@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from main import app
 from hdx_hapi.services.delete_example_logic import delete_dataset_srv, RESULT_STATES
 from hdx_hapi.services.sql_alchemy_session import get_db
-from hdx_hapi.endpoints.models.http409message import HTTP409Message
+from hdx_hapi.endpoints.models.http_409_message import HTTP409Message
 
 @app.get(
     '/dataset_delete/{id}',

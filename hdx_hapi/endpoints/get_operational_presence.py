@@ -4,7 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.operationalpresenceview import OperationalPresenceViewPydantic
+from hdx_hapi.endpoints.models.operational_presence_view import OperationalPresenceViewPydantic
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
