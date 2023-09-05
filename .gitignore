@@ -1,0 +1,8 @@
+.idea
+
+docker/.ssh/*
+docker/.env
+
+/openapi.json
+
+*.pyc

@@ -1,0 +1,27 @@
+version: "3.5"
+
+name: hapi
+
+services:
+  hapi:
+    image: public.ecr.aws/unocha/python:3
+    hostname: hapi
+    working_dir: /srv/hapi
+    ports:
+      - "127.0.0.1:8844:8844"
+      - "127.0.0.1:40022:22"
+    volumes:
+      - ".ssh/etc:/etc/ssh"
+      - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
+      - "./..:/srv/hapi"
+    entrypoint: tail -f /dev/null
+  db:
+    image: postgis/postgis:15-3.4-alpine
+    hostname: db
+    ports:
+      - "127.0.0.1:45432:5432"
+    volumes:
+      - "${BASEDIR:-./postgres-data}/dbs/hapi-psql:/var/lib/pgsql"
+    environment:
+      PGDATA: /var/lib/pgsql
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
