@@ -2,6 +2,7 @@
 
 docker/.ssh/*
 docker/.env
+docker/postgres-data
 
 /openapi.json
 

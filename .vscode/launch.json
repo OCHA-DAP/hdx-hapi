@@ -5,18 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "run_orm_models",
+            "name": "start",
             "type": "python",
             "request": "launch",
-            "program": "run_orm_models.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "run_models",
-            "type": "python",
-            "request": "launch",
-            "program": "run_models.py",
+            "program": "main.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
