@@ -3,7 +3,7 @@ from typing import Dict
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hdx_hapi.db.models.views.dbdatasetview import DatasetView
+from hdx_hapi.db.models.views.db_dataset_view import DatasetView
 from hdx_hapi.db.dao.util.util import apply_pagination
 
 async def datasets_view_list(
