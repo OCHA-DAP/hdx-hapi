@@ -1,7 +1,8 @@
-import uvicorn
+import logging
 import logging.config
 logging.config.fileConfig('logging.conf')
 
+import uvicorn
 from fastapi import FastAPI
 
 from hdx_hapi.services.sql_alchemy_session import init_db
