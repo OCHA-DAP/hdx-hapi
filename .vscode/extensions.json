@@ -3,6 +3,7 @@
         "mhutchie.git-graph",
         "charliermarsh.ruff",
         "ms-python.python",
-        "ms-python.black-formatter"
+        "ms-python.black-formatter",
+        "ryu1kn.partial-diff"
     ]
 }
