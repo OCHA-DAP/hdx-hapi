@@ -7,7 +7,6 @@ from hdx_hapi.db.models.views.db_admin2_view import Admin2View
 from hdx_hapi.db.dao.util.util import apply_pagination
 
 from datetime import datetime
-import dateutil.parser
 
 async def admin2_view_list(
     pagination_parameters: Dict,
@@ -27,11 +26,9 @@ async def admin2_view_list(
     if is_unspecified:
         query = query.where(Admin2View.is_unspecified == is_unspecified)
     if reference_period_start:
-        start_date = dateutil.parser.parse(reference_period_start)
-        query = query.where(Admin2View.reference_period_start >= start_date)
+        query = query.where(Admin2View.reference_period_start >= reference_period_start)
     if reference_period_end:
-        end_date = dateutil.parser.parse(reference_period_end)
-        query = query.where(Admin2View.reference_period_end <= end_date)
+        query = query.where(Admin2View.reference_period_end <= reference_period_end)
 
     query = apply_pagination(query, pagination_parameters)
 
