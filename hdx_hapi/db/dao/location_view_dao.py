@@ -14,15 +14,15 @@ async def locations_view_list(
     db: AsyncSession,
     code: str = None,
     name: str = None,
-    reference_period_start: str = None,
-    reference_period_end: str = None,
+    reference_period_start: datetime = None,
+    reference_period_end: datetime = None,
 ):
 
     query = select(LocationView)
     if code:
         query = query.where(LocationView.code == code)
     if name:
-        query = query.where(LocationView.name.contains(name))
+        query = query.where(LocationView.name.icontains(name))
     if reference_period_start:
         start_date = dateutil.parser.parse(reference_period_start)
         query = query.where(LocationView.reference_period_start >= start_date)
