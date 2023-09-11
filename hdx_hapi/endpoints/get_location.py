@@ -9,6 +9,8 @@ from hdx_hapi.endpoints.util.util import pagination_parameters
 from hdx_hapi.services.location_logic import get_locations_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
+from datetime import datetime, date
+
 router = APIRouter(
     tags=['location'],
 )
@@ -19,8 +21,8 @@ async def get_locations(
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=10)] = None,
     name: Annotated[str, Query(max_length=10)] = None,
-    reference_period_start: Annotated[str, Query(len=19)] = None,
-    reference_period_end: Annotated[str, Query(len=19)] = None,
+    reference_period_start: Annotated[datetime | date, Query()] = None,
+    reference_period_end: Annotated[datetime | date, Query()] = None,
 ):
     result = await get_locations_srv(
         pagination_parameters=pagination_parameters,
