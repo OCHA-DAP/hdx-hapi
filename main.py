@@ -11,6 +11,7 @@ from hdx_hapi.endpoints.get_operational_presence import router as operational_pr
 from hdx_hapi.endpoints.get_location import router as location_router
 from hdx_hapi.endpoints.get_dataset import router as dataset_router
 from hdx_hapi.endpoints.get_admin2 import router as admin2_router
+from hdx_hapi.endpoints.get_admin1 import router as admin1_router
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 
 logger = logging.getLogger(__name__)
@@ -21,6 +22,7 @@ app.include_router(operational_presence_router)
 app.include_router(location_router)
 app.include_router(dataset_router)
 app.include_router(admin2_router)
+app.include_router(admin1_router)
 
 @app.on_event('startup')
 async def startup():
