@@ -11,4 +11,4 @@ class LocationView(Base):
     name: Mapped[str] = mapped_column(String(512), nullable=False)
 
     reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
-    reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text("NULL"))
+    reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))

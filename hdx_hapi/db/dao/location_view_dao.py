@@ -7,28 +7,25 @@ from hdx_hapi.db.models.views.db_location_view import LocationView
 from hdx_hapi.db.dao.util.util import apply_pagination
 
 from datetime import datetime
-import dateutil.parser
 
 async def locations_view_list(
     pagination_parameters: Dict,
     db: AsyncSession,
     code: str = None,
     name: str = None,
-    reference_period_start: str = None,
-    reference_period_end: str = None,
+    reference_period_start: datetime = None,
+    reference_period_end: datetime = None,
 ):
 
     query = select(LocationView)
     if code:
         query = query.where(LocationView.code == code)
     if name:
-        query = query.where(LocationView.name.contains(name))
+        query = query.where(LocationView.name.icontains(name))
     if reference_period_start:
-        start_date = dateutil.parser.parse(reference_period_start)
-        query = query.where(LocationView.reference_period_start >= start_date)
+        query = query.where(LocationView.reference_period_start >= reference_period_start)
     if reference_period_end:
-        end_date = dateutil.parser.parse(reference_period_end)
-        query = query.where(LocationView.reference_period_end <= end_date)
+        query = query.where(LocationView.reference_period_end <= reference_period_end)
 
     query = apply_pagination(query, pagination_parameters)
 
