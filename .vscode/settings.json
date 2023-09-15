@@ -9,4 +9,5 @@
     "ruff.args": [
         "--config=pyproject.toml"
     ],
+    "python.analysis.autoImportCompletions": true,
 }

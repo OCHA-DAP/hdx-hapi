@@ -24,7 +24,6 @@ async def get_datasets(
 ):
     """
     Return the list of datasets
-    
     """
     result = await get_datasets_srv(pagination_parameters=pagination_parameters, db=db, code=code, title=title, provider_code=provider_code, provider_name=provider_name)
     return result

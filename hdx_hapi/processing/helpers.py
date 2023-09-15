@@ -13,6 +13,7 @@ class Context:
 
 def get_dataset_url(context: Context, dataset_id: str) -> str:
     """Creates the full HDX URL for a dataset
+    
     Args:
         context (Context): 
         dataset_id (str): Dataset id or name
@@ -28,6 +29,7 @@ def get_dataset_url(context: Context, dataset_id: str) -> str:
 
 def get_dataset_api_url(context: Context, dataset_id: str) -> str:
     """Creates the full HDX API URL for a dataset
+    
     Args:
         context (Context): 
         dataset_id (str): Dataset id or name
