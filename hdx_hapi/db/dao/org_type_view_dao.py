@@ -30,8 +30,8 @@ async def org_types_view_list(
     logger.debug(f'Executing SQL query: {query}')
 
     result = await db.execute(query)
-    locations = result.scalars().all()
+    org_types = result.scalars().all()
 
-    logger.info(f'Retrieved {len(locations)} rows from the database')
+    logger.info(f'Retrieved {len(org_types)} rows from the database')
 
-    return locations
+    return org_types
