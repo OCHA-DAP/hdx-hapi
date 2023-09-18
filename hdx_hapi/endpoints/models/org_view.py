@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, computed_field
+from pydantic import BaseModel, Field, HttpUrl, computed_field
 from typing import Optional
 from datetime import datetime
 from hdx_hapi.processing.helpers import Context, get_organization_url
@@ -17,7 +17,7 @@ class OrgViewPydantic(BaseModel):
 
     @computed_field
     @property
-    def hdx_link(self) -> str:
+    def hdx_link(self) -> HttpUrl:
         return get_organization_url(context=context, org_id=self.acronym)
 
     class Config:
