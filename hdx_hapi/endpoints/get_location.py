@@ -19,11 +19,13 @@ router = APIRouter(
 async def get_locations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=10)] = None,
-    name: Annotated[str, Query(max_length=10)] = None,
-    reference_period_start: Annotated[datetime | date, Query()] = None,
-    reference_period_end: Annotated[datetime | date, Query()] = None,
+    code: Annotated[str, Query(max_length=10, description='Location code')] = None,
+    name: Annotated[str, Query(max_length=10, description='Location name')] = None,
+    reference_period_start: Annotated[datetime | date, Query(description='Start date of reference period', example='2022-01-01T00:00:00')] = None,
+    reference_period_end: Annotated[datetime | date, Query(description='End date of reference period', example='2023-01-01T23:59:59')] = None,
 ):
+    """Get the list of locations.
+    """    
     result = await get_locations_srv(
         pagination_parameters=pagination_parameters,
         db=db,
