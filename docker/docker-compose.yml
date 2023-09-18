@@ -15,7 +15,7 @@ services:
       - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
       - "./..:/srv/hapi"
     environment:
-      HDX_DOMAIN: ${HDX_DOMAIN:-https://hdx.website.url}
+      HDX_DOMAIN: ${HDX_DOMAIN:-https://data.humdata.org}
     entrypoint: tail -f /dev/null
   db:
     image: postgis/postgis:15-3.4-alpine

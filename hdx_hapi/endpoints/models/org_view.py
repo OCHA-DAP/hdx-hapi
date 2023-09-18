@@ -1,25 +1,24 @@
-from pydantic import BaseModel, Field
-from pydantic.functional_validators import field_validator
+from pydantic import BaseModel, Field, computed_field
 from typing import Optional
 from datetime import datetime
-from config.config import get_config
-from hdx_hapi.helpers import Context, get_dataset_url
+from hdx_hapi.processing.helpers import Context, get_organization_url
+from hdx_hapi.config.config import get_config
 
 context = Context(config=get_config())
 
 class OrgViewPydantic(BaseModel):
     # id: int
-    hdx_link: str = Field(max_length=1024)
+    # hdx_link: str = Field(max_length=1024)
     acronym: str = Field(max_length=32)
     name: str = Field(max_length=512)
     # org_type_code: str = Field(max_length=32)
     reference_period_start: datetime
     reference_period_end: Optional[datetime]
 
-    @field_validator('hdx_link')
-    @classmethod
-    def create_url(cls, v) -> str:
-        return get_dataset_url(context=context, dataset_name=v)
+    @computed_field
+    @property
+    def hdx_link(self) -> str:
+        return get_organization_url(context=context, org_id=self.acronym)
 
     class Config:
         orm_mode = True
