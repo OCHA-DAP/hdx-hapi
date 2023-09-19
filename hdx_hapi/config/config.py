@@ -2,6 +2,8 @@ from dataclasses import dataclass
 import logging
 import os
 
+from hdx_hapi.config.helper import create_pg_uri_from_env_without_protocol
+
 logger = logging.getLogger(__name__)
 
 @dataclass
@@ -23,16 +25,12 @@ def get_config() -> Config:
     
     global CONFIG
     if not CONFIG:
-        hapi_db_name = os.getenv('HAPI_DB_NAME', 'hapi')
-        hapi_db_user = os.getenv('HAPI_DB_USER', 'hapi')
-        hapi_db_pass = os.getenv('HAPI_DB_PASS', 'hapi')
-        hapi_db_host = os.getenv('HAPI_DB_HOST', 'db')
-        hapi_db_port = int(os.getenv('HAPI_DB_PORT', 5432))
+        db_uri_without_protocol = create_pg_uri_from_env_without_protocol()
 
         sql_alchemy_asyncypg_db_uri = \
-            f'postgresql+asyncpg://{hapi_db_user}:{hapi_db_pass}@{hapi_db_host}:{hapi_db_port}/{hapi_db_name}'
+            f'postgresql+asyncpg://{db_uri_without_protocol}'
         sql_alchemy_psycopg2_db_uri = \
-            f'postgresql+psycopg2://{hapi_db_user}:{hapi_db_pass}@{hapi_db_host}:{hapi_db_port}/{hapi_db_name}'
+            f'postgresql+psycopg2://{db_uri_without_protocol}'
         CONFIG = Config(
             SQL_ALCHEMY_ASYNCPG_DB_URI=sql_alchemy_asyncypg_db_uri,
             SQL_ALCHEMY_PSYCOPG2_DB_URI=sql_alchemy_psycopg2_db_uri,
