@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, computed_field
+from pydantic import BaseModel, Field, HttpUrl, computed_field
 from typing import Optional
 from hdx_hapi.processing.helpers import Context, get_dataset_url, get_dataset_api_url
 from hdx_hapi.config.config import get_config
@@ -16,13 +16,13 @@ class DatasetViewPydantic(BaseModel):
 
     @computed_field
     @property
-    def hdx_link(self) -> str:
+    def hdx_link(self) -> HttpUrl:
         return get_dataset_url(context=context, dataset_id=self.code)
 
 
     @computed_field
     @property
-    def api_link(self) -> str:
+    def api_link(self) -> HttpUrl:
         return get_dataset_api_url(context=context, dataset_id=self.code)
 
 
