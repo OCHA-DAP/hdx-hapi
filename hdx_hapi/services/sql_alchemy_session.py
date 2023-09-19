@@ -1,5 +1,8 @@
+import logging
+
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
+from hdx_hapi.config.config import get_config
 
 from hdx_hapi.db.models import Base
 from hdx_hapi.db.models.dbadmin1 import DBAdmin1
@@ -17,9 +20,15 @@ from hdx_hapi.db.models.dbsector import DBSector
 from hdx_hapi.db.models.dboperationalpresence import DBOperationalPresence
 from hdx_hapi.db.models.dbpopulation import DBPopulation
 
+
+logger = logging.getLogger(__name__)
+
+CONFIG = get_config()
 # Create an AsyncEngine
 engine = create_async_engine(
-    "postgresql+asyncpg://hapi:hapi@db:5432/hapi", echo=True, pool_size=10)
+    CONFIG.SQL_ALCHEMY_ASYNCPG_DB_URI,
+    echo=True, pool_size=10
+)
 
 # Create a custom Session class
 AsyncSessionLocal = sessionmaker(
@@ -33,9 +42,12 @@ AsyncSessionLocal = sessionmaker(
 async def get_db() -> AsyncSession:
     session = AsyncSessionLocal()
     try:
+        # logger.info(f'Using the following sql alchemy uri: {get_config().SQL_ALCHEMY_ASYNCPG_DB_URI}')
+        logger.info('Yielding new session')
         yield session
     finally:
         await session.close()
+        logger.info('Session closed')
 
 
 async def init_db():
