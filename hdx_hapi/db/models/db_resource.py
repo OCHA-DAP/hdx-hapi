@@ -1,6 +1,6 @@
 """Resource table."""
 
-from hdx_hapi.db.models import Base
+from hdx_hapi.db.models.base import Base
 from sqlalchemy import (
     Boolean,
     DateTime,
@@ -9,6 +9,8 @@ from sqlalchemy import (
     String,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from hdx_hapi.db.models.db_dataset import DBDataset  # noqa: F401
 
 
 class DBResource(Base):
@@ -19,10 +21,15 @@ class DBResource(Base):
         ForeignKey("dataset.id", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
     )
-    code: Mapped[str] = mapped_column(String(128), nullable=False)
+    hdx_id: Mapped[str] = mapped_column(
+        String(36), unique=True, nullable=False
+    )
     filename: Mapped[str] = mapped_column(String(256), nullable=False)
     format: Mapped[str] = mapped_column(String(32), nullable=False)
     update_date = mapped_column(DateTime, nullable=False, index=True)
+    download_url: Mapped[str] = mapped_column(
+        String(1024), nullable=False, unique=True
+    )
     is_hxl: Mapped[bool] = mapped_column(Boolean, nullable=False, index=True)
 
     dataset = relationship("DBDataset")

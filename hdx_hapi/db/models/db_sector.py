@@ -1,7 +1,7 @@
 """Sector table."""
 from datetime import datetime
 
-from hdx_hapi.db.models import Base
+from hdx_hapi.db.models.base import Base
 from sqlalchemy import DateTime, String, text
 from sqlalchemy.orm import Mapped, mapped_column
 

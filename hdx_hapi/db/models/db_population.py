@@ -1,7 +1,7 @@
 """Population table."""
 from datetime import datetime
 
-from hdx_hapi.db.models import Base
+from hdx_hapi.db.models.base import Base
 from sqlalchemy import (
     DateTime,
     ForeignKey,
@@ -11,10 +11,10 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from hdx_hapi.db.models.dbadmin2 import DBAdmin2  # noqa: F401
-from hdx_hapi.db.models.dbagerange import DBAgeRange  # noqa: F401
-from hdx_hapi.db.models.dbgender import DBGender  # noqa: F401
-from hdx_hapi.db.models.dbresource import DBResource  # noqa: F401
+from hdx_hapi.db.models.db_admin2 import DBAdmin2  # noqa: F401
+from hdx_hapi.db.models.db_age_range import DBAgeRange  # noqa: F401
+from hdx_hapi.db.models.db_gender import DBGender  # noqa: F401
+from hdx_hapi.db.models.db_resource import DBResource  # noqa: F401
 
 
 class DBPopulation(Base):

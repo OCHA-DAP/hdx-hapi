@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Integer, String, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
-from hdx_hapi.db.models import Base
+from hdx_hapi.db.models.base import Base
 
 
 class OperationalPresenceView(Base):
@@ -17,7 +17,7 @@ class OperationalPresenceView(Base):
     source_data: Mapped[str] = mapped_column(String)
 
     # Additional fields from other tables in the view
-    dataset_code: Mapped[str] = mapped_column(String(128), nullable=False)
+    # dataset_code: Mapped[str] = mapped_column(String(128), nullable=False)
     dataset_title: Mapped[str] = mapped_column(String(1024), nullable=False)
     dataset_provider_code: Mapped[str] = mapped_column(String(128), nullable=False)
     dataset_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)

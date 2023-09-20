@@ -4,21 +4,21 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from hdx_hapi.config.config import get_config
 
-from hdx_hapi.db.models import Base
-from hdx_hapi.db.models.dbadmin1 import DBAdmin1
-from hdx_hapi.db.models.dbadmin2 import DBAdmin2
-from hdx_hapi.db.models.dblocation import DBLocation
-from hdx_hapi.db.models.dbagerange import DBAgeRange
-from hdx_hapi.db.models.dbgender import DBGender
-from hdx_hapi.db.models.dbdataset import DBDataset
-from hdx_hapi.db.models.dbresource import DBResource
-from hdx_hapi.db.models.dbadmin2 import DBAdmin2
-from hdx_hapi.db.models.dborg import DBOrg
-from hdx_hapi.db.models.dborgtype import DBOrgType
-from hdx_hapi.db.models.dbsector import DBSector
+from hdx_hapi.db.models.base import Base
+from hdx_hapi.db.models.db_admin1 import DBAdmin1
+from hdx_hapi.db.models.db_admin2 import DBAdmin2
+from hdx_hapi.db.models.db_location import DBLocation
+from hdx_hapi.db.models.db_age_range import DBAgeRange
+from hdx_hapi.db.models.db_gender import DBGender
+from hdx_hapi.db.models.db_dataset import DBDataset
+from hdx_hapi.db.models.db_resource import DBResource
+from hdx_hapi.db.models.db_admin2 import DBAdmin2
+from hdx_hapi.db.models.db_org import DBOrg
+from hdx_hapi.db.models.db_orgtype import DBOrgType
+from hdx_hapi.db.models.db_sector import DBSector
 
-from hdx_hapi.db.models.dboperationalpresence import DBOperationalPresence
-from hdx_hapi.db.models.dbpopulation import DBPopulation
+from hdx_hapi.db.models.db_operational_presence import DBOperationalPresence
+from hdx_hapi.db.models.db_population import DBPopulation
 
 
 logger = logging.getLogger(__name__)

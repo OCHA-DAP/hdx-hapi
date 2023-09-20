@@ -1,7 +1,6 @@
 from sqlalchemy import Boolean, ForeignKey, Integer, String, DateTime, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from hdx_hapi.db.models import Base
-from hdx_hapi.db.models.dblocation import DBLocation
+from hdx_hapi.db.models.base import Base
 
 
 class Admin1View(Base):
