@@ -13,17 +13,20 @@ logger = logging.getLogger(__name__)
 async def datasets_view_list(
     pagination_parameters: Dict,
     db: AsyncSession,
-    code: str = None,
+    hdx_id: str = None,
+    hdx_stub: str = None,
     title: str = None,
     provider_code: str = None,
     provider_name: str = None,
 ):
 
-    logger.info(f'datasets_view_list called with params: code={code}, title={title}, provider_code={provider_code}, provider_name={provider_name}')
+    logger.info(f'datasets_view_list called with params: hdx_id={hdx_id}, hdx_stub={hdx_stub}, title={title}, provider_code={provider_code}, provider_name={provider_name}')
 
     query = select(DatasetView)
-    if code:
-        query = query.where(DatasetView.code == code)
+    if hdx_id:
+        query = query.where(DatasetView.hdx_id == hdx_id)
+    if hdx_stub:
+        query = query.where(DatasetView.hdx_stub == hdx_stub)
     if title:
         query = query.where(DatasetView.title == title)
     if provider_code:

@@ -7,7 +7,9 @@ context = Context(config=get_config())
 
 class DatasetViewPydantic(BaseModel):
     # id: int
-    code: str = Field(max_length=128)
+    # code: str = Field(max_length=128)
+    hdx_id: str = Field(max_length=36)
+    hdx_stub: str = Field(max_length=100)
     title: str = Field(max_length=1024)
     provider_code: str = Field(max_length=128)
     provider_name: str  = Field(max_length=512)
@@ -17,13 +19,13 @@ class DatasetViewPydantic(BaseModel):
     @computed_field
     @property
     def hdx_link(self) -> HttpUrl:
-        return get_dataset_url(context=context, dataset_id=self.code)
+        return get_dataset_url(context=context, dataset_id=self.hdx_id)
 
 
     @computed_field
     @property
     def api_link(self) -> HttpUrl:
-        return get_dataset_api_url(context=context, dataset_id=self.code)
+        return get_dataset_api_url(context=context, dataset_id=self.hdx_id)
 
 
     class Config:

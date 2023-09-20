@@ -1,7 +1,7 @@
 from sqlalchemy import ForeignKey, Integer, String, DateTime, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from hdx_hapi.db.models import Base
-from hdx_hapi.db.models.dborgtype import DBOrgType
+from hdx_hapi.db.models.base import Base
+from hdx_hapi.db.models.db_orgtype import DBOrgType
 
 
 class OrgView(Base):
