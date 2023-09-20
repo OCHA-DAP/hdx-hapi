@@ -14,6 +14,7 @@ from hdx_hapi.endpoints.get_admin2 import router as admin2_router
 from hdx_hapi.endpoints.get_admin1 import router as admin1_router
 from hdx_hapi.endpoints.get_org import router as org_router
 from hdx_hapi.endpoints.get_org_type import router as org_type_router
+from hdx_hapi.endpoints.get_age_range import router as age_range_router
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 
@@ -28,6 +29,7 @@ app.include_router(admin2_router)
 app.include_router(admin1_router)
 app.include_router(org_router)
 app.include_router(org_type_router)
+app.include_router(age_range_router)
 
 @app.on_event('startup')
 async def startup():
