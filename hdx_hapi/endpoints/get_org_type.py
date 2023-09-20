@@ -10,7 +10,7 @@ from hdx_hapi.services.org_type_logic import get_org_types_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['org_type'],
+    tags=['humanitarian_response'],
 )
 
 @router.get('/api/org_type', response_model=List[OrgTypeViewPydantic])

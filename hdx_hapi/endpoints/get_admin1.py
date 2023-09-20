@@ -12,7 +12,7 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 from datetime import datetime, date
 
 router = APIRouter(
-    tags=['location'],
+    tags=['geodata'],
 )
 
 @router.get('/api/admin1', response_model=List[Admin1ViewPydantic])

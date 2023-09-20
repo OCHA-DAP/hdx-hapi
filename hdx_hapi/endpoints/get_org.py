@@ -12,7 +12,7 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 from datetime import datetime, date
 
 router = APIRouter(
-    tags=['org'],
+    tags=['humanitarian_response'],
 )
 
 @router.get('/api/org', response_model=List[OrgViewPydantic])
