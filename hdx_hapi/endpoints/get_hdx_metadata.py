@@ -39,12 +39,10 @@ async def get_datasets(
 async def get_resources(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=10, description='HDX Dataset ID or name')] = None,
-    format: Annotated[str, Query(max_length=10, description='HDX Dataset ID or name')] = None,
-    # update_date: Annotated[datetime | date, Query(description='HDX Dataset title or display name')] = None,
-    is_hxl: Annotated[bool, Query(description='HDX Dataset ID or name')] = None,
-    # dataset_code: Annotated[str, Query(max_length=10, description='Dataset ID given by provider')] = None,
-    # dataset_title: Annotated[str, Query(max_length=10, description='Dataset name given by provider')] = None,
+    hdx_id: Annotated[str, Query(max_length=36, description='HDX Resource ID')] = None,
+    format: Annotated[str, Query(max_length=10, description='HDX Resource format')] = None,
+    is_hxl: Annotated[bool, Query(description='Is Resource HXL')] = None,
+    dataset_title: Annotated[str, Query(max_length=10, description='HDX Dataset title')] = None,
     dataset_provider_code: Annotated[str, Query(max_length=10, description='Dataset ID given by provider')] = None,
     dataset_provider_name: Annotated[str, Query(max_length=10, description='Dataset name given by provider')] = None,
 ):
@@ -54,12 +52,10 @@ async def get_resources(
     result = await get_resources_srv(
         pagination_parameters=pagination_parameters,
         db=db,
-        code=code,
+        hdx_id=hdx_id,
         format=format,
-        # update_date=update_date,
         is_hxl=is_hxl,
-        # dataset_code=dataset_code,
-        # dataset_title=dataset_title,
+        dataset_title=dataset_title,
         dataset_provider_code=dataset_provider_code,
         dataset_provider_name=dataset_provider_name,
     )
