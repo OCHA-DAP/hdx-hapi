@@ -22,12 +22,17 @@ class DBOperationalPresence(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     resource_ref = mapped_column(
-        ForeignKey("resource.id", onupdate="CASCADE", ondelete="CASCADE")
+        ForeignKey("resource.id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
     )
-    org_ref = mapped_column(ForeignKey("org.id", onupdate="CASCADE"))
-    sector_code = mapped_column(ForeignKey("sector.code", onupdate="CASCADE"))
+    org_ref = mapped_column(
+        ForeignKey("org.id", onupdate="CASCADE"), nullable=False
+    )
+    sector_code = mapped_column(
+        ForeignKey("sector.code", onupdate="CASCADE"), nullable=False
+    )
     admin2_ref: Mapped[int] = mapped_column(
-        ForeignKey("admin2.id", onupdate="CASCADE")
+        ForeignKey("admin2.id", onupdate="CASCADE"), nullable=False
     )
     reference_period_start: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, index=True
@@ -35,7 +40,7 @@ class DBOperationalPresence(Base):
     reference_period_end: Mapped[datetime] = mapped_column(
         DateTime, nullable=True, server_default=text("NULL")
     )
-    source_data: Mapped[str] = mapped_column(Text)
+    source_data: Mapped[str] = mapped_column(Text, nullable=True)
 
     resource = relationship("DBResource")
     org = relationship("DBOrg")

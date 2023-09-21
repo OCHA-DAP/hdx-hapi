@@ -9,7 +9,7 @@ from hdx_hapi.services.sql_alchemy_session import init_db
 
 from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router
 from hdx_hapi.endpoints.get_location import router as location_router
-from hdx_hapi.endpoints.get_dataset import router as dataset_router
+from hdx_hapi.endpoints.get_hdx_metadata import router as dataset_router
 from hdx_hapi.endpoints.get_admin2 import router as admin2_router
 from hdx_hapi.endpoints.get_admin1 import router as admin1_router
 from hdx_hapi.endpoints.get_org import router as org_router
