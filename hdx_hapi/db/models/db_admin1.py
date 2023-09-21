@@ -20,7 +20,8 @@ class DBAdmin1(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     location_ref: Mapped[int] = mapped_column(
-        ForeignKey("location.id", onupdate="CASCADE", ondelete="CASCADE")
+        ForeignKey("location.id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
     )
     code: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
     name: Mapped[str] = mapped_column(String(512), nullable=False)

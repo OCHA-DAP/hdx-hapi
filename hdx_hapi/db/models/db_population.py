@@ -22,16 +22,17 @@ class DBPopulation(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     resource_ref: Mapped[int] = mapped_column(
-        ForeignKey("resource.id", onupdate="CASCADE", ondelete="CASCADE")
+        ForeignKey("resource.id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
     )
     admin2_ref: Mapped[int] = mapped_column(
-        ForeignKey("admin2.id", onupdate="CASCADE")
+        ForeignKey("admin2.id", onupdate="CASCADE"), nullable=False
     )
     gender_code: Mapped[str] = mapped_column(
-        ForeignKey("gender.code", onupdate="CASCADE")
+        ForeignKey("gender.code", onupdate="CASCADE"), nullable=True
     )
     age_range_code: Mapped[str] = mapped_column(
-        ForeignKey("age_range.code", onupdate="CASCADE")
+        ForeignKey("age_range.code", onupdate="CASCADE"), nullable=True
     )
     population: Mapped[int] = mapped_column(
         Integer, nullable=False, index=True
@@ -42,7 +43,7 @@ class DBPopulation(Base):
     reference_period_end: Mapped[datetime] = mapped_column(
         DateTime, nullable=True, server_default=text("NULL")
     )
-    source_data: Mapped[str] = mapped_column(Text)
+    source_data: Mapped[str] = mapped_column(Text, nullable=True)
 
     resource = relationship("DBResource")
     admin2 = relationship("DBAdmin2")

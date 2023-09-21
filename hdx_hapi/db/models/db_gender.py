@@ -9,4 +9,4 @@ class DBGender(Base):
     __tablename__ = "gender"
 
     code: Mapped[str] = mapped_column(CHAR(1), primary_key=True)
-    description: Mapped[str] = mapped_column(String(256))
+    description: Mapped[str] = mapped_column(String(256), nullable=False)
