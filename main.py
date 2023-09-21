@@ -8,15 +8,10 @@ from fastapi import FastAPI
 from hdx_hapi.services.sql_alchemy_session import init_db
 
 from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router
-from hdx_hapi.endpoints.get_location import router as location_router
+from hdx_hapi.endpoints.get_admin_level import router as admin_level_router
 from hdx_hapi.endpoints.get_hdx_metadata import router as dataset_router
-from hdx_hapi.endpoints.get_admin2 import router as admin2_router
-from hdx_hapi.endpoints.get_admin1 import router as admin1_router
-from hdx_hapi.endpoints.get_org import router as org_router
-from hdx_hapi.endpoints.get_org_type import router as org_type_router
-from hdx_hapi.endpoints.get_gender import router as gender_router
-from hdx_hapi.endpoints.get_age_range import router as age_range_router
-from hdx_hapi.endpoints.get_sector import router as sector_router
+from hdx_hapi.endpoints.get_humanitarian_response import router as humanitarian_response_router
+from hdx_hapi.endpoints.get_demographic import router as demographic_router
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 
@@ -25,15 +20,10 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 app.include_router(operational_presence_router)
-app.include_router(location_router)
+app.include_router(admin_level_router)
 app.include_router(dataset_router)
-app.include_router(admin2_router)
-app.include_router(admin1_router)
-app.include_router(org_router)
-app.include_router(org_type_router)
-app.include_router(gender_router)
-app.include_router(age_range_router)
-app.include_router(sector_router)
+app.include_router(humanitarian_response_router)
+app.include_router(demographic_router)
 
 @app.on_event('startup')
 async def startup():
