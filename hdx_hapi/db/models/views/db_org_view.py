@@ -14,5 +14,3 @@ class OrgView(Base):
     org_type_code: Mapped[str] = mapped_column(ForeignKey('org_type.code', onupdate='CASCADE', ondelete='CASCADE'))
     reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False, index=True)
     reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
-
-    org_type = relationship('DBOrgType')

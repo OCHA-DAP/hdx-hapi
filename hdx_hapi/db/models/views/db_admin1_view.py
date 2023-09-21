@@ -14,5 +14,3 @@ class Admin1View(Base):
 
     reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
     reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
-
-    location = relationship('DBLocation')

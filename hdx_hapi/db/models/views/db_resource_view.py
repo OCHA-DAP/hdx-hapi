@@ -22,4 +22,3 @@ class ResourceView(Base):
     dataset_provider_code: Mapped[str] = mapped_column(String(128), nullable=False)
     dataset_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
     
-    dataset = relationship("DBDataset")
