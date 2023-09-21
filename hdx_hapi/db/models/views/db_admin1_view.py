@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, ForeignKey, Integer, String, DateTime, text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 from hdx_hapi.db.models.base import Base
 
 
@@ -14,5 +14,3 @@ class Admin1View(Base):
 
     reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
     reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
-
-    location = relationship('DBLocation')
