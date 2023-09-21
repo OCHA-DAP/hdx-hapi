@@ -2,7 +2,7 @@
 
 Revision ID: be60e42db4db
 Revises: 
-Create Date: 2023-09-07 20:28:18.523515
+Create Date: 2023-09-20 12:43:26.000600
 
 """
 from typing import Sequence, Union
@@ -28,11 +28,14 @@ def upgrade() -> None:
     )
     op.create_table('dataset',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('code', sa.String(length=128), nullable=False),
+    sa.Column('hdx_id', sa.String(length=36), nullable=False),
+    sa.Column('hdx_stub', sa.String(length=128), nullable=False),
     sa.Column('title', sa.String(length=1024), nullable=False),
     sa.Column('provider_code', sa.String(length=128), nullable=False),
     sa.Column('provider_name', sa.String(length=512), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('hdx_id'),
+    sa.UniqueConstraint('hdx_stub')
     )
     op.create_index(op.f('ix_dataset_provider_code'), 'dataset', ['provider_code'], unique=False)
     op.create_index(op.f('ix_dataset_provider_name'), 'dataset', ['provider_name'], unique=False)
@@ -47,7 +50,8 @@ def upgrade() -> None:
     sa.Column('name', sa.String(length=512), nullable=False),
     sa.Column('reference_period_start', sa.DateTime(), nullable=False),
     sa.Column('reference_period_end', sa.DateTime(), server_default=sa.text('NULL'), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('code')
     )
     op.create_table('org_type',
     sa.Column('code', sa.String(length=32), nullable=False),
@@ -72,10 +76,12 @@ def upgrade() -> None:
     sa.Column('reference_period_start', sa.DateTime(), nullable=False),
     sa.Column('reference_period_end', sa.DateTime(), server_default=sa.text('NULL'), nullable=True),
     sa.ForeignKeyConstraint(['location_ref'], ['location.id'], onupdate='CASCADE', ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('code')
     )
     op.create_table('org',
     sa.Column('id', sa.Integer(), nullable=False),
+    # sa.Column('hdx_link', sa.String(length=1024), nullable=False),
     sa.Column('acronym', sa.String(length=32), nullable=False),
     sa.Column('name', sa.String(length=512), nullable=False),
     sa.Column('org_type_code', sa.String(length=32), nullable=False),
@@ -89,13 +95,16 @@ def upgrade() -> None:
     op.create_table('resource',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('dataset_ref', sa.Integer(), nullable=False),
-    sa.Column('code', sa.String(length=128), nullable=False),
+    sa.Column('hdx_id', sa.String(length=36), nullable=False),
     sa.Column('filename', sa.String(length=256), nullable=False),
     sa.Column('format', sa.String(length=32), nullable=False),
     sa.Column('update_date', sa.DateTime(), nullable=False),
+    sa.Column('download_url', sa.String(length=1024), nullable=False),
     sa.Column('is_hxl', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['dataset_ref'], ['dataset.id'], onupdate='CASCADE', ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('download_url'),
+    sa.UniqueConstraint('hdx_id')
     )
     op.create_index(op.f('ix_resource_is_hxl'), 'resource', ['is_hxl'], unique=False)
     op.create_index(op.f('ix_resource_update_date'), 'resource', ['update_date'], unique=False)
@@ -108,7 +117,8 @@ def upgrade() -> None:
     sa.Column('reference_period_start', sa.DateTime(), nullable=False),
     sa.Column('reference_period_end', sa.DateTime(), server_default=sa.text('NULL'), nullable=True),
     sa.ForeignKeyConstraint(['admin1_ref'], ['admin1.id'], onupdate='CASCADE', ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('code')
     )
     op.create_table('operational_presence',
     sa.Column('id', sa.Integer(), nullable=False),

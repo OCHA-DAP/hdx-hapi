@@ -1,7 +1,7 @@
 """Org table."""
 from datetime import datetime
 
-from hdx_hapi.db.models import Base
+from hdx_hapi.db.models.base import Base
 from sqlalchemy import (
     DateTime,
     ForeignKey,
@@ -11,7 +11,8 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from hdx_hapi.db.models.dborgtype import DBOrgType
+from hdx_hapi.db.models.db_orgtype import DBOrgType  # noqa: F401
+
 
 class DBOrg(Base):
     __tablename__ = "org"
@@ -21,7 +22,8 @@ class DBOrg(Base):
     acronym = mapped_column(String(32), nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(512), nullable=False)
     org_type_code: Mapped[str] = mapped_column(
-        ForeignKey("org_type.code", onupdate="CASCADE", ondelete="CASCADE")
+        ForeignKey("org_type.code", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=True,
     )
     reference_period_start: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, index=True

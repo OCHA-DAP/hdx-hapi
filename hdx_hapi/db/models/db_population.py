@@ -1,7 +1,7 @@
 """Population table."""
 from datetime import datetime
 
-from hdx_hapi.db.models import Base
+from hdx_hapi.db.models.base import Base
 from sqlalchemy import (
     DateTime,
     ForeignKey,
@@ -11,10 +11,10 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from hdx_hapi.db.models.dbadmin2 import DBAdmin2  # noqa: F401
-from hdx_hapi.db.models.dbagerange import DBAgeRange  # noqa: F401
-from hdx_hapi.db.models.dbgender import DBGender  # noqa: F401
-from hdx_hapi.db.models.dbresource import DBResource  # noqa: F401
+from hdx_hapi.db.models.db_admin2 import DBAdmin2  # noqa: F401
+from hdx_hapi.db.models.db_age_range import DBAgeRange  # noqa: F401
+from hdx_hapi.db.models.db_gender import DBGender  # noqa: F401
+from hdx_hapi.db.models.db_resource import DBResource  # noqa: F401
 
 
 class DBPopulation(Base):
@@ -22,16 +22,17 @@ class DBPopulation(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     resource_ref: Mapped[int] = mapped_column(
-        ForeignKey("resource.id", onupdate="CASCADE", ondelete="CASCADE")
+        ForeignKey("resource.id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
     )
     admin2_ref: Mapped[int] = mapped_column(
-        ForeignKey("admin2.id", onupdate="CASCADE")
+        ForeignKey("admin2.id", onupdate="CASCADE"), nullable=False
     )
     gender_code: Mapped[str] = mapped_column(
-        ForeignKey("gender.code", onupdate="CASCADE")
+        ForeignKey("gender.code", onupdate="CASCADE"), nullable=True
     )
     age_range_code: Mapped[str] = mapped_column(
-        ForeignKey("age_range.code", onupdate="CASCADE")
+        ForeignKey("age_range.code", onupdate="CASCADE"), nullable=True
     )
     population: Mapped[int] = mapped_column(
         Integer, nullable=False, index=True
@@ -42,7 +43,7 @@ class DBPopulation(Base):
     reference_period_end: Mapped[datetime] = mapped_column(
         DateTime, nullable=True, server_default=text("NULL")
     )
-    source_data: Mapped[str] = mapped_column(Text)
+    source_data: Mapped[str] = mapped_column(Text, nullable=True)
 
     resource = relationship("DBResource")
     admin2 = relationship("DBAdmin2")
