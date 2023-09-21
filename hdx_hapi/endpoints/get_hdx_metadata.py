@@ -21,12 +21,11 @@ router = APIRouter(
 async def get_datasets(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    # code: Annotated[str, Query(max_length=10, description='HDX Dataset ID or name')] = None,
     hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
-    hdx_stub: Annotated[str, Query(max_length=100, description='HDX Dataset name')] = None,
-    title: Annotated[str, Query(max_length=10, description='HDX Dataset title or display name')] = None,
+    hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset name')] = None,
+    title: Annotated[str, Query(max_length=128, description='HDX Dataset title or display name')] = None,
     provider_code: Annotated[str, Query(max_length=10, description='Dataset ID given by provider')] = None,
-    provider_name: Annotated[str, Query(max_length=10, description='Dataset name given by provider')] = None,
+    provider_name: Annotated[str, Query(max_length=128, description='Dataset name given by provider')] = None,
 ):
     """
     Return the list of datasets

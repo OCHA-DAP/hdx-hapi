@@ -4,10 +4,8 @@ from hdx_hapi.services.hdx_url_logic import get_dataset_url, get_dataset_api_url
 
 
 class DatasetViewPydantic(BaseModel):
-    # id: int
-    # code: str = Field(max_length=128)
     hdx_id: str = Field(max_length=36)
-    hdx_stub: str = Field(max_length=100)
+    hdx_stub: str = Field(max_length=128)
     title: str = Field(max_length=1024)
     provider_code: str = Field(max_length=128)
     provider_name: str = Field(max_length=512)
