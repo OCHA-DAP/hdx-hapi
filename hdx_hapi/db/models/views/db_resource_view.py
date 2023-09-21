@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Integer, String, DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from hdx_hapi.db.models.base import Base
 
 
@@ -21,3 +21,5 @@ class ResourceView(Base):
     dataset_title: Mapped[str] = mapped_column(String(1024), nullable=False)
     dataset_provider_code: Mapped[str] = mapped_column(String(128), nullable=False)
     dataset_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
+    
+    dataset = relationship("DBDataset")
