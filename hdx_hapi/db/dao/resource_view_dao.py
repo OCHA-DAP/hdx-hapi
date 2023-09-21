@@ -13,6 +13,8 @@ async def resources_view_list(
     format: str = None,
     is_hxl: bool = None,
     dataset_title: str = None,
+    dataset_hdx_id: str = None,
+    dataset_hdx_stub: str = None,
     dataset_provider_code: str = None,
     dataset_provider_name: str = None,
 ):
@@ -26,6 +28,10 @@ async def resources_view_list(
         query = query.where(ResourceView.is_hxl == is_hxl)
     if dataset_title:
         query = query.where(ResourceView.dataset_title == dataset_title)
+    if dataset_hdx_id:
+        query = query.where(ResourceView.dataset_hdx_id == dataset_hdx_id)
+    if dataset_hdx_stub:
+        query = query.where(ResourceView.dataset_hdx_stub == dataset_hdx_stub)
     if dataset_provider_code:
         query = query.where(ResourceView.dataset_provider_code == dataset_provider_code)
     if dataset_provider_name:
