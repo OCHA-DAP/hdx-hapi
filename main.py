@@ -16,6 +16,7 @@ from hdx_hapi.endpoints.get_org import router as org_router
 from hdx_hapi.endpoints.get_org_type import router as org_type_router
 from hdx_hapi.endpoints.get_gender import router as gender_router
 from hdx_hapi.endpoints.get_age_range import router as age_range_router
+from hdx_hapi.endpoints.get_sector import router as sector_router
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 
@@ -32,6 +33,7 @@ app.include_router(org_router)
 app.include_router(org_type_router)
 app.include_router(gender_router)
 app.include_router(age_range_router)
+app.include_router(sector_router)
 
 @app.on_event('startup')
 async def startup():
