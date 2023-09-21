@@ -15,6 +15,10 @@ class ResourceView(Base):
     is_hxl: Mapped[bool] = mapped_column(Boolean, nullable=False)
     download_url: Mapped[str] = mapped_column(String(1024), nullable=False)
 
+    dataset_hdx_id: Mapped[str] = mapped_column(String(36), nullable=False)
+    dataset_hdx_stub: Mapped[str] = mapped_column(String(128), nullable=False)
+
     dataset_title: Mapped[str] = mapped_column(String(1024), nullable=False)
     dataset_provider_code: Mapped[str] = mapped_column(String(128), nullable=False)
     dataset_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
+    
