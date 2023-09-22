@@ -18,10 +18,50 @@ async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     org_ref: Annotated[int, Query(ge=1, description='Organization reference')] = None,
-    location_name: Annotated[str, Query(max_length=10, description='Location name')] = None,
+    dataset_hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
+    dataset_hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset Name')] = None,
+    # dataset_title: Annotated[str, Query(max_length=1024, description='Location name')] = None,
+    dataset_provider_code: Annotated[str, Query(max_length=128, description='Dataset Provider Name')] = None,
+    # dataset_provider_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    # resource_hdx_id: Annotated[str, Query(max_length=36, description='Location name')] = None,
+    # resource_filename: Annotated[str, Query(max_length=256, description='Location name')] = None,
+    org_acronym: Annotated[str, Query(max_length=32, description='Organization Acronym')] = None,
+    org_name: Annotated[str, Query(max_length=512, description='Organization Name')] = None,
+    # org_type_code: Annotated[str, Query(max_length=32, description='Location name')] = None,
+    # org_type_description: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    sector_name: Annotated[str, Query(max_length=512, description='Sector Name')] = None,
+    location_code: Annotated[str, Query(max_length=128, description='Location Code')] = None,
+    location_name: Annotated[str, Query(max_length=512, description='Location Name')] = None,
+    admin1_code: Annotated[str, Query(max_length=128, description='Location Adm1 Code')] = None,
+    admin1_name: Annotated[str, Query(max_length=512, description='Location Adm1 Name')] = None,
+    admin2_code: Annotated[str, Query(max_length=128, description='Location Adm2 Code')] = None,
+    admin2_name: Annotated[str, Query(max_length=512, description='Location Adm2 Name')] = None,
+
 ):
     """
     Get the list of operational presences.
     """
-    result = await get_operational_presences_srv(pagination_parameters=pagination_parameters, db=db, org_ref=org_ref, location_name=location_name)
+    result = await get_operational_presences_srv(
+        pagination_parameters=pagination_parameters, 
+        db=db, 
+        org_ref=org_ref, 
+        dataset_hdx_id=dataset_hdx_id,
+        dataset_hdx_stub=dataset_hdx_stub, 
+        # dataset_title=dataset_title, 
+        dataset_provider_code=dataset_provider_code,
+        # dataset_provider_name=dataset_provider_name, 
+        # resource_hdx_id=resource_hdx_id,
+        # resource_filename=resource_filename, 
+        org_acronym=org_acronym,
+        org_name=org_name, 
+        # org_type_code=org_type_code,
+        # org_type_description=org_type_description, 
+        sector_name=sector_name, 
+        location_code=location_code,
+        location_name=location_name,
+        admin1_code=admin1_code, 
+        admin1_name=admin1_name,
+        admin2_code=admin2_code, 
+        admin2_name=admin2_name,
+        )
     return result
