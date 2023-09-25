@@ -35,6 +35,8 @@ services:
       ELASTIC_APM_ENABLED: ${ELASTIC_APM_ENABLED:-false}
     ports:
       - "127.0.0.1:8844:8844"
+      - "127.0.0.1:8850:5000"
+      - "127.0.0.1:8851:5001"
       # - "127.0.0.1:40022:22"
     volumes:
       # - ".ssh/etc:/etc/ssh"
