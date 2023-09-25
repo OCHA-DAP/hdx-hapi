@@ -7,3 +7,4 @@ docker/postgres-data
 /openapi.json
 
 *.pyc
+__pycache__/
