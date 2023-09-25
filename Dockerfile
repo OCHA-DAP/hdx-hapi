@@ -4,15 +4,16 @@ WORKDIR /srv/hapi
 
 COPY . .
 
-RUN apk add unit unit-python3 && \
+RUN apk add \
+        unit \ 
+        unit-python3 && \
     apk --virtual .build-deps add \
         git \
-        build-base git python3-dev postgresql-dev && \
+        build-base \
+        python3-dev \ 
+        postgresql-dev && \
     mkdir -p \
         /etc/services.d/hapi \
-        /srv/cache \
-        /srv/config \
-        /srv/output \
         /var/log/hapi && \
     mv docker/hapi_run /etc/services.d/hapi/run && \
     pip3 --no-cache-dir install --upgrade \
