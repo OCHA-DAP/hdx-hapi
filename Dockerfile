@@ -5,13 +5,13 @@ WORKDIR /srv/hapi
 COPY . .
 
 RUN apk add \
+        postgresql-dev \
         unit \ 
         unit-python3 && \
     apk --virtual .build-deps add \
         git \
         build-base \
-        python3-dev \ 
-        postgresql-dev && \
+        python3-dev && \
     mkdir -p \
         /etc/services.d/hapi \
         /var/log/hapi && \
