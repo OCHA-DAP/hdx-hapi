@@ -1,22 +1,47 @@
 version: "3.5"
 
-name: hapi
+name: hapi_stack
 
 services:
+  # hapi:
+  #   image: public.ecr.aws/unocha/python:3
+  #   hostname: hapi
+  #   working_dir: /srv/hapi
+  #   ports:
+  #     - "127.0.0.1:8844:8844"
+  #     - "127.0.0.1:40022:22"
+  #   volumes:
+  #     - ".ssh/etc:/etc/ssh"
+  #     - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
+  #     - "./..:/srv/hapi"
+  #   environment:
+  #     HDX_DOMAIN: ${HDX_DOMAIN:-https://data.humdata.org}
+  #   entrypoint: tail -f /dev/null
+
   hapi:
-    image: public.ecr.aws/unocha/python:3
+    image: public.ecr.aws/unocha/hdx-hapi:${HAPI_IMAGE_TAG:-main}
+    # build:
+    #   context: ./..
+    #   dockerfile: Dockerfile
     hostname: hapi
     working_dir: /srv/hapi
-    ports:
-      - "127.0.0.1:8844:8844"
-      - "127.0.0.1:40022:22"
-    volumes:
-      - ".ssh/etc:/etc/ssh"
-      - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
-      - "./..:/srv/hapi"
     environment:
       HDX_DOMAIN: ${HDX_DOMAIN:-https://data.humdata.org}
+      HAPI_DB_NAME: ${HAPI_DB_NAME:-hapi}
+      HAPI_DB_USER: ${HAPI_DB_USER:-hapi}
+      HAPI_DB_PASS: ${HAPI_DB_PASS:-hapi}
+      HAPI_DB_HOST: ${HAPI_DB_NAME:-db}
+      HAPI_DB_PORT: ${HAPI_DB_PORT:-5432}
+      ELASTIC_APM_ENABLED: ${ELASTIC_APM_ENABLED:-false}
+    ports:
+      - "127.0.0.1:8844:8844"
+      # - "127.0.0.1:40022:22"
+    volumes:
+      # - ".ssh/etc:/etc/ssh"
+      # - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
+      - "./..:/srv/hapi"
     entrypoint: tail -f /dev/null
+      
   db:
     image: postgis/postgis:15-3.4-alpine
     hostname: db

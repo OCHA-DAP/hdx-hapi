@@ -20,6 +20,7 @@ RUN apk add \
         pip \
         wheel && \
     pip3 install --upgrade -r requirements.txt && \
+    pip3 install elastic-apm && \
     apk del .build-deps && \
     rm -rf /var/lib/apk/* && rm -r /root/.cache
 
