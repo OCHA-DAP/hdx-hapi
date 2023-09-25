@@ -1,0 +1,29 @@
+{
+    "listeners": {
+        "*:5000": {
+            "pass": "applications/hapi"
+        }
+    },
+    "applications": {
+        "hapi": {
+            "type": "python 3.10",
+            "threads": 1,
+            "processes": {
+                "max": 10,
+                "spare": 3,
+                "idle_timeout": 20
+            },
+            "environment": {
+                "HOME": "/srv/hapi"
+            },
+            "path": "/srv/hapi",
+            "module": "main",
+            "callable": "app"
+        }
+    },
+    "settings": {
+        "http": {
+            "max_body_size": 1584000000
+        }
+    }
+}
