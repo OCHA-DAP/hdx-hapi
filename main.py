@@ -16,8 +16,14 @@ from hdx_hapi.endpoints.get_demographic import router as demographic_router
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 
 logger = logging.getLogger(__name__)
+# import os
+# logger.warning("Current folder is "+ os.getcwd())
 
-app = FastAPI()
+app = FastAPI(
+    title='HAPI',
+    description='THE HDX API',
+    version='0.0.1'
+)
 
 app.include_router(operational_presence_router)
 app.include_router(admin_level_router)
@@ -32,4 +38,4 @@ async def startup():
     pass
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0',port=8844)
+    uvicorn.run(app, host='0.0.0.0',port=8844, log_config='logging.conf')
