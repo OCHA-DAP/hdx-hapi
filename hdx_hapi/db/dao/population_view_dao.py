@@ -27,7 +27,7 @@ async def populations_view_list(
 
     query = select(PopulationView)
     if gender_code:
-        query = query.where(PopulationView.hdx_gender_codeid == gender_code)
+        query = query.where(PopulationView.gender_code == gender_code)
     if age_range_code:
         query = query.where(PopulationView.age_range_code == age_range_code)
     if population:
