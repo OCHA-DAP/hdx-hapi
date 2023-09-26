@@ -43,13 +43,13 @@ async def populations_view_list(
     if admin1_code:
         query = query.where(PopulationView.admin1_code == admin1_code)
     if admin1_name:
-        query = query.where(PopulationView.admin1_name.incontains(admin1_name))
+        query = query.where(PopulationView.admin1_name.icontains(admin1_name))
     if admin1_is_unspecified is not None:
         query = query.where(PopulationView.admin1_is_unspecified == admin1_is_unspecified)
     if admin2_code:
         query = query.where(PopulationView.admin2_code == admin2_code)
     if admin2_name:
-        query = query.where(PopulationView.admin2_name.incontains(admin2_name))
+        query = query.where(PopulationView.admin2_name.icontains(admin2_name))
     if admin2_is_unspecified is not None:
         query = query.where(PopulationView.admin2_is_unspecified == admin2_is_unspecified)
 

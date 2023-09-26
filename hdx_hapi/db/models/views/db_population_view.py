@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, ForeignKey, Integer, String, DateTime, Text, text
+from sqlalchemy import Boolean, Integer, String, DateTime, Text, text
 from sqlalchemy.orm import Mapped, mapped_column
 from hdx_hapi.db.models.base import Base
 
@@ -7,10 +7,10 @@ class PopulationView(Base):
     __tablename__ = 'population_view'
     
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    resource_ref: Mapped[int] = mapped_column(ForeignKey('resource.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    admin2_ref: Mapped[int] = mapped_column(ForeignKey('admin2.id', onupdate='CASCADE'), nullable=False)
-    gender_code: Mapped[str] = mapped_column(ForeignKey('gender.code', onupdate='CASCADE'), nullable=True)
-    age_range_code: Mapped[str] = mapped_column(ForeignKey('age_range.code', onupdate='CASCADE'), nullable=True)
+    resource_ref: Mapped[int] = mapped_column(Integer, nullable=False)
+    admin2_ref: Mapped[int] = mapped_column(Integer, nullable=False)
+    gender_code: Mapped[str] = mapped_column(String(1), nullable=True)
+    age_range_code: Mapped[str] = mapped_column(String(32), nullable=True)
     population: Mapped[int] = mapped_column(Integer, nullable=False, index=True)
     reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
     reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
