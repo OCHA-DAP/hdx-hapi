@@ -12,6 +12,7 @@ from hdx_hapi.endpoints.get_admin_level import router as admin_level_router
 from hdx_hapi.endpoints.get_hdx_metadata import router as dataset_router
 from hdx_hapi.endpoints.get_humanitarian_response import router as humanitarian_response_router
 from hdx_hapi.endpoints.get_demographic import router as demographic_router
+from hdx_hapi.endpoints.get_population import router as population_router
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 
@@ -24,6 +25,7 @@ app.include_router(admin_level_router)
 app.include_router(dataset_router)
 app.include_router(humanitarian_response_router)
 app.include_router(demographic_router)
+app.include_router(population_router)
 
 @app.on_event('startup')
 async def startup():
