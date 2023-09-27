@@ -1,5 +1,5 @@
-from sqlalchemy import ForeignKey, Integer, String, DateTime, text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, DateTime, text
+from sqlalchemy.orm import Mapped, mapped_column
 from hdx_hapi.db.models.base import Base
 
 

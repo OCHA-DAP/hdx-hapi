@@ -29,7 +29,7 @@ async def admin1_view_list(
         query = query.where(Admin1View.code == code)
     if name:
         query = query.where(Admin1View.name.icontains(name))
-    if is_unspecified:
+    if is_unspecified is not None:
         query = query.where(Admin1View.is_unspecified == is_unspecified)
     if reference_period_start:
         query = query.where(Admin1View.reference_period_start >= reference_period_start)
