@@ -17,24 +17,27 @@ async def admin2_view_list(
     db: AsyncSession,
     code: str = None,
     name: str = None,
-    is_unspecified: bool = None,
-    reference_period_start: datetime = None,
-    reference_period_end: datetime = None,
+    admin1_code: str = None,
+    admin1_name: str = None,
+    location_code: str = None,
+    location_name: str = None,
 ):
 
-    logger.info(f'admin2_view_list called with params: code={code}, name={name}, is_unspecified={is_unspecified}, reference_period_start={reference_period_start}, reference_period_end={reference_period_end}')
+    logger.info(f'admin2_view_list called with params: code={code}, name={name}, admin1_code={admin1_code}, admin1_name={admin1_name}, location_code={location_code}, location_name={location_name}')
 
     query = select(Admin2View)
     if code:
         query = query.where(Admin2View.code == code)
     if name:
         query = query.where(Admin2View.name.icontains(name))
-    if is_unspecified is not None:
-        query = query.where(Admin2View.is_unspecified == is_unspecified)
-    if reference_period_start:
-        query = query.where(Admin2View.reference_period_start >= reference_period_start)
-    if reference_period_end:
-        query = query.where(Admin2View.reference_period_end <= reference_period_end)
+    if admin1_code:
+        query = query.where(Admin2View.admin1_code == admin1_code)
+    if admin1_name:
+        query = query.where(Admin2View.admin1_name.icontains(admin1_name))
+    if location_code:
+        query = query.where(Admin2View.location_code == location_code)
+    if location_name:
+        query = query.where(Admin2View.location_name.icontains(location_name))
 
     query = apply_pagination(query, pagination_parameters)
 

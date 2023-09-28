@@ -67,11 +67,12 @@ async def get_admin1(
 async def get_admin2(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=10, description='Code')] = None,
-    name: Annotated[str, Query(max_length=10, description='Name')] = None,
-    is_unspecified: Annotated[bool, Query(description='Is specified or not')] = None,
-    reference_period_start: Annotated[datetime | date, Query(description='Start date of reference period', example='2022-01-01T00:00:00')] = None,
-    reference_period_end: Annotated[datetime | date, Query(description='End date of reference period', example='2023-01-01T23:59:59')] = None,
+    code: Annotated[str, Query(max_length=128, description='Code')] = None,
+    name: Annotated[str, Query(max_length=512, description='Name')] = None,
+    admin1_code: Annotated[str, Query(max_length=128, description='Admin1 code')] = None,
+    admin1_name: Annotated[str, Query(max_length=512, description='Admin1 name')] = None,
+    location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
+    location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
 ):
     """Get the list of admin2 entries.
     """    
@@ -80,8 +81,9 @@ async def get_admin2(
         db=db,
         code=code,
         name=name,
-        is_unspecified=is_unspecified,
-        reference_period_start=reference_period_start,
-        reference_period_end=reference_period_end,
+        admin1_code=admin1_code,
+        admin1_name=admin1_name,
+        location_code=location_code,
+        location_name=location_name,
     )
     return result
