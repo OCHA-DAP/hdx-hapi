@@ -8,8 +8,6 @@ from sqlalchemy import select
 from hdx_hapi.db.models.views.db_location_view import LocationView
 from hdx_hapi.db.dao.util.util import apply_pagination
 
-from datetime import datetime
-
 logger = logging.getLogger(__name__)
 
 async def locations_view_list(
@@ -17,21 +15,15 @@ async def locations_view_list(
     db: AsyncSession,
     code: str = None,
     name: str = None,
-    reference_period_start: datetime = None,
-    reference_period_end: datetime = None,
 ):
 
-    logger.info(f'orgs_view_list called with params: code={code}, name={name}, reference_period_start={reference_period_start}, reference_period_end={reference_period_end}')
+    logger.info(f'orgs_view_list called with params: code={code}, name={name}')
 
     query = select(LocationView)
     if code:
         query = query.where(LocationView.code == code)
     if name:
         query = query.where(LocationView.name.icontains(name))
-    if reference_period_start:
-        query = query.where(LocationView.reference_period_start >= reference_period_start)
-    if reference_period_end:
-        query = query.where(LocationView.reference_period_end <= reference_period_end)
 
     query = apply_pagination(query, pagination_parameters)
 
