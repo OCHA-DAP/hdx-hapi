@@ -1,5 +1,5 @@
 import logging
-
+from datetime import datetime
 from typing import Dict
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -16,6 +16,8 @@ async def operational_presences_view_list(
     db: AsyncSession,
     sector_code: int = None,
     dataset_provider_code: str = None,
+    resource_update_date_min: datetime = None,
+    resource_update_date_max: datetime = None,
     org_acronym: str = None,
     org_name: str = None,
     sector_name: str = None,
@@ -36,6 +38,10 @@ async def operational_presences_view_list(
         query = query.where(OperationalPresenceView.sector_code == sector_code)
     if dataset_provider_code:
         query = query.where(OperationalPresenceView.dataset_provider_code == dataset_provider_code)
+    if resource_update_date_min:
+        query = query.where(OperationalPresenceView.resource_update_date >= resource_update_date_min)
+    if resource_update_date_max:
+        query = query.where(OperationalPresenceView.resource_update_date <= resource_update_date_max)
     if org_acronym:
         query = query.where(OperationalPresenceView.org_acronym == org_acronym)
     if org_name:

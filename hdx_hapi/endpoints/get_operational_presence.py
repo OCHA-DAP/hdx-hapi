@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from typing import List, Annotated, Dict
 from fastapi import Depends, Query, APIRouter
 
@@ -19,6 +20,8 @@ async def get_operational_presences(
     db: AsyncSession = Depends(get_db),
     sector_code: Annotated[str, Query(max_length=512, description='Sector Code')] = None,
     dataset_provider_code: Annotated[str, Query(max_length=128, description='Dataset Provider Name')] = None,
+    resource_update_date_min: Annotated[datetime | date, Query(description='Min date of update date', example='2022-01-01T00:00:00')] = None,
+    resource_update_date_max: Annotated[datetime | date, Query(description='Max date of update date', example='2022-01-01T23:59:59')] = None,
     org_acronym: Annotated[str, Query(max_length=32, description='Organization Acronym')] = None,
     org_name: Annotated[str, Query(max_length=512, description='Organization Name')] = None,
     sector_name: Annotated[str, Query(max_length=512, description='Sector Name')] = None,
@@ -50,6 +53,8 @@ async def get_operational_presences(
         db=db, 
         sector_code=sector_code, 
         dataset_provider_code=dataset_provider_code,
+        resource_update_date_min=resource_update_date_min,
+        resource_update_date_max=resource_update_date_max,
         org_acronym=org_acronym,
         org_name=org_name,
         sector_name=sector_name, 
