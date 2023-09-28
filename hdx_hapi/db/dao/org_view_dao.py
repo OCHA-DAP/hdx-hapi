@@ -8,8 +8,6 @@ from sqlalchemy import select
 from hdx_hapi.db.models.views.db_org_view import OrgView
 from hdx_hapi.db.dao.util.util import apply_pagination
 
-from datetime import datetime
-
 logger = logging.getLogger(__name__)
 
 async def orgs_view_list(
@@ -17,21 +15,18 @@ async def orgs_view_list(
     db: AsyncSession,
     acronym: str = None,
     name: str = None,
-    reference_period_start: datetime = None,
-    reference_period_end: datetime = None,
+    org_type_description: str = None,
 ):
 
-    logger.info(f'orgs_view_list called with params: acronym={acronym}, name={name}, reference_period_start={reference_period_start}, reference_period_end={reference_period_end}')
+    logger.info(f'orgs_view_list called with params: acronym={acronym}, name={name}, org_type_description={org_type_description}')
 
     query = select(OrgView)
     if acronym:
         query = query.where(OrgView.acronym == acronym)
     if name:
         query = query.where(OrgView.name.icontains(name))
-    if reference_period_start:
-        query = query.where(OrgView.reference_period_start >= reference_period_start)
-    if reference_period_end:
-        query = query.where(OrgView.reference_period_end <= reference_period_end)
+    if org_type_description:
+        query = query.where(OrgView.org_type_description.icontains(org_type_description))
 
     query = apply_pagination(query, pagination_parameters)
 
