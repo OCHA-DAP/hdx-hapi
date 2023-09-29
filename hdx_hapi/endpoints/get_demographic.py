@@ -36,7 +36,7 @@ async def get_genders(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=1, description='Gender code', example='m')] = None,
-    description: Annotated[str, Query(max_length=50, description='Gender description', example='female')] = None
+    description: Annotated[str, Query(max_length=256, description='Gender description', example='female')] = None
 ):
     """Get the list of all genders.
     """    
