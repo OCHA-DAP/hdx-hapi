@@ -51,7 +51,7 @@ def test_helper_get_dataset_api_url():
         provider_name='Test Provider 2'
     )
 
-    assert dataset_view.api_link == expected_link
+    assert dataset_view.hdx_api_link == expected_link
 
 def test_helper_get_organization_url():
     log.info('started test_helper_get_organization_url')

@@ -20,7 +20,7 @@ class DatasetViewPydantic(BaseModel):
 
     @computed_field
     @property
-    def api_link(self) -> HttpUrl:
+    def hdx_api_link(self) -> HttpUrl:
         return get_dataset_api_url(dataset_id=self.hdx_id)
 
 

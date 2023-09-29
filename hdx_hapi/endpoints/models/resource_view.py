@@ -37,7 +37,7 @@ class ResourceViewPydantic(BaseModel):
 
     @computed_field
     @property
-    def api_link(self) -> HttpUrl:
+    def hdx_api_link(self) -> HttpUrl:
         return get_resource_api_url(resource_id=self.hdx_id)
 
     @computed_field
@@ -47,7 +47,7 @@ class ResourceViewPydantic(BaseModel):
 
     @computed_field
     @property
-    def dataset_api_link(self) -> HttpUrl:
+    def dataset_hdx_api_link(self) -> HttpUrl:
         return get_dataset_api_url(dataset_id=self.dataset_hdx_id)
 
     class Config:
