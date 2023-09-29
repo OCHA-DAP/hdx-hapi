@@ -18,7 +18,7 @@ class ResourceViewPydantic(BaseModel):
     format: str = Field(max_length=32)
     update_date: datetime
     is_hxl: bool
-    download_url: str = Field(max_length=1024)
+    download_url: HttpUrl
 
     dataset_hdx_id: str = Field(max_length=36)
     dataset_hdx_stub: str = Field(max_length=128)
