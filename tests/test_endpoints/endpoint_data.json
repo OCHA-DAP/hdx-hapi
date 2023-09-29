@@ -1,0 +1,16 @@
+{
+    "/api/admin1": {
+        "query_parameters": {
+            "code": "FOO-001",
+            "name": "Province 01",
+            "location_code": "FOO",
+            "location_name": "Foolandia"
+        },
+        "expected_fields": [
+            "code",
+            "name",
+            "location_code",
+            "location_name"
+        ]
+    }
+}
