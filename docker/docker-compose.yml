@@ -1,7 +1,3 @@
-version: "3.5"
-
-name: hapi_stack
-
 services:
   # hapi:
   #   image: public.ecr.aws/unocha/python:3

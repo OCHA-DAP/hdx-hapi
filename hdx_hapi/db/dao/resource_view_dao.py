@@ -1,5 +1,5 @@
 from typing import Dict
-
+from datetime import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -11,6 +11,8 @@ async def resources_view_list(
     db: AsyncSession,
     hdx_id: str = None,
     format: str = None,
+    update_date_min: datetime = None,
+    update_date_max: datetime = None,
     is_hxl: bool = None,
     dataset_title: str = None,
     dataset_hdx_id: str = None,
@@ -24,6 +26,10 @@ async def resources_view_list(
         query = query.where(ResourceView.hdx_id == hdx_id)
     if format:
         query = query.where(ResourceView.format == format)
+    if update_date_min:
+        query = query.where(ResourceView.update_date >= update_date_min)
+    if update_date_max:
+        query = query.where(ResourceView.update_date <= update_date_max)
     if is_hxl is not None:
         query = query.where(ResourceView.is_hxl == is_hxl)
     if dataset_title:

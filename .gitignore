@@ -8,3 +8,5 @@ docker/postgres-data
 
 *.pyc
 __pycache__/
+
+.coverage
