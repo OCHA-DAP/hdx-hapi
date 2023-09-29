@@ -23,9 +23,9 @@ async def get_datasets(
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
     hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset name')] = None,
-    title: Annotated[str, Query(max_length=128, description='HDX Dataset title or display name')] = None,
-    provider_code: Annotated[str, Query(max_length=10, description='Dataset ID given by provider')] = None,
-    provider_name: Annotated[str, Query(max_length=128, description='Dataset name given by provider')] = None,
+    title: Annotated[str, Query(max_length=1024, description='HDX Dataset title or display name')] = None,
+    provider_code: Annotated[str, Query(max_length=128, description='Dataset ID given by provider')] = None,
+    provider_name: Annotated[str, Query(max_length=512, description='Dataset name given by provider')] = None,
 ):
     """
     Return the list of datasets
