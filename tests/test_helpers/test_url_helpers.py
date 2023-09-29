@@ -65,9 +65,9 @@ def test_helper_get_organization_url():
 
     org_view = OrgViewPydantic(
         acronym=org_id,
-        name='Test Dataset',
-        reference_period_start=date(2000, 1, 1),
-        reference_period_end=None
+        name='Test Org',
+        org_type_code='Test Org Type Code',
+        org_type_description='Test Org Type Description'
     )
 
     assert org_view.hdx_link == expected_link
