@@ -47,15 +47,15 @@ async def get_resources(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description='HDX Resource ID')] = None,
-    format: Annotated[str, Query(max_length=10, description='HDX Resource format')] = None,
+    format: Annotated[str, Query(max_length=32, description='HDX Resource format')] = None,
     update_date_min: Annotated[datetime | date, Query(description='Min date of update date', example='2022-01-01T00:00:00')] = None,
     update_date_max: Annotated[datetime | date, Query(description='Max date of update date', example='2022-01-01T23:59:59')] = None,
     is_hxl: Annotated[bool, Query(description='Is Resource HXL')] = None,
-    dataset_hdx_id: Annotated[str, Query(max_length=128, description='HDX Dataset ID')] = None,
+    dataset_hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
     dataset_hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset name')] = None,
-    dataset_title: Annotated[str, Query(max_length=10, description='HDX Dataset title')] = None,
-    dataset_provider_code: Annotated[str, Query(max_length=10, description='Dataset ID given by provider')] = None,
-    dataset_provider_name: Annotated[str, Query(max_length=10, description='Dataset name given by provider')] = None,
+    dataset_title: Annotated[str, Query(max_length=1024, description='HDX Dataset title')] = None,
+    dataset_provider_code: Annotated[str, Query(max_length=128, description='Dataset ID given by provider')] = None,
+    dataset_provider_name: Annotated[str, Query(max_length=512, description='Dataset name given by provider')] = None,
 ):
     """
     Return the list of datasets
