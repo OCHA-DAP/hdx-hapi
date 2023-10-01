@@ -1,9 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import ConfigDict, Field
+
+from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
-class GenderViewPydantic(BaseModel):
+class GenderViewPydantic(HapiBaseModel):
     code: str = Field(max_length=1)
     description: str = Field(max_length=256)
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

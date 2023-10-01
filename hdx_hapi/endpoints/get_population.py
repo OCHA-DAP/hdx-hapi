@@ -6,7 +6,8 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.endpoints.models.population_view import PopulationViewPydantic
-from hdx_hapi.endpoints.util.util import pagination_parameters
+from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.population_logic import get_populations_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
@@ -15,7 +16,7 @@ router = APIRouter(
 )
 
 
-@router.get('/api/population', response_model=List[PopulationViewPydantic])
+@router.get('/api/themes/population', response_model=List[PopulationViewPydantic])
 async def get_populations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -32,6 +33,8 @@ async def get_populations(
     admin2_code: Annotated[str, Query(max_length=128, description='Admin2 code')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description='Admin2 name')] = None,
     admin2_is_unspecified: Annotated[bool, Query(description='Is admin2 specified or not')] = None,
+
+    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Return the list of populations
@@ -53,4 +56,4 @@ async def get_populations(
         admin2_name=admin2_name,
         admin2_is_unspecified=admin2_is_unspecified,
     )
-    return result
+    return transform_result_to_csv_stream_if_requested(result, output_format, PopulationViewPydantic)
