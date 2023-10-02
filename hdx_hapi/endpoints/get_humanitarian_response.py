@@ -1,4 +1,4 @@
-from typing import List, Annotated, Dict
+from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
 
 
@@ -7,7 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.endpoints.models.org_view import OrgViewPydantic
 from hdx_hapi.endpoints.models.org_type_view import OrgTypeViewPydantic
 from hdx_hapi.endpoints.models.sector_view import SectorViewPydantic
-from hdx_hapi.endpoints.util.util import pagination_parameters
+from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.org_logic import get_orgs_srv
 from hdx_hapi.services.org_type_logic import get_org_types_srv
 from hdx_hapi.services.sector_logic import get_sectors_srv
@@ -26,6 +27,8 @@ async def get_orgs(
     acronym: Annotated[str, Query(max_length=32, description='Organization acronym', example='HDX')] = None,
     name: Annotated[str, Query(max_length=512, description='Organization name', example='Humanitarian Data Exchange')] = None,
     org_type_description: Annotated[str, Query(max_length=512, description='Organization type description')] = None,
+
+    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """Get the list of all active organisations.
     """    
@@ -36,7 +39,7 @@ async def get_orgs(
         name=name,
         org_type_description=org_type_description
     )
-    return result
+    return transform_result_to_csv_stream_if_requested(result, output_format, OrgViewPydantic)
 
 @router.get('/api/org_type', response_model=List[OrgTypeViewPydantic])
 async def get_org_types(
@@ -44,6 +47,8 @@ async def get_org_types(
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Organization type code', example='123')] = None,
     description: Annotated[str, Query(max_length=512, description='Organization type description', example='Government')] = None
+
+    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """Get the list of all active organisation types.
     """    
@@ -53,7 +58,7 @@ async def get_org_types(
         code=code,
         description=description
     )
-    return result
+    return transform_result_to_csv_stream_if_requested(result, output_format, OrgTypeViewPydantic)
 
 @router.get('/api/sector', response_model=List[SectorViewPydantic])
 async def get_sectors(
@@ -61,6 +66,8 @@ async def get_sectors(
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Sector code', example='HEA')] = None,
     name: Annotated[str, Query(max_length=512, description='Sector name', example='Health')] = None,
+
+    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """Get the list of all active sectors.
     """    
@@ -70,4 +77,4 @@ async def get_sectors(
         code=code,
         name=name,
     )
-    return result
+    return transform_result_to_csv_stream_if_requested(result, output_format, SectorViewPydantic)

@@ -1,12 +1,12 @@
-from pydantic import BaseModel, Field
+from pydantic import ConfigDict, Field
 from typing import Optional
-from datetime import datetime
+
+from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
-class AgeRangeViewPydantic(BaseModel):
+class AgeRangeViewPydantic(HapiBaseModel):
     code: str = Field(max_length=32)
     age_min: int = None
     age_max: Optional[int] = None
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

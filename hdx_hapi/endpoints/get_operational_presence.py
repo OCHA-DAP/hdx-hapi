@@ -1,12 +1,13 @@
 from datetime import datetime, date
-from typing import List, Annotated, Dict
+from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.endpoints.models.operational_presence_view import OperationalPresenceViewPydantic
-from hdx_hapi.endpoints.util.util import pagination_parameters
+from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
@@ -14,6 +15,7 @@ router = APIRouter(
     tags=['3W'],
 )
 
+@router.get('/api/themes/3w', response_model=List[OperationalPresenceViewPydantic])
 @router.get('/api/themes/3W', response_model=List[OperationalPresenceViewPydantic])
 async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
@@ -43,7 +45,7 @@ async def get_operational_presences(
     # org_type_description: Annotated[str, Query(max_length=512, description='Location name')] = None,
     # admin1_name: Annotated[str, Query(max_length=512, description='Location Adm1 Name')] = None,
 
-
+    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Get the list of operational presences.
@@ -75,4 +77,4 @@ async def get_operational_presences(
         # org_type_description=org_type_description, 
 
         )
-    return result
+    return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceViewPydantic)

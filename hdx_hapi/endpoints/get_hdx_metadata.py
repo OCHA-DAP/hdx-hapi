@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from typing import List, Annotated, Dict
+from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
 
 
@@ -7,7 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.endpoints.models.dataset_view import DatasetViewPydantic
 from hdx_hapi.endpoints.models.resource_view import ResourceViewPydantic
-from hdx_hapi.endpoints.util.util import pagination_parameters
+from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.dataset_logic import get_datasets_srv
 from hdx_hapi.services.resource_logic import get_resources_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -26,6 +27,8 @@ async def get_datasets(
     title: Annotated[str, Query(max_length=1024, description='HDX Dataset title or display name')] = None,
     provider_code: Annotated[str, Query(max_length=128, description='Dataset ID given by provider')] = None,
     provider_name: Annotated[str, Query(max_length=512, description='Dataset name given by provider')] = None,
+
+    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Return the list of datasets
@@ -39,7 +42,7 @@ async def get_datasets(
         provider_code=provider_code,
         provider_name=provider_name,
     )
-    return result
+    return transform_result_to_csv_stream_if_requested(result, output_format, DatasetViewPydantic)
 
 
 @router.get('/api/resource', response_model=List[ResourceViewPydantic])
@@ -56,6 +59,8 @@ async def get_resources(
     dataset_title: Annotated[str, Query(max_length=1024, description='HDX Dataset title')] = None,
     dataset_provider_code: Annotated[str, Query(max_length=128, description='Dataset ID given by provider')] = None,
     dataset_provider_name: Annotated[str, Query(max_length=512, description='Dataset name given by provider')] = None,
+
+    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Return the list of datasets
@@ -74,4 +79,4 @@ async def get_resources(
         dataset_provider_code=dataset_provider_code,
         dataset_provider_name=dataset_provider_name,
     )
-    return result
+    return transform_result_to_csv_stream_if_requested(result, output_format, ResourceViewPydantic)
