@@ -136,7 +136,7 @@ endpoint_data = {
             "description"
         ],
     },
-    "/api/population": {
+    "/api/themes/population": {
         "query_parameters": {
             'gender_code': 'x',
             'age_range_code': '10-14',
