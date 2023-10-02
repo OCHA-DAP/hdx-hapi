@@ -46,7 +46,7 @@ async def get_org_types(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Organization type code', example='123')] = None,
-    description: Annotated[str, Query(max_length=512, description='Organization type description', example='Government')] = None
+    description: Annotated[str, Query(max_length=512, description='Organization type description', example='Government')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
