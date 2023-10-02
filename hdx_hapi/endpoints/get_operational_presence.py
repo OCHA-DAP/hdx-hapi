@@ -15,6 +15,7 @@ router = APIRouter(
     tags=['3W'],
 )
 
+@router.get('/api/themes/3w', response_model=List[OperationalPresenceViewPydantic])
 @router.get('/api/themes/3W', response_model=List[OperationalPresenceViewPydantic])
 async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
