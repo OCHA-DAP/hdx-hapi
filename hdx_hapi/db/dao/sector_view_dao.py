@@ -17,21 +17,15 @@ async def sectors_view_list(
     db: AsyncSession,
     code: str = None,
     name: str = None,
-    reference_period_start: datetime = None,
-    reference_period_end: datetime = None,
 ):
 
-    logger.info(f'sectors_view_list called with params: code={code}, name={name}, reference_period_start={reference_period_start}, reference_period_end={reference_period_end}')
+    logger.info(f'sectors_view_list called with params: code={code}, name={name}')
 
     query = select(SectorView)
     if code:
         query = query.where(SectorView.code == code)
     if name:
         query = query.where(SectorView.name.icontains(name))
-    if reference_period_start:
-        query = query.where(SectorView.reference_period_start >= reference_period_start)
-    if reference_period_end:
-        query = query.where(SectorView.reference_period_end <= reference_period_end)
 
     query = apply_pagination(query, pagination_parameters)
 

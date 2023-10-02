@@ -9,6 +9,7 @@ class PopulationViewPydantic(HapiBaseModel):
     age_range_code: Optional[str] = Field(max_length=32)
     population: int
     dataset_hdx_stub: str = Field(max_length=128)
+    resource_hdx_id: str = Field(max_length=36)
     location_code: str = Field(max_length=128)
     location_name: str = Field(max_length=512)
     admin1_code: str = Field(max_length=128)

@@ -18,7 +18,7 @@ class ResourceViewPydantic(HapiBaseModel):
     format: str = Field(max_length=32)
     update_date: datetime
     is_hxl: bool
-    download_url: str = Field(max_length=1024)
+    download_url: HttpUrl
 
     dataset_hdx_id: str = Field(max_length=36)
     dataset_hdx_stub: str = Field(max_length=128)
@@ -37,7 +37,7 @@ class ResourceViewPydantic(HapiBaseModel):
 
     @computed_field
     @property
-    def api_link(self) -> HttpUrl:
+    def hdx_api_link(self) -> HttpUrl:
         return get_resource_api_url(resource_id=self.hdx_id)
 
     @computed_field
@@ -47,7 +47,7 @@ class ResourceViewPydantic(HapiBaseModel):
 
     @computed_field
     @property
-    def dataset_api_link(self) -> HttpUrl:
+    def dataset_hdx_api_link(self) -> HttpUrl:
         return get_dataset_api_url(dataset_id=self.dataset_hdx_id)
 
     model_config = ConfigDict(from_attributes=True)

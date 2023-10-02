@@ -24,10 +24,9 @@ router = APIRouter(
 async def get_orgs(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    acronym: Annotated[str, Query(max_length=10, description='Organization acronym', example='HDX')] = None,
-    name: Annotated[str, Query(max_length=10, description='Organization name', example='Humanitarian Data Exchange')] = None,
-    reference_period_start: Annotated[datetime | date, Query(description='Start date of reference period', example='2022-01-01T00:00:00')] = None,
-    reference_period_end: Annotated[datetime | date, Query(description='End date of reference period', example='2023-01-01T23:59:59')] = None,
+    acronym: Annotated[str, Query(max_length=32, description='Organization acronym', example='HDX')] = None,
+    name: Annotated[str, Query(max_length=512, description='Organization name', example='Humanitarian Data Exchange')] = None,
+    org_type_description: Annotated[str, Query(max_length=512, description='Organization type description')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -38,8 +37,7 @@ async def get_orgs(
         db=db,
         acronym=acronym,
         name=name,
-        reference_period_start=reference_period_start,
-        reference_period_end=reference_period_end,
+        org_type_description=org_type_description
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, OrgViewPydantic)
 
@@ -48,7 +46,7 @@ async def get_org_types(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Organization type code', example='123')] = None,
-    description: Annotated[str, Query(max_length=50, description='Organization type description', example='Government')] = None,
+    description: Annotated[str, Query(max_length=512, description='Organization type description', example='Government')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -67,9 +65,7 @@ async def get_sectors(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Sector code', example='HEA')] = None,
-    name: Annotated[str, Query(max_length=50, description='Sector name', example='Health')] = None,
-    reference_period_start: Annotated[datetime | date, Query(description='Start date of reference period', example='2022-01-01T00:00:00')] = None,
-    reference_period_end: Annotated[datetime | date, Query(description='End date of reference period', example='2023-01-01T23:59:59')] = None,
+    name: Annotated[str, Query(max_length=512, description='Sector name', example='Health')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -80,7 +76,5 @@ async def get_sectors(
         db=db,
         code=code,
         name=name,
-        reference_period_start=reference_period_start,
-        reference_period_end=reference_period_end,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, SectorViewPydantic)

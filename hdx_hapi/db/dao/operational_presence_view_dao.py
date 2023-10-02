@@ -35,7 +35,7 @@ async def operational_presences_view_list(
 
     query = select(OperationalPresenceView)
     if sector_code:
-        query = query.where(OperationalPresenceView.sector_code == sector_code)
+        query = query.where(OperationalPresenceView.sector_code.icontains(sector_code))
     if dataset_provider_code:
         query = query.where(OperationalPresenceView.dataset_provider_code == dataset_provider_code)
     if resource_update_date_min:
@@ -45,19 +45,19 @@ async def operational_presences_view_list(
     if org_acronym:
         query = query.where(OperationalPresenceView.org_acronym == org_acronym)
     if org_name:
-        query = query.where(OperationalPresenceView.org_name == org_name)
+        query = query.where(OperationalPresenceView.org_name.icontains(org_name))
     if sector_name:
-        query = query.where(OperationalPresenceView.sector_name == sector_name)
+        query = query.where(OperationalPresenceView.sector_name.icontains(sector_name))
     if location_code:
         query = query.where(OperationalPresenceView.location_code == location_code)
     if location_name:
-        query = query.where(OperationalPresenceView.location_name == location_name)
+        query = query.where(OperationalPresenceView.location_name.icontains(location_name))
     if admin1_code:
         query = query.where(OperationalPresenceView.admin1_code == admin1_code)
     if admin2_code:
         query = query.where(OperationalPresenceView.admin2_code == admin2_code)
     if admin2_name:
-        query = query.where(OperationalPresenceView.admin2_name == admin2_name)
+        query = query.where(OperationalPresenceView.admin2_name.icontains(admin2_name))
     if admin1_is_unspecified is not None:
         query = query.where(OperationalPresenceView.admin1_is_unspecified == admin1_is_unspecified)
     if admin2_is_unspecified is not None:

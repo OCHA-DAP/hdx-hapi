@@ -17,8 +17,7 @@ class OperationalPresenceViewPydantic(HapiBaseModel):
     admin1_name: str = Field(max_length=512)
     admin2_code: str = Field(max_length=128)
     admin2_name: str = Field(max_length=512)
-    # TODO remove this field after testing and validation. might be helpful to have it displayed
-    resource_update_date: datetime
+    # resource_update_date: datetime
     # org_ref: int = None,
     # dataset_hdx_id: str = Field(max_length=36),
     # dataset_title: str = Field(max_length=1024),
