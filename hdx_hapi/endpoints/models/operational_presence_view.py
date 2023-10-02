@@ -1,8 +1,9 @@
-from pydantic import BaseModel, Field
-from typing import Optional
+from pydantic import ConfigDict, Field
 from datetime import datetime
 
-class OperationalPresenceViewPydantic(BaseModel):
+from hdx_hapi.endpoints.models.base import HapiBaseModel
+
+class OperationalPresenceViewPydantic(HapiBaseModel):
 
     sector_code: str = Field(max_length=32)
     dataset_hdx_stub: str = Field(max_length=128)
@@ -16,8 +17,7 @@ class OperationalPresenceViewPydantic(BaseModel):
     admin1_name: str = Field(max_length=512)
     admin2_code: str = Field(max_length=128)
     admin2_name: str = Field(max_length=512)
-    # TODO remove this field after testing and validation. might be helpful to have it displayed
-    resource_update_date: datetime
+    # resource_update_date: datetime
     # org_ref: int = None,
     # dataset_hdx_id: str = Field(max_length=36),
     # dataset_title: str = Field(max_length=1024),
@@ -28,5 +28,4 @@ class OperationalPresenceViewPydantic(BaseModel):
     # org_type_description: str = Field(max_length=512),
 
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
