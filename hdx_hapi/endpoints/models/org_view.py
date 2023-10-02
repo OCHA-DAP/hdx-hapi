@@ -1,5 +1,5 @@
 from pydantic import ConfigDict, Field, HttpUrl, computed_field
-from typing import List
+from typing import List, Optional
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 from hdx_hapi.services.hdx_url_logic import get_organization_url
 
@@ -9,7 +9,7 @@ class OrgViewPydantic(HapiBaseModel):
     # hdx_link: str = Field(max_length=1024)
     acronym: str = Field(max_length=32)
     name: str = Field(max_length=512)
-    org_type_code: str = Field(max_length=32)
+    org_type_code: Optional[str] = Field(max_length=32)
     org_type_description: str = Field(max_length=32)
 
     @computed_field
