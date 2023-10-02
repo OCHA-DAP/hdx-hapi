@@ -1,10 +1,11 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
+from typing import Optional
 
 
 class PopulationViewPydantic(BaseModel):
-    gender_code: str = Field(max_length=1)
-    age_range_code: str = Field(max_length=32)
+    gender_code: Optional[str] = Field(max_length=1,required=False)
+    age_range_code: Optional[str] = Field(max_length=32,required=False)
     population: int
     dataset_hdx_stub: str = Field(max_length=128)
     resource_hdx_id: str = Field(max_length=36)

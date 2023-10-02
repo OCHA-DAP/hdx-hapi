@@ -10,3 +10,5 @@ docker/postgres-data
 __pycache__/
 
 .coverage
+
+.DS_Store

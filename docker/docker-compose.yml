@@ -41,7 +41,7 @@ services:
     entrypoint: tail -f /dev/null
       
   db:
-    image: postgis/postgis:15-3.4-alpine
+    image: postgres:15.4-alpine3.18
     hostname: db
     ports:
       - "127.0.0.1:45432:5432"
