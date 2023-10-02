@@ -1,9 +1,11 @@
-from pydantic import BaseModel, Field
+from pydantic import ConfigDict, Field
 from typing import Optional
 from datetime import datetime
 
+from hdx_hapi.endpoints.models.base import HapiBaseModel
 
-class Admin2ViewPydantic(BaseModel):
+
+class Admin2ViewPydantic(HapiBaseModel):
     # id: int
     # admin1_ref: int
     code: str = Field(max_length=128)
@@ -12,5 +14,4 @@ class Admin2ViewPydantic(BaseModel):
     reference_period_start: datetime
     reference_period_end: Optional[datetime]
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

@@ -1,11 +1,10 @@
-from pydantic import BaseModel, Field
-from typing import Optional
-from datetime import datetime
+from pydantic import ConfigDict, Field
+
+from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
-class OrgTypeViewPydantic(BaseModel):
+class OrgTypeViewPydantic(HapiBaseModel):
     code: str = Field(max_length=32)
     description: str = Field(max_length=512)
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

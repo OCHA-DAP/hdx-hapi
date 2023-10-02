@@ -1,8 +1,9 @@
-from pydantic import BaseModel, Field
-from typing import Optional
+from pydantic import ConfigDict, Field
 from datetime import datetime
 
-class OperationalPresenceViewPydantic(BaseModel):
+from hdx_hapi.endpoints.models.base import HapiBaseModel
+
+class OperationalPresenceViewPydantic(HapiBaseModel):
 
     sector_code: str = Field(max_length=32)
     dataset_hdx_stub: str = Field(max_length=128)
@@ -28,5 +29,4 @@ class OperationalPresenceViewPydantic(BaseModel):
     # org_type_description: str = Field(max_length=512),
 
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
