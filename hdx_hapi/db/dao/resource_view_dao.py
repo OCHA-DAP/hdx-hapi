@@ -29,7 +29,7 @@ async def resources_view_list(
     if update_date_min:
         query = query.where(ResourceView.update_date >= update_date_min)
     if update_date_max:
-        query = query.where(ResourceView.update_date <= update_date_max)
+        query = query.where(ResourceView.update_date < update_date_max)
     if is_hxl is not None:
         query = query.where(ResourceView.is_hxl == is_hxl)
     if dataset_title:
