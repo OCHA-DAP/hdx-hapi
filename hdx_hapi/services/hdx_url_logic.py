@@ -1,5 +1,5 @@
 import logging
-
+from pydantic import HttpUrl
 from dataclasses import dataclass
 from hdx_hapi.config.config import Config
 
@@ -9,7 +9,7 @@ from hdx_hapi.config.config import get_config
 
 CONFIG = get_config()
 
-def get_dataset_url(dataset_id: str) -> str:
+def get_dataset_url(dataset_id: str) -> HttpUrl:
     """Creates the full HDX URL for a dataset
     
     Args:
@@ -23,9 +23,10 @@ def get_dataset_url(dataset_id: str) -> str:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    return dataset_url.format(domain=domain, dataset_id=dataset_id)
+    url=dataset_url.format(domain=domain, dataset_id=dataset_id)
+    return HttpUrl(url=url)
 
-def get_dataset_api_url(dataset_id: str) -> str:
+def get_dataset_api_url(dataset_id: str) -> HttpUrl:
     """Creates the full HDX API URL for a dataset
     
     Args:
@@ -39,10 +40,11 @@ def get_dataset_api_url(dataset_id: str) -> str:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    return dataset_api_url.format(domain=domain, dataset_id=dataset_id)
+    url=dataset_api_url.format(domain=domain, dataset_id=dataset_id)
+    return HttpUrl(url=url)
 
 
-def get_resource_url(dataset_id: str, resource_id: str) -> str:
+def get_resource_url(dataset_id: str, resource_id: str) -> HttpUrl:
     """Creates the full HDX URL for a dataset
     
     Args:
@@ -56,9 +58,10 @@ def get_resource_url(dataset_id: str, resource_id: str) -> str:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    return resource_url.format(domain=domain, dataset_id=dataset_id, resource_id=resource_id)
+    url=resource_url.format(domain=domain, dataset_id=dataset_id, resource_id=resource_id)
+    return HttpUrl(url=url)
 
-def get_resource_api_url(resource_id: str) -> str:
+def get_resource_api_url(resource_id: str) -> HttpUrl:
     """Creates the full HDX API URL for a dataset
     
     Args:
@@ -72,10 +75,11 @@ def get_resource_api_url(resource_id: str) -> str:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    return resource_api_url.format(domain=domain, resource_id=resource_id)
+    url=resource_api_url.format(domain=domain, resource_id=resource_id)
+    return HttpUrl(url=url)
 
 
-def get_organization_url(org_id: str) -> str:
+def get_organization_url(org_id: str) -> HttpUrl:
     """Creates the full HDX URL for an organization
 
     Args:
@@ -89,5 +93,6 @@ def get_organization_url(org_id: str) -> str:
     organization_url = CONFIG.HDX_ORGANIZATION_URL
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
-
-    return organization_url.format(domain=domain, org_id=org_id)
+        
+    url = organization_url.format(domain=domain, org_id=org_id)
+    return HttpUrl(url=url)

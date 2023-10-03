@@ -10,7 +10,7 @@ class OrgViewPydantic(HapiBaseModel):
     acronym: str = Field(max_length=32)
     name: str = Field(max_length=512)
     org_type_code: Optional[str] = Field(max_length=32)
-    org_type_description: str = Field(max_length=32)
+    org_type_description: Optional[str] = Field(max_length=32)
 
     @computed_field
     @property
