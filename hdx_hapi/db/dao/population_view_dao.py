@@ -1,5 +1,4 @@
 import logging
-
 import datetime
 from typing import Dict
 
@@ -8,6 +7,7 @@ from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_population_view import PopulationView
 from hdx_hapi.db.dao.util.util import apply_pagination
+
 
 logger = logging.getLogger(__name__)
 
@@ -61,6 +61,11 @@ async def populations_view_list(
 
     query = apply_pagination(query, pagination_parameters)
 
+    logger.debug(f'Executing SQL query: {query}')
+
     result = await db.execute(query)
     populations = result.scalars().all()
+
+    logger.info(f'Retrieved {len(populations)} rows from the database')
+
     return populations
