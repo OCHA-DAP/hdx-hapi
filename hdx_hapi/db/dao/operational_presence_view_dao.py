@@ -41,7 +41,7 @@ async def operational_presences_view_list(
     if resource_update_date_min:
         query = query.where(OperationalPresenceView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:
-        query = query.where(OperationalPresenceView.resource_update_date <= resource_update_date_max)
+        query = query.where(OperationalPresenceView.resource_update_date < resource_update_date_max)
     if org_acronym:
         query = query.where(OperationalPresenceView.org_acronym == org_acronym)
     if org_name:

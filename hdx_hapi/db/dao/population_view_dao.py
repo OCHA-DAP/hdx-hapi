@@ -37,7 +37,7 @@ async def populations_view_list(
     if resource_update_date_min:
         query = query.where(PopulationView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:
-        query = query.where(PopulationView.resource_update_date <= resource_update_date_max)
+        query = query.where(PopulationView.resource_update_date < resource_update_date_max)
     if location_code:
         query = query.where(PopulationView.location_code == location_code)
     if location_name:

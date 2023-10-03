@@ -5,7 +5,7 @@ from fastapi import Query
 
 
 async def pagination_parameters(
-    offset: Annotated[int, Query(ge=0)] = 0, limit: Annotated[int, Query(ge=0, le=10000)] = 10000
+    offset: Annotated[int, Query(ge=0)] = 0, limit: Annotated[int, Query(ge=0, le=10000, example=1000)] = 10000
 ):
     return {"offset": offset, "limit": limit}
 
