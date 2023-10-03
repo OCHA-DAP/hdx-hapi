@@ -29,7 +29,7 @@ async def populations_view_list(
     admin2_is_unspecified: bool = None,
 ):
 
-    logger.info(f'admin1_view_list called with params: gender_code={gender_code}, age_range_code={age_range_code}, population={population}, dataset_provider_code={dataset_provider_code}, resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, location_code={location_code}, location_name={location_name}, admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}')
+    logger.info(f'populations_view_list called with params: gender_code={gender_code}, age_range_code={age_range_code}, population={population}, dataset_provider_code={dataset_provider_code}, resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, location_code={location_code}, location_name={location_name}, admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}')
 
     query = select(PopulationView)
     if gender_code:
