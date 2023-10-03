@@ -1,5 +1,6 @@
 import pytest
 import logging
+from pydantic import HttpUrl
 from hdx_hapi.config.config import CONFIG, get_config
 from hdx_hapi.endpoints.models.dataset_view import DatasetViewPydantic
 from hdx_hapi.endpoints.models.org_view import OrgViewPydantic
@@ -17,7 +18,7 @@ def test_helper_get_dataset_url():
     log.info('started test_helper_get_dataset_url')
 
     dataset_id = 'test-dataset'
-    expected_link = 'https://data.humdata.org/dataset/%s/' % (dataset_id)
+    expected_link = HttpUrl(url='https://data.humdata.org/dataset/%s/' % (dataset_id))
 
     dataset_url = get_dataset_url(dataset_id=dataset_id)
 
@@ -37,7 +38,7 @@ def test_helper_get_dataset_api_url():
     log.info('started test_helper_get_dataset_api_url')
 
     dataset_id = 'test-api-dataset'
-    expected_link = 'https://data.humdata.org/api/action/package_show?id=%s' % (dataset_id)
+    expected_link = HttpUrl(url='https://data.humdata.org/api/action/package_show?id=%s' % (dataset_id))
 
     dataset_api_url = get_dataset_api_url(dataset_id=dataset_id)
 
@@ -57,7 +58,7 @@ def test_helper_get_organization_url():
     log.info('started test_helper_get_organization_url')
 
     org_id = 'test-organization'
-    expected_link = 'https://data.humdata.org/organization/%s' % (org_id)
+    expected_link = HttpUrl(url='https://data.humdata.org/organization/%s' % (org_id))
 
     org_url = get_organization_url(org_id=org_id)
 
