@@ -1,4 +1,4 @@
-from pydantic import ConfigDict, Field, validator
+from pydantic import ConfigDict, Field, model_validator
 from typing import Optional
 
 from hdx_hapi.endpoints.models.base import HapiBaseModel
@@ -23,24 +23,19 @@ class PopulationViewPydantic(HapiBaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-    @validator('admin1_code', 'admin1_name', pre=True)
-    def set_admin1_null(cls, v, values):
-        admin1_is_unspecified = values.get('admin1_is_unspecified', False)
+    @model_validator(mode='after')
+    def set_admin1_admin2_null(self) -> 'PopulationViewPydantic':
+        admin1_is_unspecified = self.admin1_is_unspecified
+        admin2_is_unspecified = self.admin2_is_unspecified
 
         # If 'admin1_is_unspecified' is True, set 'admin1_code' and 'admin1_name' to None
         if admin1_is_unspecified:
-            return None
-
-        # If 'admin1_is_unspecified' is False, leave 'admin1_code' and 'admin1_name' unchanged
-        return v
-
-    @validator('admin2_code', 'admin2_name', pre=True)
-    def set_admin2_null(cls, v, values):
-        admin2_is_unspecified = values.get('admin2_is_unspecified', False)
+            self.admin1_code = None
+            self.admin1_name = None
 
         # If 'admin2_is_unspecified' is True, set 'admin2_code' and 'admin2_name' to None
         if admin2_is_unspecified:
-            return None
+            self.admin2_code = None
+            self.admin2_name = None
 
-        # If 'admin2_is_unspecified' is False, leave 'admin2_code' and 'admin2_name' unchanged
-        return v
+        return self
