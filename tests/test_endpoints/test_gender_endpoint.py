@@ -1,6 +1,6 @@
 import pytest
 import logging
-
+import csv
 from httpx import AsyncClient
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
@@ -51,3 +51,16 @@ async def test_get_gender_result(event_loop, refresh_db):
         assert field in response.json()[0], f'Field "{field}" not found in the response'
 
     assert len(response.json()[0]) == len(expected_fields), f'Response has a different number of fields than expected'
+
+@pytest.mark.asyncio
+async def test_get_genders_csv(event_loop, refresh_db):
+    log.info('started test_get_genders')
+    async with AsyncClient(app=app, base_url='http://test', params={"output_format":"csv"}) as ac:
+        response = await ac.get(ENDPOINT_ROUTER)
+    assert response.status_code == 200
+    assert response.headers.get('content-type') == 'text/csv; charset=utf-8', 'The output should be in csv format'
+    try:
+        csv_response = csv.DictReader(response.text)
+    except Exception as ex:
+        assert False, 'The output is not csv'
+    
