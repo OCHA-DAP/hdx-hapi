@@ -28,11 +28,11 @@ async def datasets_view_list(
     if hdx_stub:
         query = query.where(DatasetView.hdx_stub == hdx_stub)
     if title:
-        query = query.where(DatasetView.title == title)
+        query = query.where(DatasetView.title.icontains(title))
     if provider_code:
         query = query.where(DatasetView.provider_code == provider_code)
     if provider_name:
-        query = query.where(DatasetView.provider_name == provider_name)
+        query = query.where(DatasetView.provider_name.icontains(provider_name))
 
     query = apply_pagination(query, pagination_parameters)
 
