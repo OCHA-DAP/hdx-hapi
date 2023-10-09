@@ -1,6 +1,5 @@
 import pytest
 import logging
-
 from httpx import AsyncClient
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
