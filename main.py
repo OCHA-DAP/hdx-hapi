@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title='HAPI',
-    description='THE HDX API',
+    description='The Humanitarian API is a part of the Humanitarian Data Exchange',
     version='0.0.1'
 )
 
