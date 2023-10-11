@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_dataset_view import DatasetView
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ async def datasets_view_list(
     if title:
         query = query.where(DatasetView.title.icontains(title))
     if provider_code:
-        query = query.where(DatasetView.provider_code == provider_code)
+        query = case_insensitive_filter(query, DatasetView.provider_code, provider_code)
     if provider_name:
         query = query.where(DatasetView.provider_name.icontains(provider_name))
 

@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_sector_view import SectorView
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 from datetime import datetime
 
@@ -23,7 +23,7 @@ async def sectors_view_list(
 
     query = select(SectorView)
     if code:
-        query = query.where(SectorView.code == code)
+        query = case_insensitive_filter(query, SectorView.code, code)
     if name:
         query = query.where(SectorView.name.icontains(name))
 

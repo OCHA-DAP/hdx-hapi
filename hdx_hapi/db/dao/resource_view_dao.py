@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_resource_view import ResourceView
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 async def resources_view_list(
     pagination_parameters: Dict,
@@ -39,7 +39,7 @@ async def resources_view_list(
     if dataset_hdx_stub:
         query = query.where(ResourceView.dataset_hdx_stub == dataset_hdx_stub)
     if dataset_provider_code:
-        query = query.where(ResourceView.dataset_provider_code == dataset_provider_code)
+        query = case_insensitive_filter(query, ResourceView.dataset_provider_code, dataset_provider_code)
     if dataset_provider_name:
         query = query.where(ResourceView.dataset_provider_name == dataset_provider_name)
 

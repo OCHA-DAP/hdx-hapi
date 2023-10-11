@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_gender_view import GenderView
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ async def genders_view_list(
 
     query = select(GenderView)
     if code:
-        query = query.where(GenderView.code == code)
+        query = case_insensitive_filter(query, GenderView.code, code)
     if description:
         query = query.where(GenderView.description.icontains(description))
 

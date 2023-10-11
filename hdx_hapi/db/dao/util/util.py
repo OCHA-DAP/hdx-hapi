@@ -10,3 +10,7 @@ def apply_pagination(query: Select, pagination_parameters: Dict) -> Select:
         limit = 1000
 
     return query.limit(limit).offset(offset)
+
+def case_insensitive_filter(query: Select, column, value) -> Select:
+    query = query.where(column.ilike(value))
+    return query

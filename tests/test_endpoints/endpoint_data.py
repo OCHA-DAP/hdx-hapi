@@ -3,9 +3,9 @@ from datetime import date
 endpoint_data = {
     "/api/admin1": {
         "query_parameters": {
-            "code": "FOO-001",
+            "code": "FoO-001",
             "name": "Province 01",
-            "location_code": "FOO",
+            "location_code": "FoO",
             "location_name": "Foolandia",
         },
         "expected_fields": [
@@ -17,11 +17,11 @@ endpoint_data = {
     },
     "/api/admin2": {
         "query_parameters": {
-            'code': 'FOO-001-A',
+            'code': 'FoO-001-A',
             'name': 'District A',
-            'admin1_code': 'FOO-001',
+            'admin1_code': 'FOo-001',
             'admin1_name': 'Province 01',
-            'location_code': 'FOO',
+            'location_code': 'FOo',
             'location_name': 'Foolandia',
         },
         "expected_fields": [
@@ -47,7 +47,7 @@ endpoint_data = {
         "query_parameters": {
             'hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
             'title': 'Dataset #1',
-            'provider_code': 'provider01',
+            'provider_code': 'Provider01',
             'provider_name': 'Provider #1',
         },
         "expected_fields": [
@@ -62,7 +62,7 @@ endpoint_data = {
     },
     "/api/gender": {
         "query_parameters": {
-            'code': 'f',
+            'code': 'F',
             'name': 'female'
         },
         "expected_fields": [
@@ -72,7 +72,7 @@ endpoint_data = {
     },
     "/api/location": {
         "query_parameters": {
-            'code': 'FOO',
+            'code': 'foo',
             'name': 'Foolandia'
         },
         "expected_fields": [
@@ -82,18 +82,18 @@ endpoint_data = {
     },
     "/api/themes/3W": {
         "query_parameters": {
-            'sector_code': 'SHL',
-            'dataset_provider_code': 'provider01',
+            'sector_code': 'Shl',
+            'dataset_provider_code': 'PROVIDER01',
             'resource_update_date_min': date(2023, 6, 1),
             'resource_update_date_max': date(2023, 6, 2),
             'org_acronym': 'ORG01',
             'org_name': 'Organisation 1',
             'sector_name': 'Emergency Shelter and NFI',
-            'location_code': 'FOO',
+            'location_code': 'foo',
             'location_name': 'Foolandia',
-            'admin1_code': 'FOO-001',
+            'admin1_code': 'foo-001',
             'admin1_is_unspecified': False,
-            'admin2_code': 'FOO-001-XXX',
+            'admin2_code': 'foo-001-xxx',
             'admin2_name': 'Unspecified',
             'admin2_is_unspecified': True,
         },
@@ -138,17 +138,17 @@ endpoint_data = {
     },
     "/api/themes/population": {
         "query_parameters": {
-            'gender_code': 'x',
+            'gender_code': 'X',
             'age_range_code': '10-14',
             'population': 1000000,
-            'dataset_provider_code': 'provider01',
+            'dataset_provider_code': 'PROvider01',
             'resource_update_date_min': date(2023, 6, 1),
             'resource_update_date_max': date(2023, 6, 2),
-            'location_code': 'FOO',
+            'location_code': 'fOO',
             'location_name': 'Foolandia',
-            'admin1_code': 'FOO-XXX',
+            'admin1_code': 'FOO-xxx',
             'admin1_is_unspecified': True,
-            'admin2_code': 'FOO-XXX-XXX',
+            'admin2_code': 'FOO-xxx-XXX',
             'admin2_name': 'Unspecified',
             'admin2_is_unspecified': True,
         },
@@ -175,7 +175,7 @@ endpoint_data = {
             'is_hxl': True,
             'dataset_hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
             'dataset_title': 'Dataset #1',
-            'dataset_provider_code': 'provider01',
+            'dataset_provider_code': 'pRoViDeR01',
             'dataset_provider_name': 'Provider #1',
         },
         "expected_fields": [
@@ -198,7 +198,7 @@ endpoint_data = {
     },
     "/api/sector": {
         "query_parameters": {
-            'code': 'PRO',
+            'code': 'Pro',
             'name': 'Protect'  # Protection
         },
         "expected_fields": [

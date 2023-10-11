@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_operational_presence_view import OperationalPresenceView
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 
 logger = logging.getLogger(__name__)
@@ -37,7 +37,7 @@ async def operational_presences_view_list(
     if sector_code:
         query = query.where(OperationalPresenceView.sector_code.icontains(sector_code))
     if dataset_provider_code:
-        query = query.where(OperationalPresenceView.dataset_provider_code == dataset_provider_code)
+        query = case_insensitive_filter(query, OperationalPresenceView.dataset_provider_code, dataset_provider_code)
     if resource_update_date_min:
         query = query.where(OperationalPresenceView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:
@@ -49,13 +49,13 @@ async def operational_presences_view_list(
     if sector_name:
         query = query.where(OperationalPresenceView.sector_name.icontains(sector_name))
     if location_code:
-        query = query.where(OperationalPresenceView.location_code == location_code)
+        query = case_insensitive_filter(query, OperationalPresenceView.location_code, location_code)
     if location_name:
         query = query.where(OperationalPresenceView.location_name.icontains(location_name))
     if admin1_code:
-        query = query.where(OperationalPresenceView.admin1_code == admin1_code)
+        query = case_insensitive_filter(query, OperationalPresenceView.admin1_code, admin1_code)
     if admin2_code:
-        query = query.where(OperationalPresenceView.admin2_code == admin2_code)
+        query = case_insensitive_filter(query, OperationalPresenceView.admin2_code, admin2_code)
     if admin2_name:
         query = query.where(OperationalPresenceView.admin2_name.icontains(admin2_name))
     if admin1_is_unspecified is not None:

@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_location_view import LocationView
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ async def locations_view_list(
 
     query = select(LocationView)
     if code:
-        query = query.where(LocationView.code == code)
+        query = case_insensitive_filter(query, LocationView.code, code)
     if name:
         query = query.where(LocationView.name.icontains(name))
 
