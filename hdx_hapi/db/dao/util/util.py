@@ -1,5 +1,5 @@
 from typing import Dict
-from sqlalchemy import Select
+from sqlalchemy import Column, Select
 
 def apply_pagination(query: Select, pagination_parameters: Dict) -> Select:
     offset = pagination_parameters.get('offset')
@@ -11,6 +11,6 @@ def apply_pagination(query: Select, pagination_parameters: Dict) -> Select:
 
     return query.limit(limit).offset(offset)
 
-def case_insensitive_filter(query: Select, column, value) -> Select:
+def case_insensitive_filter(query: Select, column: Column, value: str) -> Select:
     query = query.where(column.ilike(value))
     return query
