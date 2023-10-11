@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_admin2_view import Admin2View
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 from datetime import datetime
 
@@ -27,15 +27,15 @@ async def admin2_view_list(
 
     query = select(Admin2View)
     if code:
-        query = query.where(Admin2View.code == code)
+        query = case_insensitive_filter(query, Admin2View.code, code)
     if name:
         query = query.where(Admin2View.name.icontains(name))
     if admin1_code:
-        query = query.where(Admin2View.admin1_code == admin1_code)
+        query = case_insensitive_filter(query, Admin2View.admin1_code, admin1_code)
     if admin1_name:
         query = query.where(Admin2View.admin1_name.icontains(admin1_name))
     if location_code:
-        query = query.where(Admin2View.location_code == location_code)
+        query = case_insensitive_filter(query, Admin2View.location_code, location_code)
     if location_name:
         query = query.where(Admin2View.location_name.icontains(location_name))
 
