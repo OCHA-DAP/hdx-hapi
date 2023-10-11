@@ -1,6 +1,6 @@
-site_name: HAPI (Humanitarian Data Exchange API) Documentation
+site_name: HAPI - The Humanitarian API - Documentation
 nav:
   - Home: index.md
-  - About: about.md
+  - Contact: contact.md
 theme:
-  name: "material"
+  name: "mkdocs"
