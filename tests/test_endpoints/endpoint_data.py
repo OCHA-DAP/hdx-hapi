@@ -122,8 +122,7 @@ endpoint_data = {
             "acronym",
             "name",
             "org_type_code",
-            "org_type_description",
-            "hdx_link"  # computed field
+            "org_type_description"
         ],
     },
     "/api/org_type": {

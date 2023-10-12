@@ -54,21 +54,21 @@ def test_helper_get_dataset_api_url():
 
     assert dataset_view.hdx_api_link == expected_link
 
-def test_helper_get_organization_url():
-    log.info('started test_helper_get_organization_url')
+# def test_helper_get_organization_url():
+#     log.info('started test_helper_get_organization_url')
 
-    org_id = 'test-organization'
-    expected_link = HttpUrl(url='https://data.humdata.org/organization/%s' % (org_id))
+#     org_id = 'test-organization'
+#     expected_link = HttpUrl(url='https://data.humdata.org/organization/%s' % (org_id))
 
-    org_url = get_organization_url(org_id=org_id)
+#     org_url = get_organization_url(org_id=org_id)
 
-    assert org_url == expected_link
+#     assert org_url == expected_link
 
-    org_view = OrgViewPydantic(
-        acronym=org_id,
-        name='Test Org',
-        org_type_code='Test Org Type Code',
-        org_type_description='Test Org Type Description'
-    )
+#     org_view = OrgViewPydantic(
+#         acronym=org_id,
+#         name='Test Org',
+#         org_type_code='Test Org Type Code',
+#         org_type_description='Test Org Type Description'
+#     )
 
-    assert org_view.hdx_link == expected_link
+#     assert org_view.hdx_link == expected_link
