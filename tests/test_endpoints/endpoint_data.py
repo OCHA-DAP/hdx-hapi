@@ -86,7 +86,7 @@ endpoint_data = {
             'dataset_provider_code': 'PROVIDER01',
             'resource_update_date_min': date(2023, 6, 1),
             'resource_update_date_max': date(2023, 6, 2),
-            'org_acronym': 'ORG01',
+            'org_acronym': 'oRG01',
             'org_name': 'Organisation 1',
             'sector_name': 'Emergency Shelter and NFI',
             'location_code': 'foo',
@@ -114,7 +114,7 @@ endpoint_data = {
     },
     "/api/org": {
         "query_parameters": {
-            'acronym': 'ORG01',
+            'acronym': 'Org01',
             'name': 'Organisation 1',
             'org_type_description': 'Dono',  # Donor
         },

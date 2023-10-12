@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_org_view import OrgView
-from hdx_hapi.db.dao.util.util import apply_pagination
+from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +22,7 @@ async def orgs_view_list(
 
     query = select(OrgView)
     if acronym:
-        query = query.where(OrgView.acronym == acronym)
+        query = case_insensitive_filter(query, OrgView.acronym, acronym)
     if name:
         query = query.where(OrgView.name.icontains(name))
     if org_type_description:
