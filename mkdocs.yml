@@ -2,6 +2,7 @@ site_name: HAPI - The Humanitarian API - Documentation
 nav:
   - Home: index.md
   - Contact: contact.md
+  - Roadmap: roadmap.md
   - FAQ: faq.md
 theme:
   name: "mkdocs"
