@@ -13,8 +13,8 @@ As of November 2023, HAPI is in active development and early release. The number
 HAPI is organized around a set of key humanitarian indicators like **Baseline Population** and **3W - Operational Presence**. Each of these indicators can be queried via its endpoint.
 
 ### Current list of indicator endpoints in HAPI
-- [Baseline Population](https://stage.hapi-humdata-org.ahconu.org/docs#/population): Get data about baseline populations
-- [3W](https://stage.hapi-humdata-org.ahconu.org/docs#/3W): Get data about operational presence. You can learn more about 3w data [here](https://3w.unocha.org/)
+- [population](https://stage.hapi-humdata-org.ahconu.org/docs#/population): Get data about baseline populations of a location
+- [3w](https://stage.hapi-humdata-org.ahconu.org/docs#/3W): Get data about operational presence. You can learn more about 3w data [here](https://3w.unocha.org/)
 
 ## Supporting Tables
 Additional supporting endpoints provide information about locations, codelists, and metadata.
@@ -25,5 +25,6 @@ Additional supporting endpoints provide information about locations, codelists, 
 - [hdx-metadata](https://stage.hapi-humdata-org.ahconu.org/docs#/hdx-metadata): Retrieve metadata about the source of any data available in HAPI.
 ## Dates
 As of version 1 (released in late 2023), the data in HAPI is static and intended only for testing purposes. However you can filter your HAPI queries based on the date the source data was updated in HDX. Future versions will offer more robust date-related features.
-
+## Getting Started
+## Code Examples
 
