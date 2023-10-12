@@ -12,14 +12,14 @@ class OrgViewPydantic(HapiBaseModel):
     org_type_code: Optional[str] = Field(max_length=32)
     org_type_description: Optional[str] = Field(max_length=32)
 
-    @computed_field
-    @property
-    def hdx_link(self) -> HttpUrl:
-        return get_organization_url(org_id=self.acronym)
+    # @computed_field
+    # @property
+    # def hdx_link(self) -> HttpUrl:
+    #     return get_organization_url(org_id=self.acronym)
 
     model_config = ConfigDict(from_attributes=True)
 
-    def list_of_fields(self) -> List[str]:
-        fields = super().list_of_fields()
-        fields.extend(['hdx_link'])
-        return fields
+    # def list_of_fields(self) -> List[str]:
+    #     fields = super().list_of_fields()
+    #     fields.extend(['hdx_link'])
+    #     return fields
