@@ -43,7 +43,7 @@ async def operational_presences_view_list(
     if resource_update_date_max:
         query = query.where(OperationalPresenceView.resource_update_date < resource_update_date_max)
     if org_acronym:
-        query = query.where(OperationalPresenceView.org_acronym == org_acronym)
+        query = case_insensitive_filter(query, OperationalPresenceView.org_acronym, org_acronym)
     if org_name:
         query = query.where(OperationalPresenceView.org_name.icontains(org_name))
     if sector_name:
