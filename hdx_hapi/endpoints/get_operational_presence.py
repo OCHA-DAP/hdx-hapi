@@ -21,7 +21,7 @@ async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     sector_code: Annotated[str, Query(max_length=512, description='Sector Code')] = None,
-    dataset_provider_code: Annotated[str, Query(max_length=128, description='Dataset Provider Name')] = None,
+    dataset_provider_code: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
     resource_update_date_min: Annotated[datetime | date, Query(description='Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
     resource_update_date_max: Annotated[datetime | date, Query(description='Max date of update date, e.g. 2024-12-31 or 2024-12-31T23:59:59', example='2024-12-31')] = None,
     org_acronym: Annotated[str, Query(max_length=32, description='Organization Acronym')] = None,
