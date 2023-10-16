@@ -16,11 +16,11 @@ router = APIRouter(
 )
 
 @router.get('/api/themes/3w', response_model=List[OperationalPresenceViewPydantic])
-# @router.get('/api/themes/3W', response_model=List[OperationalPresenceViewPydantic])
+@router.get('/api/themes/3W', response_model=List[OperationalPresenceViewPydantic], summary="Additional version of this endpoint to support the uppercase 'W'")
 async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    sector_code: Annotated[str, Query(max_length=512, description='Sector Code')] = None,
+    sector_code: Annotated[str, Query(max_length=512, description='Sector codes describe the humanitarian sector in which the operational presence is working. See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_sectors_api_sector_get">sector endpoint</a> for details')] = None,
     dataset_provider_code: Annotated[str, Query(max_length=128, description='Dataset Provider Name')] = None,
     resource_update_date_min: Annotated[datetime | date, Query(description='Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
     resource_update_date_max: Annotated[datetime | date, Query(description='Max date of update date, e.g. 2024-12-31 or 2024-12-31T23:59:59', example='2024-12-31')] = None,
@@ -50,7 +50,7 @@ async def get_operational_presences(
     """
     UNOCHA's 3W (Who is doing What Where) Operational Presence data provide 
     information about which organizations are working in different locations affected by a 
-    crisis. 
+    crisis. <a href="https://3w.unocha.org/">Learn more about 3W</a>
     """
     result = await get_operational_presences_srv(
         pagination_parameters=pagination_parameters, 
