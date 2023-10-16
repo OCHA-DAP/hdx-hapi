@@ -25,6 +25,8 @@ Additional supporting endpoints provide information about locations, codelists, 
 - [hdx-metadata](https://stage.hapi-humdata-org.ahconu.org/docs#/hdx-metadata): Retrieve metadata about the source of any data available in HAPI.
 ## Dates
 As of version 1 (released in late 2023), the data in HAPI is static and intended only for testing purposes. However you can filter your HAPI queries based on the date the source data was updated in HDX. Future versions will offer more robust date-related features.
-## Getting Started
-## Code Examples
+# Getting Started
+TBD
+# Code Examples
+TBD
 
