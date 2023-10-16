@@ -12,11 +12,11 @@ from hdx_hapi.services.operational_presence_logic import get_operational_presenc
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['3W'],
+    tags=['3W Operational Presence'],
 )
 
 @router.get('/api/themes/3w', response_model=List[OperationalPresenceViewPydantic])
-@router.get('/api/themes/3W', response_model=List[OperationalPresenceViewPydantic])
+# @router.get('/api/themes/3W', response_model=List[OperationalPresenceViewPydantic])
 async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -48,7 +48,9 @@ async def get_operational_presences(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Get the list of operational presences.
+    UNOCHA's 3W (Who is doing What Where) Operational Presence data provide 
+    information about which organizations are working in different locations affected by a 
+    crisis. 
     """
     result = await get_operational_presences_srv(
         pagination_parameters=pagination_parameters, 
