@@ -25,8 +25,8 @@ async def get_datasets(
     hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
     hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset name')] = None,
     title: Annotated[str, Query(max_length=1024, description='HDX Dataset title or display name')] = None,
-    provider_code: Annotated[str, Query(max_length=128, description='Dataset ID given by provider')] = None,
-    provider_name: Annotated[str, Query(max_length=512, description='Dataset name given by provider')] = None,
+    provider_code: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
+    provider_name: Annotated[str, Query(max_length=512, description='Organization(provider) name')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -57,8 +57,8 @@ async def get_resources(
     dataset_hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
     dataset_hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset name')] = None,
     dataset_title: Annotated[str, Query(max_length=1024, description='HDX Dataset title')] = None,
-    dataset_provider_code: Annotated[str, Query(max_length=128, description='Dataset ID given by provider')] = None,
-    dataset_provider_name: Annotated[str, Query(max_length=512, description='Dataset name given by provider')] = None,
+    dataset_provider_code: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
+    dataset_provider_name: Annotated[str, Query(max_length=512, description='Organization(provider) name')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
