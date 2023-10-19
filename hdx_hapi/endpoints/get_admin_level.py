@@ -4,7 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.admin_level_view import Admin1Response, Admin2Response, LocationResponse
+from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.admin1_logic import get_admin1_srv
 from hdx_hapi.services.admin2_logic import get_admin2_srv

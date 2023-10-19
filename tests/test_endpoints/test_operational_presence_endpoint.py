@@ -2,7 +2,7 @@ import pytest
 import logging
 
 from httpx import AsyncClient
-from hdx_hapi.endpoints.models.operational_presence_view import OperationalPresenceResponse
+from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 

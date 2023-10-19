@@ -4,7 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.demographic_view import AgeRangeResponse, GenderResponse
+from hdx_hapi.endpoints.models.demographic import AgeRangeResponse, GenderResponse
 from hdx_hapi.endpoints.util.util import pagination_parameters, OutputFormat
 from hdx_hapi.services.age_range_logic import get_age_ranges_srv
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested

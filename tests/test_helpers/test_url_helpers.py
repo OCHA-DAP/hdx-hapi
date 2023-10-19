@@ -2,8 +2,8 @@ import pytest
 import logging
 from pydantic import HttpUrl
 from hdx_hapi.config.config import CONFIG, get_config
-from hdx_hapi.endpoints.models.hdx_metadata_view import DatasetResponse
-from hdx_hapi.endpoints.models.humanitarian_response_view import OrgResponse
+from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse
+from hdx_hapi.endpoints.models.humanitarian_response import OrgResponse
 from hdx_hapi.services.hdx_url_logic import get_dataset_url, get_dataset_api_url, get_organization_url
 
 from datetime import date

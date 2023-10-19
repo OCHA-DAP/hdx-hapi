@@ -5,7 +5,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.operational_presence_view import OperationalPresenceResponse
+from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv

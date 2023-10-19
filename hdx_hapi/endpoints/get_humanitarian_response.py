@@ -4,7 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.humanitarian_response_view import OrgResponse, OrgTypeResponse, SectorResponse
+from hdx_hapi.endpoints.models.humanitarian_response import OrgResponse, OrgTypeResponse, SectorResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.org_logic import get_orgs_srv

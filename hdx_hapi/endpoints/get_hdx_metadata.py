@@ -5,7 +5,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.hdx_metadata_view import DatasetResponse, ResourceResponse
+from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.dataset_logic import get_datasets_srv

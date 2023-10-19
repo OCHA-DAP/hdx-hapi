@@ -2,7 +2,7 @@ import pytest
 import logging
 
 from httpx import AsyncClient
-from hdx_hapi.endpoints.models.population_view import PopulationResponse
+from hdx_hapi.endpoints.models.population import PopulationResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
