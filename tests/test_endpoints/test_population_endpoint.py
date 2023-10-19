@@ -2,7 +2,7 @@ import pytest
 import logging
 
 from httpx import AsyncClient
-from hdx_hapi.endpoints.models.population_view import PopulationViewPydantic
+from hdx_hapi.endpoints.models.population_view import PopulationResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
@@ -58,7 +58,7 @@ async def test_get_population_result(event_loop, refresh_db):
 async def test_get_population_adm_fields(event_loop, refresh_db):
     log.info('started test_get_population_adm_fields')
 
-    population_view_adm_specified = PopulationViewPydantic(
+    population_view_adm_specified = PopulationResponse(
         gender_code='f',
         age_range_code='0-1',
         population=1,
@@ -79,7 +79,7 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
     assert population_view_adm_specified.admin2_code == 'FOO-XXX-XXX', 'admin2_code should keep its value when admin1_is_unspecified is False'
     assert population_view_adm_specified.admin2_name == 'District A', 'admin2_name should keep its value when admin1_is_unspecified is False'
 
-    population_view_adm_unspecified = PopulationViewPydantic(
+    population_view_adm_unspecified = PopulationResponse(
         gender_code='f',
         age_range_code='0-1',
         population=1,

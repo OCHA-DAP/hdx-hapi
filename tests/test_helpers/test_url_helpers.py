@@ -2,8 +2,8 @@ import pytest
 import logging
 from pydantic import HttpUrl
 from hdx_hapi.config.config import CONFIG, get_config
-from hdx_hapi.endpoints.models.dataset_view import DatasetViewPydantic
-from hdx_hapi.endpoints.models.org_view import OrgViewPydantic
+from hdx_hapi.endpoints.models.hdx_metadata_view import DatasetResponse
+from hdx_hapi.endpoints.models.humanitarian_response_view import OrgResponse
 from hdx_hapi.services.hdx_url_logic import get_dataset_url, get_dataset_api_url, get_organization_url
 
 from datetime import date
@@ -24,7 +24,7 @@ def test_helper_get_dataset_url():
 
     assert dataset_url == expected_link
 
-    dataset_view = DatasetViewPydantic(
+    dataset_view = DatasetResponse(
         hdx_id=dataset_id,
         hdx_stub=dataset_id,
         title='Test Dataset #1',
@@ -44,7 +44,7 @@ def test_helper_get_dataset_api_url():
 
     assert dataset_api_url == expected_link
 
-    dataset_view = DatasetViewPydantic(
+    dataset_view = DatasetResponse(
         hdx_id=dataset_id,
         hdx_stub=dataset_id,
         title='Test Dataset #2',
@@ -64,7 +64,7 @@ def test_helper_get_dataset_api_url():
 
 #     assert org_url == expected_link
 
-#     org_view = OrgViewPydantic(
+#     org_view = OrgResponse(
 #         acronym=org_id,
 #         name='Test Org',
 #         org_type_code='Test Org Type Code',

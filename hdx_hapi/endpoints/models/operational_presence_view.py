@@ -3,7 +3,7 @@ from typing import Optional
 
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 
-class OperationalPresenceViewPydantic(HapiBaseModel):
+class OperationalPresenceResponse(HapiBaseModel):
 
     sector_code: str = Field(max_length=32)
     dataset_hdx_stub: str = Field(max_length=128)
@@ -35,7 +35,7 @@ class OperationalPresenceViewPydantic(HapiBaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     @model_validator(mode='after')
-    def set_admin1_admin2_null(self) -> 'OperationalPresenceViewPydantic':
+    def set_admin1_admin2_null(self) -> 'OperationalPresenceResponse':
         admin1_is_unspecified = self.admin1_is_unspecified
         admin2_is_unspecified = self.admin2_is_unspecified
 

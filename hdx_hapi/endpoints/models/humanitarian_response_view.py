@@ -4,7 +4,7 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel
 from hdx_hapi.services.hdx_url_logic import get_organization_url
 
 
-class OrgViewPydantic(HapiBaseModel):
+class OrgResponse(HapiBaseModel):
     # id: int
     # hdx_link: str = Field(max_length=1024)
     acronym: str = Field(max_length=32)
@@ -23,3 +23,17 @@ class OrgViewPydantic(HapiBaseModel):
     #     fields = super().list_of_fields()
     #     fields.extend(['hdx_link'])
     #     return fields
+
+
+class OrgTypeResponse(HapiBaseModel):
+    code: str = Field(max_length=32)
+    description: str = Field(max_length=512)
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class SectorResponse(HapiBaseModel):
+    code: str = Field(max_length=32)
+    name: str = Field(max_length=512)
+
+    model_config = ConfigDict(from_attributes=True)

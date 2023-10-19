@@ -4,7 +4,7 @@ from typing import Optional
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
-class PopulationViewPydantic(HapiBaseModel):
+class PopulationResponse(HapiBaseModel):
     gender_code: Optional[str] = Field(max_length=1)
     age_range_code: Optional[str] = Field(max_length=32)
     population: int
@@ -24,7 +24,7 @@ class PopulationViewPydantic(HapiBaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     @model_validator(mode='after')
-    def set_admin1_admin2_null(self) -> 'PopulationViewPydantic':
+    def set_admin1_admin2_null(self) -> 'PopulationResponse':
         admin1_is_unspecified = self.admin1_is_unspecified
         admin2_is_unspecified = self.admin2_is_unspecified
 

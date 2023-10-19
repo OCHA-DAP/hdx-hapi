@@ -4,9 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.admin1_view import Admin1ViewPydantic
-from hdx_hapi.endpoints.models.admin2_view import Admin2ViewPydantic
-from hdx_hapi.endpoints.models.location_view import LocationViewPydantic
+from hdx_hapi.endpoints.models.admin_level_view import Admin1Response, Admin2Response, LocationResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.admin1_logic import get_admin1_srv
 from hdx_hapi.services.admin2_logic import get_admin2_srv
@@ -20,7 +18,7 @@ router = APIRouter(
     tags=['Location and Administrative Divisions'],
 )
 
-@router.get('/api/location', response_model=List[LocationViewPydantic])
+@router.get('/api/location', response_model=List[LocationResponse])
 async def get_locations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -37,10 +35,10 @@ async def get_locations(
         code=code,
         name=name
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, LocationViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
 
 
-@router.get('/api/admin1', response_model=List[Admin1ViewPydantic])
+@router.get('/api/admin1', response_model=List[Admin1Response])
 async def get_admin1(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -61,10 +59,10 @@ async def get_admin1(
         location_code=location_code,
         location_name=location_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, Admin1ViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, Admin1Response)
 
 
-@router.get('/api/admin2', response_model=List[Admin2ViewPydantic])
+@router.get('/api/admin2', response_model=List[Admin2Response])
 async def get_admin2(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -89,4 +87,4 @@ async def get_admin2(
         location_code=location_code,
         location_name=location_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, Admin2ViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, Admin2Response)
