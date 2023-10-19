@@ -24,7 +24,7 @@ router = APIRouter(
 async def get_orgs(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    acronym: Annotated[str, Query(max_length=32, description='Organization acronym', example='UNHCR')] = None,
+    acronym: Annotated[str, Query(max_length=32, description='Organization acronym', example='unhcr')] = None,
     name: Annotated[str, Query(max_length=512, description='Organization name', example='United Nations High Commissioner for Refugees')] = None,
     org_type_description: Annotated[str, Query(max_length=512, description='Organization type description')] = None,
 
@@ -64,7 +64,7 @@ async def get_org_types(
 async def get_sectors(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=32, description='Sector code', example='HEA')] = None,
+    code: Annotated[str, Query(max_length=32, description='Sector code', example='hea')] = None,
     name: Annotated[str, Query(max_length=512, description='Sector name', example='Health')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
