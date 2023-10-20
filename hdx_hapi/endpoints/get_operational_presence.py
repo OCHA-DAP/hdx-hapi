@@ -20,9 +20,9 @@ router = APIRouter(
 async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    sector_code: Annotated[str, Query(max_length=512, description='Sector codes describe the humanitarian sector to which the operational presence applies. See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_sectors_api_sector_get">sector endpoint</a> for details')] = None,
-    dataset_provider_code: Annotated[str, Query(max_length=128, description='Provides a reference to the organization who contributed the source data to HDX.')] = None,
-    resource_update_date_min: Annotated[datetime | date, Query(description='Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
+    sector_code: Annotated[str, Query(max_length=512, description='Filter the response by sector codes, which describe the humanitarian sector to which the operational presence applies. See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_sectors_api_sector_get">sector endpoint</a> for details')] = None,
+    dataset_provider_code: Annotated[str, Query(max_length=128, description='Filter the query by the organizations contributing the source data to HDX. This will usually be an office of UNOCHA')] = None,
+    resource_update_date_min: Annotated[datetime | date, Query(description='Filter the repsonse to data updated on or after this date. For example 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
     resource_update_date_max: Annotated[datetime | date, Query(description='Max date of update date, e.g. 2024-12-31 or 2024-12-31T23:59:59', example='2024-12-31')] = None,
     org_acronym: Annotated[str, Query(max_length=32, description='Organization Acronym')] = None,
     org_name: Annotated[str, Query(max_length=512, description='Organization Name')] = None,
