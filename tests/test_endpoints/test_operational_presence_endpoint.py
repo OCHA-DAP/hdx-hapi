@@ -2,7 +2,7 @@ import pytest
 import logging
 
 from httpx import AsyncClient
-from hdx_hapi.endpoints.models.operational_presence_view import OperationalPresenceViewPydantic
+from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
@@ -58,7 +58,7 @@ async def test_get_operational_presence_result(event_loop, refresh_db):
 async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
     log.info('started test_get_operational_presence_adm_fields')
 
-    operational_presence_view_adm_specified = OperationalPresenceViewPydantic(
+    operational_presence_view_adm_specified = OperationalPresenceResponse(
         sector_code='ABC',
         age_range_code='0-1',
         dataset_hdx_stub='test-dataset1',
@@ -81,7 +81,7 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
     assert operational_presence_view_adm_specified.admin2_code == 'FOO-XXX-XXX', 'admin2_code should keep its value when admin1_is_unspecified is False'
     assert operational_presence_view_adm_specified.admin2_name == 'District A', 'admin2_name should keep its value when admin1_is_unspecified is False'
 
-    operational_presence_view_adm_unspecified = OperationalPresenceViewPydantic(
+    operational_presence_view_adm_unspecified = OperationalPresenceResponse(
         sector_code='ABC',
         age_range_code='0-1',
         dataset_hdx_stub='test-dataset1',
