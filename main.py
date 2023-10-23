@@ -3,10 +3,13 @@ import logging.config
 logging.config.fileConfig('logging.conf')
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.openapi.docs import get_swagger_ui_html
 
-from hdx_hapi.services.sql_alchemy_session import init_db
+# from hdx_hapi.services.sql_alchemy_session import init_db
 
+from hdx_hapi.endpoints.favicon import router as favicon_router
 from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router
 from hdx_hapi.endpoints.get_admin_level import router as admin_level_router
 from hdx_hapi.endpoints.get_hdx_metadata import router as dataset_router
@@ -23,9 +26,12 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     title='HAPI',
     description='The Humanitarian API (HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="fix/this/link">TBD - get started here</a>',
-    version='0.0.1'
+    version='0.0.1',
+    docs_url=None,
 )
 
+
+app.include_router(favicon_router)
 app.include_router(operational_presence_router)
 app.include_router(admin_level_router)
 app.include_router(dataset_router)
@@ -38,6 +44,29 @@ async def startup():
     # await init_db()
     # await populate_db()
     pass
+
+
+# Adding custom favicon based on article 
+@app.get('/docs', include_in_schema=False)
+async def swagger_ui_html(req: Request) -> HTMLResponse:
+    root_path = req.scope.get('root_path', '').rstrip('/')
+    openapi_url = root_path + app.openapi_url
+    oauth2_redirect_url = app.swagger_ui_oauth2_redirect_url
+    if oauth2_redirect_url:
+        oauth2_redirect_url = root_path + oauth2_redirect_url
+    return get_swagger_ui_html(
+        openapi_url=openapi_url,
+        title=app.title + ' - OpenAPI Docs',
+        oauth2_redirect_url=oauth2_redirect_url,
+        init_oauth=app.swagger_ui_init_oauth,
+        swagger_favicon_url='/favicon.ico',
+        swagger_ui_parameters=app.swagger_ui_parameters,
+    )
+
+
+@app.get('/')
+def home():
+    return RedirectResponse('/docs')
 
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0',port=8844, log_config='logging.conf')
