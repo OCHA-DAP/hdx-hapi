@@ -5,8 +5,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.dataset_view import DatasetViewPydantic
-from hdx_hapi.endpoints.models.resource_view import ResourceViewPydantic
+from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.dataset_logic import get_datasets_srv
@@ -18,7 +17,7 @@ router = APIRouter(
 )
 
 
-@router.get('/api/dataset', response_model=List[DatasetViewPydantic])
+@router.get('/api/dataset', response_model=List[DatasetResponse])
 async def get_datasets(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -42,10 +41,10 @@ async def get_datasets(
         provider_code=provider_code,
         provider_name=provider_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, DatasetViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, DatasetResponse)
 
 
-@router.get('/api/resource', response_model=List[ResourceViewPydantic])
+@router.get('/api/resource', response_model=List[ResourceResponse])
 async def get_resources(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -79,4 +78,4 @@ async def get_resources(
         dataset_provider_code=dataset_provider_code,
         dataset_provider_name=dataset_provider_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, ResourceViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, ResourceResponse)

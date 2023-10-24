@@ -5,7 +5,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.population_view import PopulationViewPydantic
+from hdx_hapi.endpoints.models.population import PopulationResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.population_logic import get_populations_srv
@@ -16,7 +16,7 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/population', response_model=List[PopulationViewPydantic])
+@router.get('/api/themes/population', response_model=List[PopulationResponse])
 async def get_populations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -56,4 +56,4 @@ async def get_populations(
         admin2_name=admin2_name,
         admin2_is_unspecified=admin2_is_unspecified,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, PopulationViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, PopulationResponse)

@@ -2,10 +2,9 @@ from datetime import datetime, date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
 
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.operational_presence_view import OperationalPresenceViewPydantic
+from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
@@ -15,8 +14,9 @@ router = APIRouter(
     tags=['3W Operational Presence'],
 )
 
-@router.get('/api/themes/3w', response_model=List[OperationalPresenceViewPydantic], summary = "Get the list of organizations present and in which humanitarian sectors they are working. There are two versions of this endpoint to support the uppercase and lowercase 'w'")
-@router.get('/api/themes/3W', response_model=List[OperationalPresenceViewPydantic], summary = "Get the list of organizations present and in which humanitarian sectors they are working. There are two versions of this endpoint to support the uppercase and lowercase 'w'.")
+
+@router.get('/api/themes/3w', response_model=List[OperationalPresenceResponse], summary = "Get the list of organizations present and in which humanitarian sectors they are working. There are two versions of this endpoint to support the uppercase and lowercase 'w'")
+@router.get('/api/themes/3W', response_model=List[OperationalPresenceResponse], summary = "Get the list of organizations present and in which humanitarian sectors they are working. There are two versions of this endpoint to support the uppercase and lowercase 'w'.")
 async def get_operational_presences(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -80,4 +80,4 @@ async def get_operational_presences(
         # org_type_description=org_type_description, 
 
         )
-    return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceResponse)

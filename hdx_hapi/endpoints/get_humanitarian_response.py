@@ -4,9 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hdx_hapi.endpoints.models.org_view import OrgViewPydantic
-from hdx_hapi.endpoints.models.org_type_view import OrgTypeViewPydantic
-from hdx_hapi.endpoints.models.sector_view import SectorViewPydantic
+from hdx_hapi.endpoints.models.humanitarian_response import OrgResponse, OrgTypeResponse, SectorResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.org_logic import get_orgs_srv
@@ -20,12 +18,12 @@ router = APIRouter(
     tags=['humanitarian-response'],
 )
 
-@router.get('/api/org', response_model=List[OrgViewPydantic])
+@router.get('/api/org', response_model=List[OrgResponse])
 async def get_orgs(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    acronym: Annotated[str, Query(max_length=32, description='Organization acronym', example='HDX')] = None,
-    name: Annotated[str, Query(max_length=512, description='Organization name', example='Humanitarian Data Exchange')] = None,
+    acronym: Annotated[str, Query(max_length=32, description='Organization acronym', example='unhcr')] = None,
+    name: Annotated[str, Query(max_length=512, description='Organization name', example='United Nations High Commissioner for Refugees')] = None,
     org_type_description: Annotated[str, Query(max_length=512, description='Organization type description')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
@@ -39,14 +37,14 @@ async def get_orgs(
         name=name,
         org_type_description=org_type_description
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, OrgViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, OrgResponse)
 
-@router.get('/api/org_type', response_model=List[OrgTypeViewPydantic])
+@router.get('/api/org_type', response_model=List[OrgTypeResponse])
 async def get_org_types(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=32, description='Organization type code', example='123')] = None,
-    description: Annotated[str, Query(max_length=512, description='Organization type description', example='Government')] = None,
+    code: Annotated[str, Query(max_length=32, description='Organization type code', example='433')] = None,
+    description: Annotated[str, Query(max_length=512, description='Organization type description', example='Donor')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -58,13 +56,13 @@ async def get_org_types(
         code=code,
         description=description
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, OrgTypeViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, OrgTypeResponse)
 
-@router.get('/api/sector', response_model=List[SectorViewPydantic])
+@router.get('/api/sector', response_model=List[SectorResponse])
 async def get_sectors(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=32, description='Sector code', example='HEA')] = None,
+    code: Annotated[str, Query(max_length=32, description='Sector code', example='hea')] = None,
     name: Annotated[str, Query(max_length=512, description='Sector name', example='Health')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
@@ -77,4 +75,4 @@ async def get_sectors(
         code=code,
         name=name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, SectorViewPydantic)
+    return transform_result_to_csv_stream_if_requested(result, output_format, SectorResponse)
