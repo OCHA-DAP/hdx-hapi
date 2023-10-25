@@ -28,7 +28,7 @@ def test_helper_get_dataset_url():
         hdx_id=dataset_id,
         hdx_stub=dataset_id,
         title='Test Dataset #1',
-        provider_code='test-provider',
+        hdx_provider_stub='test-provider',
         provider_name='Test Provider'
     )
 
@@ -48,7 +48,7 @@ def test_helper_get_dataset_api_url():
         hdx_id=dataset_id,
         hdx_stub=dataset_id,
         title='Test Dataset #2',
-        provider_code='test-provider2',
+        hdx_provider_stub='test-provider2',
         provider_name='Test Provider 2'
     )
 

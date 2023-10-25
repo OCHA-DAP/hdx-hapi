@@ -31,13 +31,13 @@ def upgrade() -> None:
     sa.Column('hdx_id', sa.String(length=36), nullable=False),
     sa.Column('hdx_stub', sa.String(length=128), nullable=False),
     sa.Column('title', sa.String(length=1024), nullable=False),
-    sa.Column('provider_code', sa.String(length=128), nullable=False),
+    sa.Column('hdx_provider_stub', sa.String(length=128), nullable=False),
     sa.Column('provider_name', sa.String(length=512), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('hdx_id'),
     sa.UniqueConstraint('hdx_stub')
     )
-    op.create_index(op.f('ix_dataset_provider_code'), 'dataset', ['provider_code'], unique=False)
+    op.create_index(op.f('ix_dataset_hdx_provider_stub'), 'dataset', ['hdx_provider_stub'], unique=False)
     op.create_index(op.f('ix_dataset_provider_name'), 'dataset', ['provider_name'], unique=False)
     op.create_table('gender',
     sa.Column('code', sa.CHAR(length=1), nullable=False),
@@ -177,7 +177,7 @@ def downgrade() -> None:
     op.drop_table('location')
     op.drop_table('gender')
     op.drop_index(op.f('ix_dataset_provider_name'), table_name='dataset')
-    op.drop_index(op.f('ix_dataset_provider_code'), table_name='dataset')
+    op.drop_index(op.f('ix_dataset_hdx_provider_stub'), table_name='dataset')
     op.drop_table('dataset')
     op.drop_table('age_range')
     # ### end Alembic commands ###

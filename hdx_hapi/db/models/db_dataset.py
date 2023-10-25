@@ -16,7 +16,7 @@ class DBDataset(Base):
         String(128), unique=True, nullable=False
     )
     title = mapped_column(String(1024), nullable=False)
-    provider_code: Mapped[str] = mapped_column(
+    hdx_provider_stub: Mapped[str] = mapped_column(
         String(128), nullable=False, index=True
     )
     provider_name: Mapped[str] = mapped_column(

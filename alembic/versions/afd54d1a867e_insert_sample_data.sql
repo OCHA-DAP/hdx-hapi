@@ -7,7 +7,7 @@
 -- Started 2023-08-09
 -- ---------------------------------------------------------------------
 
-INSERT INTO dataset (id, hdx_id, hdx_stub, title, provider_code, provider_name)
+INSERT INTO dataset (id, hdx_id, hdx_stub, title, hdx_provider_stub, provider_name)
 VALUES
 (1, 'c3f001fa-b45b-464c-9460-1ca79fd39b40', 'dataset01', 'Dataset #1', 'provider01', 'Provider #1'),
 (2, '7cf3cec8-dbbc-4c96-9762-1464cd0bff75', 'dataset02', 'Dataset #2', 'provider02', 'Provider #2');

@@ -47,14 +47,14 @@ endpoint_data = {
         "query_parameters": {
             'hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
             'title': 'Dataset #1',
-            'provider_code': 'Provider01',
+            'hdx_provider_stub': 'Provider01',
             'provider_name': 'Provider #1',
         },
         "expected_fields": [
             "hdx_id",
             "hdx_stub",
             "title",
-            "provider_code",
+            "hdx_provider_stub",
             "provider_name",
             "hdx_link",  # computed field
             "hdx_api_link"  # computed field
@@ -83,7 +83,7 @@ endpoint_data = {
     "/api/themes/3W": {
         "query_parameters": {
             'sector_code': 'Shl',
-            'dataset_provider_code': 'PROVIDER01',
+            'dataset_hdx_provider_stub': 'PROVIDER01',
             'resource_update_date_min': date(2023, 6, 1),
             'resource_update_date_max': date(2023, 6, 2),
             'org_acronym': 'oRG01',
@@ -140,7 +140,7 @@ endpoint_data = {
             'gender_code': 'X',
             'age_range_code': '10-14',
             'population': 1000000,
-            'dataset_provider_code': 'PROvider01',
+            'dataset_hdx_provider_stub': 'PROvider01',
             'resource_update_date_min': date(2023, 6, 1),
             'resource_update_date_max': date(2023, 6, 2),
             'location_code': 'fOO',
@@ -174,7 +174,7 @@ endpoint_data = {
             'is_hxl': True,
             'dataset_hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
             'dataset_title': 'Dataset #1',
-            'dataset_provider_code': 'pRoViDeR01',
+            'dataset_hdx_provider_stub': 'pRoViDeR01',
             'dataset_provider_name': 'Provider #1',
         },
         "expected_fields": [
@@ -187,7 +187,7 @@ endpoint_data = {
             "dataset_hdx_id",
             "dataset_hdx_stub",
             "dataset_title",
-            "dataset_provider_code",
+            "dataset_hdx_provider_stub",
             "dataset_provider_name",
             "hdx_link",  # computed field
             "hdx_api_link",  # computed field

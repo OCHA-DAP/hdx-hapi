@@ -14,7 +14,7 @@ class DatasetResponse(HapiBaseModel):
     hdx_id: str = Field(max_length=36)
     hdx_stub: str = Field(max_length=128)
     title: str = Field(max_length=1024)
-    provider_code: str = Field(max_length=128)
+    hdx_provider_stub: str = Field(max_length=128)
     provider_name: str = Field(max_length=512)
 
     # computed fields
@@ -51,7 +51,7 @@ class ResourceResponse(HapiBaseModel):
     dataset_hdx_stub: str = Field(max_length=128)
     
     dataset_title: str = Field(max_length=1024) 
-    dataset_provider_code: str = Field(max_length=128)
+    dataset_hdx_provider_stub: str = Field(max_length=128)
     dataset_provider_name: str = Field(max_length=512)
 
 

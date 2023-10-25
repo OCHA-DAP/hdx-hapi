@@ -11,10 +11,10 @@ async def get_datasets_srv(
     hdx_id: str,
     hdx_stub: str,
     title: str = None,
-    provider_code: str = None,
+    hdx_provider_stub: str = None,
     provider_name: str = None,
 ):
     return await datasets_view_list(
         pagination_parameters=pagination_parameters, db=db, hdx_id=hdx_id, hdx_stub=hdx_stub, title=title,
-                provider_code=provider_code, provider_name=provider_name
+                hdx_provider_stub=hdx_provider_stub, provider_name=provider_name
     )
