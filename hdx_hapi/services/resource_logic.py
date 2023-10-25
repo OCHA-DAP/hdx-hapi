@@ -17,7 +17,7 @@ async def get_resources_srv(
     dataset_hdx_id: str = None,
     dataset_hdx_stub: str = None,
     dataset_hdx_provider_stub: str = None,
-    dataset_provider_name: str = None,
+    dataset_hdx_provider_name: str = None,
 ):
     return await resources_view_list(
         pagination_parameters=pagination_parameters,
@@ -31,5 +31,5 @@ async def get_resources_srv(
         dataset_hdx_stub=dataset_hdx_stub,
         dataset_title=dataset_title,
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
-        dataset_provider_name=dataset_provider_name,
+        dataset_hdx_provider_name=dataset_hdx_provider_name,
     )

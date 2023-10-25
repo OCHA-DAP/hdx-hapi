@@ -18,7 +18,7 @@ async def resources_view_list(
     dataset_hdx_id: str = None,
     dataset_hdx_stub: str = None,
     dataset_hdx_provider_stub: str = None,
-    dataset_provider_name: str = None,
+    dataset_hdx_provider_name: str = None,
 ):
 
     query = select(ResourceView)
@@ -40,8 +40,8 @@ async def resources_view_list(
         query = query.where(ResourceView.dataset_hdx_stub == dataset_hdx_stub)
     if dataset_hdx_provider_stub:
         query = case_insensitive_filter(query, ResourceView.dataset_hdx_provider_stub, dataset_hdx_provider_stub)
-    if dataset_provider_name:
-        query = query.where(ResourceView.dataset_provider_name == dataset_provider_name)
+    if dataset_hdx_provider_name:
+        query = query.where(ResourceView.dataset_hdx_provider_name == dataset_hdx_provider_name)
 
     query = apply_pagination(query, pagination_parameters)
 

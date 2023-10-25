@@ -17,10 +17,10 @@ async def datasets_view_list(
     hdx_stub: str = None,
     title: str = None,
     hdx_provider_stub: str = None,
-    provider_name: str = None,
+    hdx_provider_name: str = None,
 ):
 
-    logger.info(f'datasets_view_list called with params: hdx_id={hdx_id}, hdx_stub={hdx_stub}, title={title}, hdx_provider_stub={hdx_provider_stub}, provider_name={provider_name}')
+    logger.info(f'datasets_view_list called with params: hdx_id={hdx_id}, hdx_stub={hdx_stub}, title={title}, hdx_provider_stub={hdx_provider_stub}, hdx_provider_name={hdx_provider_name}')
 
     query = select(DatasetView)
     if hdx_id:
@@ -31,8 +31,8 @@ async def datasets_view_list(
         query = query.where(DatasetView.title.icontains(title))
     if hdx_provider_stub:
         query = case_insensitive_filter(query, DatasetView.hdx_provider_stub, hdx_provider_stub)
-    if provider_name:
-        query = query.where(DatasetView.provider_name.icontains(provider_name))
+    if hdx_provider_name:
+        query = query.where(DatasetView.hdx_provider_name.icontains(hdx_provider_name))
 
     query = apply_pagination(query, pagination_parameters)
 

@@ -29,7 +29,7 @@ def test_helper_get_dataset_url():
         hdx_stub=dataset_id,
         title='Test Dataset #1',
         hdx_provider_stub='test-provider',
-        provider_name='Test Provider'
+        hdx_provider_name='Test Provider'
     )
 
     assert dataset_view.hdx_link == expected_link
@@ -49,7 +49,7 @@ def test_helper_get_dataset_api_url():
         hdx_stub=dataset_id,
         title='Test Dataset #2',
         hdx_provider_stub='test-provider2',
-        provider_name='Test Provider 2'
+        hdx_provider_name='Test Provider 2'
     )
 
     assert dataset_view.hdx_api_link == expected_link

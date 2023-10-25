@@ -23,7 +23,7 @@ SELECT R.*,
        D.hdx_stub AS dataset_hdx_stub, 
        D.title AS dataset_title,
        D.hdx_provider_stub AS dataset_hdx_provider_stub,
-       D.provider_name AS dataset_provider_name
+       D.hdx_provider_name AS dataset_hdx_provider_name
 FROM resource R
 LEFT JOIN dataset D ON R.dataset_ref=D.id;
 
@@ -118,7 +118,7 @@ SELECT OP.*,
        D.hdx_stub as dataset_hdx_stub,
        D.title AS dataset_title,
        D.hdx_provider_stub AS dataset_hdx_provider_stub,
-       D.provider_name AS dataset_provider_name,
+       D.hdx_provider_name AS dataset_hdx_provider_name,
        R.hdx_id AS resource_hdx_id,
        R.name AS resource_name,
        R.update_date AS resource_update_date,
@@ -161,7 +161,7 @@ SELECT POP.*,
        D.hdx_stub as dataset_hdx_stub,
        D.title AS dataset_title,
        D.hdx_provider_stub AS dataset_hdx_provider_stub,
-       D.provider_name AS dataset_provider_name,
+       D.hdx_provider_name AS dataset_hdx_provider_name,
        R.hdx_id AS resource_hdx_id,
        R.name AS resource_name,
        R.update_date AS resource_update_date,

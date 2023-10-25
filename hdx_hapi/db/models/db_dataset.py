@@ -19,6 +19,6 @@ class DBDataset(Base):
     hdx_provider_stub: Mapped[str] = mapped_column(
         String(128), nullable=False, index=True
     )
-    provider_name: Mapped[str] = mapped_column(
+    hdx_provider_name: Mapped[str] = mapped_column(
         String(512), nullable=False, index=True
     )

@@ -20,5 +20,5 @@ class ResourceView(Base):
 
     dataset_title: Mapped[str] = mapped_column(String(1024), nullable=False)
     dataset_hdx_provider_stub: Mapped[str] = mapped_column(String(128), nullable=False)
-    dataset_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
+    dataset_hdx_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
     

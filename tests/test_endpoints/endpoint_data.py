@@ -48,14 +48,14 @@ endpoint_data = {
             'hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
             'title': 'Dataset #1',
             'hdx_provider_stub': 'Provider01',
-            'provider_name': 'Provider #1',
+            'hdx_provider_name': 'Provider #1',
         },
         "expected_fields": [
             "hdx_id",
             "hdx_stub",
             "title",
             "hdx_provider_stub",
-            "provider_name",
+            "hdx_provider_name",
             "hdx_link",  # computed field
             "hdx_api_link"  # computed field
         ],
@@ -175,7 +175,7 @@ endpoint_data = {
             'dataset_hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
             'dataset_title': 'Dataset #1',
             'dataset_hdx_provider_stub': 'pRoViDeR01',
-            'dataset_provider_name': 'Provider #1',
+            'dataset_hdx_provider_name': 'Provider #1',
         },
         "expected_fields": [
             "hdx_id",
@@ -188,7 +188,7 @@ endpoint_data = {
             "dataset_hdx_stub",
             "dataset_title",
             "dataset_hdx_provider_stub",
-            "dataset_provider_name",
+            "dataset_hdx_provider_name",
             "hdx_link",  # computed field
             "hdx_api_link",  # computed field
             "dataset_hdx_link",  # computed field
