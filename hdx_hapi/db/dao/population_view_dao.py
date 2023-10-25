@@ -13,7 +13,7 @@ async def populations_view_list(
     gender_code: str = None,
     age_range_code: str = None,
     population: int = None,
-    dataset_provider_code: str = None,
+    dataset_hdx_provider_stub: str = None,
     resource_update_date_min: datetime = None,
     resource_update_date_max: datetime = None,
     location_code: str = None,
@@ -32,8 +32,8 @@ async def populations_view_list(
         query = query.where(PopulationView.age_range_code == age_range_code)
     if population:
         query = query.where(PopulationView.population == population)
-    if dataset_provider_code:
-        query = case_insensitive_filter(query, PopulationView.dataset_provider_code, dataset_provider_code)
+    if dataset_hdx_provider_stub:
+        query = case_insensitive_filter(query, PopulationView.dataset_hdx_provider_stub, dataset_hdx_provider_stub)
     if resource_update_date_min:
         query = query.where(PopulationView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:

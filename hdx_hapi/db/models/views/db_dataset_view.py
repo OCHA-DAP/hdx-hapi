@@ -10,5 +10,5 @@ class DatasetView(Base):
     hdx_id: Mapped[str] = mapped_column(String(36), unique=True, nullable=False)
     hdx_stub: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
     title: Mapped[str] = mapped_column(String(1024), nullable=False)
-    provider_code: Mapped[str] = mapped_column(String(128), nullable=False)
-    provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
+    hdx_provider_stub: Mapped[str] = mapped_column(String(128), nullable=False)
+    hdx_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)

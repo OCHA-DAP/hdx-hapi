@@ -14,8 +14,8 @@ class DatasetResponse(HapiBaseModel):
     hdx_id: str = Field(max_length=36)
     hdx_stub: str = Field(max_length=128)
     title: str = Field(max_length=1024)
-    provider_code: str = Field(max_length=128)
-    provider_name: str = Field(max_length=512)
+    hdx_provider_stub: str = Field(max_length=128)
+    hdx_provider_name: str = Field(max_length=512)
 
     # computed fields
 
@@ -41,7 +41,7 @@ class DatasetResponse(HapiBaseModel):
 class ResourceResponse(HapiBaseModel):
     # id: int
     hdx_id: str = Field(max_length=36)
-    filename: str = Field(max_length=256)
+    name: str = Field(max_length=256)
     format: str = Field(max_length=32)
     update_date: datetime
     is_hxl: bool
@@ -51,8 +51,8 @@ class ResourceResponse(HapiBaseModel):
     dataset_hdx_stub: str = Field(max_length=128)
     
     dataset_title: str = Field(max_length=1024) 
-    dataset_provider_code: str = Field(max_length=128)
-    dataset_provider_name: str = Field(max_length=512)
+    dataset_hdx_provider_stub: str = Field(max_length=128)
+    dataset_hdx_provider_name: str = Field(max_length=512)
 
 
     # computed fields
