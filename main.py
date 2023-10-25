@@ -64,7 +64,7 @@ async def swagger_ui_html(req: Request) -> HTMLResponse:
     )
 
 
-@app.get('/')
+@app.get('/', include_in_schema=False)
 def home():
     return RedirectResponse('/docs')
 
