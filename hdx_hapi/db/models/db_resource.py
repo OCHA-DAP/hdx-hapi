@@ -24,7 +24,7 @@ class DBResource(Base):
     hdx_id: Mapped[str] = mapped_column(
         String(36), unique=True, nullable=False
     )
-    filename: Mapped[str] = mapped_column(String(256), nullable=False)
+    name: Mapped[str] = mapped_column(String(256), nullable=False)
     format: Mapped[str] = mapped_column(String(32), nullable=False)
     update_date = mapped_column(DateTime, nullable=False, index=True)
     download_url: Mapped[str] = mapped_column(

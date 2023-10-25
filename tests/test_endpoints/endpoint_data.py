@@ -179,7 +179,7 @@ endpoint_data = {
         },
         "expected_fields": [
             "hdx_id",
-            "filename",
+            "name",
             "format",
             "update_date",
             "is_hxl",

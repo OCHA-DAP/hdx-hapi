@@ -17,7 +17,7 @@ class PopulationView(Base):
     source_data: Mapped[str] = mapped_column(Text, nullable=True)
 
     resource_hdx_id: Mapped[str] = mapped_column(String(36), nullable=False)
-    resource_filename: Mapped[str] = mapped_column(String(256), nullable=False)
+    resource_name: Mapped[str] = mapped_column(String(256), nullable=False)
     resource_update_date = mapped_column(DateTime, nullable=False)
 
     dataset_hdx_id: Mapped[str] = mapped_column(String(36), unique=True, nullable=False)

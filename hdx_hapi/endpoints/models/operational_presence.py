@@ -27,7 +27,7 @@ class OperationalPresenceResponse(HapiBaseModel):
     # dataset_title: str = Field(max_length=1024),
     # dataset_provider_code: str = Field(max_length=128),
     # dataset_provider_name: str = Field(max_length=512),
-    # resource_filename: str = Field(max_length=256),
+    # resource_name: str = Field(max_length=256),
     # org_type_code: str = Field(max_length=32),
     # org_type_description: str = Field(max_length=512),
 

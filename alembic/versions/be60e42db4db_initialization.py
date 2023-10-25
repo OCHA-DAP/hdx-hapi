@@ -96,7 +96,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('dataset_ref', sa.Integer(), nullable=False),
     sa.Column('hdx_id', sa.String(length=36), nullable=False),
-    sa.Column('filename', sa.String(length=256), nullable=False),
+    sa.Column('name', sa.String(length=256), nullable=False),
     sa.Column('format', sa.String(length=32), nullable=False),
     sa.Column('update_date', sa.DateTime(), nullable=False),
     sa.Column('download_url', sa.String(length=1024), nullable=False),

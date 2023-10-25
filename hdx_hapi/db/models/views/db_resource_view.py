@@ -9,7 +9,7 @@ class ResourceView(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     dataset_ref: Mapped[int] = mapped_column(Integer, nullable=False)
     hdx_id: Mapped[str] = mapped_column(String(36), nullable=False)
-    filename: Mapped[str] = mapped_column(String(256), nullable=False)
+    name: Mapped[str] = mapped_column(String(256), nullable=False)
     format: Mapped[str] = mapped_column(String(32), nullable=False)
     update_date = mapped_column(DateTime, nullable=False)
     is_hxl: Mapped[bool] = mapped_column(Boolean, nullable=False)

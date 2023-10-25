@@ -41,7 +41,7 @@ class DatasetResponse(HapiBaseModel):
 class ResourceResponse(HapiBaseModel):
     # id: int
     hdx_id: str = Field(max_length=36)
-    filename: str = Field(max_length=256)
+    name: str = Field(max_length=256)
     format: str = Field(max_length=32)
     update_date: datetime
     is_hxl: bool
