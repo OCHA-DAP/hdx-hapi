@@ -1,9 +1,16 @@
 from typing import List, Annotated, Dict
 from fastapi import Depends, Query, APIRouter
 
-from ..config import doc_snippets as snip
-
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from hdx_hapi.config.doc_snippets import (
+    DOC_LOCATION_CODE, 
+    DOC_LOCATION_NAME, 
+    DOC_ADMIN1_CODE, 
+    DOC_ADMIN1_NAME, 
+    DOC_SEE_ADMIN1, 
+    DOC_SCOPE_DISCLAIMER
+)
 
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
@@ -23,12 +30,12 @@ router = APIRouter(
 async def get_locations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description=f'{snip.doc_location_code}')] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{snip.doc_location_name}')] = None,
+    code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    f"""{snip.doc_scope_disclaimer}
+    f"""{DOC_SCOPE_DISCLAIMER}
     """    
     result = await get_locations_srv(
         pagination_parameters=pagination_parameters,
@@ -43,8 +50,8 @@ async def get_locations(
 async def get_admin1(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description=snip.doc_admin1_code)] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{snip.doc_admin1_name} {snip.doc_see_admin1}')] = None,
+    code: Annotated[str, Query(max_length=128, description=DOC_ADMIN1_CODE)] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
     location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
 
