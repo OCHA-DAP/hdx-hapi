@@ -1,8 +1,16 @@
 from typing import List, Annotated, Dict
 from fastapi import Depends, Query, APIRouter
 
-
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from hdx_hapi.config.doc_snippets import (
+    DOC_LOCATION_CODE, 
+    DOC_LOCATION_NAME, 
+    DOC_ADMIN1_CODE, 
+    DOC_ADMIN1_NAME, 
+    DOC_SEE_ADMIN1, 
+    DOC_SCOPE_DISCLAIMER
+)
 
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
@@ -15,19 +23,19 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 from datetime import datetime, date
 
 router = APIRouter(
-    tags=['Location and Administrative Divisions'],
+    tags=['Locations and Administrative Divisions'],
 )
 
-@router.get('/api/location', response_model=List[LocationResponse])
+@router.get('/api/location', response_model=List[LocationResponse], summary='Get the list of locations (typically countries) included in HAPI.')
 async def get_locations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description='Location code')] = None,
-    name: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of locations.
+    f"""{DOC_SCOPE_DISCLAIMER}
     """    
     result = await get_locations_srv(
         pagination_parameters=pagination_parameters,
@@ -42,8 +50,8 @@ async def get_locations(
 async def get_admin1(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description='Code')] = None,
-    name: Annotated[str, Query(max_length=512, description='Name')] = None,
+    code: Annotated[str, Query(max_length=128, description=DOC_ADMIN1_CODE)] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
     location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
 

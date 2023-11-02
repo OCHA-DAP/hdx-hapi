@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title='HAPI',
-    description='The Humanitarian API (HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="fix/this/link">TBD - get started here</a>',
+    description='The Humanitarian API (HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="https://FIXTHIS">get started here</a>',
     version='0.0.1',
     docs_url=None,
 )
