@@ -1,4 +1,5 @@
 from enum import Enum
+from re import T
 from typing import Annotated
 
 from fastapi import Query
@@ -14,3 +15,7 @@ class OutputFormat(str, Enum):
     CSV = 'csv'
     JSON = 'json'
 
+class AdminLevel(str, Enum):
+    ZERO = "0"
+    ONE = "1"
+    TWO = "2"

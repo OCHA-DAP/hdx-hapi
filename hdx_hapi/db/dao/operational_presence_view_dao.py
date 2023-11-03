@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 async def operational_presences_view_list(
     pagination_parameters: Dict,
     db: AsyncSession,
-    sector_code: int = None,
+    sector_code: str = None,
     dataset_hdx_provider_stub: str = None,
     resource_update_date_min: datetime = None,
     resource_update_date_max: datetime = None,
@@ -24,6 +24,7 @@ async def operational_presences_view_list(
     location_code: str = None,
     location_name: str = None,
     admin1_code: str = None,
+    admin1_name: str = None,
     admin1_is_unspecified: bool = None,
     admin2_code: str = None,
     admin2_name: str = None,
@@ -54,6 +55,8 @@ async def operational_presences_view_list(
         query = query.where(OperationalPresenceView.location_name.icontains(location_name))
     if admin1_code:
         query = case_insensitive_filter(query, OperationalPresenceView.admin1_code, admin1_code)
+    if admin1_name:
+        query = query.where(OperationalPresenceView.admin1_name.icontains(admin1_name))
     if admin2_code:
         query = case_insensitive_filter(query, OperationalPresenceView.admin2_code, admin2_code)
     if admin2_name:

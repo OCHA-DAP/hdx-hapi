@@ -103,3 +103,28 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
     assert operational_presence_view_adm_unspecified.admin1_name == None, 'admin1_name should be changed to None when admin1_is_unspecified is True'
     assert operational_presence_view_adm_unspecified.admin2_code == None, 'admin2_code should be changed to None when admin1_is_unspecified is True'
     assert operational_presence_view_adm_unspecified.admin2_name == None, 'admin2_name should be changed to None when admin1_is_unspecified is True'
+
+
+@pytest.mark.asyncio
+async def test_get_operational_presence_admin_level(event_loop, refresh_db):
+    log.info('started test_get_operational_presence_admin_level')
+
+    async with AsyncClient(app=app, base_url='http://test', ) as ac:
+        response = await ac.get(ENDPOINT_ROUTER)
+
+    response_items = response.json()
+    admin_0_count = len([item for item in response_items if item['admin1_name'] == None and item['admin2_name'] == None])
+    admin_1_count = len([item for item in response_items if item['admin1_name'] != None and item['admin2_name'] == None])
+    admin_2_count = len([item for item in response_items if item['admin1_name'] != None and item['admin2_name'] != None])
+    counts_map = {
+        '0': admin_0_count,
+        '1': admin_1_count,
+        '2': admin_2_count,
+    }
+
+    for admin_level, count in counts_map.items():
+        async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
+            response = await ac.get(ENDPOINT_ROUTER)
+            assert len(response.json()) == count, f'Admin level {admin_level} should return {count} entries'
+
+    assert len(response.json()[0]) == len(expected_fields), f'Response has a different number of fields than expected'

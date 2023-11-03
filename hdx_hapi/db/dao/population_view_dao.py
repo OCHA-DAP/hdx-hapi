@@ -18,6 +18,7 @@ async def populations_view_list(
     resource_update_date_max: datetime = None,
     location_code: str = None,
     location_name: str = None,
+    admin1_name: str = None,
     admin1_code: str = None,
     admin1_is_unspecified: bool = None,
     admin2_code: str = None,
@@ -42,6 +43,8 @@ async def populations_view_list(
         query = case_insensitive_filter(query, PopulationView.location_code, location_code)
     if location_name:
         query = query.where(PopulationView.location_name.icontains(location_name))
+    if admin1_name:
+        query = query.where(PopulationView.admin1_name.icontains(admin1_name))
     if admin1_code:
         query = case_insensitive_filter(query, PopulationView.admin1_code, admin1_code)
     if admin1_is_unspecified is not None:
