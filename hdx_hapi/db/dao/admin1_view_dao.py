@@ -24,6 +24,9 @@ async def admin1_view_list(
     logger.info(f'admin1_view_list called with params: code={code}, name={name}, location_code={location_code}, location_name={location_name}')
 
     query = select(Admin1View)
+    if True:
+        # TODO: implement debug=True to show unspecified values
+        query = query.where(Admin1View.is_unspecified==False)
     if code:
         query = case_insensitive_filter(query, Admin1View.code, code)
     if name:
