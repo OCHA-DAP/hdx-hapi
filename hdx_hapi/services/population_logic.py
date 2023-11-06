@@ -1,9 +1,10 @@
-from datetime import datetime
 from typing import Dict
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.population_view_dao import populations_view_list
+from hdx_hapi.endpoints.util.util import AdminLevel
+from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
 
 async def get_populations_srv(
@@ -17,12 +18,16 @@ async def get_populations_srv(
     resource_update_date_max=None,
     location_code: str = None,
     location_name: str = None,
+    admin1_name: str = None,
     admin1_code: str = None,
-    admin1_is_unspecified: bool = None,
+    # admin1_is_unspecified: bool = None,
     admin2_code: str = None,
     admin2_name: str = None,
-    admin2_is_unspecified: bool = None,
+    admin_level: AdminLevel = None,
+    # admin2_is_unspecified: bool = None,
 ):
+    admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
+
     return await populations_view_list(
         pagination_parameters=pagination_parameters,
         db=db,
@@ -34,9 +39,11 @@ async def get_populations_srv(
         resource_update_date_max=resource_update_date_max,
         location_code=location_code,
         location_name=location_name,
+        admin1_name=admin1_name,
         admin1_code=admin1_code,
         admin1_is_unspecified=admin1_is_unspecified,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
         admin2_is_unspecified=admin2_is_unspecified,
     )
+

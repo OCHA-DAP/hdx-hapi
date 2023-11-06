@@ -19,7 +19,10 @@ async def test_get_admin2(event_loop, refresh_db):
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
-    assert len(response.json()) > 0, 'There should be at least one admin2 entry in the database'
+    response_items = response.json()
+    assert len(response_items) > 0, 'There should be at least one admin2 entry in the database'
+    unspecified_list = [item for item in response_items if item['name'] == 'Unspecified']
+    assert len(unspecified_list) == 0, 'Unspecified admin2 entries should not be returned'
 
 
 @pytest.mark.asyncio

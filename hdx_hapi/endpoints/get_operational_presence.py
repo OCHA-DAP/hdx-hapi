@@ -5,7 +5,7 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
-from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -27,11 +27,12 @@ async def get_operational_presences(
     location_code: Annotated[str, Query(max_length=128, description='Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes. See the <a href="https://FIXTHIS/docs#/Location%20and%20Administrative%20Divisions/get_locations_api_location_get">location endpoint</a> for details')] = None,
     location_name: Annotated[str, Query(max_length=512, description='Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a> . See the <a href="https://FIXTHIS/docs#/Location%20and%20Administrative%20Divisions/get_locations_api_location_get">location endpoint</a> for details.')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description='Filter the response by the 1st subnational administrative divisions. The admin1 codes refer to the p-codes in the Common Operational Datasets. See the <a href="https://FIXTHIS/docs#/Location%20and%20Administrative%20Divisions/get_admin1_api_admin1_get">admin1 endpoint</a> for details.')] = None,
-    # admin1_name: Annotated[str, Query(max_length=512, description='Filter the response by the 1st subnational administrative divisions. The admin2 names refer to the Common Operational Datasets. See the <a href="https://FIXTHIS/docs#/Location%20and%20Administrative%20Divisions/get_admin1_api_admin1_get">admin1 endpoint</a> for details.')] = None,
-    admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
+    admin1_name: Annotated[str, Query(max_length=512, description='Filter the response by the 1st subnational administrative divisions. The admin1 names refer to the Common Operational Datasets. See the <a href="https://FIXTHIS/docs#/Location%20and%20Administrative%20Divisions/get_admin1_api_admin1_get">admin1 endpoint</a> for details.')] = None,
+    # admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description='Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the Common Operational Datasets. See the <a href="https://FIXTHIS/docs#/Location%20and%20Administrative%20Divisions/get_admin1_api_admin2_get">admin2 endpoint</a> for details.')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description='Filter the response by the 2nd subnational administrative divisions. The admin2 names refer to the Common Operational Datasets. See the <a href="https://FIXTHIS/docs#/Location%20and%20Administrative%20Divisions/get_admin2_api_admin2_get">admin2 endpoint</a> for details.')] = None,
-    admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
+    admin_level: Annotated[AdminLevel, Query(description="Filter the response by admin level")] = None,
+    # admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
     resource_update_date_min: Annotated[datetime | date, Query(description='Filter the repsonse to data updated on or after this date. For example 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
     resource_update_date_max: Annotated[datetime | date, Query(description='Filter the repsonse to data updated on or before this date. For example 2024-12-31 or 2024-12-31T23:59:59', example='2024-12-31')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Filter the query by the organizations contributing the source data to HDX. If you want to filter by the organization mentioned in the operational presence record, see the org_name and org_acronym parameters below.')] = None,
@@ -66,10 +67,11 @@ async def get_operational_presences(
         location_code=location_code,
         location_name=location_name,
         admin1_code=admin1_code, 
-        admin1_is_unspecified=admin1_is_unspecified,
+        admin1_name=admin1_name,
+        # admin1_is_unspecified=admin1_is_unspecified,
         admin2_code=admin2_code, 
         admin2_name=admin2_name,
-        admin2_is_unspecified=admin2_is_unspecified 
+        # admin2_is_unspecified=admin2_is_unspecified 
         # dataset_hdx_id=dataset_hdx_id,
         # dataset_hdx_stub=dataset_hdx_stub, 
         # dataset_title=dataset_title, 
@@ -78,6 +80,6 @@ async def get_operational_presences(
         # resource_name=resource_name, 
         # org_type_code=org_type_code,
         # org_type_description=org_type_description, 
-
+        admin_level=admin_level,
         )
     return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceResponse)
