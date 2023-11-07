@@ -5,6 +5,19 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN1_CODE, 
+    DOC_ADMIN1_NAME,
+    DOC_ADMIN2_CODE,
+    DOC_ADMIN2_NAME, 
+    DOC_LOCATION_CODE, 
+    DOC_LOCATION_NAME, 
+    DOC_SCOPE_DISCLAIMER,
+    DOC_SEE_ADMIN1,
+    DOC_SEE_ADMIN2, 
+    DOC_SEE_LOC
+)
+
 from hdx_hapi.endpoints.models.population import PopulationResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -26,8 +39,8 @@ async def get_populations(
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
     resource_update_date_min: Annotated[datetime | date, Query(description='Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
     resource_update_date_max: Annotated[datetime | date, Query(description='Max date of update date, e.g. 2024-12-31 or 2024-12-31T23:59:59', example='2024-12-31')] = None,
-    location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
-    location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
+    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description='Admin1 code')] = None,
     admin1_is_unspecified: Annotated[bool, Query(description='Is admin1 specified or not')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description='Admin2 code')] = None,

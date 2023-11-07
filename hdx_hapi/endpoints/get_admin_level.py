@@ -4,12 +4,16 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN1_CODE, 
+    DOC_ADMIN1_NAME,
+    DOC_ADMIN2_CODE,
+    DOC_ADMIN2_NAME, 
     DOC_LOCATION_CODE, 
     DOC_LOCATION_NAME, 
-    DOC_ADMIN1_CODE, 
-    DOC_ADMIN1_NAME, 
-    DOC_SEE_ADMIN1, 
-    DOC_SCOPE_DISCLAIMER
+    DOC_SCOPE_DISCLAIMER,
+    DOC_SEE_ADMIN1,
+    DOC_SEE_ADMIN2, 
+    DOC_SEE_LOC
 )
 
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
@@ -50,10 +54,10 @@ async def get_locations(
 async def get_admin1(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description=DOC_ADMIN1_CODE)] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
-    location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
-    location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
+    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
+    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -74,12 +78,12 @@ async def get_admin1(
 async def get_admin2(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description='Code')] = None,
-    name: Annotated[str, Query(max_length=512, description='Name')] = None,
-    admin1_code: Annotated[str, Query(max_length=128, description='Admin1 code')] = None,
-    admin1_name: Annotated[str, Query(max_length=512, description='Admin1 name')] = None,
-    location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
-    location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
+    admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
+    admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
+    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
+    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):

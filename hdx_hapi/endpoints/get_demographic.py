@@ -3,6 +3,10 @@ from fastapi import Depends, Query, APIRouter
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
+from hdx_hapi.config.doc_snippets import (
+    DOC_AGE_RANGE_CODE,
+    DOC_AGE_RANGE_SUMMARY
+)
 
 from hdx_hapi.endpoints.models.demographic import AgeRangeResponse, GenderResponse
 from hdx_hapi.endpoints.util.util import pagination_parameters, OutputFormat
@@ -17,15 +21,15 @@ router = APIRouter(
 )
 
 
-@router.get('/api/age_range', response_model=List[AgeRangeResponse])
+@router.get('/api/age_range', response_model=List[AgeRangeResponse], summary = f'{DOC_AGE_RANGE_SUMMARY}')
 async def get_age_ranges(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=32, description='Age range code', example='20-24')] = None,
+    code: Annotated[str, Query(max_length=32, example='20-24', description=f'{DOC_AGE_RANGE_CODE}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of all active age ranges.
+    """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across different data sources and instead necessarily reflect the age range breakdowns provided by the data source.
     """    
     result = await get_age_ranges_srv(
         pagination_parameters=pagination_parameters,
