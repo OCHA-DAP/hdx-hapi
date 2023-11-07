@@ -28,7 +28,7 @@ As of version 1 (released in late 2023), the data in HAPI is static and intended
 
 # Getting Started with the API
 
-Welcome to our API documentation! To begin, we suggest exploring the [query interface](https://stage.hapi-humdata-org.ahconu.org/docs) which details all available filtering options for each endpoint, providing a hands-on way to familiarize yourself with the API's structure.
+In addtion to this getting started section we suggest exploring the [query interface](https://stage.hapi-humdata-org.ahconu.org/docs) which details all available filtering options for each endpoint, providing a hands-on way to familiarize yourself with the API's structure.
 
 Below, you will find example URLs to help you learn how to construct your API queries. These URLs can be entered directly into your web browser for immediate results.
 
