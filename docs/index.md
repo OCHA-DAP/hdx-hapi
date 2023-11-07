@@ -272,7 +272,7 @@ BASE_URL <- paste0("https://stage.hapi-humdata-org.ahconu.org/api/themes/", THEM
 
 Some themes have data at multiple admin levels. If you don't filter for a particular levels you will recieve data from both in one call. To filter for just admin1 data add these parameters to URL
 ```
-admin1_is_unspecified=false&admin2_is_unspecified=true
+admin_level=1
 ```
 
 ## 4. Get data from supporting tables
@@ -293,18 +293,19 @@ CONST BASE_URL "https://stage.hapi-humdata-org.ahconu.org/api/sector?output_form
 
 ## 5. Get admin level data for a country
 
-The admin1 and admin2 api end points provide data about subnational adminstration boundary names and p-codes (place codes). The geometry associated with each admin boundary is not yet available via the API, but it can be downloaded from HDX or obtained from the ITOS API service.  To query the adminstration area endputs use the URL below
+The admin1 and admin2 api end points provide data about subnational adminstration boundary names and p-codes (place codes). The geometry associated with each admin boundary is not yet available via the API, but it can be downloaded from HDX or obtained from the ITOS API service.
 
-```python
-BASE_URL = "https://stage.hapi-humdata-org.ahconu.org/api/admin1?location_code=MLI&output_format=json&offset=0&limit=1000"
+```
+https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/locations/{pCode}/versions/current/{format}/{level}
 ```
 
-### Javascript
+Here is an example of how to get the admin1 geojson for Afghanistan
 
-```javascript
-CONST BASE_URL = "https://stage.hapi-humdata-org.ahconu.org/api/admin1?location_code=MLI&output_format=json&offset=0&limit=1000"
+```
+https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/locations/AFG/versions/current/geoJSON/1
 ```
 
+[Full documentation](https://apps.itos.uga.edu/CODV2API/Help)
 ## 6. Download as CSV
 
 The code examples so far have been using JSON output and then processing this data. To query this data as csv, change the ```output_format``` to ```csv``` as per the examples below. Visiting this URL through the browser will download the CSV to then be used on your computer.
