@@ -4,12 +4,16 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN1_CODE, 
+    DOC_ADMIN1_NAME,
+    DOC_ADMIN2_CODE,
+    DOC_ADMIN2_NAME, 
     DOC_LOCATION_CODE, 
     DOC_LOCATION_NAME, 
-    DOC_ADMIN1_CODE, 
-    DOC_ADMIN1_NAME, 
-    DOC_SEE_ADMIN1, 
-    DOC_SCOPE_DISCLAIMER
+    DOC_SCOPE_DISCLAIMER,
+    DOC_SEE_ADMIN1,
+    DOC_SEE_ADMIN2, 
+    DOC_SEE_LOC
 )
 
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
@@ -26,7 +30,7 @@ router = APIRouter(
     tags=['Locations and Administrative Divisions'],
 )
 
-@router.get('/api/location', response_model=List[LocationResponse], summary='Get the list of locations (typically countries) included in HAPI.')
+@router.get('/api/location', response_model=List[LocationResponse], summary='Get the list of locations (typically countries) included in HAPI')
 async def get_locations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -35,8 +39,8 @@ async def get_locations(
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    f"""{DOC_SCOPE_DISCLAIMER}
-    """    
+    '''Not all data are available for all locations. Learn more about the scope of data coverage in HAPI in the <a href="https://FIXTHIS/">Overview and Getting Started</a> documentation.
+    '''    
     result = await get_locations_srv(
         pagination_parameters=pagination_parameters,
         db=db,
@@ -46,18 +50,18 @@ async def get_locations(
     return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
 
 
-@router.get('/api/admin1', response_model=List[Admin1Response])
+@router.get('/api/admin1', response_model=List[Admin1Response], summary='Get the list of first-level subnational administrative divisions available in HAPI')
 async def get_admin1(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description=DOC_ADMIN1_CODE)] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
-    location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
-    location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
+    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
+    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of admin1 entries.
+    """Not all data are available for all locations. Learn more about the scope of data coverage in HAPI in the <a href="https://FIXTHIS/">Overview and Getting Started</a> documentation.
     """    
     result = await get_admin1_srv(
         pagination_parameters=pagination_parameters,
@@ -70,20 +74,20 @@ async def get_admin1(
     return transform_result_to_csv_stream_if_requested(result, output_format, Admin1Response)
 
 
-@router.get('/api/admin2', response_model=List[Admin2Response])
+@router.get('/api/admin2', response_model=List[Admin2Response], summary='Get the list of second-level administrative divisions available in HAPI')
 async def get_admin2(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=128, description='Code')] = None,
-    name: Annotated[str, Query(max_length=512, description='Name')] = None,
-    admin1_code: Annotated[str, Query(max_length=128, description='Admin1 code')] = None,
-    admin1_name: Annotated[str, Query(max_length=512, description='Admin1 name')] = None,
-    location_code: Annotated[str, Query(max_length=128, description='Location code')] = None,
-    location_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
+    code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
+    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
+    admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
+    admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
+    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
+    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of admin2 entries.
+    """Not all data are available for all locations. Learn more about the scope of data coverage in HAPI in the <a href="https://FIXTHIS/">Overview and Getting Started</a> documentation.
     """    
     result = await get_admin2_srv(
         pagination_parameters=pagination_parameters,
