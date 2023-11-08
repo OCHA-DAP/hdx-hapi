@@ -5,7 +5,10 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
     DOC_AGE_RANGE_CODE,
-    DOC_AGE_RANGE_SUMMARY
+    DOC_AGE_RANGE_SUMMARY,
+    DOC_GENDER_CODE,
+    DOC_GENDER_DESCRIPTION,
+    DOC_GENDER_SUMMARY
 )
 
 from hdx_hapi.endpoints.models.demographic import AgeRangeResponse, GenderResponse
@@ -17,7 +20,7 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 
 
 router = APIRouter(
-    tags=['demographic'],
+    tags=['Age and Gender Disaggregations'],
 )
 
 
@@ -29,7 +32,7 @@ async def get_age_ranges(
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across different data sources and instead necessarily reflect the age range breakdowns provided by the data source.
+    """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across different data sources and instead reflect the age range breakdowns provided by the data source.
     """    
     result = await get_age_ranges_srv(
         pagination_parameters=pagination_parameters,
@@ -40,16 +43,16 @@ async def get_age_ranges(
     return transform_result_to_csv_stream_if_requested(result, output_format, AgeRangeResponse)
 
 
-@router.get('/api/gender', response_model=List[GenderResponse])
+@router.get('/api/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}')
 async def get_genders(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=1, description='Gender code', example='f')] = None,
-    description: Annotated[str, Query(max_length=256, description='Gender description', example='female')] = None,
+    code: Annotated[str, Query(max_length=1, description=f'{DOC_GENDER_CODE}', example='f')] = None,
+    description: Annotated[str, Query(max_length=256, description=f'{DOC_GENDER_DESCRIPTION}', example='female')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of all genders.
+    """
     """    
     result = await get_genders_srv(
         pagination_parameters=pagination_parameters,

@@ -6,7 +6,11 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_HDX_DATASET_ID
+    DOC_HDX_DATASET_ID,
+    DOC_HDX_DATASET_NAME,
+    DOC_HDX_DATASET_TITLE,
+    DOC_HDX_PROVIDER_NAME,
+    DOC_HDX_PROVIDER_STUB
 )
 
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
@@ -21,20 +25,19 @@ router = APIRouter(
 )
 
 
-@router.get('/api/dataset', response_model=List[DatasetResponse])
+@router.get('/api/dataset', response_model=List[DatasetResponse], summary='Get information about the sources of the data in HAPI')
 async def get_datasets(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
-    hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset name')] = None,
-    title: Annotated[str, Query(max_length=1024, description='HDX Dataset title or display name')] = None,
-    hdx_provider_stub: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
-    hdx_provider_name: Annotated[str, Query(max_length=512, description='Organization(provider) name')] = None,
-
+    hdx_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
+    title: Annotated[str, Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
+    hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
+    hdx_provider_name: Annotated[str, Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of datasets
+    Get information about the <a href="https://data.humdata.org/dataset">HDX Datasets</a> that are used as data sources for HAPI. Datasets contain one or more resources, which are the sources of the data found in HAPI.
     """
     result = await get_datasets_srv(
         pagination_parameters=pagination_parameters,

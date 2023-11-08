@@ -25,11 +25,11 @@ from hdx_hapi.services.population_logic import get_populations_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['population'],
+    tags=['Baseline Population'],
 )
 
 
-@router.get('/api/themes/population', response_model=List[PopulationResponse])
+@router.get('/api/themes/population', response_model=List[PopulationResponse], summary='Get baseline population data')
 async def get_populations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
