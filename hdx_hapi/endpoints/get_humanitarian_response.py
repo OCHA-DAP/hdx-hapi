@@ -33,6 +33,7 @@ async def get_orgs(
     db: AsyncSession = Depends(get_db),
     acronym: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}', example='unhcr')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ORG_NAME}', example='United Nations High Commissioner for Refugees')] = None,
+    org_type_code: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')] = None,
     org_type_description: Annotated[str, Query(max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION} {DOC_SEE_ORG_TYPE}')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
@@ -44,6 +45,7 @@ async def get_orgs(
         db=db,
         acronym=acronym,
         name=name,
+        org_type_code=org_type_code,
         org_type_description=org_type_description
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, OrgResponse)

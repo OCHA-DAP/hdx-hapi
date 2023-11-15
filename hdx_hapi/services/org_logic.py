@@ -10,6 +10,7 @@ async def get_orgs_srv(
     db: AsyncSession,
     acronym: str = None,
     name: str = None,
+    org_type_code: str = None,
     org_type_description: str = None,
 ):
     return await orgs_view_list(
@@ -17,5 +18,6 @@ async def get_orgs_srv(
         db=db,
         acronym=acronym,
         name=name,
+        org_type_code=org_type_code,
         org_type_description=org_type_description,
     )
