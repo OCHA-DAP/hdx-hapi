@@ -8,6 +8,10 @@ HAPI provides a consistent, standardised and machine-readable interface to query
 
 As of November 2023, HAPI is in active development and early release. The number of indcators in HAPI is limited, and work is ongoing to continually add more data. The initial scope of HAPI will be the data included in the [HDX Data Grids](https://data.humdata.org/dashboards/overview-of-data-grids).
 
+# Terms Of Use
+
+[The HDX Terms of Service] (https://data.humdata.org/faqs/terms)
+
 # The Structure of HAPI
 ## Indicator Endpoints
 HAPI is organized around a set of key humanitarian indicators like **Baseline Population** and **3W - Operational Presence**. Each of these indicators can be queried via its endpoint.
