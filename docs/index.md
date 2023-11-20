@@ -337,14 +337,14 @@ fetch_data <- function(base_url, limit = 1000) {
     results <- append(results, list(json_response))
     
     # If the returned results are less than the limit, it's the last page
-    if(length(json_response) < limit) {
+    if(nrow(json_response) < limit) {
       break
     }
     
     idx <- idx + 1
   }
   
-  return(results)
+  return(do.call(rbind, results))
 }
 
 THEME <- "3w"
