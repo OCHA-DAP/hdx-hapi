@@ -1,6 +1,6 @@
 # Summary
 
-For full documentation visit [the reference documentation - TBD](fix/this/link). Please note, in late 2023 and early 2024, HAPI is undergoing continual development. **Both the capabilities of the API and the data within it may change frequently.**
+For full documentation visit [the reference documentation](https://placeholder.url). Please note, in late 2023 and early 2024, HAPI is undergoing continual development. **Both the capabilities of the API and the data within it may change frequently.**
 
 HAPI is a service of the [Humanitarian Data Exchange (HDX)](https://data.humdata.org), part of UNOCHA's [Centre for Humanitarian Data](https://centre.humdata.org). The purpose of HAPI is to improve access to key humanitarian datasets taken from the HDX catalog data to better support automated visualisation and analysis. HAPI is primarily intended for application developers and data scientists working within the humanitarian community.
 
@@ -8,27 +8,31 @@ HAPI provides a consistent, standardised and machine-readable interface to query
 
 As of November 2023, HAPI is in active development and early release. The number of indcators in HAPI is limited, and work is ongoing to continually add more data. The initial scope of HAPI will be the data included in the [HDX Data Grids](https://data.humdata.org/dashboards/overview-of-data-grids).
 
+# Terms Of Use
+
+[The HDX Terms of Service] (https://data.humdata.org/faqs/terms)
+
 # The Structure of HAPI
 ## Indicator Endpoints
 HAPI is organized around a set of key humanitarian indicators like **Baseline Population** and **3W - Operational Presence**. Each of these indicators can be queried via its endpoint.
 
 ### Current list of indicator endpoints in HAPI
-- [population](https://stage.hapi-humdata-org.ahconu.org/docs#/population): Get data about baseline populations of a location
-- [3w](https://stage.hapi-humdata-org.ahconu.org/docs#/3W): Get data about operational presence. You can learn more about 3w data [here](https://3w.unocha.org/)
+- [population](https://placeholder.url/docs#/population): Get data about baseline populations of a location
+- [3w](https://placeholder.url/docs#/3W): Get data about operational presence. You can learn more about 3w data [here](https://3w.unocha.org/)
 
 ## Supporting Tables
 Additional supporting endpoints provide information about locations, codelists, and metadata.
 ### Current list of supporting endpoints in HAPI
-- [admin-level](https://stage.hapi-humdata-org.ahconu.org/docs#/admin-level): Get the lists of locations (countries and similar), and administrative subdivisions used as location references in HAPI. These are taken from the [Common Operational Datasets](https://data.humdata.org/dashboards/cod)
-- [humanitarian-response](https://stage.hapi-humdata-org.ahconu.org/docs#/humanitarian-response): Get the lists of organizations, organization types, and humanitarian sectors used in the data available in HAPI.
-- [demographic](https://stage.hapi-humdata-org.ahconu.org/docs#/demographic): Get the lists of gender categories and age groupings used in the data available in HAPI.
-- [hdx-metadata](https://stage.hapi-humdata-org.ahconu.org/docs#/hdx-metadata): Retrieve metadata about the source of any data available in HAPI.
+- [admin-level](https://placeholder.url/docs#/admin-level): Get the lists of locations (countries and similar), and administrative subdivisions used as location references in HAPI. These are taken from the [Common Operational Datasets](https://data.humdata.org/dashboards/cod)
+- [humanitarian-response](https://placeholder.url/docs#/humanitarian-response): Get the lists of organizations, organization types, and humanitarian sectors used in the data available in HAPI.
+- [demographic](https://placeholder.url/docs#/demographic): Get the lists of gender categories and age groupings used in the data available in HAPI.
+- [hdx-metadata](https://placeholder.url/docs#/hdx-metadata): Retrieve metadata about the source of any data available in HAPI.
 ## Dates
 As of version 1 (released in late 2023), the data in HAPI is static and intended only for testing purposes. However you can filter your HAPI queries based on the date the source data was updated in HDX. Future versions will offer more robust date-related features.
 
 # Getting Started with the API
 
-In addtion to this getting started section we suggest exploring the [query interface](https://stage.hapi-humdata-org.ahconu.org/docs) which details all available filtering options for each endpoint, providing a hands-on way to familiarize yourself with the API's structure.
+In addtion to this getting started section we suggest exploring the [query interface](https://placeholder.url/docs) which details all available filtering options for each endpoint, providing a hands-on way to familiarize yourself with the API's structure.
 
 Below, you will find example URLs to help you learn how to construct your API queries. These URLs can be entered directly into your web browser for immediate results.
 
@@ -39,7 +43,7 @@ Retrieve the latest 3W (Who's doing What, Where) data for a specific country usi
 Copy this link into your browser to see the results
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/themes/3w?location_name=Mali&output_format=json&offset=0&limit=10000
+https://placeholder.url/api/themes/3w?location_name=Mali&output_format=json&offset=0&limit=10000
 ```
 
 A single row of the result looks like this:
@@ -68,7 +72,7 @@ The above result was in JSON. It is also possible to get a CSV by changing the o
 The maximum number of rows returned in a single response is 10,000. To access more data beyond this limit, you can paginate through results by increasing the ```offset``` parameter as shown here:
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/themes/3w?location_name=Mali&output_format=json&offset=10000&limit=10000
+https://placeholder.url/api/themes/3w?location_name=Mali&output_format=json&offset=10000&limit=10000
 ```
 
 Check the code example section to see code for querying multiple pages and loading into a single result.
@@ -78,23 +82,23 @@ With the 3w theme endpoint there are a variety of filters to target your results
 This query gets all of the WASH activities happening in Yobe, Nigeria using the ```sector_name``` and ```admin1_name``` filter
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/themes/3w?sector_name=Water%20Sanitation%20Hygiene&location_name=Nigeria&admin1_name=Yobe&output_format=json&offset=0&limit=1000
+https://placeholder.url/api/themes/3w?sector_name=Water%20Sanitation%20Hygiene&location_name=Nigeria&admin1_name=Yobe&output_format=json&offset=0&limit=1000
 ```
 
-Remember to check the [technical documentation](https://stage.hapi-humdata-org.ahconu.org/docs) for the full list of filters available
+Remember to check the [technical documentation](https://placeholder.url/docs) for the full list of filters available
 
 ## Exploring Population Data
 
 The Population endpoint delivers detailed demographic breakdowns by age range and gender.  The example query below uses ```location_code``` rather than ```location_name``` to use the iso3 code for Afghanistan ```AFG```. In addition it also uses the ```admin_level=1``` filter to get only admin level 1 results.
 
 ```
-https://stage.hapi-humdata-org.ahconu.org/api/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1
+https://placeholder.url/api/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1
 ```
 
 To refine this query to retrieve population statistics specifically for males under the age of 5, append the age_range_code and gender_code filters to your request:
 
 ```
-https://stage.hapi-humdata-org.ahconu.org/api/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1&age_range_code=0-4&gender_code=m
+https://placeholder.url/api/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1&age_range_code=0-4&gender_code=m
 ```
 
 By tailoring these filters, you can obtain a variety of demographic insights from the API
@@ -106,7 +110,7 @@ Each theme within our API is bolstered by associated supporting tables. These ta
 You can retrieve a list of possible age ranges by querying the `age_range` support table like so:
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/age_range?output_format=json&offset=0&limit=1000
+https://placeholder.url/api/age_range?output_format=json&offset=0&limit=1000
 ```
 
 This functionality is not limited to age ranges. There are similar support tables for a variety of filters such as organizations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
@@ -139,7 +143,7 @@ Among these fields, ```dataset_hdx_stub``` and ```resource_hdx_id``` are keys to
 To dive deeper into the data's origin, use the resource_hdx_id in the resource endpoint URL:
 
 ```
-https://stage.hapi-humdata-org.ahconu.org/api/resource?hdx_id=a92fd2e8-4cbc-4366-92a8-1ffbbd6659d1&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=json&offset=0&limit=1000
+https://placeholder.url/api/resource?hdx_id=a92fd2e8-4cbc-4366-92a8-1ffbbd6659d1&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=json&offset=0&limit=1000
 ```
 
 Executing this query provides a response like the following:
@@ -221,7 +225,7 @@ def fetch_data(base_url, limit=1000):
 
 THEME = "3w"
 LOCATION = "AFG"
-BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/themes/{THEME}?output_format=json&location_code={LOCATION}"
+BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}"
 LIMIT = 1000
 
 
@@ -260,7 +264,7 @@ async function fetchData(baseUrl, limit = 1000) {
 
 const THEME = "3W"
 const LOCATION = "AFG"
-const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
+const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
 const LIMIT = 1000;
 
 window.onload = async function() {
@@ -302,7 +306,7 @@ async function fetchData(baseUrl, limit = 1000) {
 
 const THEME = "3W"
 const LOCATION = "AFG"
-const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
+const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
 const LIMIT = 1000;
 
 fetchData(BASE_URL, LIMIT).then(results => {
@@ -333,19 +337,19 @@ fetch_data <- function(base_url, limit = 1000) {
     results <- append(results, list(json_response))
     
     # If the returned results are less than the limit, it's the last page
-    if(length(json_response) < limit) {
+    if(nrow(json_response) < limit) {
       break
     }
     
     idx <- idx + 1
   }
   
-  return(results)
+  return(do.call(rbind, results))
 }
 
 THEME <- "3w"
 LOCATION <- "AFG"
-BASE_URL <- paste0("https://stage.hapi-humdata-org.ahconu.org/api/themes/", THEME, "?output_format=json&location_code=", LOCATION)
+BASE_URL <- paste0("https://placeholder.url/api/themes/", THEME, "?output_format=json&location_code=", LOCATION)
 LIMIT <- 1000
 
 results <- fetch_data(BASE_URL, LIMIT)
@@ -356,7 +360,7 @@ print(results)
 
 It is possible to add extra filters to the call to get a subset of results. To see the full set of filters that can be used for each theme, please check this documentation:
 
-https://stage.hapi-humdata-org.ahconu.org/docs#/humanitarian-response/
+https://placeholder.url/docs#/humanitarian-response/
 
 ### Python
 
@@ -366,14 +370,14 @@ Change the code to include a new parameter in the URL.
 
 ```python
 SECTOR= urllib.parse.quote("Emergency Shelter and NFI")
-BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/themes/{THEME}?output_format=json&location_code={LOCATION}&sector_name={SECTOR}"
+BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}&sector_name={SECTOR}"
 ```
 
 #### Filter by Admin1
 
 ```python
 ADMIN1= "AF01"
-BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/themes/{THEME}?output_format=json&location_code={LOCATION}&admin1_code={ADMIN1}"
+BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}&admin1_code={ADMIN1}"
 ```
 
 ### Plain Javascript and Node
@@ -384,14 +388,14 @@ Change the code to include a new parameter in the URL.
 
 ```javascript
 const SECTOR = "Emergency Shelter and NFI"
-const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/themes/${THEME}?output_format=json&location_code=${LOCATION}&sector_name=${SECTOR}`;
+const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}&sector_name=${SECTOR}`;
 ```
 
 #### Filter by Admin1
 
 ```javascript
 const ADMIN1 = "AF01"
-const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/themes/${THEME}?output_format=json&location_code=${LOCATION}&admin1_code=${ADMIN1}`;
+const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}&admin1_code=${ADMIN1}`;
 ```
 
 ### R
@@ -402,14 +406,14 @@ Change the code to include a new parameter in the URL.
 
 ```R
 SECTOR <- "Emergency Shelter and NFI"
-BASE_URL <- paste0("https://stage.hapi-humdata-org.ahconu.org/api/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&sector_name=",SECTOR)
+BASE_URL <- paste0("https://placeholder.url/api/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&sector_name=",SECTOR)
 ```
 
 #### Filter by Admin1
 
 ```R
 ADMIN1 <- "AF01"
-BASE_URL <- paste0("https://stage.hapi-humdata-org.ahconu.org/api/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&admin1_code=",ADMIN1)
+BASE_URL <- paste0("https://placeholder.url/api/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&admin1_code=",ADMIN1)
 ```
 
 ## 3. Filter for admin level
@@ -426,13 +430,13 @@ Each supporting table such as ```orgs```, ```orgs_type```, ```sector``` and more
 ### Python
 
 ```python
-BASE_URL "https://stage.hapi-humdata-org.ahconu.org/api/sector?output_format=json&offset=0&limit=1000"
+BASE_URL "https://placeholder.url/api/sector?output_format=json&offset=0&limit=1000"
 ```
 
 ### Javascript
 
 ```javascript
-CONST BASE_URL "https://stage.hapi-humdata-org.ahconu.org/api/sector?output_format=json&offset=0&limit=1000"
+CONST BASE_URL "https://placeholder.url/api/sector?output_format=json&offset=0&limit=1000"
 ```
 
 ## 5. Get admin level data for a country
@@ -455,13 +459,13 @@ https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/locations/AFG/versions/c
 The code examples so far have been using JSON output and then processing this data. To query this data as csv, change the ```output_format``` to ```csv``` as per the examples below. Visiting this URL through the browser will download the CSV to then be used on your computer.
 
 ```python
-BASE_URL = "https://stage.hapi-humdata-org.ahconu.org/api/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
+BASE_URL = "https://placeholder.url/api/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
 ```
 
 ### Javascript
 
 ```javascript
-CONST BASE_URL = "https://stage.hapi-humdata-org.ahconu.org/api/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
+CONST BASE_URL = "https://placeholder.url/api/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
 ```
 
 ## 7. Query Population and join to GeoJson from ITOS service
@@ -555,7 +559,7 @@ THEME = "population"
 LOCATION = "AFG"
 AGE_RANGE_CODE = "80%2B"
 GENDER = "f"
-BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/themes/{THEME}?output_format=json&location_code={LOCATION}&age_range_code={AGE_RANGE_CODE}&gender={GENDER}&admin1_is_unspecified=false&admin2_is_unspecified=true"
+BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}&age_range_code={AGE_RANGE_CODE}&gender={GENDER}&admin1_is_unspecified=false&admin2_is_unspecified=true"
 LIMIT = 1000
 results = fetch_data(BASE_URL, LIMIT)
 
@@ -625,7 +629,7 @@ THEME <- "population"
 LOCATION <- "AFG"
 AGE_RANGE_CODE <- "80%2B"
 GENDER <- "f"
-BASE_URL <- sprintf("https://stage.hapi-humdata-org.ahconu.org/api/themes/%s?output_format=json&location_code=%s&age_range_code=%s&gender=%s&admin1_is_unspecified=false&admin2_is_unspecified=true",
+BASE_URL <- sprintf("https://placeholder.url/api/themes/%s?output_format=json&location_code=%s&age_range_code=%s&gender=%s&admin1_is_unspecified=false&admin2_is_unspecified=true",
                     THEME, LOCATION, AGE_RANGE_CODE, GENDER)
 LIMIT <- 1000
 results <- fetch_data(BASE_URL, LIMIT)
@@ -655,7 +659,7 @@ A simple script that will fetch the API data and place it in the spreadsheet
 
 ```javascript
 function loadApiData() {
-  var baseUrl = "https://stage.hapi-humdata-org.ahconu.org/api/themes/3w?output_format=json";
+  var baseUrl = "https://placeholder.url/api/themes/3w?output_format=json";
   var limit = 10000;
   var offset = 0;
   
