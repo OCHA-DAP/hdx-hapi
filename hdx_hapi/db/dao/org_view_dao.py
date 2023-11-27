@@ -15,16 +15,19 @@ async def orgs_view_list(
     db: AsyncSession,
     acronym: str = None,
     name: str = None,
+    org_type_code: str = None,
     org_type_description: str = None,
 ):
 
-    logger.info(f'orgs_view_list called with params: acronym={acronym}, name={name}, org_type_description={org_type_description}')
+    logger.info(f'orgs_view_list called with params: acronym={acronym}, name={name}, org_type_code={org_type_code}, org_type_description={org_type_description}')
 
     query = select(OrgView)
     if acronym:
         query = case_insensitive_filter(query, OrgView.acronym, acronym)
     if name:
         query = query.where(OrgView.name.icontains(name))
+    if org_type_code:
+        query = query.where(OrgView.org_type_code == org_type_code)
     if org_type_description:
         query = query.where(OrgView.org_type_description.icontains(org_type_description))
 
