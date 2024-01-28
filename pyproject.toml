@@ -11,3 +11,6 @@ multiline-quotes = "single"
 [tool.black]
 line-length = 120
 skip-string-normalization = true
+
+[tool.pytest.ini_options]
+addopts = "--ignore=src"
