@@ -31,6 +31,13 @@ from hapi_schema.db_resource import DBResource
 from hapi_schema.db_org import DBOrg
 from hapi_schema.db_org_type import DBOrgType
 from hapi_schema.db_sector import DBSector
+from hapi_schema.db_food_security import DBFoodSecurity
+from hapi_schema.db_humanitarian_needs import DBHumanitarianNeeds
+from hapi_schema.db_ipc_phase import DBIpcPhase
+from hapi_schema.db_ipc_type import DBIpcType
+from hapi_schema.db_national_risk import DBNationalRisk
+from hapi_schema.db_population_group import DBPopulationGroup
+from hapi_schema.db_population_status import DBPopulationStatus
 
 from hapi_schema.db_operational_presence import DBOperationalPresence
 from hapi_schema.db_population import DBPopulation
