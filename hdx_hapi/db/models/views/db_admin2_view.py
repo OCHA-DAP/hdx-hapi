@@ -1,26 +1,31 @@
-from sqlalchemy import Boolean, Integer, String, DateTime, text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import DateTime
+from sqlalchemy.orm import Mapped, column_property
+
+from hapi_schema.db_admin2 import view_params_admin2
+from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
+
+admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
 
 
 class Admin2View(Base):
-    __tablename__ = 'admin2_view'
+    __table__ = admin2_view
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    admin1_ref: Mapped[int] = mapped_column(Integer, nullable=False)
-    code: Mapped[str] = mapped_column(String(128), nullable=False)
-    name: Mapped[str] = mapped_column(String(512), nullable=False)
-    is_unspecified: Mapped[bool] = mapped_column(Boolean, server_default=text('FALSE'))
-    reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
-    reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
+    id: Mapped[int] = column_property(admin2_view.c.id)
+    admin1_ref: Mapped[int] = column_property(admin2_view.c.admin1_ref)
+    code: Mapped[str] = column_property(admin2_view.c.code)
+    name: Mapped[str] = column_property(admin2_view.c.name)
+    is_unspecified: Mapped[bool] = column_property(admin2_view.c.is_unspecified)
+    reference_period_start: Mapped[DateTime] = column_property(admin2_view.c.reference_period_start)
+    reference_period_end: Mapped[DateTime] = column_property(admin2_view.c.reference_period_end)
 
-    admin1_code: Mapped[str] = mapped_column(String(128), nullable=False)
-    admin1_name: Mapped[str] = mapped_column(String(512), nullable=False)
-    admin1_is_unspecified: Mapped[bool] = mapped_column(Boolean, server_default=text('FALSE'))
-    admin1_reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
-    admin1_reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
+    admin1_code: Mapped[str] = column_property(admin2_view.c.admin1_code)
+    admin1_name: Mapped[str] = column_property(admin2_view.c.admin1_name)
+    admin1_is_unspecified: Mapped[bool] = column_property(admin2_view.c.admin1_is_unspecified)
+    admin1_reference_period_start: Mapped[DateTime] = column_property(admin2_view.c.admin1_reference_period_start)
+    admin1_reference_period_end: Mapped[DateTime] = column_property(admin2_view.c.admin1_reference_period_end)
 
-    location_code: Mapped[str] = mapped_column(String(128), nullable=False)
-    location_name: Mapped[str] = mapped_column(String(512), nullable=False)
-    location_reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
-    location_reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
+    location_code: Mapped[str] = column_property(admin2_view.c.location_code)
+    location_name: Mapped[str] = column_property(admin2_view.c.location_name)
+    location_reference_period_start: Mapped[DateTime] = column_property(admin2_view.c.location_reference_period_start)
+    location_reference_period_end: Mapped[DateTime] = column_property(admin2_view.c.location_reference_period_end)

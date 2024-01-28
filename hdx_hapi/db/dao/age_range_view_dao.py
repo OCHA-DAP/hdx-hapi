@@ -1,5 +1,4 @@
 import logging
-from re import A
 
 from typing import Dict
 

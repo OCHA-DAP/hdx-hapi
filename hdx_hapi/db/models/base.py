@@ -1,4 +1,2 @@
-from sqlalchemy.orm import DeclarativeBase
-
-class Base(DeclarativeBase):
-    pass
+from hapi_schema.utils.base import Base
+Base = Base

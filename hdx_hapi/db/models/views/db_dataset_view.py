@@ -1,14 +1,19 @@
-from sqlalchemy import Boolean, Integer, String, DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, column_property
+
+from hapi_schema.db_dataset import view_params_dataset
+
 from hdx_hapi.db.models.base import Base
+from hdx_hapi.db.models.views.util.util import view
+
+dataset_view = view(view_params_dataset.name, Base.metadata, view_params_dataset.selectable)
 
 
 class DatasetView(Base):
-    __tablename__ = 'dataset_view'
+    __table__ = dataset_view
     
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    hdx_id: Mapped[str] = mapped_column(String(36), unique=True, nullable=False)
-    hdx_stub: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
-    title: Mapped[str] = mapped_column(String(1024), nullable=False)
-    hdx_provider_stub: Mapped[str] = mapped_column(String(128), nullable=False)
-    hdx_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
+    id: Mapped[int] = column_property(dataset_view.c.id)
+    hdx_id: Mapped[str] = column_property(dataset_view.c.hdx_id)
+    hdx_stub: Mapped[str] = column_property(dataset_view.c.hdx_stub)
+    title: Mapped[str] = column_property(dataset_view.c.title)
+    hdx_provider_stub: Mapped[str] = column_property(dataset_view.c.hdx_provider_stub)
+    hdx_provider_name: Mapped[str] = column_property(dataset_view.c.hdx_provider_name)
