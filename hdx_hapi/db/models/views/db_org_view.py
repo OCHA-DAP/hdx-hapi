@@ -1,7 +1,6 @@
 from sqlalchemy import Integer, String, DateTime, text
 from sqlalchemy.orm import Mapped, mapped_column
 from hdx_hapi.db.models.base import Base
-from hdx_hapi.db.models.db_orgtype import DBOrgType
 
 
 class OrgView(Base):

@@ -1,10 +1,16 @@
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, column_property
+
+from hapi_schema.db_gender import view_params_gender
+
+from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 
 
-class GenderView(Base):
-    __tablename__ = 'gender_view'
+gender_view = view(view_params_gender.name, Base.metadata, view_params_gender.selectable)
 
-    code: Mapped[str] = mapped_column(String(1), primary_key=True)
-    description: Mapped[str] = mapped_column(String(256), nullable=False)
+
+class GenderView(Base):
+    __table__ = gender_view
+
+    code: Mapped[str] = column_property(gender_view.c.code)
+    description: Mapped[str] = column_property(gender_view.c.description)

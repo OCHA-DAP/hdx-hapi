@@ -1,24 +1,30 @@
-from sqlalchemy import Boolean, Integer, String, DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, column_property
+
+from hapi_schema.db_resource import view_params_resource
+
+from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 
 
+resource_view = view(view_params_resource.name, Base.metadata, view_params_resource.selectable)
+
+
 class ResourceView(Base):
-    __tablename__ = 'resource_view'
+    __table__ = resource_view
     
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    dataset_ref: Mapped[int] = mapped_column(Integer, nullable=False)
-    hdx_id: Mapped[str] = mapped_column(String(36), nullable=False)
-    name: Mapped[str] = mapped_column(String(256), nullable=False)
-    format: Mapped[str] = mapped_column(String(32), nullable=False)
-    update_date = mapped_column(DateTime, nullable=False)
-    is_hxl: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    download_url: Mapped[str] = mapped_column(String(1024), nullable=False)
+    id: Mapped[int] = column_property(resource_view.c.id)
+    dataset_ref: Mapped[int] = column_property(resource_view.c.dataset_ref)
+    hdx_id: Mapped[str] = column_property(resource_view.c.hdx_id)
+    name: Mapped[str] = column_property(resource_view.c.name)
+    format: Mapped[str] = column_property(resource_view.c.format)
+    update_date = column_property(resource_view.c.update_date)
+    is_hxl: Mapped[bool] = column_property(resource_view.c.is_hxl)
+    download_url: Mapped[str] = column_property(resource_view.c.download_url)
 
-    dataset_hdx_id: Mapped[str] = mapped_column(String(36), nullable=False)
-    dataset_hdx_stub: Mapped[str] = mapped_column(String(128), nullable=False)
+    dataset_hdx_id: Mapped[str] = column_property(resource_view.c.dataset_hdx_id)
+    dataset_hdx_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_stub)
+    dataset_title: Mapped[str] = column_property(resource_view.c.dataset_title)
 
-    dataset_title: Mapped[str] = mapped_column(String(1024), nullable=False)
-    dataset_hdx_provider_stub: Mapped[str] = mapped_column(String(128), nullable=False)
-    dataset_hdx_provider_name: Mapped[str] = mapped_column(String(512), nullable=False)
+    dataset_hdx_provider_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_provider_stub)
+    dataset_hdx_provider_name: Mapped[str] = column_property(resource_view.c.dataset_hdx_provider_name)
     

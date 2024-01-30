@@ -1,12 +1,19 @@
-from sqlalchemy import String, DateTime, text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import DateTime
+from sqlalchemy.orm import Mapped, column_property
+
+from hapi_schema.db_sector import view_params_sector
+
+from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 
 
-class SectorView(Base):
-    __tablename__ = 'sector_view'
+sector_view = view(view_params_sector.name, Base.metadata, view_params_sector.selectable)
 
-    code: Mapped[str] = mapped_column(String(32), primary_key=True)
-    name: Mapped[str] = mapped_column(String(512), nullable=False, index=True)
-    reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False, index=True)
-    reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
+
+class SectorView(Base):
+    __table__ = sector_view
+
+    code: Mapped[str] = column_property(sector_view.c.code)
+    name: Mapped[str] = column_property(sector_view.c.name)
+    reference_period_start: Mapped[DateTime] = column_property(sector_view.c.reference_period_start)
+    reference_period_end: Mapped[DateTime] = column_property(sector_view.c.reference_period_end)

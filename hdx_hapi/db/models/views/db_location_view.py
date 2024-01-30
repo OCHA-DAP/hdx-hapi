@@ -1,14 +1,21 @@
-from sqlalchemy import Boolean, Integer, String, DateTime, text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import DateTime
+from sqlalchemy.orm import Mapped, column_property
+
+from hapi_schema.db_location import view_params_location
+
+from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 
 
+location_view = view(view_params_location.name, Base.metadata, view_params_location.selectable)
+
+
 class LocationView(Base):
-    __tablename__ = 'location_view'
+    __table__ = location_view
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    code: Mapped[str] = mapped_column(String(128), nullable=False)
-    name: Mapped[str] = mapped_column(String(512), nullable=False)
+    id: Mapped[int] = column_property(location_view.c.id)
+    code: Mapped[str] = column_property(location_view.c.code)
+    name: Mapped[str] = column_property(location_view.c.name)
 
-    reference_period_start: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
-    reference_period_end: Mapped[DateTime] = mapped_column(DateTime, nullable=True, server_default=text('NULL'))
+    reference_period_start: Mapped[DateTime] = column_property(location_view.c.reference_period_start)
+    reference_period_end: Mapped[DateTime] = column_property(location_view.c.reference_period_end)

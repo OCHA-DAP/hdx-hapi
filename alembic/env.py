@@ -21,20 +21,27 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 
 from hdx_hapi.db.models.base import Base
-from hdx_hapi.db.models.db_admin1 import DBAdmin1
-from hdx_hapi.db.models.db_admin2 import DBAdmin2
-from hdx_hapi.db.models.db_location import DBLocation
-from hdx_hapi.db.models.db_age_range import DBAgeRange
-from hdx_hapi.db.models.db_gender import DBGender
-from hdx_hapi.db.models.db_dataset import DBDataset
-from hdx_hapi.db.models.db_resource import DBResource
-from hdx_hapi.db.models.db_admin2 import DBAdmin2
-from hdx_hapi.db.models.db_org import DBOrg
-from hdx_hapi.db.models.db_orgtype import DBOrgType
-from hdx_hapi.db.models.db_sector import DBSector
+from hapi_schema.db_admin1 import DBAdmin1
+from hapi_schema.db_admin2 import DBAdmin2
+from hapi_schema.db_location import DBLocation
+from hapi_schema.db_age_range import DBAgeRange
+from hapi_schema.db_gender import DBGender
+from hapi_schema.db_dataset import DBDataset
+from hapi_schema.db_resource import DBResource
+from hapi_schema.db_org import DBOrg
+from hapi_schema.db_org_type import DBOrgType
+from hapi_schema.db_sector import DBSector
+from hapi_schema.db_food_security import DBFoodSecurity
+from hapi_schema.db_humanitarian_needs import DBHumanitarianNeeds
+from hapi_schema.db_ipc_phase import DBIpcPhase
+from hapi_schema.db_ipc_type import DBIpcType
+from hapi_schema.db_national_risk import DBNationalRisk
+from hapi_schema.db_population_group import DBPopulationGroup
+from hapi_schema.db_population_status import DBPopulationStatus
 
-from hdx_hapi.db.models.db_operational_presence import DBOperationalPresence
-from hdx_hapi.db.models.db_population import DBPopulation
+from hapi_schema.db_operational_presence import DBOperationalPresence
+from hapi_schema.db_population import DBPopulation
+
 target_metadata = Base.metadata
 # target_metadata = None
 
