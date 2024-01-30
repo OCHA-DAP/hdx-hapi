@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
+from pydantic import NaiveDatetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
@@ -44,8 +45,8 @@ async def get_operational_presences(
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
     admin_level: Annotated[AdminLevel, Query(description="Filter the response by admin level")] = None,
     # admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
-    resource_update_date_min: Annotated[datetime | date, Query(description='Filter the repsonse to data updated on or after this date. For example 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
-    resource_update_date_max: Annotated[datetime | date, Query(description='Filter the repsonse to data updated on or before this date. For example 2024-12-31 or 2024-12-31T23:59:59', example='2024-12-31')] = None,
+    resource_update_date_min: Annotated[NaiveDatetime | date, Query(description='Filter the repsonse to data updated on or after this date. For example 2020-01-01 or 2020-01-01T00:00:00', example='2020-01-01')] = None,
+    resource_update_date_max: Annotated[NaiveDatetime | date, Query(description='Filter the repsonse to data updated on or before this date. For example 2024-12-31 or 2024-12-31T23:59:59', example='2024-12-31')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Filter the query by the organizations contributing the source data to HDX. If you want to filter by the organization mentioned in the operational presence record, see the org_name and org_acronym parameters below.')] = None,
     # org_ref: Annotated[int, Query(ge=1, description='Organization reference')] = None,
     # dataset_hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,

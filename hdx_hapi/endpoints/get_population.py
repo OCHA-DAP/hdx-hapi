@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
+from pydantic import NaiveDatetime
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -39,8 +40,8 @@ async def get_populations(
     age_range_code: Annotated[str, Query(max_length=32, description='Age range code')] = None,
     population: Annotated[int, Query(description='Population')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
-    resource_update_date_min: Annotated[datetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')] = None,
-    resource_update_date_max: Annotated[datetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')] = None,
+    resource_update_date_min: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')] = None,
+    resource_update_date_max: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description='Admin1 name')] = None,

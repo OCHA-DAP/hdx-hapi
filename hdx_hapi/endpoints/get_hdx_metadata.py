@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
+from pydantic import NaiveDatetime
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -63,8 +64,8 @@ async def get_resources(
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
     format: Annotated[str, Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
-    update_date_min: Annotated[datetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')] = None,
-    update_date_max: Annotated[datetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')] = None,
+    update_date_min: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')] = None,
+    update_date_max: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')] = None,
     is_hxl: Annotated[bool, Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
     dataset_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID} {DOC_SEE_DATASET} ')] = None,
     dataset_hdx_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME} {DOC_SEE_DATASET}')] = None,
