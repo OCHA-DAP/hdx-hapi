@@ -116,6 +116,7 @@ endpoint_data = {
         "query_parameters": {
             'acronym': 'Org01',
             'name': 'Organisation 1',
+            'org_type_code': '433',
             'org_type_description': 'Dono',  # Donor
         },
         "expected_fields": [
