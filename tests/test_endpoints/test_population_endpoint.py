@@ -72,6 +72,8 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
         admin2_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
+        reference_period_start='2023-01-01 00:00:00',
+        reference_period_end='2023-03-31 23:59:59'
     )
 
     assert population_view_adm_specified.admin1_code == 'FOO-XXX', 'admin1_code should keep its value when admin1_is_unspecified is False'
@@ -93,6 +95,8 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
         admin2_is_unspecified=True,
         admin2_code='FOO-XXX',
         admin2_name='Unspecified',
+        reference_period_start='2023-01-01 00:00:00',
+        reference_period_end='2023-03-31 23:59:59'
     )
 
     assert population_view_adm_unspecified.admin1_code == None, 'admin1_code should be changed to None when admin1_is_unspecified is True'
