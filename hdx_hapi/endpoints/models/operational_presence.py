@@ -1,4 +1,4 @@
-from pydantic import ConfigDict, Field, model_validator
+from pydantic import ConfigDict, Field, model_validator, NaiveDatetime
 from typing import Optional
 
 from hdx_hapi.endpoints.models.base import HapiBaseModel
@@ -13,6 +13,9 @@ class OperationalPresenceResponse(HapiBaseModel):
     sector_name: str = Field(max_length=512)
     location_code: str = Field(max_length=128)
     location_name: str = Field(max_length=512)
+
+    reference_period_start: Optional[NaiveDatetime]
+    reference_period_end: Optional[NaiveDatetime]
 
     admin1_is_unspecified: bool = Field(exclude=True)
     admin2_is_unspecified: bool = Field(exclude=True)
