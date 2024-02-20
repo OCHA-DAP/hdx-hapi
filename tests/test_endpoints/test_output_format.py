@@ -7,10 +7,10 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/admin1'
-endpoint_data = endpoint_data[ENDPOINT_ROUTER]
-query_parameters = endpoint_data['query_parameters']
-expected_fields = endpoint_data['expected_fields']
+# ENDPOINT_ROUTER = '/api/admin1'
+# endpoint_data = endpoint_data[ENDPOINT_ROUTER]
+# query_parameters = endpoint_data['query_parameters']
+# expected_fields = endpoint_data['expected_fields']
 ENDPOINT_ROUTER_LIST = [
     '/api/admin1',
     '/api/admin2',
@@ -22,12 +22,13 @@ ENDPOINT_ROUTER_LIST = [
     '/api/org',
     '/api/org_type',
     '/api/themes/population',
+    '/api/themes/food_security',
     '/api/resource',
     '/api/sector',
 ]
 
 
-@pytest.mark.parametrize("endpoint_router", ENDPOINT_ROUTER_LIST)
+@pytest.mark.parametrize('endpoint_router', ENDPOINT_ROUTER_LIST)
 @pytest.mark.asyncio
 async def test_output_format(event_loop, refresh_db, endpoint_router):
     log.info('started ' + endpoint_router)
