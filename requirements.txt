@@ -7,4 +7,4 @@ python-json-logger~=2.0.7
 alembic~=1.12.00
 psycopg2~=2.9.7
 
--e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.6.0#egg=hapi-schema
+-e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.6.1#egg=hapi-schema
