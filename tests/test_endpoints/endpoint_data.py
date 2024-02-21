@@ -170,6 +170,40 @@ endpoint_data = {
             "admin2_name"
         ],
     },
+    "/api/themes/national_risk": {
+        "query_parameters": {
+            'risk_class': 5,
+            'global_rank': 4,
+            'overall_risk': 8.1,
+            'hazard_exposure_risk': 8.7,
+            'vulnerability_risk': 8.5,
+            'coping_capacity_risk': 7.1,
+            'dataset_hdx_provider_stub': 'pRoViDeR01',
+            'resource_update_date_min': date(2023, 6, 1),
+            'resource_update_date_max': date(2023, 6, 2),
+            # 'sector_name': 'Emergency Shelter and NFI',
+            'location_code': 'fOO',
+            'location_name': 'Foolandia',
+        },
+        "expected_fields": [
+            "risk_class",
+            "global_rank",
+            "overall_risk",
+            "hazard_exposure_risk",
+            "vulnerability_risk",
+            "coping_capacity_risk",
+            "meta_missing_indicators_pct",
+            "meta_avg_recentness_years",
+            "reference_period_start",
+            "reference_period_end",
+            "dataset_hdx_stub",
+            "dataset_hdx_provider_stub",
+            "resource_hdx_id",
+            # "sector_name",
+            "location_code",
+            "location_name"
+        ],
+    },
     "/api/resource": {
         "query_parameters": {
             'hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',
