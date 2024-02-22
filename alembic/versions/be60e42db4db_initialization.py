@@ -182,7 +182,7 @@ def upgrade() -> None:
     op.create_table('national_risk',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('resource_ref', sa.Integer(), nullable=False),
-    sa.Column('location_ref', sa.Integer(), nullable=False),
+    sa.Column('admin2_ref', sa.Integer(), nullable=False),
     sa.Column('risk_class', sa.Integer(), nullable=False),
     sa.Column('global_rank', sa.Integer(), nullable=False),
     sa.Column('overall_risk', sa.Float(), nullable=False),
@@ -194,7 +194,7 @@ def upgrade() -> None:
     sa.Column('reference_period_start', sa.DateTime(), nullable=False),
     sa.Column('reference_period_end', sa.DateTime(), server_default=sa.text('NULL'), nullable=True),
     sa.Column('source_data', sa.Text(), nullable=True),
-    sa.ForeignKeyConstraint(['location_ref'], ['location.id'], onupdate='CASCADE'),
+    sa.ForeignKeyConstraint(['admin2_ref'], ['admin2.id'], onupdate='CASCADE'),
     sa.ForeignKeyConstraint(['resource_ref'], ['resource.id'], onupdate='CASCADE', ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )

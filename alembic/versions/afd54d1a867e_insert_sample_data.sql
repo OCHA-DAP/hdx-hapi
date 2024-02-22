@@ -164,6 +164,19 @@ VALUES
 (5, 1, 1, 'f', '0-4', 300000, '2023-01-01 00:00:00',  '2023-06-30 00:00:00','DATA,DATA,DATA'),   -- national (f) children
 (6, 1, 2, 'x', '5-9', 2000, '2023-01-01 00:00:00',  '2023-06-30 00:00:00','DATA,DATA,DATA'),  -- admin1 (x) adolescents
 (7, 1, 4, 'm', '10-14', 100000, '2023-01-01 00:00:00',  '2023-06-30 00:00:00','DATA,DATA,DATA');    -- admin2 (m) elderly
+-- end
+
+
+-- ---------------------------------------------------------------------
+-- Sample data for the national_risk table.
+--
+-- Started 2024-02-20
+--
+-- ------------------------------------------------------------------------
+
+INSERT INTO public.national_risk (id, resource_ref, admin2_ref, risk_class, global_rank, overall_risk, hazard_exposure_risk, vulnerability_risk, coping_capacity_risk, meta_missing_indicators_pct, meta_avg_recentness_years, reference_period_start, reference_period_end, source_data) VALUES (1, 1, 1, 5, 4, 8.1, 8.7, 8.5, 7.1, 0.0784313725490196, 0.2571428571428571, '2024-01-01 00:00:00', '2024-12-31 23:59:59.999999', 'not yet implemented');
+INSERT INTO public.national_risk (id, resource_ref, admin2_ref, risk_class, global_rank, overall_risk, hazard_exposure_risk, vulnerability_risk, coping_capacity_risk, meta_missing_indicators_pct, meta_avg_recentness_years, reference_period_start, reference_period_end, source_data) VALUES (2, 2, 2, 5, 12, 7, 6.9, 7.9, 6.4, 0, 0.3013698630136986, '2024-01-01 00:00:00', '2024-12-31 23:59:59.999999', 'not yet implemented');
+INSERT INTO public.national_risk (id, resource_ref, admin2_ref, risk_class, global_rank, overall_risk, hazard_exposure_risk, vulnerability_risk, coping_capacity_risk, meta_missing_indicators_pct, meta_avg_recentness_years, reference_period_start, reference_period_end, source_data) VALUES (3, 3, 3, 4, 19, 6.6, 7.2, 6.8, 5.9, 0, 0.3918918918918919, '2024-01-01 00:00:00', '2024-12-31 23:59:59.999999', 'not yet implemented');
 
 -- end
 
