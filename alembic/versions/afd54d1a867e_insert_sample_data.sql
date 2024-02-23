@@ -213,3 +213,41 @@ INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, 
 INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (11, 1, 4, '4', 'first projection', 0, 0, '2021-06-01 00:00:00', '2021-08-31 00:00:00', 'not yet implemented');
 
 -- end
+
+
+-- ---------------------------------------------------------------------
+-- Sample data for the population_group table.
+--
+-- Started 2024-02-23
+--
+-- ------------------------------------------------------------------------
+
+INSERT INTO public.population_group(code, description) VALUES ('refugees', 'refugees');
+
+-- end
+
+
+-- ---------------------------------------------------------------------
+-- Sample data for the population_status table.
+--
+-- Started 2024-02-23
+--
+-- ------------------------------------------------------------------------
+
+INSERT INTO public.population_status(code, description) VALUES ('inneed', 'number of people in need');
+
+-- end
+
+
+-- ---------------------------------------------------------------------
+-- Sample data for the humanitarian_needs table.
+--
+-- Started 2024-02-23
+--
+-- ------------------------------------------------------------------------
+
+INSERT INTO public.humanitarian_needs (id, resource_ref, admin2_ref, population_status_code, population_group_code, sector_code, gender_code, age_range_code, disabled_marker, population, reference_period_start, reference_period_end, source_data) VALUES (1, 1, 1, 'inneed', 'refugees', 'EDU', 'm', '0-4', FALSE, 100, '2017-01-01 00:00:00', '2024-12-31 23:59:59', 'not yet implemented');
+INSERT INTO public.humanitarian_needs (id, resource_ref, admin2_ref, population_status_code, population_group_code, sector_code, gender_code, age_range_code, disabled_marker, population, reference_period_start, reference_period_end, source_data) VALUES (2, 2, 2, 'inneed', 'refugees', 'EDU', 'f', '0-4', TRUE, 200, '2017-01-01 00:00:00', '2024-12-31 23:59:59', 'not yet implemented');
+INSERT INTO public.humanitarian_needs (id, resource_ref, admin2_ref, population_status_code, population_group_code, sector_code, gender_code, age_range_code, disabled_marker, population, reference_period_start, reference_period_end, source_data) VALUES (3, 3, 3, 'inneed', 'refugees', NULL, NULL, '80+', NULL, 300, '2017-01-01 00:00:00', '2024-12-31 23:59:59', 'not yet implemented');
+
+-- end

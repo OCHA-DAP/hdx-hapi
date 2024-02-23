@@ -18,6 +18,7 @@ from hdx_hapi.endpoints.get_humanitarian_response import router as humanitarian_
 from hdx_hapi.endpoints.get_demographic import router as demographic_router
 from hdx_hapi.endpoints.get_food_security import router as food_security_router
 from hdx_hapi.endpoints.get_national_risk import router as national_risk_router
+from hdx_hapi.endpoints.get_humanitarian_needs import router as humanitarian_needs_router
 
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
@@ -39,6 +40,7 @@ app.include_router(operational_presence_router)
 app.include_router(population_router)
 app.include_router(food_security_router)
 app.include_router(national_risk_router)
+app.include_router(humanitarian_needs_router)
 app.include_router(admin_level_router)
 app.include_router(humanitarian_response_router)
 app.include_router(demographic_router)
