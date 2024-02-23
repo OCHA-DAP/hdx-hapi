@@ -179,3 +179,37 @@ INSERT INTO public.national_risk (id, resource_ref, admin2_ref, risk_class, glob
 INSERT INTO public.national_risk (id, resource_ref, admin2_ref, risk_class, global_rank, overall_risk, hazard_exposure_risk, vulnerability_risk, coping_capacity_risk, meta_missing_indicators_pct, meta_avg_recentness_years, reference_period_start, reference_period_end, source_data) VALUES (3, 3, 3, 4, 19, 6.6, 7.2, 6.8, 5.9, 0, 0.3918918918918919, '2024-01-01 00:00:00', '2024-12-31 23:59:59.999999', 'not yet implemented');
 
 -- end
+
+
+-- ---------------------------------------------------------------------
+-- Sample data for the ipc_phase, ipc_type and food_security tables.
+--
+-- Started 2024-02-19
+--
+-- ------------------------------------------------------------------------
+
+INSERT INTO public.ipc_phase (code, name, description) VALUES ('1', 'Phase 1: None/Minimal', 'Households are able to meet essential food and non-food needs without engaging in atypical and unsustainable strategies to access food and income.');
+INSERT INTO public.ipc_phase (code, name, description) VALUES ('2', 'Phase 2: Stressed', 'Households have minimally adequate food consumption but are unable to afford some essential non-food expenditures without engaging in stress-coping strategies.');
+INSERT INTO public.ipc_phase (code, name, description) VALUES ('3', 'Phase 3: Crisis', 'Households either have food consumption gaps that are reflected by high or above-usual acute malnutrition, or are marginally able to meet minimum food needs but only by depleting essential livelihood assets or through crisis-coping strategies.');
+INSERT INTO public.ipc_phase (code, name, description) VALUES ('4', 'Phase 4: Emergency', 'Households either have large food consumption gaps which are reflected in very high acute malnutrition and excess mortality, or are able to mitigate large food consumption gaps but only by employing emergency livelihood strategies and asset liquidation.');
+INSERT INTO public.ipc_phase (code, name, description) VALUES ('5', 'Phase 5: Catastrophe/Famine', 'Households have an extreme lack of food and/or other basic needs even after full employment of coping strategies. Starvation, death, destitution and extremely critical acute malnutrition levels are evident. (For Famine Classification, an area needs to have extreme critical levels of acute malnutrition and mortality.)');
+INSERT INTO public.ipc_phase (code, name, description) VALUES ('3+', 'Phase 3+: In Need of Action', 'Sum of population in phases 3, 4, and 5. The population in Phase 3+ does not necessarily reflect the full population in need of urgent action. This is because some households may be in Phase 2 or even 1 but only because of receipt of assistance, and thus, they may be in need of continued action.');
+INSERT INTO public.ipc_phase (code, name, description) VALUES ('all', 'Phases 1, 2, 3, 4, and 5', 'Sum of population in phases 1, 2, 3, 4, and 5. Used as the denominator to determine the fraction of population per phase.');
+
+INSERT INTO public.ipc_type (code, description) VALUES ('current', 'Food insecurity that is occurring in the current analysis period.');
+INSERT INTO public.ipc_type (code, description) VALUES ('first projection', 'Projected food insecurity occurring in the period immediately following the current analysis period.');
+INSERT INTO public.ipc_type (code, description) VALUES ('second projection', 'Projected food insecurity occurring in the period immediately following the first projection period.');
+
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (1, 1, 1, '1', 'current', 49348, 0.8399945530060597, '2021-01-01 00:00:00', '2021-05-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (2, 1, 1, '2', 'current', 8225, 0.1400047661196977, '2021-01-01 00:00:00', '2021-05-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (3, 1, 1, '3', 'current', 1175, 0.02000068087424253, '2021-01-01 00:00:00', '2021-05-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (4, 1, 1, '4', 'current', 0, 0, '2021-01-01 00:00:00', '2021-05-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (5, 1, 1, '5', 'current', 0, 0, '2021-01-01 00:00:00', '2021-05-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (6, 1, 1, '3+', 'current', 1175, 0.02000068087424253, '2021-01-01 00:00:00', '2021-05-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (7, 1, 1, 'all', 'current', 58748, 1, '2021-01-01 00:00:00', '2021-05-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (8, 1, 2, '1', 'first projection', 47586, 0.8100020426227276, '2021-06-01 00:00:00', '2021-08-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (9, 1, 2, '2', 'first projection', 9400, 0.16000544699394023, '2021-06-01 00:00:00', '2021-08-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (10, 1, 4, '3', 'first projection', 1762, 0.0299925103833322, '2021-06-01 00:00:00', '2021-08-31 00:00:00', 'not yet implemented');
+INSERT INTO public.food_security (id, resource_ref, admin2_ref, ipc_phase_code, ipc_type_code, population_in_phase, population_fraction_in_phase, reference_period_start, reference_period_end, source_data) VALUES (11, 1, 4, '4', 'first projection', 0, 0, '2021-06-01 00:00:00', '2021-08-31 00:00:00', 'not yet implemented');
+
+-- end
