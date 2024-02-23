@@ -32,7 +32,7 @@ async def operational_presences_view_list(
 
 ):
 
-    # logger.info(f'operational_presences_view_list called with params: org_ref={org_ref}, location_name={location_name}')
+    logger.info(f'operational_presences_view_list called with params: sector_code={sector_code}, dataset_provider_code={dataset_provider_code}, resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, org_acronym={org_acronym}, org_name={org_name}, sector_name={sector_name}, location_code={location_code}, location_name={location_name}, admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}')
 
     query = select(OperationalPresenceView)
     if sector_code:

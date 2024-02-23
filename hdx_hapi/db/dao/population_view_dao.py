@@ -1,3 +1,4 @@
+import logging
 import datetime
 from typing import Dict
 
@@ -6,6 +7,9 @@ from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_population_view import PopulationView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+
+
+logger = logging.getLogger(__name__)
 
 async def populations_view_list(
     pagination_parameters: Dict,
@@ -25,6 +29,8 @@ async def populations_view_list(
     admin2_name: str = None,
     admin2_is_unspecified: bool = None,
 ):
+
+    logger.info(f'populations_view_list called with params: gender_code={gender_code}, age_range_code={age_range_code}, population={population}, dataset_provider_code={dataset_provider_code}, resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, location_code={location_code}, location_name={location_name}, admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}')
 
     query = select(PopulationView)
     if gender_code:
@@ -58,6 +64,11 @@ async def populations_view_list(
 
     query = apply_pagination(query, pagination_parameters)
 
+    logger.debug(f'Executing SQL query: {query}')
+
     result = await db.execute(query)
     populations = result.scalars().all()
+
+    logger.info(f'Retrieved {len(populations)} rows from the database')
+
     return populations
