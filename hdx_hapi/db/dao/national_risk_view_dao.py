@@ -19,7 +19,7 @@ async def national_risks_view_list(
     dataset_hdx_provider_stub: str = None,
     resource_update_date_min: datetime = None,
     resource_update_date_max: datetime = None,
-    sector_name: str = None,
+    # sector_name: str = None,
     location_code: str = None,
     location_name: str = None,
 ):
@@ -43,8 +43,8 @@ async def national_risks_view_list(
         query = query.where(NationalRiskView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:
         query = query.where(NationalRiskView.resource_update_date < resource_update_date_max)
-    if sector_name:
-        query = query.where(NationalRiskView.sector_name.icontains(sector_name))
+    # if sector_name:
+        # query = query.where(NationalRiskView.sector_name.icontains(sector_name))
     if location_code:
         query = case_insensitive_filter(query, NationalRiskView.location_code, location_code)
     if location_name:
