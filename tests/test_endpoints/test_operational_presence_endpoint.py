@@ -116,6 +116,8 @@ async def test_get_operational_presence_admin_level(event_loop, refresh_db):
     async with AsyncClient(app=app, base_url='http://test', ) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
+    assert len(response.json()[0]) == len(expected_fields), f'Response has a different number of fields than expected'
+
     response_items = response.json()
     admin_0_count = len([item for item in response_items if item['admin1_name'] == None and item['admin2_name'] == None])
     admin_1_count = len([item for item in response_items if item['admin1_name'] != None and item['admin2_name'] == None])
@@ -130,5 +132,3 @@ async def test_get_operational_presence_admin_level(event_loop, refresh_db):
         async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
             assert len(response.json()) == count, f'Admin level {admin_level} should return {count} entries'
-
-    assert len(response.json()[0]) == len(expected_fields), f'Response has a different number of fields than expected'
