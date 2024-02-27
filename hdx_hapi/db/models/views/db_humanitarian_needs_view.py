@@ -1,8 +1,6 @@
 from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, column_property
 from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs
-from hapi_schema.db_population_group import DBPopulationGroup
-from hapi_schema.db_population_status import DBPopulationStatus
 
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base

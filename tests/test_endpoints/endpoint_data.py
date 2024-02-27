@@ -170,7 +170,26 @@ endpoint_data = {
             "admin2_name"
         ],
     },
-
+    "/api/population_group": {
+        "query_parameters": {
+            'code': 'refugees',
+            'description': 'refugee'  # refugees
+        },
+        "expected_fields": [
+            "code",
+            "description"
+        ],
+    },
+    "/api/population_status": {
+        "query_parameters": {
+            'code': 'inneed',
+            'description': 'people'
+        },
+        "expected_fields": [
+            "code",
+            "description"
+        ],
+    },
     "/api/themes/food_security": {
         "query_parameters": {
             'ipc_phase_code': '1',
