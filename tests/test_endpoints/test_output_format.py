@@ -24,6 +24,7 @@ ENDPOINT_ROUTER_LIST = [
     '/api/themes/population',
     '/api/themes/food_security',
     '/api/themes/national_risk',
+    '/api/themes/humanitarian_needs',
     '/api/resource',
     '/api/sector',
 ]
