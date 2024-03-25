@@ -24,7 +24,7 @@ jobs:
 
       - name: Run the linter
         run: | 
-          ruff check
+          docker-compose exec -T hapi sh -c "ruff check"
 
       - name: Test with pytest
         run: |
