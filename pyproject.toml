@@ -1,16 +1,30 @@
 [tool.ruff]
-select = ["E", "F", "Q"]
-exclude = [
-    "alembic",
-    "src",
+extend-exclude = [
+    "./alembic",
+    "./src",
 ]
 
 # Allow lines to be as long as 120 characters.
 line-length = 120
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint]
+select = [
+    "E", 
+    "F", 
+    "Q", 
+]
+extend-ignore = [
+    "Q003", # avoidable-escaped-quote
+    "E712", # true-false-comparison (interferes with sqlAlchemy queries)
+]
+
+[tool.ruff.lint.flake8-quotes]
 inline-quotes = "single"
 multiline-quotes = "single"
+
+[tool.ruff.lint.extend-per-file-ignores]
+"hdx_hapi/config/doc_snippets.py" = ["E501"] # line too long
+
 
 [tool.black]
 line-length = 120
