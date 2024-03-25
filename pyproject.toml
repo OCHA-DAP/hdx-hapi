@@ -1,5 +1,9 @@
 [tool.ruff]
 select = ["E", "F", "Q"]
+exclude = [
+    "alembic",
+    "src",
+]
 
 # Allow lines to be as long as 120 characters.
 line-length = 120
