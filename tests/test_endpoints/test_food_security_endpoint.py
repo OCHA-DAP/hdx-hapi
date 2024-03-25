@@ -32,13 +32,15 @@ async def test_get_food_security_params(event_loop, refresh_db):
             response = await ac.get(ENDPOINT_ROUTER)
 
         assert response.status_code == 200
-        assert len(response.json()) > 0, f'There should be at least one food_security entry for parameter "{param_name}" with value "{param_value}" in the database'
+        assert len(response.json()) > 0, \
+            f'There should be at least one food_security entry for parameter ' \
+            f'"{param_name}" with value "{param_value}" in the database'
 
     async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 200
-    assert len(response.json()) > 0, f'There should be at least one food_security entry for all parameters in the database'
+    assert len(response.json()) > 0, 'There should be at least one food_security entry for all parameters in the db'
 
 
 @pytest.mark.asyncio
@@ -51,7 +53,7 @@ async def test_get_food_security_result(event_loop, refresh_db):
     for field in expected_fields:
         assert field in response.json()[0], f'Field "{field}" not found in the response'
 
-    assert len(response.json()[0]) == len(expected_fields), f'Response has a different number of fields than expected'
+    assert len(response.json()[0]) == len(expected_fields), 'Response has a different number of fields than expected'
 
 
 @pytest.mark.asyncio
@@ -79,10 +81,14 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
         reference_period_end='2023-03-31 23:59:59'
     )
 
-    assert food_security_view_adm_specified.admin1_code == 'FOO-XXX', 'admin1_code should keep its value when admin1_is_unspecified is False'
-    assert food_security_view_adm_specified.admin1_name == 'Province 01', 'admin1_name should keep its value when admin1_is_unspecified is False'
-    assert food_security_view_adm_specified.admin2_code == 'FOO-XXX-XXX', 'admin2_code should keep its value when admin1_is_unspecified is False'
-    assert food_security_view_adm_specified.admin2_name == 'District A', 'admin2_name should keep its value when admin1_is_unspecified is False'
+    assert food_security_view_adm_specified.admin1_code == 'FOO-XXX', \
+        'admin1_code should keep its value when admin1_is_unspecified is False'
+    assert food_security_view_adm_specified.admin1_name == 'Province 01', \
+        'admin1_name should keep its value when admin1_is_unspecified is False'
+    assert food_security_view_adm_specified.admin2_code == 'FOO-XXX-XXX', \
+        'admin2_code should keep its value when admin1_is_unspecified is False'
+    assert food_security_view_adm_specified.admin2_name == 'District A', \
+        'admin2_name should keep its value when admin1_is_unspecified is False'
 
     food_security_view_adm_unspecified = FoodSecurityResponse(
         population_in_phase=8225,
@@ -105,10 +111,14 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
         reference_period_end='2023-03-31 23:59:59'
     )
 
-    assert food_security_view_adm_unspecified.admin1_code == None, 'admin1_code should be changed to None when admin1_is_unspecified is True'
-    assert food_security_view_adm_unspecified.admin1_name == None, 'admin1_name should be changed to None when admin1_is_unspecified is True'
-    assert food_security_view_adm_unspecified.admin2_code == None, 'admin2_code should be changed to None when admin1_is_unspecified is True'
-    assert food_security_view_adm_unspecified.admin2_name == None, 'admin2_name should be changed to None when admin1_is_unspecified is True'
+    assert food_security_view_adm_unspecified.admin1_code is None, \
+        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    assert food_security_view_adm_unspecified.admin1_name is None, \
+        'admin1_name should be changed to None when admin1_is_unspecified is True'
+    assert food_security_view_adm_unspecified.admin2_code is None, \
+        'admin2_code should be changed to None when admin1_is_unspecified is True'
+    assert food_security_view_adm_unspecified.admin2_name is None, \
+        'admin2_name should be changed to None when admin1_is_unspecified is True'
 
 
 @pytest.mark.asyncio
@@ -118,12 +128,18 @@ async def test_get_food_security_admin_level(event_loop, refresh_db):
     async with AsyncClient(app=app, base_url='http://test', ) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
-    assert len(response.json()[0]) == len(expected_fields), f'Response has a different number of fields than expected'
+    assert len(response.json()[0]) == len(expected_fields), 'Response has a different number of fields than expected'
 
     response_items = response.json()
-    admin_0_count = len([item for item in response_items if item['admin1_name'] == None and item['admin2_name'] == None])
-    admin_1_count = len([item for item in response_items if item['admin1_name'] != None and item['admin2_name'] == None])
-    admin_2_count = len([item for item in response_items if item['admin1_name'] != None and item['admin2_name'] != None])
+    admin_0_count = len(
+        [item for item in response_items if item['admin1_name'] is None and item['admin2_name'] is None]
+    )
+    admin_1_count = len(
+        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is None]
+    )
+    admin_2_count = len(
+        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is not None]
+    )
     counts_map = {
         '0': admin_0_count,
         '1': admin_1_count,

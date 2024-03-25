@@ -8,7 +8,6 @@ from sqlalchemy import select
 from hdx_hapi.db.models.views.db_admin2_view import Admin2View
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
-from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +22,10 @@ async def admin2_view_list(
     location_name: str = None,
 ):
 
-    logger.info(f'admin2_view_list called with params: code={code}, name={name}, admin1_code={admin1_code}, admin1_name={admin1_name}, location_code={location_code}, location_name={location_name}')
+    logger.info(
+        f'admin2_view_list called with params: code={code}, name={name}, admin1_code={admin1_code}, ' \
+        f'admin1_name={admin1_name}, location_code={location_code}, location_name={location_name}'
+    )
 
     query = select(Admin2View)
     if True:

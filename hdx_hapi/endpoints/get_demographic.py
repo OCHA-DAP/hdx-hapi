@@ -32,7 +32,8 @@ async def get_age_ranges(
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across different data sources and instead reflect the age range breakdowns provided by the data source.
+    """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across 
+    different data sources and instead reflect the age range breakdowns provided by the data source.
     """    
     result = await get_age_ranges_srv(
         pagination_parameters=pagination_parameters,
@@ -48,8 +49,9 @@ async def get_genders(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=1, description=f'{DOC_GENDER_CODE}', example='f')] = None,
-    description: Annotated[str, Query(max_length=256, description=f'{DOC_GENDER_DESCRIPTION}', example='female')] = None,
-
+    description: Annotated[
+        str, Query(max_length=256, description=f'{DOC_GENDER_DESCRIPTION}', example='female')
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

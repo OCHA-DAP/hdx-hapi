@@ -1,4 +1,3 @@
-from datetime import datetime, date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
 
@@ -22,7 +21,7 @@ async def get_population_groups(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Population group code')] = None,
-    description: Annotated[str, Query(max_length=512, description=f'Population group description')] = None,
+    description: Annotated[str, Query(max_length=512, description='Population group description')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -38,12 +37,13 @@ async def get_population_groups(
     return transform_result_to_csv_stream_if_requested(result, output_format, PopulationGroupResponse)
 
 
-@router.get('/api/population_status', response_model=List[PopulationStatusResponse], summary='Get population statuses data')
+@router.get('/api/population_status', response_model=List[PopulationStatusResponse],
+            summary='Get population statuses data')
 async def get_population_statuses(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Population status code')] = None,
-    description: Annotated[str, Query(max_length=512, description=f'Population status description')] = None,
+    description: Annotated[str, Query(max_length=512, description='Population status description')] = None,
 
     output_format: OutputFormat = OutputFormat.JSON,
 ):

@@ -3,7 +3,6 @@ import logging
 import csv
 from httpx import AsyncClient
 from main import app
-from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
@@ -45,7 +44,7 @@ async def test_output_format(event_loop, refresh_db, endpoint_router):
     assert no_rows_json > 0
 
     # CSV
-    async with AsyncClient(app=app, base_url='http://test', params={"output_format": "csv"}) as ac:
+    async with AsyncClient(app=app, base_url='http://test', params={'output_format': 'csv'}) as ac:
         response = await ac.get(endpoint_router)
     assert response.status_code == 200
     assert response.headers.get('content-type') == 'text/csv; charset=utf-8', 'The output should be in csv format'
