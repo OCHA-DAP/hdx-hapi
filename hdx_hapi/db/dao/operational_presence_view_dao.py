@@ -32,13 +32,22 @@ async def operational_presences_view_list(
 
 ):
 
-    logger.info(f'operational_presences_view_list called with params: sector_code={sector_code}, dataset_hdx_provider_stub={dataset_hdx_provider_stub}, resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, org_acronym={org_acronym}, org_name={org_name}, sector_name={sector_name}, location_code={location_code}, location_name={location_name}, admin1_code={admin1_code}, admin1_name={admin1_name}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}')
+    logger.info(
+        f'operational_presences_view_list called with params: sector_code={sector_code}, ' \
+        f'dataset_hdx_provider_stub={dataset_hdx_provider_stub}, resource_update_date_min={resource_update_date_min}, '\
+        f'resource_update_date_max={resource_update_date_max}, org_acronym={org_acronym}, org_name={org_name}, ' \
+        f'sector_name={sector_name}, location_code={location_code}, location_name={location_name}, ' \
+        f'admin1_code={admin1_code}, admin1_name={admin1_name}, admin1_is_unspecified={admin1_is_unspecified}, ' \
+        f'admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}'
+    )
 
     query = select(OperationalPresenceView)
     if sector_code:
         query = query.where(OperationalPresenceView.sector_code.icontains(sector_code))
     if dataset_hdx_provider_stub:
-        query = case_insensitive_filter(query, OperationalPresenceView.dataset_hdx_provider_stub, dataset_hdx_provider_stub)
+        query = case_insensitive_filter(
+            query, OperationalPresenceView.dataset_hdx_provider_stub, dataset_hdx_provider_stub
+        )
     if resource_update_date_min:
         query = query.where(OperationalPresenceView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:
@@ -65,8 +74,6 @@ async def operational_presences_view_list(
         query = query.where(OperationalPresenceView.admin1_is_unspecified == admin1_is_unspecified)
     if admin2_is_unspecified is not None:
         query = query.where(OperationalPresenceView.admin2_is_unspecified == admin2_is_unspecified)
-    
-
 
     query = apply_pagination(query, pagination_parameters)
 

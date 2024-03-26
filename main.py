@@ -2,24 +2,24 @@ import logging
 import logging.config
 logging.config.fileConfig('logging.conf')
 
-import uvicorn
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.openapi.docs import get_swagger_ui_html
+import uvicorn # noqa
+from fastapi import FastAPI, Request # noqa
+from fastapi.responses import HTMLResponse, RedirectResponse # noqa
+from fastapi.openapi.docs import get_swagger_ui_html # noqa
 
 # from hdx_hapi.services.sql_alchemy_session import init_db
 
-from hdx_hapi.endpoints.favicon import router as favicon_router
-from hdx_hapi.endpoints.get_population import router as population_router
-from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router
-from hdx_hapi.endpoints.get_admin_level import router as admin_level_router
-from hdx_hapi.endpoints.get_hdx_metadata import router as dataset_router
-from hdx_hapi.endpoints.get_humanitarian_response import router as humanitarian_response_router
-from hdx_hapi.endpoints.get_demographic import router as demographic_router
-from hdx_hapi.endpoints.get_food_security import router as food_security_router
-from hdx_hapi.endpoints.get_national_risk import router as national_risk_router
-from hdx_hapi.endpoints.get_humanitarian_needs import router as humanitarian_needs_router
-from hdx_hapi.endpoints.get_population_profile import router as population_profile_router
+from hdx_hapi.endpoints.favicon import router as favicon_router # noqa
+from hdx_hapi.endpoints.get_population import router as population_router # noqa
+from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router # noqa
+from hdx_hapi.endpoints.get_admin_level import router as admin_level_router # noqa
+from hdx_hapi.endpoints.get_hdx_metadata import router as dataset_router # noqa
+from hdx_hapi.endpoints.get_humanitarian_response import router as humanitarian_response_router # noqa
+from hdx_hapi.endpoints.get_demographic import router as demographic_router # noqa
+from hdx_hapi.endpoints.get_food_security import router as food_security_router # noqa 
+from hdx_hapi.endpoints.get_national_risk import router as national_risk_router # noqa
+from hdx_hapi.endpoints.get_humanitarian_needs import router as humanitarian_needs_router # noqa
+from hdx_hapi.endpoints.get_population_profile import router as population_profile_router # noqa
 
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title='HAPI',
-    description='The Humanitarian API (HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="https://FIXTHIS">get started here</a>',
+    description='The Humanitarian API (HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="https://FIXTHIS">get started here</a>', # noqa
     version='0.1.0',
     docs_url=None,
 )

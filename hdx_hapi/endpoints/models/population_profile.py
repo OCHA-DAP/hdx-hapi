@@ -1,5 +1,4 @@
-from pydantic import ConfigDict, Field, model_validator, NaiveDatetime
-from typing import Optional
+from pydantic import ConfigDict, Field
 
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 

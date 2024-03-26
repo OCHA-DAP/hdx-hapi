@@ -1,7 +1,6 @@
-from pydantic import ConfigDict, Field, HttpUrl, computed_field
-from typing import List, Optional
+from pydantic import ConfigDict, Field
+from typing import Optional
 from hdx_hapi.endpoints.models.base import HapiBaseModel
-from hdx_hapi.services.hdx_url_logic import get_organization_url
 
 
 class OrgResponse(HapiBaseModel):

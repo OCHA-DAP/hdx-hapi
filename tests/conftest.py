@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, Session
 from typing import List
 
-from hdx_hapi.config.config import CONFIG, get_config
+from hdx_hapi.config.config import get_config
 
 
 SAMPLE_DATA_SQL_FILE = 'alembic/versions/afd54d1a867e_insert_sample_data.sql'
@@ -19,7 +19,7 @@ def pytest_sessionstart(session):
     os.environ['HAPI_DB_NAME'] =  'hapi_test'
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope='session')
 def event_loop():
     loop = asyncio.get_event_loop()
     yield loop

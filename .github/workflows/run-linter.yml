@@ -10,26 +10,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Start the HAPI docker container
+      - name: Install ruff linter
         run: |
-          cd docker
-          docker-compose up -d hapi
-
-      - name: Install requirements
-        run: |
-          cd docker
-          docker-compose exec -T hapi sh -c "apk add git"
-          docker-compose exec -T hapi sh -c "pip install --upgrade -r requirements.txt"
-          docker-compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
-
+          pip install ruff
+      
       - name: Run the linter
-        run: | 
-          docker-compose exec -T hapi sh -c "ruff check"
-
-      - name: Test with pytest
         run: |
-          cd docker
-          docker-compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report term --cov-report xml:coverage.xml"
-
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
+          ruff check
