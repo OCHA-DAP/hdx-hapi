@@ -2,9 +2,9 @@ from hdx_hapi.endpoints.util.util import AdminLevel
 
 
 def compute_unspecified_values(admin_level: AdminLevel):
-    '''
+    """
     Compute unspecified values for admin1 and admin2
-    '''
+    """
     admin1_is_unspecified = None
     admin2_is_unspecified = None
     if admin_level == AdminLevel.ZERO:

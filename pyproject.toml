@@ -8,6 +8,10 @@ line-length = 120
 inline-quotes = "single"
 multiline-quotes = "single"
 
+[tool.ruff.format]
+# Prefer single quotes over double quotes
+quote-style = "single"
+
 [tool.black]
 line-length = 120
 skip-string-normalization = true
