@@ -3,11 +3,16 @@
         120
     ],
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
-    // "editor.defaultFormatter": "charliermarsh.ruff",
-    "ruff.args": [
-        "--config=pyproject.toml"
+    "ruff.enable": true,
+    "ruff.importStrategy": "fromEnvironment",
+    "ruff.lint.args": [
+        "--config=pyproject.toml", 
+    ],
+    "ruff.format.args": [
+        "--config=pyproject.toml",
     ],
     "python.analysis.autoImportCompletions": true,
     "python.testing.pytestArgs": [

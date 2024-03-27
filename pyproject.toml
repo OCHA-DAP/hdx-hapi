@@ -25,6 +25,9 @@ multiline-quotes = "single"
 [tool.ruff.lint.extend-per-file-ignores]
 "hdx_hapi/config/doc_snippets.py" = ["E501"] # line too long
 
+[tool.ruff.format]
+# Prefer single quotes over double quotes
+quote-style = "single"
 
 [tool.black]
 line-length = 120
