@@ -1,8 +1,10 @@
-site_name: HAPI - The Humanitarian API - Documentation
+site_name: HAPI - The Humanitarian API
 nav:
   - Home: index.md
+  - Getting Started: getting-started.md
+  - Data Coverage: data.md
+  - Examples: examples.md
+  - Geo Data: geo.md
   - Contact: contact.md
-  - Roadmap: roadmap.md
-  - FAQ: faq.md
 theme:
   name: "mkdocs"
