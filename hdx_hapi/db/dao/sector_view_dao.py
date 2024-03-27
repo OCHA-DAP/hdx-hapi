@@ -8,7 +8,6 @@ from sqlalchemy import select
 from hdx_hapi.db.models.views.db_sector_view import SectorView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
-from datetime import datetime
 
 logger = logging.getLogger(__name__)
 

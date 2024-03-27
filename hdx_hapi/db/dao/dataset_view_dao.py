@@ -20,7 +20,10 @@ async def datasets_view_list(
     hdx_provider_name: str = None,
 ):
 
-    logger.info(f'datasets_view_list called with params: hdx_id={hdx_id}, hdx_stub={hdx_stub}, title={title}, hdx_provider_stub={hdx_provider_stub}, hdx_provider_name={hdx_provider_name}')
+    logger.info(
+        f'datasets_view_list called with params: hdx_id={hdx_id}, hdx_stub={hdx_stub}, title={title}, ' \
+        f'hdx_provider_stub={hdx_provider_stub}, hdx_provider_name={hdx_provider_name}'
+    )
 
     query = select(DatasetView)
     if hdx_id:

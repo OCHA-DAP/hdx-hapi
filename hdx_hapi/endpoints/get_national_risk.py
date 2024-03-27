@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
@@ -10,15 +10,13 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_PROVIDER_STUB,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
-    DOC_SECTOR_NAME,
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN,
     DOC_UPDATE_DATE_MIN,
 )
 
 from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
-from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.national_risk_logic import get_national_risks_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -39,12 +37,15 @@ async def get_national_risks(
     vulnerability_risk: Annotated[float, Query(description='Vulnerability risk')] = None,
     coping_capacity_risk: Annotated[float, Query(description='Coping capacity risk')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
-    resource_update_date_min: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')] = None,
-    resource_update_date_max: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')] = None,
+    resource_update_date_min: Annotated[
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')
+    ] = None,
+    resource_update_date_max: Annotated[
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')
+    ] = None,
     # sector_name: Annotated[str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
-
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

@@ -41,7 +41,8 @@ def get_config() -> Config:
             HDX_DATASET_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}/'),
             HDX_RESOURCE_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}/resource/{resource_id}/'),
             HDX_DATASET_API_URL=os.getenv('HDX_DATASET_API_URL', '{domain}/api/action/package_show?id={dataset_id}'),
-            HDX_RESOURCE_API_URL=os.getenv('HDX_RESOURCE_API_URL', '{domain}/api/action/resource_show?id={resource_id}'),
+            HDX_RESOURCE_API_URL=os.getenv('HDX_RESOURCE_API_URL',
+                                           '{domain}/api/action/resource_show?id={resource_id}'),
             HDX_ORGANIZATION_URL=os.getenv('HDX_ORGANIZATION_URL', '{domain}/organization/{org_id}'),
         )
 

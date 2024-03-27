@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
@@ -7,15 +7,8 @@ from pydantic import NaiveDatetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_ADMIN1_CODE, 
-    DOC_ADMIN1_NAME,
-    DOC_ADMIN2_CODE,
-    DOC_ADMIN2_NAME, 
     DOC_LOCATION_CODE, 
     DOC_LOCATION_NAME, 
-    DOC_SCOPE_DISCLAIMER,
-    DOC_SEE_ADMIN1,
-    DOC_SEE_ADMIN2, 
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN
@@ -39,16 +32,19 @@ async def get_food_security(
     ipc_phase_code: Annotated[str, Query(max_length=32, description='IPC phase code')] = None,
     ipc_type_code: Annotated[str, Query(max_length=32, description='IPC type code')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
-    resource_update_date_min: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')] = None,
-    resource_update_date_max: Annotated[NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')] = None,
+    resource_update_date_min: Annotated[
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')
+    ] = None,
+    resource_update_date_max: Annotated[
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')
+    ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description='Admin1 name')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description='Admin1 code')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description='Admin2 name')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description='Admin2 code')] = None,
-    admin_level: Annotated[AdminLevel, Query(description="Filter the response by admin level")] = None,
-
+    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

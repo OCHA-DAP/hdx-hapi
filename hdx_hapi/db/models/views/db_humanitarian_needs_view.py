@@ -6,7 +6,8 @@ from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 
 
-humanitarian_needs_view = view(view_params_humanitarian_needs.name, Base.metadata, view_params_humanitarian_needs.selectable)
+humanitarian_needs_view = view(view_params_humanitarian_needs.name, Base.metadata,
+                               view_params_humanitarian_needs.selectable)
 
 
 class HumanitarianNeedsView(Base):

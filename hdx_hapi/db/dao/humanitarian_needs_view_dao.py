@@ -51,7 +51,9 @@ async def humanitarian_needs_view_list(
     if population:
         query = query.where(HumanitarianNeedsView.population == population)
     if dataset_hdx_provider_stub:
-        query = case_insensitive_filter(query, HumanitarianNeedsView.dataset_hdx_provider_stub, dataset_hdx_provider_stub)
+        query = case_insensitive_filter(
+            query, HumanitarianNeedsView.dataset_hdx_provider_stub, dataset_hdx_provider_stub
+        )
     if resource_update_date_min:
         query = query.where(HumanitarianNeedsView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:
@@ -63,7 +65,7 @@ async def humanitarian_needs_view_list(
     if admin1_code:
         query = case_insensitive_filter(query, HumanitarianNeedsView.admin1_code, admin1_code)
     # if admin1_name:
-        # query = query.where(HumanitarianNeedsView.admin1_name.icontains(admin1_name))
+    # query = query.where(HumanitarianNeedsView.admin1_name.icontains(admin1_name))
     if admin1_is_unspecified is not None:
         query = query.where(HumanitarianNeedsView.admin1_is_unspecified == admin1_is_unspecified)
     if admin2_code:

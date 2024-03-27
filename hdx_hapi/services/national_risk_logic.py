@@ -3,8 +3,6 @@ from typing import Dict
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.national_risk_view_dao import national_risks_view_list
-from hdx_hapi.endpoints.util.util import AdminLevel
-from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
 
 async def get_national_risks_srv(

@@ -30,7 +30,14 @@ async def populations_view_list(
     admin2_is_unspecified: bool = None,
 ):
 
-    logger.info(f'populations_view_list called with params: gender_code={gender_code}, age_range_code={age_range_code}, population={population}, dataset_hdx_provider_stub={dataset_hdx_provider_stub}, resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, location_code={location_code}, location_name={location_name}, admin1_name={admin1_name}, admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}')
+    logger.info(
+        f'populations_view_list called with params: gender_code={gender_code}, age_range_code={age_range_code}, ' \
+        f'population={population}, dataset_hdx_provider_stub={dataset_hdx_provider_stub}, ' \
+        f'resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, ' \
+        f'location_code={location_code}, location_name={location_name}, admin1_name={admin1_name}, ' \
+        f'admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, ' \
+        f'admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}'
+    )
 
     query = select(PopulationView)
     if gender_code:

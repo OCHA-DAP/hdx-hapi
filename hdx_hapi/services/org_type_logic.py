@@ -4,7 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.org_type_view_dao import org_types_view_list
 
-from datetime import datetime
 
 
 async def get_org_types_srv(

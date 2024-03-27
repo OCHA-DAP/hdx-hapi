@@ -1,6 +1,5 @@
 import csv
 import io
-import re
 
 from typing import Dict, List, Type
 
@@ -50,10 +49,10 @@ def transform_result_to_csv_stream_if_requested(
                         csv_row = str_as_file.getvalue()
                         yield csv_row          
 
-            response = StreamingResponse(iter_csv(), media_type="text/csv")
-            response.headers["Content-Disposition"] = "attachment; filename=results.csv"
+            response = StreamingResponse(iter_csv(), media_type='text/csv')
+            response.headers['Content-Disposition'] = 'attachment; filename=results.csv'
             return response
 
-        return StreamingResponse(iter([]), media_type="text/csv")
+        return StreamingResponse(iter([]), media_type='text/csv')
     return result
 
