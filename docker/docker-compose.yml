@@ -38,7 +38,7 @@ services:
       # - ".ssh/etc:/etc/ssh"
       # - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
       - "./..:/srv/hapi"
-    entrypoint: tail -f /dev/null
+    #entrypoint: tail -f /dev/null
       
   db:
     image: postgres:15.4-alpine3.18
