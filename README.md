@@ -2,10 +2,10 @@
 
 This GitHub repository implements the Humanitarian API (API), this includes the API endpoints themselves, API documentation and documentation on readthedocs.
 
-This project is currently in development. The outputs can be found here:
+This project is currently in development and the outputs are not yet public except for the `readthedocs` documentation:
 
-* [HAPI documentation](https://stage.hapi-humdata-org.ahconu.org/docs)
-* [HAPI endpoint root](https://stage.hapi-humdata-org.ahconu.org/api)
+* HAPI documentation
+* HAPI endpoint root
 * [readthedocs](https://hdx-hapi.readthedocs.io/en/latest/)
 
 # Related repositories
