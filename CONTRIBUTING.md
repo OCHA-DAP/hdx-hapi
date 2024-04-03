@@ -22,18 +22,18 @@ Tests can either be run from the Visual Code test runner or with:
 docker-compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report term --cov-report xml:coverage.xml"
 ```
 
-A local copy of HAPI can be run by importing a snapshot of the database from [here](https://github.com/OCHA-DAP/hapi-pipelines/tree/db-export/database). This is done using the following steps:
+A local copy of HAPI can be run by importing a snapshot of the database using the following shell script invocation in the host machine.
 
-1. Running the `initialize_db.sh` script in the host.
+```shell
+ ./restore_database.sh https://github.com/OCHA-DAP/hapi-pipelines/raw/db-export/database/hapi_db.pg_restore hapi
+```
 
-2. Downloaded the database snapshot to the `docker/postgres-data/dbs/hapi-psql` folder in the host machine, this is mounted to `/var/lib/pgsql` folder in the `db` Docker container.
+The HAPI application can then be launched using the `start` launch configuration in Visual Code, this serves the documentation at `http://localhost:8844/docs` and the API at `http://localhost:8844/api` in the host machine.
 
-3. Importing the data is then done by running the following inside the `db` Docker container (*not* the application container):
-    1. `cd /var/lib/pgsql`
-    2. `pg_restore -U postgres --dbname hapi [dump filename].pg_restore`
-    This import raises many error messages because the database already exists but the data appears to import successfully.
+The HAPI database can be accessed locally with the following connection details: 
 
-4. Setting the appropriate permissions by running `post_db_import.sh` from the host machine.
-
-5. The docs and api can then be found at `http://localhost:8844/docs` in the host machine, once the application has been launched in the `hapi` container. This can be done using the Visual Code `start` launch target.
-
+```
+URL: jdbc:postgresql://localhost:45432/hapi
+username: hapi
+password: hapi
+```
