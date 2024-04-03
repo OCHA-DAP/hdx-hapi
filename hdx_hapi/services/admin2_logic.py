@@ -4,7 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.admin2_view_dao import admin2_view_list
 
-from datetime import datetime
 
 
 async def get_admin2_srv(

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Integer, String, DateTime, text
+from sqlalchemy import DateTime
 from sqlalchemy.orm import column_property, Mapped
 
 from hapi_schema.db_admin1 import view_params_admin1

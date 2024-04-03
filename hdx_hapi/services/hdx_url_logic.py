@@ -1,11 +1,9 @@
 import logging
 from pydantic import HttpUrl
-from dataclasses import dataclass
-from hdx_hapi.config.config import Config
-
-logger = logging.getLogger(__name__)
 
 from hdx_hapi.config.config import get_config
+
+logger = logging.getLogger(__name__)
 
 CONFIG = get_config()
 

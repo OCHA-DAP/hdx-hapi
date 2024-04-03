@@ -1,0 +1,19 @@
+name: Run linter
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install ruff linter
+        run: |
+          pip install ruff
+      
+      - name: Run the linter
+        run: |
+          ruff check

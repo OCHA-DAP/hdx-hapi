@@ -19,7 +19,10 @@ async def orgs_view_list(
     org_type_description: str = None,
 ):
 
-    logger.info(f'orgs_view_list called with params: acronym={acronym}, name={name}, org_type_code={org_type_code}, org_type_description={org_type_description}')
+    logger.info(
+        f'orgs_view_list called with params: acronym={acronym}, name={name}, org_type_code={org_type_code}, ' \
+        f'org_type_description={org_type_description}'
+    )
 
     query = select(OrgView)
     if acronym:
