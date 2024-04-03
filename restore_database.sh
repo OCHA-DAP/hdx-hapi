@@ -14,6 +14,9 @@ DUMP_FILE_NAME="postgres_dump.pg_restore"
 HOST_DUMP_FILE_NAME="postgres_dump.pg_restore"
 CONTAINER_DB_PATH="/var/lib/pgsql"
 
+# This is a fix for running in Git Bash on Windows
+export MSYS_NO_PATHCONV=1
+
 # Execute commands inside the ./docker directory
 pushd ./docker || exit
 
@@ -36,7 +39,7 @@ docker-compose exec db psql -U postgres -c "DROP DATABASE IF EXISTS $DATABASE_NA
 docker-compose exec db psql -U postgres -c "CREATE DATABASE $DATABASE_NAME with encoding 'UTF8';"
 
 # Restore the database
-docker-compose exec db pg_restore --username postgres --no-owner --no-privileges --dbname $DATABASE_NAME $CONTAINER_DB_PATH/$DUMP_FILE_NAME
+docker-compose exec db pg_restore --username postgres --no-owner --no-privileges --dbname $DATABASE_NAME "${CONTAINER_DB_PATH}/$DUMP_FILE_NAME"
 
 # Grant privileges
 docker-compose exec db psql -U postgres -c "grant all privileges on database $DATABASE_NAME to hapi"
