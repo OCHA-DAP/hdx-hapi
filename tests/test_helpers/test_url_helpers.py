@@ -14,7 +14,7 @@ def test_helper_get_dataset_url():
     log.info('started test_helper_get_dataset_url')
 
     dataset_id = 'test-dataset'
-    expected_link = HttpUrl(url='https://data.humdata.org/dataset/%s/' % (dataset_id))
+    expected_link = HttpUrl(url='https://data.humdata.org/dataset/%s' % (dataset_id))
 
     dataset_url = get_dataset_url(dataset_id=dataset_id)
 
