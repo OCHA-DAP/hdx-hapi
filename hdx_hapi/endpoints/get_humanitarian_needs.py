@@ -15,13 +15,13 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_CODE,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
-    DOC_LOCATION_CODE, 
-    DOC_LOCATION_NAME, 
+    DOC_LOCATION_CODE,
+    DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
-    DOC_SEE_ADMIN2
+    DOC_SEE_ADMIN2,
 )
 
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
@@ -35,8 +35,16 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/humanitarian_needs', response_model=List[HumanitarianNeedsResponse],
-            summary='Get humanitarian needs data')
+@router.get(
+    '/api/themes/humanitarian_needs',
+    response_model=List[HumanitarianNeedsResponse],
+    summary='Get humanitarian needs data',
+)
+@router.get(
+    '/api/v1/themes/humanitarian_needs',
+    response_model=List[HumanitarianNeedsResponse],
+    summary='Get humanitarian needs data',
+)
 async def get_humanitarian_needs(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),

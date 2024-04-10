@@ -17,7 +17,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_SEE_DATASET,
     DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN
+    DOC_UPDATE_DATE_MIN,
 )
 
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
@@ -32,8 +32,16 @@ router = APIRouter(
 )
 
 
-@router.get('/api/dataset', response_model=List[DatasetResponse],
-            summary='Get information about the sources of the data in HAPI')
+@router.get(
+    '/api/dataset',
+    response_model=List[DatasetResponse],
+    summary='Get information about the sources of the data in HAPI',
+)
+@router.get(
+    '/api/v1/dataset',
+    response_model=List[DatasetResponse],
+    summary='Get information about the sources of the data in HAPI',
+)
 async def get_datasets(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -45,7 +53,7 @@ async def get_datasets(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Get information about the <a href="https://data.humdata.org/dataset">HDX Datasets</a> that are used as data sources 
+    Get information about the <a href="https://data.humdata.org/dataset">HDX Datasets</a> that are used as data sources
     for HAPI. Datasets contain one or more resources, which are the sources of the data found in HAPI.
     """
     result = await get_datasets_srv(
@@ -60,8 +68,16 @@ async def get_datasets(
     return transform_result_to_csv_stream_if_requested(result, output_format, DatasetResponse)
 
 
-@router.get('/api/resource', response_model=List[ResourceResponse],
-            summary='Get information about the sources of the data in HAPI')
+@router.get(
+    '/api/resource',
+    response_model=List[ResourceResponse],
+    summary='Get information about the sources of the data in HAPI',
+)
+@router.get(
+    '/api/v1/resource',
+    response_model=List[ResourceResponse],
+    summary='Get information about the sources of the data in HAPI',
+)
 async def get_resources(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -86,7 +102,7 @@ async def get_resources(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Get information about the resources that are used as data sources for HAPI. Datasets contain one or more resources, 
+    Get information about the resources that are used as data sources for HAPI. Datasets contain one or more resources,
     which are the sources of the data found in HAPI.
     """
     result = await get_resources_srv(

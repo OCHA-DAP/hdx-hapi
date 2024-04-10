@@ -8,7 +8,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_AGE_RANGE_SUMMARY,
     DOC_GENDER_CODE,
     DOC_GENDER_DESCRIPTION,
-    DOC_GENDER_SUMMARY
+    DOC_GENDER_SUMMARY,
 )
 
 from hdx_hapi.endpoints.models.demographic import AgeRangeResponse, GenderResponse
@@ -24,27 +24,28 @@ router = APIRouter(
 )
 
 
-@router.get('/api/age_range', response_model=List[AgeRangeResponse], summary = f'{DOC_AGE_RANGE_SUMMARY}')
+@router.get('/api/age_range', response_model=List[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}')
+@router.get('/api/v1/age_range', response_model=List[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}')
 async def get_age_ranges(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, example='20-24', description=f'{DOC_AGE_RANGE_CODE}')] = None,
-
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across 
+    """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across
     different data sources and instead reflect the age range breakdowns provided by the data source.
-    """    
+    """
     result = await get_age_ranges_srv(
         pagination_parameters=pagination_parameters,
         db=db,
         code=code,
     )
-    
+
     return transform_result_to_csv_stream_if_requested(result, output_format, AgeRangeResponse)
 
 
 @router.get('/api/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}')
+@router.get('/api/v1/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}')
 async def get_genders(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -54,12 +55,8 @@ async def get_genders(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    """    
+    """ """
     result = await get_genders_srv(
-        pagination_parameters=pagination_parameters,
-        db=db,
-        code=code,
-        description=description
+        pagination_parameters=pagination_parameters, db=db, code=code, description=description
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, GenderResponse)
