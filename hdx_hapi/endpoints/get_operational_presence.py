@@ -91,14 +91,14 @@ async def get_operational_presences(
         NaiveDatetime | date,
         Query(
             description='Filter the repsonse to data updated on or after this date. For example 2020-01-01 or 2020-01-01T00:00:00',
-            example='2020-01-01',
+            examples=['2020-01-01'],
         ),
     ] = None,  # noqa
     resource_update_date_max: Annotated[
         NaiveDatetime | date,
         Query(
             description='Filter the repsonse to data updated on or before this date. For example 2024-12-31 or 2024-12-31T23:59:59',
-            example='2024-12-31',
+            examples=['2024-12-31'],
         ),
     ] = None,  # noqa
     dataset_hdx_provider_stub: Annotated[

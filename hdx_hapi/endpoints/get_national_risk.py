@@ -39,10 +39,10 @@ async def get_national_risks(
     coping_capacity_risk: Annotated[float, Query(description='Coping capacity risk')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
     resource_update_date_min: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', examples=['2020-01-01'])
     ] = None,
     resource_update_date_max: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', examples=['2024-12-31'])
     ] = None,
     # sector_name: Annotated[str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,

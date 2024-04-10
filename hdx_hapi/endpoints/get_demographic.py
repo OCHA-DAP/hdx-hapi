@@ -29,7 +29,7 @@ router = APIRouter(
 async def get_age_ranges(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=32, example='20-24', description=f'{DOC_AGE_RANGE_CODE}')] = None,
+    code: Annotated[str, Query(max_length=32, examples=['20-24'], description=f'{DOC_AGE_RANGE_CODE}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """Get the list of age ranges used for disaggregating population data. Age ranges are not standardized across
@@ -49,9 +49,9 @@ async def get_age_ranges(
 async def get_genders(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=1, description=f'{DOC_GENDER_CODE}', example='f')] = None,
+    code: Annotated[str, Query(max_length=1, description=f'{DOC_GENDER_CODE}', examples=['f'])] = None,
     description: Annotated[
-        str, Query(max_length=256, description=f'{DOC_GENDER_DESCRIPTION}', example='female')
+        str, Query(max_length=256, description=f'{DOC_GENDER_DESCRIPTION}', examples=['female'])
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):

@@ -84,10 +84,10 @@ async def get_resources(
     hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
     format: Annotated[str, Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
     update_date_min: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', examples=['2020-01-01'])
     ] = None,
     update_date_max: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')
+        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', examples=['2024-12-31'])
     ] = None,
     is_hxl: Annotated[bool, Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
     dataset_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID} {DOC_SEE_DATASET} ')] = None,
