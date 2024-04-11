@@ -122,7 +122,7 @@ async def get_operational_presences(
                 'Filter the repsonse to data updated on or after this date. '
                 'For example 2020-01-01 or 2020-01-01T00:00:00'
             ),
-            examples=['2020-01-01'],
+            openapi_examples={'default': {'value': '2020-01-01'}},
         ),
     ] = None,
     resource_update_date_max: Annotated[
@@ -132,7 +132,7 @@ async def get_operational_presences(
                 'Filter the repsonse to data updated on or before this date. '
                 'For example 2024-12-31 or 2024-12-31T23:59:59'
             ),
-            examples=['2024-12-31'],
+            openapi_examples={'default': {'value': '2024-12-31'}},
         ),
     ] = None,
     dataset_hdx_provider_stub: Annotated[

@@ -41,11 +41,15 @@ router = APIRouter(
 async def get_orgs(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    acronym: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}', examples=['unhcr'])] = None,
+    acronym: Annotated[
+        str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}', openapi_examples={'default': {'value': 'unhcr'}})
+    ] = None,
     name: Annotated[
         str,
         Query(
-            max_length=512, description=f'{DOC_ORG_NAME}', examples=['United Nations High Commissioner for Refugees']
+            max_length=512,
+            description=f'{DOC_ORG_NAME}',
+            openapi_examples={'default': {'value': 'United Nations High Commissioner for Refugees'}},
         ),
     ] = None,
     org_type_code: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')] = None,
@@ -80,9 +84,14 @@ async def get_orgs(
 async def get_org_types(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}', examples=['433'])] = None,
+    code: Annotated[
+        str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}', openapi_examples={'default': {'value': '433'}})
+    ] = None,
     description: Annotated[
-        str, Query(max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}', examples=['Donor'])
+        str,
+        Query(
+            max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}', openapi_examples={'default': {'value': 'Donor'}}
+        ),
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -109,8 +118,12 @@ async def get_org_types(
 async def get_sectors(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}', examples=['hea'])] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}', examples=['Health'])] = None,
+    code: Annotated[
+        str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}', openapi_examples={'default': {'value': 'hea'}})
+    ] = None,
+    name: Annotated[
+        str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}', openapi_examples={'default': {'value': 'Health'}})
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """There is no consistent standard for the humanitarian sectors. The codes and descriptions used in HAPI are based

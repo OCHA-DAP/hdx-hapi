@@ -11,7 +11,9 @@ _OFFSET_DESCRIPTION = (
 
 
 async def pagination_parameters(
-    limit: Annotated[int, Query(ge=0, le=10000, examples=[1000], description=_LIMIT_DESCRIPTION)] = 10000,
+    limit: Annotated[
+        int, Query(ge=0, le=10000, openapi_examples={'default': {'value': 1000}}, description=_LIMIT_DESCRIPTION)
+    ] = 10000,
     offset: Annotated[int, Query(ge=0, description=_OFFSET_DESCRIPTION)] = 0,
 ):
     return {'offset': offset, 'limit': limit}
