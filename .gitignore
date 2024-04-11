@@ -18,4 +18,3 @@ coverage.xml
 
 *.pg_restore
 
-src/
