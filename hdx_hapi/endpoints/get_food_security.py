@@ -25,7 +25,12 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/food_security', response_model=List[FoodSecurityResponse], summary='Get food security data')
+@router.get(
+    '/api/themes/food_security',
+    response_model=List[FoodSecurityResponse],
+    summary='Get food security data',
+    include_in_schema=False,
+)
 @router.get('/api/v1/themes/food_security', response_model=List[FoodSecurityResponse], summary='Get food security data')
 async def get_food_security(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],

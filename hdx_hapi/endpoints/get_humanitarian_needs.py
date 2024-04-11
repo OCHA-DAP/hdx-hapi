@@ -39,6 +39,7 @@ router = APIRouter(
     '/api/themes/humanitarian_needs',
     response_model=List[HumanitarianNeedsResponse],
     summary='Get humanitarian needs data',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/themes/humanitarian_needs',

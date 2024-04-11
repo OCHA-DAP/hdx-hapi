@@ -25,7 +25,12 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/population', response_model=List[PopulationResponse], summary='Get baseline population data')
+@router.get(
+    '/api/themes/population',
+    response_model=List[PopulationResponse],
+    summary='Get baseline population data',
+    include_in_schema=False,
+)
 @router.get(
     '/api/v1/themes/population', response_model=List[PopulationResponse], summary='Get baseline population data'
 )

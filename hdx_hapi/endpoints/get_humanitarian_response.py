@@ -31,6 +31,7 @@ router = APIRouter(
     '/api/org',
     response_model=List[OrgResponse],
     summary='Get the list of organizations represented in the data available in HAPI',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/org',
@@ -69,6 +70,7 @@ async def get_orgs(
     '/api/org_type',
     response_model=List[OrgTypeResponse],
     summary='Get information about how organizations are classified in HAPI',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/org_type',
@@ -97,6 +99,7 @@ async def get_org_types(
     '/api/sector',
     response_model=List[SectorResponse],
     summary='Get information about how humanitarian response activities are classified',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/sector',

@@ -32,6 +32,7 @@ router = APIRouter(
     '/api/location',
     response_model=List[LocationResponse],
     summary='Get the list of locations (typically countries) included in HAPI',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/location',
@@ -56,6 +57,7 @@ async def get_locations(
     '/api/admin1',
     response_model=List[Admin1Response],
     summary='Get the list of first-level subnational administrative divisions available in HAPI',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/admin1',
@@ -89,6 +91,7 @@ async def get_admin1(
     '/api/admin2',
     response_model=List[Admin2Response],
     summary='Get the list of second-level administrative divisions available in HAPI',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/admin2',

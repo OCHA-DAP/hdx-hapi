@@ -24,7 +24,9 @@ router = APIRouter(
 )
 
 
-@router.get('/api/age_range', response_model=List[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}')
+@router.get(
+    '/api/age_range', response_model=List[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}', include_in_schema=False
+)
 @router.get('/api/v1/age_range', response_model=List[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}')
 async def get_age_ranges(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
@@ -44,7 +46,9 @@ async def get_age_ranges(
     return transform_result_to_csv_stream_if_requested(result, output_format, AgeRangeResponse)
 
 
-@router.get('/api/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}')
+@router.get(
+    '/api/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}', include_in_schema=False
+)
 @router.get('/api/v1/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}')
 async def get_genders(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],

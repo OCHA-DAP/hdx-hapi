@@ -36,6 +36,7 @@ router = APIRouter(
     '/api/dataset',
     response_model=List[DatasetResponse],
     summary='Get information about the sources of the data in HAPI',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/dataset',
@@ -72,6 +73,7 @@ async def get_datasets(
     '/api/resource',
     response_model=List[ResourceResponse],
     summary='Get information about the sources of the data in HAPI',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/resource',

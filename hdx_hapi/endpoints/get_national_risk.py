@@ -26,7 +26,12 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/national_risk', response_model=List[NationalRiskResponse], summary='Get national risk data')
+@router.get(
+    '/api/themes/national_risk',
+    response_model=List[NationalRiskResponse],
+    summary='Get national risk data',
+    include_in_schema=False,
+)
 @router.get('/api/v1/themes/national_risk', response_model=List[NationalRiskResponse], summary='Get national risk data')
 async def get_national_risks(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],

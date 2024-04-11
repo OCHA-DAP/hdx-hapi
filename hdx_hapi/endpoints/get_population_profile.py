@@ -16,7 +16,12 @@ router = APIRouter(
 )
 
 
-@router.get('/api/population_group', response_model=List[PopulationGroupResponse], summary='Get population groups data')
+@router.get(
+    '/api/population_group',
+    response_model=List[PopulationGroupResponse],
+    summary='Get population groups data',
+    include_in_schema=False,
+)
 @router.get(
     '/api/v1/population_group', response_model=List[PopulationGroupResponse], summary='Get population groups data'
 )
@@ -40,7 +45,10 @@ async def get_population_groups(
 
 
 @router.get(
-    '/api/population_status', response_model=List[PopulationStatusResponse], summary='Get population statuses data'
+    '/api/population_status',
+    response_model=List[PopulationStatusResponse],
+    summary='Get population statuses data',
+    include_in_schema=False,
 )
 @router.get(
     '/api/v1/population_status', response_model=List[PopulationStatusResponse], summary='Get population statuses data'
