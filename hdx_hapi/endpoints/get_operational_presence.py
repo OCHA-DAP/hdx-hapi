@@ -64,8 +64,8 @@ async def get_operational_presences(
             max_length=512,
             description=(
                 'Filter the response by sector codes, which describe the humanitarian sector '
-                ' to which the operational presence applies. '
-                'See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_sectors_api_sector_get"> '
+                'to which the operational presence applies. '
+                'See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_sectors_api_sector_get">'
                 'sector endpoint</a> for details'
             ),
         ),
@@ -119,7 +119,7 @@ async def get_operational_presences(
         NaiveDatetime | date,
         Query(
             description=(
-                'Filter the repsonse to data updated on or after this date. '
+                'Filter the response to data updated on or after this date. '
                 'For example 2020-01-01 or 2020-01-01T00:00:00'
             ),
             openapi_examples={'default': {'value': '2020-01-01'}},
@@ -129,7 +129,7 @@ async def get_operational_presences(
         NaiveDatetime | date,
         Query(
             description=(
-                'Filter the repsonse to data updated on or before this date. '
+                'Filter the response to data updated on or before this date. '
                 'For example 2024-12-31 or 2024-12-31T23:59:59'
             ),
             openapi_examples={'default': {'value': '2024-12-31'}},
@@ -159,7 +159,7 @@ async def get_operational_presences(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    UNOCHA's 3W (Who is doing What Where) Operational Presence data provide
+    UNOCHA's 3W (Who is doing What Where) Operational Presence data provides
     information about which organizations are working in different locations affected by a
     crisis. <a href="https://3w.unocha.org/">Learn more about 3W</a>
     """
