@@ -16,11 +16,15 @@ cd ..
 ./initialize_test_db.sh
 ```
 
+This makes an editable installation of `hapi-sqlalchemy-schema` inside this repository.
+
 Tests can either be run from the Visual Code test runner or with:
 
 ```shell
 docker-compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report term --cov-report xml:coverage.xml"
 ```
+
+As an integration test the `docs` endpoint is inspected "manually".
 
 A local copy of HAPI can be run by importing a snapshot of the database using the following shell script invocation in the host machine.
 
