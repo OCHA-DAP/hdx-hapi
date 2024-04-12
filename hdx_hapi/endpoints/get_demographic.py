@@ -32,7 +32,7 @@ async def get_age_ranges(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=32, openapi_examples={'default': {'value': '20-24'}}, description=f'{DOC_AGE_RANGE_CODE}')
+        str, Query(max_length=32, openapi_examples={'20-24': {'value': '20-24'}}, description=f'{DOC_AGE_RANGE_CODE}')
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -56,12 +56,12 @@ async def get_genders(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=1, description=f'{DOC_GENDER_CODE}', openapi_examples={'default': {'value': 'f'}})
+        str, Query(max_length=1, description=f'{DOC_GENDER_CODE}', openapi_examples={'f': {'value': 'f'}})
     ] = None,
     description: Annotated[
         str,
         Query(
-            max_length=256, description=f'{DOC_GENDER_DESCRIPTION}', openapi_examples={'default': {'value': 'female'}}
+            max_length=256, description=f'{DOC_GENDER_DESCRIPTION}', openapi_examples={'female': {'value': 'female'}}
         ),
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,

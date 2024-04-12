@@ -42,14 +42,18 @@ async def get_orgs(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     acronym: Annotated[
-        str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}', openapi_examples={'default': {'value': 'unhcr'}})
+        str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}', openapi_examples={'unhcr': {'value': 'unhcr'}})
     ] = None,
     name: Annotated[
         str,
         Query(
             max_length=512,
             description=f'{DOC_ORG_NAME}',
-            openapi_examples={'default': {'value': 'United Nations High Commissioner for Refugees'}},
+            openapi_examples={
+                'United Nations High Commissioner for Refugees': {
+                    'value': 'United Nations High Commissioner for Refugees'
+                }
+            },
         ),
     ] = None,
     org_type_code: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')] = None,
@@ -85,12 +89,12 @@ async def get_org_types(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}', openapi_examples={'default': {'value': '433'}})
+        str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}', openapi_examples={'433': {'value': '433'}})
     ] = None,
     description: Annotated[
         str,
         Query(
-            max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}', openapi_examples={'default': {'value': 'Donor'}}
+            max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}', openapi_examples={'Donor': {'value': 'Donor'}}
         ),
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -119,10 +123,10 @@ async def get_sectors(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}', openapi_examples={'default': {'value': 'hea'}})
+        str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}', openapi_examples={'hea': {'value': 'hea'}})
     ] = None,
     name: Annotated[
-        str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}', openapi_examples={'default': {'value': 'Health'}})
+        str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}', openapi_examples={'Health': {'value': 'Health'}})
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):

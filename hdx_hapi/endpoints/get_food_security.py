@@ -40,11 +40,11 @@ async def get_food_security(
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
     resource_update_date_min: Annotated[
         NaiveDatetime | date,
-        Query(description=f'{DOC_UPDATE_DATE_MIN}', openapi_examples={'default': {'value': '2020-01-01'}}),
+        Query(description=f'{DOC_UPDATE_DATE_MIN}', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
     ] = None,
     resource_update_date_max: Annotated[
         NaiveDatetime | date,
-        Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'default': {'value': '2024-12-31'}}),
+        Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
