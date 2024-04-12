@@ -15,13 +15,13 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_CODE,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
-    DOC_LOCATION_CODE, 
-    DOC_LOCATION_NAME, 
+    DOC_LOCATION_CODE,
+    DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
-    DOC_SEE_ADMIN2
+    DOC_SEE_ADMIN2,
 )
 
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
@@ -35,8 +35,17 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/humanitarian_needs', response_model=List[HumanitarianNeedsResponse],
-            summary='Get humanitarian needs data')
+@router.get(
+    '/api/themes/humanitarian_needs',
+    response_model=List[HumanitarianNeedsResponse],
+    summary='Get humanitarian needs data',
+    include_in_schema=False,
+)
+@router.get(
+    '/api/v1/themes/humanitarian_needs',
+    response_model=List[HumanitarianNeedsResponse],
+    summary='Get humanitarian needs data',
+)
 async def get_humanitarian_needs(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -50,10 +59,12 @@ async def get_humanitarian_needs(
     population: Annotated[int, Query(description='Population')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
     resource_update_date_min: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')
+        NaiveDatetime | date,
+        Query(description=f'{DOC_UPDATE_DATE_MIN}', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
     ] = None,
     resource_update_date_max: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')
+        NaiveDatetime | date,
+        Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,

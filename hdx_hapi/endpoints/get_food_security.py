@@ -7,11 +7,11 @@ from pydantic import NaiveDatetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_LOCATION_CODE, 
-    DOC_LOCATION_NAME, 
+    DOC_LOCATION_CODE,
+    DOC_LOCATION_NAME,
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN
+    DOC_UPDATE_DATE_MIN,
 )
 
 from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
@@ -25,7 +25,13 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/food_security', response_model=List[FoodSecurityResponse], summary='Get food security data')
+@router.get(
+    '/api/themes/food_security',
+    response_model=List[FoodSecurityResponse],
+    summary='Get food security data',
+    include_in_schema=False,
+)
+@router.get('/api/v1/themes/food_security', response_model=List[FoodSecurityResponse], summary='Get food security data')
 async def get_food_security(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -33,10 +39,12 @@ async def get_food_security(
     ipc_type_code: Annotated[str, Query(max_length=32, description='IPC type code')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
     resource_update_date_min: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')
+        NaiveDatetime | date,
+        Query(description=f'{DOC_UPDATE_DATE_MIN}', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
     ] = None,
     resource_update_date_max: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')
+        NaiveDatetime | date,
+        Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,

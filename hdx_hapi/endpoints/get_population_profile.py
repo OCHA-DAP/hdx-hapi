@@ -16,13 +16,20 @@ router = APIRouter(
 )
 
 
-@router.get('/api/population_group', response_model=List[PopulationGroupResponse], summary='Get population groups data')
+@router.get(
+    '/api/population_group',
+    response_model=List[PopulationGroupResponse],
+    summary='Get population groups data',
+    include_in_schema=False,
+)
+@router.get(
+    '/api/v1/population_group', response_model=List[PopulationGroupResponse], summary='Get population groups data'
+)
 async def get_population_groups(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Population group code')] = None,
     description: Annotated[str, Query(max_length=512, description='Population group description')] = None,
-
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
@@ -37,14 +44,20 @@ async def get_population_groups(
     return transform_result_to_csv_stream_if_requested(result, output_format, PopulationGroupResponse)
 
 
-@router.get('/api/population_status', response_model=List[PopulationStatusResponse],
-            summary='Get population statuses data')
+@router.get(
+    '/api/population_status',
+    response_model=List[PopulationStatusResponse],
+    summary='Get population statuses data',
+    include_in_schema=False,
+)
+@router.get(
+    '/api/v1/population_status', response_model=List[PopulationStatusResponse], summary='Get population statuses data'
+)
 async def get_population_statuses(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=32, description='Population status code')] = None,
     description: Annotated[str, Query(max_length=512, description='Population status description')] = None,
-
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
