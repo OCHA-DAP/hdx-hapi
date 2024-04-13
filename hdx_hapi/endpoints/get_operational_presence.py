@@ -65,8 +65,8 @@ async def get_operational_presences(
             description=(
                 'Filter the response by sector codes, which describe the humanitarian sector '
                 'to which the operational presence applies. '
-                'See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_sectors_api_sector_get">'
-                'sector endpoint</a> for details'
+                'See the <a href="/docs#/Humanitarian%20Organizations%20and%20Sectors/get_sectors_api_v1_sector_get" '
+                'target="_blank">sector endpoint</a> for details'
             ),
         ),
     ] = None,
@@ -77,8 +77,8 @@ async def get_operational_presences(
             description=(
                 'Filter the response by sector names, '
                 'which describe the humanitarian sector to which the operational presence applies. '
-                'See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_sectors_api_sector_get">'
-                'sector endpoint</a> for details.'
+                'See the <a href="/docs#/Humanitarian%20Organizations%20and%20Sectors/get_sectors_api_v1_sector_get" '
+                'target="_blank">sector endpoint</a> for details'
             ),
         ),
     ] = None,
@@ -89,8 +89,8 @@ async def get_operational_presences(
             description=(
                 'Filter the response by the acronym of the organization '
                 'to which the operational presence applies. '
-                'See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_orgs_api_org_get">'
-                'org endpoint</a> for details'
+                'See the <a href="/docs#/Humanitarian%20Organizations%20and%20Sectors/get_orgs_api_v1_org_get" '
+                'target="_blank">org endpoint</a> for details'
             ),
         ),
     ] = None,
@@ -101,8 +101,8 @@ async def get_operational_presences(
             description=(
                 'Filter the response by the name of the organization '
                 'to which the operational presence applies. '
-                'See the <a href="https://FIXTHIS/docs#/humanitarian-response/get_orgs_api_org_get">'
-                'org endpoint</a> for details'
+                'See the <a href="/docs#/Humanitarian%20Organizations%20and%20Sectors/get_orgs_api_v1_org_get" '
+                'target="_blank">org endpoint</a> for details'
             ),
         ),
     ] = None,
