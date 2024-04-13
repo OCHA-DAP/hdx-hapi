@@ -11,7 +11,7 @@ Retrieve the latest 3W (Who's doing What, Where) data for a specific country usi
 Copy this link into your browser to see the results
 
 ```plaintext
-https://placeholder.url/api/themes/3w?location_name=Mali&output_format=json&offset=0&limit=10000
+https://placeholder.url/api/v1/themes/3w?location_name=Mali&output_format=json&offset=0&limit=10000
 ```
 
 A single row of the result looks like this:
@@ -40,7 +40,7 @@ The above result was in JSON. It is also possible to get a CSV by changing the o
 The maximum number of rows returned in a single response is 10,000. To access more data beyond this limit, you can paginate through results by increasing the ```offset``` parameter as shown here:
 
 ```plaintext
-https://placeholder.url/api/themes/3w?location_name=Mali&output_format=json&offset=10000&limit=10000
+https://placeholder.url/api/v1/themes/3w?location_name=Mali&output_format=json&offset=10000&limit=10000
 ```
 
 Check the code example section to see code for querying multiple pages and loading into a single result.
@@ -50,7 +50,7 @@ With the 3w theme endpoint there are a variety of filters to target your results
 This query gets all of the WASH activities happening in Yobe, Nigeria using the ```sector_name``` and ```admin1_name``` filter
 
 ```plaintext
-https://placeholder.url/api/themes/3w?sector_name=Water%20Sanitation%20Hygiene&location_name=Nigeria&admin1_name=Yobe&output_format=json&offset=0&limit=1000
+https://placeholder.url/api/v1/themes/3w?sector_name=Water%20Sanitation%20Hygiene&location_name=Nigeria&admin1_name=Yobe&output_format=json&offset=0&limit=1000
 ```
 
 Remember to check the [technical documentation](https://placeholder.url/docs) for the full list of filters available
@@ -60,13 +60,13 @@ Remember to check the [technical documentation](https://placeholder.url/docs) fo
 The Population endpoint delivers detailed demographic breakdowns by age range and gender.  The example query below uses ```location_code``` rather than ```location_name``` to use the iso3 code for Afghanistan ```AFG```. In addition it also uses the ```admin_level=1``` filter to get only admin level 1 results.
 
 ```
-https://placeholder.url/api/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1
+https://placeholder.url/api/v1/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1
 ```
 
 To refine this query to retrieve population statistics specifically for males under the age of 5, append the age_range_code and gender_code filters to your request:
 
 ```
-https://placeholder.url/api/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1&age_range_code=0-4&gender_code=m
+https://placeholder.url/api/v1/themes/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1&age_range_code=0-4&gender_code=m
 ```
 
 By tailoring these filters, you can obtain a variety of demographic insights from the API
@@ -78,7 +78,7 @@ Each theme within our API is bolstered by associated supporting tables. These ta
 You can retrieve a list of possible age ranges by querying the `age_range` support table like so:
 
 ```plaintext
-https://placeholder.url/api/age_range?output_format=json&offset=0&limit=1000
+https://placeholder.url/api/v1/age_range?output_format=json&offset=0&limit=1000
 ```
 
 This functionality is not limited to age ranges. There are similar support tables for a variety of filters such as organizations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
@@ -111,7 +111,7 @@ Among these fields, ```dataset_hdx_stub``` and ```resource_hdx_id``` are keys to
 To dive deeper into the data's origin, use the resource_hdx_id in the resource endpoint URL:
 
 ```
-https://placeholder.url/api/resource?hdx_id=a92fd2e8-4cbc-4366-92a8-1ffbbd6659d1&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=json&offset=0&limit=1000
+https://placeholder.url/api/v1/resource?hdx_id=a92fd2e8-4cbc-4366-92a8-1ffbbd6659d1&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=json&offset=0&limit=1000
 ```
 
 Executing this query provides a response like the following:

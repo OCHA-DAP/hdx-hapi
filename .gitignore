@@ -12,3 +12,9 @@ __pycache__/
 .coverage
 
 .DS_Store
+
+venv/
+coverage.xml
+
+*.pg_restore
+

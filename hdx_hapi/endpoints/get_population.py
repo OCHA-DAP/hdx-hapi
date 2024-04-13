@@ -7,11 +7,11 @@ from pydantic import NaiveDatetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_LOCATION_CODE, 
-    DOC_LOCATION_NAME, 
+    DOC_LOCATION_CODE,
+    DOC_LOCATION_NAME,
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN
+    DOC_UPDATE_DATE_MIN,
 )
 
 from hdx_hapi.endpoints.models.population import PopulationResponse
@@ -25,7 +25,15 @@ router = APIRouter(
 )
 
 
-@router.get('/api/themes/population', response_model=List[PopulationResponse], summary='Get baseline population data')
+@router.get(
+    '/api/themes/population',
+    response_model=List[PopulationResponse],
+    summary='Get baseline population data',
+    include_in_schema=False,
+)
+@router.get(
+    '/api/v1/themes/population', response_model=List[PopulationResponse], summary='Get baseline population data'
+)
 async def get_populations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -34,10 +42,12 @@ async def get_populations(
     population: Annotated[int, Query(description='Population')] = None,
     dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description='Organization(provider) code')] = None,
     resource_update_date_min: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MIN}', example='2020-01-01')
+        NaiveDatetime | date,
+        Query(description=f'{DOC_UPDATE_DATE_MIN}', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
     ] = None,
     resource_update_date_max: Annotated[
-        NaiveDatetime | date, Query(description=f'{DOC_UPDATE_DATE_MAX}', example='2024-12-31')
+        NaiveDatetime | date,
+        Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,

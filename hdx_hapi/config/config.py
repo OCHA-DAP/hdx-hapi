@@ -38,8 +38,8 @@ def get_config() -> Config:
             SQL_ALCHEMY_PSYCOPG2_DB_URI=sql_alchemy_psycopg2_db_uri,
 
             HDX_DOMAIN=os.getenv('HDX_DOMAIN', 'https://data.humdata.org'),
-            HDX_DATASET_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}/'),
-            HDX_RESOURCE_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}/resource/{resource_id}/'),
+            HDX_DATASET_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}'),
+            HDX_RESOURCE_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}/resource/{resource_id}'),
             HDX_DATASET_API_URL=os.getenv('HDX_DATASET_API_URL', '{domain}/api/action/package_show?id={dataset_id}'),
             HDX_RESOURCE_API_URL=os.getenv('HDX_RESOURCE_API_URL',
                                            '{domain}/api/action/resource_show?id={resource_id}'),

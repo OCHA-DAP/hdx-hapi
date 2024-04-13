@@ -49,7 +49,7 @@ def fetch_data(base_url, limit=1000):
 
 THEME = "3w"
 LOCATION = "AFG"
-BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}"
+BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}"
 LIMIT = 1000
 
 
@@ -88,7 +88,7 @@ async function fetchData(baseUrl, limit = 1000) {
 
 const THEME = "3W"
 const LOCATION = "AFG"
-const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
+const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
 const LIMIT = 1000;
 
 window.onload = async function() {
@@ -130,7 +130,7 @@ async function fetchData(baseUrl, limit = 1000) {
 
 const THEME = "3W"
 const LOCATION = "AFG"
-const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
+const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
 const LIMIT = 1000;
 
 fetchData(BASE_URL, LIMIT).then(results => {
@@ -173,7 +173,7 @@ fetch_data <- function(base_url, limit = 1000) {
 
 THEME <- "3w"
 LOCATION <- "AFG"
-BASE_URL <- paste0("https://placeholder.url/api/themes/", THEME, "?output_format=json&location_code=", LOCATION)
+BASE_URL <- paste0("https://placeholder.url/api/v1/themes/", THEME, "?output_format=json&location_code=", LOCATION)
 LIMIT <- 1000
 
 results <- fetch_data(BASE_URL, LIMIT)
@@ -194,14 +194,14 @@ Change the code to include a new parameter in the URL.
 
 ```python
 SECTOR= urllib.parse.quote("Emergency Shelter and NFI")
-BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}&sector_name={SECTOR}"
+BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}&sector_name={SECTOR}"
 ```
 
 #### Filter by Admin1
 
 ```python
 ADMIN1= "AF01"
-BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}&admin1_code={ADMIN1}"
+BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}&admin1_code={ADMIN1}"
 ```
 
 ### Plain Javascript and Node
@@ -212,14 +212,14 @@ Change the code to include a new parameter in the URL.
 
 ```javascript
 const SECTOR = "Emergency Shelter and NFI"
-const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}&sector_name=${SECTOR}`;
+const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}&sector_name=${SECTOR}`;
 ```
 
 #### Filter by Admin1
 
 ```javascript
 const ADMIN1 = "AF01"
-const BASE_URL = `https://placeholder.url/api/themes/${THEME}?output_format=json&location_code=${LOCATION}&admin1_code=${ADMIN1}`;
+const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}&admin1_code=${ADMIN1}`;
 ```
 
 ### R
@@ -230,14 +230,14 @@ Change the code to include a new parameter in the URL.
 
 ```R
 SECTOR <- "Emergency Shelter and NFI"
-BASE_URL <- paste0("https://placeholder.url/api/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&sector_name=",SECTOR)
+BASE_URL <- paste0("https://placeholder.url/api/v1/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&sector_name=",SECTOR)
 ```
 
 #### Filter by Admin1
 
 ```R
 ADMIN1 <- "AF01"
-BASE_URL <- paste0("https://placeholder.url/api/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&admin1_code=",ADMIN1)
+BASE_URL <- paste0("https://placeholder.url/api/v1/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&admin1_code=",ADMIN1)
 ```
 
 ## 3. Filter for admin level
@@ -254,13 +254,13 @@ Each supporting table such as ```orgs```, ```orgs_type```, ```sector``` and more
 ### Python
 
 ```python
-BASE_URL "https://placeholder.url/api/sector?output_format=json&offset=0&limit=1000"
+BASE_URL "https://placeholder.url/api/v1/sector?output_format=json&offset=0&limit=1000"
 ```
 
 ### Javascript
 
 ```javascript
-CONST BASE_URL "https://placeholder.url/api/sector?output_format=json&offset=0&limit=1000"
+CONST BASE_URL "https://placeholder.url/api/v1/sector?output_format=json&offset=0&limit=1000"
 ```
 
 ## 5. Get admin level data for a country
@@ -283,13 +283,13 @@ https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/locations/AFG/versions/c
 The code examples so far have been using JSON output and then processing this data. To query this data as csv, change the ```output_format``` to ```csv``` as per the examples below. Visiting this URL through the browser will download the CSV to then be used on your computer.
 
 ```python
-BASE_URL = "https://placeholder.url/api/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
+BASE_URL = "https://placeholder.url/api/v1/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
 ```
 
 ### Javascript
 
 ```javascript
-CONST BASE_URL = "https://placeholder.url/api/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
+CONST BASE_URL = "https://placeholder.url/api/v1/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
 ```
 
 ## 7. Query Population and join to GeoJson from ITOS service
@@ -383,7 +383,7 @@ THEME = "population"
 LOCATION = "AFG"
 AGE_RANGE_CODE = "80%2B"
 GENDER = "f"
-BASE_URL = f"https://placeholder.url/api/themes/{THEME}?output_format=json&location_code={LOCATION}&age_range_code={AGE_RANGE_CODE}&gender={GENDER}&admin1_is_unspecified=false&admin2_is_unspecified=true"
+BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}&age_range_code={AGE_RANGE_CODE}&gender={GENDER}&admin1_is_unspecified=false&admin2_is_unspecified=true"
 LIMIT = 1000
 results = fetch_data(BASE_URL, LIMIT)
 
@@ -453,7 +453,7 @@ THEME <- "population"
 LOCATION <- "AFG"
 AGE_RANGE_CODE <- "80%2B"
 GENDER <- "f"
-BASE_URL <- sprintf("https://placeholder.url/api/themes/%s?output_format=json&location_code=%s&age_range_code=%s&gender=%s&admin1_is_unspecified=false&admin2_is_unspecified=true",
+BASE_URL <- sprintf("https://placeholder.url/api/v1/themes/%s?output_format=json&location_code=%s&age_range_code=%s&gender=%s&admin1_is_unspecified=false&admin2_is_unspecified=true",
                     THEME, LOCATION, AGE_RANGE_CODE, GENDER)
 LIMIT <- 1000
 results <- fetch_data(BASE_URL, LIMIT)
@@ -483,7 +483,7 @@ A simple script that will fetch the API data and place it in the spreadsheet
 
 ```javascript
 function loadApiData() {
-  var baseUrl = "https://placeholder.url/api/themes/3w?output_format=json";
+  var baseUrl = "https://placeholder.url/api/v1/themes/3w?output_format=json";
   var limit = 10000;
   var offset = 0;
   
