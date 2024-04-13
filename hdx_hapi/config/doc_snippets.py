@@ -1,3 +1,7 @@
+from hdx_hapi.config.config import get_config
+
+CONFIG = get_config()
+
 DOC_ADMIN1_CODE = 'Filter the response by the 1st subnational administrative divisions. The admin1 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative divisions. The admin1 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
@@ -23,7 +27,7 @@ DOC_ORG_ACRONYM = 'Filter the response by the standard acronym used to represent
 DOC_ORG_NAME = 'Filter the response by the standard name used to represent the organization. When data is brought into the HAPI database, an attempt is made to standardize the acronyms.'
 DOC_ORG_TYPE_CODE = 'Filter the response by the organization type code.'
 DOC_ORG_TYPE_DESCRIPTION = 'Filter the response by the organization type description.'
-DOC_SCOPE_DISCLAIMER = 'Not all data are available for all locations. Learn more about the scope of data coverage in HAPI in the <a href="https://FIXTHIS/">Overview and Getting Started</a> documentation.'
+DOC_SCOPE_DISCLAIMER = f'Not all data are available for all locations. Learn more about the scope of data coverage in HAPI in the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
 DOC_SECTOR_CODE = 'Filter the response by the sector code.'
 DOC_SECTOR_NAME = 'Filter the response by the sector name.'
 DOC_UPDATE_DATE_MIN = 'Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
