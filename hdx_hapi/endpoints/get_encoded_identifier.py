@@ -1,3 +1,4 @@
+import base64
 from typing import Annotated
 from fastapi import APIRouter, Depends, Query
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -30,8 +31,9 @@ async def get_encoded_identifier(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Get information about the <a href="https://data.humdata.org/dataset">HDX Datasets</a> that are used as data sources
-    for HAPI. Datasets contain one or more resources, which are the sources of the data found in HAPI.
+    Encode an application name and email address in base64 to serve as an client identifier in HAPI calls
     """
-    result = {'encoded_identifier': f'{application}:{email}'}
+    encoded_identifier = base64.b64encode(bytes(f'{application}:{email}', 'utf-8'))
+
+    result = {'encoded_identifier': encoded_identifier.decode('utf-8')}
     return transform_result_to_csv_stream_if_requested(result, output_format, IdentifierResponse)
