@@ -8,12 +8,7 @@ endpoint_data = {
             'location_code': 'FoO',
             'location_name': 'Foolandia',
         },
-        'expected_fields': [
-            'code',
-            'name',
-            'location_code',
-            'location_name'
-        ],
+        'expected_fields': ['code', 'name', 'location_code', 'location_name'],
     },
     '/api/admin2': {
         'query_parameters': {
@@ -24,24 +19,11 @@ endpoint_data = {
             'location_code': 'FOo',
             'location_name': 'Foolandia',
         },
-        'expected_fields': [
-            'code',
-            'name',
-            'admin1_code',
-            'admin1_name',
-            'location_code',
-            'location_name'
-        ],
+        'expected_fields': ['code', 'name', 'admin1_code', 'admin1_name', 'location_code', 'location_name'],
     },
     '/api/age_range': {
-        'query_parameters': {
-            'code': '10-14'
-        },
-        'expected_fields': [
-            'code',
-            'age_min',
-            'age_max'
-        ],
+        'query_parameters': {'code': '10-14'},
+        'expected_fields': ['code', 'age_min', 'age_max'],
     },
     '/api/dataset': {
         'query_parameters': {
@@ -57,28 +39,16 @@ endpoint_data = {
             'hdx_provider_stub',
             'hdx_provider_name',
             'hdx_link',  # computed field
-            'hdx_api_link'  # computed field
+            'hdx_api_link',  # computed field
         ],
     },
     '/api/gender': {
-        'query_parameters': {
-            'code': 'F',
-            'name': 'female'
-        },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'query_parameters': {'code': 'F', 'name': 'female'},
+        'expected_fields': ['code', 'description'],
     },
     '/api/location': {
-        'query_parameters': {
-            'code': 'foo',
-            'name': 'Foolandia'
-        },
-        'expected_fields': [
-            'code',
-            'name'
-        ],
+        'query_parameters': {'code': 'foo', 'name': 'Foolandia'},
+        'expected_fields': ['code', 'name'],
     },
     '/api/themes/3W': {
         'query_parameters': {
@@ -111,7 +81,7 @@ endpoint_data = {
             'admin1_code',
             'admin1_name',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
         ],
     },
     '/api/org': {
@@ -121,22 +91,14 @@ endpoint_data = {
             'org_type_code': '433',
             'org_type_description': 'Dono',  # Donor
         },
-        'expected_fields': [
-            'acronym',
-            'name',
-            'org_type_code',
-            'org_type_description'
-        ],
+        'expected_fields': ['acronym', 'name', 'org_type_code', 'org_type_description'],
     },
     '/api/org_type': {
         'query_parameters': {
             'code': '431',
-            'name': 'national'  # International
+            'name': 'national',  # International
         },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'expected_fields': ['code', 'description'],
     },
     '/api/themes/population': {
         'query_parameters': {
@@ -167,28 +129,19 @@ endpoint_data = {
             'admin1_code',
             'admin1_name',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
         ],
     },
     '/api/population_group': {
         'query_parameters': {
             'code': 'refugees',
-            'description': 'refugee'  # refugees
+            'description': 'refugee',  # refugees
         },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'expected_fields': ['code', 'description'],
     },
     '/api/population_status': {
-        'query_parameters': {
-            'code': 'inneed',
-            'description': 'people'
-        },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'query_parameters': {'code': 'inneed', 'description': 'people'},
+        'expected_fields': ['code', 'description'],
     },
     '/api/themes/food_security': {
         'query_parameters': {
@@ -221,7 +174,7 @@ endpoint_data = {
             'admin1_code',
             'admin1_name',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
         ],
     },
     '/api/themes/national_risk': {
@@ -255,7 +208,7 @@ endpoint_data = {
             'resource_hdx_id',
             # "sector_name",
             'location_code',
-            'location_name'
+            'location_name',
         ],
     },
     '/api/themes/humanitarian_needs': {
@@ -298,7 +251,7 @@ endpoint_data = {
             'admin1_code',
             'admin1_name',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
         ],
     },
     '/api/resource': {
@@ -334,11 +287,15 @@ endpoint_data = {
     '/api/sector': {
         'query_parameters': {
             'code': 'Pro',
-            'name': 'Protect'  # Protection
+            'name': 'Protect',  # Protection
         },
-        'expected_fields': [
-            'code',
-            'name'
-        ],
+        'expected_fields': ['code', 'name'],
+    },
+    '/api/encode_identifier': {
+        'query_parameters': {
+            'application': 'web_application_1',
+            'email': 'info@example.com',
+        },
+        'expected_fields': ['encoded_identifier'],
     },
 }
