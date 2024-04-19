@@ -10,6 +10,8 @@ from fastapi.openapi.docs import get_swagger_ui_html  # noqa
 
 # from hdx_hapi.services.sql_alchemy_session import init_db
 
+from hdx_hapi.endpoints.get_encoded_identifier import router as encoded_identifier_router  # noqa
+
 from hdx_hapi.endpoints.favicon import router as favicon_router  # noqa
 from hdx_hapi.endpoints.get_population import router as population_router  # noqa
 from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router  # noqa
@@ -21,7 +23,6 @@ from hdx_hapi.endpoints.get_food_security import router as food_security_router 
 from hdx_hapi.endpoints.get_national_risk import router as national_risk_router  # noqa
 from hdx_hapi.endpoints.get_humanitarian_needs import router as humanitarian_needs_router  # noqa
 from hdx_hapi.endpoints.get_population_profile import router as population_profile_router  # noqa
-from hdx_hapi.endpoints.get_encoded_identifier import router as encoded_identifier_router  # noqa
 
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
@@ -37,7 +38,7 @@ app = FastAPI(
     docs_url=None,
 )
 
-
+app.include_router(encoded_identifier_router)
 app.include_router(favicon_router)
 app.include_router(operational_presence_router)
 app.include_router(population_router)
@@ -49,7 +50,6 @@ app.include_router(humanitarian_response_router)
 app.include_router(demographic_router)
 app.include_router(population_profile_router)
 app.include_router(dataset_router)
-app.include_router(encoded_identifier_router)
 
 
 @app.on_event('startup')
