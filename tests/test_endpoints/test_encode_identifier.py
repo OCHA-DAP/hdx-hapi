@@ -60,3 +60,24 @@ async def test_get_encoded_identifier_results(event_loop, refresh_db):
     assert (
         base64.b64decode(response.json()['encoded_identifier']).decode('utf-8') == 'web_application_1:info@example.com'
     )
+
+
+@pytest.mark.asyncio
+async def test_email_validation(event_loop, refresh_db):
+    log.info('started test_get_encoded_identifier_result')
+
+    query_parameters = {'application': 'web_application', 'email': 'not_an_email'}
+    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+        response = await ac.get(ENDPOINT_ROUTER)
+
+    assert response.json() == {
+        'detail': [
+            {
+                'type': 'value_error',
+                'loc': ['query', 'email'],
+                'msg': 'value is not a valid email address: The email address is not valid. It must have exactly one @-sign.',
+                'input': 'not_an_email',
+                'ctx': {'reason': 'The email address is not valid. It must have exactly one @-sign.'},
+            }
+        ]
+    }
