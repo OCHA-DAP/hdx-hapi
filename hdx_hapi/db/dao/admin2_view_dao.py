@@ -1,3 +1,4 @@
+from datetime import datetime
 import logging
 
 from typing import Dict
@@ -11,11 +12,16 @@ from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 
 logger = logging.getLogger(__name__)
 
+
 async def admin2_view_list(
     pagination_parameters: Dict,
     db: AsyncSession,
     code: str = None,
     name: str = None,
+    hapi_updated_date_min: datetime = None,
+    hapi_updated_date_max: datetime = None,
+    hapi_replaced_date_min: datetime = None,
+    hapi_replaced_date_max: datetime = None,
     admin1_code: str = None,
     admin1_name: str = None,
     location_code: str = None,
@@ -30,11 +36,19 @@ async def admin2_view_list(
     query = select(Admin2View)
     if True:
         # TODO: implement debug=True to show unspecified values
-        query = query.where(Admin2View.is_unspecified==False)
+        query = query.where(Admin2View.is_unspecified == False)
     if code:
         query = case_insensitive_filter(query, Admin2View.code, code)
     if name:
         query = query.where(Admin2View.name.icontains(name))
+    if hapi_updated_date_min:
+        query = query.where(Admin2View.hapi_updated_date >= hapi_updated_date_min)
+    if hapi_updated_date_max:
+        query = query.where(Admin2View.hapi_updated_date < hapi_updated_date_max)
+    if hapi_replaced_date_min:
+        query = query.where(Admin2View.hapi_replaced_date >= hapi_replaced_date_min)
+    if hapi_replaced_date_max:
+        query = query.where(Admin2View.hapi_replaced_date < hapi_replaced_date_max)
     if admin1_code:
         query = case_insensitive_filter(query, Admin2View.admin1_code, admin1_code)
     if admin1_name:

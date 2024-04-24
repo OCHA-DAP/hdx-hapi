@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import ConfigDict, Field, model_validator, NaiveDatetime
 from typing import Optional
 
@@ -11,13 +12,15 @@ class FoodSecurityResponse(HapiBaseModel):
     ipc_phase_code: str = Field(max_length=32)
     ipc_phase_name: str = Field(max_length=32)
     ipc_type_code: str = Field(max_length=32)
-    
+
     reference_period_start: Optional[NaiveDatetime]
     reference_period_end: Optional[NaiveDatetime]
 
     dataset_hdx_stub: str = Field(max_length=128)
     dataset_hdx_provider_stub: str = Field(max_length=128)
     resource_hdx_id: str = Field(max_length=36)
+    hapi_updated_date: datetime
+    hapi_replaced_date: Optional[datetime]
 
     location_code: str = Field(max_length=128)
     location_name: str = Field(max_length=512)
@@ -27,8 +30,10 @@ class FoodSecurityResponse(HapiBaseModel):
 
     admin1_code: Optional[str] = Field(max_length=128)
     admin1_name: Optional[str] = Field(max_length=512)
+    location_ref: int = None
     admin2_code: Optional[str] = Field(max_length=128)
     admin2_name: Optional[str] = Field(max_length=512)
+    admin1_ref: int = None
 
     model_config = ConfigDict(from_attributes=True)
 

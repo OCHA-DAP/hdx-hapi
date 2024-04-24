@@ -13,6 +13,10 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MAX,
+    DOC_HAPI_REPLACED_DATE_MIN,
+    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
@@ -51,6 +55,22 @@ async def get_national_risks(
         NaiveDatetime | date,
         Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     # sector_name: Annotated[str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
@@ -71,6 +91,10 @@ async def get_national_risks(
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
         resource_update_date_min=resource_update_date_min,
         resource_update_date_max=resource_update_date_max,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         # sector_name=sector_name,
         location_code=location_code,
         location_name=location_name,

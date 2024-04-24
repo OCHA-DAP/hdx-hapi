@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
@@ -21,6 +22,8 @@ class NationalRiskResponse(HapiBaseModel):
     dataset_hdx_stub: str = Field(max_length=128)
     dataset_hdx_provider_stub: str = Field(max_length=128)
     resource_hdx_id: str = Field(max_length=36)
+    hapi_updated_date: datetime
+    hapi_replaced_date: Optional[datetime]
 
     # sector_name: str = Field(max_length=512)
 

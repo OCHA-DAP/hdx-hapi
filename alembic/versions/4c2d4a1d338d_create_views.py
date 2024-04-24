@@ -1,10 +1,11 @@
 """create views
 
-Revision ID: 5ea413542a49
-Revises: be60e42db4db
-Create Date: 2023-09-07 20:31:02.198042
+Revision ID: 4c2d4a1d338d
+Revises: 50477e183fe7
+Create Date: 2024-04-24 15:23:50.679622
 
 """
+
 from typing import Sequence, Union
 
 from alembic import op
@@ -22,11 +23,11 @@ from hapi_schema.db_ipc_type import view_params_ipc_type
 from hapi_schema.db_location import view_params_location
 from hapi_schema.db_national_risk import view_params_national_risk
 from hapi_schema.db_operational_presence import view_params_operational_presence
-from hapi_schema.db_org_type import view_params_org_type
 from hapi_schema.db_org import view_params_org
+from hapi_schema.db_org_type import view_params_org_type
+from hapi_schema.db_population import view_params_population
 from hapi_schema.db_population_group import view_params_population_group
 from hapi_schema.db_population_status import view_params_population_status
-from hapi_schema.db_population import view_params_population
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
 
@@ -34,19 +35,32 @@ from hdx_hapi.db.models.views.util.util import CreateView, DropView
 
 
 # revision identifiers, used by Alembic.
-revision: str = '5ea413542a49'
-down_revision: Union[str, None] = 'be60e42db4db'
+revision: str = '4c2d4a1d338d'
+down_revision: Union[str, None] = '50477e183fe7'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
 VIEW_LIST = [
-    view_params_admin1, view_params_admin2, view_params_age_range, view_params_dataset,
-    view_params_food_security, view_params_gender, view_params_humanitarian_needs,
-    view_params_ipc_phase, view_params_ipc_type, view_params_location, view_params_national_risk,
-    view_params_operational_presence, view_params_org_type, view_params_org,
-    view_params_population_group, view_params_population_status, view_params_population,
-    view_params_resource, view_params_sector
+    view_params_admin1,
+    view_params_admin2,
+    view_params_age_range,
+    view_params_dataset,
+    view_params_food_security,
+    view_params_gender,
+    view_params_humanitarian_needs,
+    view_params_ipc_phase,
+    view_params_ipc_type,
+    view_params_location,
+    view_params_national_risk,
+    view_params_operational_presence,
+    view_params_org_type,
+    view_params_org,
+    view_params_population_group,
+    view_params_population_status,
+    view_params_population,
+    view_params_resource,
+    view_params_sector,
 ]
 
 
@@ -57,5 +71,4 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     for v in VIEW_LIST:
-        op.get_bind().execute(DropView(v.name))   
-
+        op.get_bind().execute(DropView(v.name))

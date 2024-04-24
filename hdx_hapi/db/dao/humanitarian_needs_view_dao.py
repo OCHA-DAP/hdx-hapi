@@ -22,14 +22,20 @@ async def humanitarian_needs_view_list(
     dataset_hdx_provider_stub: str = None,
     resource_update_date_min: datetime = None,
     resource_update_date_max: datetime = None,
+    hapi_updated_date_min: datetime = None,
+    hapi_updated_date_max: datetime = None,
+    hapi_replaced_date_min: datetime = None,
+    hapi_replaced_date_max: datetime = None,
     location_code: str = None,
     location_name: str = None,
     admin1_code: str = None,
     # admin1_name: str = None,
     admin1_is_unspecified: bool = None,
+    location_ref: int = None,
     admin2_code: str = None,
     admin2_name: str = None,
     admin2_is_unspecified: bool = None,
+    admin1_ref: int = None,
 ):
 
     query = select(HumanitarianNeedsView)
@@ -58,6 +64,14 @@ async def humanitarian_needs_view_list(
         query = query.where(HumanitarianNeedsView.resource_update_date >= resource_update_date_min)
     if resource_update_date_max:
         query = query.where(HumanitarianNeedsView.resource_update_date < resource_update_date_max)
+    if hapi_updated_date_min:
+        query = query.where(HumanitarianNeedsView.hapi_updated_date >= hapi_updated_date_min)
+    if hapi_updated_date_max:
+        query = query.where(HumanitarianNeedsView.hapi_updated_date < hapi_updated_date_max)
+    if hapi_replaced_date_min:
+        query = query.where(HumanitarianNeedsView.hapi_replaced_date >= hapi_replaced_date_min)
+    if hapi_replaced_date_max:
+        query = query.where(HumanitarianNeedsView.hapi_replaced_date < hapi_replaced_date_max)
     if location_code:
         query = case_insensitive_filter(query, HumanitarianNeedsView.location_code, location_code)
     if location_name:
@@ -68,12 +82,16 @@ async def humanitarian_needs_view_list(
     # query = query.where(HumanitarianNeedsView.admin1_name.icontains(admin1_name))
     if admin1_is_unspecified is not None:
         query = query.where(HumanitarianNeedsView.admin1_is_unspecified == admin1_is_unspecified)
+    if location_ref:
+        query = query.where(HumanitarianNeedsView.location_ref == location_ref)
     if admin2_code:
         query = case_insensitive_filter(query, HumanitarianNeedsView.admin2_code, admin2_code)
     if admin2_name:
         query = query.where(HumanitarianNeedsView.admin2_name.icontains(admin2_name))
     if admin2_is_unspecified is not None:
         query = query.where(HumanitarianNeedsView.admin2_is_unspecified == admin2_is_unspecified)
+    if admin1_ref:
+        query = query.where(HumanitarianNeedsView.admin1_ref == admin1_ref)
 
     query = apply_pagination(query, pagination_parameters)
 

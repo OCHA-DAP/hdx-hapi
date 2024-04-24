@@ -15,5 +15,3 @@ class SectorView(Base):
 
     code: Mapped[str] = column_property(sector_view.c.code)
     name: Mapped[str] = column_property(sector_view.c.name)
-    reference_period_start: Mapped[DateTime] = column_property(sector_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(sector_view.c.reference_period_end)

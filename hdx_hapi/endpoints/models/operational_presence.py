@@ -1,7 +1,9 @@
+from datetime import datetime
 from pydantic import ConfigDict, Field, model_validator, NaiveDatetime
 from typing import Optional
 
 from hdx_hapi.endpoints.models.base import HapiBaseModel
+
 
 class OperationalPresenceResponse(HapiBaseModel):
 
@@ -17,13 +19,18 @@ class OperationalPresenceResponse(HapiBaseModel):
     reference_period_start: Optional[NaiveDatetime]
     reference_period_end: Optional[NaiveDatetime]
 
+    hapi_updated_date: datetime
+    hapi_replaced_date: Optional[datetime]
+
     admin1_is_unspecified: bool = Field(exclude=True)
     admin2_is_unspecified: bool = Field(exclude=True)
 
     admin1_code: Optional[str] = Field(max_length=128)
     admin1_name: Optional[str] = Field(max_length=512)
+    location_ref: int = None
     admin2_code: Optional[str] = Field(max_length=128)
     admin2_name: Optional[str] = Field(max_length=512)
+    admin1_ref: int = None
     # resource_update_date: datetime
     # org_ref: int = None,
     # dataset_hdx_id: str = Field(max_length=36),
@@ -33,7 +40,6 @@ class OperationalPresenceResponse(HapiBaseModel):
     # resource_name: str = Field(max_length=256),
     # org_type_code: str = Field(max_length=32),
     # org_type_description: str = Field(max_length=512),
-
 
     model_config = ConfigDict(from_attributes=True)
 

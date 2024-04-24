@@ -18,6 +18,10 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_DATASET,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MAX,
+    DOC_HAPI_REPLACED_DATE_MIN,
+    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
@@ -94,6 +98,22 @@ async def get_resources(
         Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
     is_hxl: Annotated[bool, Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     dataset_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID} {DOC_SEE_DATASET} ')] = None,
     dataset_hdx_stub: Annotated[
         str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME} {DOC_SEE_DATASET}')
@@ -117,6 +137,10 @@ async def get_resources(
         update_date_min=update_date_min,
         update_date_max=update_date_max,
         is_hxl=is_hxl,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         dataset_hdx_id=dataset_hdx_id,
         dataset_hdx_stub=dataset_hdx_stub,
         dataset_title=dataset_title,

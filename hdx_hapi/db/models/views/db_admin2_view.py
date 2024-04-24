@@ -18,6 +18,8 @@ class Admin2View(Base):
     is_unspecified: Mapped[bool] = column_property(admin2_view.c.is_unspecified)
     reference_period_start: Mapped[DateTime] = column_property(admin2_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(admin2_view.c.reference_period_end)
+    hapi_updated_date: Mapped[DateTime] = column_property(admin2_view.c.hapi_updated_date)
+    hapi_replaced_date: Mapped[DateTime] = column_property(admin2_view.c.hapi_replaced_date)
 
     admin1_code: Mapped[str] = column_property(admin2_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(admin2_view.c.admin1_name)
