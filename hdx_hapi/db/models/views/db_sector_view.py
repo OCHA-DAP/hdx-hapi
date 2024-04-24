@@ -1,4 +1,3 @@
-from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, column_property
 
 from hapi_schema.db_sector import view_params_sector
