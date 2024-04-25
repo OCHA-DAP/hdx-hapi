@@ -1,8 +1,8 @@
 """initialization
 
-Revision ID: 50477e183fe7
+Revision ID: 927d2ce143cc
 Revises: 
-Create Date: 2024-04-24 14:59:31.327852
+Create Date: 2024-04-25 15:02:30.586918
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '50477e183fe7'
+revision: str = '927d2ce143cc'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -68,7 +68,7 @@ def upgrade() -> None:
     sa.CheckConstraint('(hapi_replaced_date IS NULL) OR (hapi_replaced_date >= hapi_updated_date)', name='hapi_dates'),
     sa.CheckConstraint('(reference_period_end >= reference_period_start) OR (reference_period_start IS NULL)', name='reference_period'),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('code', 'hapi_updated_date', name='code_date_unique2')
+    sa.UniqueConstraint('code', 'hapi_updated_date')
     )
     op.create_index(op.f('ix_location_hapi_replaced_date'), 'location', ['hapi_replaced_date'], unique=False)
     op.create_index(op.f('ix_location_hapi_updated_date'), 'location', ['hapi_updated_date'], unique=False)
@@ -80,6 +80,20 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('code')
     )
     op.create_index(op.f('ix_org_type_description'), 'org_type', ['description'], unique=False)
+    op.create_table('patch',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('patch_sequence_number', sa.Integer(), nullable=False),
+    sa.Column('commit_hash', sa.String(length=48), nullable=False),
+    sa.Column('commit_date', sa.DateTime(), nullable=False),
+    sa.Column('patch_path', sa.String(length=128), nullable=False),
+    sa.Column('permanent_download_url', sa.String(length=1024), nullable=False),
+    sa.Column('state', sa.Enum('discovered', 'executed', 'failed', 'canceled', name='stateenum'), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('commit_hash'),
+    sa.UniqueConstraint('permanent_download_url')
+    )
+    op.create_index(op.f('ix_patch_patch_sequence_number'), 'patch', ['patch_sequence_number'], unique=False)
+    op.create_index(op.f('ix_patch_state'), 'patch', ['state'], unique=False)
     op.create_table('population_group',
     sa.Column('code', sa.String(length=32), nullable=False),
     sa.Column('description', sa.String(length=512), nullable=False),
@@ -172,7 +186,7 @@ def upgrade() -> None:
     sa.CheckConstraint('(reference_period_end >= reference_period_start) OR (reference_period_start IS NULL)', name='reference_period'),
     sa.ForeignKeyConstraint(['admin1_ref'], ['admin1.id'], onupdate='CASCADE', ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('code', 'hapi_updated_date', name='code_date_unique1')
+    sa.UniqueConstraint('code', 'hapi_updated_date')
     )
     op.create_index(op.f('ix_admin2_hapi_replaced_date'), 'admin2', ['hapi_replaced_date'], unique=False)
     op.create_index(op.f('ix_admin2_hapi_updated_date'), 'admin2', ['hapi_updated_date'], unique=False)
@@ -341,6 +355,9 @@ def downgrade() -> None:
     op.drop_table('population_status')
     op.drop_index(op.f('ix_population_group_description'), table_name='population_group')
     op.drop_table('population_group')
+    op.drop_index(op.f('ix_patch_state'), table_name='patch')
+    op.drop_index(op.f('ix_patch_patch_sequence_number'), table_name='patch')
+    op.drop_table('patch')
     op.drop_index(op.f('ix_org_type_description'), table_name='org_type')
     op.drop_table('org_type')
     op.drop_index(op.f('ix_location_reference_period_start'), table_name='location')

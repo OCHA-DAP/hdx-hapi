@@ -1,11 +1,10 @@
 """create views
 
-Revision ID: 4c2d4a1d338d
-Revises: 50477e183fe7
-Create Date: 2024-04-24 15:23:50.679622
+Revision ID: 2d6db74775b5
+Revises: 927d2ce143cc
+Create Date: 2024-04-25 15:02:49.678672
 
 """
-
 from typing import Sequence, Union
 
 from alembic import op
@@ -35,8 +34,8 @@ from hdx_hapi.db.models.views.util.util import CreateView, DropView
 
 
 # revision identifiers, used by Alembic.
-revision: str = '4c2d4a1d338d'
-down_revision: Union[str, None] = '50477e183fe7'
+revision: str = '2d6db74775b5'
+down_revision: Union[str, None] = '927d2ce143cc'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

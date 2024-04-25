@@ -35,6 +35,7 @@ from hapi_schema.db_national_risk import DBNationalRisk
 from hapi_schema.db_operational_presence import DBOperationalPresence
 from hapi_schema.db_org import DBOrg
 from hapi_schema.db_org_type import DBOrgType
+from hapi_schema.db_patch import DBPatch
 from hapi_schema.db_population import DBPopulation
 from hapi_schema.db_population_group import DBPopulationGroup
 from hapi_schema.db_population_status import DBPopulationStatus
