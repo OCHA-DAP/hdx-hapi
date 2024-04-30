@@ -23,6 +23,8 @@ class Config:
 
     HAPI_READTHEDOCS_OVERVIEW_URL: str
 
+    HAPI_IDENTIFIER_FILTERING: bool
+
 
 CONFIG = None
 
@@ -48,6 +50,7 @@ def get_config() -> Config:
             HAPI_READTHEDOCS_OVERVIEW_URL=os.getenv(
                 'HAPI_READTHEDOCS_OVERVIEW_URL', 'https://hdx-hapi.readthedocs.io/en/latest/'
             ),
+            HAPI_IDENTIFIER_FILTERING=os.getenv('HAPI_IDENTIFIER_FILTERING', 'True').lower() == 'true',
         )
 
     return CONFIG

@@ -26,3 +26,7 @@ class AdminLevel(str, Enum):
     ZERO = '0'
     ONE = '1'
     TWO = '2'
+
+
+app_name_identifier_query = Query(max_length=512, min_length=4, description='A name for the calling application')
+email_identifier_query = Query(max_length=512, description='An email address')
