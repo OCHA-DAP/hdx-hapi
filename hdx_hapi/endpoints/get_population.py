@@ -15,7 +15,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.population import PopulationResponse
-from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.population_logic import get_populations_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -35,7 +35,7 @@ router = APIRouter(
     '/api/v1/themes/population', response_model=List[PopulationResponse], summary='Get baseline population data'
 )
 async def get_populations(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     gender_code: Annotated[str, Query(max_length=1, description='Gender code')] = None,
     age_range_code: Annotated[str, Query(max_length=32, description='Age range code')] = None,
@@ -64,7 +64,7 @@ async def get_populations(
     Return the list of populations
     """
     result = await get_populations_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         gender_code=gender_code,
         age_range_code=age_range_code,

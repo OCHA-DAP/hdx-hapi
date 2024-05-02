@@ -1,12 +1,12 @@
-from typing import Dict
 from datetime import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.resource_view_dao import resources_view_list
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 async def get_resources_srv(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     hdx_id: str = None,
     format: str = None,

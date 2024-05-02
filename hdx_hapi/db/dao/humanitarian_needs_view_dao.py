@@ -1,15 +1,15 @@
 import datetime
-from typing import Dict
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_humanitarian_needs_view import HumanitarianNeedsView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 async def humanitarian_needs_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     gender_code: str = None,
     age_range_code: str = None,
@@ -31,7 +31,6 @@ async def humanitarian_needs_view_list(
     admin2_name: str = None,
     admin2_is_unspecified: bool = None,
 ):
-
     query = select(HumanitarianNeedsView)
 
     if gender_code:
