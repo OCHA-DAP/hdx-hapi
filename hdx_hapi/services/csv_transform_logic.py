@@ -54,5 +54,5 @@ def transform_result_to_csv_stream_if_requested(
             return response
 
         return StreamingResponse(iter([]), media_type='text/csv')
-    return result
+    return {'data': result}
 
