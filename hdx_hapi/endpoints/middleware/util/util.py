@@ -30,7 +30,7 @@ async def track_api_call(request: Request, response: Response):
     ua_browser = ua_dict.get('user_agent', {}).get('family')
     ua_browser_version = ua_dict.get('user_agent', {}).get('major')
 
-    mixpanel.track(distinct_id, 'api call', {
+    mixpanel_dict = {
         'endpoint name': endpoint,
         'query params': query_params,
         'time': event_time,
@@ -45,7 +45,12 @@ async def track_api_call(request: Request, response: Response):
         '$browser': ua_browser,
         '$browser_version': ua_browser_version,
         '$current_url': current_url
-    })
+    }
+    await send_mixpanel_event('api call', distinct_id, mixpanel_dict)
+
+
+async def send_mixpanel_event(event_name: str, distinct_id: str, event_data: dict):
+    mixpanel.track(distinct_id, event_name, event_data)    
 
 
 class HashCodeGenerator(object):

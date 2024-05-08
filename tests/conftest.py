@@ -14,8 +14,9 @@ SAMPLE_DATA_SQL_FILE = 'alembic/versions/afd54d1a867e_insert_sample_data.sql'
 
 
 def pytest_sessionstart(session):
-    os.environ['HAPI_DB_NAME'] =  'hapi_test'
-    os.environ['HAPI_IDENTIFIER_FILTERING'] =  'False'
+    os.environ['HAPI_DB_NAME'] = 'hapi_test'
+    os.environ['HAPI_IDENTIFIER_FILTERING'] = 'False'
+    os.environ['HDX_MIXPANEL_TOKEN'] = 'fake_token'
 
 
 @pytest.fixture(scope='session')
