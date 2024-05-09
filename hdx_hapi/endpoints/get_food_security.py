@@ -19,7 +19,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
-from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.food_security_logic import get_food_security_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -37,7 +37,7 @@ router = APIRouter(
 )
 @router.get('/api/v1/themes/food_security', response_model=List[FoodSecurityResponse], summary='Get food security data')
 async def get_food_security(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     ipc_phase_code: Annotated[str, Query(max_length=32, description='IPC phase code')] = None,
     ipc_type_code: Annotated[str, Query(max_length=32, description='IPC type code')] = None,
@@ -81,7 +81,7 @@ async def get_food_security(
     Return the list of food security data
     """
     result = await get_food_security_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         ipc_phase_code=ipc_phase_code,
         ipc_type_code=ipc_type_code,

@@ -4,12 +4,12 @@ from typing import Dict
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.food_security_view_dao import food_security_view_list
-from hdx_hapi.endpoints.util.util import AdminLevel
+from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
 
 async def get_food_security_srv(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     ipc_phase_code: str = None,
     ipc_type_code: str = None,

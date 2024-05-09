@@ -29,7 +29,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
-from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.humanitarian_needs_logic import get_humanitarian_needs_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -51,7 +51,7 @@ router = APIRouter(
     summary='Get humanitarian needs data',
 )
 async def get_humanitarian_needs(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     gender_code: Annotated[str, Query(max_length=1, description=f'{DOC_GENDER_CODE}')] = None,
     age_range_code: Annotated[str, Query(max_length=32, description=f'{DOC_AGE_RANGE_CODE}')] = None,
@@ -101,7 +101,7 @@ async def get_humanitarian_needs(
     Return the list of humanitarian needs data
     """
     result = await get_humanitarian_needs_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         gender_code=gender_code,
         age_range_code=age_range_code,

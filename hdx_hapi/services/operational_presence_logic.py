@@ -4,12 +4,12 @@ from typing import Dict
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.operational_presence_view_dao import operational_presences_view_list
-from hdx_hapi.endpoints.util.util import AdminLevel
+from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
 
 async def get_operational_presences_srv(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     sector_code: str = None,
     dataset_hdx_provider_stub: str = None,

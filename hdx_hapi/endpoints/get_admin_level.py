@@ -21,7 +21,11 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
-from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import (
+    CommonEndpointParams,
+    OutputFormat,
+    common_endpoint_parameters,
+)
 from hdx_hapi.services.admin1_logic import get_admin1_srv
 from hdx_hapi.services.admin2_logic import get_admin2_srv
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -47,7 +51,7 @@ router = APIRouter(
     summary='Get the list of locations (typically countries) included in HAPI',
 )
 async def get_locations(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
@@ -70,7 +74,7 @@ async def get_locations(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     result = await get_locations_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         code=code,
         name=name,
@@ -100,7 +104,7 @@ get_locations.__doc__ = (
     summary='Get the list of first-level subnational administrative divisions available in HAPI',
 )
 async def get_admin1(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
@@ -125,7 +129,7 @@ async def get_admin1(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     result = await get_admin1_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         code=code,
         name=name,
@@ -157,7 +161,7 @@ get_admin1.__doc__ = (
     summary='Get the list of second-level administrative divisions available in HAPI',
 )
 async def get_admin2(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
@@ -184,7 +188,7 @@ async def get_admin2(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     result = await get_admin2_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         code=code,
         name=name,

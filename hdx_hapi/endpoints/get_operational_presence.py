@@ -21,7 +21,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
-from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -60,7 +60,7 @@ SUMMARY_TEXT = (
     include_in_schema=False,
 )
 async def get_operational_presences(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     sector_code: Annotated[
         str,
@@ -186,7 +186,7 @@ async def get_operational_presences(
     crisis. <a href="https://3w.unocha.org/">Learn more about 3W</a>
     """
     result = await get_operational_presences_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         sector_code=sector_code,
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,

@@ -1,15 +1,16 @@
 import datetime
-from typing import Dict
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_national_risk_view import NationalRiskView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
+
 
 
 async def national_risks_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     risk_class: int = None,
     global_rank: int = None,
@@ -28,7 +29,6 @@ async def national_risks_view_list(
     location_code: str = None,
     location_name: str = None,
 ):
-
     query = select(NationalRiskView)
     if risk_class:
         query = query.where(NationalRiskView.risk_class == risk_class)

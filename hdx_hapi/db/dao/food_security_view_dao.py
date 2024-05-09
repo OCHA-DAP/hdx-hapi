@@ -1,15 +1,14 @@
 import datetime
-from typing import Dict
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_food_security_view import FoodSecurityView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 async def food_security_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     ipc_phase_code: str = None,
     ipc_type_code: str = None,
@@ -31,7 +30,6 @@ async def food_security_view_list(
     admin2_is_unspecified: bool = None,
     admin1_ref: int = None,
 ):
-
     query = select(FoodSecurityView)
 
     if ipc_phase_code:

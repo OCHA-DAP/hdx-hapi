@@ -25,7 +25,11 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
-from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import (
+    CommonEndpointParams,
+    OutputFormat,
+    common_endpoint_parameters,
+)
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.dataset_logic import get_datasets_srv
 from hdx_hapi.services.resource_logic import get_resources_srv
@@ -48,7 +52,7 @@ router = APIRouter(
     summary='Get information about the sources of the data in HAPI',
 )
 async def get_datasets(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
     hdx_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
@@ -62,7 +66,7 @@ async def get_datasets(
     for HAPI. Datasets contain one or more resources, which are the sources of the data found in HAPI.
     """
     result = await get_datasets_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         hdx_id=hdx_id,
         hdx_stub=hdx_stub,
@@ -85,7 +89,7 @@ async def get_datasets(
     summary='Get information about the sources of the data in HAPI',
 )
 async def get_resources(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
     format: Annotated[str, Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
@@ -130,7 +134,7 @@ async def get_resources(
     which are the sources of the data found in HAPI.
     """
     result = await get_resources_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         hdx_id=hdx_id,
         format=format,

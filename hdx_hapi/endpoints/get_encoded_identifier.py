@@ -1,11 +1,11 @@
 import base64
 from typing import Annotated
-from fastapi import APIRouter, Query
+from fastapi import APIRouter
 from pydantic import EmailStr
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 
 from hdx_hapi.endpoints.models.encoded_identifier import IdentifierResponse
-from hdx_hapi.endpoints.util.util import OutputFormat
+from hdx_hapi.endpoints.util.util import OutputFormat, app_name_identifier_query, email_identifier_query
 
 router = APIRouter(
     tags=['Utility'],
@@ -26,8 +26,8 @@ SUMMARY = 'Get an encoded application name plus email'
     summary=SUMMARY,
 )
 async def get_encoded_identifier(
-    application: Annotated[str, Query(max_length=512, description='A name for the calling application')] = None,
-    email: Annotated[EmailStr, Query(max_length=512, description='An email address')] = None,
+    application: Annotated[str, app_name_identifier_query],
+    email: Annotated[EmailStr, email_identifier_query],
 ):
     """
     Encode an application name and email address in base64 to serve as an client identifier in HAPI calls
