@@ -22,6 +22,7 @@ async def test_encoded_identifier_refuses_empty_parameters(event_loop, refresh_d
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 422
+    print(response.json())
     assert response.json() == {
         'detail': [
             {
