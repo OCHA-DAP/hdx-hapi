@@ -9,6 +9,7 @@ from hdx_hapi.config.config import mixpanel
 
 logger = logging.getLogger(__name__)
 
+
 async def track_api_call(request: Request, response: Response):
     current_url = str(request.url)
     endpoint = request.url.path
@@ -44,19 +45,47 @@ async def track_api_call(request: Request, response: Response):
         '$os': ua_os,
         '$browser': ua_browser,
         '$browser_version': ua_browser_version,
-        '$current_url': current_url
+        '$current_url': current_url,
     }
     await send_mixpanel_event('api call', distinct_id, mixpanel_dict)
 
 
+async def track_page_view(request: Request, response: Response):
+    current_url = str(request.url)
+    user_agent_string = request.headers.get('user-agent', '')
+    ip_address = request.headers.get('HTTP_X_REAL_IP', '')
+    response_code = response.status_code
+    distinct_id = HashCodeGenerator({'ip': ip_address, 'ua': user_agent_string}).compute_hash()
+    event_time = time.time()
+    ua_dict = useragent.Parse(user_agent_string)
+    ua_os = ua_dict.get('os', {}).get('family')
+    ua_browser = ua_dict.get('user_agent', {}).get('family')
+    ua_browser_version = ua_dict.get('user_agent', {}).get('major')
+
+    page_view_dict = {
+        'page title': 'HAPI - OpenAPI Docs',
+        'time': event_time,
+        'server side': True,
+        'response code': response_code,
+        'user agent': user_agent_string,
+        'ip': ip_address,
+        '$os': ua_os,
+        '$browser': ua_browser,
+        '$browser_version': ua_browser_version,
+        '$current_url': current_url,
+    }
+    await send_mixpanel_event('page view', distinct_id, page_view_dict)
+
+
 async def send_mixpanel_event(event_name: str, distinct_id: str, event_data: dict):
-    mixpanel.track(distinct_id, event_name, event_data)    
+    mixpanel.track(distinct_id, event_name, event_data)
 
 
 class HashCodeGenerator(object):
     """
     Works only on simple dictionaries (not nested). At least the specified fields need to not be nested.
     """
+
     def __init__(self, src_dict, field_list=None):
         if not field_list and src_dict:
             field_list = list(src_dict.keys())

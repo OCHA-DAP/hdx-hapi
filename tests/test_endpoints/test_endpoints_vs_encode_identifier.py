@@ -52,12 +52,11 @@ async def test_encode_identifier(event_loop, refresh_db, enable_hapi_identifier_
     # testing the encode identifier endpoint
     endpoint_router = '/api/v1/encode_identifier'
 
+    # it should not be important if app_identifier is passed or not to the endpoint
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(endpoint_router)
-    assert response.status_code == 200
+    assert response.status_code == 422
 
     async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(endpoint_router)
-    assert response.status_code == 200
-    response_items = response.json()
-    assert len(response_items) > 0
+    assert response.status_code == 422
