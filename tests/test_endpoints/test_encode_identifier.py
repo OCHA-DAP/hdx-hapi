@@ -1,6 +1,7 @@
 import base64
 import pytest
 import logging
+from unittest.mock import ANY
 
 from httpx import AsyncClient
 from main import app
@@ -22,23 +23,11 @@ async def test_encoded_identifier_refuses_empty_parameters(event_loop, refresh_d
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 422
-    print(response.json())
+    # The url key depends on the Pydantic version which we do not pin
     assert response.json() == {
         'detail': [
-            {
-                'type': 'missing',
-                'loc': ['query', 'application'],
-                'msg': 'Field required',
-                'input': None,
-                'url': 'https://errors.pydantic.dev/2.6/v/missing',
-            },
-            {
-                'type': 'missing',
-                'loc': ['query', 'email'],
-                'msg': 'Field required',
-                'input': None,
-                'url': 'https://errors.pydantic.dev/2.6/v/missing',
-            },
+            {'type': 'missing', 'loc': ['query', 'application'], 'msg': 'Field required', 'input': None, 'url': ANY},
+            {'type': 'missing', 'loc': ['query', 'email'], 'msg': 'Field required', 'input': None, 'url': ANY},
         ]
     }
 
