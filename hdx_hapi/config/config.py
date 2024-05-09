@@ -24,6 +24,8 @@ class Config:
 
     HAPI_READTHEDOCS_OVERVIEW_URL: str
 
+    HAPI_SERVER_URL: str
+
     HAPI_IDENTIFIER_FILTERING: bool
 
     HDX_MIXPANEL_TOKEN: str
@@ -53,6 +55,7 @@ def get_config() -> Config:
             HAPI_READTHEDOCS_OVERVIEW_URL=os.getenv(
                 'HAPI_READTHEDOCS_OVERVIEW_URL', 'https://hdx-hapi.readthedocs.io/en/latest/'
             ),
+            HAPI_SERVER_URL=os.getenv('HAPI_SERVER_URL', None),
             HAPI_IDENTIFIER_FILTERING=os.getenv('HAPI_IDENTIFIER_FILTERING', 'True').lower() == 'true',
             HDX_MIXPANEL_TOKEN=os.getenv('HDX_MIXPANEL_TOKEN', ''),
         )
