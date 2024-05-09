@@ -9,6 +9,8 @@ from fastapi.responses import HTMLResponse, RedirectResponse  # noqa
 from fastapi.openapi.docs import get_swagger_ui_html  # noqa
 
 # from hdx_hapi.services.sql_alchemy_session import init_db
+from hdx_hapi.endpoints.middleware.app_identifier_middleware import app_identifier_middleware  # noqa
+from hdx_hapi.endpoints.middleware.mixpanel_tracking_middleware import mixpanel_tracking_middleware  # noqa
 
 from hdx_hapi.endpoints.get_encoded_identifier import router as encoded_identifier_router  # noqa
 
@@ -50,6 +52,18 @@ app.include_router(humanitarian_response_router)
 app.include_router(demographic_router)
 app.include_router(population_profile_router)
 app.include_router(dataset_router)
+
+# add middleware
+@app.middleware('http')
+async def app_identifier_middleware_init(request: Request, call_next):
+    response = await app_identifier_middleware(request, call_next)
+    return response
+
+# add middleware
+@app.middleware('http')
+async def mixpanel_tracking_middleware_init(request: Request, call_next):
+    response = await mixpanel_tracking_middleware(request, call_next)
+    return response
 
 
 @app.on_event('startup')

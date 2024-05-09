@@ -1,18 +1,19 @@
 import logging
 import datetime
-from typing import Dict
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_population_view import PopulationView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 logger = logging.getLogger(__name__)
 
+
 async def populations_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     gender_code: str = None,
     age_range_code: str = None,
@@ -29,13 +30,12 @@ async def populations_view_list(
     admin2_name: str = None,
     admin2_is_unspecified: bool = None,
 ):
-
     logger.info(
-        f'populations_view_list called with params: gender_code={gender_code}, age_range_code={age_range_code}, ' \
-        f'population={population}, dataset_hdx_provider_stub={dataset_hdx_provider_stub}, ' \
-        f'resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, ' \
-        f'location_code={location_code}, location_name={location_name}, admin1_name={admin1_name}, ' \
-        f'admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, ' \
+        f'populations_view_list called with params: gender_code={gender_code}, age_range_code={age_range_code}, '
+        f'population={population}, dataset_hdx_provider_stub={dataset_hdx_provider_stub}, '
+        f'resource_update_date_min={resource_update_date_min}, resource_update_date_max={resource_update_date_max}, '
+        f'location_code={location_code}, location_name={location_name}, admin1_name={admin1_name}, '
+        f'admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, '
         f'admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}'
     )
 

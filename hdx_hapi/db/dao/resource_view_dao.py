@@ -1,13 +1,14 @@
-from typing import Dict
 from datetime import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_resource_view import ResourceView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
+
 
 async def resources_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     hdx_id: str = None,
     format: str = None,
@@ -20,7 +21,6 @@ async def resources_view_list(
     dataset_hdx_provider_stub: str = None,
     dataset_hdx_provider_name: str = None,
 ):
-
     query = select(ResourceView)
     if hdx_id:
         query = query.where(ResourceView.hdx_id == hdx_id)

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from mixpanel import Mixpanel
 import logging
 import os
 
@@ -22,6 +23,10 @@ class Config:
     HDX_RESOURCE_API_URL: str
 
     HAPI_READTHEDOCS_OVERVIEW_URL: str
+
+    HAPI_IDENTIFIER_FILTERING: bool
+
+    HDX_MIXPANEL_TOKEN: str
 
 
 CONFIG = None
@@ -48,6 +53,10 @@ def get_config() -> Config:
             HAPI_READTHEDOCS_OVERVIEW_URL=os.getenv(
                 'HAPI_READTHEDOCS_OVERVIEW_URL', 'https://hdx-hapi.readthedocs.io/en/latest/'
             ),
+            HAPI_IDENTIFIER_FILTERING=os.getenv('HAPI_IDENTIFIER_FILTERING', 'True').lower() == 'true',
+            HDX_MIXPANEL_TOKEN=os.getenv('HDX_MIXPANEL_TOKEN', ''),
         )
 
     return CONFIG
+
+mixpanel = Mixpanel(get_config().HDX_MIXPANEL_TOKEN)
