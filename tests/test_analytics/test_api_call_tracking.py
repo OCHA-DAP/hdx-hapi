@@ -20,7 +20,6 @@ async def test_tracking_endpoint_success():
         'hdx_hapi.endpoints.middleware.util.util.HashCodeGenerator.compute_hash',
         return_value='123456',
     ):
-
         async with AsyncClient(app=app, base_url=TEST_BASE_URL) as ac:
             headers = {
                 'User-Agent': TEST_USER_AGENT,
@@ -49,17 +48,17 @@ async def test_tracking_endpoint_success():
             '$current_url': f'{TEST_BASE_URL}/api/v1/themes/3w?admin_level=1&output_format=json',
         }
 
-        send_mixpanel_event_patch.assert_called_once_with(
-            'api call', '123456', expected_mixpanel_dict
-        ), 'Parameters do not match the expected ones'
+        (
+            send_mixpanel_event_patch.assert_called_once_with('api call', '123456', expected_mixpanel_dict),
+            'Parameters do not match the expected ones',
+        )
 
 
 @pytest.mark.asyncio
-async def test_docs_page_not_tracked():
+async def test_docs_page_tracked():
     with patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch:
-
         async with AsyncClient(app=app, base_url=TEST_BASE_URL) as ac:
             response = await ac.get('/docs')
 
         assert response.status_code == 200
-        assert send_mixpanel_event_patch.call_count == 0, 'Docs page should not be tracked as an API call'
+        assert send_mixpanel_event_patch.call_count == 1, 'Docs page should be tracked as a page view'

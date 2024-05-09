@@ -1,7 +1,7 @@
 from fastapi import Request, BackgroundTasks
 
 from hdx_hapi.config.config import get_config
-from hdx_hapi.endpoints.middleware.util.util import track_api_call
+from hdx_hapi.endpoints.middleware.util.util import track_api_call, track_page_view
 
 import logging
 
@@ -26,6 +26,11 @@ async def mixpanel_tracking_middleware(request: Request, call_next):
         else:
             logger.warning('HDX_MIXPANEL_TOKEN environment variable is not set.')
 
+    if request.url.path.startswith('/docs'):
+        if CONFIG.HDX_MIXPANEL_TOKEN:
+            background_tasks.add_task(track_page_view, request, response)
+        else:
+            logger.warning('HDX_MIXPANEL_TOKEN environment variable is not set.')
     response.background = background_tasks
 
     return response
