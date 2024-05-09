@@ -55,7 +55,7 @@ async def test_tracking_endpoint_success():
 
 
 @pytest.mark.asyncio
-async def test_docs_page_not_tracked():
+async def test_docs_page_tracked():
     with patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch:
         async with AsyncClient(app=app, base_url=TEST_BASE_URL) as ac:
             response = await ac.get('/docs')
