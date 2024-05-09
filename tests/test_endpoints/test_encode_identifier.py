@@ -46,6 +46,34 @@ async def test_get_encoded_identifier_params(event_loop, refresh_db):
 
 
 @pytest.mark.asyncio
+async def test_encoded_identifier_refuses_empty_parameters(event_loop, refresh_db):
+    log.info('started test_encoded_identifier_refuses_empty_parameters')
+
+    async with AsyncClient(app=app, base_url='http://test') as ac:
+        response = await ac.get(ENDPOINT_ROUTER)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        'detail': [
+            {
+                'type': 'missing',
+                'loc': ['query', 'application'],
+                'msg': 'Field required',
+                'input': None,
+                'url': 'https://errors.pydantic.dev/2.6/v/missing',
+            },
+            {
+                'type': 'missing',
+                'loc': ['query', 'email'],
+                'msg': 'Field required',
+                'input': None,
+                'url': 'https://errors.pydantic.dev/2.6/v/missing',
+            },
+        ]
+    }
+
+
+@pytest.mark.asyncio
 async def test_get_encoded_identifier_results(event_loop, refresh_db):
     log.info('started test_get_encoded_identifier_result')
 

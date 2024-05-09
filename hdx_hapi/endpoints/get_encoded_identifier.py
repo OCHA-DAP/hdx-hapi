@@ -26,8 +26,8 @@ SUMMARY = 'Get an encoded application name plus email'
     summary=SUMMARY,
 )
 async def get_encoded_identifier(
-    application: Annotated[str, Query(max_length=512, description='A name for the calling application')] = None,
-    email: Annotated[EmailStr, Query(max_length=512, description='An email address')] = None,
+    application: Annotated[str, Query(max_length=512, description='A name for the calling application')],
+    email: Annotated[EmailStr, Query(max_length=512, description='An email address')],
 ):
     """
     Encode an application name and email address in base64 to serve as an client identifier in HAPI calls
