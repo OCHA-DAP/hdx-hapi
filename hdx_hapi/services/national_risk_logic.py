@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Dict
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
