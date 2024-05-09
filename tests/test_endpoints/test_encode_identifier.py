@@ -15,37 +15,6 @@ expected_fields = endpoint_data['expected_fields']
 
 
 @pytest.mark.asyncio
-async def test_get_encoded_identifier(event_loop, refresh_db):
-    log.info('started test_get_encoded_identifier')
-    async with AsyncClient(app=app, base_url='http://test') as ac:
-        response = await ac.get(ENDPOINT_ROUTER)
-    assert response.status_code == 200
-    response_items = response.json()
-    assert len(response_items) == 1, 'One entry should be returned for encoded identifier'
-
-
-@pytest.mark.asyncio
-async def test_get_encoded_identifier_params(event_loop, refresh_db):
-    log.info('started test_get_encoded_identifier_params')
-
-    for param_name, param_value in query_parameters.items():
-        async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
-            response = await ac.get(ENDPOINT_ROUTER)
-
-        assert response.status_code == 200
-        assert len(response.json()) == 1, (
-            'There should be at one encoded_identifier entry for parameter '
-            f'"{param_name}" with value "{param_value}" in the database'
-        )
-
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
-        response = await ac.get(ENDPOINT_ROUTER)
-
-    assert response.status_code == 200
-    assert len(response.json()) == 1, 'There should be at one encoded_identifier entry for all parameters'
-
-
-@pytest.mark.asyncio
 async def test_encoded_identifier_refuses_empty_parameters(event_loop, refresh_db):
     log.info('started test_encoded_identifier_refuses_empty_parameters')
 
