@@ -16,6 +16,7 @@ SAMPLE_DATA_SQL_FILE = 'alembic/versions/afd54d1a867e_insert_sample_data.sql'
 def pytest_sessionstart(session):
     os.environ['HAPI_DB_NAME'] = 'hapi_test'
     os.environ['HAPI_IDENTIFIER_FILTERING'] = 'False'
+    os.environ['HDX_MIXPANEL_TOKEN'] = 'fake_token'
 
 
 @pytest.fixture(scope='session')
@@ -32,9 +33,10 @@ def log():
 
 @pytest.fixture(scope='session')
 def session_maker() -> sessionmaker[Session]:
+        
     # we don't want to import get_config before env vars are set for tests in pytest_sessionstart method
     from hdx_hapi.config.config import get_config
-
+    
     engine = create_engine(
         get_config().SQL_ALCHEMY_PSYCOPG2_DB_URI,
     )
