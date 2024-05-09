@@ -23,6 +23,8 @@ class Config:
 
     HAPI_READTHEDOCS_OVERVIEW_URL: str
 
+    HAPI_SERVER_URL: str
+
 
 CONFIG = None
 
@@ -48,6 +50,7 @@ def get_config() -> Config:
             HAPI_READTHEDOCS_OVERVIEW_URL=os.getenv(
                 'HAPI_READTHEDOCS_OVERVIEW_URL', 'https://hdx-hapi.readthedocs.io/en/latest/'
             ),
+            HAPI_SERVER_URL=os.getenv('HAPI_SERVER_URL', None),
         )
 
     return CONFIG
