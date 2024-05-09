@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker, Session
 from typing import List
 
 
-SAMPLE_DATA_SQL_FILE = 'alembic/versions/afd54d1a867e_insert_sample_data.sql'
+SAMPLE_DATA_SQL_FILE = 'tests/sample_data.sql'
 
 
 def pytest_sessionstart(session):

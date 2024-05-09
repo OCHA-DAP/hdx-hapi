@@ -1,5 +1,7 @@
+from datetime import date
 from typing import List, Annotated
 from fastapi import Depends, Query, APIRouter
+from pydantic import NaiveDatetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.config import get_config
@@ -12,6 +14,10 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
+    DOC_HAPI_UPDATED_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MAX,
+    DOC_HAPI_REPLACED_DATE_MIN,
+    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
@@ -49,9 +55,34 @@ async def get_locations(
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    result = await get_locations_srv(pagination_parameters=common_parameters, db=db, code=code, name=name)
+    result = await get_locations_srv(
+        pagination_parameters=common_parameters,
+        db=db,
+        code=code,
+        name=name,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
+    )
     return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
 
 
@@ -77,6 +108,22 @@ async def get_admin1(
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -86,6 +133,10 @@ async def get_admin1(
         db=db,
         code=code,
         name=name,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         location_code=location_code,
         location_name=location_name,
     )
@@ -114,6 +165,22 @@ async def get_admin2(
     db: AsyncSession = Depends(get_db),
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
@@ -125,6 +192,10 @@ async def get_admin2(
         db=db,
         code=code,
         name=name,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
         location_code=location_code,

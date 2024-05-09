@@ -12,6 +12,10 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MAX,
+    DOC_HAPI_REPLACED_DATE_MIN,
+    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
@@ -46,12 +50,30 @@ async def get_food_security(
         NaiveDatetime | date,
         Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description='Admin1 name')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description='Admin1 code')] = None,
+    location_ref: Annotated[int, Query(description='Location reference')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description='Admin2 name')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description='Admin2 code')] = None,
+    admin1_ref: Annotated[int, Query(description='Admin1 reference')] = None,
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -66,12 +88,18 @@ async def get_food_security(
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
         resource_update_date_min=resource_update_date_min,
         resource_update_date_max=resource_update_date_max,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         location_code=location_code,
         location_name=location_name,
         admin1_name=admin1_name,
         admin1_code=admin1_code,
+        location_ref=location_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        admin1_ref=admin1_ref,
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, FoodSecurityResponse)

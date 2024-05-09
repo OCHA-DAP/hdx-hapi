@@ -1,4 +1,3 @@
-from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, column_property
 
 from hapi_schema.db_sector import view_params_sector
@@ -15,5 +14,3 @@ class SectorView(Base):
 
     code: Mapped[str] = column_property(sector_view.c.code)
     name: Mapped[str] = column_property(sector_view.c.name)
-    reference_period_start: Mapped[DateTime] = column_property(sector_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(sector_view.c.reference_period_end)

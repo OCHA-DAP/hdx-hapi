@@ -19,3 +19,5 @@ class LocationView(Base):
 
     reference_period_start: Mapped[DateTime] = column_property(location_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(location_view.c.reference_period_end)
+    hapi_updated_date: Mapped[DateTime] = column_property(location_view.c.hapi_updated_date)
+    hapi_replaced_date: Mapped[DateTime] = column_property(location_view.c.hapi_replaced_date)

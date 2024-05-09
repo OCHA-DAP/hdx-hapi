@@ -22,6 +22,10 @@ from hdx_hapi.config.doc_snippets import (
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
     DOC_SEE_ADMIN2,
+    DOC_HAPI_UPDATED_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MAX,
+    DOC_HAPI_REPLACED_DATE_MIN,
+    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
@@ -66,12 +70,30 @@ async def get_humanitarian_needs(
         NaiveDatetime | date,
         Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
+    location_ref: Annotated[int, Query(description='Location reference')] = None,
     # admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
+    admin1_ref: Annotated[int, Query(description='Admin1 reference')] = None,
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -92,12 +114,18 @@ async def get_humanitarian_needs(
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
         resource_update_date_min=resource_update_date_min,
         resource_update_date_max=resource_update_date_max,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         location_code=location_code,
         location_name=location_name,
         admin1_code=admin1_code,
         # admin1_name=admin1_name,
+        location_ref=location_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        admin1_ref=admin1_ref,
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, HumanitarianNeedsResponse)

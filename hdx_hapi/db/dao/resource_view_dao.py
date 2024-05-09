@@ -7,6 +7,7 @@ from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 from hdx_hapi.endpoints.util.util import PaginationParams
 
 
+
 async def resources_view_list(
     pagination_parameters: PaginationParams,
     db: AsyncSession,
@@ -15,6 +16,10 @@ async def resources_view_list(
     update_date_min: datetime = None,
     update_date_max: datetime = None,
     is_hxl: bool = None,
+    hapi_updated_date_min: datetime = None,
+    hapi_updated_date_max: datetime = None,
+    hapi_replaced_date_min: datetime = None,
+    hapi_replaced_date_max: datetime = None,
     dataset_title: str = None,
     dataset_hdx_id: str = None,
     dataset_hdx_stub: str = None,
@@ -32,6 +37,14 @@ async def resources_view_list(
         query = query.where(ResourceView.update_date < update_date_max)
     if is_hxl is not None:
         query = query.where(ResourceView.is_hxl == is_hxl)
+    if hapi_updated_date_min:
+        query = query.where(ResourceView.hapi_updated_date >= hapi_updated_date_min)
+    if hapi_updated_date_max:
+        query = query.where(ResourceView.hapi_updated_date < hapi_updated_date_max)
+    if hapi_replaced_date_min:
+        query = query.where(ResourceView.hapi_replaced_date >= hapi_replaced_date_min)
+    if hapi_replaced_date_max:
+        query = query.where(ResourceView.hapi_replaced_date < hapi_replaced_date_max)
     if dataset_title:
         query = query.where(ResourceView.dataset_title == dataset_title)
     if dataset_hdx_id:

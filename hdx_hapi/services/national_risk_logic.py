@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.national_risk_view_dao import national_risks_view_list
@@ -16,6 +18,10 @@ async def get_national_risks_srv(
     dataset_hdx_provider_stub: str = None,
     resource_update_date_min=None,
     resource_update_date_max=None,
+    hapi_updated_date_min: datetime = None,
+    hapi_updated_date_max: datetime = None,
+    hapi_replaced_date_min: datetime = None,
+    hapi_replaced_date_max: datetime = None,
     # sector_name: str = None,
     location_code: str = None,
     location_name: str = None,
@@ -32,6 +38,10 @@ async def get_national_risks_srv(
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
         resource_update_date_min=resource_update_date_min,
         resource_update_date_max=resource_update_date_max,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         # sector_name=sector_name,
         location_code=location_code,
         location_name=location_name,
