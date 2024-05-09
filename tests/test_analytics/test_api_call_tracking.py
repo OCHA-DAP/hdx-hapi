@@ -61,4 +61,4 @@ async def test_docs_page_tracked():
             response = await ac.get('/docs')
 
         assert response.status_code == 200
-        assert send_mixpanel_event_patch.call_count > 0, 'Docs page should be tracked as a page view'
+        assert send_mixpanel_event_patch.call_count == 1, 'Docs page should be tracked as a page view'
