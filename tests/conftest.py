@@ -49,9 +49,7 @@ def list_of_db_tables(log: Logger, session_maker: sessionmaker[Session]) -> List
     # log.info('Getting list of db tables')
     session = session_maker()
     try:
-        result = session.execute(
-            text('SELECT tablename FROM pg_tables WHERE schemaname = \'public\'')
-        )
+        result = session.execute(text("SELECT tablename FROM pg_tables WHERE schemaname = 'public'"))
         return [row[0] for row in result if row != 'alembic_version']
     except Exception as e:
         raise e
@@ -74,6 +72,7 @@ def clear_db_tables(log: Logger, session_maker: sessionmaker[Session], list_of_d
     finally:
         db_session.close()
 
+
 @pytest.fixture(scope='function')
 def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
     log.info('Populating with test data')
@@ -91,7 +90,17 @@ def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
     finally:
         db_session.close()
 
+
 @pytest.fixture(scope='function')
 def refresh_db(clear_db_tables, populate_test_data):
     pass
 
+
+@pytest.fixture(scope='function')
+def enable_hapi_identifier_filtering():
+    import hdx_hapi.config.config as config
+
+    initial_config_id_filtering = config.CONFIG.HAPI_IDENTIFIER_FILTERING
+    config.CONFIG.HAPI_IDENTIFIER_FILTERING = True
+    yield
+    config.CONFIG.HAPI_IDENTIFIER_FILTERING = initial_config_id_filtering
