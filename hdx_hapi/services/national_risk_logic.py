@@ -1,12 +1,11 @@
-from typing import Dict
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.national_risk_view_dao import national_risks_view_list
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 async def get_national_risks_srv(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     risk_class: int = None,
     global_rank: int = None,
@@ -21,7 +20,6 @@ async def get_national_risks_srv(
     location_code: str = None,
     location_name: str = None,
 ):
-
     return await national_risks_view_list(
         pagination_parameters=pagination_parameters,
         db=db,
@@ -38,4 +36,3 @@ async def get_national_risks_srv(
         location_code=location_code,
         location_name=location_name,
     )
-

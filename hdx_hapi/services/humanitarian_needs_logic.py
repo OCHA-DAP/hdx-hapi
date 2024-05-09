@@ -1,14 +1,12 @@
-from typing import Dict
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.humanitarian_needs_view_dao import humanitarian_needs_view_list
-from hdx_hapi.endpoints.util.util import AdminLevel
+from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
 
 async def get_humanitarian_needs_srv(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     gender_code: str = None,
     age_range_code: str = None,
@@ -54,4 +52,3 @@ async def get_humanitarian_needs_srv(
         admin2_name=admin2_name,
         admin2_is_unspecified=admin2_is_unspecified,
     )
-

@@ -1,18 +1,19 @@
 import logging
 from datetime import datetime
-from typing import Dict
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_operational_presence_view import OperationalPresenceView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 logger = logging.getLogger(__name__)
 
+
 async def operational_presences_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     sector_code: str = None,
     dataset_hdx_provider_stub: str = None,
@@ -29,15 +30,13 @@ async def operational_presences_view_list(
     admin2_code: str = None,
     admin2_name: str = None,
     admin2_is_unspecified: bool = None,
-
 ):
-
     logger.info(
-        f'operational_presences_view_list called with params: sector_code={sector_code}, ' \
-        f'dataset_hdx_provider_stub={dataset_hdx_provider_stub}, resource_update_date_min={resource_update_date_min}, '\
-        f'resource_update_date_max={resource_update_date_max}, org_acronym={org_acronym}, org_name={org_name}, ' \
-        f'sector_name={sector_name}, location_code={location_code}, location_name={location_name}, ' \
-        f'admin1_code={admin1_code}, admin1_name={admin1_name}, admin1_is_unspecified={admin1_is_unspecified}, ' \
+        f'operational_presences_view_list called with params: sector_code={sector_code}, '
+        f'dataset_hdx_provider_stub={dataset_hdx_provider_stub}, resource_update_date_min={resource_update_date_min}, '
+        f'resource_update_date_max={resource_update_date_max}, org_acronym={org_acronym}, org_name={org_name}, '
+        f'sector_name={sector_name}, location_code={location_code}, location_name={location_name}, '
+        f'admin1_code={admin1_code}, admin1_name={admin1_name}, admin1_is_unspecified={admin1_is_unspecified}, '
         f'admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}'
     )
 
