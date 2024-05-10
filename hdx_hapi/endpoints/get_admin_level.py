@@ -14,6 +14,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_LOC,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
 from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
 from hdx_hapi.services.admin1_logic import get_admin1_srv
@@ -31,13 +32,13 @@ router = APIRouter(
 
 @router.get(
     '/api/location',
-    response_model=List[LocationResponse],
+    response_model=HapiGenericResponse[LocationResponse],
     summary='Get the list of locations (typically countries) included in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/location',
-    response_model=List[LocationResponse],
+    response_model=HapiGenericResponse[LocationResponse],
     summary='Get the list of locations (typically countries) included in HAPI',
 )
 async def get_locations(
@@ -59,13 +60,13 @@ get_locations.__doc__ = (
 
 @router.get(
     '/api/admin1',
-    response_model=List[Admin1Response],
+    response_model=HapiGenericResponse[Admin1Response],
     summary='Get the list of first-level subnational administrative divisions available in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/admin1',
-    response_model=List[Admin1Response],
+    response_model=HapiGenericResponse[Admin1Response],
     summary='Get the list of first-level subnational administrative divisions available in HAPI',
 )
 async def get_admin1(
@@ -96,13 +97,13 @@ get_admin1.__doc__ = (
 
 @router.get(
     '/api/admin2',
-    response_model=List[Admin2Response],
+    response_model=HapiGenericResponse[Admin2Response],
     summary='Get the list of second-level administrative divisions available in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/admin2',
-    response_model=List[Admin2Response],
+    response_model=HapiGenericResponse[Admin2Response],
     summary='Get the list of second-level administrative divisions available in HAPI',
 )
 async def get_admin2(
