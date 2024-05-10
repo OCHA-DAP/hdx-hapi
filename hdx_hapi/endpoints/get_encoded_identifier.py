@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from pydantic import EmailStr
 
 from hdx_hapi.endpoints.models.encoded_identifier import IdentifierResponse
+from hdx_hapi.endpoints.util.util import app_name_identifier_query, email_identifier_query
 
 router = APIRouter(
     tags=['Utility'],
