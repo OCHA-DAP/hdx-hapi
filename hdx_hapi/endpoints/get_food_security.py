@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
