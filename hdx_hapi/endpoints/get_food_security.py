@@ -14,6 +14,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_UPDATE_DATE_MIN,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
 from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -27,11 +28,15 @@ router = APIRouter(
 
 @router.get(
     '/api/themes/food_security',
-    response_model=List[FoodSecurityResponse],
+    response_model=HapiGenericResponse[FoodSecurityResponse],
     summary='Get food security data',
     include_in_schema=False,
 )
-@router.get('/api/v1/themes/food_security', response_model=List[FoodSecurityResponse], summary='Get food security data')
+@router.get(
+    '/api/v1/themes/food_security',
+    response_model=HapiGenericResponse[FoodSecurityResponse],
+    summary='Get food security data',
+)
 async def get_food_security(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
     db: AsyncSession = Depends(get_db),

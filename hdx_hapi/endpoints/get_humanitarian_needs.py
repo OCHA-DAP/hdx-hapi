@@ -24,6 +24,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN2,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
 from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -37,13 +38,13 @@ router = APIRouter(
 
 @router.get(
     '/api/themes/humanitarian_needs',
-    response_model=List[HumanitarianNeedsResponse],
+    response_model=HapiGenericResponse[HumanitarianNeedsResponse],
     summary='Get humanitarian needs data',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/themes/humanitarian_needs',
-    response_model=List[HumanitarianNeedsResponse],
+    response_model=HapiGenericResponse[HumanitarianNeedsResponse],
     summary='Get humanitarian needs data',
 )
 async def get_humanitarian_needs(

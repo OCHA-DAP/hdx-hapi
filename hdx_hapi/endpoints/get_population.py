@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -14,6 +14,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_UPDATE_DATE_MIN,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.population import PopulationResponse
 from hdx_hapi.endpoints.util.util import AdminLevel, OutputFormat, pagination_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -27,12 +28,14 @@ router = APIRouter(
 
 @router.get(
     '/api/themes/population',
-    response_model=List[PopulationResponse],
+    response_model=HapiGenericResponse[PopulationResponse],
     summary='Get baseline population data',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/themes/population', response_model=List[PopulationResponse], summary='Get baseline population data'
+    '/api/v1/themes/population',
+    response_model=HapiGenericResponse[PopulationResponse],
+    summary='Get baseline population data',
 )
 async def get_populations(
     pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
