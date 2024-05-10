@@ -20,6 +20,8 @@ class Admin1View(Base):
 
     reference_period_start: Mapped[DateTime] = column_property(admin1_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(admin1_view.c.reference_period_end)
+    hapi_updated_date: Mapped[DateTime] = column_property(admin1_view.c.hapi_updated_date)
+    hapi_replaced_date: Mapped[DateTime] = column_property(admin1_view.c.hapi_replaced_date)
 
     location_code: Mapped[str] = column_property(admin1_view.c.location_code)
     location_name: Mapped[str] = column_property(admin1_view.c.location_name)

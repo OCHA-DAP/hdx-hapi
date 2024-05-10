@@ -11,11 +11,11 @@ food_security_view = view(view_params_food_security.name, Base.metadata, view_pa
 
 class FoodSecurityView(Base):
     __table__ = food_security_view
-    
+
     id: Mapped[int] = column_property(food_security_view.c.id)
     resource_ref: Mapped[int] = column_property(food_security_view.c.resource_ref)
     admin2_ref: Mapped[int] = column_property(food_security_view.c.admin2_ref)
-    
+
     ipc_phase_name: Mapped[str] = column_property(food_security_view.c.ipc_phase_name)
     ipc_phase_code: Mapped[str] = column_property(food_security_view.c.ipc_phase_code)
     ipc_type_code: Mapped[str] = column_property(food_security_view.c.ipc_type_code)
@@ -29,6 +29,8 @@ class FoodSecurityView(Base):
     resource_hdx_id: Mapped[str] = column_property(food_security_view.c.resource_hdx_id)
     resource_name: Mapped[str] = column_property(food_security_view.c.resource_name)
     resource_update_date = column_property(food_security_view.c.resource_update_date)
+    hapi_updated_date: Mapped[DateTime] = column_property(food_security_view.c.hapi_updated_date)
+    hapi_replaced_date: Mapped[DateTime] = column_property(food_security_view.c.hapi_replaced_date)
 
     dataset_hdx_id: Mapped[str] = column_property(food_security_view.c.dataset_hdx_id)
     dataset_hdx_stub: Mapped[str] = column_property(food_security_view.c.dataset_hdx_stub)
@@ -42,7 +44,9 @@ class FoodSecurityView(Base):
     admin1_code: Mapped[str] = column_property(food_security_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(food_security_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(food_security_view.c.admin1_is_unspecified)
+    location_ref: Mapped[int] = column_property(food_security_view.c.location_ref)
 
     admin2_code: Mapped[str] = column_property(food_security_view.c.admin2_code)
     admin2_name: Mapped[str] = column_property(food_security_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(food_security_view.c.admin2_is_unspecified)
+    admin1_ref: Mapped[int] = column_property(food_security_view.c.admin1_ref)
