@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -20,6 +20,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HAPI_REPLACED_DATE_MAX,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
 from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -38,24 +39,24 @@ SUMMARY_TEXT = (
 
 @router.get(
     '/api/themes/3w',
-    response_model=List[OperationalPresenceResponse],
+    response_model=HapiGenericResponse[OperationalPresenceResponse],
     summary=SUMMARY_TEXT,
     include_in_schema=False,
 )
 @router.get(
     '/api/themes/3W',
-    response_model=List[OperationalPresenceResponse],
+    response_model=HapiGenericResponse[OperationalPresenceResponse],
     summary=SUMMARY_TEXT,
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/themes/3w',
-    response_model=List[OperationalPresenceResponse],
+    response_model=HapiGenericResponse[OperationalPresenceResponse],
     summary=SUMMARY_TEXT,
 )
 @router.get(
     '/api/v1/themes/3W',
-    response_model=List[OperationalPresenceResponse],
+    response_model=HapiGenericResponse[OperationalPresenceResponse],
     summary=SUMMARY_TEXT,
     include_in_schema=False,
 )

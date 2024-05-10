@@ -40,7 +40,7 @@ async def test_output_format(event_loop, refresh_db, endpoint_router):
         response = await ac.get(endpoint_router)
     assert response.status_code == 200
     assert response.headers.get('content-type') == 'application/json', 'The output should be in json format'
-    no_rows_json = len(response.json())
+    no_rows_json = len(response.json()['data'])
     assert no_rows_json > 0
 
     # CSV

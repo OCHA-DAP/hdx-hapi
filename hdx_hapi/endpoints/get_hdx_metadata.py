@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -24,6 +24,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HAPI_REPLACED_DATE_MAX,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
@@ -42,13 +43,13 @@ router = APIRouter(
 
 @router.get(
     '/api/dataset',
-    response_model=List[DatasetResponse],
+    response_model=HapiGenericResponse[DatasetResponse],
     summary='Get information about the sources of the data in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/dataset',
-    response_model=List[DatasetResponse],
+    response_model=HapiGenericResponse[DatasetResponse],
     summary='Get information about the sources of the data in HAPI',
 )
 async def get_datasets(
@@ -79,13 +80,13 @@ async def get_datasets(
 
 @router.get(
     '/api/resource',
-    response_model=List[ResourceResponse],
+    response_model=HapiGenericResponse[ResourceResponse],
     summary='Get information about the sources of the data in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/resource',
-    response_model=List[ResourceResponse],
+    response_model=HapiGenericResponse[ResourceResponse],
     summary='Get information about the sources of the data in HAPI',
 )
 async def get_resources(

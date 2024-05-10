@@ -1,9 +1,10 @@
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.population_profile import PopulationGroupResponse, PopulationStatusResponse
 from hdx_hapi.endpoints.util.util import CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -18,12 +19,14 @@ router = APIRouter(
 
 @router.get(
     '/api/population_group',
-    response_model=List[PopulationGroupResponse],
+    response_model=HapiGenericResponse[PopulationGroupResponse],
     summary='Get population groups data',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/population_group', response_model=List[PopulationGroupResponse], summary='Get population groups data'
+    '/api/v1/population_group',
+    response_model=HapiGenericResponse[PopulationGroupResponse],
+    summary='Get population groups data',
 )
 async def get_population_groups(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
@@ -46,12 +49,14 @@ async def get_population_groups(
 
 @router.get(
     '/api/population_status',
-    response_model=List[PopulationStatusResponse],
+    response_model=HapiGenericResponse[PopulationStatusResponse],
     summary='Get population statuses data',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/population_status', response_model=List[PopulationStatusResponse], summary='Get population statuses data'
+    '/api/v1/population_status',
+    response_model=HapiGenericResponse[PopulationStatusResponse],
+    summary='Get population statuses data',
 )
 async def get_population_statuses(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],

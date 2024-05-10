@@ -1,4 +1,4 @@
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 
 
@@ -11,6 +11,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_GENDER_SUMMARY,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.demographic import AgeRangeResponse, GenderResponse
 from hdx_hapi.endpoints.util.util import CommonEndpointParams, common_endpoint_parameters, OutputFormat
 from hdx_hapi.services.age_range_logic import get_age_ranges_srv
@@ -25,9 +26,14 @@ router = APIRouter(
 
 
 @router.get(
-    '/api/age_range', response_model=List[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}', include_in_schema=False
+    '/api/age_range',
+    response_model=HapiGenericResponse[AgeRangeResponse],
+    summary=f'{DOC_AGE_RANGE_SUMMARY}',
+    include_in_schema=False,
 )
-@router.get('/api/v1/age_range', response_model=List[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}')
+@router.get(
+    '/api/v1/age_range', response_model=HapiGenericResponse[AgeRangeResponse], summary=f'{DOC_AGE_RANGE_SUMMARY}'
+)
 async def get_age_ranges(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -49,9 +55,12 @@ async def get_age_ranges(
 
 
 @router.get(
-    '/api/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}', include_in_schema=False
+    '/api/gender',
+    response_model=HapiGenericResponse[GenderResponse],
+    summary=f'{DOC_GENDER_SUMMARY}',
+    include_in_schema=False,
 )
-@router.get('/api/v1/gender', response_model=List[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}')
+@router.get('/api/v1/gender', response_model=HapiGenericResponse[GenderResponse], summary=f'{DOC_GENDER_SUMMARY}')
 async def get_genders(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),

@@ -13,17 +13,16 @@ MAX_ITEMS_IN_BATCH = 5000
 
 
 def transform_result_to_csv_stream_if_requested(
-        result: List[Dict], 
-        output_format: OutputFormat, 
-        pydantic_class: Type[HapiBaseModel]
-    ) -> List[Dict] | StreamingResponse:
+    result: List[Dict], output_format: OutputFormat, pydantic_class: Type[HapiBaseModel]
+) -> List[Dict] | StreamingResponse:
     """
     Transforms the result to a CSV stream if requested. Otherwise, returns the result as is
     """
 
     if output_format == OutputFormat.CSV:
         if result:
-            def iter_csv(): 
+
+            def iter_csv():
                 pydantic_instance = pydantic_class.model_validate(result[0])
                 keys = pydantic_instance.list_of_fields()
                 items_per_row = len(keys)
@@ -47,12 +46,11 @@ def transform_result_to_csv_stream_if_requested(
                                 break
 
                         csv_row = str_as_file.getvalue()
-                        yield csv_row          
+                        yield csv_row
 
             response = StreamingResponse(iter_csv(), media_type='text/csv')
             response.headers['Content-Disposition'] = 'attachment; filename=results.csv'
             return response
 
         return StreamingResponse(iter([]), media_type='text/csv')
-    return result
-
+    return {'data': result}

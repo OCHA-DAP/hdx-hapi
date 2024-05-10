@@ -1,4 +1,4 @@
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 
 
@@ -13,6 +13,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ORG_TYPE,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.humanitarian_response import OrgResponse, OrgTypeResponse, SectorResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
@@ -33,13 +34,13 @@ router = APIRouter(
 
 @router.get(
     '/api/org',
-    response_model=List[OrgResponse],
+    response_model=HapiGenericResponse[OrgResponse],
     summary='Get the list of organizations represented in the data available in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/org',
-    response_model=List[OrgResponse],
+    response_model=HapiGenericResponse[OrgResponse],
     summary='Get the list of organizations represented in the data available in HAPI',
 )
 async def get_orgs(
@@ -80,13 +81,13 @@ async def get_orgs(
 
 @router.get(
     '/api/org_type',
-    response_model=List[OrgTypeResponse],
+    response_model=HapiGenericResponse[OrgTypeResponse],
     summary='Get information about how organizations are classified in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/org_type',
-    response_model=List[OrgTypeResponse],
+    response_model=HapiGenericResponse[OrgTypeResponse],
     summary='Get information about how organizations are classified in HAPI',
 )
 async def get_org_types(
@@ -112,13 +113,13 @@ async def get_org_types(
 
 @router.get(
     '/api/sector',
-    response_model=List[SectorResponse],
+    response_model=HapiGenericResponse[SectorResponse],
     summary='Get information about how humanitarian response activities are classified',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/sector',
-    response_model=List[SectorResponse],
+    response_model=HapiGenericResponse[SectorResponse],
     summary='Get information about how humanitarian response activities are classified',
 )
 async def get_sectors(

@@ -2,10 +2,9 @@ import base64
 from typing import Annotated
 from fastapi import APIRouter
 from pydantic import EmailStr
-from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 
 from hdx_hapi.endpoints.models.encoded_identifier import IdentifierResponse
-from hdx_hapi.endpoints.util.util import OutputFormat, app_name_identifier_query, email_identifier_query
+from hdx_hapi.endpoints.util.util import app_name_identifier_query, email_identifier_query
 
 router = APIRouter(
     tags=['Utility'],
@@ -35,4 +34,5 @@ async def get_encoded_identifier(
     encoded_identifier = base64.b64encode(bytes(f'{application}:{email}', 'utf-8'))
 
     result = {'encoded_identifier': encoded_identifier.decode('utf-8')}
-    return transform_result_to_csv_stream_if_requested(result, OutputFormat.JSON, IdentifierResponse)
+    return result
+    # return transform_result_to_csv_stream_if_requested(result, OutputFormat.JSON, IdentifierResponse)

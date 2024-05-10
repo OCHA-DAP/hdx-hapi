@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -28,6 +28,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HAPI_REPLACED_DATE_MAX,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
 from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -41,13 +42,13 @@ router = APIRouter(
 
 @router.get(
     '/api/themes/humanitarian_needs',
-    response_model=List[HumanitarianNeedsResponse],
+    response_model=HapiGenericResponse[HumanitarianNeedsResponse],
     summary='Get humanitarian needs data',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/themes/humanitarian_needs',
-    response_model=List[HumanitarianNeedsResponse],
+    response_model=HapiGenericResponse[HumanitarianNeedsResponse],
     summary='Get humanitarian needs data',
 )
 async def get_humanitarian_needs(
