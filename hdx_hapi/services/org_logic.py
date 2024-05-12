@@ -1,12 +1,11 @@
-from typing import Dict
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.org_view_dao import orgs_view_list
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 async def get_orgs_srv(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     acronym: str = None,
     name: str = None,

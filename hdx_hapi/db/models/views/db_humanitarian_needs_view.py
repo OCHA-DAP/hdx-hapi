@@ -34,6 +34,8 @@ class HumanitarianNeedsView(Base):
     resource_hdx_id: Mapped[str] = column_property(humanitarian_needs_view.c.resource_hdx_id)
     resource_name: Mapped[str] = column_property(humanitarian_needs_view.c.resource_name)
     resource_update_date = column_property(humanitarian_needs_view.c.resource_update_date)
+    hapi_updated_date: Mapped[DateTime] = column_property(humanitarian_needs_view.c.hapi_updated_date)
+    hapi_replaced_date: Mapped[DateTime] = column_property(humanitarian_needs_view.c.hapi_replaced_date)
 
     dataset_hdx_id: Mapped[str] = column_property(humanitarian_needs_view.c.dataset_hdx_id)
     dataset_hdx_stub: Mapped[str] = column_property(humanitarian_needs_view.c.dataset_hdx_stub)
@@ -47,7 +49,9 @@ class HumanitarianNeedsView(Base):
     admin1_code: Mapped[str] = column_property(humanitarian_needs_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(humanitarian_needs_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(humanitarian_needs_view.c.admin1_is_unspecified)
+    location_ref: Mapped[int] = column_property(humanitarian_needs_view.c.location_ref)
 
     admin2_code: Mapped[str] = column_property(humanitarian_needs_view.c.admin2_code)
     admin2_name: Mapped[str] = column_property(humanitarian_needs_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(humanitarian_needs_view.c.admin2_is_unspecified)
+    admin1_ref: Mapped[int] = column_property(humanitarian_needs_view.c.admin1_ref)

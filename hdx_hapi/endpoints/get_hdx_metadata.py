@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -18,10 +18,19 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_DATASET,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MAX,
+    DOC_HAPI_REPLACED_DATE_MIN,
+    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
-from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import (
+    CommonEndpointParams,
+    OutputFormat,
+    common_endpoint_parameters,
+)
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.dataset_logic import get_datasets_srv
 from hdx_hapi.services.resource_logic import get_resources_srv
@@ -34,17 +43,17 @@ router = APIRouter(
 
 @router.get(
     '/api/dataset',
-    response_model=List[DatasetResponse],
+    response_model=HapiGenericResponse[DatasetResponse],
     summary='Get information about the sources of the data in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/dataset',
-    response_model=List[DatasetResponse],
+    response_model=HapiGenericResponse[DatasetResponse],
     summary='Get information about the sources of the data in HAPI',
 )
 async def get_datasets(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
     hdx_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
@@ -58,7 +67,7 @@ async def get_datasets(
     for HAPI. Datasets contain one or more resources, which are the sources of the data found in HAPI.
     """
     result = await get_datasets_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         hdx_id=hdx_id,
         hdx_stub=hdx_stub,
@@ -71,17 +80,17 @@ async def get_datasets(
 
 @router.get(
     '/api/resource',
-    response_model=List[ResourceResponse],
+    response_model=HapiGenericResponse[ResourceResponse],
     summary='Get information about the sources of the data in HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/resource',
-    response_model=List[ResourceResponse],
+    response_model=HapiGenericResponse[ResourceResponse],
     summary='Get information about the sources of the data in HAPI',
 )
 async def get_resources(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
     format: Annotated[str, Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
@@ -94,6 +103,22 @@ async def get_resources(
         Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
     is_hxl: Annotated[bool, Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     dataset_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID} {DOC_SEE_DATASET} ')] = None,
     dataset_hdx_stub: Annotated[
         str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME} {DOC_SEE_DATASET}')
@@ -110,13 +135,17 @@ async def get_resources(
     which are the sources of the data found in HAPI.
     """
     result = await get_resources_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         hdx_id=hdx_id,
         format=format,
         update_date_min=update_date_min,
         update_date_max=update_date_max,
         is_hxl=is_hxl,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         dataset_hdx_id=dataset_hdx_id,
         dataset_hdx_stub=dataset_hdx_stub,
         dataset_title=dataset_title,

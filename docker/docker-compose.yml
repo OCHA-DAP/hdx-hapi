@@ -1,18 +1,4 @@
 services:
-  # hapi:
-  #   image: public.ecr.aws/unocha/python:3
-  #   hostname: hapi
-  #   working_dir: /srv/hapi
-  #   ports:
-  #     - "127.0.0.1:8844:8844"
-  #     - "127.0.0.1:40022:22"
-  #   volumes:
-  #     - ".ssh/etc:/etc/ssh"
-  #     - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
-  #     - "./..:/srv/hapi"
-  #   environment:
-  #     HDX_DOMAIN: ${HDX_DOMAIN:-https://data.humdata.org}
-  #   entrypoint: tail -f /dev/null
 
   hapi:
     image: public.ecr.aws/unocha/hdx-hapi:${HAPI_IMAGE_TAG:-main}
@@ -33,12 +19,12 @@ services:
       - "127.0.0.1:8844:8844"
       - "127.0.0.1:8850:5000"
       - "127.0.0.1:8851:5001"
-      # - "127.0.0.1:40022:22"
     volumes:
-      # - ".ssh/etc:/etc/ssh"
-      # - ".ssh/authorized_keys/:/root/.ssh/authorized_keys"
+
       - "./..:/srv/hapi"
     entrypoint: tail -f /dev/null
+    networks:
+      - hapi
       
   db:
     image: postgres:15.4-alpine3.18
@@ -50,3 +36,8 @@ services:
     environment:
       PGDATA: /var/lib/pgsql
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    networks:
+      - hapi
+
+networks:
+  hapi:

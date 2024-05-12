@@ -11,7 +11,7 @@ national_risk_view = view(view_params_national_risk.name, Base.metadata, view_pa
 
 class NationalRiskView(Base):
     __table__ = national_risk_view
-    
+
     id: Mapped[int] = column_property(national_risk_view.c.id)
 
     resource_ref: Mapped[int] = column_property(national_risk_view.c.resource_ref)
@@ -40,6 +40,8 @@ class NationalRiskView(Base):
     resource_hdx_id: Mapped[str] = column_property(national_risk_view.c.resource_hdx_id)
     resource_name: Mapped[str] = column_property(national_risk_view.c.resource_name)
     resource_update_date = column_property(national_risk_view.c.resource_update_date)
+    hapi_updated_date: Mapped[DateTime] = column_property(national_risk_view.c.hapi_updated_date)
+    hapi_replaced_date: Mapped[DateTime] = column_property(national_risk_view.c.hapi_replaced_date)
 
     # sector_name: Mapped[str] = column_property(national_risk_view.c.sector_name)
 

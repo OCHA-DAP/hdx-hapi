@@ -12,7 +12,9 @@ endpoint_data = {
             'code',
             'name',
             'location_code',
-            'location_name'
+            'location_name',
+            'hapi_updated_date',
+            'hapi_replaced_date',
         ],
     },
     '/api/admin2': {
@@ -30,18 +32,14 @@ endpoint_data = {
             'admin1_code',
             'admin1_name',
             'location_code',
-            'location_name'
+            'location_name',
+            'hapi_updated_date',
+            'hapi_replaced_date',
         ],
     },
     '/api/age_range': {
-        'query_parameters': {
-            'code': '10-14'
-        },
-        'expected_fields': [
-            'code',
-            'age_min',
-            'age_max'
-        ],
+        'query_parameters': {'code': '10-14'},
+        'expected_fields': ['code', 'age_min', 'age_max'],
     },
     '/api/dataset': {
         'query_parameters': {
@@ -57,28 +55,16 @@ endpoint_data = {
             'hdx_provider_stub',
             'hdx_provider_name',
             'hdx_link',  # computed field
-            'hdx_api_link'  # computed field
+            'hdx_api_link',  # computed field
         ],
     },
     '/api/gender': {
-        'query_parameters': {
-            'code': 'F',
-            'name': 'female'
-        },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'query_parameters': {'code': 'F', 'name': 'female'},
+        'expected_fields': ['code', 'description'],
     },
     '/api/location': {
-        'query_parameters': {
-            'code': 'foo',
-            'name': 'Foolandia'
-        },
-        'expected_fields': [
-            'code',
-            'name'
-        ],
+        'query_parameters': {'code': 'foo', 'name': 'Foolandia'},
+        'expected_fields': ['code', 'name'],
     },
     '/api/themes/3W': {
         'query_parameters': {
@@ -101,6 +87,8 @@ endpoint_data = {
             'sector_code',
             'dataset_hdx_stub',
             'resource_hdx_id',
+            'hapi_updated_date',
+            'hapi_replaced_date',
             'org_acronym',
             'org_name',
             'sector_name',
@@ -110,8 +98,10 @@ endpoint_data = {
             'reference_period_end',
             'admin1_code',
             'admin1_name',
+            'location_ref',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
+            'admin1_ref',
         ],
     },
     '/api/org': {
@@ -121,22 +111,14 @@ endpoint_data = {
             'org_type_code': '433',
             'org_type_description': 'Dono',  # Donor
         },
-        'expected_fields': [
-            'acronym',
-            'name',
-            'org_type_code',
-            'org_type_description'
-        ],
+        'expected_fields': ['acronym', 'name', 'org_type_code', 'org_type_description'],
     },
     '/api/org_type': {
         'query_parameters': {
             'code': '431',
-            'name': 'national'  # International
+            'name': 'national',  # International
         },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'expected_fields': ['code', 'description'],
     },
     '/api/themes/population': {
         'query_parameters': {
@@ -162,33 +144,28 @@ endpoint_data = {
             'reference_period_end',
             'dataset_hdx_stub',
             'resource_hdx_id',
+            'hapi_updated_date',
+            'hapi_replaced_date',
             'location_code',
             'location_name',
             'admin1_code',
             'admin1_name',
+            'location_ref',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
+            'admin1_ref',
         ],
     },
     '/api/population_group': {
         'query_parameters': {
             'code': 'refugees',
-            'description': 'refugee'  # refugees
+            'description': 'refugee',  # refugees
         },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'expected_fields': ['code', 'description'],
     },
     '/api/population_status': {
-        'query_parameters': {
-            'code': 'inneed',
-            'description': 'people'
-        },
-        'expected_fields': [
-            'code',
-            'description'
-        ],
+        'query_parameters': {'code': 'inneed', 'description': 'people'},
+        'expected_fields': ['code', 'description'],
     },
     '/api/themes/food_security': {
         'query_parameters': {
@@ -216,12 +193,16 @@ endpoint_data = {
             'dataset_hdx_stub',
             'dataset_hdx_provider_stub',
             'resource_hdx_id',
+            'hapi_updated_date',
+            'hapi_replaced_date',
             'location_code',
             'location_name',
             'admin1_code',
             'admin1_name',
+            'location_ref',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
+            'admin1_ref',
         ],
     },
     '/api/themes/national_risk': {
@@ -253,9 +234,11 @@ endpoint_data = {
             'dataset_hdx_stub',
             'dataset_hdx_provider_stub',
             'resource_hdx_id',
+            'hapi_updated_date',
+            'hapi_replaced_date',
             # "sector_name",
             'location_code',
-            'location_name'
+            'location_name',
         ],
     },
     '/api/themes/humanitarian_needs': {
@@ -292,13 +275,17 @@ endpoint_data = {
             'dataset_hdx_stub',
             'dataset_hdx_provider_stub',
             'resource_hdx_id',
+            'hapi_updated_date',
+            'hapi_replaced_date',
             'sector_name',
             'location_code',
             'location_name',
             'admin1_code',
             'admin1_name',
+            'location_ref',
             'admin2_code',
-            'admin2_name'
+            'admin2_name',
+            'admin1_ref',
         ],
     },
     '/api/resource': {
@@ -319,6 +306,8 @@ endpoint_data = {
             'format',
             'update_date',
             'is_hxl',
+            'hapi_updated_date',
+            'hapi_replaced_date',
             'download_url',
             'dataset_hdx_id',
             'dataset_hdx_stub',
@@ -334,11 +323,15 @@ endpoint_data = {
     '/api/sector': {
         'query_parameters': {
             'code': 'Pro',
-            'name': 'Protect'  # Protection
+            'name': 'Protect',  # Protection
         },
-        'expected_fields': [
-            'code',
-            'name'
-        ],
+        'expected_fields': ['code', 'name'],
+    },
+    '/api/encode_identifier': {
+        'query_parameters': {
+            'application': 'web_application_1',
+            'email': 'info@example.com',
+        },
+        'expected_fields': ['encoded_identifier'],
     },
 }

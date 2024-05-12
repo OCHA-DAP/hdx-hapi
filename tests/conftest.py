@@ -9,14 +9,14 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, Session
 from typing import List
 
-from hdx_hapi.config.config import get_config
 
-
-SAMPLE_DATA_SQL_FILE = 'alembic/versions/afd54d1a867e_insert_sample_data.sql'
+SAMPLE_DATA_SQL_FILE = 'tests/sample_data.sql'
 
 
 def pytest_sessionstart(session):
-    os.environ['HAPI_DB_NAME'] =  'hapi_test'
+    os.environ['HAPI_DB_NAME'] = 'hapi_test'
+    os.environ['HAPI_IDENTIFIER_FILTERING'] = 'False'
+    os.environ['HDX_MIXPANEL_TOKEN'] = 'fake_token'
 
 
 @pytest.fixture(scope='session')
@@ -33,6 +33,10 @@ def log():
 
 @pytest.fixture(scope='session')
 def session_maker() -> sessionmaker[Session]:
+        
+    # we don't want to import get_config before env vars are set for tests in pytest_sessionstart method
+    from hdx_hapi.config.config import get_config
+    
     engine = create_engine(
         get_config().SQL_ALCHEMY_PSYCOPG2_DB_URI,
     )
@@ -45,9 +49,7 @@ def list_of_db_tables(log: Logger, session_maker: sessionmaker[Session]) -> List
     # log.info('Getting list of db tables')
     session = session_maker()
     try:
-        result = session.execute(
-            text('SELECT tablename FROM pg_tables WHERE schemaname = \'public\'')
-        )
+        result = session.execute(text("SELECT tablename FROM pg_tables WHERE schemaname = 'public'"))
         return [row[0] for row in result if row != 'alembic_version']
     except Exception as e:
         raise e
@@ -70,6 +72,7 @@ def clear_db_tables(log: Logger, session_maker: sessionmaker[Session], list_of_d
     finally:
         db_session.close()
 
+
 @pytest.fixture(scope='function')
 def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
     log.info('Populating with test data')
@@ -87,7 +90,17 @@ def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
     finally:
         db_session.close()
 
+
 @pytest.fixture(scope='function')
 def refresh_db(clear_db_tables, populate_test_data):
     pass
 
+
+@pytest.fixture(scope='function')
+def enable_hapi_identifier_filtering():
+    import hdx_hapi.config.config as config
+
+    initial_config_id_filtering = config.CONFIG.HAPI_IDENTIFIER_FILTERING
+    config.CONFIG.HAPI_IDENTIFIER_FILTERING = True
+    yield
+    config.CONFIG.HAPI_IDENTIFIER_FILTERING = initial_config_id_filtering

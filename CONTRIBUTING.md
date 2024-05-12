@@ -41,3 +41,20 @@ URL: jdbc:postgresql://localhost:45432/hapi
 username: hapi
 password: hapi
 ```
+
+# Adding a new endpoint
+
+To add a new endpoint we add lines like this to `main.py`:
+```python
+from hdx_hapi.endpoints.get_population_profile import router as population_profile_router  # noqa
+```
+
+Followed by:
+```python
+app.include_router(population_profile_router)
+```
+
+The route is implemented in the `hdx_hapi/endpoints` directory based on a FastAPI `APIRouter`. `pagingination_parameters` and `OutputFormat` are provided as parameters for all endpoints. The model for the response is provided in the `hdx_hapi/endpoints/models` directory, derived from the HapiBaseModel which is itself derived from the `pydantic.BaseModel`
+
+Tests are created by adding dictionary entries with `query_parameters` and `expected_fields` to the `tests/endpoint_data.py` file. Three tests are then done in a dedicated test file, one for any response, one for the query parameters and one for the response.
+

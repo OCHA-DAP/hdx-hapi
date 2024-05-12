@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List, Annotated
+from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -13,10 +13,15 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_LOC,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MIN,
+    DOC_HAPI_UPDATED_DATE_MAX,
+    DOC_HAPI_REPLACED_DATE_MIN,
+    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
+from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
-from hdx_hapi.endpoints.util.util import OutputFormat, pagination_parameters
+from hdx_hapi.endpoints.util.util import CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.national_risk_logic import get_national_risks_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -28,13 +33,17 @@ router = APIRouter(
 
 @router.get(
     '/api/themes/national_risk',
-    response_model=List[NationalRiskResponse],
+    response_model=HapiGenericResponse[NationalRiskResponse],
     summary='Get national risk data',
     include_in_schema=False,
 )
-@router.get('/api/v1/themes/national_risk', response_model=List[NationalRiskResponse], summary='Get national risk data')
+@router.get(
+    '/api/v1/themes/national_risk',
+    response_model=HapiGenericResponse[NationalRiskResponse],
+    summary='Get national risk data',
+)
 async def get_national_risks(
-    pagination_parameters: Annotated[dict, Depends(pagination_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     risk_class: Annotated[int, Query(description='Risk class')] = None,
     global_rank: Annotated[int, Query(description='Global rank')] = None,
@@ -51,6 +60,22 @@ async def get_national_risks(
         NaiveDatetime | date,
         Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
+    hapi_updated_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    ] = None,
+    hapi_updated_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    ] = None,
+    hapi_replaced_date_min: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    ] = None,
+    hapi_replaced_date_max: Annotated[
+        NaiveDatetime | date,
+        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    ] = None,
     # sector_name: Annotated[str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
@@ -60,7 +85,7 @@ async def get_national_risks(
     Return the list of national risks
     """
     result = await get_national_risks_srv(
-        pagination_parameters=pagination_parameters,
+        pagination_parameters=common_parameters,
         db=db,
         risk_class=risk_class,
         global_rank=global_rank,
@@ -71,6 +96,10 @@ async def get_national_risks(
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
         resource_update_date_min=resource_update_date_min,
         resource_update_date_max=resource_update_date_max,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
+        hapi_replaced_date_min=hapi_replaced_date_min,
+        hapi_replaced_date_max=hapi_replaced_date_max,
         # sector_name=sector_name,
         location_code=location_code,
         location_name=location_name,

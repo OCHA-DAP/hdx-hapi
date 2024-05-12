@@ -16,7 +16,7 @@ class OperationalPresenceView(Base):
     id: Mapped[int] = column_property(operational_presence_view.c.id)
     resource_ref: Mapped[int] = column_property(operational_presence_view.c.resource_ref)
     org_ref: Mapped[int] = column_property(operational_presence_view.c.org_ref)
-    
+
     sector_code: Mapped[str] = column_property(operational_presence_view.c.sector_code)
     admin2_ref: Mapped[int] = column_property(operational_presence_view.c.admin2_ref)
     reference_period_start: Mapped[DateTime] = column_property(operational_presence_view.c.reference_period_start)
@@ -32,6 +32,8 @@ class OperationalPresenceView(Base):
     resource_hdx_id: Mapped[str] = column_property(operational_presence_view.c.resource_hdx_id)
     resource_name: Mapped[str] = column_property(operational_presence_view.c.resource_name)
     resource_update_date: Mapped[DateTime] = column_property(operational_presence_view.c.resource_update_date)
+    hapi_updated_date: Mapped[DateTime] = column_property(operational_presence_view.c.hapi_updated_date)
+    hapi_replaced_date: Mapped[DateTime] = column_property(operational_presence_view.c.hapi_replaced_date)
     org_acronym: Mapped[str] = column_property(operational_presence_view.c.org_acronym)
     org_name: Mapped[str] = column_property(operational_presence_view.c.org_name)
     org_type_code: Mapped[str] = column_property(operational_presence_view.c.org_type_code)
@@ -42,6 +44,8 @@ class OperationalPresenceView(Base):
     admin1_code: Mapped[str] = column_property(operational_presence_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(operational_presence_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(operational_presence_view.c.admin1_is_unspecified)
+    location_ref: Mapped[int] = column_property(operational_presence_view.c.location_ref)
     admin2_code: Mapped[str] = column_property(operational_presence_view.c.admin2_code)
     admin2_name: Mapped[str] = column_property(operational_presence_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(operational_presence_view.c.admin2_is_unspecified)
+    admin1_ref: Mapped[int] = column_property(operational_presence_view.c.admin1_ref)

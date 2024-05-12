@@ -23,24 +23,24 @@ if config.config_file_name is not None:
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import DBAdmin1
 from hapi_schema.db_admin2 import DBAdmin2
-from hapi_schema.db_location import DBLocation
 from hapi_schema.db_age_range import DBAgeRange
-from hapi_schema.db_gender import DBGender
 from hapi_schema.db_dataset import DBDataset
-from hapi_schema.db_resource import DBResource
-from hapi_schema.db_org import DBOrg
-from hapi_schema.db_org_type import DBOrgType
-from hapi_schema.db_sector import DBSector
 from hapi_schema.db_food_security import DBFoodSecurity
+from hapi_schema.db_gender import DBGender
 from hapi_schema.db_humanitarian_needs import DBHumanitarianNeeds
 from hapi_schema.db_ipc_phase import DBIpcPhase
 from hapi_schema.db_ipc_type import DBIpcType
+from hapi_schema.db_location import DBLocation
 from hapi_schema.db_national_risk import DBNationalRisk
+from hapi_schema.db_operational_presence import DBOperationalPresence
+from hapi_schema.db_org import DBOrg
+from hapi_schema.db_org_type import DBOrgType
+from hapi_schema.db_patch import DBPatch
+from hapi_schema.db_population import DBPopulation
 from hapi_schema.db_population_group import DBPopulationGroup
 from hapi_schema.db_population_status import DBPopulationStatus
-
-from hapi_schema.db_operational_presence import DBOperationalPresence
-from hapi_schema.db_population import DBPopulation
+from hapi_schema.db_resource import DBResource
+from hapi_schema.db_sector import DBSector
 
 target_metadata = Base.metadata
 # target_metadata = None
@@ -56,7 +56,7 @@ def _get_db_uri() -> str:
     db_url = db_url_dict.get('sqlalchemy.url') if db_url_dict else None
     if not db_url:
         db_url = f'postgresql+psycopg2://{create_pg_uri_from_env_without_protocol()}'
-    # print(f'My db url is {x_url}')
+    # print(f'My db url is {db_url}')
     return db_url
 
 

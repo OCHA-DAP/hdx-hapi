@@ -19,7 +19,7 @@ async def test_get_orgs(event_loop, refresh_db):
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
-    assert len(response.json()) > 0, 'There should be at least one org in the database'
+    assert len(response.json()['data']) > 0, 'There should be at least one org in the database'
 
 
 @pytest.mark.asyncio
@@ -31,15 +31,16 @@ async def test_get_org_params(event_loop, refresh_db):
             response = await ac.get(ENDPOINT_ROUTER)
 
         assert response.status_code == 200
-        assert len(response.json()) > 0, \
-            f'There should be at least one org entry for parameter "{param_name}" with value "{param_value}" ' \
+        assert len(response.json()['data']) > 0, (
+            f'There should be at least one org entry for parameter "{param_name}" with value "{param_value}" '
             'in the database'
+        )
 
     async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 200
-    assert len(response.json()) > 0, 'There should be at least one org entry for all parameters in the database'
+    assert len(response.json()['data']) > 0, 'There should be at least one org entry for all parameters in the database'
 
 
 @pytest.mark.asyncio
@@ -50,6 +51,8 @@ async def test_get_org_result(event_loop, refresh_db):
         response = await ac.get(ENDPOINT_ROUTER)
 
     for field in expected_fields:
-        assert field in response.json()[0], f'Field "{field}" not found in the response'
+        assert field in response.json()['data'][0], f'Field "{field}" not found in the response'
 
-    assert len(response.json()[0]) == len(expected_fields), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(
+        expected_fields
+    ), 'Response has a different number of fields than expected'

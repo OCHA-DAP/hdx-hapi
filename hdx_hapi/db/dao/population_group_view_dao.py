@@ -1,22 +1,21 @@
 import logging
 
-from typing import Dict
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_population_group_view import PopulationGroupView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 logger = logging.getLogger(__name__)
 
+
 async def population_groups_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     code: str = None,
     description: str = None,
 ):
-
     logger.info(f'population_groups_view_list called with params: code={code}, description={description}')
 
     query = select(PopulationGroupView)

@@ -1,12 +1,11 @@
-from typing import Dict
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.age_range_view_dao import age_ranges_view_list
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 
 async def get_age_ranges_srv(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
     db: AsyncSession,
     code: str = None,
 ):
