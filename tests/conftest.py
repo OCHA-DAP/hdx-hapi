@@ -5,18 +5,85 @@ import logging
 
 
 from logging import Logger
-from sqlalchemy import create_engine, text
+from sqlalchemy import Engine, MetaData, create_engine, inspect, text
 from sqlalchemy.orm import sessionmaker, Session
 from typing import List
 
+from hapi_schema.db_admin1 import view_params_admin1
+from hapi_schema.db_admin2 import view_params_admin2
+from hapi_schema.db_dataset import view_params_dataset
+from hapi_schema.db_food_security import view_params_food_security
+from hapi_schema.db_funding import view_params_funding
+from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs
+from hapi_schema.db_location import view_params_location
+from hapi_schema.db_national_risk import view_params_national_risk
+from hapi_schema.db_operational_presence import view_params_operational_presence
+from hapi_schema.db_org_type import view_params_org_type
+from hapi_schema.db_org import view_params_org
+from hapi_schema.db_population import view_params_population
+from hapi_schema.db_refugees import view_params_refugees
+from hapi_schema.db_resource import view_params_resource
+from hapi_schema.db_sector import view_params_sector
 
-SAMPLE_DATA_SQL_FILE = 'tests/sample_data.sql'
+from hdx_hapi.config.config import get_config
+from hdx_hapi.db.models.base import Base
+from hdx_hapi.db.models.views.util.util import CreateView
+
+
+SAMPLE_DATA_SQL_FILES = ['tests/sample_location_admin.sql']
+
+VIEW_LIST = [
+    view_params_admin1,
+    view_params_admin2,
+    view_params_location,
+    view_params_dataset,
+    view_params_food_security,
+    view_params_funding,
+    view_params_humanitarian_needs,
+    view_params_national_risk,
+    view_params_operational_presence,
+    view_params_org_type,
+    view_params_org,
+    view_params_population,
+    view_params_refugees,
+    view_params_resource,
+    view_params_sector,
+]
 
 
 def pytest_sessionstart(session):
     os.environ['HAPI_DB_NAME'] = 'hapi_test'
     os.environ['HAPI_IDENTIFIER_FILTERING'] = 'False'
     os.environ['HDX_MIXPANEL_TOKEN'] = 'fake_token'
+
+    engine = create_engine(
+        get_config().SQL_ALCHEMY_PSYCOPG2_DB_URI,
+    )
+    _drop_tables_and_views(engine)
+    _create_tables_and_views(engine)
+
+
+def _create_tables_and_views(engine: Engine):
+    Base.metadata.create_all(engine)
+    with engine.connect() as conn:
+        for v in VIEW_LIST:
+            conn.execute(CreateView(v.name, v.selectable))
+            conn.commit()
+
+
+def _drop_tables_and_views(engine: Engine):
+    # drop views
+    inspector = inspect(engine)
+    views = inspector.get_view_names()
+    with engine.connect() as conn:
+        for view in views:
+            conn.execute(text(f'DROP VIEW IF EXISTS {view}'))
+            conn.commit()
+
+    # drop tables
+    metadata = MetaData()
+    metadata.reflect(bind=engine)
+    metadata.drop_all(bind=engine)
 
 
 @pytest.fixture(scope='session')
@@ -33,10 +100,9 @@ def log():
 
 @pytest.fixture(scope='session')
 def session_maker() -> sessionmaker[Session]:
-        
     # we don't want to import get_config before env vars are set for tests in pytest_sessionstart method
     from hdx_hapi.config.config import get_config
-    
+
     engine = create_engine(
         get_config().SQL_ALCHEMY_PSYCOPG2_DB_URI,
     )
@@ -78,11 +144,12 @@ def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
     log.info('Populating with test data')
     db_session = session_maker()
     try:
-        with open(SAMPLE_DATA_SQL_FILE, 'r') as file:
-            sql_commands = file.read()
-            db_session.execute(text(sql_commands))
-            db_session.commit()
-            log.info('Test data inserted successfully')
+        for sample_file in SAMPLE_DATA_SQL_FILES:
+            with open(sample_file, 'r') as file:
+                sql_commands = file.read()
+                db_session.execute(text(sql_commands))
+                db_session.commit()
+                log.info('Test data inserted successfully from {sample_file}')
     except Exception as e:
         log.error(f'Error while inserting test data: {str(e).splitlines()[0]}')
         db_session.rollback()
