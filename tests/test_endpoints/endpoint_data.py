@@ -1,7 +1,7 @@
 from datetime import date
 
 endpoint_data = {
-    '/api/admin1': {
+    '/api/v1/metadata/admin1': {
         'query_parameters': {
             'code': 'FoO-001',
             'name': 'Province 01',
@@ -13,11 +13,11 @@ endpoint_data = {
             'name',
             'location_code',
             'location_name',
-            'hapi_updated_date',
-            'hapi_replaced_date',
+            'reference_period_start',
+            'reference_period_end',
         ],
     },
-    '/api/admin2': {
+    '/api/v1/metadata/admin2': {
         'query_parameters': {
             'code': 'FoO-001-A',
             'name': 'District A',
@@ -33,8 +33,8 @@ endpoint_data = {
             'admin1_name',
             'location_code',
             'location_name',
-            'hapi_updated_date',
-            'hapi_replaced_date',
+            'reference_period_start',
+            'reference_period_end',
         ],
     },
     '/api/age_range': {
@@ -62,9 +62,14 @@ endpoint_data = {
         'query_parameters': {'code': 'F', 'name': 'female'},
         'expected_fields': ['code', 'description'],
     },
-    '/api/location': {
+    '/api/v1/metadata/location': {
         'query_parameters': {'code': 'foo', 'name': 'Foolandia'},
-        'expected_fields': ['code', 'name'],
+        'expected_fields': [
+            'code',
+            'name',
+            'reference_period_start',
+            'reference_period_end',
+        ],
     },
     '/api/themes/3W': {
         'query_parameters': {

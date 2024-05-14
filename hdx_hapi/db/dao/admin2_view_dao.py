@@ -1,10 +1,9 @@
-from datetime import datetime
 import logging
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hdx_hapi.db.models.views.db_admin2_view import Admin2View
+from hdx_hapi.db.models.views.all_views import Admin2View
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 from hdx_hapi.endpoints.util.util import PaginationParams
 
@@ -17,10 +16,6 @@ async def admin2_view_list(
     db: AsyncSession,
     code: str = None,
     name: str = None,
-    hapi_updated_date_min: datetime = None,
-    hapi_updated_date_max: datetime = None,
-    hapi_replaced_date_min: datetime = None,
-    hapi_replaced_date_max: datetime = None,
     admin1_code: str = None,
     admin1_name: str = None,
     location_code: str = None,
@@ -39,14 +34,6 @@ async def admin2_view_list(
         query = case_insensitive_filter(query, Admin2View.code, code)
     if name:
         query = query.where(Admin2View.name.icontains(name))
-    if hapi_updated_date_min:
-        query = query.where(Admin2View.hapi_updated_date >= hapi_updated_date_min)
-    if hapi_updated_date_max:
-        query = query.where(Admin2View.hapi_updated_date < hapi_updated_date_max)
-    if hapi_replaced_date_min:
-        query = query.where(Admin2View.hapi_replaced_date >= hapi_replaced_date_min)
-    if hapi_replaced_date_max:
-        query = query.where(Admin2View.hapi_replaced_date < hapi_replaced_date_max)
     if admin1_code:
         query = case_insensitive_filter(query, Admin2View.admin1_code, admin1_code)
     if admin1_name:
