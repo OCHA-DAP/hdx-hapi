@@ -118,10 +118,10 @@ endpoint_data = {
         },
         'expected_fields': ['acronym', 'name', 'org_type_code', 'org_type_description'],
     },
-    '/api/org_type': {
+    '/api/v1/metadata/org_type': {
         'query_parameters': {
             'code': '431',
-            'name': 'national',  # International
+            'name': 'Academic / Research',
         },
         'expected_fields': ['code', 'description'],
     },

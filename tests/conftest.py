@@ -33,6 +33,7 @@ from hdx_hapi.db.models.views.util.util import CreateView
 SAMPLE_DATA_SQL_FILES = [
     'tests/sample_location_admin.sql',
     'tests/sample_sector.sql',
+    'tests/sample_org_type.sql',
 ]
 
 VIEW_LIST = [
