@@ -5,24 +5,7 @@
 -- production we'll let the database generate them automatically.
 --
 -- Started 2023-08-09
--- ---------------------------------------------------------------------
-
-INSERT INTO dataset (id, hdx_id, hdx_stub, title, hdx_provider_stub, hdx_provider_name)
-VALUES
-(1, 'c3f001fa-b45b-464c-9460-1ca79fd39b40', 'dataset01', 'Dataset #1', 'provider01', 'Provider #1'),
-(2, '7cf3cec8-dbbc-4c96-9762-1464cd0bff75', 'dataset02', 'Dataset #2', 'provider02', 'Provider #2');
-
-INSERT INTO resource (id, dataset_ref, hdx_id, name, format, update_date, download_url, is_hxl, hapi_updated_date)
-VALUES
-(1, 1, '90deb235-1bf5-4bae-b231-3393222c2d01', 'resource-01.csv', 'csv', '2023-06-01 00:00:00',
-'https://data.humdata.org/dataset/c3f001fa-b45b-464c-9460-1ca79fd39b40/resource/90deb235-1bf5-4bae-b231-3393222c2d01/download/resource-01.csv',
- TRUE, '2023-01-01 00:00:00'),
-(2, 1, 'b9e438e0-b68a-49f9-b9a9-68c0f3e93604', 'resource-02.xlsx', 'xlsx', '2023-07-01 00:00:00',
-'https://fdw.fews.net/api/tradeflowquantityvaluefacts/?dataset=1845&country=TZ&fields=simple&format=xlsx',
- TRUE, '2023-01-01 00:00:00'),
-(3, 2, '62ad6e55-5f5d-4494-854c-4110687e9e25', 'resource-03.csv', 'csv', '2023-08-01 00:00:00',
- 'https://data.humdata.org/dataset/7cf3cec8-dbbc-4c96-9762-1464cd0bff75/resource/62ad6e55-5f5d-4494-854c-4110687e9e25/download/resource-03.csv',
- TRUE, '2023-01-01 00:00:00');
+-- --------------------------------------------------------------------
 
 -- these are the actual datatypes from
 -- https://data.humdata.org/dataset/organization-types-beta
