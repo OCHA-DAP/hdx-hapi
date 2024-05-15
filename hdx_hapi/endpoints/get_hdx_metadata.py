@@ -48,7 +48,7 @@ router = APIRouter(
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/dataset',
+    '/api/v1/metadata/dataset',
     response_model=HapiGenericResponse[DatasetResponse],
     summary='Get information about the sources of the data in HAPI',
 )

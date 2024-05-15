@@ -41,9 +41,9 @@ endpoint_data = {
         'query_parameters': {'code': '10-14'},
         'expected_fields': ['code', 'age_min', 'age_max'],
     },
-    '/api/dataset': {
+    '/api/v1/metadata/dataset': {
         'query_parameters': {
-            'hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
+            'hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',
             'title': 'Dataset #1',
             'hdx_provider_stub': 'Provider01',
             'hdx_provider_name': 'Provider #1',
