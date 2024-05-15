@@ -109,7 +109,7 @@ endpoint_data = {
             'admin1_ref',
         ],
     },
-    '/api/org': {
+    '/api/v1/metadata/org': {
         'query_parameters': {
             'acronym': 'Org01',
             'name': 'Organisation 1',

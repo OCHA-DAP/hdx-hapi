@@ -34,6 +34,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_location_admin.sql',
     'tests/sample_sector.sql',
     'tests/sample_org_type.sql',
+    'tests/sample_org.sql',
 ]
 
 VIEW_LIST = [
