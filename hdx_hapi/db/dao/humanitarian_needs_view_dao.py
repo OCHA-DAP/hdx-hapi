@@ -3,7 +3,7 @@ import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hdx_hapi.db.models.views.db_humanitarian_needs_view import HumanitarianNeedsView
+from hdx_hapi.db.models.views.all_views import HumanitarianNeedsView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
 from hdx_hapi.endpoints.util.util import PaginationParams
 

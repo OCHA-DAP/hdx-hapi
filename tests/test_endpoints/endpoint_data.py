@@ -325,10 +325,10 @@ endpoint_data = {
             'dataset_hdx_api_link',  # computed field
         ],
     },
-    '/api/sector': {
+    '/api/v1/metadata/sector': {
         'query_parameters': {
             'code': 'Pro',
-            'name': 'Protect',  # Protection
+            'name': 'Protection',  # Protection
         },
         'expected_fields': ['code', 'name'],
     },
