@@ -4,8 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.all_views import Admin2View
-from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
-from hdx_hapi.endpoints.util.util import PaginationParams
+from hdx_hapi.db.dao.util.util import apply_pagination, apply_reference_period_filter, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
 
 
 logger = logging.getLogger(__name__)
@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 async def admin2_view_list(
     pagination_parameters: PaginationParams,
+    ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
     code: str = None,
     name: str = None,
@@ -42,6 +43,8 @@ async def admin2_view_list(
         query = case_insensitive_filter(query, Admin2View.location_code, location_code)
     if location_name:
         query = query.where(Admin2View.location_name.icontains(location_name))
+
+    query = apply_reference_period_filter(query, ref_period_parameters, Admin2View)
 
     query = apply_pagination(query, pagination_parameters)
 

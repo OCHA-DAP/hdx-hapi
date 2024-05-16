@@ -1,10 +1,12 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.admin2_view_dao import admin2_view_list
-from hdx_hapi.endpoints.util.util import PaginationParams
+from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+
 
 async def get_admin2_srv(
     pagination_parameters: PaginationParams,
+    ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
     code: str = None,
     name: str = None,
@@ -15,6 +17,7 @@ async def get_admin2_srv(
 ):
     return await admin2_view_list(
         pagination_parameters=pagination_parameters,
+        ref_period_parameters=ref_period_parameters,
         db=db,
         code=code,
         name=name,

@@ -8,6 +8,7 @@ from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
 from hapi_schema.db_admin2 import view_params_admin2
+from hapi_schema.db_conflict_event import view_params_conflict_event
 from hapi_schema.db_dataset import view_params_dataset
 from hapi_schema.db_food_security import view_params_food_security
 from hapi_schema.db_funding import view_params_funding
@@ -18,6 +19,7 @@ from hapi_schema.db_operational_presence import view_params_operational_presence
 from hapi_schema.db_org_type import view_params_org_type
 from hapi_schema.db_org import view_params_org
 from hapi_schema.db_population import view_params_population
+from hapi_schema.db_poverty_rate import view_params_poverty_rate
 from hapi_schema.db_refugees import view_params_refugees
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
@@ -26,6 +28,7 @@ from hapi_schema.db_sector import view_params_sector
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
 admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
+conflict_event_view = view(view_params_conflict_event.name, Base.metadata, view_params_conflict_event.selectable)
 dataset_view = view(view_params_dataset.name, Base.metadata, view_params_dataset.selectable)
 food_security_view = view(view_params_food_security.name, Base.metadata, view_params_food_security.selectable)
 funding_view = view(view_params_funding.name, Base.metadata, view_params_funding.selectable)
@@ -40,6 +43,7 @@ operational_presence_view = view(
 org_type_view = view(view_params_org_type.name, Base.metadata, view_params_org_type.selectable)
 org_view = view(view_params_org.name, Base.metadata, view_params_org.selectable)
 population_view = view(view_params_population.name, Base.metadata, view_params_population.selectable)
+poverty_rate_view = view(view_params_poverty_rate.name, Base.metadata, view_params_poverty_rate.selectable)
 refugees_view = view(view_params_refugees.name, Base.metadata, view_params_refugees.selectable)
 resource_view = view(view_params_resource.name, Base.metadata, view_params_resource.selectable)
 sector_view = view(view_params_sector.name, Base.metadata, view_params_sector.selectable)
@@ -73,6 +77,27 @@ class Admin2View(Base):
     admin1_is_unspecified: Mapped[bool] = column_property(admin2_view.c.admin1_is_unspecified)
     location_code: Mapped[str] = column_property(admin2_view.c.location_code)
     location_name: Mapped[str] = column_property(admin2_view.c.location_name)
+
+
+class ConflictEventView(Base):
+    __table__ = conflict_event_view
+    resource_hdx_id: Mapped[str] = column_property(conflict_event_view.c.resource_hdx_id)
+    admin2_ref: Mapped[int] = column_property(conflict_event_view.c.admin2_ref)
+    event_type: Mapped[str] = column_property(conflict_event_view.c.event_type)
+    events: Mapped[int] = column_property(conflict_event_view.c.events)
+    fatalities: Mapped[int] = column_property(conflict_event_view.c.fatalities)
+    reference_period_start: Mapped[DateTime] = column_property(conflict_event_view.c.reference_period_start)
+    reference_period_end: Mapped[DateTime] = column_property(conflict_event_view.c.reference_period_end)
+    location_code: Mapped[str] = column_property(conflict_event_view.c.location_code)
+    location_name: Mapped[str] = column_property(conflict_event_view.c.location_name)
+    admin1_code: Mapped[str] = column_property(conflict_event_view.c.admin1_code)
+    admin1_name: Mapped[str] = column_property(conflict_event_view.c.admin1_name)
+    admin1_is_unspecified: Mapped[bool] = column_property(conflict_event_view.c.admin1_is_unspecified)
+    location_ref: Mapped[int] = column_property(conflict_event_view.c.location_ref)
+    admin2_code: Mapped[str] = column_property(conflict_event_view.c.admin2_code)
+    admin2_name: Mapped[str] = column_property(conflict_event_view.c.admin2_name)
+    admin2_is_unspecified: Mapped[bool] = column_property(conflict_event_view.c.admin2_is_unspecified)
+    admin1_ref: Mapped[int] = column_property(conflict_event_view.c.admin1_ref)
 
 
 class DatasetView(Base):
@@ -235,6 +260,22 @@ class PopulationView(Base):
     admin2_name: Mapped[str] = column_property(population_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(population_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(population_view.c.admin1_ref)
+
+
+class PovertyRateView(Base):
+    __table__ = poverty_rate_view
+    resource_hdx_id: Mapped[str] = column_property(poverty_rate_view.c.resource_hdx_id)
+    admin1_ref: Mapped[int] = column_property(poverty_rate_view.c.admin1_ref)
+    classification: Mapped[str] = column_property(poverty_rate_view.c.classification)
+    population: Mapped[int] = column_property(poverty_rate_view.c.population)
+    reference_period_start: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_start)
+    reference_period_end: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_end)
+    location_code: Mapped[str] = column_property(poverty_rate_view.c.location_code)
+    location_name: Mapped[str] = column_property(poverty_rate_view.c.location_name)
+    admin1_code: Mapped[str] = column_property(poverty_rate_view.c.admin1_code)
+    admin1_name: Mapped[str] = column_property(poverty_rate_view.c.admin1_name)
+    admin1_is_unspecified: Mapped[bool] = column_property(poverty_rate_view.c.admin1_is_unspecified)
+    location_ref: Mapped[int] = column_property(poverty_rate_view.c.location_ref)
 
 
 class RefugeesView(Base):

@@ -7,6 +7,8 @@ endpoint_data = {
             'name': 'Province 01',
             'location_code': 'FoO',
             'location_name': 'Foolandia',
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
             'code',
@@ -25,6 +27,8 @@ endpoint_data = {
             'admin1_name': 'Province 01',
             'location_code': 'FOo',
             'location_name': 'Foolandia',
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
             'code',
@@ -65,7 +69,12 @@ endpoint_data = {
         'expected_fields': ['code', 'description'],
     },
     '/api/v1/metadata/location': {
-        'query_parameters': {'code': 'foo', 'name': 'Foolandia'},
+        'query_parameters': {
+            'code': 'foo',
+            'name': 'Foolandia',
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-01T00:00:00',
+        },
         'expected_fields': [
             'code',
             'name',
@@ -111,7 +120,7 @@ endpoint_data = {
             'admin1_ref',
         ],
     },
-    '/api/org': {
+    '/api/v1/metadata/org': {
         'query_parameters': {
             'acronym': 'Org01',
             'name': 'Organisation 1',
@@ -120,10 +129,10 @@ endpoint_data = {
         },
         'expected_fields': ['acronym', 'name', 'org_type_code', 'org_type_description'],
     },
-    '/api/org_type': {
+    '/api/v1/metadata/org_type': {
         'query_parameters': {
             'code': '431',
-            'name': 'national',  # International
+            'name': 'Academic / Research',
         },
         'expected_fields': ['code', 'description'],
     },
@@ -330,10 +339,10 @@ endpoint_data = {
             'provider_hdx_api_link',  # computed field
         ],
     },
-    '/api/sector': {
+    '/api/v1/metadata/sector': {
         'query_parameters': {
             'code': 'Pro',
-            'name': 'Protect',  # Protection
+            'name': 'Protection',  # Protection
         },
         'expected_fields': ['code', 'name'],
     },
