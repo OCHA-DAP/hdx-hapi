@@ -57,6 +57,7 @@ endpoint_data = {
             'hdx_link',  # computed field
             'hdx_api_link',  # computed field
             'provider_hdx_link',  # computed field
+            'provider_hdx_api_link',  # computed field
         ],
     },
     '/api/gender': {
@@ -326,6 +327,7 @@ endpoint_data = {
             'dataset_hdx_link',  # computed field
             'dataset_hdx_api_link',  # computed field
             'provider_hdx_link',  # computed field
+            'provider_hdx_api_link',  # computed field
         ],
     },
     '/api/sector': {

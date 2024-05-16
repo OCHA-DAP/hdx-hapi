@@ -19,6 +19,7 @@ class Config:
     HDX_DATASET_URL: str
     HDX_DATASET_API_URL: str
     HDX_ORGANIZATION_URL: str
+    HDX_ORGANIZATION_API_URL: str
 
     HDX_RESOURCE_URL: str
     HDX_RESOURCE_API_URL: str
@@ -54,6 +55,9 @@ def get_config() -> Config:
                 'HDX_RESOURCE_API_URL', '{domain}/api/action/resource_show?id={resource_id}'
             ),
             HDX_ORGANIZATION_URL=os.getenv('HDX_ORGANIZATION_URL', '{domain}/organization/{org_id}'),
+            HDX_ORGANIZATION_API_URL=os.getenv(
+                'HDX_ORGANIZATION_API_URL', '{domain}/api/action/organization_show?id={org_id}'
+            ),
             HAPI_READTHEDOCS_OVERVIEW_URL=os.getenv(
                 'HAPI_READTHEDOCS_OVERVIEW_URL', 'https://hdx-hapi.readthedocs.io/en/latest/'
             ),

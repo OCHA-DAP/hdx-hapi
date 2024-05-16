@@ -8,6 +8,7 @@ from hdx_hapi.services.hdx_url_logic import (
     get_dataset_url,
     get_dataset_api_url,
     get_organization_url,
+    get_organization_api_url,
 )
 
 
@@ -37,9 +38,16 @@ class DatasetResponse(HapiBaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+    @computed_field
+    @property
+    def provider_hdx_api_link(self) -> HttpUrl:
+        return get_organization_api_url(org_id=self.hdx_provider_stub)
+
+    model_config = ConfigDict(from_attributes=True)
+
     def list_of_fields(self) -> List[str]:
         fields = super().list_of_fields()
-        fields.extend(['hdx_link', 'api_link', 'hdx_provider_link'])
+        fields.extend(['hdx_link', 'api_link', 'provider_hdx_link', 'provider_hdx_api_link'])
         return fields
 
 
@@ -87,9 +95,14 @@ class ResourceResponse(HapiBaseModel):
     def provider_hdx_link(self) -> HttpUrl:
         return get_organization_url(org_id=self.dataset_hdx_provider_stub)
 
+    @computed_field
+    @property
+    def provider_hdx_api_link(self) -> HttpUrl:
+        return get_organization_api_url(org_id=self.dataset_hdx_provider_stub)
+
     model_config = ConfigDict(from_attributes=True)
 
     def list_of_fields(self) -> List[str]:
         fields = super().list_of_fields()
-        fields.extend(['hdx_link', 'api_link', 'dataset_hdx_link', 'dataset_api_link'])
+        fields.extend(['hdx_link', 'api_link', 'dataset_hdx_link', 'dataset_hdx_api_link'])
         return fields
