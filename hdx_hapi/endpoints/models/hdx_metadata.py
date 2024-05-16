@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 from datetime import datetime
 from pydantic import ConfigDict, Field, HttpUrl, computed_field
 from hdx_hapi.endpoints.models.base import HapiBaseModel
