@@ -32,7 +32,7 @@ class DatasetResponse(HapiBaseModel):
 
     @computed_field
     @property
-    def hdx_provider_link(self) -> HttpUrl:
+    def provider_hdx_link(self) -> HttpUrl:
         return get_organization_url(org_id=self.hdx_provider_stub)
 
     model_config = ConfigDict(from_attributes=True)
@@ -46,14 +46,14 @@ class DatasetResponse(HapiBaseModel):
 class ResourceResponse(HapiBaseModel):
     # id: int
     hdx_id: str = Field(max_length=36)
+    dataset_hdx_id: str = Field(max_length=36)
     name: str = Field(max_length=256)
     format: str = Field(max_length=32)
     update_date: datetime
     is_hxl: bool
-    hapi_updated_date: datetime
     download_url: HttpUrl
+    hapi_updated_date: datetime
 
-    dataset_hdx_id: str = Field(max_length=36)
     dataset_hdx_stub: str = Field(max_length=128)
 
     dataset_title: str = Field(max_length=1024)
@@ -81,6 +81,11 @@ class ResourceResponse(HapiBaseModel):
     @property
     def dataset_hdx_api_link(self) -> HttpUrl:
         return get_dataset_api_url(dataset_id=self.dataset_hdx_id)
+
+    @computed_field
+    @property
+    def provider_hdx_link(self) -> HttpUrl:
+        return get_organization_url(org_id=self.dataset_hdx_provider_stub)
 
     model_config = ConfigDict(from_attributes=True)
 
