@@ -7,6 +7,8 @@ endpoint_data = {
             'name': 'Province 01',
             'location_code': 'FoO',
             'location_name': 'Foolandia',
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
             'code',
@@ -25,6 +27,8 @@ endpoint_data = {
             'admin1_name': 'Province 01',
             'location_code': 'FOo',
             'location_name': 'Foolandia',
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
             'code',
@@ -63,7 +67,12 @@ endpoint_data = {
         'expected_fields': ['code', 'description'],
     },
     '/api/v1/metadata/location': {
-        'query_parameters': {'code': 'foo', 'name': 'Foolandia'},
+        'query_parameters': {
+            'code': 'foo',
+            'name': 'Foolandia',
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-01T00:00:00',
+        },
         'expected_fields': [
             'code',
             'name',
