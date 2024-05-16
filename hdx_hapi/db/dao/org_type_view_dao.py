@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hdx_hapi.db.models.views.db_org_type_view import OrgTypeView
+from hdx_hapi.db.models.views.all_views import OrgTypeView
 from hdx_hapi.db.dao.util.util import apply_pagination
 from hdx_hapi.endpoints.util.util import PaginationParams
 

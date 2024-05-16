@@ -109,7 +109,7 @@ endpoint_data = {
             'admin1_ref',
         ],
     },
-    '/api/org': {
+    '/api/v1/metadata/org': {
         'query_parameters': {
             'acronym': 'Org01',
             'name': 'Organisation 1',
@@ -118,10 +118,10 @@ endpoint_data = {
         },
         'expected_fields': ['acronym', 'name', 'org_type_code', 'org_type_description'],
     },
-    '/api/org_type': {
+    '/api/v1/metadata/org_type': {
         'query_parameters': {
             'code': '431',
-            'name': 'national',  # International
+            'name': 'Academic / Research',
         },
         'expected_fields': ['code', 'description'],
     },
@@ -325,10 +325,10 @@ endpoint_data = {
             'dataset_hdx_api_link',  # computed field
         ],
     },
-    '/api/sector': {
+    '/api/v1/metadata/sector': {
         'query_parameters': {
             'code': 'Pro',
-            'name': 'Protect',  # Protection
+            'name': 'Protection',  # Protection
         },
         'expected_fields': ['code', 'name'],
     },
