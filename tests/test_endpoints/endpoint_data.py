@@ -45,9 +45,9 @@ endpoint_data = {
         'query_parameters': {'code': '10-14'},
         'expected_fields': ['code', 'age_min', 'age_max'],
     },
-    '/api/dataset': {
+    '/api/v1/metadata/dataset': {
         'query_parameters': {
-            'hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
+            'hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',
             'title': 'Dataset #1',
             'hdx_provider_stub': 'pRoViDeR01',
             'hdx_provider_name': 'Provider #1',
@@ -60,6 +60,8 @@ endpoint_data = {
             'hdx_provider_name',
             'hdx_link',  # computed field
             'hdx_api_link',  # computed field
+            'provider_hdx_link',  # computed field
+            'provider_hdx_api_link',  # computed field
         ],
     },
     '/api/gender': {
@@ -302,29 +304,30 @@ endpoint_data = {
             'admin2_name',
             'admin1_ref',
         ],
-    },
-    '/api/resource': {
+    },  # (hdx_id, dataset_hdx_id, name, format, update_date, is_hxl, download_url, hapi_updated_date)
+    '/api/v1/metadata/resource': {
         'query_parameters': {
-            'hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',
+            'hdx_id': '17acb541-9431-409a-80a8-50eda7e8ebab',
+            'name': 'resource-01.csv',
             'format': 'csv',
             'update_date_min': date(2023, 6, 1),
-            'update_date_max': date(2023, 6, 2),
+            'update_date_max': date(2023, 6, 3),
             'is_hxl': True,
-            'dataset_hdx_id': 'c3f001fa-b45b-464c-9460-1ca79fd39b40',
+            'hapi_updated_date': date(2023, 6, 2),
+            'dataset_hdx_stub': 'dataset01',
             'dataset_title': 'Dataset #1',
-            'dataset_hdx_provider_stub': 'pRoViDeR01',
+            'dataset_hdx_provider_stub': 'provider01',
             'dataset_hdx_provider_name': 'Provider #1',
         },
         'expected_fields': [
             'hdx_id',
+            'dataset_hdx_id',
             'name',
             'format',
             'update_date',
             'is_hxl',
-            'hapi_updated_date',
-            'hapi_replaced_date',
             'download_url',
-            'dataset_hdx_id',
+            'hapi_updated_date',
             'dataset_hdx_stub',
             'dataset_title',
             'dataset_hdx_provider_stub',
@@ -333,6 +336,8 @@ endpoint_data = {
             'hdx_api_link',  # computed field
             'dataset_hdx_link',  # computed field
             'dataset_hdx_api_link',  # computed field
+            'provider_hdx_link',  # computed field
+            'provider_hdx_api_link',  # computed field
         ],
     },
     '/api/v1/metadata/sector': {

@@ -29,7 +29,6 @@ from hdx_hapi.config.config import get_config
 from hdx_hapi.db.models.base import Base
 from hdx_hapi.db.models.views.util.util import CreateView
 
-
 SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/sample_location_admin.sql',
     'tests/sample_data/sample_sector.sql',
