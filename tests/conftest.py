@@ -31,10 +31,11 @@ from hdx_hapi.db.models.views.util.util import CreateView
 
 
 SAMPLE_DATA_SQL_FILES = [
-    'tests/sample_location_admin.sql',
-    'tests/sample_sector.sql',
-    'tests/sample_org_type.sql',
-    'tests/sample_org.sql',
+    'tests/sample_data/sample_location_admin.sql',
+    'tests/sample_data/sample_sector.sql',
+    'tests/sample_data/sample_org_type.sql',
+    'tests/sample_data/sample_org.sql',
+    'tests/sample_data/sample_population.sql',
 ]
 
 VIEW_LIST = [
@@ -154,7 +155,7 @@ def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
                 sql_commands = file.read()
                 db_session.execute(text(sql_commands))
                 db_session.commit()
-                log.info('Test data inserted successfully from {sample_file}')
+                log.info(f'Test data inserted successfully from {sample_file}')
     except Exception as e:
         log.error(f'Error while inserting test data: {str(e).splitlines()[0]}')
         db_session.rollback()

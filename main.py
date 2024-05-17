@@ -15,7 +15,8 @@ from hdx_hapi.endpoints.middleware.mixpanel_tracking_middleware import mixpanel_
 from hdx_hapi.endpoints.get_encoded_identifier import router as encoded_identifier_router  # noqa
 
 # from hdx_hapi.endpoints.favicon import router as favicon_router  # noqa
-# from hdx_hapi.endpoints.get_population import router as population_router  # noqa
+from hdx_hapi.endpoints.get_population import router as population_router  # noqa
+
 # from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router  # noqa
 from hdx_hapi.endpoints.get_admin_level import router as admin_level_router  # noqa
 
@@ -48,7 +49,7 @@ app = FastAPI(
 app.include_router(encoded_identifier_router)
 # app.include_router(favicon_router)
 # app.include_router(operational_presence_router)
-# app.include_router(population_router)
+app.include_router(population_router)
 # app.include_router(food_security_router)
 # app.include_router(national_risk_router)
 # app.include_router(humanitarian_needs_router)

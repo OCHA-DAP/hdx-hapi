@@ -6,29 +6,31 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
 class PopulationResponse(HapiBaseModel):
-    gender_code: Optional[str] = Field(max_length=1)
-    age_range_code: Optional[str] = Field(max_length=32)
+    resource_hdx_id: str = Field(max_length=36)
+    admin2_ref: int = None
+
+    gender: Optional[str] = Field(max_length=1)
+    age_range: Optional[str] = Field(max_length=32)
+
+    min_age: Optional[int]
+    max_age: Optional[int]
     population: int
 
     reference_period_start: Optional[NaiveDatetime]
     reference_period_end: Optional[NaiveDatetime]
 
-    dataset_hdx_stub: str = Field(max_length=128)
-    resource_hdx_id: str = Field(max_length=36)
-    hapi_updated_date: datetime
-    hapi_replaced_date: Optional[datetime]
+    location_ref: int = None
     location_code: str = Field(max_length=128)
     location_name: str = Field(max_length=512)
 
-    admin1_is_unspecified: bool = Field(exclude=True)
-    admin2_is_unspecified: bool = Field(exclude=True)
-
+    admin1_ref: int = None
     admin1_code: Optional[str] = Field(max_length=128)
     admin1_name: Optional[str] = Field(max_length=512)
-    location_ref: int = None
+    admin1_is_unspecified: bool = Field(exclude=True)
+
     admin2_code: Optional[str] = Field(max_length=128)
     admin2_name: Optional[str] = Field(max_length=512)
-    admin1_ref: int = None
+    admin2_is_unspecified: bool = Field(exclude=True)
 
     model_config = ConfigDict(from_attributes=True)
 
