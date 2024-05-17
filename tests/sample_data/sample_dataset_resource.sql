@@ -3,7 +3,8 @@ INSERT INTO dataset (hdx_id, hdx_stub, title, hdx_provider_stub, hdx_provider_na
 VALUES
 ('90deb235-1bf5-4bae-b231-3393222c2d01', 'dataset01', 'Dataset #1', 'provider01', 'Provider #1'),
 ('b9e438e0-b68a-49f9-b9a9-68c0f3e93604', 'dataset02', 'Dataset #2', 'provider02', 'Provider #2'),
-('62ad6e55-5f5d-4494-854c-4110687e9e25', 'dataset03', 'Dataset #3', 'provider03', 'Provider #3');
+('62ad6e55-5f5d-4494-854c-4110687e9e25', 'dataset03', 'Dataset #3', 'provider03', 'Provider #3'),
+('62ad6e55-5f5d-4494-854c-4110687e9e26', 'dataset04', 'Dataset #4', 'provider04', 'Provider #4'); -- added for consistency with population sample
 
 -- dummy data
 INSERT INTO resource (hdx_id, dataset_hdx_id, name, format, update_date, is_hxl, download_url, hapi_updated_date)
@@ -16,4 +17,9 @@ VALUES
   '2023-01-01 00:00:00'),
 ('a8e69c6c-16fc-4983-92ee-e04e8960b51f', '62ad6e55-5f5d-4494-854c-4110687e9e25', 'resource-03.csv', 'csv', '2023-08-01 00:00:00',TRUE, 
  'https://data.humdata.org/dataset/7cf3cec8-dbbc-4c96-9762-1464cd0bff75/resource/62ad6e55-5f5d-4494-854c-4110687e9e25/download/resource-03.csv',
- '2023-01-01 00:00:00');
+ '2023-01-01 00:00:00'),
+ ('e6e0195f-704a-4797-bc2c-f74058821346', '62ad6e55-5f5d-4494-854c-4110687e9e26', 'resource-03.csv', 'csv', '2023-08-01 00:00:00',TRUE, 
+ 'https://data.humdata.org/dataset/7cf3cec8-dbbc-4c96-9762-1464cd0bff75/resource/62ad6e55-5f5d-4494-854c-4110687e9e26/download/resource-03.csv',
+ '2023-01-01 00:00:00'); -- added for consistency with population sample
+
+ 

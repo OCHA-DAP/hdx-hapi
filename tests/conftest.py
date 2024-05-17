@@ -34,6 +34,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/sample_sector.sql',
     'tests/sample_data/sample_org_type.sql',
     'tests/sample_data/sample_org.sql',
+    'tests/sample_data/sample_dataset_resource.sql',
     'tests/sample_data/sample_population.sql',
 ]
 
