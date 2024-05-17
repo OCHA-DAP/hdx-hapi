@@ -1,3 +1,4 @@
+from datetime import datetime
 import pytest
 import logging
 
@@ -8,7 +9,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/themes/3W'
+ENDPOINT_ROUTER = '/api/v1/coordination-context/operational-presence'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -67,24 +68,24 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
 
     operational_presence_view_adm_specified = OperationalPresenceResponse(
         sector_code='ABC',
-        age_range_code='0-1',
-        dataset_hdx_stub='test-dataset1',
         resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
         org_acronym='ORG01',
         org_name='Organisation 1',
+        org_type_code='unimportant',
         sector_name='Sector Name',
+        location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
+        admin1_ref=1,
         admin1_is_unspecified=False,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
+        admin2_ref=1,
         admin2_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
     )
 
     assert (
@@ -102,24 +103,24 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
 
     operational_presence_view_adm_unspecified = OperationalPresenceResponse(
         sector_code='ABC',
-        age_range_code='0-1',
-        dataset_hdx_stub='test-dataset1',
         resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
         org_acronym='ORG01',
         org_name='Organisation 1',
+        org_type_code='unimportant',
         sector_name='Sector Name',
+        location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
         admin1_is_unspecified=True,
+        admin1_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Unpecified',
+        admin2_ref=1,
         admin2_is_unspecified=True,
-        admin2_code='FOO-XXX',
+        admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
     )
 
     assert (

@@ -1,7 +1,5 @@
-from datetime import date
 from typing import Annotated
 from fastapi import Depends, Query, APIRouter
-from pydantic import NaiveDatetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
@@ -14,15 +12,22 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
     DOC_SEE_LOC,
-    DOC_HAPI_UPDATED_DATE_MIN,
-    DOC_HAPI_UPDATED_DATE_MAX,
-    DOC_HAPI_REPLACED_DATE_MIN,
-    DOC_HAPI_REPLACED_DATE_MAX,
+    # DOC_HAPI_UPDATED_DATE_MIN,
+    # DOC_HAPI_UPDATED_DATE_MAX,
+    # DOC_HAPI_REPLACED_DATE_MIN,
+    # DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
-from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
+from hdx_hapi.endpoints.util.util import (
+    AdminLevel,
+    CommonEndpointParams,
+    OutputFormat,
+    ReferencePeriodParameters,
+    common_endpoint_parameters,
+    reference_period_parameters,
+)
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -38,29 +43,18 @@ SUMMARY_TEXT = (
 
 
 @router.get(
-    '/api/themes/3w',
+    '/api/coordination-context/operational-presence',
     response_model=HapiGenericResponse[OperationalPresenceResponse],
     summary=SUMMARY_TEXT,
     include_in_schema=False,
 )
 @router.get(
-    '/api/themes/3W',
+    '/api/v1/coordination-context/operational-presence',
     response_model=HapiGenericResponse[OperationalPresenceResponse],
     summary=SUMMARY_TEXT,
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/themes/3w',
-    response_model=HapiGenericResponse[OperationalPresenceResponse],
-    summary=SUMMARY_TEXT,
-)
-@router.get(
-    '/api/v1/themes/3W',
-    response_model=HapiGenericResponse[OperationalPresenceResponse],
-    summary=SUMMARY_TEXT,
-    include_in_schema=False,
 )
 async def get_operational_presences(
+    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     sector_code: Annotated[
@@ -111,64 +105,65 @@ async def get_operational_presences(
             ),
         ),
     ] = None,
+    location_ref: Annotated[int, Query(description='Location reference')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    admin1_ref: Annotated[int, Query(description='Admin1 reference')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
-    location_ref: Annotated[int, Query(description='Location reference')] = None,
     # admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
+    admin2_ref: Annotated[int, Query(description='Admin2 reference')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin1_ref: Annotated[int, Query(description='Admin1 reference')] = None,
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
     # admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
-    resource_update_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(
-            description=(
-                'Filter the response to data updated on or after this date. '
-                'For example 2020-01-01 or 2020-01-01T00:00:00'
-            ),
-            openapi_examples={'2020-01-01': {'value': '2020-01-01'}},
-        ),
-    ] = None,
-    resource_update_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(
-            description=(
-                'Filter the response to data updated on or before this date. '
-                'For example 2024-12-31 or 2024-12-31T23:59:59'
-            ),
-            openapi_examples={'2024-12-31': {'value': '2024-12-31'}},
-        ),
-    ] = None,
-    hapi_updated_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
-    ] = None,
-    hapi_updated_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
-    ] = None,
-    hapi_replaced_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
-    ] = None,
-    hapi_replaced_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
-    ] = None,
-    dataset_hdx_provider_stub: Annotated[
-        str,
-        Query(
-            max_length=128,
-            description=(
-                'Filter the query by the organizations contributing the source data to HDX. '
-                'If you want to filter by the organization mentioned in the operational presence record, '
-                'see the org_name and org_acronym parameters below.'
-            ),
-        ),
-    ] = None,
+    # resource_update_date_min: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(
+    #         description=(
+    #             'Filter the response to data updated on or after this date. '
+    #             'For example 2020-01-01 or 2020-01-01T00:00:00'
+    #         ),
+    #         openapi_examples={'2020-01-01': {'value': '2020-01-01'}},
+    #     ),
+    # ] = None,
+    # resource_update_date_max: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(
+    #         description=(
+    #             'Filter the response to data updated on or before this date. '
+    #             'For example 2024-12-31 or 2024-12-31T23:59:59'
+    #         ),
+    #         openapi_examples={'2024-12-31': {'value': '2024-12-31'}},
+    #     ),
+    # ] = None,
+    # hapi_updated_date_min: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    # ] = None,
+    # hapi_updated_date_max: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    # ] = None,
+    # hapi_replaced_date_min: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    # ] = None,
+    # hapi_replaced_date_max: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    # ] = None,
+    # dataset_hdx_provider_stub: Annotated[
+    #     str,
+    #     Query(
+    #         max_length=128,
+    #         description=(
+    #             'Filter the query by the organizations contributing the source data to HDX. '
+    #             'If you want to filter by the organization mentioned in the operational presence record, '
+    #             'see the org_name and org_acronym parameters below.'
+    #         ),
+    #     ),
+    # ] = None,
     # org_ref: Annotated[int, Query(ge=1, description='Organization reference')] = None,
     # dataset_hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
     # dataset_hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset Name')] = None,
@@ -188,15 +183,16 @@ async def get_operational_presences(
     """
     result = await get_operational_presences_srv(
         pagination_parameters=common_parameters,
+        ref_period_parameters=ref_period_parameters,
         db=db,
         sector_code=sector_code,
-        dataset_hdx_provider_stub=dataset_hdx_provider_stub,
-        resource_update_date_min=resource_update_date_min,
-        resource_update_date_max=resource_update_date_max,
-        hapi_updated_date_min=hapi_updated_date_min,
-        hapi_updated_date_max=hapi_updated_date_max,
-        hapi_replaced_date_min=hapi_replaced_date_min,
-        hapi_replaced_date_max=hapi_replaced_date_max,
+        # dataset_hdx_provider_stub=dataset_hdx_provider_stub,
+        # resource_update_date_min=resource_update_date_min,
+        # resource_update_date_max=resource_update_date_max,
+        # hapi_updated_date_min=hapi_updated_date_min,
+        # hapi_updated_date_max=hapi_updated_date_max,
+        # hapi_replaced_date_min=hapi_replaced_date_min,
+        # hapi_replaced_date_max=hapi_replaced_date_max,
         org_acronym=org_acronym,
         org_name=org_name,
         sector_name=sector_name,
@@ -206,6 +202,7 @@ async def get_operational_presences(
         admin1_name=admin1_name,
         location_ref=location_ref,
         # admin1_is_unspecified=admin1_is_unspecified,
+        admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
         admin1_ref=admin1_ref,
