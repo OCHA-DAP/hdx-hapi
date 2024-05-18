@@ -118,7 +118,7 @@ def session_maker() -> sessionmaker[Session]:
 
 @pytest.fixture(scope='session')
 def list_of_db_tables(log: Logger, session_maker: sessionmaker[Session]) -> List[str]:
-    # log.info('Getting list of db tables')
+    log.info('Getting list of db tables')
     session = session_maker()
     try:
         result = session.execute(text("SELECT tablename FROM pg_tables WHERE schemaname = 'public'"))
@@ -151,6 +151,7 @@ def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
     db_session = session_maker()
     try:
         for sample_file in SAMPLE_DATA_SQL_FILES:
+            log.info(f'Starting data insert from {sample_file}')
             with open(sample_file, 'r') as file:
                 sql_commands = file.read()
                 db_session.execute(text(sql_commands))
