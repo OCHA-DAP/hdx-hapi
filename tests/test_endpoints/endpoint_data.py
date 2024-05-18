@@ -82,6 +82,30 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
+    '/api/v1/coordination-context/funding': {
+        'query_parameters': {
+            'appeal_code': 'hfoo24',
+            'appeal_type': 'hRp',
+            'location_code': 'foo',
+            'location_name': 'Foolandia',
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-01T00:00:00',
+        },
+        'expected_fields': [
+            'resource_hdx_id',
+            'appeal_code',
+            'appeal_name',
+            'appeal_type',
+            'requirements_usd',
+            'funding_usd',
+            'funding_pct',
+            'location_ref',
+            'location_code',
+            'location_name',
+            'reference_period_start',
+            'reference_period_end',
+        ],
+    },
     '/api/v1/coordination-context/operational-presence': {
         'query_parameters': {
             'dataset_hdx_provider_stub': 'PROVIDER01',

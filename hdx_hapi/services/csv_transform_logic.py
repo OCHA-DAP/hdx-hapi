@@ -1,7 +1,7 @@
 import csv
 import io
 
-from typing import Dict, List, Type
+from typing import Dict, Sequence, Type
 
 from fastapi.responses import StreamingResponse
 from hdx_hapi.endpoints.models.base import HapiBaseModel
@@ -13,8 +13,8 @@ MAX_ITEMS_IN_BATCH = 5000
 
 
 def transform_result_to_csv_stream_if_requested(
-    result: List[Dict], output_format: OutputFormat, pydantic_class: Type[HapiBaseModel]
-) -> List[Dict] | StreamingResponse:
+    result: Sequence[Dict], output_format: OutputFormat, pydantic_class: Type[HapiBaseModel]
+) -> Dict[str, Sequence] | StreamingResponse:
     """
     Transforms the result to a CSV stream if requested. Otherwise, returns the result as is
     """

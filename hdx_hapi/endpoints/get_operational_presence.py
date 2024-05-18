@@ -36,10 +36,7 @@ router = APIRouter(
     tags=['3W Operational Presence'],
 )
 
-SUMMARY_TEXT = (
-    'Get the list of organizations present and in which humanitarian sectors they are working. '
-    "There are two versions of this endpoint to support the uppercase and lowercase 'w'"
-)
+SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working.'
 
 
 @router.get(
