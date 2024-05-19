@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.db_food_security_view import FoodSecurityView
-from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.db.dao.util.util import apply_location_admin_filter, apply_pagination, case_insensitive_filter
 from hdx_hapi.endpoints.util.util import PaginationParams
 
 
@@ -29,6 +29,7 @@ async def food_security_view_list(
     admin2_name: str = None,
     admin2_is_unspecified: bool = None,
     admin1_ref: int = None,
+    admin2_ref: int = None,
 ):
     query = select(FoodSecurityView)
 
@@ -50,26 +51,22 @@ async def food_security_view_list(
         query = query.where(FoodSecurityView.hapi_replaced_date >= hapi_replaced_date_min)
     if hapi_replaced_date_max:
         query = query.where(FoodSecurityView.hapi_replaced_date < hapi_replaced_date_max)
-    if location_code:
-        query = case_insensitive_filter(query, FoodSecurityView.location_code, location_code)
-    if location_name:
-        query = query.where(FoodSecurityView.location_name.icontains(location_name))
-    if admin1_name:
-        query = query.where(FoodSecurityView.admin1_name.icontains(admin1_name))
-    if admin1_code:
-        query = case_insensitive_filter(query, FoodSecurityView.admin1_code, admin1_code)
-    if admin1_is_unspecified is not None:
-        query = query.where(FoodSecurityView.admin1_is_unspecified == admin1_is_unspecified)
-    if location_ref:
-        query = query.where(FoodSecurityView.location_ref == location_ref)
-    if admin2_code:
-        query = case_insensitive_filter(query, FoodSecurityView.admin2_code, admin2_code)
-    if admin2_name:
-        query = query.where(FoodSecurityView.admin2_name.icontains(admin2_name))
-    if admin2_is_unspecified is not None:
-        query = query.where(FoodSecurityView.admin2_is_unspecified == admin2_is_unspecified)
-    if admin1_ref:
-        query = query.where(FoodSecurityView.admin1_ref == admin1_ref)
+
+    query = apply_location_admin_filter(
+        query,
+        FoodSecurityView,
+        location_ref,
+        location_code,
+        location_name,
+        admin1_ref,
+        admin1_code,
+        admin1_name,
+        admin1_is_unspecified,
+        admin2_ref,
+        admin2_code,
+        admin2_name,
+        admin2_is_unspecified,
+    )
 
     query = apply_pagination(query, pagination_parameters)
 

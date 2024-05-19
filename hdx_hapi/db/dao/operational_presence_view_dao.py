@@ -1,10 +1,16 @@
 import logging
+from typing import Optional, Sequence
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.all_views import OperationalPresenceView
-from hdx_hapi.db.dao.util.util import apply_pagination, apply_reference_period_filter, case_insensitive_filter
+from hdx_hapi.db.dao.util.util import (
+    apply_location_admin_filter,
+    apply_pagination,
+    apply_reference_period_filter,
+    case_insensitive_filter,
+)
 from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
 
 
@@ -15,7 +21,7 @@ async def operational_presences_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
-    sector_code: str = None,
+    sector_code: Optional[str] = None,
     # dataset_hdx_provider_stub: str = None,
     # resource_update_date_min: datetime = None,
     # resource_update_date_max: datetime = None,
@@ -23,21 +29,21 @@ async def operational_presences_view_list(
     # hapi_updated_date_max: datetime = None,
     # hapi_replaced_date_min: datetime = None,
     # hapi_replaced_date_max: datetime = None,
-    org_acronym: str = None,
-    org_name: str = None,
-    sector_name: str = None,
-    location_code: str = None,
-    location_name: str = None,
-    admin1_ref: int = None,
-    admin1_code: str = None,
-    admin1_name: str = None,
-    admin1_is_unspecified: bool = None,
-    location_ref: int = None,
-    admin2_ref: int = None,
-    admin2_code: str = None,
-    admin2_name: str = None,
-    admin2_is_unspecified: bool = None,
-):
+    org_acronym: Optional[str] = None,
+    org_name: Optional[str] = None,
+    sector_name: Optional[str] = None,
+    location_code: Optional[str] = None,
+    location_name: Optional[str] = None,
+    admin1_ref: Optional[int] = None,
+    admin1_code: Optional[str] = None,
+    admin1_name: Optional[str] = None,
+    admin1_is_unspecified: Optional[bool] = None,
+    location_ref: Optional[int] = None,
+    admin2_ref: Optional[int] = None,
+    admin2_code: Optional[str] = None,
+    admin2_name: Optional[str] = None,
+    admin2_is_unspecified: Optional[bool] = None,
+) -> Sequence[OperationalPresenceView]:
     logger.info(
         f'operational_presences_view_list called with params: sector_code={sector_code}, '
         f'org_acronym={org_acronym}, org_name={org_name}, '
@@ -72,28 +78,22 @@ async def operational_presences_view_list(
         query = query.where(OperationalPresenceView.sector_code.icontains(sector_code))
     if sector_name:
         query = query.where(OperationalPresenceView.sector_name.icontains(sector_name))
-    if location_ref:
-        query = query.where(OperationalPresenceView.location_ref == location_ref)
-    if location_code:
-        query = case_insensitive_filter(query, OperationalPresenceView.location_code, location_code)
-    if location_name:
-        query = query.where(OperationalPresenceView.location_name.icontains(location_name))
-    if admin1_ref:
-        query = query.where(OperationalPresenceView.admin1_ref == admin1_ref)
-    if admin1_code:
-        query = case_insensitive_filter(query, OperationalPresenceView.admin1_code, admin1_code)
-    if admin1_name:
-        query = query.where(OperationalPresenceView.admin1_name.icontains(admin1_name))
-    if admin2_ref:
-        query = query.where(OperationalPresenceView.admin2_ref == admin2_ref)
-    if admin2_code:
-        query = case_insensitive_filter(query, OperationalPresenceView.admin2_code, admin2_code)
-    if admin2_name:
-        query = query.where(OperationalPresenceView.admin2_name.icontains(admin2_name))
-    if admin1_is_unspecified is not None:
-        query = query.where(OperationalPresenceView.admin1_is_unspecified == admin1_is_unspecified)
-    if admin2_is_unspecified is not None:
-        query = query.where(OperationalPresenceView.admin2_is_unspecified == admin2_is_unspecified)
+
+    query = apply_location_admin_filter(
+        query,
+        OperationalPresenceView,
+        location_ref,
+        location_code,
+        location_name,
+        admin1_ref,
+        admin1_code,
+        admin1_name,
+        admin1_is_unspecified,
+        admin2_ref,
+        admin2_code,
+        admin2_name,
+        admin2_is_unspecified,
+    )
 
     query = apply_reference_period_filter(query, ref_period_parameters, OperationalPresenceView)
 
