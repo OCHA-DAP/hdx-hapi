@@ -55,7 +55,9 @@ async def test_get_funding_result(event_loop, refresh_db):
     for field in expected_fields:
         assert field in response.json()['data'][0], f'Field "{field}" not found in the response'
 
+    for field in response.json()['data'][0]:
+        assert field in expected_fields, f'Field "{field}" unexpected'
+
     assert len(response.json()['data'][0]) == len(
         expected_fields
     ), 'Response has a different number of fields than expected'
-
