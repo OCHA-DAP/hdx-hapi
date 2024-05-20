@@ -317,7 +317,7 @@ endpoint_data = {
             'hapi_updated_date': date(2023, 6, 2),
             'dataset_hdx_stub': 'dataset01',
             'dataset_title': 'Dataset #1',
-            'dataset_hdx_provider_stub': 'provider01',
+            'dataset_hdx_provider_stub': 'pRoViDeR01',
             'dataset_hdx_provider_name': 'Provider #1',
         },
         'expected_fields': [

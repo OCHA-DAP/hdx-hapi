@@ -36,7 +36,6 @@ def apply_reference_period_filter(
         query = query.where(db_class.reference_period_end < ref_period_parameters.reference_period_end_max)
     return query
 
-
 class EntityWithLocationAdmin(Protocol):
     location_ref: Mapped[int]
     location_code: Mapped[str]
@@ -90,7 +89,6 @@ def apply_location_admin_filter(
         query = query.where(db_class.admin2_is_unspecified == admin2_is_unspecified)
 
     return query
-
 
 def case_insensitive_filter(query: Select, column: Mapped[str], value: str) -> Select:
     query = query.where(column.ilike(value))
