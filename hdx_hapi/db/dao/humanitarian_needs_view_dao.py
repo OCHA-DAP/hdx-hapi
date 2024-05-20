@@ -11,67 +11,54 @@ from hdx_hapi.endpoints.util.util import PaginationParams
 async def humanitarian_needs_view_list(
     pagination_parameters: PaginationParams,
     db: AsyncSession,
-    gender_code: str = None,
-    age_range_code: str = None,
+    admin2_ref: int = None,
+    gender: str = None,
+    age_range: str = None,
+    min_age: int = None,
+    max_age: int = None,
     disabled_marker: bool = None,
     sector_code: str = None,
-    sector_name: str = None,
-    population_group_code: str = None,
-    population_status_code: str = None,
+    population_group: str = None,
+    population_status: str = None,
     population: int = None,
-    dataset_hdx_provider_stub: str = None,
-    resource_update_date_min: datetime = None,
-    resource_update_date_max: datetime = None,
-    hapi_updated_date_min: datetime = None,
-    hapi_updated_date_max: datetime = None,
-    hapi_replaced_date_min: datetime = None,
-    hapi_replaced_date_max: datetime = None,
+    reference_period_start: datetime = None,
+    reference_period_end: datetime = None,
+    sector_name: str = None,
     location_code: str = None,
     location_name: str = None,
-    admin1_code: str = None,
-    admin1_name: str = None,
-    admin1_is_unspecified: bool = None,
     location_ref: int = None,
+    admin1_code: str = None,
     admin2_code: str = None,
     admin2_name: str = None,
-    admin2_is_unspecified: bool = None,
     admin1_ref: int = None,
-    admin2_ref: int = None,
 ):
     query = select(HumanitarianNeedsView)
 
-    if gender_code:
-        query = case_insensitive_filter(query, HumanitarianNeedsView.gender_code, gender_code)
-    if age_range_code:
-        query = query.where(HumanitarianNeedsView.age_range_code == age_range_code)
+    if gender:
+        query = case_insensitive_filter(query, HumanitarianNeedsView.gender, gender)
+    if age_range:
+        query = query.where(HumanitarianNeedsView.age_range == age_range)
+    if min_age:
+        query = query.where(HumanitarianNeedsView.min_age == min_age)
+    if max_age:
+        query = query.where(HumanitarianNeedsView.max_age == max_age)
     if disabled_marker:
         query = query.where(HumanitarianNeedsView.disabled_marker == disabled_marker)
     if sector_code:
         query = query.where(HumanitarianNeedsView.sector_code.icontains(sector_code))
-    if sector_name:
-        query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
-    if population_group_code:
-        query = query.where(HumanitarianNeedsView.population_group_code.icontains(population_group_code))
-    if population_status_code:
-        query = query.where(HumanitarianNeedsView.population_status_code.icontains(population_status_code))
+    if population_group:
+        query = query.where(HumanitarianNeedsView.population_group.icontains(population_group))
+    if population_status:
+        query = query.where(HumanitarianNeedsView.population_status.icontains(population_status))
+
     if population:
         query = query.where(HumanitarianNeedsView.population == population)
-    if dataset_hdx_provider_stub:
-        query = case_insensitive_filter(
-            query, HumanitarianNeedsView.dataset_hdx_provider_stub, dataset_hdx_provider_stub
-        )
-    if resource_update_date_min:
-        query = query.where(HumanitarianNeedsView.resource_update_date >= resource_update_date_min)
-    if resource_update_date_max:
-        query = query.where(HumanitarianNeedsView.resource_update_date < resource_update_date_max)
-    if hapi_updated_date_min:
-        query = query.where(HumanitarianNeedsView.hapi_updated_date >= hapi_updated_date_min)
-    if hapi_updated_date_max:
-        query = query.where(HumanitarianNeedsView.hapi_updated_date < hapi_updated_date_max)
-    if hapi_replaced_date_min:
-        query = query.where(HumanitarianNeedsView.hapi_replaced_date >= hapi_replaced_date_min)
-    if hapi_replaced_date_max:
-        query = query.where(HumanitarianNeedsView.hapi_replaced_date < hapi_replaced_date_max)
+
+    # reference_period_start
+    # reference_period_end
+
+    if sector_name:
+        query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
 
     query = apply_location_admin_filter(
         query,
