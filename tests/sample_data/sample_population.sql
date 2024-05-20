@@ -1,14 +1,6 @@
 -- dummy data
 
 INSERT INTO population (resource_hdx_id,admin2_ref,gender,age_range,min_age,max_age,population,reference_period_start,reference_period_end) VALUES
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'FEMALE','80+',80,NULL,63890,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'MALE','80+',80,NULL,103119,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'ALL','80+',80,NULL,167009,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'FEMALE','*',NULL,NULL,19844212,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'MALE','*',NULL,NULL,20567657,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'ALL','*',NULL,NULL,40411869,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'FEMALE','10-14',10,14,3571135,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
-	--  ('e6e0195f-704a-4797-bc2c-f74058821346',5912,'MALE','0-4',0,4,3707169,'2021-01-01 00:00:00.000','2021-12-31 23:59:59.000'),
 	 ('e6e0195f-704a-4797-bc2c-f74058821346',1,'NONBINARY','10-14',10,14,1000000,'2023-01-01 00:00:00','2023-06-30 00:00:00'),
 	 ('e6e0195f-704a-4797-bc2c-f74058821346',1,'FEMALE','25-29',25,25,500001,'2023-01-01 00:00:00','2023-06-30 00:00:00'),
 	 ('e6e0195f-704a-4797-bc2c-f74058821346',1,'MALE','10-14',10,14,489999,'2023-01-01 00:00:00','2023-06-30 00:00:00'),
@@ -17,21 +9,6 @@ INSERT INTO population (resource_hdx_id,admin2_ref,gender,age_range,min_age,max_
 	 ('e6e0195f-704a-4797-bc2c-f74058821346',2,'NONBINARY','5-9',5,9,2000,'2023-01-01 00:00:00','2023-06-30 00:00:00'),
 	 ('e6e0195f-704a-4797-bc2c-f74058821346',4,'MALE','10-14',10,14,100000,'2023-01-01 00:00:00','2023-06-30 00:00:00');
 
--- 'admin2_ref': 1,
---             'gender': 'NONBINARY',
---             'age_range': '10-14',
---             'min_age': 10,
---             'max_age': 14,
---             'population': 1000000,
---             'reference_period_start': date(2023, 6, 1),
---             'reference_period_end': date(2023, 6, 2),
---             'location_code': 'fOO',
---             'location_name': 'Foolandia',
---             'admin1_code': 'FOO-xxx',
---             'admin1_is_unspecified': True,
---             'admin2_code': 'FOO-xxx-XXX',
---             'admin2_name': 'Unspecified',
---             'admin2_is_unspecified': True,
 -- INSERT INTO population (id, resource_ref, admin2_ref, gender_code, age_range_code, population, reference_period_start, reference_period_end, source_data)
 -- VALUES
 -- (1, 1, 1, 'x', '10-14', 1000000, '2023-01-01 00:00:00', '2023-06-30 00:00:00', 'DATA,DATA,DATA'),       -- total national

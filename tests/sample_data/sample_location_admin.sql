@@ -1,9 +1,7 @@
 -- dummy data
 INSERT INTO location (id, code, name, reference_period_start, reference_period_end)
 VALUES
-(1, 'FOO', 'Foolandia', '2023-01-01 00:00:00', NULL),
-(2, 'AFG', 'Afghanistan', '2023-01-01 00:00:00', NULL),
-(3, 'BFA', 'Burkina Faso', '2023-01-01 00:00:00', NULL);
+(1, 'FOO', 'Foolandia', '2023-01-01 00:00:00', NULL);
 
 -- dummy data
 INSERT INTO admin1 (id, location_ref, code, name, is_unspecified, reference_period_start, reference_period_end)
@@ -23,4 +21,3 @@ VALUES
 (5, 2, 'FOO-001-B', 'District B', FALSE, '2023-01-01 00:00:00', NULL),
 (6, 3, 'FOO-002-C', 'District C', FALSE, '2023-01-01 00:00:00', NULL),
 (7, 3, 'FOO-002-D', 'District D', FALSE, '2023-01-01 00:00:00', NULL);
--- (5912, 3, 'AFG-002-D', 'District D', FALSE, '2023-01-01 00:00:00', NULL); -- added for population sample constraints
