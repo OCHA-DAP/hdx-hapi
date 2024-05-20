@@ -24,6 +24,7 @@ from hapi_schema.db_population import view_params_population
 from hapi_schema.db_refugees import view_params_refugees
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
+from hapi_schema.db_conflict_event import view_params_conflict_event
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.db.models.base import Base
@@ -37,6 +38,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/org.sql',
     'tests/sample_data/operational_presence.sql',
     'tests/sample_data/funding.sql',
+    'tests/sample_data/conflict_event.sql',
 ]
 
 VIEW_LIST = [
@@ -55,6 +57,7 @@ VIEW_LIST = [
     view_params_refugees,
     view_params_resource,
     view_params_sector,
+    view_params_conflict_event,
 ]
 
 
