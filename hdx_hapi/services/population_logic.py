@@ -1,9 +1,7 @@
-from datetime import datetime
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.population_view_dao import populations_view_list
-from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams, CommonEndpointParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, ReferencePeriodParameters
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
 
@@ -32,7 +30,7 @@ async def get_populations_srv(
     admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
 
     return await populations_view_list(
-        common_parameters=pagination_parameters,
+        pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
         gender=gender,
@@ -49,7 +47,6 @@ async def get_populations_srv(
         admin2_ref=admin2_ref,
         admin2_name=admin2_name,
         admin2_code=admin2_code,
-        admin_level=admin_level,
         admin1_is_unspecified=admin1_is_unspecified,
         admin2_is_unspecified=admin2_is_unspecified,
     )

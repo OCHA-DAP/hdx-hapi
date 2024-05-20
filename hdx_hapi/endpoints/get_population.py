@@ -46,7 +46,7 @@ async def get_populations(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    gender: Annotated[str, Query(max_length=1, description='Gender')] = None,
+    gender: Annotated[str, Query(max_length=8, description='Gender')] = None,
     age_range: Annotated[str, Query(max_length=32, description='Age range')] = None,
     min_age: Annotated[int, Query(description='Minimum age')] = None,
     max_age: Annotated[int, Query(description='Maximum age')] = None,
@@ -69,7 +69,7 @@ async def get_populations(
     Return the list of populations
     """
     result = await get_populations_srv(
-        common_parameters=common_parameters,
+        pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
         gender=gender,
