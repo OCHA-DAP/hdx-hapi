@@ -1,7 +1,5 @@
-from datetime import date
 from typing import Annotated
 from fastapi import Depends, Query, APIRouter
-from pydantic import NaiveDatetime
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
