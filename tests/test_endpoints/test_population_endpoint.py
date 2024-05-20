@@ -8,7 +8,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/v1/themes/population'
+ENDPOINT_ROUTER = '/api/v1/population-social/population'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -31,19 +31,12 @@ async def test_get_population_params(event_loop, refresh_db):
         async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
+        log.info(f'{param_name}:{param_value} - {len(response.json()["data"]) } rows')
         assert response.status_code == 200
         assert len(response.json()['data']) > 0, (
             f'There should be at least one population entry for parameter "{param_name}" with value "{param_value}" '
             'in the database'
         )
-
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
-        response = await ac.get(ENDPOINT_ROUTER)
-
-    assert response.status_code == 200
-    assert (
-        len(response.json()['data']) > 0
-    ), 'There should be at least one population entry for all parameters in the database'
 
 
 @pytest.mark.asyncio

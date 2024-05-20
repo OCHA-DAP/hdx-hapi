@@ -32,13 +32,13 @@ router = APIRouter(
 
 
 @router.get(
-    '/api/themes/population',
+    '/api/population-social/population',
     response_model=HapiGenericResponse[PopulationResponse],
     summary='Get baseline population data',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/themes/population',
+    '/api/v1/population-social/population',
     response_model=HapiGenericResponse[PopulationResponse],
     summary='Get baseline population data',
 )
@@ -46,7 +46,7 @@ async def get_populations(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    gender: Annotated[str, Query(max_length=8, description='Gender')] = None,
+    gender: Annotated[str, Query(max_length=16, description='Gender')] = None,
     age_range: Annotated[str, Query(max_length=32, description='Age range')] = None,
     min_age: Annotated[int, Query(description='Minimum age')] = None,
     max_age: Annotated[int, Query(description='Maximum age')] = None,

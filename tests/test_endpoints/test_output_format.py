@@ -20,7 +20,7 @@ ENDPOINT_ROUTER_LIST = [
     #'/api/v1/themes/3W',
     '/api/v1/metadata/org',
     '/api/v1/metadata/org_type',
-    '/api/v1/themes/population',
+    '/api/v1/population-social/population',
     #'/api/v1/population_group',
     #'/api/v1/population_status',
     #'/api/v1/themes/food_security',
