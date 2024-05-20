@@ -8,7 +8,7 @@ class PopulationResponse(HapiBaseModel):
     resource_hdx_id: str = Field(max_length=36)
     admin2_ref: int = None
 
-    gender: Optional[str] = Field(max_length=1)
+    gender: Optional[str] = Field(max_length=16)
     age_range: Optional[str] = Field(max_length=32)
 
     min_age: Optional[int]

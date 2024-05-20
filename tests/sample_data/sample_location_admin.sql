@@ -22,5 +22,5 @@ VALUES
 (4, 2, 'FOO-001-A', 'District A', FALSE, '2023-01-01 00:00:00', NULL),
 (5, 2, 'FOO-001-B', 'District B', FALSE, '2023-01-01 00:00:00', NULL),
 (6, 3, 'FOO-002-C', 'District C', FALSE, '2023-01-01 00:00:00', NULL),
-(7, 3, 'FOO-002-D', 'District D', FALSE, '2023-01-01 00:00:00', NULL),
-(5912, 3, 'AFG-002-D', 'District D', FALSE, '2023-01-01 00:00:00', NULL); -- added for population sample constraints
+(7, 3, 'FOO-002-D', 'District D', FALSE, '2023-01-01 00:00:00', NULL);
+-- (5912, 3, 'AFG-002-D', 'District D', FALSE, '2023-01-01 00:00:00', NULL); -- added for population sample constraints

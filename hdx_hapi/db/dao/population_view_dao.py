@@ -50,15 +50,15 @@ async def populations_view_list(
 
     query = select(PopulationView)
     if gender:
-        query = case_insensitive_filter(query, PopulationView.gender, gender)
+        query = query.where(PopulationView.gender == gender)
     if age_range:
-        query = query.where(PopulationView.age_range == age_range)
+        query = case_insensitive_filter(query, PopulationView.age_range, age_range)
     if population:
         query = query.where(PopulationView.population == population)
     if min_age:
         query = query.where(PopulationView.min_age >= min_age)
     if max_age:
-        query = query.where(PopulationView.max_age < max_age)
+        query = query.where(PopulationView.max_age <= max_age)
         query = apply_location_admin_filter(
             query,
             PopulationView,
@@ -78,7 +78,7 @@ async def populations_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, PopulationView)
 
     query = apply_pagination(query, pagination_parameters)
-    logger.debug(f'Executing SQL query: {query}')
+    logger.info(f'Executing SQL query: {query}')
 
     result = await db.execute(query)
     populations = result.scalars().all()
