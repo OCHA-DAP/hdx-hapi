@@ -157,6 +157,9 @@ async def test_get_population_admin_level(event_loop, refresh_db):
         '2': admin_2_count,
     }
 
+    for item in response_items:
+        log.info(f"{item['admin1_name']}, {item['admin2_name']}")
+    log.info(counts_map)
     for admin_level, count in counts_map.items():
         async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
