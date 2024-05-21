@@ -1,36 +1,45 @@
 import datetime
+from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.all_views import HumanitarianNeedsView
-from hdx_hapi.db.dao.util.util import apply_location_admin_filter, apply_pagination, case_insensitive_filter
-from hdx_hapi.endpoints.util.util import PaginationParams
+from hdx_hapi.db.dao.util.util import (
+    apply_location_admin_filter,
+    apply_pagination,
+    apply_reference_period_filter,
+    case_insensitive_filter,
+)
+from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, PopulationStatus
 
 
 async def humanitarian_needs_view_list(
     pagination_parameters: PaginationParams,
+    ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
-    admin2_ref: int = None,
-    gender: str = None,
-    age_range: str = None,
-    min_age: int = None,
-    max_age: int = None,
-    disabled_marker: bool = None,
-    sector_code: str = None,
-    population_group: str = None,
-    population_status: str = None,
-    population: int = None,
-    reference_period_start: datetime = None,
-    reference_period_end: datetime = None,
-    sector_name: str = None,
-    location_code: str = None,
-    location_name: str = None,
-    location_ref: int = None,
-    admin1_code: str = None,
-    admin2_code: str = None,
-    admin2_name: str = None,
-    admin1_ref: int = None,
+    admin2_ref: Optional[int] = None,
+    gender: Optional[Gender] = None,
+    age_range: Optional[str] = None,
+    min_age: Optional[int] = None,
+    max_age: Optional[int] = None,
+    disabled_marker: Optional[DisabledMarker] = None,
+    sector_code: Optional[str] = None,
+    population_group: Optional[PopulationGroup] = None,
+    population_status: Optional[PopulationStatus] = None,
+    population: Optional[int] = None,
+    sector_name: Optional[str] = None,
+    location_code: Optional[str] = None,
+    location_name: Optional[str] = None,
+    location_ref: Optional[int] = None,
+    admin1_code: Optional[str] = None,
+    admin2_code: Optional[str] = None,
+    admin2_name: Optional[str] = None,
+    admin1_ref: Optional[int] = None,
+    admin1_name: Optional[str] = None,
+    admin1_is_unspecified: Optional[bool] = None,
+    admin2_is_unspecified: Optional[bool] = None,
 ):
     query = select(HumanitarianNeedsView)
 
@@ -54,9 +63,6 @@ async def humanitarian_needs_view_list(
     if population:
         query = query.where(HumanitarianNeedsView.population == population)
 
-    # reference_period_start
-    # reference_period_end
-
     if sector_name:
         query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
 
@@ -75,6 +81,8 @@ async def humanitarian_needs_view_list(
         admin2_name,
         admin2_is_unspecified,
     )
+
+    query = apply_reference_period_filter(query, ref_period_parameters, HumanitarianNeedsView)
 
     query = apply_pagination(query, pagination_parameters)
 
