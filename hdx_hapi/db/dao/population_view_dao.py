@@ -61,21 +61,21 @@ async def populations_view_list(
         query = query.where(PopulationView.min_age >= min_age)
     if max_age:
         query = query.where(PopulationView.max_age <= max_age)
-        query = apply_location_admin_filter(
-            query,
-            PopulationView,
-            location_ref,
-            location_code,
-            location_name,
-            admin1_ref,
-            admin1_code,
-            admin1_name,
-            admin1_is_unspecified,
-            admin2_ref,
-            admin2_code,
-            admin2_name,
-            admin2_is_unspecified,
-        )
+    query = apply_location_admin_filter(
+        query,
+        PopulationView,
+        location_ref,
+        location_code,
+        location_name,
+        admin1_ref,
+        admin1_code,
+        admin1_name,
+        admin1_is_unspecified,
+        admin2_ref,
+        admin2_code,
+        admin2_name,
+        admin2_is_unspecified,
+    )
 
     query = apply_reference_period_filter(query, ref_period_parameters, PopulationView)
 
