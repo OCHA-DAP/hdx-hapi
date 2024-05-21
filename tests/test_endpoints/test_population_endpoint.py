@@ -2,6 +2,8 @@ import pytest
 import logging
 
 from httpx import AsyncClient
+from hapi_schema.utils.enums import Gender
+
 from hdx_hapi.endpoints.models.population import PopulationResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
@@ -60,7 +62,7 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
     population_view_adm_specified = PopulationResponse(
         resource_hdx_id='foo',
         admin2_ref=1,
-        gender='male',
+        gender=Gender.MALE,
         age_range='10-14',
         min_age=10,
         max_age=14,
@@ -94,7 +96,7 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
     population_view_adm_unspecified = PopulationResponse(
         resource_hdx_id='foo',
         admin2_ref=1,
-        gender='male',
+        gender=Gender.MALE,
         age_range='10-14',
         min_age=10,
         max_age=14,

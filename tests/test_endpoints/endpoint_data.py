@@ -139,7 +139,7 @@ endpoint_data = {
     '/api/v1/population-social/population': {
         'query_parameters': {
             'admin2_ref': 1,
-            'gender': 'NONBINARY',
+            'gender': 'x',
             'age_range': '10-14',
             'min_age': 10,
             'max_age': 14,
@@ -149,7 +149,7 @@ endpoint_data = {
             'location_code': 'fOO',
             'location_name': 'Foolandia',
             'admin1_code': 'FOO-xxx',
-            'admin1_is_unspecified': True,
+            'admin1_is_unspecified': False,
             'admin2_code': 'FOO-xxx-XXX',
             'admin2_name': 'Unspecified',
             'admin2_is_unspecified': True,

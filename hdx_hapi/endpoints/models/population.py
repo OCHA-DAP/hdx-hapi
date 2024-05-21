@@ -1,6 +1,7 @@
 from pydantic import ConfigDict, Field, model_validator, NaiveDatetime
 from typing import Optional
 
+from hapi_schema.utils.enums import Gender
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
@@ -8,7 +9,7 @@ class PopulationResponse(HapiBaseModel):
     resource_hdx_id: str = Field(max_length=36)
     admin2_ref: int = None
 
-    gender: Optional[str] = Field(max_length=16)
+    gender: Optional[Gender] = Field()
     age_range: Optional[str] = Field(max_length=32)
 
     min_age: Optional[int]

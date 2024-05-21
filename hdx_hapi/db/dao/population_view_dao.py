@@ -4,6 +4,8 @@ from typing import Optional, Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
+from hapi_schema.utils.enums import Gender
+
 from hdx_hapi.db.models.views.all_views import PopulationView
 from hdx_hapi.db.dao.util.util import (
     apply_location_admin_filter,
@@ -21,7 +23,7 @@ async def populations_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
-    gender: Optional[str] = None,
+    gender: Optional[Gender] = None,
     age_range: Optional[str] = None,
     min_age: Optional[int] = None,
     max_age: Optional[int] = None,

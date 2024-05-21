@@ -23,6 +23,7 @@ from hapi_schema.db_poverty_rate import view_params_poverty_rate
 from hapi_schema.db_refugees import view_params_refugees
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
+from hapi_schema.utils.enums import Gender
 # from hapi_schema.db_patch import view_params_patch
 
 
@@ -243,7 +244,7 @@ class PopulationView(Base):
     __table__ = population_view
     resource_hdx_id: Mapped[str] = column_property(population_view.c.resource_hdx_id)
     admin2_ref: Mapped[int] = column_property(population_view.c.admin2_ref)
-    gender: Mapped[str] = column_property(population_view.c.gender)
+    gender: Mapped[Gender] = column_property(population_view.c.gender)
     age_range: Mapped[str] = column_property(population_view.c.age_range)
     min_age: Mapped[int] = column_property(population_view.c.min_age)
     max_age: Mapped[int] = column_property(population_view.c.max_age)

@@ -4,6 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hapi_schema.utils.enums import Gender
 from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
@@ -44,7 +45,7 @@ async def get_populations(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    gender: Annotated[str, Query(max_length=16, description='Gender')] = None,
+    gender: Annotated[Gender, Query(description='Gender')] = None,
     age_range: Annotated[str, Query(max_length=32, description='Age range')] = None,
     min_age: Annotated[int, Query(description='Minimum age')] = None,
     max_age: Annotated[int, Query(description='Maximum age')] = None,

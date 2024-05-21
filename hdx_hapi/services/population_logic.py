@@ -1,5 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hapi_schema.utils.enums import Gender
+
 from hdx_hapi.db.dao.population_view_dao import populations_view_list
 from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, ReferencePeriodParameters
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
@@ -9,7 +11,7 @@ async def get_populations_srv(
     ref_period_parameters: ReferencePeriodParameters,
     pagination_parameters: CommonEndpointParams,
     db: AsyncSession,
-    gender: str = None,
+    gender: Gender = None,
     age_range: str = None,
     min_age: int = None,
     max_age: int = None,
