@@ -32,10 +32,11 @@ from hdx_hapi.db.models.views.util.util import CreateView
 
 SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/location_admin.sql',
-    'tests/sample_data/dataset_resource.sql',
     'tests/sample_data/sector.sql',
     'tests/sample_data/org_type.sql',
     'tests/sample_data/org.sql',
+    'tests/sample_data/dataset_resource.sql',
+    'tests/sample_data/population.sql',
     'tests/sample_data/operational_presence.sql',
     'tests/sample_data/funding.sql',
     'tests/sample_data/conflict_event.sql',
@@ -123,7 +124,7 @@ def session_maker() -> sessionmaker[Session]:
 
 @pytest.fixture(scope='session')
 def list_of_db_tables(log: Logger, session_maker: sessionmaker[Session]) -> List[str]:
-    # log.info('Getting list of db tables')
+    log.info('Getting list of db tables')
     session = session_maker()
     try:
         result = session.execute(text("SELECT tablename FROM pg_tables WHERE schemaname = 'public'"))
@@ -156,11 +157,12 @@ def populate_test_data(log: Logger, session_maker: sessionmaker[Session]):
     db_session = session_maker()
     try:
         for sample_file in SAMPLE_DATA_SQL_FILES:
+            log.info(f'Starting data insert from {sample_file}')
             with open(sample_file, 'r') as file:
                 sql_commands = file.read()
                 db_session.execute(text(sql_commands))
                 db_session.commit()
-                log.info('Test data inserted successfully from {sample_file}')
+                log.info(f'Test data inserted successfully from {sample_file}')
     except Exception as e:
         log.error(f'Error while inserting test data: {str(e).splitlines()[0]}')
         db_session.rollback()

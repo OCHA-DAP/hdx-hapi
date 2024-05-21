@@ -1,21 +1,22 @@
-from datetime import datetime
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
+from hapi_schema.utils.enums import Gender
 from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
 
 
 class PopulationResponse(HapiBaseModel, HapiModelWithAdmins):
-    gender_code: Optional[str] = Field(max_length=1)
-    age_range_code: Optional[str] = Field(max_length=32)
+    resource_hdx_id: str = Field(max_length=36)
+    admin2_ref: int = None
+
+    gender: Optional[Gender] = Field()
+    age_range: Optional[str] = Field(max_length=32)
+
+    min_age: Optional[int]
+    max_age: Optional[int]
     population: int
 
     reference_period_start: Optional[NaiveDatetime]
     reference_period_end: Optional[NaiveDatetime]
-
-    dataset_hdx_stub: str = Field(max_length=128)
-    resource_hdx_id: str = Field(max_length=36)
-    hapi_updated_date: datetime
-    hapi_replaced_date: Optional[datetime]
 
     model_config = ConfigDict(from_attributes=True)
