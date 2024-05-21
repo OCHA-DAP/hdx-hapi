@@ -39,6 +39,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/operational_presence.sql',
     'tests/sample_data/funding.sql',
     'tests/sample_data/conflict_event.sql',
+    'tests/sample_data/national_risk.sql',
 ]
 
 VIEW_LIST = [

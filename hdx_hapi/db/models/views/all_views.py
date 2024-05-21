@@ -2,6 +2,7 @@
 This code was generated automatically using src/hapi_schema/utils/hapi_views_code_generator.py
 """
 
+from hapi_schema.utils.enums import RiskClass
 from sqlalchemy import DateTime
 from sqlalchemy.orm import column_property, Mapped
 from hdx_hapi.db.models.views.util.util import view
@@ -188,7 +189,7 @@ class NationalRiskView(Base):
     __table__ = national_risk_view
     resource_hdx_id: Mapped[str] = column_property(national_risk_view.c.resource_hdx_id)
     location_ref: Mapped[int] = column_property(national_risk_view.c.location_ref)
-    risk_class: Mapped[str] = column_property(national_risk_view.c.risk_class)
+    risk_class: Mapped[RiskClass] = column_property(national_risk_view.c.risk_class)
     global_rank: Mapped[int] = column_property(national_risk_view.c.global_rank)
     overall_risk: Mapped[float] = column_property(national_risk_view.c.overall_risk)
     hazard_exposure_risk: Mapped[float] = column_property(national_risk_view.c.hazard_exposure_risk)

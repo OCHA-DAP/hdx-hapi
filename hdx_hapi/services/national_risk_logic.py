@@ -1,48 +1,45 @@
-from datetime import datetime
+from typing import Optional
 
+from hapi_schema.utils.enums import RiskClass
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.national_risk_view_dao import national_risks_view_list
-from hdx_hapi.endpoints.util.util import PaginationParams
+from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
 
 
 async def get_national_risks_srv(
     pagination_parameters: PaginationParams,
+    ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
-    risk_class: int = None,
-    global_rank: int = None,
-    overall_risk: float = None,
-    hazard_exposure_risk: float = None,
-    vulnerability_risk: float = None,
-    coping_capacity_risk: float = None,
-    dataset_hdx_provider_stub: str = None,
-    resource_update_date_min=None,
-    resource_update_date_max=None,
-    hapi_updated_date_min: datetime = None,
-    hapi_updated_date_max: datetime = None,
-    hapi_replaced_date_min: datetime = None,
-    hapi_replaced_date_max: datetime = None,
-    # sector_name: str = None,
-    location_code: str = None,
-    location_name: str = None,
+    risk_class: Optional[RiskClass] = None,
+    global_rank_min: Optional[int] = None,
+    global_rank_max: Optional[int] = None,
+    overall_risk_min: Optional[float] = None,
+    overall_risk_max: Optional[float] = None,
+    hazard_exposure_risk_min: Optional[float] = None,
+    hazard_exposure_risk_max: Optional[float] = None,
+    vulnerability_risk_min: Optional[float] = None,
+    vulnerability_risk_max: Optional[float] = None,
+    coping_capacity_risk_min: Optional[float] = None,
+    coping_capacity_risk_max: Optional[float] = None,
+    location_code: Optional[str] = None,
+    location_name: Optional[str] = None,
 ):
     return await national_risks_view_list(
         pagination_parameters=pagination_parameters,
+        ref_period_parameters=ref_period_parameters,
         db=db,
         risk_class=risk_class,
-        global_rank=global_rank,
-        overall_risk=overall_risk,
-        hazard_exposure_risk=hazard_exposure_risk,
-        vulnerability_risk=vulnerability_risk,
-        coping_capacity_risk=coping_capacity_risk,
-        dataset_hdx_provider_stub=dataset_hdx_provider_stub,
-        resource_update_date_min=resource_update_date_min,
-        resource_update_date_max=resource_update_date_max,
-        hapi_updated_date_min=hapi_updated_date_min,
-        hapi_updated_date_max=hapi_updated_date_max,
-        hapi_replaced_date_min=hapi_replaced_date_min,
-        hapi_replaced_date_max=hapi_replaced_date_max,
-        # sector_name=sector_name,
+        global_rank_min=global_rank_min,
+        global_rank_max=global_rank_max,
+        overall_risk_min=overall_risk_min,
+        overall_risk_max=overall_risk_max,
+        hazard_exposure_risk_min=hazard_exposure_risk_min,
+        hazard_exposure_risk_max=hazard_exposure_risk_max,
+        vulnerability_risk_min=vulnerability_risk_min,
+        vulnerability_risk_max=vulnerability_risk_max,
+        coping_capacity_risk_min=coping_capacity_risk_min,
+        coping_capacity_risk_max=coping_capacity_risk_max,
         location_code=location_code,
         location_name=location_name,
     )
