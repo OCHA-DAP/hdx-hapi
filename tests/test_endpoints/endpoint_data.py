@@ -43,10 +43,6 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
-    '/api/age_range': {
-        'query_parameters': {'code': '10-14'},
-        'expected_fields': ['code', 'age_min', 'age_max'],
-    },
     '/api/v1/metadata/dataset': {
         'query_parameters': {
             'hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',
@@ -65,10 +61,6 @@ endpoint_data = {
             'provider_hdx_link',  # computed field
             'provider_hdx_api_link',  # computed field
         ],
-    },
-    '/api/gender': {
-        'query_parameters': {'code': 'F', 'name': 'female'},
-        'expected_fields': ['code', 'description'],
     },
     '/api/v1/metadata/location': {
         'query_parameters': {
@@ -236,17 +228,6 @@ endpoint_data = {
             'admin2_code',
             'admin2_name',
         ],
-    },
-    '/api/population_group': {
-        'query_parameters': {
-            'code': 'refugees',
-            'description': 'refugee',  # refugees
-        },
-        'expected_fields': ['code', 'description'],
-    },
-    '/api/population_status': {
-        'query_parameters': {'code': 'inneed', 'description': 'people'},
-        'expected_fields': ['code', 'description'],
     },
     '/api/themes/food_security': {
         'query_parameters': {
