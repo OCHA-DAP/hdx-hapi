@@ -16,7 +16,7 @@ from hdx_hapi.endpoints.get_encoded_identifier import router as encoded_identifi
 
 from hdx_hapi.endpoints.favicon import router as favicon_router  # noqa
 
-# from hdx_hapi.endpoints.get_population import router as population_router  # noqa
+from hdx_hapi.endpoints.get_population import router as population_router  # noqa
 from hdx_hapi.endpoints.get_operational_presence import router as operational_presence_router  # noqa
 from hdx_hapi.endpoints.get_funding import router as funding_router  # noqa
 from hdx_hapi.endpoints.get_conflict_events import router as conflict_events_router  # noqa
@@ -52,7 +52,7 @@ app.include_router(favicon_router)
 app.include_router(operational_presence_router)
 app.include_router(funding_router)
 app.include_router(conflict_events_router)
-# app.include_router(population_router)
+app.include_router(population_router)
 # app.include_router(food_security_router)
 # app.include_router(national_risk_router)
 # app.include_router(humanitarian_needs_router)
