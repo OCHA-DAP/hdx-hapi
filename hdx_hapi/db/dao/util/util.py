@@ -92,20 +92,6 @@ def apply_location_admin_filter(
     return query
 
 
-class EntityWithLocationAdmin(Protocol):
-    location_ref: Mapped[int]
-    location_code: Mapped[str]
-    location_name: Mapped[str]
-    admin1_ref: Mapped[int]
-    admin1_code: Mapped[str]
-    admin1_name: Mapped[str]
-    admin1_is_unspecified: Mapped[bool]
-    admin2_ref: Mapped[int]
-    admin2_code: Mapped[str]
-    admin2_name: Mapped[str]
-    admin2_is_unspecified: Mapped[bool]
-
-
 def case_insensitive_filter(query: Select, column: Mapped[str], value: str) -> Select:
     query = query.where(column.ilike(value))
     return query
