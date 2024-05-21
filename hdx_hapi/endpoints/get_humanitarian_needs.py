@@ -1,4 +1,3 @@
-from datetime import date
 from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
@@ -11,7 +10,6 @@ from hdx_hapi.config.doc_snippets import (
     DOC_AGE_RANGE,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
-    DOC_HDX_PROVIDER_STUB,
     DOC_ADMIN1_CODE,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
@@ -19,13 +17,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
-    DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN,
     DOC_SEE_ADMIN2,
-    DOC_HAPI_UPDATED_DATE_MIN,
-    DOC_HAPI_UPDATED_DATE_MAX,
-    DOC_HAPI_REPLACED_DATE_MIN,
-    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -44,7 +36,7 @@ from hdx_hapi.endpoints.util.util import (
 )
 
 router = APIRouter(
-    tags=['Humanitarian Needs'],
+    tags=['Affected people'],
 )
 
 
@@ -75,14 +67,14 @@ async def get_humanitarian_needs(
         Optional[PopulationStatus], Query(max_length=32, description='Population status')
     ] = None,
     population: Annotated[Optional[int], Query(description='Population')] = None,
-    reference_period_start: Annotated[
-        NaiveDatetime | date,
-        Query(description='Reference period start', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
-    ] = None,
-    reference_period_end: Annotated[
-        NaiveDatetime | date,
-        Query(description='Reference period end', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
-    ] = None,
+    # reference_period_start: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description='Reference period start', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
+    # ] = None,
+    # reference_period_end: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description='Reference period end', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
+    # ] = None,
     sector_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')

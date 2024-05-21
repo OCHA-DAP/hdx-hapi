@@ -1,4 +1,3 @@
-import datetime
 from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -9,7 +8,6 @@ from hdx_hapi.db.dao.util.util import (
     apply_location_admin_filter,
     apply_pagination,
     apply_reference_period_filter,
-    case_insensitive_filter,
 )
 from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
 from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, PopulationStatus
