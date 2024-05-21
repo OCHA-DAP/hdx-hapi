@@ -44,21 +44,21 @@ async def humanitarian_needs_view_list(
     query = select(HumanitarianNeedsView)
 
     if gender:
-        query = case_insensitive_filter(query, HumanitarianNeedsView.gender, gender)
+        query = query.where(HumanitarianNeedsView.gender == gender)
     if age_range:
         query = query.where(HumanitarianNeedsView.age_range == age_range)
-    if min_age:
-        query = query.where(HumanitarianNeedsView.min_age == min_age)
-    if max_age:
-        query = query.where(HumanitarianNeedsView.max_age == max_age)
+    # if min_age:
+    #     query = query.where(HumanitarianNeedsView.min_age == min_age)
+    # if max_age:
+    #     query = query.where(HumanitarianNeedsView.max_age == max_age)
     if disabled_marker:
         query = query.where(HumanitarianNeedsView.disabled_marker == disabled_marker)
     if sector_code:
         query = query.where(HumanitarianNeedsView.sector_code.icontains(sector_code))
     if population_group:
-        query = query.where(HumanitarianNeedsView.population_group.icontains(population_group))
+        query = query.where(HumanitarianNeedsView.population_group == population_group)
     if population_status:
-        query = query.where(HumanitarianNeedsView.population_status.icontains(population_status))
+        query = query.where(HumanitarianNeedsView.population_status == population_status)
 
     if population:
         query = query.where(HumanitarianNeedsView.population == population)
