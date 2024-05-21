@@ -1,4 +1,4 @@
-from pydantic import ConfigDict, Field, model_validator, NaiveDatetime
+from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
 from hapi_schema.utils.enums import Gender
