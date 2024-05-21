@@ -33,20 +33,3 @@ class PopulationResponse(HapiBaseModel):
     admin2_is_unspecified: bool = Field(exclude=True)
 
     model_config = ConfigDict(from_attributes=True)
-
-    @model_validator(mode='after')
-    def set_admin1_admin2_null(self) -> 'PopulationResponse':
-        admin1_is_unspecified = self.admin1_is_unspecified
-        admin2_is_unspecified = self.admin2_is_unspecified
-
-        # If 'admin1_is_unspecified' is True, set 'admin1_code' and 'admin1_name' to None
-        if admin1_is_unspecified:
-            self.admin1_code = None
-            self.admin1_name = None
-
-        # If 'admin2_is_unspecified' is True, set 'admin2_code' and 'admin2_name' to None
-        if admin2_is_unspecified:
-            self.admin2_code = None
-            self.admin2_name = None
-
-        return self

@@ -1,23 +1,24 @@
 from datetime import datetime
+from hapi_schema.utils.enums import EventType
 import pytest
 import logging
 
 from httpx import AsyncClient
-from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
+from hdx_hapi.endpoints.models.conflict_event import ConflictEventResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/v1/coordination-context/operational-presence'
+ENDPOINT_ROUTER = '/api/v1/coordination-context/conflict-event'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
 
 
 @pytest.mark.asyncio
-async def test_get_operational_presences(event_loop, refresh_db):
-    log.info('started test_get_operational_presences')
+async def test_get_conflict_events(event_loop, refresh_db):
+    log.info('started test_get_conflict_events')
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
@@ -25,8 +26,8 @@ async def test_get_operational_presences(event_loop, refresh_db):
 
 
 @pytest.mark.asyncio
-async def test_get_operational_presence_params(event_loop, refresh_db):
-    log.info('started test_get_operational_presence_params')
+async def test_get_conflict_event_params(event_loop, refresh_db):
+    log.info('started test_get_conflict_event_params')
 
     for param_name, param_value in query_parameters.items():
         async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
@@ -34,7 +35,7 @@ async def test_get_operational_presence_params(event_loop, refresh_db):
 
         assert response.status_code == 200
         assert len(response.json()['data']) > 0, (
-            'There should be at least one operational_presence entry for parameter '
+            'There should be at least one conflict_event entry for parameter '
             f'"{param_name}" with value "{param_value}" in the database'
         )
 
@@ -44,12 +45,12 @@ async def test_get_operational_presence_params(event_loop, refresh_db):
     assert response.status_code == 200
     assert (
         len(response.json()['data']) > 0
-    ), 'There should be at least one operational_presence entry for all parameters in the database'
+    ), 'There should be at least one conflict_event entry for all parameters in the database'
 
 
 @pytest.mark.asyncio
-async def test_get_operational_presence_result(event_loop, refresh_db):
-    log.info('started test_get_operational_presence_result')
+async def test_get_conflict_event_result(event_loop, refresh_db):
+    log.info('started test_get_conflict_event_result')
 
     async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
@@ -57,22 +58,23 @@ async def test_get_operational_presence_result(event_loop, refresh_db):
     for field in expected_fields:
         assert field in response.json()['data'][0], f'Field "{field}" not found in the response'
 
+    for field in response.json()['data'][0]:
+        assert field in expected_fields, f'Field "{field}" unexpected'
+
     assert len(response.json()['data'][0]) == len(
         expected_fields
     ), 'Response has a different number of fields than expected'
 
 
 @pytest.mark.asyncio
-async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
-    log.info('started test_get_operational_presence_adm_fields')
+async def test_get_conflict_event_adm_fields(event_loop, refresh_db):
+    log.info('started test_get_conflict_event_adm_fields')
 
-    operational_presence_view_adm_specified = OperationalPresenceResponse(
-        sector_code='ABC',
+    conflict_event_view_adm_specified = ConflictEventResponse(
         resource_hdx_id='test-resource1',
-        org_acronym='ORG01',
-        org_name='Organisation 1',
-        org_type_code='unimportant',
-        sector_name='Sector Name',
+        event_type=EventType.CIVILIAN_TARGETING,
+        events=10,
+        fatalities=2,
         location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
@@ -89,25 +91,23 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
     )
 
     assert (
-        operational_presence_view_adm_specified.admin1_code == 'FOO-XXX'
+        conflict_event_view_adm_specified.admin1_code == 'FOO-XXX'
     ), 'admin1_code should keep its value when admin1_is_unspecified is False'
     assert (
-        operational_presence_view_adm_specified.admin1_name == 'Province 01'
+        conflict_event_view_adm_specified.admin1_name == 'Province 01'
     ), 'admin1_name should keep its value when admin1_is_unspecified is False'
     assert (
-        operational_presence_view_adm_specified.admin2_code == 'FOO-XXX-XXX'
+        conflict_event_view_adm_specified.admin2_code == 'FOO-XXX-XXX'
     ), 'admin2_code should keep its value when admin1_is_unspecified is False'
     assert (
-        operational_presence_view_adm_specified.admin2_name == 'District A'
+        conflict_event_view_adm_specified.admin2_name == 'District A'
     ), 'admin2_name should keep its value when admin1_is_unspecified is False'
 
-    operational_presence_view_adm_unspecified = OperationalPresenceResponse(
-        sector_code='ABC',
+    conflict_event_view_adm_unspecified = ConflictEventResponse(
         resource_hdx_id='test-resource1',
-        org_acronym='ORG01',
-        org_name='Organisation 1',
-        org_type_code='unimportant',
-        sector_name='Sector Name',
+        event_type=EventType.CIVILIAN_TARGETING,
+        events=10,
+        fatalities=2,
         location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
@@ -124,22 +124,22 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
     )
 
     assert (
-        operational_presence_view_adm_unspecified.admin1_code is None
+        conflict_event_view_adm_unspecified.admin1_code is None
     ), 'admin1_code should be changed to None when admin1_is_unspecified is True'
     assert (
-        operational_presence_view_adm_unspecified.admin1_name is None
+        conflict_event_view_adm_unspecified.admin1_name is None
     ), 'admin1_name should be changed to None when admin1_is_unspecified is True'
     assert (
-        operational_presence_view_adm_unspecified.admin2_code is None
+        conflict_event_view_adm_unspecified.admin2_code is None
     ), 'admin2_code should be changed to None when admin1_is_unspecified is True'
     assert (
-        operational_presence_view_adm_unspecified.admin2_name is None
+        conflict_event_view_adm_unspecified.admin2_name is None
     ), 'admin2_name should be changed to None when admin1_is_unspecified is True'
 
 
 @pytest.mark.asyncio
-async def test_get_operational_presence_admin_level(event_loop, refresh_db):
-    log.info('started test_get_operational_presence_admin_level')
+async def test_get_conflict_event_admin_level(event_loop, refresh_db):
+    log.info('started test_get_conflict_event_admin_level')
 
     async with AsyncClient(
         app=app,
