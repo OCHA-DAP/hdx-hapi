@@ -1,6 +1,6 @@
 from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
-from pydantic import NaiveDatetime
+# from pydantic import NaiveDatetime
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
