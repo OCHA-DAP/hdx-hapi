@@ -1,5 +1,7 @@
 from datetime import date
 
+from hapi_schema.utils.enums import RiskClass
+
 endpoint_data = {
     '/api/v1/metadata/admin1': {
         'query_parameters': {
@@ -284,18 +286,23 @@ endpoint_data = {
             'admin1_ref',
         ],
     },
-    '/api/themes/national_risk': {
+    '/api/v1/coordination-context/national-risk': {
         'query_parameters': {
-            'risk_class': 5,
-            'global_rank': 4,
-            'overall_risk': 8.1,
-            'hazard_exposure_risk': 8.7,
-            'vulnerability_risk': 8.5,
-            'coping_capacity_risk': 7.1,
-            'dataset_hdx_provider_stub': 'pRoViDeR01',
-            'resource_update_date_min': date(2023, 6, 1),
-            'resource_update_date_max': date(2023, 6, 2),
-            # 'sector_name': 'Emergency Shelter and NFI',
+            'risk_class': RiskClass.HIGH.value,
+            'global_rank_min': 5,
+            'global_rank_max': 7,
+            'overall_risk_min': 6,
+            'overall_risk_max': 10,
+            'hazard_exposure_risk_min': 6,
+            'hazard_exposure_risk_max': 10,
+            'vulnerability_risk_min': 5,
+            'vulnerability_risk_max': 10,
+            'coping_capacity_risk_min': 6.1,
+            'coping_capacity_risk_max': 10.1,
+            'reference_period_start_min': '2020-01-01T00:00:00',
+            'reference_period_start_max': '2024-01-11T00:00:00',
+            'reference_period_end_min': '2023-01-01T00:00:00',
+            'reference_period_end_max': '2025-01-01T00:00:00',
             'location_code': 'fOO',
             'location_name': 'Foolandia',
         },
@@ -310,12 +317,7 @@ endpoint_data = {
             'meta_avg_recentness_years',
             'reference_period_start',
             'reference_period_end',
-            'dataset_hdx_stub',
-            'dataset_hdx_provider_stub',
             'resource_hdx_id',
-            'hapi_updated_date',
-            'hapi_replaced_date',
-            # "sector_name",
             'location_code',
             'location_name',
         ],
