@@ -1,4 +1,4 @@
-from datetime import datetime
+# from datetime import datetime
 from typing import Optional, Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -60,6 +60,7 @@ async def get_humanitarian_needs_srv(
         admin2_code=admin2_code,
         admin2_name=admin2_name,
         admin1_ref=admin1_ref,
+        admin1_name=admin1_name,
         admin1_is_unspecified=admin1_is_unspecified,
         admin2_is_unspecified=admin2_is_unspecified,
     )
