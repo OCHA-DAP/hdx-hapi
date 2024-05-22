@@ -8,7 +8,6 @@ from sqlalchemy.orm import column_property, Mapped
 from hapi_schema.db_admin1 import view_params_admin1
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
-from hapi_schema.db_admin1 import view_params_admin1
 from hapi_schema.db_admin2 import view_params_admin2
 from hapi_schema.db_conflict_event import view_params_conflict_event
 from hapi_schema.db_currency import view_params_currency
