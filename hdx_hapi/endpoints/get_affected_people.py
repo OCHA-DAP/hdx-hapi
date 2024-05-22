@@ -22,8 +22,10 @@ from hdx_hapi.config.doc_snippets import (
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
+from hdx_hapi.endpoints.models.refugees import RefugeesResponse
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.humanitarian_needs_logic import get_humanitarian_needs_srv
+from hdx_hapi.services.refugees_logic import get_refugees_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, PopulationStatus
 from hdx_hapi.endpoints.util.util import (
@@ -124,3 +126,60 @@ async def get_humanitarian_needs(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, HumanitarianNeedsResponse)
+
+
+## refugees
+
+
+@router.get(
+    '/api/affected-people/refugees',
+    response_model=HapiGenericResponse[RefugeesResponse],
+    summary='Get refugees data',
+    include_in_schema=False,
+)
+@router.get(
+    '/api/v1/affected-people/refugees',
+    response_model=HapiGenericResponse[RefugeesResponse],
+    summary='Get refugees data',
+)
+async def get_refugees(
+    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
+    db: AsyncSession = Depends(get_db),
+    population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
+    gender: Annotated[Optional[Gender], Query(max_length=1, description=f'{DOC_GENDER}')] = None,
+    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
+    min_age: Annotated[Optional[int], Query(description='Min age')] = None,
+    max_age: Annotated[Optional[int], Query(description='Max age')] = None,
+    origin_location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    origin_location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    asylum_location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    asylum_location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    output_format: OutputFormat = OutputFormat.JSON,
+):
+    """
+    Return the list of refugees data
+    """
+    result = await get_refugees_srv(
+        pagination_parameters=common_parameters,
+        ref_period_parameters=ref_period_parameters,
+        db=db,
+        population_group=population_group,
+        gender=gender,
+        age_range=age_range,
+        min_age=min_age,
+        max_age=max_age,
+        origin_location_code=origin_location_code,
+        origin_location_name=origin_location_name,
+        asylum_location_code=asylum_location_code,
+        asylum_location_name=asylum_location_name,
+    )
+    return transform_result_to_csv_stream_if_requested(result, output_format, RefugeesResponse)
