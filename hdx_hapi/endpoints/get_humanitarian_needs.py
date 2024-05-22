@@ -1,5 +1,4 @@
-from datetime import date
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -7,11 +6,10 @@ from pydantic import NaiveDatetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_GENDER_CODE,
-    DOC_AGE_RANGE_CODE,
+    DOC_GENDER,
+    DOC_AGE_RANGE,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
-    DOC_HDX_PROVIDER_STUB,
     DOC_ADMIN1_CODE,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
@@ -19,83 +17,83 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
-    DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN,
     DOC_SEE_ADMIN2,
-    DOC_HAPI_UPDATED_DATE_MIN,
-    DOC_HAPI_UPDATED_DATE_MAX,
-    DOC_HAPI_REPLACED_DATE_MIN,
-    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
-from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.humanitarian_needs_logic import get_humanitarian_needs_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
+from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, PopulationStatus
+from hdx_hapi.endpoints.util.util import (
+    CommonEndpointParams,
+    OutputFormat,
+    ReferencePeriodParameters,
+    common_endpoint_parameters,
+    reference_period_parameters,
+    AdminLevel,
+)
 
 router = APIRouter(
-    tags=['Humanitarian Needs'],
+    tags=['Affected people'],
 )
 
 
 @router.get(
-    '/api/themes/humanitarian_needs',
+    '/api/affected-people/humanitarian-needs',
     response_model=HapiGenericResponse[HumanitarianNeedsResponse],
     summary='Get humanitarian needs data',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/themes/humanitarian_needs',
+    '/api/v1/affected-people/humanitarian-needs',
     response_model=HapiGenericResponse[HumanitarianNeedsResponse],
     summary='Get humanitarian needs data',
 )
 async def get_humanitarian_needs(
+    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    gender_code: Annotated[str, Query(max_length=1, description=f'{DOC_GENDER_CODE}')] = None,
-    age_range_code: Annotated[str, Query(max_length=32, description=f'{DOC_AGE_RANGE_CODE}')] = None,
-    disabled_marker: Annotated[bool, Query(description='Disabled marker')] = None,
-    sector_code: Annotated[str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
-    sector_name: Annotated[str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
-    population_group_code: Annotated[str, Query(max_length=32, description='Population group code')] = None,
-    population_status_code: Annotated[str, Query(max_length=32, description='Population status code')] = None,
-    population: Annotated[int, Query(description='Population')] = None,
-    dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
-    resource_update_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_UPDATE_DATE_MIN}', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
+    admin2_ref: Annotated[Optional[int], Query(description='Admin2 reference')] = None,
+    gender: Annotated[Optional[Gender], Query(max_length=1, description=f'{DOC_GENDER}')] = None,
+    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
+    min_age: Annotated[Optional[int], Query(description='Min age')] = None,
+    max_age: Annotated[Optional[int], Query(description='Max age')] = None,
+    disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker')] = None,
+    sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
+    population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
+    population_status: Annotated[
+        Optional[PopulationStatus], Query(max_length=32, description='Population status')
     ] = None,
-    resource_update_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
+    population: Annotated[Optional[int], Query(description='Population')] = None,
+    # reference_period_start: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description='Reference period start', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
+    # ] = None,
+    # reference_period_end: Annotated[
+    #     NaiveDatetime | date,
+    #     Query(description='Reference period end', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
+    # ] = None,
+    sector_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
-    hapi_updated_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    hapi_updated_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
+    location_ref: Annotated[Optional[int], Query(description='Location reference')] = None,
+    admin1_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
     ] = None,
-    hapi_replaced_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
+    admin2_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
     ] = None,
-    hapi_replaced_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
+    admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
-    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
-    admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
-    location_ref: Annotated[int, Query(description='Location reference')] = None,
-    # admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
-    admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
-    admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin1_ref: Annotated[int, Query(description='Admin1 reference')] = None,
-    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
+    admin1_ref: Annotated[Optional[int], Query(description='Admin1 reference')] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
@@ -103,27 +101,23 @@ async def get_humanitarian_needs(
     """
     result = await get_humanitarian_needs_srv(
         pagination_parameters=common_parameters,
+        ref_period_parameters=ref_period_parameters,
         db=db,
-        gender_code=gender_code,
-        age_range_code=age_range_code,
+        admin2_ref=admin2_ref,
+        gender=gender,
+        age_range=age_range,
+        min_age=min_age,
+        max_age=max_age,
         disabled_marker=disabled_marker,
         sector_code=sector_code,
-        sector_name=sector_name,
-        population_group_code=population_group_code,
-        population_status_code=population_status_code,
+        population_group=population_group,
+        population_status=population_status,
         population=population,
-        dataset_hdx_provider_stub=dataset_hdx_provider_stub,
-        resource_update_date_min=resource_update_date_min,
-        resource_update_date_max=resource_update_date_max,
-        hapi_updated_date_min=hapi_updated_date_min,
-        hapi_updated_date_max=hapi_updated_date_max,
-        hapi_replaced_date_min=hapi_replaced_date_min,
-        hapi_replaced_date_max=hapi_replaced_date_max,
+        sector_name=sector_name,
         location_code=location_code,
         location_name=location_name,
-        admin1_code=admin1_code,
-        # admin1_name=admin1_name,
         location_ref=location_ref,
+        admin1_code=admin1_code,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
         admin1_ref=admin1_ref,
