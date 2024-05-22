@@ -2,7 +2,7 @@
 This code was generated automatically using src/hapi_schema/utils/hapi_views_code_generator.py
 """
 
-from hapi_schema.utils.enums import RiskClass
+from decimal import Decimal
 from sqlalchemy import DateTime
 from sqlalchemy.orm import column_property, Mapped
 from hdx_hapi.db.models.views.util.util import view
@@ -10,7 +10,9 @@ from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
 from hapi_schema.db_admin2 import view_params_admin2
 from hapi_schema.db_conflict_event import view_params_conflict_event
+from hapi_schema.db_currency import view_params_currency
 from hapi_schema.db_dataset import view_params_dataset
+from hapi_schema.db_food_price import view_params_food_price
 from hapi_schema.db_food_security import view_params_food_security
 from hapi_schema.db_funding import view_params_funding
 from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs
@@ -24,14 +26,19 @@ from hapi_schema.db_poverty_rate import view_params_poverty_rate
 from hapi_schema.db_refugees import view_params_refugees
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
-from hapi_schema.utils.enums import Gender
-# from hapi_schema.db_patch import view_params_patch
+from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
+from hapi_schema.db_wfp_market import view_params_wfp_market
 
+# from hapi_schema.db_patch import view_params_patch
+from hapi_schema.utils.enums import RiskClass
+from hapi_schema.utils.enums import Gender
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
 admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
 conflict_event_view = view(view_params_conflict_event.name, Base.metadata, view_params_conflict_event.selectable)
+currency_view = view(view_params_currency.name, Base.metadata, view_params_currency.selectable)
 dataset_view = view(view_params_dataset.name, Base.metadata, view_params_dataset.selectable)
+food_price_view = view(view_params_food_price.name, Base.metadata, view_params_food_price.selectable)
 food_security_view = view(view_params_food_security.name, Base.metadata, view_params_food_security.selectable)
 funding_view = view(view_params_funding.name, Base.metadata, view_params_funding.selectable)
 humanitarian_needs_view = view(
@@ -49,6 +56,8 @@ poverty_rate_view = view(view_params_poverty_rate.name, Base.metadata, view_para
 refugees_view = view(view_params_refugees.name, Base.metadata, view_params_refugees.selectable)
 resource_view = view(view_params_resource.name, Base.metadata, view_params_resource.selectable)
 sector_view = view(view_params_sector.name, Base.metadata, view_params_sector.selectable)
+wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_params_wfp_commodity.selectable)
+wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
 # patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
 
 
@@ -59,6 +68,7 @@ class Admin1View(Base):
     code: Mapped[str] = column_property(admin1_view.c.code)
     name: Mapped[str] = column_property(admin1_view.c.name)
     is_unspecified: Mapped[bool] = column_property(admin1_view.c.is_unspecified)
+    from_cods: Mapped[bool] = column_property(admin1_view.c.from_cods)
     reference_period_start: Mapped[DateTime] = column_property(admin1_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(admin1_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(admin1_view.c.location_code)
@@ -72,6 +82,7 @@ class Admin2View(Base):
     code: Mapped[str] = column_property(admin2_view.c.code)
     name: Mapped[str] = column_property(admin2_view.c.name)
     is_unspecified: Mapped[bool] = column_property(admin2_view.c.is_unspecified)
+    from_cods: Mapped[bool] = column_property(admin2_view.c.from_cods)
     reference_period_start: Mapped[DateTime] = column_property(admin2_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(admin2_view.c.reference_period_end)
     admin1_code: Mapped[str] = column_property(admin2_view.c.admin1_code)
@@ -102,6 +113,12 @@ class ConflictEventView(Base):
     admin1_ref: Mapped[int] = column_property(conflict_event_view.c.admin1_ref)
 
 
+class CurrencyView(Base):
+    __table__ = currency_view
+    code: Mapped[str] = column_property(currency_view.c.code)
+    name: Mapped[str] = column_property(currency_view.c.name)
+
+
 class DatasetView(Base):
     __table__ = dataset_view
     hdx_id: Mapped[str] = column_property(dataset_view.c.hdx_id)
@@ -109,6 +126,36 @@ class DatasetView(Base):
     title: Mapped[str] = column_property(dataset_view.c.title)
     hdx_provider_stub: Mapped[str] = column_property(dataset_view.c.hdx_provider_stub)
     hdx_provider_name: Mapped[str] = column_property(dataset_view.c.hdx_provider_name)
+
+
+class FoodPriceView(Base):
+    __table__ = food_price_view
+    resource_hdx_id: Mapped[str] = column_property(food_price_view.c.resource_hdx_id)
+    market_code: Mapped[str] = column_property(food_price_view.c.market_code)
+    commodity_code: Mapped[str] = column_property(food_price_view.c.commodity_code)
+    currency_code: Mapped[str] = column_property(food_price_view.c.currency_code)
+    unit: Mapped[str] = column_property(food_price_view.c.unit)
+    price_flag: Mapped[str] = column_property(food_price_view.c.price_flag)
+    price_type: Mapped[str] = column_property(food_price_view.c.price_type)
+    price: Mapped[Decimal] = column_property(food_price_view.c.price)
+    reference_period_start: Mapped[DateTime] = column_property(food_price_view.c.reference_period_start)
+    reference_period_end: Mapped[DateTime] = column_property(food_price_view.c.reference_period_end)
+    admin2_ref: Mapped[int] = column_property(food_price_view.c.admin2_ref)
+    market_name: Mapped[str] = column_property(food_price_view.c.market_name)
+    lat: Mapped[float] = column_property(food_price_view.c.lat)
+    lon: Mapped[float] = column_property(food_price_view.c.lon)
+    commodity_category: Mapped[str] = column_property(food_price_view.c.commodity_category)
+    commodity_name: Mapped[str] = column_property(food_price_view.c.commodity_name)
+    location_code: Mapped[str] = column_property(food_price_view.c.location_code)
+    location_name: Mapped[str] = column_property(food_price_view.c.location_name)
+    location_ref: Mapped[int] = column_property(food_price_view.c.location_ref)
+    admin1_code: Mapped[str] = column_property(food_price_view.c.admin1_code)
+    admin1_name: Mapped[str] = column_property(food_price_view.c.admin1_name)
+    admin1_is_unspecified: Mapped[bool] = column_property(food_price_view.c.admin1_is_unspecified)
+    admin1_ref: Mapped[int] = column_property(food_price_view.c.admin1_ref)
+    admin2_code: Mapped[str] = column_property(food_price_view.c.admin2_code)
+    admin2_name: Mapped[str] = column_property(food_price_view.c.admin2_name)
+    admin2_is_unspecified: Mapped[bool] = column_property(food_price_view.c.admin2_is_unspecified)
 
 
 class FoodSecurityView(Base):
@@ -140,9 +187,9 @@ class FundingView(Base):
     location_ref: Mapped[int] = column_property(funding_view.c.location_ref)
     appeal_name: Mapped[str] = column_property(funding_view.c.appeal_name)
     appeal_type: Mapped[str] = column_property(funding_view.c.appeal_type)
-    requirements_usd: Mapped[float] = column_property(funding_view.c.requirements_usd)
-    funding_usd: Mapped[float] = column_property(funding_view.c.funding_usd)
-    funding_pct: Mapped[float] = column_property(funding_view.c.funding_pct)
+    requirements_usd: Mapped[Decimal] = column_property(funding_view.c.requirements_usd)
+    funding_usd: Mapped[Decimal] = column_property(funding_view.c.funding_usd)
+    funding_pct: Mapped[Decimal] = column_property(funding_view.c.funding_pct)
     reference_period_start: Mapped[DateTime] = column_property(funding_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(funding_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(funding_view.c.location_code)
@@ -182,6 +229,7 @@ class LocationView(Base):
     id: Mapped[int] = column_property(location_view.c.id)
     code: Mapped[str] = column_property(location_view.c.code)
     name: Mapped[str] = column_property(location_view.c.name)
+    from_cods: Mapped[bool] = column_property(location_view.c.from_cods)
     reference_period_start: Mapped[DateTime] = column_property(location_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(location_view.c.reference_period_end)
 
@@ -319,6 +367,32 @@ class SectorView(Base):
     __table__ = sector_view
     code: Mapped[str] = column_property(sector_view.c.code)
     name: Mapped[str] = column_property(sector_view.c.name)
+
+
+class WfpCommodityView(Base):
+    __table__ = wfp_commodity_view
+    code: Mapped[str] = column_property(wfp_commodity_view.c.code)
+    category: Mapped[str] = column_property(wfp_commodity_view.c.category)
+    name: Mapped[str] = column_property(wfp_commodity_view.c.name)
+
+
+class WfpMarketView(Base):
+    __table__ = wfp_market_view
+    code: Mapped[str] = column_property(wfp_market_view.c.code)
+    admin2_ref: Mapped[int] = column_property(wfp_market_view.c.admin2_ref)
+    name: Mapped[str] = column_property(wfp_market_view.c.name)
+    lat: Mapped[float] = column_property(wfp_market_view.c.lat)
+    lon: Mapped[float] = column_property(wfp_market_view.c.lon)
+    location_code: Mapped[str] = column_property(wfp_market_view.c.location_code)
+    location_name: Mapped[str] = column_property(wfp_market_view.c.location_name)
+    admin1_code: Mapped[str] = column_property(wfp_market_view.c.admin1_code)
+    admin1_name: Mapped[str] = column_property(wfp_market_view.c.admin1_name)
+    admin1_is_unspecified: Mapped[bool] = column_property(wfp_market_view.c.admin1_is_unspecified)
+    location_ref: Mapped[int] = column_property(wfp_market_view.c.location_ref)
+    admin2_code: Mapped[str] = column_property(wfp_market_view.c.admin2_code)
+    admin2_name: Mapped[str] = column_property(wfp_market_view.c.admin2_name)
+    admin2_is_unspecified: Mapped[bool] = column_property(wfp_market_view.c.admin2_is_unspecified)
+    admin1_ref: Mapped[int] = column_property(wfp_market_view.c.admin1_ref)
 
 
 # class PatchView(Base):
