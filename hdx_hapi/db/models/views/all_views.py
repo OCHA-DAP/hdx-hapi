@@ -5,6 +5,7 @@ This code was generated automatically using src/hapi_schema/utils/hapi_views_cod
 from decimal import Decimal
 from sqlalchemy import DateTime
 from sqlalchemy.orm import column_property, Mapped
+from hapi_schema.db_admin1 import view_params_admin1
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
@@ -28,10 +29,8 @@ from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
+from hapi_schema.db_patch import view_params_patch
 
-# from hapi_schema.db_patch import view_params_patch
-from hapi_schema.utils.enums import RiskClass
-from hapi_schema.utils.enums import Gender
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
 admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
@@ -58,7 +57,7 @@ resource_view = view(view_params_resource.name, Base.metadata, view_params_resou
 sector_view = view(view_params_sector.name, Base.metadata, view_params_sector.selectable)
 wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_params_wfp_commodity.selectable)
 wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
-# patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
+patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
 
 
 class Admin1View(Base):
@@ -238,7 +237,7 @@ class NationalRiskView(Base):
     __table__ = national_risk_view
     resource_hdx_id: Mapped[str] = column_property(national_risk_view.c.resource_hdx_id)
     location_ref: Mapped[int] = column_property(national_risk_view.c.location_ref)
-    risk_class: Mapped[RiskClass] = column_property(national_risk_view.c.risk_class)
+    risk_class: Mapped[str] = column_property(national_risk_view.c.risk_class)
     global_rank: Mapped[int] = column_property(national_risk_view.c.global_rank)
     overall_risk: Mapped[float] = column_property(national_risk_view.c.overall_risk)
     hazard_exposure_risk: Mapped[float] = column_property(national_risk_view.c.hazard_exposure_risk)
@@ -293,7 +292,7 @@ class PopulationView(Base):
     __table__ = population_view
     resource_hdx_id: Mapped[str] = column_property(population_view.c.resource_hdx_id)
     admin2_ref: Mapped[int] = column_property(population_view.c.admin2_ref)
-    gender: Mapped[Gender] = column_property(population_view.c.gender)
+    gender: Mapped[str] = column_property(population_view.c.gender)
     age_range: Mapped[str] = column_property(population_view.c.age_range)
     min_age: Mapped[int] = column_property(population_view.c.min_age)
     max_age: Mapped[int] = column_property(population_view.c.max_age)
@@ -315,17 +314,14 @@ class PopulationView(Base):
 class PovertyRateView(Base):
     __table__ = poverty_rate_view
     resource_hdx_id: Mapped[str] = column_property(poverty_rate_view.c.resource_hdx_id)
-    admin1_ref: Mapped[int] = column_property(poverty_rate_view.c.admin1_ref)
+    location_ref: Mapped[int] = column_property(poverty_rate_view.c.location_ref)
+    admin1_name: Mapped[str] = column_property(poverty_rate_view.c.admin1_name)
     classification: Mapped[str] = column_property(poverty_rate_view.c.classification)
-    population: Mapped[int] = column_property(poverty_rate_view.c.population)
+    rate: Mapped[Decimal] = column_property(poverty_rate_view.c.rate)
     reference_period_start: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(poverty_rate_view.c.location_code)
     location_name: Mapped[str] = column_property(poverty_rate_view.c.location_name)
-    admin1_code: Mapped[str] = column_property(poverty_rate_view.c.admin1_code)
-    admin1_name: Mapped[str] = column_property(poverty_rate_view.c.admin1_name)
-    admin1_is_unspecified: Mapped[bool] = column_property(poverty_rate_view.c.admin1_is_unspecified)
-    location_ref: Mapped[int] = column_property(poverty_rate_view.c.location_ref)
 
 
 class RefugeesView(Base):
@@ -395,15 +391,15 @@ class WfpMarketView(Base):
     admin1_ref: Mapped[int] = column_property(wfp_market_view.c.admin1_ref)
 
 
-# class PatchView(Base):
-#     __table__ = patch_view
-#     id: Mapped[int] = column_property(patch_view.c.id)
-#     patch_sequence_number: Mapped[int] = column_property(patch_view.c.patch_sequence_number)
-#     commit_hash: Mapped[str] = column_property(patch_view.c.commit_hash)
-#     commit_date: Mapped[DateTime] = column_property(patch_view.c.commit_date)
-#     patch_path: Mapped[str] = column_property(patch_view.c.patch_path)
-#     patch_permalink_url: Mapped[str] = column_property(patch_view.c.patch_permalink_url)
-#     patch_target: Mapped[str] = column_property(patch_view.c.patch_target)
-#     patch_hash: Mapped[str] = column_property(patch_view.c.patch_hash)
-#     state: Mapped[str] = column_property(patch_view.c.state)
-#     execution_date: Mapped[DateTime] = column_property(patch_view.c.execution_date)
+class PatchView(Base):
+    __table__ = patch_view
+    id: Mapped[int] = column_property(patch_view.c.id)
+    patch_sequence_number: Mapped[int] = column_property(patch_view.c.patch_sequence_number)
+    commit_hash: Mapped[str] = column_property(patch_view.c.commit_hash)
+    commit_date: Mapped[DateTime] = column_property(patch_view.c.commit_date)
+    patch_path: Mapped[str] = column_property(patch_view.c.patch_path)
+    patch_permalink_url: Mapped[str] = column_property(patch_view.c.patch_permalink_url)
+    patch_target: Mapped[str] = column_property(patch_view.c.patch_target)
+    patch_hash: Mapped[str] = column_property(patch_view.c.patch_hash)
+    state: Mapped[str] = column_property(patch_view.c.state)
+    execution_date: Mapped[DateTime] = column_property(patch_view.c.execution_date)
