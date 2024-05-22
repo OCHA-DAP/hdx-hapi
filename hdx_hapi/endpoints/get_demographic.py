@@ -4,7 +4,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
-    DOC_AGE_RANGE_CODE,
+    DOC_AGE_RANGE,
     DOC_AGE_RANGE_SUMMARY,
     DOC_GENDER_CODE,
     DOC_GENDER_DESCRIPTION,
@@ -38,7 +38,7 @@ async def get_age_ranges(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=32, openapi_examples={'20-24': {'value': '20-24'}}, description=f'{DOC_AGE_RANGE_CODE}')
+        str, Query(max_length=32, openapi_examples={'20-24': {'value': '20-24'}}, description=f'{DOC_AGE_RANGE}')
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
