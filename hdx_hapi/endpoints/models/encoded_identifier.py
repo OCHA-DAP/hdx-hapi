@@ -3,4 +3,4 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
 class IdentifierResponse(HapiBaseModel):
-    encoded_identifier: str = Field(max_length=512)
+    encoded_app_identifier: str = Field(max_length=512)

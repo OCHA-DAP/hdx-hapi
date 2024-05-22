@@ -52,7 +52,7 @@ async def test_endpoints_vs_encode_identifier(event_loop, refresh_db, enable_hap
 @pytest.mark.asyncio
 async def test_encode_identifier(event_loop, refresh_db, enable_hapi_identifier_filtering):
     # testing the encode identifier endpoint
-    endpoint_router = '/api/v1/encode_identifier'
+    endpoint_router = '/api/v1/encode_app_identifier'
 
     # it should not be important if app_identifier is passed or not to the endpoint
     async with AsyncClient(app=app, base_url='http://test') as ac:

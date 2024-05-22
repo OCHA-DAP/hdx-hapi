@@ -15,8 +15,8 @@ CONFIG = get_config()
 
 
 ALLOWED_API_ENDPOINTS = {
-    '/api/v1/encode_identifier',
-    '/api/encode_identifier',
+    '/api/v1/encode_app_identifier',
+    '/api/encode_app_identifier',
 }
 
 
