@@ -20,17 +20,14 @@ async def mixpanel_tracking_middleware(request: Request, call_next):
 
     response = await call_next(request)
 
-    if request.url.path.startswith('/api'):
-        if CONFIG.HDX_MIXPANEL_TOKEN:
+    
+    if CONFIG.MIXPANEL:
+        if request.url.path.startswith('/api'):
             background_tasks.add_task(track_api_call, request, response)
-        else:
-            logger.warning('HDX_MIXPANEL_TOKEN environment variable is not set.')
-
-    if request.url.path.startswith('/docs'):
-        if CONFIG.HDX_MIXPANEL_TOKEN:
+        elif request.url.path.startswith('/docs'):
             background_tasks.add_task(track_page_view, request, response)
-        else:
-            logger.warning('HDX_MIXPANEL_TOKEN environment variable is not set.')
+    else:
+        logger.warning('HDX_MIXPANEL_TOKEN environment variable is not set.')
     response.background = background_tasks
 
     return response

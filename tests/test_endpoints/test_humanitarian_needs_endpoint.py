@@ -8,7 +8,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/themes/humanitarian_needs'
+ENDPOINT_ROUTER = '/api/v1/affected-people/humanitarian-needs'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -66,28 +66,33 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
     log.info('started test_get_humanitarian_needs_adm_fields')
 
     humanitarian_needs_view_adm_specified = HumanitarianNeedsResponse(
-        gender_code='m',
-        age_range_code='0-1',
-        sector_code='ABC',
-        sector_name='Sector Name',
-        population_status_code='inneed',
-        population_group_code='abcd',
-        dataset_hdx_provider_stub='provider01',
-        dataset_hdx_stub='test-dataset1',
-        resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
+        resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
+        gender='f',
+        age_range='1-2',
+        min_age=0,
+        max_age=99,
+        disabled_marker='y',
+        sector_code='EDU',
+        population_group='REF',
+        population_status='AFF',
+        population=500000,
+        reference_period_start='2023-01-01 00:00:00',
+        reference_period_end='2023-03-31 23:59:59',
+        sector_name='Education',
         location_code='Foolandia',
         location_name='FOO-XXX',
         admin1_is_unspecified=False,
+        admin1_ref=1,
+        admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
         admin2_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        location_ref=2,
     )
+
+    assert True
 
     assert (
         humanitarian_needs_view_adm_specified.admin1_code == 'FOO-XXX'
@@ -103,27 +108,30 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
     ), 'admin2_name should keep its value when admin1_is_unspecified is False'
 
     humanitarian_needs_view_adm_unspecified = HumanitarianNeedsResponse(
-        gender_code='f',
-        age_range_code='1-2',
-        sector_code='DEF',
-        sector_name='Sector_name2',
-        population_status_code='inneed',
-        population_group_code='efgh',
-        dataset_hdx_stub='test-dataset2',
-        dataset_hdx_provider_stub='provider02',
-        resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
+        resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
+        gender='f',
+        age_range='1-2',
+        min_age=0,
+        max_age=99,
+        disabled_marker='y',
+        sector_code='EDU',
+        population_group='REF',
+        population_status='AFF',
+        population=500000,
+        reference_period_start='2023-01-01 00:00:00',
+        reference_period_end='2023-03-31 23:59:59',
+        sector_name='Education',
         location_code='Foolandia',
         location_name='FOO-XXX',
         admin1_is_unspecified=True,
+        admin1_ref=1,
+        admin2_ref=1,
         admin1_code='FOO-XXX',
-        admin1_name='Unpecified',
+        admin1_name='Unspecified',
         admin2_is_unspecified=True,
         admin2_code='FOO-XXX',
         admin2_name='Unspecified',
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        location_ref=2,
     )
 
     assert (

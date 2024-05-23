@@ -7,20 +7,20 @@ from hdx_hapi.endpoints.models.encoded_identifier import IdentifierResponse
 from hdx_hapi.endpoints.util.util import app_name_identifier_query, email_identifier_query
 
 router = APIRouter(
-    tags=['Utility'],
+    tags=['Generate App Identifier'],
 )
 
 SUMMARY = 'Get an encoded application name plus email'
 
 
 @router.get(
-    '/api/encode_identifier',
+    '/api/encode_app_identifier',
     response_model=IdentifierResponse,
     summary=SUMMARY,
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/encode_identifier',
+    '/api/v1/encode_app_identifier',
     response_model=IdentifierResponse,
     summary=SUMMARY,
 )
@@ -33,6 +33,5 @@ async def get_encoded_identifier(
     """
     encoded_identifier = base64.b64encode(bytes(f'{application}:{email}', 'utf-8'))
 
-    result = {'encoded_identifier': encoded_identifier.decode('utf-8')}
+    result = {'encoded_app_identifier': encoded_identifier.decode('utf-8')}
     return result
-    # return transform_result_to_csv_stream_if_requested(result, OutputFormat.JSON, IdentifierResponse)

@@ -13,6 +13,8 @@ TEST_USER_AGENT = (
 
 log = logging.getLogger(__name__)
 
+ENDPOINT = '/api/v1/coordination-context/operational-presence'
+
 
 @pytest.mark.asyncio
 async def test_tracking_endpoint_success():
@@ -26,13 +28,13 @@ async def test_tracking_endpoint_success():
                 'HTTP_X_REAL_IP': '127.0.0.1',
             }
             params = {'admin_level': '1', 'output_format': 'json'}
-            response = await ac.get('/api/v1/themes/3w', params=params, headers=headers)
+            response = await ac.get(ENDPOINT, params=params, headers=headers)
 
         assert response.status_code == 200
         assert send_mixpanel_event_patch.call_count == 1, 'API calls should be tracked'
 
         expected_mixpanel_dict = {
-            'endpoint name': '/api/v1/themes/3w',
+            'endpoint name': ENDPOINT,
             'query params': ['admin_level', 'output_format'],
             'time': pytest.approx(time.time()),
             'app name': None,
@@ -45,13 +47,11 @@ async def test_tracking_endpoint_success():
             '$os': 'Windows',
             '$browser': 'Chrome',
             '$browser_version': '124',
-            '$current_url': f'{TEST_BASE_URL}/api/v1/themes/3w?admin_level=1&output_format=json',
+            '$current_url': f'{TEST_BASE_URL}{ENDPOINT}?admin_level=1&output_format=json',
         }
 
-        (
-            send_mixpanel_event_patch.assert_called_once_with('api call', '123456', expected_mixpanel_dict),
-            'Parameters do not match the expected ones',
-        )
+        # Check parameters match the expected ones
+        send_mixpanel_event_patch.assert_called_once_with('api call', '123456', expected_mixpanel_dict)
 
 
 @pytest.mark.asyncio
