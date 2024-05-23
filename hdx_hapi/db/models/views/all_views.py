@@ -28,8 +28,7 @@ from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
-
-# from hapi_schema.db_patch import view_params_patch
+from hapi_schema.db_patch import view_params_patch
 from hapi_schema.utils.enums import RiskClass
 from hapi_schema.utils.enums import Gender
 
@@ -58,7 +57,7 @@ resource_view = view(view_params_resource.name, Base.metadata, view_params_resou
 sector_view = view(view_params_sector.name, Base.metadata, view_params_sector.selectable)
 wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_params_wfp_commodity.selectable)
 wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
-# patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
+patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
 
 
 class Admin1View(Base):
@@ -262,6 +261,7 @@ class OperationalPresenceView(Base):
     reference_period_start: Mapped[DateTime] = column_property(operational_presence_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(operational_presence_view.c.reference_period_end)
     org_type_code: Mapped[str] = column_property(operational_presence_view.c.org_type_code)
+    org_type_description: Mapped[str] = column_property(operational_presence_view.c.org_type_description)
     sector_name: Mapped[str] = column_property(operational_presence_view.c.sector_name)
     location_code: Mapped[str] = column_property(operational_presence_view.c.location_code)
     location_name: Mapped[str] = column_property(operational_presence_view.c.location_name)
@@ -316,14 +316,17 @@ class PovertyRateView(Base):
     __table__ = poverty_rate_view
     resource_hdx_id: Mapped[str] = column_property(poverty_rate_view.c.resource_hdx_id)
     admin1_ref: Mapped[int] = column_property(poverty_rate_view.c.admin1_ref)
-    classification: Mapped[str] = column_property(poverty_rate_view.c.classification)
-    population: Mapped[int] = column_property(poverty_rate_view.c.population)
+    admin1_name: Mapped[str] = column_property(poverty_rate_view.c.admin1_name)
+    mpi: Mapped[float] = column_property(poverty_rate_view.c.mpi)
+    headcount_ratio: Mapped[float] = column_property(poverty_rate_view.c.headcount_ratio)
+    intensity_of_deprivation: Mapped[float] = column_property(poverty_rate_view.c.intensity_of_deprivation)
+    vulnerable_to_poverty: Mapped[float] = column_property(poverty_rate_view.c.vulnerable_to_poverty)
+    in_severe_poverty: Mapped[float] = column_property(poverty_rate_view.c.in_severe_poverty)
     reference_period_start: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(poverty_rate_view.c.location_code)
     location_name: Mapped[str] = column_property(poverty_rate_view.c.location_name)
     admin1_code: Mapped[str] = column_property(poverty_rate_view.c.admin1_code)
-    admin1_name: Mapped[str] = column_property(poverty_rate_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(poverty_rate_view.c.admin1_is_unspecified)
     location_ref: Mapped[int] = column_property(poverty_rate_view.c.location_ref)
 
@@ -395,15 +398,15 @@ class WfpMarketView(Base):
     admin1_ref: Mapped[int] = column_property(wfp_market_view.c.admin1_ref)
 
 
-# class PatchView(Base):
-#     __table__ = patch_view
-#     id: Mapped[int] = column_property(patch_view.c.id)
-#     patch_sequence_number: Mapped[int] = column_property(patch_view.c.patch_sequence_number)
-#     commit_hash: Mapped[str] = column_property(patch_view.c.commit_hash)
-#     commit_date: Mapped[DateTime] = column_property(patch_view.c.commit_date)
-#     patch_path: Mapped[str] = column_property(patch_view.c.patch_path)
-#     patch_permalink_url: Mapped[str] = column_property(patch_view.c.patch_permalink_url)
-#     patch_target: Mapped[str] = column_property(patch_view.c.patch_target)
-#     patch_hash: Mapped[str] = column_property(patch_view.c.patch_hash)
-#     state: Mapped[str] = column_property(patch_view.c.state)
-#     execution_date: Mapped[DateTime] = column_property(patch_view.c.execution_date)
+class PatchView(Base):
+    __table__ = patch_view
+    id: Mapped[int] = column_property(patch_view.c.id)
+    patch_sequence_number: Mapped[int] = column_property(patch_view.c.patch_sequence_number)
+    commit_hash: Mapped[str] = column_property(patch_view.c.commit_hash)
+    commit_date: Mapped[DateTime] = column_property(patch_view.c.commit_date)
+    patch_path: Mapped[str] = column_property(patch_view.c.patch_path)
+    patch_permalink_url: Mapped[str] = column_property(patch_view.c.patch_permalink_url)
+    patch_target: Mapped[str] = column_property(patch_view.c.patch_target)
+    patch_hash: Mapped[str] = column_property(patch_view.c.patch_hash)
+    state: Mapped[str] = column_property(patch_view.c.state)
+    execution_date: Mapped[DateTime] = column_property(patch_view.c.execution_date)
