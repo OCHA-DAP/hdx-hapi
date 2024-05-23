@@ -1,9 +1,7 @@
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
-from hapi_schema.utils.enums import Gender
-from hdx_hapi.endpoints.middleware import mixpanel_tracking_middleware
-from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
+from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
 class PovertyRateResponse(HapiBaseModel):
