@@ -20,12 +20,12 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v1/metadata/sector',
     '/api/v1/population-social/population',
     '/api/v1/coordination-context/national-risk',
+    '/api/v1/coordination-context/operational-presence',
+    '/api/v1/affected-people/refugees',
+    '/api/v1/coordination-context/funding',
+    '/api/v1/coordination-context/conflict-event',
     # TODO to fix the following endpoints
     '/api/v1/food/food-security',
-    # removed endpoints
-    # '/api/v1/themes/3W',
-    # '/api/v1/population_group',
-    # '/api/v1/population_status',
 ]
 
 
