@@ -1,6 +1,6 @@
 from datetime import date
 
-from hapi_schema.utils.enums import RiskClass
+from hapi_schema.utils.enums import RiskClass, IPCPhase, IPCType
 
 endpoint_data = {
     '/api/v1/metadata/admin1': {
@@ -229,13 +229,11 @@ endpoint_data = {
             'admin2_name',
         ],
     },
-    '/api/food/food_security': {
+    '/api/v1/food/food_security': {
         'query_parameters': {
             'admin2_ref': 1,
-            'ipc_phase': '1',
-            'ipc_type': '1',
-            'reference_period_start': date(2023, 6, 1),
-            'reference_period_end': date(2023, 6, 2),
+            'ipc_phase': IPCPhase.PHASE_1.value,
+            'ipc_type': IPCType.CURRENT.value,
             'location_ref': 1,
             'location_code': 'fOO',
             'location_name': 'Foolandia',
@@ -244,6 +242,8 @@ endpoint_data = {
             'admin2_code': 'FOO-xxx-XXX',
             'admin2_name': 'Unspecified',
             'admin2_is_unspecified': True,
+            'reference_period_start': date(2023, 6, 1),
+            'reference_period_end': date(2023, 6, 2),
         },
         'expected_fields': [
             'resource_hdx_id',

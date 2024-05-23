@@ -8,7 +8,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/food/food_security'
+ENDPOINT_ROUTER = '/api/v1/food/food_security'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -28,6 +28,7 @@ async def test_get_food_security_params(event_loop, refresh_db):
     log.info('started test_get_food_security_params')
 
     for param_name, param_value in query_parameters.items():
+        log.info(f'{param_name}:{param_value}')
         async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
@@ -69,16 +70,14 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
         population_in_phase=8225,
         population_fraction_in_phase=0.02,
         ipc_phase='2',
-        ipc_phase_name='Phase 2: Stressed',
         ipc_type='current',
-        dataset_hdx_provider_stub='provider01',
-        dataset_hdx_stub='test-dataset1',
         resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
+        location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
+        admin1_ref=1,
         admin1_is_unspecified=False,
+        admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
         admin2_is_unspecified=False,
@@ -105,15 +104,12 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
         population_in_phase=8225,
         population_fraction_in_phase=0.02,
         ipc_phase='2',
-        ipc_phase_name='Phase 2: Stressed',
         ipc_type='current',
-        dataset_hdx_stub='test-dataset1',
-        dataset_hdx_provider_stub='provider01',
         resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
+        location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
+        admin1_ref=1,
         admin1_is_unspecified=True,
         admin1_code='FOO-XXX',
         admin1_name='Unpecified',
