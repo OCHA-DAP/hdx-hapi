@@ -229,6 +229,30 @@ endpoint_data = {
             'admin2_name',
         ],
     },
+    '/api/v1/population-social/poverty-rate': {
+        'query_parameters': {
+            'admin1_name': 'Province 01',
+            'mpi_min': 0.01,
+            'mpi_max': 0.9,
+            'reference_period_start': date(2020, 6, 1),
+            'reference_period_end': date(2025, 6, 2),
+            'location_code': 'fOO',
+            'location_name': 'Foolandia',
+        },
+        'expected_fields': [
+            'resource_hdx_id',
+            'admin1_name',
+            'mpi',
+            'headcount_ratio',
+            'intensity_of_deprivation',
+            'vulnerable_to_poverty',
+            'in_severe_poverty',
+            'reference_period_start',
+            'reference_period_end',
+            'location_code',
+            'location_name',
+        ],
+    },
     '/api/themes/food_security': {
         'query_parameters': {
             'ipc_phase_code': '1',

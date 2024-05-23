@@ -19,6 +19,7 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v1/metadata/resource',
     '/api/v1/metadata/sector',
     '/api/v1/population-social/population',
+    '/api/v1/population-social/poverty-rate',
     '/api/v1/coordination-context/national-risk',
     '/api/v1/coordination-context/operational-presence',
     '/api/v1/affected-people/refugees',
