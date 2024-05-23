@@ -44,7 +44,7 @@ async def test_endpoints_vs_encode_identifier(event_loop, refresh_db, enable_hap
 
         async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
             response = await ac.get(endpoint_router)
-        assert response.status_code == 400
+        assert response.status_code == 200
         response_items = response.json()
         assert len(response_items) > 0
 
