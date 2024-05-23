@@ -25,6 +25,7 @@ from hapi_schema.db_refugees import view_params_refugees
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_conflict_event import view_params_conflict_event
+from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.db.models.base import Base
@@ -43,6 +44,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/national_risk.sql',
     'tests/sample_data/humanitarian_needs.sql',
     'tests/sample_data/refugees.sql',
+    'tests/sample_data/wfp_commodity.sql',
 ]
 
 VIEW_LIST = [
@@ -62,6 +64,7 @@ VIEW_LIST = [
     view_params_resource,
     view_params_sector,
     view_params_conflict_event,
+    view_params_wfp_commodity,
 ]
 
 
