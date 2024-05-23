@@ -8,7 +8,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/themes/food_security'
+ENDPOINT_ROUTER = '/api/food/food_security'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -68,9 +68,9 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
     food_security_view_adm_specified = FoodSecurityResponse(
         population_in_phase=8225,
         population_fraction_in_phase=0.02,
-        ipc_phase_code='2',
+        ipc_phase='2',
         ipc_phase_name='Phase 2: Stressed',
-        ipc_type_code='current',
+        ipc_type='current',
         dataset_hdx_provider_stub='provider01',
         dataset_hdx_stub='test-dataset1',
         resource_hdx_id='test-resource1',
@@ -104,9 +104,9 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
     food_security_view_adm_unspecified = FoodSecurityResponse(
         population_in_phase=8225,
         population_fraction_in_phase=0.02,
-        ipc_phase_code='2',
+        ipc_phase='2',
         ipc_phase_name='Phase 2: Stressed',
-        ipc_type_code='current',
+        ipc_type='current',
         dataset_hdx_stub='test-dataset1',
         dataset_hdx_provider_stub='provider01',
         resource_hdx_id='test-resource1',

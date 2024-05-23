@@ -1,28 +1,8 @@
-from datetime import datetime
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.food_security_view_dao import food_security_view_list
 from hdx_hapi.endpoints.util.util import AdminLevel, CommonEndpointParams, ReferencePeriodParameters
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
-
-# pagination_parameters=common_parameters,
-#         ref_period_parameters=ref_period_parameters,
-#         db=db,
-#         ipc_phase=ipc_phase,
-#         ipc_type=ipc_type,
-#         population_in_phase=population_in_phase,
-#         population_fraction_in_phase=population_fraction_in_phase,
-#         location_code=location_code,
-#         location_name=location_name,
-#         admin1_name=admin1_name,
-#         admin1_code=admin1_code,
-#         location_ref=location_ref,
-#         admin2_ref=admin2_ref,
-#         admin2_code=admin2_code,
-#         admin2_name=admin2_name,
-#         admin1_ref=admin1_ref,
-#         admin_level=admin_level,
 
 
 async def get_food_security_srv(
@@ -48,15 +28,15 @@ async def get_food_security_srv(
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
-        ipc_phase_code=ipc_phase,
-        ipc_type_code=ipc_type,
+        ipc_phase=ipc_phase,
+        ipc_type=ipc_type,
         location_code=location_code,
         location_name=location_name,
-        admin2_ref=admin2_ref,
         admin1_name=admin1_name,
         admin1_code=admin1_code,
         admin1_is_unspecified=admin1_is_unspecified,
         location_ref=location_ref,
+        admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
         admin2_is_unspecified=admin2_is_unspecified,

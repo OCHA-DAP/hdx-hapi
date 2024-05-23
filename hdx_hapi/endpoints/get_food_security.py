@@ -5,20 +5,13 @@ from pydantic import NaiveDatetime
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from hapi_schema.utils.enums import Gender, IPCPhase, IPCType
+from hapi_schema.utils.enums import IPCPhase, IPCType
 from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_LOC,
-    DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN,
-    DOC_HAPI_UPDATED_DATE_MIN,
-    DOC_HAPI_UPDATED_DATE_MAX,
-    DOC_HAPI_REPLACED_DATE_MIN,
-    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
-from hdx_hapi.endpoints.models import population
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
 from hdx_hapi.endpoints.util.util import (

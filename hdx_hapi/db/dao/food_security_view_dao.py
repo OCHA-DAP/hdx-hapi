@@ -11,13 +11,30 @@ from hdx_hapi.db.dao.util.util import (
     case_insensitive_filter,
 )
 
+# pagination_parameters=pagination_parameters,
+#         ref_period_parameters=ref_period_parameters,
+#         db=db,
+#         ipc_phase=ipc_phase,
+#         ipc_type=ipc_type,
+#         location_code=location_code,
+#         location_name=location_name,
+#         admin1_name=admin1_name,
+#         admin1_code=admin1_code,
+#         admin1_is_unspecified=admin1_is_unspecified,
+#         location_ref=location_ref,
+#         admin2_ref=admin2_ref,
+#         admin2_code=admin2_code,
+#         admin2_name=admin2_name,
+#         admin2_is_unspecified=admin2_is_unspecified,
+#         admin1_ref=admin1_ref,
+
 
 async def food_security_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
-    ipc_phase_code: str = None,
-    ipc_type_code: str = None,
+    ipc_phase: str = None,
+    ipc_type: str = None,
     location_code: str = None,
     location_name: str = None,
     admin1_name: str = None,
@@ -32,10 +49,10 @@ async def food_security_view_list(
 ):
     query = select(FoodSecurityView)
 
-    if ipc_phase_code:
-        query = query.where(FoodSecurityView.ipc_phase_code == ipc_phase_code)
-    if ipc_type_code:
-        query = case_insensitive_filter(query, FoodSecurityView.ipc_type_code, ipc_type_code)
+    if ipc_phase:
+        query = query.where(FoodSecurityView.ipc_phase == ipc_phase)
+    if ipc_type:
+        query = case_insensitive_filter(query, FoodSecurityView.ipc_type, ipc_type)
 
     query = apply_location_admin_filter(
         query,
