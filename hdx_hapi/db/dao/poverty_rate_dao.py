@@ -20,8 +20,6 @@ async def poverty_rates_view_list(
     mpi_max: Optional[float] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
-    location_ref: Optional[int] = None,
-    admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
 ):
     query = select(PovertyRateView)
@@ -34,11 +32,11 @@ async def poverty_rates_view_list(
     query = apply_location_admin_filter(
         query,
         PovertyRateView,
-        location_ref,
+        None,
         location_code,
         location_name,
         None,
-        admin1_code,
+        None,
         admin1_name,
     )
 
