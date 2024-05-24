@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 
 
@@ -13,6 +13,7 @@ from hdx_hapi.config.doc_snippets import (
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.population import PopulationResponse
+from hdx_hapi.endpoints.models.poverty_rate import PovertyRateResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
@@ -23,6 +24,7 @@ from hdx_hapi.endpoints.util.util import (
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.population_logic import get_populations_srv
+from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
@@ -88,3 +90,41 @@ async def get_populations(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, PopulationResponse)
+
+
+@router.get(
+    '/api/population-social/poverty-rate',
+    response_model=HapiGenericResponse[PovertyRateResponse],
+    summary='Get baseline population data',
+    include_in_schema=False,
+)
+@router.get(
+    '/api/v1/population-social/poverty-rate',
+    response_model=HapiGenericResponse[PovertyRateResponse],
+    summary='Get baseline population data',
+)
+async def get_poverty_rates(
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
+    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    db: AsyncSession = Depends(get_db),
+    mpi_min: Annotated[Optional[float], Query(description='mpi, lower bound')] = None,
+    mpi_max: Annotated[Optional[float], Query(description='mpi upper bound')] = None,
+    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
+    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    admin1_name: Annotated[str, Query(max_length=512, description='Admin1 name')] = None,
+    output_format: OutputFormat = OutputFormat.JSON,
+):
+    """
+    Return the list of poverty rates
+    """
+    result = await get_poverty_rates_srv(
+        pagination_parameters=common_parameters,
+        ref_period_parameters=ref_period_parameters,
+        db=db,
+        mpi_min=mpi_min,
+        mpi_max=mpi_max,
+        location_code=location_code,
+        location_name=location_name,
+        admin1_name=admin1_name,
+    )
+    return transform_result_to_csv_stream_if_requested(result, output_format, PovertyRateResponse)
