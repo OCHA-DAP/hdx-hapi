@@ -25,7 +25,6 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v1/affected-people/refugees',
     '/api/v1/coordination-context/funding',
     '/api/v1/coordination-context/conflict-event',
-    # TODO to fix the following endpoints
     '/api/v1/food/food-security',
 ]
 
