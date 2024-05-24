@@ -1,6 +1,6 @@
 from datetime import date
 
-from hapi_schema.utils.enums import RiskClass, IPCPhase, IPCType
+from hapi_schema.utils.enums import CommodityCategory, RiskClass, IPCPhase, IPCType
 
 endpoint_data = {
     '/api/v1/metadata/admin1': {
@@ -445,6 +445,14 @@ endpoint_data = {
             'name': 'Protection',  # Protection
         },
         'expected_fields': ['code', 'name'],
+    },
+    '/api/v1/metadata/wfp_commodity': {
+        'query_parameters': {
+            'code': '001',
+            'name': 'commodity',
+            'category': CommodityCategory.VEGETABLES_FRUITS.value,
+        },
+        'expected_fields': ['code', 'name', 'category'],
     },
     '/api/encode_app_identifier': {
         'query_parameters': {
