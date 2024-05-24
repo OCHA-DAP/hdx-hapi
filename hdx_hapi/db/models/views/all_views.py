@@ -1,10 +1,10 @@
 """
 This code was generated automatically using src/hapi_schema/utils/hapi_views_code_generator.py
 """
+
 from decimal import Decimal
 from sqlalchemy import DateTime
 from sqlalchemy.orm import column_property, Mapped
-from hapi_schema.db_admin1 import view_params_admin1
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
@@ -29,7 +29,8 @@ from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
-
+from hapi_schema.utils.enums import RiskClass
+from hapi_schema.utils.enums import Gender
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
 admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
@@ -39,10 +40,14 @@ dataset_view = view(view_params_dataset.name, Base.metadata, view_params_dataset
 food_price_view = view(view_params_food_price.name, Base.metadata, view_params_food_price.selectable)
 food_security_view = view(view_params_food_security.name, Base.metadata, view_params_food_security.selectable)
 funding_view = view(view_params_funding.name, Base.metadata, view_params_funding.selectable)
-humanitarian_needs_view = view(view_params_humanitarian_needs.name, Base.metadata, view_params_humanitarian_needs.selectable)
+humanitarian_needs_view = view(
+    view_params_humanitarian_needs.name, Base.metadata, view_params_humanitarian_needs.selectable
+)
 location_view = view(view_params_location.name, Base.metadata, view_params_location.selectable)
 national_risk_view = view(view_params_national_risk.name, Base.metadata, view_params_national_risk.selectable)
-operational_presence_view = view(view_params_operational_presence.name, Base.metadata, view_params_operational_presence.selectable)
+operational_presence_view = view(
+    view_params_operational_presence.name, Base.metadata, view_params_operational_presence.selectable
+)
 org_type_view = view(view_params_org_type.name, Base.metadata, view_params_org_type.selectable)
 org_view = view(view_params_org.name, Base.metadata, view_params_org.selectable)
 population_view = view(view_params_population.name, Base.metadata, view_params_population.selectable)
@@ -53,7 +58,6 @@ sector_view = view(view_params_sector.name, Base.metadata, view_params_sector.se
 wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_params_wfp_commodity.selectable)
 wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
 patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
-
 
 
 class Admin1View(Base):
@@ -68,6 +72,7 @@ class Admin1View(Base):
     reference_period_end: Mapped[DateTime] = column_property(admin1_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(admin1_view.c.location_code)
     location_name: Mapped[str] = column_property(admin1_view.c.location_name)
+
 
 class Admin2View(Base):
     __table__ = admin2_view
@@ -84,6 +89,7 @@ class Admin2View(Base):
     admin1_is_unspecified: Mapped[bool] = column_property(admin2_view.c.admin1_is_unspecified)
     location_code: Mapped[str] = column_property(admin2_view.c.location_code)
     location_name: Mapped[str] = column_property(admin2_view.c.location_name)
+
 
 class ConflictEventView(Base):
     __table__ = conflict_event_view
@@ -105,10 +111,12 @@ class ConflictEventView(Base):
     admin2_is_unspecified: Mapped[bool] = column_property(conflict_event_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(conflict_event_view.c.admin1_ref)
 
+
 class CurrencyView(Base):
     __table__ = currency_view
     code: Mapped[str] = column_property(currency_view.c.code)
     name: Mapped[str] = column_property(currency_view.c.name)
+
 
 class DatasetView(Base):
     __table__ = dataset_view
@@ -117,6 +125,7 @@ class DatasetView(Base):
     title: Mapped[str] = column_property(dataset_view.c.title)
     hdx_provider_stub: Mapped[str] = column_property(dataset_view.c.hdx_provider_stub)
     hdx_provider_name: Mapped[str] = column_property(dataset_view.c.hdx_provider_name)
+
 
 class FoodPriceView(Base):
     __table__ = food_price_view
@@ -147,6 +156,7 @@ class FoodPriceView(Base):
     admin2_name: Mapped[str] = column_property(food_price_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(food_price_view.c.admin2_is_unspecified)
 
+
 class FoodSecurityView(Base):
     __table__ = food_security_view
     resource_hdx_id: Mapped[str] = column_property(food_security_view.c.resource_hdx_id)
@@ -168,6 +178,7 @@ class FoodSecurityView(Base):
     admin2_is_unspecified: Mapped[bool] = column_property(food_security_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(food_security_view.c.admin1_ref)
 
+
 class FundingView(Base):
     __table__ = funding_view
     resource_hdx_id: Mapped[str] = column_property(funding_view.c.resource_hdx_id)
@@ -182,6 +193,7 @@ class FundingView(Base):
     reference_period_end: Mapped[DateTime] = column_property(funding_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(funding_view.c.location_code)
     location_name: Mapped[str] = column_property(funding_view.c.location_name)
+
 
 class HumanitarianNeedsView(Base):
     __table__ = humanitarian_needs_view
@@ -210,6 +222,7 @@ class HumanitarianNeedsView(Base):
     admin2_is_unspecified: Mapped[bool] = column_property(humanitarian_needs_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(humanitarian_needs_view.c.admin1_ref)
 
+
 class LocationView(Base):
     __table__ = location_view
     id: Mapped[int] = column_property(location_view.c.id)
@@ -219,11 +232,12 @@ class LocationView(Base):
     reference_period_start: Mapped[DateTime] = column_property(location_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(location_view.c.reference_period_end)
 
+
 class NationalRiskView(Base):
     __table__ = national_risk_view
     resource_hdx_id: Mapped[str] = column_property(national_risk_view.c.resource_hdx_id)
     location_ref: Mapped[int] = column_property(national_risk_view.c.location_ref)
-    risk_class: Mapped[str] = column_property(national_risk_view.c.risk_class)
+    risk_class: Mapped[RiskClass] = column_property(national_risk_view.c.risk_class)
     global_rank: Mapped[int] = column_property(national_risk_view.c.global_rank)
     overall_risk: Mapped[float] = column_property(national_risk_view.c.overall_risk)
     hazard_exposure_risk: Mapped[float] = column_property(national_risk_view.c.hazard_exposure_risk)
@@ -235,6 +249,7 @@ class NationalRiskView(Base):
     reference_period_end: Mapped[DateTime] = column_property(national_risk_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(national_risk_view.c.location_code)
     location_name: Mapped[str] = column_property(national_risk_view.c.location_name)
+
 
 class OperationalPresenceView(Base):
     __table__ = operational_presence_view
@@ -259,10 +274,12 @@ class OperationalPresenceView(Base):
     admin2_is_unspecified: Mapped[bool] = column_property(operational_presence_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(operational_presence_view.c.admin1_ref)
 
+
 class OrgTypeView(Base):
     __table__ = org_type_view
     code: Mapped[str] = column_property(org_type_view.c.code)
     description: Mapped[str] = column_property(org_type_view.c.description)
+
 
 class OrgView(Base):
     __table__ = org_view
@@ -271,11 +288,12 @@ class OrgView(Base):
     org_type_code: Mapped[str] = column_property(org_view.c.org_type_code)
     org_type_description: Mapped[str] = column_property(org_view.c.org_type_description)
 
+
 class PopulationView(Base):
     __table__ = population_view
     resource_hdx_id: Mapped[str] = column_property(population_view.c.resource_hdx_id)
     admin2_ref: Mapped[int] = column_property(population_view.c.admin2_ref)
-    gender: Mapped[str] = column_property(population_view.c.gender)
+    gender: Mapped[Gender] = column_property(population_view.c.gender)
     age_range: Mapped[str] = column_property(population_view.c.age_range)
     min_age: Mapped[int] = column_property(population_view.c.min_age)
     max_age: Mapped[int] = column_property(population_view.c.max_age)
@@ -292,6 +310,7 @@ class PopulationView(Base):
     admin2_name: Mapped[str] = column_property(population_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(population_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(population_view.c.admin1_ref)
+
 
 class PovertyRateView(Base):
     __table__ = poverty_rate_view
@@ -311,6 +330,7 @@ class PovertyRateView(Base):
     admin1_is_unspecified: Mapped[bool] = column_property(poverty_rate_view.c.admin1_is_unspecified)
     location_ref: Mapped[int] = column_property(poverty_rate_view.c.location_ref)
 
+
 class RefugeesView(Base):
     __table__ = refugees_view
     resource_hdx_id: Mapped[str] = column_property(refugees_view.c.resource_hdx_id)
@@ -329,6 +349,7 @@ class RefugeesView(Base):
     asylum_location_code: Mapped[str] = column_property(refugees_view.c.asylum_location_code)
     asylum_location_name: Mapped[str] = column_property(refugees_view.c.asylum_location_name)
 
+
 class ResourceView(Base):
     __table__ = resource_view
     hdx_id: Mapped[str] = column_property(resource_view.c.hdx_id)
@@ -344,16 +365,19 @@ class ResourceView(Base):
     dataset_hdx_provider_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_provider_stub)
     dataset_hdx_provider_name: Mapped[str] = column_property(resource_view.c.dataset_hdx_provider_name)
 
+
 class SectorView(Base):
     __table__ = sector_view
     code: Mapped[str] = column_property(sector_view.c.code)
     name: Mapped[str] = column_property(sector_view.c.name)
+
 
 class WfpCommodityView(Base):
     __table__ = wfp_commodity_view
     code: Mapped[str] = column_property(wfp_commodity_view.c.code)
     category: Mapped[str] = column_property(wfp_commodity_view.c.category)
     name: Mapped[str] = column_property(wfp_commodity_view.c.name)
+
 
 class WfpMarketView(Base):
     __table__ = wfp_market_view
@@ -372,6 +396,7 @@ class WfpMarketView(Base):
     admin2_name: Mapped[str] = column_property(wfp_market_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(wfp_market_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(wfp_market_view.c.admin1_ref)
+
 
 class PatchView(Base):
     __table__ = patch_view
