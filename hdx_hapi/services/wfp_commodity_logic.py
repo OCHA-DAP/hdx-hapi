@@ -1,8 +1,9 @@
-from typing import Optional
+from typing import Optional, Sequence
 from hapi_schema.utils.enums import CommodityCategory
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.wfp_commodity_view_dao import wfp_commodity_view_list
+from hdx_hapi.db.models.views.all_views import WfpCommodityView
 from hdx_hapi.endpoints.util.util import PaginationParams
 
 
@@ -12,11 +13,11 @@ async def get_wfp_commodities_srv(
     code: Optional[str] = None,
     category: Optional[CommodityCategory] = None,
     name: Optional[str] = None
-):
+) -> Sequence[WfpCommodityView]:
     return await wfp_commodity_view_list(
         pagination_parameters=pagination_parameters,
         db=db,
         code=code,
         category=category,
-        name=name
+        name=name,
    )
