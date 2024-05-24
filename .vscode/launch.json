@@ -1,26 +1,9 @@
-// {
-//     // Use IntelliSense to learn about possible attributes.
-//     // Hover to view descriptions of existing attributes.
-//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-//     "version": "0.2.0",
-//     "configurations": [
-//         {
-//             "name": "start",
-//             "type": "python",
-//             "request": "launch",
-//             "program": "main.py",
-//             "console": "integratedTerminal",
-//             "justMyCode": true,
-//         }
-//     ]
-// }
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "name": "start",
             "type": "python",
@@ -28,11 +11,6 @@
             "program": "main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "env": {
-                "HAPI_DB_NAME":"hapi",
-                "HAPI_IDENTIFIER_FILTERING": "true",
-                "HDX_MIXPANEL_TOKEN": "875bfe50f9cb981f4e2817832c83c165",
-            }
         }
     ]
 }
