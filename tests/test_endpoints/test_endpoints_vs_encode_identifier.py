@@ -26,6 +26,7 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v1/coordination-context/funding',
     '/api/v1/coordination-context/conflict-event',
     '/api/v1/food/food-security',
+    '/api/v1/metadata/currency',
 ]
 
 
