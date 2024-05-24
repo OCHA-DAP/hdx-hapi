@@ -32,13 +32,13 @@ router = APIRouter(
 
 
 @router.get(
-    '/api/food/food_security',
+    '/api/food/food-security',
     response_model=HapiGenericResponse[FoodSecurityResponse],
     summary='Get food security data',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/food/food_security',
+    '/api/v1/food/food-security',
     response_model=HapiGenericResponse[FoodSecurityResponse],
     summary='Get food security data',
 )

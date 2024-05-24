@@ -229,7 +229,7 @@ endpoint_data = {
             'admin2_name',
         ],
     },
-    '/api/v1/food/food_security': {
+    '/api/v1/food/food-security': {
         'query_parameters': {
             'admin2_ref': 1,
             'ipc_phase': IPCPhase.PHASE_1.value,
