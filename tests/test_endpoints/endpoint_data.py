@@ -446,7 +446,7 @@ endpoint_data = {
         },
         'expected_fields': ['code', 'name'],
     },
-    '/api/v1/metadata/wfp_commodity': {
+    '/api/v1/metadata/wfp-commodity': {
         'query_parameters': {
             'code': '001',
             'name': 'commodity',

@@ -7,7 +7,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/v1/metadata/wfp_commodity'
+ENDPOINT_ROUTER = '/api/v1/metadata/wfp-commodity'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']

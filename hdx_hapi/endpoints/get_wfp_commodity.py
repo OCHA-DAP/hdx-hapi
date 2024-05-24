@@ -19,13 +19,13 @@ SUMMARY = 'Get the list of WFP commodities'
 
 
 @router.get(
-    '/api/metadata/wfp_commodity',
+    '/api/metadata/wfp-commodity',
     response_model=HapiGenericResponse[WfpCommodityResponse],
     summary=SUMMARY,
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/metadata/wfp_commodity',
+    '/api/v1/metadata/wfp-commodity',
     response_model=HapiGenericResponse[WfpCommodityResponse],
     summary=SUMMARY,
 )
