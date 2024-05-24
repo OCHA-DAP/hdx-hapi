@@ -253,7 +253,7 @@ endpoint_data = {
             'location_name',
         ],
     },
-    '/api/themes/food_security': {
+    '/api/v1/food/food-security': {
         'query_parameters': {
             'admin2_ref': 1,
             'ipc_phase': IPCPhase.PHASE_1.value,
