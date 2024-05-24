@@ -1,6 +1,6 @@
 from datetime import date
 
-from hapi_schema.utils.enums import RiskClass, IPCPhase, IPCType
+from hapi_schema.utils.enums import CommodityCategory, RiskClass, IPCPhase, IPCType
 
 endpoint_data = {
     '/api/v1/metadata/admin1': {
@@ -445,6 +445,50 @@ endpoint_data = {
             'name': 'Protection',  # Protection
         },
         'expected_fields': ['code', 'name'],
+    },
+    '/api/v1/metadata/currency': {
+        'query_parameters': {
+            'code': 'usD',
+        },
+        'expected_fields': ['code', 'name'],
+    },
+    '/api/v1/metadata/wfp-commodity': {
+        'query_parameters': {
+            'code': '001',
+            'name': 'commodity',
+            'category': CommodityCategory.VEGETABLES_FRUITS.value,
+        },
+        'expected_fields': ['code', 'name', 'category'],
+    },
+    '/api/v1/metadata/wfp-market': {
+        'query_parameters': {
+            'code': '001',
+            'name': 'market',
+            'location_ref': 1,
+            'location_code': 'foo',
+            'location_name': 'Foolandia',
+            'admin1_ref': 2,
+            'admin1_code': 'foo-001',
+            'admin1_name': 'province',
+            'admin2_ref': 4,
+            'admin2_code': 'foo-001-a',
+            'admin2_name': 'district',
+        },
+        'expected_fields': [
+            'code',
+            'name',
+            'lat',
+            'lon',
+            'location_ref',
+            'location_code',
+            'location_name',
+            'admin1_ref',
+            'admin1_code',
+            'admin1_name',
+            'admin2_ref',
+            'admin2_code',
+            'admin2_name',
+        ],
     },
     '/api/encode_app_identifier': {
         'query_parameters': {

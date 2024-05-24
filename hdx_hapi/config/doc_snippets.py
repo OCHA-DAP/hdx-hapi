@@ -43,3 +43,5 @@ DOC_SEE_ADMIN2 = 'See the <a href="/docs#/Locations%20and%20Administrative%20Div
 DOC_SEE_DATASET = 'See the <a href="/docs#/HDX%20Metadata/get_datasets_api_v1_dataset_get" target="_blank">dataset endpoint</a> for details.'
 DOC_SEE_LOC = 'See the <a href="/docs#/Locations%20and%20Administrative%20Divisions/get_locations_api_v1_location_get" target="_blank">location endpoint</a> for details.'
 DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Humanitarian%20Organizations%20and%20Sectors/get_org_types_api_v1_org_type_get" target="_blank">org type endpoint</a> for details.'
+
+DOC_CURRENCY_CODE = 'Filter the response by the currency code.'
