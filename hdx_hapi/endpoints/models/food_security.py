@@ -1,4 +1,3 @@
-from datetime import datetime
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 

@@ -11,7 +11,6 @@ from hdx_hapi.db.dao.util.util import (
     apply_location_admin_filter,
     apply_reference_period_filter,
     apply_pagination,
-    case_insensitive_filter,
 )
 
 
