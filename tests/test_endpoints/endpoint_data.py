@@ -1,6 +1,6 @@
 from datetime import date
 
-from hapi_schema.utils.enums import RiskClass
+from hapi_schema.utils.enums import RiskClass, IPCPhase, IPCType
 
 endpoint_data = {
     '/api/v1/metadata/admin1': {
@@ -229,13 +229,12 @@ endpoint_data = {
             'admin2_name',
         ],
     },
-    '/api/themes/food_security': {
+    '/api/v1/food/food-security': {
         'query_parameters': {
-            'ipc_phase_code': '1',
-            'ipc_type_code': 'current',
-            'dataset_hdx_provider_stub': 'PROvider01',
-            'resource_update_date_min': date(2023, 6, 1),
-            'resource_update_date_max': date(2023, 6, 2),
+            'admin2_ref': 1,
+            'ipc_phase': IPCPhase.PHASE_1.value,
+            'ipc_type': IPCType.CURRENT.value,
+            'location_ref': 1,
             'location_code': 'fOO',
             'location_name': 'Foolandia',
             'admin1_code': 'FOO-xxx',
@@ -243,20 +242,18 @@ endpoint_data = {
             'admin2_code': 'FOO-xxx-XXX',
             'admin2_name': 'Unspecified',
             'admin2_is_unspecified': True,
+            'reference_period_start': date(2023, 6, 1),
+            'reference_period_end': date(2023, 6, 2),
         },
         'expected_fields': [
+            'resource_hdx_id',
+            'admin2_ref',
+            'ipc_phase',
+            'ipc_type',
             'population_in_phase',
             'population_fraction_in_phase',
-            'ipc_phase_code',
-            'ipc_phase_name',
-            'ipc_type_code',
             'reference_period_start',
             'reference_period_end',
-            'dataset_hdx_stub',
-            'dataset_hdx_provider_stub',
-            'resource_hdx_id',
-            'hapi_updated_date',
-            'hapi_replaced_date',
             'location_code',
             'location_name',
             'admin1_code',
