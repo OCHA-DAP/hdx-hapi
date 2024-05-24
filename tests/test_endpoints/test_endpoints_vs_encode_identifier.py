@@ -19,10 +19,12 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v1/metadata/resource',
     '/api/v1/metadata/sector',
     '/api/v1/population-social/population',
+    '/api/v1/coordination-context/national-risk',
+    '/api/v1/coordination-context/operational-presence',
+    '/api/v1/affected-people/refugees',
+    '/api/v1/coordination-context/funding',
+    '/api/v1/coordination-context/conflict-event',
     '/api/v1/food/food-security',
-    # TODO to fix the following endpoints
-    '/api/v1/themes/national_risk',
-    '/api/v1/themes/3W',
 ]
 
 
@@ -41,7 +43,7 @@ async def test_endpoints_vs_encode_identifier(event_loop, refresh_db, enable_hap
 
         async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
             response = await ac.get(endpoint_router)
-        assert response.status_code == 400
+        assert response.status_code == 200
         response_items = response.json()
         assert len(response_items) > 0
 
@@ -49,7 +51,7 @@ async def test_endpoints_vs_encode_identifier(event_loop, refresh_db, enable_hap
 @pytest.mark.asyncio
 async def test_encode_identifier(event_loop, refresh_db, enable_hapi_identifier_filtering):
     # testing the encode identifier endpoint
-    endpoint_router = '/api/v1/encode_identifier'
+    endpoint_router = '/api/v1/encode_app_identifier'
 
     # it should not be important if app_identifier is passed or not to the endpoint
     async with AsyncClient(app=app, base_url='http://test') as ac:

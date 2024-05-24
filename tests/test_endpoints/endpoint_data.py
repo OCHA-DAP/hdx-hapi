@@ -422,11 +422,11 @@ endpoint_data = {
         },
         'expected_fields': ['code', 'name'],
     },
-    '/api/encode_identifier': {
+    '/api/encode_app_identifier': {
         'query_parameters': {
             'application': 'web_application_1',
             'email': 'info@example.com',
         },
-        'expected_fields': ['encoded_identifier'],
+        'expected_fields': ['encoded_app_identifier'],
     },
 }
