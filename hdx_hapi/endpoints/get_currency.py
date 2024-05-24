@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import DOC_CURRENCY_CODE
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
-from hdx_hapi.endpoints.models.currency_response import CurrencyResponse
+from hdx_hapi.endpoints.models.currency import CurrencyResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
