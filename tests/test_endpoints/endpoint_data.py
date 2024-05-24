@@ -446,6 +446,12 @@ endpoint_data = {
         },
         'expected_fields': ['code', 'name'],
     },
+    '/api/v1/metadata/currency': {
+        'query_parameters': {
+            'code': 'usD',
+        },
+        'expected_fields': ['code', 'name'],
+    },
     '/api/v1/metadata/wfp_commodity': {
         'query_parameters': {
             'code': '001',

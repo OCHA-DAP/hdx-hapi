@@ -27,6 +27,7 @@ from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_conflict_event import view_params_conflict_event
 from hapi_schema.db_poverty_rate import view_params_poverty_rate
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
+from hapi_schema.db_currency import view_params_currency
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.db.models.base import Base
@@ -48,6 +49,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/poverty_rate.sql',
     'tests/sample_data/food_security.sql',
     'tests/sample_data/wfp_commodity.sql',
+    'tests/sample_data/currency.sql',
 ]
 
 VIEW_LIST = [
@@ -69,6 +71,7 @@ VIEW_LIST = [
     view_params_conflict_event,
     view_params_poverty_rate,
     view_params_wfp_commodity,
+    view_params_currency,
 ]
 
 
