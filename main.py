@@ -26,6 +26,7 @@ from hdx_hapi.endpoints.get_humanitarian_response import router as humanitarian_
 from hdx_hapi.endpoints.get_affected_people import router as affected_people_router  # noqa
 from hdx_hapi.endpoints.get_national_risk import router as national_risk_router  # noqa
 from hdx_hapi.endpoints.get_wfp_commodity import router as wfp_commodity_router  # noqa
+from hdx_hapi.endpoints.get_wfp_market import router as wfp_market_router  # noqa
 from hdx_hapi.endpoints.get_food_security import router as food_security_router  # noqa
 
 
@@ -58,6 +59,7 @@ app.include_router(admin_level_router)
 app.include_router(humanitarian_response_router)
 app.include_router(dataset_router)
 app.include_router(wfp_commodity_router)
+app.include_router(wfp_market_router)
 app.include_router(food_security_router)
 
 
