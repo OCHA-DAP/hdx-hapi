@@ -44,7 +44,7 @@ SUMMARY_TEXT = 'Get the list of WFP markets.'
     response_model=HapiGenericResponse[WfpMarketResponse],
     summary=SUMMARY_TEXT,
 )
-async def get_wfp_market(
+async def get_wfp_markets(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[Optional[str], Query(max_length=32, description='Commodity code')] = None,
