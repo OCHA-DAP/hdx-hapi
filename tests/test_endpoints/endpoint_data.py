@@ -1,6 +1,8 @@
 from datetime import date
 
-from hapi_schema.utils.enums import CommodityCategory, RiskClass, IPCPhase, IPCType
+from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType, RiskClass, IPCPhase, IPCType
+
+from hdx_hapi.endpoints.util.util import AdminLevel
 
 endpoint_data = {
     '/api/v1/metadata/admin1': {
@@ -262,10 +264,11 @@ endpoint_data = {
             'location_code': 'fOO',
             'location_name': 'Foolandia',
             'admin1_code': 'FOO-xxx',
-            'admin1_is_unspecified': True,
+            # 'admin1_is_unspecified': True,
             'admin2_code': 'FOO-xxx-XXX',
             'admin2_name': 'Unspecified',
-            'admin2_is_unspecified': True,
+            # 'admin2_is_unspecified': True,
+            'admin_level': AdminLevel.ZERO.value,
             'reference_period_start': date(2023, 6, 1),
             'reference_period_end': date(2023, 6, 2),
         },
@@ -286,6 +289,55 @@ endpoint_data = {
             'admin2_code',
             'admin2_name',
             'admin1_ref',
+        ],
+    },
+    '/api/v1/food/food-price': {
+        'query_parameters': {
+            'market_code': '002',
+            'market_name': 'market',
+            'commodity_code': '001',
+            'commodity_name': 'commodity',
+            'commodity_category': CommodityCategory.VEGETABLES_FRUITS.value,
+            'price_flag': PriceFlag.AGGREGATE.value,
+            'price_type': PriceType.WHOLESALE.value,
+            'price_min': '200.1',
+            'price_max': '200.3',
+            'location_ref': 1,
+            'location_code': 'fOO',
+            'location_name': 'Foolandia',
+            'admin1_ref': 1,
+            'admin1_code': 'FOO-xxx',
+            'admin1_name': 'Unspecified',
+            'admin2_ref': 1,
+            'admin2_code': 'FOO-xxx-XXX',
+            'admin2_name': 'Unspecified',
+            'admin_level': AdminLevel.ZERO.value,
+        },
+        'expected_fields': [
+            'resource_hdx_id',
+            'market_code',
+            'market_name',
+            'commodity_code',
+            'commodity_name',
+            'commodity_category',
+            'price_flag',
+            'price_type',
+            'price',
+            'unit',
+            'currency_code',
+            'lat',
+            'lon',
+            'reference_period_start',
+            'reference_period_end',
+            'location_ref',
+            'location_code',
+            'location_name',
+            'admin1_ref',
+            'admin1_code',
+            'admin1_name',
+            'admin2_ref',
+            'admin2_code',
+            'admin2_name',
         ],
     },
     '/api/v1/coordination-context/national-risk': {
