@@ -2,19 +2,20 @@
 
 ---
 
-## 3W
-### Details
-Coordination & Context
+## Coordination Context
 
-The Who does What Where (3W) is a core humanitarian coordination dataset that contains the geographic and sectoral spread of humanitarian activities and partners. It is critical to know where humanitarian organisations are working and what they are doing in order to identify gaps and plan for future humanitarian response.
-### Time series
-Not available for this subcategory
-### Usage Notes
+### Operational Presence (3W)
+**Description:** The Who does What Where (3W) is a core humanitarian coordination dataset that contains the geographic and sectoral spread of humanitarian activities and partners. It is critical to know where humanitarian organisations are working and what they are doing in order to identify gaps and plan for future humanitarian response.
+
+**Time series:** Not available for this subcategory
+
+**Update frequency:** Irregular, depending on the country. Common update frequencies include quarterly and annually. Please check individual resources for more information. i based on field needs, please check individual resources
+
+#### Usage Notes
 - Sectors are cleaned and aligned to Global Coordination Groups
 - Available at either Admin 1 or Admin 2 depending on the country. Please check data coverage for further information
-### Update frequency
-Irregular, depending on the country. Common update frequencies include quarterly and annually. Please check individual resources for more information. i based on field needs, please check individual resources
-### Data Providers and Data Sources
+
+#### Data Providers and Data Sources
 |              Country               |                                                                                      Dataset                                                                                      |                     Source                    |
 |:----------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------:|
 |                Chad                |                  [Chad: Operational Presence](https://data.humdata.org/dataset/682c3db6-e253-430f-a3f3-305ef079e2de/resource/d394406d-7d81-4821-a4bc-cae55119daab)                |                    OCHA Chad                  |
@@ -32,18 +33,17 @@ Irregular, depending on the country. Common update frequencies include quarterly
 
 ---
 
-## Population
-### Details
-Coordination & Context
+### Population
+**Description:** Sex and age disaggregated Population Statistics at various admin levels.
 
-Sex and age disaggregated Population Statistics at various admin levels depending on locations
-### Time series
-Not available for this subcategory
-### Usage Notes
+**Time series:** Not available for this subcategory
+
+**Update frequency:** Yearly
+
+#### Usage Notes
 - Age ranges are not consistent across countries
-### Update frequency
-Yearly
-### Data Providers
+
+#### Data Providers
 |              Country               |                                                                                            Dataset                                                                                             |                      Source                     |
 |:----------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------:|
 |            Afghanistan             |             [Afghanistan - Subnational Population Statistics](https://data.humdata.org/dataset/17acb541-9431-409a-80a8-50eda7e8ebab/resource/e6e0195f-704a-4797-bc2c-f74058821346)             |                 OCHA Afghanistan                |
