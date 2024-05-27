@@ -5,10 +5,12 @@ logging.config.fileConfig('logging.conf')
 
 import uvicorn  # noqa
 from fastapi import FastAPI, Request  # noqa
+from fastapi.exceptions import ResponseValidationError  # noqa
 from fastapi.responses import HTMLResponse, RedirectResponse  # noqa
 from fastapi.openapi.docs import get_swagger_ui_html  # noqa
 
 # from hdx_hapi.services.sql_alchemy_session import init_db
+from hdx_hapi.endpoints.exception_handler.response_validation_error_handler import response_validation_error_handler  # noqa
 from hdx_hapi.endpoints.middleware.app_identifier_middleware import app_identifier_middleware  # noqa
 from hdx_hapi.endpoints.middleware.mixpanel_tracking_middleware import mixpanel_tracking_middleware  # noqa
 
@@ -36,8 +38,6 @@ from hdx_hapi.endpoints.get_food_price import router as food_price_router  # noq
 from hdx_hapi.config.config import get_config  # noqa
 
 logger = logging.getLogger(__name__)
-# import os
-# logger.warning("Current folder is "+ os.getcwd())
 
 CONFIG = get_config()
 
@@ -109,6 +109,11 @@ async def swagger_ui_html(req: Request) -> HTMLResponse:
 @app.get('/', include_in_schema=False)
 def home():
     return RedirectResponse('/docs')
+
+
+@app.exception_handler(ResponseValidationError)
+async def resp_validation_exception_handler(request: Request, exc: ResponseValidationError):
+    return await response_validation_error_handler(request, exc)
 
 
 if __name__ == '__main__':
