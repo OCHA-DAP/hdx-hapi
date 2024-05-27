@@ -1,6 +1,8 @@
+from decimal import Decimal
 from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 
+from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_CODE,
@@ -15,7 +17,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
-from hdx_hapi.endpoints.models.wfp_market import WfpMarketResponse
+from hdx_hapi.endpoints.models.food_price import FoodPriceResponse
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
     CommonEndpointParams,
@@ -23,32 +25,39 @@ from hdx_hapi.endpoints.util.util import (
     common_endpoint_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
+from hdx_hapi.services.food_price_logic import get_food_prices_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
-from hdx_hapi.services.wfp_market_logic import get_wfp_markets_srv
 
 router = APIRouter(
-    tags=['Metadata'],
+    tags=['Food Security & Nutrition'],
 )
 
-SUMMARY_TEXT = 'Get the list of WFP markets.'
+SUMMARY_TEXT = 'Get food prices.'
 
 
 @router.get(
-    '/api/metadata/wfp-market',
-    response_model=HapiGenericResponse[WfpMarketResponse],
+    '/api/food/food-price',
+    response_model=HapiGenericResponse[FoodPriceResponse],
     summary=SUMMARY_TEXT,
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/metadata/wfp-market',
-    response_model=HapiGenericResponse[WfpMarketResponse],
+    '/api/v1/food/food-price',
+    response_model=HapiGenericResponse[FoodPriceResponse],
     summary=SUMMARY_TEXT,
 )
-async def get_wfp_markets(
+async def get_food_prices(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[Optional[str], Query(max_length=32, description='Commodity code')] = None,
-    name: Annotated[Optional[str], Query(max_length=512, description='Commodity name')] = None,
+    market_code: Annotated[Optional[str], Query(max_length=32, description='Market code')] = None,
+    market_name: Annotated[Optional[str], Query(max_length=512, description='Market name')] = None,
+    commodity_code: Annotated[Optional[str], Query(max_length=32, description='Commodity code')] = None,
+    commodity_category: Annotated[Optional[CommodityCategory], Query(description='Commodity category')] = None,
+    commodity_name: Annotated[Optional[str], Query(max_length=512, description='Commodity name')] = None,
+    price_flag: Annotated[Optional[PriceFlag], Query(description='Price Flag')] = None,
+    price_type: Annotated[Optional[PriceType], Query(description='Price Type')] = None,
+    price_min: Annotated[Optional[Decimal], Query(description='Price, lower bound')] = None,
+    price_max: Annotated[Optional[Decimal], Query(description='Price, upper bound')] = None,
     location_ref: Annotated[Optional[int], Query(description='Location reference')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
@@ -76,11 +85,18 @@ async def get_wfp_markets(
     """
     List of WFP markets
     """
-    result = await get_wfp_markets_srv(
+    result = await get_food_prices_srv(
         pagination_parameters=common_parameters,
         db=db,
-        code=code,
-        name=name,
+        market_code=market_code,
+        market_name=market_name,
+        commodity_code=commodity_code,
+        commodity_category=commodity_category,
+        commodity_name=commodity_name,
+        price_flag=price_flag,
+        price_type=price_type,
+        price_min=price_min,
+        price_max=price_max,
         location_code=location_code,
         location_name=location_name,
         admin1_code=admin1_code,
@@ -92,4 +108,4 @@ async def get_wfp_markets(
         admin1_ref=admin1_ref,
         admin_level=admin_level,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, WfpMarketResponse)
+    return transform_result_to_csv_stream_if_requested(result, output_format, FoodPriceResponse)
