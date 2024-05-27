@@ -21,6 +21,7 @@ from hdx_hapi.endpoints.util.util import (
     common_endpoint_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
+
 from hdx_hapi.services.org_logic import get_orgs_srv
 from hdx_hapi.services.org_type_logic import get_org_types_srv
 from hdx_hapi.services.sector_logic import get_sectors_srv
@@ -33,13 +34,13 @@ router = APIRouter(
 
 
 @router.get(
-    '/api/org',
+    '/api/metadata/org',
     response_model=HapiGenericResponse[OrgResponse],
     summary='Get the list of organizations represented in the data available in HAPI',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/org',
+    '/api/v1/metadata/org',
     response_model=HapiGenericResponse[OrgResponse],
     summary='Get the list of organizations represented in the data available in HAPI',
 )
@@ -80,13 +81,13 @@ async def get_orgs(
 
 
 @router.get(
-    '/api/org_type',
+    '/api/metadata/org_type',
     response_model=HapiGenericResponse[OrgTypeResponse],
     summary='Get information about how organizations are classified in HAPI',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/org_type',
+    '/api/v1/metadata/org_type',
     response_model=HapiGenericResponse[OrgTypeResponse],
     summary='Get information about how organizations are classified in HAPI',
 )
@@ -112,13 +113,13 @@ async def get_org_types(
 
 
 @router.get(
-    '/api/sector',
+    '/api/metadata/sector',
     response_model=HapiGenericResponse[SectorResponse],
     summary='Get information about how humanitarian response activities are classified',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/sector',
+    '/api/v1/metadata/sector',
     response_model=HapiGenericResponse[SectorResponse],
     summary='Get information about how humanitarian response activities are classified',
 )

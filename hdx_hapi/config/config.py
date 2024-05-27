@@ -1,7 +1,8 @@
-from dataclasses import dataclass
-from mixpanel import Mixpanel
 import logging
 import os
+
+from dataclasses import dataclass
+from mixpanel import Mixpanel
 
 from hdx_hapi.config.helper import create_pg_uri_from_env_without_protocol
 
@@ -18,6 +19,7 @@ class Config:
     HDX_DATASET_URL: str
     HDX_DATASET_API_URL: str
     HDX_ORGANIZATION_URL: str
+    HDX_ORGANIZATION_API_URL: str
 
     HDX_RESOURCE_URL: str
     HDX_RESOURCE_API_URL: str
@@ -28,7 +30,7 @@ class Config:
 
     HAPI_IDENTIFIER_FILTERING: bool
 
-    HDX_MIXPANEL_TOKEN: str
+    MIXPANEL: Mixpanel
 
 
 CONFIG = None
@@ -41,6 +43,7 @@ def get_config() -> Config:
 
         sql_alchemy_asyncypg_db_uri = f'postgresql+asyncpg://{db_uri_without_protocol}'
         sql_alchemy_psycopg2_db_uri = f'postgresql+psycopg2://{db_uri_without_protocol}'
+        mixpanel_token = os.getenv('HDX_MIXPANEL_TOKEN', '')
         CONFIG = Config(
             SQL_ALCHEMY_ASYNCPG_DB_URI=sql_alchemy_asyncypg_db_uri,
             SQL_ALCHEMY_PSYCOPG2_DB_URI=sql_alchemy_psycopg2_db_uri,
@@ -52,14 +55,15 @@ def get_config() -> Config:
                 'HDX_RESOURCE_API_URL', '{domain}/api/action/resource_show?id={resource_id}'
             ),
             HDX_ORGANIZATION_URL=os.getenv('HDX_ORGANIZATION_URL', '{domain}/organization/{org_id}'),
+            HDX_ORGANIZATION_API_URL=os.getenv(
+                'HDX_ORGANIZATION_API_URL', '{domain}/api/action/organization_show?id={org_id}'
+            ),
             HAPI_READTHEDOCS_OVERVIEW_URL=os.getenv(
                 'HAPI_READTHEDOCS_OVERVIEW_URL', 'https://hdx-hapi.readthedocs.io/en/latest/'
             ),
             HAPI_SERVER_URL=os.getenv('HAPI_SERVER_URL', None),
             HAPI_IDENTIFIER_FILTERING=os.getenv('HAPI_IDENTIFIER_FILTERING', 'True').lower() == 'true',
-            HDX_MIXPANEL_TOKEN=os.getenv('HDX_MIXPANEL_TOKEN', ''),
+            MIXPANEL=Mixpanel(mixpanel_token) if mixpanel_token else None,
         )
 
     return CONFIG
-
-mixpanel = Mixpanel(get_config().HDX_MIXPANEL_TOKEN)

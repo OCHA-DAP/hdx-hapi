@@ -1,7 +1,8 @@
+from typing import Optional
 from hdx_hapi.endpoints.util.util import AdminLevel
 
 
-def compute_unspecified_values(admin_level: AdminLevel):
+def compute_unspecified_values(admin_level: Optional[AdminLevel]):
     """
     Compute unspecified values for admin1 and admin2
     """

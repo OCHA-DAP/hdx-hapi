@@ -4,10 +4,12 @@ import time
 import ua_parser.user_agent_parser as useragent
 from fastapi import Request, Response
 
-from hdx_hapi.config.config import mixpanel
+from hdx_hapi.config.config import get_config
 
 
 logger = logging.getLogger(__name__)
+
+_CONFIG = get_config()
 
 
 async def track_api_call(request: Request, response: Response):
@@ -78,7 +80,7 @@ async def track_page_view(request: Request, response: Response):
 
 
 async def send_mixpanel_event(event_name: str, distinct_id: str, event_data: dict):
-    mixpanel.track(distinct_id, event_name, event_data)
+    _CONFIG.MIXPANEL.track(distinct_id, event_name, event_data)
 
 
 class HashCodeGenerator(object):

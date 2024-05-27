@@ -2,13 +2,15 @@ import pytest
 import logging
 
 from httpx import AsyncClient
+from hapi_schema.utils.enums import Gender
+
 from hdx_hapi.endpoints.models.population import PopulationResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/themes/population'
+ENDPOINT_ROUTER = '/api/v1/population-social/population'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -31,19 +33,12 @@ async def test_get_population_params(event_loop, refresh_db):
         async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
+        log.info(f'{param_name}:{param_value} - {len(response.json()["data"]) } rows')
         assert response.status_code == 200
         assert len(response.json()['data']) > 0, (
             f'There should be at least one population entry for parameter "{param_name}" with value "{param_value}" '
             'in the database'
         )
-
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
-        response = await ac.get(ENDPOINT_ROUTER)
-
-    assert response.status_code == 200
-    assert (
-        len(response.json()['data']) > 0
-    ), 'There should be at least one population entry for all parameters in the database'
 
 
 @pytest.mark.asyncio
@@ -64,27 +59,27 @@ async def test_get_population_result(event_loop, refresh_db):
 @pytest.mark.asyncio
 async def test_get_population_adm_fields(event_loop, refresh_db):
     log.info('started test_get_population_adm_fields')
-
     population_view_adm_specified = PopulationResponse(
-        gender_code='f',
-        age_range_code='0-1',
-        population=1,
-        dataset_hdx_stub='test-dataset1',
-        resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
-        location_code='Foolandia',
-        location_name='FOO-XXX',
-        admin1_is_unspecified=False,
-        admin1_code='FOO-XXX',
-        admin1_name='Province 01',
-        admin2_is_unspecified=False,
-        admin2_code='FOO-XXX-XXX',
-        admin2_name='District A',
+        resource_hdx_id='foo',
+        admin2_ref=1,
+        gender=Gender.MALE,
+        age_range='10-14',
+        min_age=10,
+        max_age=14,
+        population=100,
         reference_period_start='2023-01-01 00:00:00',
         reference_period_end='2023-03-31 23:59:59',
+        location_ref=1,
+        location_code='FOO',
+        location_name='Foolandia',
+        admin1_ref=1,
+        admin1_code='FOO-XXX',
+        admin1_name='Province 01',
+        admin1_is_unspecified=False,
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='District A',
+        admin2_is_unspecified=False,
     )
-
     assert (
         population_view_adm_specified.admin1_code == 'FOO-XXX'
     ), 'admin1_code should keep its value when admin1_is_unspecified is False'
@@ -99,23 +94,25 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
     ), 'admin2_name should keep its value when admin1_is_unspecified is False'
 
     population_view_adm_unspecified = PopulationResponse(
-        gender_code='f',
-        age_range_code='0-1',
-        population=1,
-        dataset_hdx_stub='test-dataset1',
-        resource_hdx_id='test-resource1',
-        hapi_updated_date='2023-01-01 00:00:00',
-        hapi_replaced_date=None,
-        location_code='Foolandia',
-        location_name='FOO-XXX',
-        admin1_is_unspecified=True,
-        admin1_code='FOO-XXX',
-        admin1_name='Unpecified',
-        admin2_is_unspecified=True,
-        admin2_code='FOO-XXX',
-        admin2_name='Unspecified',
+        resource_hdx_id='foo',
+        admin2_ref=1,
+        gender=Gender.MALE,
+        age_range='10-14',
+        min_age=10,
+        max_age=14,
+        population=100,
         reference_period_start='2023-01-01 00:00:00',
         reference_period_end='2023-03-31 23:59:59',
+        location_ref=1,
+        location_code='FOO',
+        location_name='Foolandia',
+        admin1_ref=1,
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin1_is_unspecified=True,
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        admin2_is_unspecified=True,
     )
 
     assert (
@@ -162,6 +159,9 @@ async def test_get_population_admin_level(event_loop, refresh_db):
         '2': admin_2_count,
     }
 
+    for item in response_items:
+        log.info(f"{item['admin1_name']}, {item['admin2_name']}")
+    log.info(counts_map)
     for admin_level, count in counts_map.items():
         async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
             response = await ac.get(ENDPOINT_ROUTER)

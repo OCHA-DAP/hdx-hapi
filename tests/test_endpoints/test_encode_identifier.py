@@ -9,7 +9,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/encode_identifier'
+ENDPOINT_ROUTER = '/api/encode_app_identifier'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -43,9 +43,10 @@ async def test_get_encoded_identifier_results(event_loop, refresh_db):
         assert field in response.json(), f'Field "{field}" not found in the response'
 
     assert len(response.json()) == len(expected_fields), 'Response has a different number of fields than expected'
-    assert response.json() == {'encoded_identifier': 'd2ViX2FwcGxpY2F0aW9uXzE6aW5mb0BleGFtcGxlLmNvbQ=='}
+    assert response.json() == {'encoded_app_identifier': 'd2ViX2FwcGxpY2F0aW9uXzE6aW5mb0BleGFtcGxlLmNvbQ=='}
     assert (
-        base64.b64decode(response.json()['encoded_identifier']).decode('utf-8') == 'web_application_1:info@example.com'
+        base64.b64decode(response.json()['encoded_app_identifier']).decode('utf-8')
+        == 'web_application_1:info@example.com'
     )
 
 

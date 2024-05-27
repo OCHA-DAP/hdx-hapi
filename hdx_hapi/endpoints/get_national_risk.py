@@ -1,27 +1,25 @@
-from datetime import date
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
-from pydantic import NaiveDatetime
+from hapi_schema.utils.enums import RiskClass
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_HDX_PROVIDER_STUB,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_LOC,
-    DOC_UPDATE_DATE_MAX,
-    DOC_UPDATE_DATE_MIN,
-    DOC_HAPI_UPDATED_DATE_MIN,
-    DOC_HAPI_UPDATED_DATE_MAX,
-    DOC_HAPI_REPLACED_DATE_MIN,
-    DOC_HAPI_REPLACED_DATE_MAX,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
-from hdx_hapi.endpoints.util.util import CommonEndpointParams, OutputFormat, common_endpoint_parameters
+from hdx_hapi.endpoints.util.util import (
+    CommonEndpointParams,
+    OutputFormat,
+    ReferencePeriodParameters,
+    common_endpoint_parameters,
+    reference_period_parameters,
+)
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.national_risk_logic import get_national_risks_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -32,53 +30,37 @@ router = APIRouter(
 
 
 @router.get(
-    '/api/themes/national_risk',
+    '/api/coordination-context/national-risk',
     response_model=HapiGenericResponse[NationalRiskResponse],
     summary='Get national risk data',
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/themes/national_risk',
+    '/api/v1/coordination-context/national-risk',
     response_model=HapiGenericResponse[NationalRiskResponse],
     summary='Get national risk data',
 )
 async def get_national_risks(
+    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    risk_class: Annotated[int, Query(description='Risk class')] = None,
-    global_rank: Annotated[int, Query(description='Global rank')] = None,
-    overall_risk: Annotated[float, Query(description='Overall risk')] = None,
-    hazard_exposure_risk: Annotated[float, Query(description='Hazard exposure risk')] = None,
-    vulnerability_risk: Annotated[float, Query(description='Vulnerability risk')] = None,
-    coping_capacity_risk: Annotated[float, Query(description='Coping capacity risk')] = None,
-    dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
-    resource_update_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_UPDATE_DATE_MIN}', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
+    risk_class: Annotated[Optional[RiskClass], Query(description='Risk class')] = None,
+    global_rank_min: Annotated[Optional[int], Query(description='Global rank, lower bound')] = None,
+    global_rank_max: Annotated[Optional[int], Query(description='Global rank, upper bound')] = None,
+    overall_risk_min: Annotated[Optional[float], Query(description='Overall risk, lower bound')] = None,
+    overall_risk_max: Annotated[Optional[float], Query(description='Overall risk, upper bound')] = None,
+    hazard_exposure_risk_min: Annotated[Optional[float], Query(description='Hazard exposure risk, lower bound')] = None,
+    hazard_exposure_risk_max: Annotated[Optional[float], Query(description='Hazard exposure risk, upper bound')] = None,
+    vulnerability_risk_min: Annotated[Optional[float], Query(description='Vulnerability risk, lower bound')] = None,
+    vulnerability_risk_max: Annotated[Optional[float], Query(description='Vulnerability risk, upper bound')] = None,
+    coping_capacity_risk_min: Annotated[Optional[float], Query(description='Coping capacity risk, lower bound')] = None,
+    coping_capacity_risk_max: Annotated[Optional[float], Query(description='Coping capacity risk, upper bound')] = None,
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
-    resource_update_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    hapi_updated_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
-    ] = None,
-    hapi_updated_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
-    ] = None,
-    hapi_replaced_date_min: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
-    ] = None,
-    hapi_replaced_date_max: Annotated[
-        NaiveDatetime | date,
-        Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
-    ] = None,
-    # sector_name: Annotated[str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
-    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
-    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
@@ -86,21 +68,19 @@ async def get_national_risks(
     """
     result = await get_national_risks_srv(
         pagination_parameters=common_parameters,
+        ref_period_parameters=ref_period_parameters,
         db=db,
         risk_class=risk_class,
-        global_rank=global_rank,
-        overall_risk=overall_risk,
-        hazard_exposure_risk=hazard_exposure_risk,
-        vulnerability_risk=vulnerability_risk,
-        coping_capacity_risk=coping_capacity_risk,
-        dataset_hdx_provider_stub=dataset_hdx_provider_stub,
-        resource_update_date_min=resource_update_date_min,
-        resource_update_date_max=resource_update_date_max,
-        hapi_updated_date_min=hapi_updated_date_min,
-        hapi_updated_date_max=hapi_updated_date_max,
-        hapi_replaced_date_min=hapi_replaced_date_min,
-        hapi_replaced_date_max=hapi_replaced_date_max,
-        # sector_name=sector_name,
+        global_rank_min=global_rank_min,
+        global_rank_max=global_rank_max,
+        overall_risk_min=overall_risk_min,
+        overall_risk_max=overall_risk_max,
+        hazard_exposure_risk_min=hazard_exposure_risk_min,
+        hazard_exposure_risk_max=hazard_exposure_risk_max,
+        vulnerability_risk_min=vulnerability_risk_min,
+        vulnerability_risk_max=vulnerability_risk_max,
+        coping_capacity_risk_min=coping_capacity_risk_min,
+        coping_capacity_risk_max=coping_capacity_risk_max,
         location_code=location_code,
         location_name=location_name,
     )

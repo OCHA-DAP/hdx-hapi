@@ -7,7 +7,7 @@ from tests.test_endpoints.endpoint_data import endpoint_data
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/resource'
+ENDPOINT_ROUTER = '/api/v1/metadata/resource'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']
@@ -54,6 +54,9 @@ async def test_get_resource_result(event_loop, refresh_db):
 
     for field in expected_fields:
         assert field in response.json()['data'][0], f'Field "{field}" not found in the response'
+
+    for field in response.json()['data'][0]:
+        assert field in expected_fields, f'Field "{field}" unexpected'
 
     assert len(response.json()['data'][0]) == len(
         expected_fields

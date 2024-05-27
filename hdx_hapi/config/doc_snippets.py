@@ -7,9 +7,10 @@ DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative div
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_NAME = 'Filter the response by the 1st subnational administrative divisions. The admin2 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_AGE_RANGE_SUMMARY = 'Get the list of age ranges used for disaggregating population data'
-DOC_AGE_RANGE_CODE = 'Filter the response by the age range. These are expressed as [start year]-[end year]. The end year is assumed to be inclusive, though that is not always explicit in the source data.'
+DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start year]-[end year]. The end year is assumed to be inclusive, though that is not always explicit in the source data.'
 DOC_GENDER_SUMMARY = 'Get the list of gender codes used for disaggregating population data'
 DOC_GENDER_CODE = 'Filter the response by the gender code.'
+DOC_GENDER = 'Filter the response by the gender.'
 DOC_GENDER_DESCRIPTION = 'Filter the response by the gender description.'
 DOC_HDX_DATASET_ID = 'Filter the response by the dataset ID, which is a unique and fixed identifier of a Dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset id]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_NAME = 'Filter the response by the URL-safe name of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset name]` will load the dataset page on HDX.'
@@ -42,3 +43,5 @@ DOC_SEE_ADMIN2 = 'See the <a href="/docs#/Locations%20and%20Administrative%20Div
 DOC_SEE_DATASET = 'See the <a href="/docs#/HDX%20Metadata/get_datasets_api_v1_dataset_get" target="_blank">dataset endpoint</a> for details.'
 DOC_SEE_LOC = 'See the <a href="/docs#/Locations%20and%20Administrative%20Divisions/get_locations_api_v1_location_get" target="_blank">location endpoint</a> for details.'
 DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Humanitarian%20Organizations%20and%20Sectors/get_org_types_api_v1_org_type_get" target="_blank">org type endpoint</a> for details.'
+
+DOC_CURRENCY_CODE = 'Filter the response by the currency code.'
