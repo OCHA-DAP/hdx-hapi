@@ -28,7 +28,7 @@ from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['Baseline Population'],
+    tags=['Population & Socio-Economy'],
 )
 
 

@@ -33,7 +33,7 @@ from hdx_hapi.services.operational_presence_logic import get_operational_presenc
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['3W Operational Presence'],
+    tags=['Coordination & Context'],
 )
 
 SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working.'

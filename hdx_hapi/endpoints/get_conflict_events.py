@@ -31,7 +31,7 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 
 
 router = APIRouter(
-    tags=['Conflict Events'],
+    tags=['Coordination & Context'],
 )
 
 SUMMARY_TEXT = 'Get the list of conflict events'
