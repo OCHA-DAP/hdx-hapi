@@ -2,6 +2,7 @@ from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
 from hdx_hapi.endpoints.models.base import HapiBaseModel
+from hdx_hapi.endpoints.models.util.constants import NON_NEGATIVE_DECIMAL_TYPE
 
 
 class FundingResponse(HapiBaseModel):
@@ -11,9 +12,9 @@ class FundingResponse(HapiBaseModel):
     appeal_name: str = Field(max_length=256)
     appeal_type: str = Field(max_length=32)
 
-    requirements_usd: float = Field(ge=0.0)
-    funding_usd: float = Field(ge=0.0)
-    funding_pct: float = Field(ge=0.0)
+    requirements_usd: NON_NEGATIVE_DECIMAL_TYPE
+    funding_usd: NON_NEGATIVE_DECIMAL_TYPE
+    funding_pct: NON_NEGATIVE_DECIMAL_TYPE
 
     location_ref: int
     location_code: str = Field(max_length=128)
