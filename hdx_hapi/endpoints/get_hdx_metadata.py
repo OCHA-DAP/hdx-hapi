@@ -33,7 +33,7 @@ from hdx_hapi.services.resource_logic import get_resources_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['HDX Metadata'],
+    tags=['Metadata'],
 )
 
 
