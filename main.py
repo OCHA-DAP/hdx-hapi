@@ -5,10 +5,12 @@ logging.config.fileConfig('logging.conf')
 
 import uvicorn  # noqa
 from fastapi import FastAPI, Request  # noqa
+from fastapi.exceptions import ResponseValidationError  # noqa
 from fastapi.responses import HTMLResponse, RedirectResponse  # noqa
 from fastapi.openapi.docs import get_swagger_ui_html  # noqa
 
 # from hdx_hapi.services.sql_alchemy_session import init_db
+from hdx_hapi.endpoints.exception_handler.response_validation_error_handler import response_validation_error_handler  # noqa
 from hdx_hapi.endpoints.middleware.app_identifier_middleware import app_identifier_middleware  # noqa
 from hdx_hapi.endpoints.middleware.mixpanel_tracking_middleware import mixpanel_tracking_middleware  # noqa
 
@@ -27,16 +29,15 @@ from hdx_hapi.endpoints.get_affected_people import router as affected_people_rou
 from hdx_hapi.endpoints.get_national_risk import router as national_risk_router  # noqa
 from hdx_hapi.endpoints.get_wfp_commodity import router as wfp_commodity_router  # noqa
 from hdx_hapi.endpoints.get_wfp_market import router as wfp_market_router  # noqa
-from hdx_hapi.endpoints.get_food_security import router as food_security_router  # noqa
 from hdx_hapi.endpoints.get_currency import router as currency_router  # noqa
+from hdx_hapi.endpoints.get_food_security import router as food_security_router  # noqa
+from hdx_hapi.endpoints.get_food_price import router as food_price_router  # noqa
 
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 from hdx_hapi.config.config import get_config  # noqa
 
 logger = logging.getLogger(__name__)
-# import os
-# logger.warning("Current folder is "+ os.getcwd())
 
 CONFIG = get_config()
 
@@ -56,12 +57,13 @@ app.include_router(conflict_events_router)
 app.include_router(population_router)
 app.include_router(affected_people_router)
 app.include_router(national_risk_router)
+app.include_router(food_security_router)
+app.include_router(food_price_router)
 app.include_router(admin_level_router)
 app.include_router(humanitarian_response_router)
 app.include_router(dataset_router)
-app.include_router(wfp_commodity_router)
 app.include_router(wfp_market_router)
-app.include_router(food_security_router)
+app.include_router(wfp_commodity_router)
 app.include_router(currency_router)
 
 
@@ -107,6 +109,11 @@ async def swagger_ui_html(req: Request) -> HTMLResponse:
 @app.get('/', include_in_schema=False)
 def home():
     return RedirectResponse('/docs')
+
+
+@app.exception_handler(ResponseValidationError)
+async def resp_validation_exception_handler(request: Request, exc: ResponseValidationError):
+    return await response_validation_error_handler(request, exc)
 
 
 if __name__ == '__main__':

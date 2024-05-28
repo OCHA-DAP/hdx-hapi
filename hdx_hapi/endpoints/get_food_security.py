@@ -25,7 +25,7 @@ from hdx_hapi.services.food_security_logic import get_food_security_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['Food Security'],
+    tags=['Food Security & Nutrition'],
 )
 
 
