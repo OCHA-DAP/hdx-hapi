@@ -186,7 +186,7 @@ endpoint_data = {
         },
         'expected_fields': ['acronym', 'name', 'org_type_code', 'org_type_description'],
     },
-    '/api/v1/metadata/org_type': {
+    '/api/v1/metadata/org-type': {
         'query_parameters': {
             'code': '431',
             'name': 'Academic / Research',
@@ -379,7 +379,7 @@ endpoint_data = {
     '/api/v1/affected-people/humanitarian-needs': {
         'query_parameters': {
             'admin2_ref': 2,
-            'gender': '*',
+            'gender': 'all',
             'age_range': 'ALL',
             'min_age': 0,
             'max_age': 99,
@@ -427,7 +427,7 @@ endpoint_data = {
     '/api/v1/affected-people/refugees': {
         'query_parameters': {
             'population_group': 'REF',
-            'gender': '*',
+            'gender': 'all',
             'age_range': 'ALL',
             'min_age': 0,
             'max_age': 99,
