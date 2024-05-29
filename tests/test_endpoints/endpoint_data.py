@@ -379,7 +379,7 @@ endpoint_data = {
     '/api/v1/affected-people/humanitarian-needs': {
         'query_parameters': {
             'admin2_ref': 2,
-            'gender': '*',
+            'gender': 'all',
             'age_range': 'ALL',
             'min_age': 0,
             'max_age': 99,
@@ -427,7 +427,7 @@ endpoint_data = {
     '/api/v1/affected-people/refugees': {
         'query_parameters': {
             'population_group': 'REF',
-            'gender': '*',
+            'gender': 'all',
             'age_range': 'ALL',
             'min_age': 0,
             'max_age': 99,
