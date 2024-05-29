@@ -20,8 +20,6 @@ async def refugees_view_list(
     population_group: Optional[PopulationGroup] = None,
     gender: Optional[Gender] = None,
     age_range: Optional[str] = None,
-    min_age: Optional[int] = None,
-    max_age: Optional[int] = None,
     origin_location_code: Optional[str] = None,
     origin_location_name: Optional[str] = None,
     asylum_location_code: Optional[str] = None,
@@ -33,10 +31,6 @@ async def refugees_view_list(
         query = query.where(RefugeesView.gender == gender)
     if age_range:
         query = query.where(RefugeesView.age_range == age_range)
-    # if min_age:
-    #     query = query.where(RefugeesView.min_age == min_age)
-    # if max_age:
-    #     query = query.where(RefugeesView.max_age == max_age)
     if population_group:
         query = query.where(RefugeesView.population_group == population_group)
     if origin_location_code:

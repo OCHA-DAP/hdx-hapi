@@ -20,8 +20,6 @@ async def humanitarian_needs_view_list(
     admin2_ref: Optional[int] = None,
     gender: Optional[Gender] = None,
     age_range: Optional[str] = None,
-    min_age: Optional[int] = None,
-    max_age: Optional[int] = None,
     disabled_marker: Optional[DisabledMarker] = None,
     sector_code: Optional[str] = None,
     population_group: Optional[PopulationGroup] = None,
@@ -45,10 +43,6 @@ async def humanitarian_needs_view_list(
         query = query.where(HumanitarianNeedsView.gender == gender)
     if age_range:
         query = query.where(HumanitarianNeedsView.age_range == age_range)
-    # if min_age:
-    #     query = query.where(HumanitarianNeedsView.min_age == min_age)
-    # if max_age:
-    #     query = query.where(HumanitarianNeedsView.max_age == max_age)
     if disabled_marker:
         query = query.where(HumanitarianNeedsView.disabled_marker == disabled_marker)
     if sector_code:

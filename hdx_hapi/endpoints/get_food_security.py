@@ -21,9 +21,9 @@ from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
-    ReferencePeriodParameters,
+    # ReferencePeriodParameters,
     common_endpoint_parameters,
-    reference_period_parameters,
+    # reference_period_parameters,
     AdminLevel,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -48,7 +48,7 @@ router = APIRouter(
 )
 async def get_food_security(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
     ipc_phase: Annotated[IPCPhase, Query(description='IPC Phase')] = None,
     ipc_type: Annotated[IPCType, Query(description='IPC Type')] = None,
@@ -69,6 +69,7 @@ async def get_food_security(
     """
     Return the list of food security data
     """
+    ref_period_parameters = None
     result = await get_food_security_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,

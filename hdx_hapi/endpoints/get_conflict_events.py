@@ -21,9 +21,9 @@ from hdx_hapi.endpoints.util.util import (
     AdminLevel,
     CommonEndpointParams,
     OutputFormat,
-    ReferencePeriodParameters,
+    # ReferencePeriodParameters,
     common_endpoint_parameters,
-    reference_period_parameters,
+    # reference_period_parameters,
 )
 from hdx_hapi.services.conflict_view_logic import get_conflict_event_srv
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -49,7 +49,7 @@ SUMMARY_TEXT = 'Get the list of conflict events'
     summary=SUMMARY_TEXT,
 )
 async def get_conflict_events(
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     event_type: Annotated[Optional[EventType], Query(description='Event type')] = None,
@@ -77,6 +77,7 @@ async def get_conflict_events(
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
+    ref_period_parameters = None
     result = await get_conflict_event_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
