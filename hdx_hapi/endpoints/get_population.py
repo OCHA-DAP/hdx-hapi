@@ -23,9 +23,9 @@ from hdx_hapi.endpoints.models.poverty_rate import PovertyRateResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
-    ReferencePeriodParameters,
+    # ReferencePeriodParameters,
     common_endpoint_parameters,
-    reference_period_parameters,
+    # reference_period_parameters,
     AdminLevel,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -51,12 +51,10 @@ router = APIRouter(
 )
 async def get_populations(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
     gender: Annotated[Gender, Query(description='Gender')] = None,
     age_range: Annotated[str, Query(max_length=32, description='Age range')] = None,
-    min_age: Annotated[int, Query(description='Minimum age')] = None,
-    max_age: Annotated[int, Query(description='Maximum age')] = None,
     population: Annotated[int, Query(description='Population')] = None,
     location_ref: Annotated[int, Query(description='Location reference')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
@@ -75,14 +73,13 @@ async def get_populations(
     """
     Return the list of populations
     """
+    ref_period_parameters = None
     result = await get_populations_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
         gender=gender,
         age_range=age_range,
-        min_age=min_age,
-        max_age=max_age,
         population=population,
         admin1_ref=admin1_ref,
         location_ref=location_ref,
@@ -111,7 +108,7 @@ async def get_populations(
 )
 async def get_poverty_rates(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
     mpi_min: Annotated[Optional[float], Query(description='mpi, lower bound')] = None,
     mpi_max: Annotated[Optional[float], Query(description='mpi upper bound')] = None,
@@ -123,6 +120,7 @@ async def get_poverty_rates(
     """
     Return the list of poverty rates
     """
+    ref_period_parameters = None
     result = await get_poverty_rates_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
