@@ -1,5 +1,7 @@
 # Contact Us
 
+---
+
 We appreciate your interest in our work. Here is how to contact us and get involved:
 
 - [Bug reports and feature requests - TBD](fix/this/link) for HAPI are welcome.
