@@ -1,8 +1,8 @@
-from decimal import Decimal
 from typing import Optional
-from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType
 from pydantic import ConfigDict, Field, NaiveDatetime
+from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType
 from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
+from hdx_hapi.endpoints.models.util.constants import NON_NEGATIVE_DECIMAL_TYPE
 
 
 class FoodPriceResponse(HapiBaseModel, HapiModelWithAdmins):
@@ -19,8 +19,7 @@ class FoodPriceResponse(HapiBaseModel, HapiModelWithAdmins):
 
     price_flag: PriceFlag
     price_type: PriceType
-    price: Decimal
-
+    price: NON_NEGATIVE_DECIMAL_TYPE
     lat: float = Field(ge=-90.0, le=90.0)
     lon: float = Field(ge=-180.0, le=180.0)
 

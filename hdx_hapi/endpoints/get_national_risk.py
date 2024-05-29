@@ -25,7 +25,7 @@ from hdx_hapi.services.national_risk_logic import get_national_risks_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
 router = APIRouter(
-    tags=['National Risk'],
+    tags=['Coordination & Context'],
 )
 
 

@@ -10,7 +10,7 @@ router = APIRouter(
     tags=['Generate App Identifier'],
 )
 
-SUMMARY = 'Get an encoded application name plus email'
+SUMMARY = 'Get an app identifier by encoding an application name and email'
 
 
 @router.get(

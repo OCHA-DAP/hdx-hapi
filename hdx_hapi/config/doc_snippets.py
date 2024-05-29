@@ -38,10 +38,10 @@ DOC_HAPI_UPDATED_DATE_MAX = 'Max date of HAPI updated date, e.g. 2020-01-01 or 2
 DOC_HAPI_REPLACED_DATE_MIN = 'Min date of HAPI replaced date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 DOC_HAPI_REPLACED_DATE_MAX = 'Max date of HAPI replaced date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 
-DOC_SEE_ADMIN1 = 'See the <a href="/docs#/Locations%20and%20Administrative%20Divisions/get_admin1_api_v1_admin1_get" target="_blank">admin1 endpoint</a> for details.'
-DOC_SEE_ADMIN2 = 'See the <a href="/docs#/Locations%20and%20Administrative%20Divisions/get_admin2_api_v1_admin2_get" target="_blank">admin2 endpoint</a> for details.'
-DOC_SEE_DATASET = 'See the <a href="/docs#/HDX%20Metadata/get_datasets_api_v1_dataset_get" target="_blank">dataset endpoint</a> for details.'
-DOC_SEE_LOC = 'See the <a href="/docs#/Locations%20and%20Administrative%20Divisions/get_locations_api_v1_location_get" target="_blank">location endpoint</a> for details.'
-DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Humanitarian%20Organizations%20and%20Sectors/get_org_types_api_v1_org_type_get" target="_blank">org type endpoint</a> for details.'
+DOC_SEE_ADMIN1 = 'See the <a href="/docs#/Metadata/get_admin1_api_v1_metadata_admin1_get" target="_blank">admin1 endpoint</a> for details.'
+DOC_SEE_ADMIN2 = 'See the <a href="/docs#/Metadata/get_admin2_api_v1_metadata_admin2_get" target="_blank">admin2 endpoint</a> for details.'
+DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
+DOC_SEE_LOC = 'See the <a href="/docs#/Metadata/get_locations_api_v1_metadata_location_get" target="_blank">location endpoint</a> for details.'
+DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
 
 DOC_CURRENCY_CODE = 'Filter the response by the currency code.'
