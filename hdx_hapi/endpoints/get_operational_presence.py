@@ -24,9 +24,9 @@ from hdx_hapi.endpoints.util.util import (
     AdminLevel,
     CommonEndpointParams,
     OutputFormat,
-    ReferencePeriodParameters,
+    # ReferencePeriodParameters,
     common_endpoint_parameters,
-    reference_period_parameters,
+    # reference_period_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
@@ -51,7 +51,7 @@ SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian 
     summary=SUMMARY_TEXT,
 )
 async def get_operational_presences(
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     sector_code: Annotated[
@@ -178,6 +178,7 @@ async def get_operational_presences(
     information about which organizations are working in different locations affected by a
     crisis. <a href="https://3w.unocha.org/">Learn more about 3W</a>
     """
+    ref_period_parameters = None
     result = await get_operational_presences_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,

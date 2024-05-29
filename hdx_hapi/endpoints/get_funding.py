@@ -9,9 +9,9 @@ from hdx_hapi.endpoints.models.funding import FundingResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
-    ReferencePeriodParameters,
+    # ReferencePeriodParameters,
     common_endpoint_parameters,
-    reference_period_parameters,
+    # reference_period_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.funding_logic import get_funding_srv
@@ -35,7 +35,7 @@ router = APIRouter(
     summary='Get funding data',
 )
 async def get_fundings(
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     appeal_code: Annotated[Optional[str], Query(max_length=32, description='Appeal code')] = None,
@@ -48,6 +48,7 @@ async def get_fundings(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
+    ref_period_parameters = None
     result = await get_funding_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,

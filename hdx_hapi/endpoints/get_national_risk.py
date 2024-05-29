@@ -16,9 +16,9 @@ from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
-    ReferencePeriodParameters,
+    # ReferencePeriodParameters,
     common_endpoint_parameters,
-    reference_period_parameters,
+    # reference_period_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.national_risk_logic import get_national_risks_srv
@@ -41,7 +41,7 @@ router = APIRouter(
     summary='Get national risk data',
 )
 async def get_national_risks(
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     risk_class: Annotated[Optional[RiskClass], Query(description='Risk class')] = None,
@@ -66,6 +66,7 @@ async def get_national_risks(
     """
     Return the list of national risks
     """
+    ref_period_parameters = None
     result = await get_national_risks_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,

@@ -37,8 +37,6 @@ async def get_populations_srv(
         db=db,
         gender=gender,
         age_range=age_range,
-        min_age=min_age,
-        max_age=max_age,
         population=population,
         admin1_ref=admin1_ref,
         location_ref=location_ref,

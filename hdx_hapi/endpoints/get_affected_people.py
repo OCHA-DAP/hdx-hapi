@@ -31,9 +31,9 @@ from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, Pop
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
-    ReferencePeriodParameters,
+    # ReferencePeriodParameters,
     common_endpoint_parameters,
-    reference_period_parameters,
+    # reference_period_parameters,
     AdminLevel,
 )
 
@@ -54,14 +54,14 @@ router = APIRouter(
     summary='Get humanitarian needs data',
 )
 async def get_humanitarian_needs(
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     admin2_ref: Annotated[Optional[int], Query(description='Admin2 reference')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    min_age: Annotated[Optional[int], Query(description='Min age')] = None,
-    max_age: Annotated[Optional[int], Query(description='Max age')] = None,
+    # min_age: Annotated[Optional[int], Query(description='Min age')] = None,
+    # max_age: Annotated[Optional[int], Query(description='Max age')] = None,
     disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker')] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
     population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
@@ -101,6 +101,7 @@ async def get_humanitarian_needs(
     """
     Return the list of humanitarian needs data
     """
+    ref_period_parameters = None
     result = await get_humanitarian_needs_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
@@ -108,8 +109,6 @@ async def get_humanitarian_needs(
         admin2_ref=admin2_ref,
         gender=gender,
         age_range=age_range,
-        min_age=min_age,
-        max_age=max_age,
         disabled_marker=disabled_marker,
         sector_code=sector_code,
         population_group=population_group,
@@ -143,14 +142,12 @@ async def get_humanitarian_needs(
     summary='Get refugees data',
 )
 async def get_refugees(
-    ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    min_age: Annotated[Optional[int], Query(description='Min age')] = None,
-    max_age: Annotated[Optional[int], Query(description='Max age')] = None,
     origin_location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
@@ -168,6 +165,7 @@ async def get_refugees(
     """
     Return the list of refugees data
     """
+    ref_period_parameters = None
     result = await get_refugees_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
@@ -175,8 +173,6 @@ async def get_refugees(
         population_group=population_group,
         gender=gender,
         age_range=age_range,
-        min_age=min_age,
-        max_age=max_age,
         origin_location_code=origin_location_code,
         origin_location_name=origin_location_name,
         asylum_location_code=asylum_location_code,
