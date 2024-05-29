@@ -42,7 +42,7 @@ async def app_identifier_middleware(request: Request, call_next):
 
         if not encoded_value:
             return JSONResponse(
-                content={'error': 'Missing authentication token'}, status_code=status.HTTP_400_BAD_REQUEST
+                content={'error': 'Missing app identifier'}, status_code=status.HTTP_400_BAD_REQUEST
             )
 
         try:
@@ -54,7 +54,7 @@ async def app_identifier_middleware(request: Request, call_next):
             request.state.app_name = identifier_params.application
         except Exception:
             return JSONResponse(
-                content={'error': 'Invalid authentication token'}, status_code=status.HTTP_400_BAD_REQUEST
+                content={'error': 'Invalid app identifier'}, status_code=status.HTTP_400_BAD_REQUEST
             )
 
     response = await call_next(request)
