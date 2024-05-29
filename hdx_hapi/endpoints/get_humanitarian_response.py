@@ -87,7 +87,7 @@ async def get_orgs(
     include_in_schema=False,
 )
 @router.get(
-    '/api/v1/metadata/org_type',
+    '/api/v1/metadata/org-type',
     response_model=HapiGenericResponse[OrgTypeResponse],
     summary='Get information about how organizations are classified in HAPI',
 )

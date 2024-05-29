@@ -14,6 +14,6 @@ docker-compose exec -T db psql -U postgres -c "grant all privileges on database 
 docker-compose exec -T db psql -U postgres $DB_NAME -c "GRANT USAGE, CREATE ON SCHEMA public TO $DB_USER;"
 docker-compose exec -T db psql -U postgres $DB_NAME -c "GRANT ALL ON ALL TABLES IN SCHEMA public TO $DB_USER;"
 
-docker-compose exec -T hapi sh -c "alembic -x sqlalchemy.url=postgresql+psycopg2://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_NAME upgrade $ALEMBIC_COMMIT"
+# docker-compose exec -T hapi sh -c "alembic -x sqlalchemy.url=postgresql+psycopg2://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_NAME upgrade $ALEMBIC_COMMIT"
 
 cd ..

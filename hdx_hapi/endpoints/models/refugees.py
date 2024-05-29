@@ -17,9 +17,9 @@ class RefugeesResponse(HapiBaseModel):
     population: int = Field(ge=0)
     reference_period_start: NaiveDatetime
     reference_period_end: Optional[NaiveDatetime]
-    origin_location_code: Optional[str] = Field(max_length=128)
-    origin_location_name: Optional[str] = Field(max_length=512)
-    asylum_location_code: Optional[str] = Field(max_length=128)
-    asylum_location_name: Optional[str] = Field(max_length=512)
+    origin_location_code: str = Field(max_length=128)
+    origin_location_name: str = Field(max_length=512)
+    asylum_location_code: str = Field(max_length=128)
+    asylum_location_name: str = Field(max_length=512)
 
     model_config = ConfigDict(from_attributes=True)
