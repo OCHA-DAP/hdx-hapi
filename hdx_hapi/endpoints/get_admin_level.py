@@ -32,7 +32,7 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 CONFIG = get_config()
 
 router = APIRouter(
-    tags=['Locations and Administrative Divisions'],
+    tags=['Metadata'],
 )
 
 

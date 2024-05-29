@@ -19,20 +19,20 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 
 
 router = APIRouter(
-    tags=['Funding'],
+    tags=['Coordination & Context'],
 )
 
 
 @router.get(
     '/api/coordination-context/funding',
     response_model=HapiGenericResponse[FundingResponse],
-    summary='Funding endpoint',
+    summary='Get funding data',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/coordination-context/funding',
     response_model=HapiGenericResponse[FundingResponse],
-    summary='Funding endpoint',
+    summary='Get funding data',
 )
 async def get_fundings(
     ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],

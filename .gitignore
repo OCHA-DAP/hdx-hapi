@@ -18,3 +18,5 @@ coverage.xml
 
 *.pg_restore
 
+
+src/hapi-schema/
