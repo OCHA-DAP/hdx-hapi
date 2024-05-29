@@ -26,6 +26,9 @@ def apply_reference_period_filter(
     ref_period_parameters: ReferencePeriodParameters,
     db_class: Type[EntityWithReferencePeriod],
 ) -> Select:
+    if ref_period_parameters is None:
+        return query
+
     if ref_period_parameters.reference_period_start_min:
         query = query.where(db_class.reference_period_start >= ref_period_parameters.reference_period_start_min)
     if ref_period_parameters.reference_period_start_max:
