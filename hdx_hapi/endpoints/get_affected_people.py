@@ -60,15 +60,14 @@ async def get_humanitarian_needs(
     admin2_ref: Annotated[Optional[int], Query(description='Admin2 reference')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    # min_age: Annotated[Optional[int], Query(description='Min age')] = None,
-    # max_age: Annotated[Optional[int], Query(description='Max age')] = None,
     disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker')] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
     population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
     population_status: Annotated[
         Optional[PopulationStatus], Query(max_length=32, description='Population status')
     ] = None,
-    population: Annotated[Optional[int], Query(description='Population')] = None,
+    population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
+    population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
     # reference_period_start: Annotated[
     #     NaiveDatetime | date,
     #     Query(description='Reference period start', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
@@ -113,7 +112,8 @@ async def get_humanitarian_needs(
         sector_code=sector_code,
         population_group=population_group,
         population_status=population_status,
-        population=population,
+        population_min=population_min,
+        population_max=population_max,
         sector_name=sector_name,
         location_code=location_code,
         location_name=location_name,

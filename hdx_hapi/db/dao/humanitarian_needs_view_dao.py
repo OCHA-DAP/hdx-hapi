@@ -24,7 +24,8 @@ async def humanitarian_needs_view_list(
     sector_code: Optional[str] = None,
     population_group: Optional[PopulationGroup] = None,
     population_status: Optional[PopulationStatus] = None,
-    population: Optional[int] = None,
+    population_min: Optional[int] = None,
+    population_max: Optional[int] = None,
     sector_name: Optional[str] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
@@ -52,9 +53,10 @@ async def humanitarian_needs_view_list(
     if population_status:
         query = query.where(HumanitarianNeedsView.population_status == population_status)
 
-    if population:
-        query = query.where(HumanitarianNeedsView.population == population)
-
+    if population_min:
+        query = query.where(HumanitarianNeedsView.population >= population_min)
+    if population_max:
+        query = query.where(HumanitarianNeedsView.population <= population_max)
     if sector_name:
         query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
 
