@@ -201,7 +201,7 @@ endpoint_data = {
             'min_age': 10,
             'max_age': 14,
             'population_min': 0,
-            'population_max': 1000000,
+            'population_max': 10000000,
             #'reference_period_start_min': '2020-01-01T00:00:00',
             #'reference_period_end_max': '2024-01-01T00:00:00',
             'location_code': 'fOO',
