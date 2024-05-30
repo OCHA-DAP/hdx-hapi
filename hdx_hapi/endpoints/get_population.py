@@ -55,7 +55,8 @@ async def get_populations(
     db: AsyncSession = Depends(get_db),
     gender: Annotated[Gender, Query(description='Gender')] = None,
     age_range: Annotated[str, Query(max_length=32, description='Age range')] = None,
-    population: Annotated[int, Query(description='Population')] = None,
+    population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
+    population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
     location_ref: Annotated[int, Query(description='Location reference')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
@@ -80,7 +81,8 @@ async def get_populations(
         db=db,
         gender=gender,
         age_range=age_range,
-        population=population,
+        population_min=population_min,
+        population_max=population_max,
         admin1_ref=admin1_ref,
         location_ref=location_ref,
         location_code=location_code,
@@ -98,13 +100,13 @@ async def get_populations(
 @router.get(
     '/api/population-social/poverty-rate',
     response_model=HapiGenericResponse[PovertyRateResponse],
-    summary='Get baseline population data',
+    summary='Get poverty rate data',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/population-social/poverty-rate',
     response_model=HapiGenericResponse[PovertyRateResponse],
-    summary='Get baseline population data',
+    summary='Get poverty rate data',
 )
 async def get_poverty_rates(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
