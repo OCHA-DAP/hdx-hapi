@@ -18,6 +18,8 @@ async def refugees_view_list(
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
     population_group: Optional[PopulationGroup] = None,
+    population_min: Optional[int] = None,
+    population_max: Optional[int] = None,
     gender: Optional[Gender] = None,
     age_range: Optional[str] = None,
     origin_location_code: Optional[str] = None,
@@ -33,6 +35,10 @@ async def refugees_view_list(
         query = query.where(RefugeesView.age_range == age_range)
     if population_group:
         query = query.where(RefugeesView.population_group == population_group)
+    if population_min:
+        query = query.where(RefugeesView.population >= population_min)
+    if population_max:
+        query = query.where(RefugeesView.population <= population_max)
     if origin_location_code:
         query = case_insensitive_filter(query, RefugeesView.origin_location_code, origin_location_code)
     if origin_location_name:

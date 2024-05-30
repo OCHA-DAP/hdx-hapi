@@ -146,6 +146,8 @@ async def get_refugees(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
+    population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
+    population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     origin_location_code: Annotated[
@@ -171,6 +173,8 @@ async def get_refugees(
         ref_period_parameters=ref_period_parameters,
         db=db,
         population_group=population_group,
+        population_min=population_min,
+        population_max=population_max,
         gender=gender,
         age_range=age_range,
         origin_location_code=origin_location_code,
