@@ -56,7 +56,7 @@ async def populations_view_list(
     if population_min:
         query = query.where(PopulationView.population >= population_min)
     if population_max:
-        query = query.where(PopulationView.population <= population_max)
+        query = query.where(PopulationView.population < population_max)
     query = apply_location_admin_filter(
         query,
         PopulationView,

@@ -38,7 +38,7 @@ async def refugees_view_list(
     if population_min:
         query = query.where(RefugeesView.population >= population_min)
     if population_max:
-        query = query.where(RefugeesView.population <= population_max)
+        query = query.where(RefugeesView.population < population_max)
     if origin_location_code:
         query = case_insensitive_filter(query, RefugeesView.origin_location_code, origin_location_code)
     if origin_location_name:

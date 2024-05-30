@@ -56,7 +56,7 @@ async def humanitarian_needs_view_list(
     if population_min:
         query = query.where(HumanitarianNeedsView.population >= population_min)
     if population_max:
-        query = query.where(HumanitarianNeedsView.population <= population_max)
+        query = query.where(HumanitarianNeedsView.population < population_max)
     if sector_name:
         query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
 
