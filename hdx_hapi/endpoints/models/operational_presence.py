@@ -26,6 +26,6 @@ class OperationalPresenceResponse(HapiBaseModel, HapiModelWithAdmins):
     # dataset_hdx_provider_name: str = Field(max_length=512),
     # resource_name: str = Field(max_length=256),
     org_type_code: Optional[str] = Field(max_length=32)
-    # org_type_description: str = Field(max_length=512),
+    org_type_description: Optional[str] = Field(max_length=512)
 
     model_config = ConfigDict(from_attributes=True)
