@@ -25,7 +25,8 @@ async def populations_view_list(
     db: AsyncSession,
     gender: Optional[Gender] = None,
     age_range: Optional[str] = None,
-    population: Optional[int] = None,
+    population_min: Optional[int] = None,
+    population_max: Optional[int] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
     admin1_ref: Optional[int] = None,
@@ -40,7 +41,7 @@ async def populations_view_list(
 ) -> Sequence[PopulationView]:
     logger.info(
         f'populations_view_list called with params: gender={gender}, age_range={age_range}, '
-        f'population={population}, '
+        f'population_min={population_min}, population_max={population_max},'
         f'location_code={location_code}, location_name={location_name}, admin1_name={admin1_name}, '
         f'admin1_code={admin1_code}, admin1_is_unspecified={admin1_is_unspecified}, admin2_code={admin2_code}, '
         f'admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}'
@@ -52,8 +53,10 @@ async def populations_view_list(
         query = query.where(PopulationView.gender == gender)
     if age_range:
         query = case_insensitive_filter(query, PopulationView.age_range, age_range)
-    if population:
-        query = query.where(PopulationView.population == population)
+    if population_min:
+        query = query.where(PopulationView.population >= population_min)
+    if population_max:
+        query = query.where(PopulationView.population < population_max)
     query = apply_location_admin_filter(
         query,
         PopulationView,
