@@ -33,6 +33,8 @@ from hdx_hapi.endpoints.get_currency import router as currency_router  # noqa
 from hdx_hapi.endpoints.get_food_security import router as food_security_router  # noqa
 from hdx_hapi.endpoints.get_food_price import router as food_price_router  # noqa
 
+from hdx_hapi.endpoints.get_version import router as version_router  # noqa
+
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 from hdx_hapi.config.config import get_config  # noqa
@@ -65,6 +67,7 @@ app.include_router(dataset_router)
 app.include_router(wfp_market_router)
 app.include_router(wfp_commodity_router)
 app.include_router(currency_router)
+app.include_router(version_router)
 
 
 # add middleware
