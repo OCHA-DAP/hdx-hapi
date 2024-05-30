@@ -17,6 +17,8 @@ CONFIG = get_config()
 ALLOWED_API_ENDPOINTS = {
     '/api/v1/encode_app_identifier',
     '/api/encode_app_identifier',
+    '/api/v1/util/version',
+    '/api/util/version',
 }
 
 
@@ -41,9 +43,7 @@ async def app_identifier_middleware(request: Request, call_next):
         encoded_value = app_identifier or authorization
 
         if not encoded_value:
-            return JSONResponse(
-                content={'error': 'Missing app identifier'}, status_code=status.HTTP_400_BAD_REQUEST
-            )
+            return JSONResponse(content={'error': 'Missing app identifier'}, status_code=status.HTTP_400_BAD_REQUEST)
 
         try:
             decoded_value = base64.b64decode(encoded_value).decode('utf-8')
@@ -53,9 +53,7 @@ async def app_identifier_middleware(request: Request, call_next):
             # Adding the app_name to the request state so it can be accessed in the endpoint
             request.state.app_name = identifier_params.application
         except Exception:
-            return JSONResponse(
-                content={'error': 'Invalid app identifier'}, status_code=status.HTTP_400_BAD_REQUEST
-            )
+            return JSONResponse(content={'error': 'Invalid app identifier'}, status_code=status.HTTP_400_BAD_REQUEST)
 
     response = await call_next(request)
     return response
