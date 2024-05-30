@@ -1,6 +1,18 @@
 from datetime import date
 
-from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType, RiskClass, IPCPhase, IPCType
+from hapi_schema.utils.enums import (
+    CommodityCategory,
+    DisabledMarker,
+    EventType,
+    Gender,
+    PopulationGroup,
+    PopulationStatus,
+    PriceFlag,
+    PriceType,
+    RiskClass,
+    IPCPhase,
+    IPCType,
+)
 
 from hdx_hapi.endpoints.util.util import AdminLevel
 
@@ -80,7 +92,7 @@ endpoint_data = {
     },
     '/api/v1/coordination-context/conflict-event': {
         'query_parameters': {
-            'event_type': 'political_violence',
+            'event_type': EventType.POLITICAL_VIOLENCE.value,
             'location_ref': 1,
             'location_code': 'foo',
             'location_name': 'Foolandia',
@@ -196,7 +208,7 @@ endpoint_data = {
     '/api/v1/population-social/population': {
         'query_parameters': {
             'admin2_ref': 1,
-            'gender': 'x',
+            'gender': Gender.NONBINARY.value,
             'age_range': '10-14',
             'min_age': 10,
             'max_age': 14,
@@ -379,12 +391,12 @@ endpoint_data = {
     '/api/v1/affected-people/humanitarian-needs': {
         'query_parameters': {
             'admin2_ref': 2,
-            'gender': 'all',
+            'gender': Gender.ALL.value,
             'age_range': 'ALL',
-            'disabled_marker': 'y',
+            'disabled_marker': DisabledMarker.YES.value,
             'sector_code': 'EDU',
-            'population_group': 'REF',
-            'population_status': 'AFF',
+            'population_group': PopulationGroup.REFUGEES.value,
+            'population_status': PopulationStatus.AFFECTED.value,
             # 'reference_period_start_min': '2020-01-01T00:00:00',
             # 'reference_period_start_max': '2026-01-01T00:00:00',
             'sector_name': 'Education',
@@ -424,8 +436,8 @@ endpoint_data = {
     },
     '/api/v1/affected-people/refugees': {
         'query_parameters': {
-            'population_group': 'REF',
-            'gender': 'all',
+            'population_group': PopulationGroup.REFUGEES.value,
+            'gender': Gender.ALL.value,
             'age_range': 'ALL',
             # 'reference_period_start_min': '2020-01-01T00:00:00',
             # 'reference_period_start_max': '2026-01-01T00:00:00',
