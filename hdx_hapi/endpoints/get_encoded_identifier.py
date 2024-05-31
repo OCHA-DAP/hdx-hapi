@@ -29,7 +29,7 @@ async def get_encoded_identifier(
     email: Annotated[EmailStr, email_identifier_query],
 ):
     """
-    Encode an application name and email address in base64 to serve as an client identifier in HAPI calls
+    Encode an application name and email address in base64 to serve as an client identifier in HDX HAPI calls
     """
     encoded_identifier = base64.b64encode(bytes(f'{application}:{email}', 'utf-8'))
 

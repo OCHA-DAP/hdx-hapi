@@ -36,13 +36,13 @@ router = APIRouter(
 @router.get(
     '/api/metadata/org',
     response_model=HapiGenericResponse[OrgResponse],
-    summary='Get the list of organizations represented in the data available in HAPI',
+    summary='Get the list of organizations represented in the data available in HDX HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/metadata/org',
     response_model=HapiGenericResponse[OrgResponse],
-    summary='Get the list of organizations represented in the data available in HAPI',
+    summary='Get the list of organizations represented in the data available in HDX HAPI',
 )
 async def get_orgs(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
@@ -83,13 +83,13 @@ async def get_orgs(
 @router.get(
     '/api/metadata/org_type',
     response_model=HapiGenericResponse[OrgTypeResponse],
-    summary='Get information about how organizations are classified in HAPI',
+    summary='Get information about how organizations are classified in HDX HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/metadata/org-type',
     response_model=HapiGenericResponse[OrgTypeResponse],
-    summary='Get information about how organizations are classified in HAPI',
+    summary='Get information about how organizations are classified in HDX HAPI',
 )
 async def get_org_types(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
@@ -105,8 +105,8 @@ async def get_org_types(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """There is no agreed standard for the classification of organizations. The codes and descriptions used in HAPI are
-    based on <a href="https://data.humdata.org/dataset/organization-types-beta">this dataset</a>.
+    """There is no agreed standard for the classification of organizations. The codes and descriptions used in HDX HAPI
+    are based on <a href="https://data.humdata.org/dataset/organization-types-beta">this dataset</a>.
     """
     result = await get_org_types_srv(pagination_parameters=common_parameters, db=db, code=code, description=description)
     return transform_result_to_csv_stream_if_requested(result, output_format, OrgTypeResponse)
@@ -134,8 +134,8 @@ async def get_sectors(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """There is no consistent standard for the humanitarian sectors. The codes and descriptions used in HAPI are based
-    on <a href="https://data.humdata.org/organization/54255d0b-c6b1-4517-9722-17321f6634ab">this dataset</a>.
+    """There is no consistent standard for the humanitarian sectors. The codes and descriptions used in HDX HAPI are
+    based on <a href="https://data.humdata.org/organization/54255d0b-c6b1-4517-9722-17321f6634ab">this dataset</a>.
     """
     result = await get_sectors_srv(
         pagination_parameters=common_parameters,

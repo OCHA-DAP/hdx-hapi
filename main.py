@@ -44,8 +44,8 @@ logger = logging.getLogger(__name__)
 CONFIG = get_config()
 
 app = FastAPI(
-    title='HAPI',
-    description='The Humanitarian API (HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="https://hdx-hapi.readthedocs.io/en/latest/">get started here</a>',  # noqa
+    title='HDX HAPI',
+    description='The Humanitarian API (HDX HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="https://hdx-hapi.readthedocs.io/en/latest/">get started here</a>',  # noqa
     version='0.1.0',
     docs_url=None,
     servers=[{'url': CONFIG.HAPI_SERVER_URL}] if CONFIG.HAPI_SERVER_URL else [],
