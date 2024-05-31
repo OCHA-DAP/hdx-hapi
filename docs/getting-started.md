@@ -9,7 +9,7 @@ Below, you will find example URLs to help you learn how to construct your API qu
 
 ## Generating a key
 
-To access HAPI you need to generate an API key. This can be done via the the [sandbox interface encode_identifier endpoint](https://stage.hapi-humdata-org.ahconu.org/docs#/Utility/get_encoded_identifier_api_v1_encode_identifier_get). Enter your application name and email address and it will return the api key. The key must be included as a query string parameter e.g.
+To access HDX HAPI you need to generate an API key. This can be done via the the [sandbox interface encode_identifier endpoint](https://stage.hapi-humdata-org.ahconu.org/docs#/Utility/get_encoded_identifier_api_v1_encode_identifier_get). Enter your application name and email address and it will return the api key. The key must be included as a query string parameter e.g.
 
 
 ```

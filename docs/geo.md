@@ -2,7 +2,7 @@
 
 ---
 
-Much of the data in HAPI references a geographical area.  The complimentary geodata to this is provided by ITOS via ARCGIS service accessible here: [https://apps.itos.uga.edu/CODV2API/api/v1/](https://apps.itos.uga.edu/CODV2API/api/v1/)
+Much of the data in HDX HAPI references a geographical area.  The complimentary geodata to this is provided by ITOS via ARCGIS service accessible here: [https://apps.itos.uga.edu/CODV2API/api/v1/](https://apps.itos.uga.edu/CODV2API/api/v1/)
 
 This service contains the common operational datasets administration boundaries and it can be accessed in a number formats. Enhanced datasets have been standardised and contain the data formatting. Check the [CODs Dashboard](https://cod.unocha.org/) to see the status of different countries.
 

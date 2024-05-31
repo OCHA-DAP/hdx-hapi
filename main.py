@@ -42,10 +42,30 @@ from hdx_hapi.config.config import get_config  # noqa
 logger = logging.getLogger(__name__)
 
 CONFIG = get_config()
+DESCRIPTION = """
+The Humanitarian API (HDX HAPI) is a service of the 
+<a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s 
+<a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.
+\nThis is the reference documentation of the API. 
+You may want to <a href="https://hdx-hapi.readthedocs.io/en/latest/">get started here</a>
+
+All queries require an `app_identifier` which can be supplied as a query parameter or as a header 
+(`X-HDX-HAPI-APP-IDENTIFIER`). The `app_identifier` is simply a base64 encoded version of a user supplied
+application name and email address.
+
+The `limit` and `offset` parameters are available for all queries and have the usual database meanings 
+to provide pagination of results.
+
+The `output_format` parameter is available for all queries and can be set to JSON or csv, 
+where JSON is selected rows of data are supplied under a data key.
+
+Query parameters that access string fields are implicitly wildcards and case insensitive 
+so that `location_name=Mali` will return data for Mali and Somalia.
+"""  # noqa
 
 app = FastAPI(
-    title='HAPI',
-    description='The Humanitarian API (HAPI) is a service of the <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.\nThis is the reference documentation of the API. You may want to <a href="https://hdx-hapi.readthedocs.io/en/latest/">get started here</a>',  # noqa
+    title='HDX HAPI',
+    description=DESCRIPTION,
     version='0.1.0',
     docs_url=None,
     servers=[{'url': CONFIG.HAPI_SERVER_URL}] if CONFIG.HAPI_SERVER_URL else [],

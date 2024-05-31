@@ -2,7 +2,7 @@
 
 ---
 
-The initial aim of HAPI is to cover all countries that have a humanitarian response plan and cover the data categories from HDX data grids
+The initial aim of HDX HAPI is to cover all countries that have a humanitarian response plan and cover the data categories from HDX data grids
 
 |                                    | Affected People - Humanitarian Needs | Affected People - Refugees | Coordination Context - Conflict Events | Coordination Context Funding | Coordination Context - National-risk | Coordination Context - Operational Presence | Food - Food-price | Food - Food-security | Population Social - Population | Population Social - Poverty Rate |
 |:----------------------------------:|:----------------------------------:|:-----------------------------------:|:----------------------------:|:----------------------------------:|:-----------------------------------------:|:---------------:|:------------------:|:----------------------------:|:------------------------------:|:------------------------------:|

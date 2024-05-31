@@ -40,13 +40,13 @@ router = APIRouter(
 @router.get(
     '/api/metadata/dataset',
     response_model=HapiGenericResponse[DatasetResponse],
-    summary='Get information about the sources of the data in HAPI',
+    summary='Get information about the sources of the data in HDX HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/metadata/dataset',
     response_model=HapiGenericResponse[DatasetResponse],
-    summary='Get information about the sources of the data in HAPI',
+    summary='Get information about the sources of the data in HDX HAPI',
 )
 async def get_datasets(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
@@ -60,7 +60,7 @@ async def get_datasets(
 ):
     """
     Get information about the <a href="https://data.humdata.org/dataset">HDX Datasets</a> that are used as data sources
-    for HAPI. Datasets contain one or more resources, which are the sources of the data found in HAPI.
+    for HDX HAPI. Datasets contain one or more resources, which are the sources of the data found in HDX HAPI.
     """
     result = await get_datasets_srv(
         pagination_parameters=common_parameters,
@@ -77,13 +77,13 @@ async def get_datasets(
 @router.get(
     '/api/metadata/resource',
     response_model=HapiGenericResponse[ResourceResponse],
-    summary='Get information about the sources of the data in HAPI',
+    summary='Get information about the sources of the data in HDX HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/metadata/resource',
     response_model=HapiGenericResponse[ResourceResponse],
-    summary='Get information about the sources of the data in HAPI',
+    summary='Get information about the sources of the data in HDX HAPI',
 )
 async def get_resources(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
@@ -111,8 +111,8 @@ async def get_resources(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Get information about the resources that are used as data sources for HAPI. Datasets contain one or more resources,
-    which are the sources of the data found in HAPI.
+    Get information about the resources that are used as data sources for HDX HAPI. Datasets contain one or
+    more resources, which are the sources of the data found in HDX HAPI.
     """
     result = await get_resources_srv(
         pagination_parameters=common_parameters,

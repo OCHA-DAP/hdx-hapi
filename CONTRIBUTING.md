@@ -1,6 +1,6 @@
 # Contributing 
 
-The Humanitarian API (HAPI) is being developed by a team from the [Centre for Humanitarian Data](https://centre.humdata.org/).
+The Humanitarian API (HDX HAPI) is being developed by a team from the [Centre for Humanitarian Data](https://centre.humdata.org/).
 
 HDX developers are using [Visual Code](https://code.visualstudio.com/) as a standard IDE for this project with development taking place inside Docker containers.
 
@@ -26,15 +26,15 @@ docker-compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report 
 
 As an integration test the `docs` endpoint is inspected "manually".
 
-A local copy of HAPI can be run by importing a snapshot of the database using the following shell script invocation in the host machine.
+A local copy of HDX HAPI can be run by importing a snapshot of the database using the following shell script invocation in the host machine.
 
 ```shell
  ./restore_database.sh https://github.com/OCHA-DAP/hapi-pipelines/raw/db-export/database/hapi_db.pg_restore hapi
 ```
 
-The HAPI application can then be launched using the `start` launch configuration in Visual Code, this serves the documentation at `http://localhost:8844/docs` and the API at `http://localhost:8844/api` in the host machine.
+The HDX HAPI application can then be launched using the `start` launch configuration in Visual Code, this serves the documentation at `http://localhost:8844/docs` and the API at `http://localhost:8844/api` in the host machine.
 
-The HAPI database can be accessed locally with the following connection details: 
+The HDX HAPI database can be accessed locally with the following connection details: 
 
 ```
 URL: jdbc:postgresql://localhost:45432/hapi
