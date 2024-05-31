@@ -175,6 +175,7 @@ endpoint_data = {
             'org_acronym',
             'org_name',
             'org_type_code',
+            'org_type_description',
             'sector_name',
             'location_ref',
             'location_code',
