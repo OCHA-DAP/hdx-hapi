@@ -18,10 +18,13 @@ DOC_HDX_DATASET_TITLE = 'Filter the response by the title of the dataset as it a
 DOC_HDX_PROVIDER_STUB = "Filter the response by the code of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[hdx_provider_stub]` will load the provider's page on HDX."
 DOC_HDX_PROVIDER_NAME = 'Filter the response by the display name of the provider (organization) of the dataset on HDX.'
 DOC_HDX_RESOURCE_ID = 'Filter the response by the resource ID (hdx_id), which is a unique and fixed identifier of a resource on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]` will load the resource page on HDX.'
-DOC_HDX_RESOURCE_FORMAT = 'Filter the response by the format of the resource on HDX. These are typically file formats, but can also include APIs and web apps.'
+DOC_HDX_RESOURCE_FORMAT = 'Filter the response by the format of the resource on HDX. These are typically file formats (i.e. CSV, XLSX), but can also include APIs and web apps.'
 DOC_HDX_RESOURCE_HXL = (
     'Filter the response by whether or not the resource contains <a href="https://hxlstandard.org/">HXL tags</a>.'
 )
+DOC_HDX_DATASET_IN_RESOURCE_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX. '
+DOC_HDX_DATASET_IN_RESOURCE_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
+DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the code of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[dataset_hdx_provider_stub]` will load the provider's page on HDX."
 DOC_LOCATION_CODE = 'Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes.'
 DOC_LOCATION_NAME = 'Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a>.'
 DOC_ORG_ACRONYM = 'Filter the response by the standard acronym used to represent the organization. When data is brought into the HDX HAPI database, an attempt is made to standardize the acronyms.'
