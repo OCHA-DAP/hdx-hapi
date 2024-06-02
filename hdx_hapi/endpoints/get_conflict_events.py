@@ -52,7 +52,10 @@ async def get_conflict_events(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    event_type: Annotated[Optional[EventType], Query(description='Event type')] = None,
+    event_type: Annotated[
+        Optional[EventType],
+        Query(description='Event type, on of civilian_targeting, demonstration, political_violence'),
+    ] = None,
     location_ref: Annotated[Optional[int], Query(description='Location reference')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
@@ -77,6 +80,11 @@ async def get_conflict_events(
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
+    """
+    Armed Conflict Location & Events Data from ACLED.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://acleddata.com/'>original ACLED source</a> website.
+    """
     ref_period_parameters = None
     result = await get_conflict_event_srv(
         pagination_parameters=common_parameters,
