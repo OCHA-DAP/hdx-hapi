@@ -3,7 +3,7 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Data Coverage: data.md
-  - Examples: examples.md
+  - Code Examples: examples.md
   - Data Usage Guide: subcategory_details.md
   - Geo Data: geo.md
   - Contact: contact.md
