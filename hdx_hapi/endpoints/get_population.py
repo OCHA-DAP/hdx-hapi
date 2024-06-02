@@ -15,6 +15,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN2_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
+    DOC_GENDER,
+    DOC_AGE_RANGE,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -53,8 +55,8 @@ async def get_populations(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    gender: Annotated[Gender, Query(description='Gender')] = None,
-    age_range: Annotated[str, Query(max_length=32, description='Age range')] = None,
+    gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
+    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
     population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
     location_ref: Annotated[int, Query(description='Location reference')] = None,
@@ -112,8 +114,8 @@ async def get_poverty_rates(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    mpi_min: Annotated[Optional[float], Query(description='mpi, lower bound')] = None,
-    mpi_max: Annotated[Optional[float], Query(description='mpi upper bound')] = None,
+    mpi_min: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), lower bound')] = None,
+    mpi_max: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), upper bound')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,

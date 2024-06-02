@@ -98,7 +98,10 @@ async def get_humanitarian_needs(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of humanitarian needs data
+    UNOCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF),
+    provides information about the number of people in need during a crisis.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://www.jiaf.info/'>original JIAF source</a> website.”
     """
     ref_period_parameters = None
     result = await get_humanitarian_needs_srv(
