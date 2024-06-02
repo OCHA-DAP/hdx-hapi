@@ -168,7 +168,9 @@ async def get_refugees(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of refugees data
+    UNHCR's Refugee data provides information about displaced people in a crisis.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://data.humdata.org/dataset/unhcr-population-data-for-world'>original HDX source</a> website.
     """
     ref_period_parameters = None
     result = await get_refugees_srv(
