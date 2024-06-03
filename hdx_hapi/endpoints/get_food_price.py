@@ -83,7 +83,10 @@ async def get_food_prices(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    List of WFP markets
+    The World Food Programme (WFP) food prices data provides information about food prices for a range of commodities
+    at markets across the world. See the more detailed technical
+    <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://www.wfp.org/'>original WFP source</a> website.
     """
     result = await get_food_prices_srv(
         pagination_parameters=common_parameters,

@@ -37,6 +37,9 @@ async def get_wfp_commodities(
     name: Annotated[Optional[str], Query(max_length=512, description='Commodity name')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
+    """
+    Provide commodity information to use in conjunction with the food-prices endpoint
+    """
     result = await get_wfp_commodities_srv(
         pagination_parameters=common_parameters, db=db, code=code, category=category, name=name
     )

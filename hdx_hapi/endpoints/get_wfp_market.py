@@ -74,7 +74,7 @@ async def get_wfp_markets(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    List of WFP markets
+    Provide physical market location information to use in conjunction with the food-prices endpoint
     """
     result = await get_wfp_markets_srv(
         pagination_parameters=common_parameters,
