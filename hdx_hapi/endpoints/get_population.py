@@ -74,7 +74,9 @@ async def get_populations(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of populations
+    Population data from the UNOCHA Common Operational Datasets (COD) originally sourced UNFPA (UN Population Fund)
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://cod.unocha.org/'>UNOCHA COD</a> website.
     """
     ref_period_parameters = None
     result = await get_populations_srv(
@@ -122,7 +124,9 @@ async def get_poverty_rates(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of poverty rates
+    Poverty rate data from the Oxford Department of International Development.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://ophi.org.uk/global-mpi'>Oxford Department of International Development</a> website.
     """
     ref_period_parameters = None
     result = await get_poverty_rates_srv(

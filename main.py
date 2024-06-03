@@ -54,7 +54,7 @@ All queries require an `app_identifier` which can be supplied as a query paramet
 application name and email address.
 
 The `limit` and `offset` parameters are available for all queries and have the usual database meanings 
-to provide pagination of results.
+to provide pagination of results. If no `limit` is specified, a maximum of 10,000 records will be returned.
 
 The `output_format` parameter is available for all queries and can be set to JSON or csv, 
 where JSON is selected rows of data are supplied under a data key.

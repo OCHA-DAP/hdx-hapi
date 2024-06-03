@@ -43,5 +43,4 @@ async def get_wfp_commodities(
     result = await get_wfp_commodities_srv(
         pagination_parameters=common_parameters, db=db, code=code, category=category, name=name
     )
-
     return transform_result_to_csv_stream_if_requested(result, output_format, WfpCommodityResponse)
