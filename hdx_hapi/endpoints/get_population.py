@@ -77,9 +77,9 @@ async def get_populations(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Population data from the UNOCHA Common Operational Datasets (COD) originally sourced UNFPA (UN Population Fund)
+    Baseline population data sourced and maintained by UNFPA (UN Population Fund).
     See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
-    and the <a href='https://cod.unocha.org/'>UNOCHA COD</a> website.
+    and the <a href='https://data.humdata.org/organization/unfpa'>UNFPA on HDX</a>.
     """
     ref_period_parameters = None
     result = await get_populations_srv(

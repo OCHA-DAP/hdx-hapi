@@ -57,7 +57,7 @@ async def get_conflict_events(
     db: AsyncSession = Depends(get_db),
     event_type: Annotated[
         Optional[EventType],
-        Query(description='Event type, on of civilian_targeting, demonstration, political_violence'),
+        Query(description='Event type, one of civilian_targeting, demonstration, political_violence'),
     ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
