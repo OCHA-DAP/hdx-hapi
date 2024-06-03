@@ -29,8 +29,19 @@ from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
-from hapi_schema.utils.enums import RiskClass
-from hapi_schema.utils.enums import Gender
+from hapi_schema.utils.enums import (
+    CommodityCategory,
+    DisabledMarker,
+    EventType,
+    IPCPhase,
+    IPCType,
+    PopulationGroup,
+    PopulationStatus,
+    PriceFlag,
+    PriceType,
+    RiskClass,
+    Gender,
+)
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
 admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
@@ -95,7 +106,7 @@ class ConflictEventView(Base):
     __table__ = conflict_event_view
     resource_hdx_id: Mapped[str] = column_property(conflict_event_view.c.resource_hdx_id)
     admin2_ref: Mapped[int] = column_property(conflict_event_view.c.admin2_ref)
-    event_type: Mapped[str] = column_property(conflict_event_view.c.event_type)
+    event_type: Mapped[EventType] = column_property(conflict_event_view.c.event_type)
     events: Mapped[int] = column_property(conflict_event_view.c.events)
     fatalities: Mapped[int] = column_property(conflict_event_view.c.fatalities)
     reference_period_start: Mapped[DateTime] = column_property(conflict_event_view.c.reference_period_start)
@@ -134,8 +145,8 @@ class FoodPriceView(Base):
     commodity_code: Mapped[str] = column_property(food_price_view.c.commodity_code)
     currency_code: Mapped[str] = column_property(food_price_view.c.currency_code)
     unit: Mapped[str] = column_property(food_price_view.c.unit)
-    price_flag: Mapped[str] = column_property(food_price_view.c.price_flag)
-    price_type: Mapped[str] = column_property(food_price_view.c.price_type)
+    price_flag: Mapped[PriceFlag] = column_property(food_price_view.c.price_flag)
+    price_type: Mapped[PriceType] = column_property(food_price_view.c.price_type)
     price: Mapped[Decimal] = column_property(food_price_view.c.price)
     reference_period_start: Mapped[DateTime] = column_property(food_price_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(food_price_view.c.reference_period_end)
@@ -143,7 +154,7 @@ class FoodPriceView(Base):
     market_name: Mapped[str] = column_property(food_price_view.c.market_name)
     lat: Mapped[float] = column_property(food_price_view.c.lat)
     lon: Mapped[float] = column_property(food_price_view.c.lon)
-    commodity_category: Mapped[str] = column_property(food_price_view.c.commodity_category)
+    commodity_category: Mapped[CommodityCategory] = column_property(food_price_view.c.commodity_category)
     commodity_name: Mapped[str] = column_property(food_price_view.c.commodity_name)
     location_code: Mapped[str] = column_property(food_price_view.c.location_code)
     location_name: Mapped[str] = column_property(food_price_view.c.location_name)
@@ -161,8 +172,8 @@ class FoodSecurityView(Base):
     __table__ = food_security_view
     resource_hdx_id: Mapped[str] = column_property(food_security_view.c.resource_hdx_id)
     admin2_ref: Mapped[int] = column_property(food_security_view.c.admin2_ref)
-    ipc_phase: Mapped[str] = column_property(food_security_view.c.ipc_phase)
-    ipc_type: Mapped[str] = column_property(food_security_view.c.ipc_type)
+    ipc_phase: Mapped[IPCPhase] = column_property(food_security_view.c.ipc_phase)
+    ipc_type: Mapped[IPCType] = column_property(food_security_view.c.ipc_type)
     population_in_phase: Mapped[int] = column_property(food_security_view.c.population_in_phase)
     population_fraction_in_phase: Mapped[float] = column_property(food_security_view.c.population_fraction_in_phase)
     reference_period_start: Mapped[DateTime] = column_property(food_security_view.c.reference_period_start)
@@ -199,14 +210,14 @@ class HumanitarianNeedsView(Base):
     __table__ = humanitarian_needs_view
     resource_hdx_id: Mapped[str] = column_property(humanitarian_needs_view.c.resource_hdx_id)
     admin2_ref: Mapped[int] = column_property(humanitarian_needs_view.c.admin2_ref)
-    gender: Mapped[str] = column_property(humanitarian_needs_view.c.gender)
+    gender: Mapped[Gender] = column_property(humanitarian_needs_view.c.gender)
     age_range: Mapped[str] = column_property(humanitarian_needs_view.c.age_range)
     min_age: Mapped[int] = column_property(humanitarian_needs_view.c.min_age)
     max_age: Mapped[int] = column_property(humanitarian_needs_view.c.max_age)
     sector_code: Mapped[str] = column_property(humanitarian_needs_view.c.sector_code)
-    population_group: Mapped[str] = column_property(humanitarian_needs_view.c.population_group)
-    population_status: Mapped[str] = column_property(humanitarian_needs_view.c.population_status)
-    disabled_marker: Mapped[str] = column_property(humanitarian_needs_view.c.disabled_marker)
+    population_group: Mapped[PopulationGroup] = column_property(humanitarian_needs_view.c.population_group)
+    population_status: Mapped[PopulationStatus] = column_property(humanitarian_needs_view.c.population_status)
+    disabled_marker: Mapped[DisabledMarker] = column_property(humanitarian_needs_view.c.disabled_marker)
     population: Mapped[int] = column_property(humanitarian_needs_view.c.population)
     reference_period_start: Mapped[DateTime] = column_property(humanitarian_needs_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(humanitarian_needs_view.c.reference_period_end)
@@ -336,8 +347,8 @@ class RefugeesView(Base):
     resource_hdx_id: Mapped[str] = column_property(refugees_view.c.resource_hdx_id)
     origin_location_ref: Mapped[int] = column_property(refugees_view.c.origin_location_ref)
     asylum_location_ref: Mapped[int] = column_property(refugees_view.c.asylum_location_ref)
-    population_group: Mapped[str] = column_property(refugees_view.c.population_group)
-    gender: Mapped[str] = column_property(refugees_view.c.gender)
+    population_group: Mapped[PopulationGroup] = column_property(refugees_view.c.population_group)
+    gender: Mapped[Gender] = column_property(refugees_view.c.gender)
     age_range: Mapped[str] = column_property(refugees_view.c.age_range)
     min_age: Mapped[int] = column_property(refugees_view.c.min_age)
     max_age: Mapped[int] = column_property(refugees_view.c.max_age)
@@ -375,7 +386,7 @@ class SectorView(Base):
 class WfpCommodityView(Base):
     __table__ = wfp_commodity_view
     code: Mapped[str] = column_property(wfp_commodity_view.c.code)
-    category: Mapped[str] = column_property(wfp_commodity_view.c.category)
+    category: Mapped[CommodityCategory] = column_property(wfp_commodity_view.c.category)
     name: Mapped[str] = column_property(wfp_commodity_view.c.name)
 
 
