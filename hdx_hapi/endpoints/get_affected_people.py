@@ -8,6 +8,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
     DOC_GENDER,
     DOC_AGE_RANGE,
+    DOC_POPULATION_GROUP,
+    DOC_POPULATION_STATUS,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
     DOC_ADMIN1_REF,
@@ -65,9 +67,11 @@ async def get_humanitarian_needs(
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker')] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
-    population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
+    population_group: Annotated[
+        Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
+    ] = None,
     population_status: Annotated[
-        Optional[PopulationStatus], Query(max_length=32, description='Population status')
+        Optional[PopulationStatus], Query(max_length=32, description=f'{DOC_POPULATION_STATUS}')
     ] = None,
     population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
     population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
@@ -151,7 +155,9 @@ async def get_refugees(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
+    population_group: Annotated[
+        Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
+    ] = None,
     population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
     population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
