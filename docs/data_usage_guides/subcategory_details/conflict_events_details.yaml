@@ -1,0 +1,10 @@
+- Attribute: Data provider
+  Details: ACLED
+- Attribute: Dataset
+  Details: "[ACLED Conflict Events Data series](https://data.humdata.org/dataset/?dataseries_name=ACLED+-+Conflict+Events)"
+- Attribute: Time series
+  Details: Monthly
+- Attribute: Update frequency
+  Details: Weekly
+- Attribute: Related tables
+  Details: "[`EventType`](event-type)"

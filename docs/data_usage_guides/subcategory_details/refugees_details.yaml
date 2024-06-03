@@ -1,0 +1,10 @@
+- Attribute: Data provider
+  Details: UNHCR
+- Attribute: Dataset
+  Details: "[Data on forcibly displaced populations and stateless persons (Global)](https://data.humdata.org/dataset/unhcr-population-data-for-world)"
+- Attribute: Time series
+  Details: Annual, dating back to 2001
+- Attribute: Update frequency
+  Details: Annually
+- Attribute: Related tables
+  Details: "[`Gender`](gender), [`PopulationGroup`](population-group)"

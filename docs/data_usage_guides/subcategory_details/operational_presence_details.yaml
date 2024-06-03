@@ -1,0 +1,10 @@
+- Attribute: Data provider
+  Details: OCHA country and regional offices
+- Attribute: Dataset
+  Details: "[Operational Presence tag on HDX](https://data.humdata.org/dataset/?vocab_Topics=operational%20presence&q=&sort=last_modified%20desc&ext_page_size=25)"
+- Attribute: Time series
+  Details: Not available for this subcategory. While older resources are available on HDX, HDX HAPI currently only supports the latest resource.
+- Attribute: Update frequency
+  Details: Irregular, depending on the country. Common update frequencies include quarterly and annually. Please check individual resources for more information.
+- Attribute: Related tables
+  Details: "[`Org`](org), [`OrgType`](org-type), [`Sector`](sector)"

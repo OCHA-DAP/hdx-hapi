@@ -4,8 +4,16 @@ nav:
   - Getting Started: getting-started.md
   - Data Coverage: data.md
   - Code Examples: examples.md
-  - Data Usage Guide: subcategory_details.md
+  - Data Usage Guide:
+      - Affected People: data_usage_guides/affected_people.md
+      - Coordination & Context : data_usage_guides/coordination_and_context.md
   - Geo Data: geo.md
   - Contact: contact.md
 theme:
   name: "material"
+markdown_extensions:
+  - pymdownx.snippets
+plugins:
+  - search
+  - table-reader:
+      base_path: "docs_dir"

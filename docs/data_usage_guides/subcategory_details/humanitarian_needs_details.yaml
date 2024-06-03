@@ -1,0 +1,10 @@
+- Attribute: Data provider
+  Details: OCHA HPC
+- Attribute: Dataset
+  Details: Coming soon to HDX
+- Attribute: Time series
+  Details: Past datasets are available in the HPC API, but are sparse prior to 2023
+- Attribute: Update frequency
+  Details: Annually
+- Attribute: Related tables
+  Details: "[ `DisabledMarker` ](disabled-marker), [`Gender`](gender),  [`PopulationGroup`](population-group), [`PopulationStatus`](population-status)"
