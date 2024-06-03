@@ -67,7 +67,10 @@ async def get_food_security(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of food security data
+    Integrated Food Security Phase Classification from the IPC.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://www.ipcinfo.org/ipcinfo-website/ipc-overview-and-classification-system/ipc-acute-food-insecurity-classification/en/'>
+    original IPC source</a> website.
     """
     ref_period_parameters = None
     result = await get_food_security_srv(
