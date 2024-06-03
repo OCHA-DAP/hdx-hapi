@@ -5,10 +5,13 @@ from fastapi import Depends, Query, APIRouter
 from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
+    DOC_ADMIN2_REF,
     DOC_ADMIN2_CODE,
     DOC_ADMIN2_NAME,
+    DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
@@ -58,21 +61,21 @@ async def get_food_prices(
     price_type: Annotated[Optional[PriceType], Query(description='Price Type')] = None,
     price_min: Annotated[Optional[Decimal], Query(description='Price, lower bound')] = None,
     price_max: Annotated[Optional[Decimal], Query(description='Price, upper bound')] = None,
-    location_ref: Annotated[Optional[int], Query(description='Location reference')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    admin1_ref: Annotated[Optional[int], Query(description='Admin1 reference')] = None,
+    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin1_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
     ] = None,
     admin1_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
     ] = None,
-    admin2_ref: Annotated[Optional[int], Query(description='Admin2 reference')] = None,
+    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
     ] = None,

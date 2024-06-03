@@ -10,9 +10,12 @@ from hdx_hapi.config.doc_snippets import (
     DOC_AGE_RANGE,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
+    DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
+    DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
+    DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
@@ -57,7 +60,7 @@ async def get_humanitarian_needs(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    admin2_ref: Annotated[Optional[int], Query(description='Admin2 reference')] = None,
+    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker')] = None,
@@ -83,7 +86,7 @@ async def get_humanitarian_needs(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    location_ref: Annotated[Optional[int], Query(description='Location reference')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     admin1_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
     ] = None,
@@ -93,7 +96,7 @@ async def get_humanitarian_needs(
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin1_ref: Annotated[Optional[int], Query(description='Admin1 reference')] = None,
+    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
