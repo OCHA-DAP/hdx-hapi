@@ -66,7 +66,7 @@ endpoint_data = {
         },
         'expected_fields': [
             'dataset_hdx_id',
-            'hdx_stub',
+            'dataset_hdx_stub',
             'title',
             'hdx_provider_stub',
             'hdx_provider_name',
