@@ -7,4 +7,4 @@
 - Attribute: Update frequency
   Details: Annually
 - Attribute: Related tables
-  Details: "[`Gender`](gender)"
+  Details: "[`Gender`](enums.md#gender)"

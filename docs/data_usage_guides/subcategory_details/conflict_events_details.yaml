@@ -7,4 +7,4 @@
 - Attribute: Update frequency
   Details: Weekly
 - Attribute: Related tables
-  Details: "[`EventType`](event-type)"
+  Details: "[`EventType`](enums.md#event-type)"

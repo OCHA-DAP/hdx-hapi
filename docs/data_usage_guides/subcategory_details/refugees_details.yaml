@@ -7,4 +7,4 @@
 - Attribute: Update frequency
   Details: Annually
 - Attribute: Related tables
-  Details: "[`Gender`](gender), [`PopulationGroup`](population-group)"
+  Details: "[`Gender`](enums.md#gender), [`PopulationGroup`](metadata.md#population-group)"

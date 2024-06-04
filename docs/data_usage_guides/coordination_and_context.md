@@ -61,6 +61,8 @@ requirements stated in Humanitarian Response Plans.
 dates, actors, fatalities, and types of all reported political violence and
 protest events around the world. HDX HAPI leverages ACLED’s publicly accessible
 data, aggregated on a monthly basis and to administrative regions.
+To learn more about their methodology, please consult the
+[ACLED Codebook](https://acleddata.com/knowledge-base/codebook/).
 
 ### Summary
 
@@ -74,7 +76,11 @@ data, aggregated on a monthly basis and to administrative regions.
 * Any duplicate rows in the original data are removed
 * The reference period is constructed using the full range of the month
   presented in the “Month” and “Year” columns of the original data
-* Usage notes
+
+### Usage notes
+
+* The three event categories are not mutually exclusive, see
+  [`Event Type`](enums.md#event-type) for more details
 * Data is either national or disaggregated to admin 2, see individual resources
   for more details
 
@@ -101,4 +107,3 @@ information on the methodology, see
   any that have been estimated (e.g. HDI derived from GDP per capita).
 * Recentness: The average of the total number of years older than the
   reference year per indicator, to account for any older data used as a proxy
-  for the most recent year.

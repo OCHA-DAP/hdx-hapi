@@ -9,6 +9,8 @@ nav:
       - Coordination & Context : data_usage_guides/coordination_and_context.md
       - Food Security & Nutrition : data_usage_guides/food_security_and_nutrition.md
       - Population & Socio-economy : data_usage_guides/population_and_socio-economy.md
+      - Metadata: data_usage_guides/metadata.md
+      - Enums: data_usage_guides/enums.md
   - Geo Data: geo.md
   - Contact: contact.md
 theme:

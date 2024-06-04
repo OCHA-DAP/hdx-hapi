@@ -7,4 +7,4 @@
 - Attribute: Update frequency
   Details: Annually
 - Attribute: Related tables
-  Details: "[`IPCPhase`](ipc-phase), [`IPCType`](ipc-type)"
+  Details: "[`IPCPhase`](enums.md#ipc-phase), [`IPCType`](enums.md#ipc-type)"

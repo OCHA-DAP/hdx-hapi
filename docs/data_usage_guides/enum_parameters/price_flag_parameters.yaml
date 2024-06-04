@@ -1,0 +1,6 @@
+- price flag: actual
+  description: ''
+- price flag: aggregate
+  description: ''
+- price flag: actual,aggregate
+  description: ''

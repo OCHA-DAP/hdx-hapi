@@ -7,4 +7,4 @@
 - Attribute: Update frequency
   Details: Weekly
 - Attribute: Related tables
-  Details: "[`Commodity`](commodity), [`Currency`](Currency), [`Market`](market)"
+  Details: "[`Commodity Category`](enums.md#commodity-category), [`Currency`](metadata.md#currency), [`Price Flag`](enums.md#price-flag), [`Price Type`](enums.md#price-type), [`WFP Commodity`](metadata.md#wfp-commodity), [`WFP Market`](metadata.md#wfp-market)"

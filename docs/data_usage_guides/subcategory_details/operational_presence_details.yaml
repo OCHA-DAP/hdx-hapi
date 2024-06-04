@@ -7,4 +7,4 @@
 - Attribute: Update frequency
   Details: Irregular, depending on the country. Common update frequencies include quarterly and annually. Please check individual resources for more information.
 - Attribute: Related tables
-  Details: "[`Org`](org), [`OrgType`](org-type), [`Sector`](sector)"
+  Details: "[`Org`](metadata.md#org), [`OrgType`](metadata.md#org-type), [`Sector`](metadata.md#sector)"
