@@ -1,5 +1,5 @@
 from datetime import date
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 from pydantic import NaiveDatetime
 
@@ -54,11 +54,11 @@ router = APIRouter(
 async def get_datasets(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
-    hdx_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
-    title: Annotated[str, Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
-    hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
-    hdx_provider_name: Annotated[str, Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,
+    dataset_hdx_id: Annotated[Optional[str], Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
+    dataset_hdx_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
+    dataset_hdx_title: Annotated[Optional[str], Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
+    hdx_provider_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
+    hdx_provider_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
@@ -68,9 +68,9 @@ async def get_datasets(
     result = await get_datasets_srv(
         pagination_parameters=common_parameters,
         db=db,
-        hdx_id=hdx_id,
-        hdx_stub=hdx_stub,
-        title=title,
+        dataset_hdx_id=dataset_hdx_id,
+        dataset_hdx_stub=dataset_hdx_stub,
+        dataset_hdx_title=dataset_hdx_title,
         hdx_provider_stub=hdx_provider_stub,
         hdx_provider_name=hdx_provider_name,
     )
@@ -91,7 +91,7 @@ async def get_datasets(
 async def get_resources(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
+    resource_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
     format: Annotated[str, Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
     update_date_min: Annotated[
         NaiveDatetime | date,
@@ -108,7 +108,7 @@ async def get_resources(
     dataset_hdx_stub: Annotated[
         str, Query(max_length=128, description=f'{DOC_HDX_DATASET_IN_RESOURCE_NAME} {DOC_SEE_DATASET}')
     ] = None,
-    dataset_title: Annotated[
+    dataset_hdx_title: Annotated[
         str, Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE} {DOC_SEE_DATASET}')
     ] = None,
     dataset_hdx_provider_stub: Annotated[
@@ -124,14 +124,14 @@ async def get_resources(
     result = await get_resources_srv(
         pagination_parameters=common_parameters,
         db=db,
-        hdx_id=hdx_id,
+        resource_hdx_id=resource_hdx_id,
         format=format,
         update_date_min=update_date_min,
         update_date_max=update_date_max,
         is_hxl=is_hxl,
         dataset_hdx_id=dataset_hdx_id,
         dataset_hdx_stub=dataset_hdx_stub,
-        dataset_title=dataset_title,
+        dataset_hdx_title=dataset_hdx_title,
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
         dataset_hdx_provider_name=dataset_hdx_provider_name,
     )
