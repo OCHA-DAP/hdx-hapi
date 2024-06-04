@@ -54,7 +54,7 @@ router = APIRouter(
 async def get_datasets(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
+    dataset_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
     hdx_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
     title: Annotated[str, Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
     hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
@@ -68,7 +68,7 @@ async def get_datasets(
     result = await get_datasets_srv(
         pagination_parameters=common_parameters,
         db=db,
-        hdx_id=hdx_id,
+        dataset_hdx_id=dataset_hdx_id,
         hdx_stub=hdx_stub,
         title=title,
         hdx_provider_stub=hdx_provider_stub,

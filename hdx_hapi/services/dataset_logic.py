@@ -7,13 +7,18 @@ from hdx_hapi.endpoints.util.util import PaginationParams
 async def get_datasets_srv(
     pagination_parameters: PaginationParams,
     db: AsyncSession,
-    hdx_id: str,
+    dataset_hdx_id: str,
     hdx_stub: str,
     title: str = None,
     hdx_provider_stub: str = None,
     hdx_provider_name: str = None,
 ):
     return await datasets_view_list(
-        pagination_parameters=pagination_parameters, db=db, hdx_id=hdx_id, hdx_stub=hdx_stub, title=title,
-                hdx_provider_stub=hdx_provider_stub, hdx_provider_name=hdx_provider_name
+        pagination_parameters=pagination_parameters,
+        db=db,
+        dataset_hdx_id=dataset_hdx_id,
+        hdx_stub=hdx_stub,
+        title=title,
+        hdx_provider_stub=hdx_provider_stub,
+        hdx_provider_name=hdx_provider_name,
     )
