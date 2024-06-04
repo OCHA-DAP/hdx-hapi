@@ -64,7 +64,9 @@ async def get_national_risks(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of national risks
+    European Commission national risk data from the INFORM-risk framework.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk'>original INFORM-risk source</a> website.
     """
     ref_period_parameters = None
     result = await get_national_risks_srv(

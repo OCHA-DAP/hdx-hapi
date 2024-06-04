@@ -6,15 +6,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hapi_schema.utils.enums import Gender
 from hdx_hapi.config.doc_snippets import (
+    DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_LOC,
+    DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
+    DOC_ADMIN2_REF,
     DOC_ADMIN2_CODE,
     DOC_ADMIN2_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
+    DOC_GENDER,
+    DOC_AGE_RANGE,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -53,18 +58,18 @@ async def get_populations(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    gender: Annotated[Gender, Query(description='Gender')] = None,
-    age_range: Annotated[str, Query(max_length=32, description='Age range')] = None,
+    gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
+    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
     population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
-    location_ref: Annotated[int, Query(description='Location reference')] = None,
+    location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
-    admin1_ref: Annotated[int, Query(description='Admin1 reference')] = None,
+    admin1_ref: Annotated[int, Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     # admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
-    admin2_ref: Annotated[int, Query(description='Admin2 reference')] = None,
+    admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
@@ -72,7 +77,9 @@ async def get_populations(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of populations
+    Baseline population data sourced and maintained by UNFPA (UN Population Fund).
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://data.humdata.org/organization/unfpa'>UNFPA on HDX</a>.
     """
     ref_period_parameters = None
     result = await get_populations_srv(
@@ -112,15 +119,17 @@ async def get_poverty_rates(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    mpi_min: Annotated[Optional[float], Query(description='mpi, lower bound')] = None,
-    mpi_max: Annotated[Optional[float], Query(description='mpi upper bound')] = None,
+    mpi_min: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), lower bound')] = None,
+    mpi_max: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), upper bound')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of poverty rates
+    Poverty rate data from the Oxford Department of International Development.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://ophi.org.uk/global-mpi'>Oxford Department of International Development</a> website.
     """
     ref_period_parameters = None
     result = await get_poverty_rates_srv(

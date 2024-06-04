@@ -15,6 +15,9 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_FORMAT,
     DOC_HDX_RESOURCE_HXL,
     DOC_HDX_RESOURCE_ID,
+    DOC_HDX_DATASET_IN_RESOURCE_ID,
+    DOC_HDX_DATASET_IN_RESOURCE_NAME,
+    DOC_HDX_PROVIDER_IN_RESOURCE_STUB,
     DOC_SEE_DATASET,
     DOC_UPDATE_DATE_MAX,
     DOC_UPDATE_DATE_MIN,
@@ -99,14 +102,18 @@ async def get_resources(
         Query(description=f'{DOC_UPDATE_DATE_MAX}', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
     ] = None,
     is_hxl: Annotated[bool, Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
-    dataset_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_DATASET_ID} {DOC_SEE_DATASET} ')] = None,
+    dataset_hdx_id: Annotated[
+        str, Query(max_length=36, description=f'{DOC_HDX_DATASET_IN_RESOURCE_ID} {DOC_SEE_DATASET} ')
+    ] = None,
     dataset_hdx_stub: Annotated[
-        str, Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME} {DOC_SEE_DATASET}')
+        str, Query(max_length=128, description=f'{DOC_HDX_DATASET_IN_RESOURCE_NAME} {DOC_SEE_DATASET}')
     ] = None,
     dataset_title: Annotated[
         str, Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE} {DOC_SEE_DATASET}')
     ] = None,
-    dataset_hdx_provider_stub: Annotated[str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
+    dataset_hdx_provider_stub: Annotated[
+        str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_IN_RESOURCE_STUB}')
+    ] = None,
     dataset_hdx_provider_name: Annotated[str, Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):

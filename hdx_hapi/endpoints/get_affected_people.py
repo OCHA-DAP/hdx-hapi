@@ -8,11 +8,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
     DOC_GENDER,
     DOC_AGE_RANGE,
+    DOC_POPULATION_GROUP,
+    DOC_POPULATION_STATUS,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
+    DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
+    DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
+    DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
@@ -57,14 +62,15 @@ async def get_humanitarian_needs(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    admin2_ref: Annotated[Optional[int], Query(description='Admin2 reference')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker')] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
-    population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
+    population_group: Annotated[
+        Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
+    ] = None,
     population_status: Annotated[
-        Optional[PopulationStatus], Query(max_length=32, description='Population status')
+        Optional[PopulationStatus], Query(max_length=32, description=f'{DOC_POPULATION_STATUS}')
     ] = None,
     population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
     population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
@@ -83,22 +89,26 @@ async def get_humanitarian_needs(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    location_ref: Annotated[Optional[int], Query(description='Location reference')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     admin1_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
     ] = None,
+    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
     ] = None,
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin1_ref: Annotated[Optional[int], Query(description='Admin1 reference')] = None,
+    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of humanitarian needs data
+    UNOCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF),
+    provides information about the number of people in need during a crisis.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://www.jiaf.info/'>original JIAF source</a> website.”
     """
     ref_period_parameters = None
     result = await get_humanitarian_needs_srv(
@@ -145,7 +155,9 @@ async def get_refugees(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    population_group: Annotated[Optional[PopulationGroup], Query(max_length=32, description='Population group')] = None,
+    population_group: Annotated[
+        Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
+    ] = None,
     population_min: Annotated[int, Query(description='Population, minimum value for filter')] = None,
     population_max: Annotated[int, Query(description='Population, maximum value for filter')] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
@@ -165,7 +177,9 @@ async def get_refugees(
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
-    Return the list of refugees data
+    UNHCR's Refugee data provides information about displaced people in a crisis.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://data.humdata.org/dataset/unhcr-population-data-for-world'>original HDX source</a> website.
     """
     ref_period_parameters = None
     result = await get_refugees_srv(

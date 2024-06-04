@@ -75,13 +75,13 @@ get_locations.__doc__ = (
 @router.get(
     '/api/metadata/admin1',
     response_model=HapiGenericResponse[Admin1Response],
-    summary='Get the list of first-level subnational administrative divisions available in HAPI',
+    summary='Get the list of first-level subnational administrative divisions available in HDX HAPI',
     include_in_schema=False,
 )
 @router.get(
     '/api/v1/metadata/admin1',
     response_model=HapiGenericResponse[Admin1Response],
-    summary='Get the list of first-level subnational administrative divisions available in HAPI',
+    summary='Get the list of first-level subnational administrative divisions available in HDX HAPI',
 )
 async def get_admin1(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
@@ -183,6 +183,6 @@ async def get_admin2(
 
 
 get_admin2.__doc__ = (
-    'Not all data are available for all locations. Learn more about the scope of data coverage in HAPI in '
+    'Not all data are available for all locations. Learn more about the scope of data coverage in HDX HAPI in '
     f'the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
 )

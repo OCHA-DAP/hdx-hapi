@@ -3,10 +3,13 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
+    DOC_ADMIN2_REF,
     DOC_ADMIN2_CODE,
     DOC_ADMIN2_NAME,
+    DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
@@ -102,14 +105,14 @@ async def get_operational_presences(
             ),
         ),
     ] = None,
-    location_ref: Annotated[int, Query(description='Location reference')] = None,
+    location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
-    admin1_ref: Annotated[int, Query(description='Admin1 reference')] = None,
+    admin1_ref: Annotated[int, Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     # admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
-    admin2_ref: Annotated[int, Query(description='Admin2 reference')] = None,
+    admin2_ref: Annotated[int, Query(description={DOC_ADMIN2_REF})] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
@@ -176,7 +179,9 @@ async def get_operational_presences(
     """
     UNOCHA's 3W (Who is doing What Where) Operational Presence data provides
     information about which organizations are working in different locations affected by a
-    crisis. <a href="https://3w.unocha.org/">Learn more about 3W</a>
+    crisis.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://3w.unocha.org/'>original UNOCHA 3W source</a> website.
     """
     ref_period_parameters = None
     result = await get_operational_presences_srv(

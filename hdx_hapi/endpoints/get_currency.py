@@ -41,6 +41,9 @@ async def get_currencies(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
+    """
+    Provide currency information to use in conjunction with the food-prices endpoint
+    """
     result = await get_currencies_srv(
         pagination_parameters=common_parameters,
         db=db,
