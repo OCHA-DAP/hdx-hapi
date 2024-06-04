@@ -37,7 +37,7 @@ for their methodology and more detailed descriptions of the sub-event types.
 ## Gender <a id="gender"></a>
 
 **Used in:**
-[`Baseline Population`](population_and_socio-economy.md#baseline-population),
+[`Baseline Population`](population_and_socio-economy.md#population),
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
 [`Refugees & Persons of Concern`](refugees)
 

@@ -1,21 +1,43 @@
 - IPC Phase: 1
   Name: None/Minimal
-  Description: Households are able to meet essential food and non-food needs without engaging in atypical and unsustainable strategies to access food and income.
+  Description: >
+    Households are able to meet essential food and non-food needs without
+    engaging in atypical and unsustainable strategies to access food and income.
 - IPC Phase: 2
   Name: Stressed
-  Description: Households have minimally adequate food consumption but are unable to afford some essential non-food expenditures without engaging in stress-coping strategies.
+  Description: >
+    Households have minimally adequate food consumption but are unable to
+    afford some essential non-food expenditures without engaging in
+    stress-coping strategies.
 - IPC Phase: 3
   Name: Crisis
-  Description: Households either have food consumption gaps that are reflected by high or above-usual acute malnutrition, or are marginally able to meet minimum food needs but only by depleting essential livelihood assets or through crisis-coping strategies.
+  Description: >
+    Households either have food consumption gaps that are reflected by high or
+    above-usual acute malnutrition, or are marginally able to meet minimum food
+    needs but only by depleting essential livelihood assets or through
+    crisis-coping strategies.
 - IPC Phase: 4
   Name: Emergency
-  Description: Households either have large food consumption gaps which are reflected in very high acute malnutrition and excess mortality, or are able to mitigate large food consumption gaps but only by employing emergency livelihood strategies and asset liquidation.
+  Description: >
+    Households either have large food consumption gaps which are reflected in
+    very high acute malnutrition and excess mortality, or are able to mitigate
+    large food consumption gaps but only by employing emergency livelihood
+    strategies and asset liquidation.
 - IPC Phase: 5
   Name: Catastrophe/Famine
-  Description: Households have an extreme lack of food and/or other basic needs even after full employment of coping strategies. Starvation, death, destitution and extremely critical acute malnutrition levels are evident. (For Famine Classification, an area needs to have extreme critical levels of acute malnutrition and mortality.)
+  Description: >
+    Households have an extreme lack of food and/or other basic needs even after
+    full employment of coping strategies. Starvation, death, destitution and
+    extremely critical acute malnutrition levels are evident. (For Famine
+    Classification, an area needs to have extreme critical levels of acute
+    malnutrition and mortality.)
 - IPC Phase: 3+
   Name: In Need of Action
-  Description: Sum of population in phases 3, 4, and 5. The population in Phase 3+ does not necessarily reflect the full population in need of urgent action. This is because some households may be in Phase 2 or even 1 but only because of receipt of assistance, and thus, they may be in need of continued action.
+  Description: >
+    Sum of population in phases 3, 4, and 5. The population in Phase 3+ does
+    not necessarily reflect the full population in need of urgent action. This
+    is because some households may be in Phase 2 or even 1 but only because of
+    receipt of assistance, and thus, they may be in need of continued action.
 - IPC Phase: all
   Name: Population
   Description: Total population

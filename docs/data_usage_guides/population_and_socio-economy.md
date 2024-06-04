@@ -1,6 +1,6 @@
 # Population & Socio-economy
 
-## Baseline Population <a id="baseline-population"></a>
+## Baseline Population <a id="population"></a>
 
 The population statistics presented here are sourced from the
 [common operational datasets](https://cod.unocha.org/) (CODs), and are
@@ -12,7 +12,7 @@ sources.
 
 ### Summary
 
-{{ read_yaml('data_usage_guides/subcategory_details/baseline_population_details.yaml') }}
+{{ read_yaml('data_usage_guides/subcategory_details/population_details.yaml') }}
 
 ### Transformations applied
 
@@ -54,5 +54,3 @@ details.
 * The data is disaggregated to admin 1, but not p-coded. We have kept the
   admin 1 names in the data, but link only to national level p-codes.
   We plan to p-code this data in a future release.
-* Please be aware of the metric definitions, provided in the parameter
-  summary table !!!! TODO add link and table

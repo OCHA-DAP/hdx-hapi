@@ -1,6 +1,14 @@
 - event type: civilian_targeting
-  description: Civilian targeting events include violence against civilians events and explosions/remote violence events in which civilians were directly targeted.
+  description: >
+    Civilian targeting events include violence against civilians events and
+    explosions/remote violence events in which civilians were directly
+    targeted.
 - event type: demonstration
-  description: Demonstration events include ACLED’s protests and riots event types, with the exception of the mob violence sub-event type of the riots event type.
+  description: >
+    Demonstration events include ACLED’s protests and riots event types, with
+    the exception of the mob violence sub-event type of the riots event type.
 - event type: political_violence
-  description: Political violence events include ACLED’s battles, violence against civilians, and explosions/remote violence event types, as well as the mob violence sub-event type of the riots event type.
+  description: >
+    Political violence events include ACLED’s battles, violence against
+    civilians, and explosions/remote violence event types, as well as the mob
+    violence sub-event type of the riots event type.
