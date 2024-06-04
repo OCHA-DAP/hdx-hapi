@@ -16,13 +16,14 @@ async def datasets_view_list(
     db: AsyncSession,
     dataset_hdx_id: Optional[str] = None,
     dataset_hdx_stub: Optional[str] = None,
-    title: Optional[str] = None,
+    dataset_hdx_title: Optional[str] = None,
     hdx_provider_stub: Optional[str] = None,
     hdx_provider_name: Optional[str] = None,
 ):
     logger.info(
         f'datasets_view_list called with params: dataset_hdx_id={dataset_hdx_id}, dataset_hdx_stub={dataset_hdx_stub}, '
-        f'title={title}, hdx_provider_stub={hdx_provider_stub}, hdx_provider_name={hdx_provider_name}'
+        f'dataset_hdx_title={dataset_hdx_title}, hdx_provider_stub={hdx_provider_stub}, '
+        f'hdx_provider_name={hdx_provider_name}'
     )
 
     query = select(DatasetView)
@@ -30,8 +31,8 @@ async def datasets_view_list(
         query = query.where(DatasetView.dataset_hdx_id == dataset_hdx_id)
     if dataset_hdx_stub:
         query = query.where(DatasetView.dataset_hdx_stub == dataset_hdx_stub)
-    if title:
-        query = query.where(DatasetView.title.icontains(title))
+    if dataset_hdx_title:
+        query = query.where(DatasetView.dataset_hdx_title.icontains(dataset_hdx_title))
     if hdx_provider_stub:
         query = case_insensitive_filter(query, DatasetView.hdx_provider_stub, hdx_provider_stub)
     if hdx_provider_name:
@@ -45,7 +46,5 @@ async def datasets_view_list(
     datasets = result.scalars().all()
 
     logger.info(f'Retrieved {len(datasets)} rows from the database')
-    for row in datasets:
-        print(row, flush=True)
 
     return datasets

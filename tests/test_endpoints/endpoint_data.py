@@ -60,14 +60,14 @@ endpoint_data = {
     '/api/v1/metadata/dataset': {
         'query_parameters': {
             'dataset_hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',
-            'title': 'Dataset #1',
+            'dataset_hdx_title': 'Dataset #1',
             'hdx_provider_stub': 'pRoViDeR01',
             'hdx_provider_name': 'Provider #1',
         },
         'expected_fields': [
             'dataset_hdx_id',
             'dataset_hdx_stub',
-            'title',
+            'dataset_hdx_title',
             'hdx_provider_stub',
             'hdx_provider_name',
             'hdx_link',  # computed field

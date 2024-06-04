@@ -133,7 +133,7 @@ class DatasetView(Base):
     __table__ = dataset_view
     dataset_hdx_id: Mapped[str] = column_property(dataset_view.c.hdx_id)
     dataset_hdx_stub: Mapped[str] = column_property(dataset_view.c.hdx_stub)
-    title: Mapped[str] = column_property(dataset_view.c.title)
+    dataset_hdx_title: Mapped[str] = column_property(dataset_view.c.title)
     hdx_provider_stub: Mapped[str] = column_property(dataset_view.c.hdx_provider_stub)
     hdx_provider_name: Mapped[str] = column_property(dataset_view.c.hdx_provider_name)
 

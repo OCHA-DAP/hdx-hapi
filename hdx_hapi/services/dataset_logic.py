@@ -10,7 +10,7 @@ async def get_datasets_srv(
     db: AsyncSession,
     dataset_hdx_id: Optional[str] = None,
     dataset_hdx_stub: Optional[str] = None,
-    title: Optional[str] = None,
+    dataset_hdx_title: Optional[str] = None,
     hdx_provider_stub: Optional[str] = None,
     hdx_provider_name: Optional[str] = None,
 ):
@@ -19,7 +19,7 @@ async def get_datasets_srv(
         db=db,
         dataset_hdx_id=dataset_hdx_id,
         dataset_hdx_stub=dataset_hdx_stub,
-        title=title,
+        dataset_hdx_title=dataset_hdx_title,
         hdx_provider_stub=hdx_provider_stub,
         hdx_provider_name=hdx_provider_name,
     )

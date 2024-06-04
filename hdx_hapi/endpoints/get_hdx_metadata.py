@@ -56,7 +56,7 @@ async def get_datasets(
     db: AsyncSession = Depends(get_db),
     dataset_hdx_id: Annotated[Optional[str], Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
     dataset_hdx_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
-    title: Annotated[Optional[str], Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
+    dataset_hdx_title: Annotated[Optional[str], Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
     hdx_provider_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
     hdx_provider_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -70,7 +70,7 @@ async def get_datasets(
         db=db,
         dataset_hdx_id=dataset_hdx_id,
         dataset_hdx_stub=dataset_hdx_stub,
-        title=title,
+        dataset_hdx_title=dataset_hdx_title,
         hdx_provider_stub=hdx_provider_stub,
         hdx_provider_name=hdx_provider_name,
     )

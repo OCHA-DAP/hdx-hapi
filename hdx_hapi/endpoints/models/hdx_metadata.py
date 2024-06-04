@@ -15,7 +15,7 @@ from hdx_hapi.services.hdx_url_logic import (
 class DatasetResponse(HapiBaseModel):
     dataset_hdx_id: str = Field(max_length=36)
     dataset_hdx_stub: str = Field(max_length=128)
-    title: str = Field(max_length=1024)
+    dataset_hdx_title: str = Field(max_length=1024)
     hdx_provider_stub: str = Field(max_length=128)
     hdx_provider_name: str = Field(max_length=512)
 
