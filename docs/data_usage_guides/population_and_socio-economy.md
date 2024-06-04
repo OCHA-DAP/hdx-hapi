@@ -51,5 +51,8 @@ details.
 
 ### Usage Notes
 
+* The data is disaggregated to admin 1, but not p-coded. We have kept the
+  admin 1 names in the data, but link only to national level p-codes.
+  We plan to p-code this data in a future release.
 * Please be aware of the metric definitions, provided in the parameter
   summary table !!!! TODO add link and table

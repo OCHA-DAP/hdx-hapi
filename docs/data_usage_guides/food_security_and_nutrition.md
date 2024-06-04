@@ -39,7 +39,9 @@ a future release we will p-code and expand coverage to other IPC datasets.
 
 The World Food Programme Price Database covers foods such as maize, rice,
 beans, fish, and sugar for 98 countries and some 3000 markets. It is updated
-weekly but primarily contains data with a monthly update frequency.
+weekly but primarily contains data with a monthly update frequency. For a
+detailed methodology, see WFP's
+[Market Analysis Guidelines](https://www.wfp.org/publications/market-analysis-guidelines).
 
 ### Summary
 

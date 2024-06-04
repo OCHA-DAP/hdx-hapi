@@ -1,59 +1,166 @@
 # Metadata
 
-## Dataset <a id="dataset"></a>
+## HDX Metadata
 
-## Resource <a id="resource"></a>
+All of the data in HDX HAPI comes from publicly-available datasets on HDX, and
+the HDX metadata can be used refer back to the original data to see what HAPI
+has simplified or omitted.
+The two primary HDX metadata tables are
+[`dataset`](dataset) and [`resource`](resource), and they
+contain a small subset of the metadata available through the CKAN API or
+HDX library.
+
+The HAPI data records contain enough information to access the full records
+from CKAN, see the parameters tables for more details.
+All subcategory tables link back to a resource record, and all resources link
+back to a dataset record.
+
+### Dataset <a id="dataset"></a>
+
+**Used in:** [`Resource`](resource), all sub-category tables
+
+This table contains the HDX-specific metadata associated with all datasets
+used to populate the HAPI sub-category tables. Every dataset has at least
+one child [resource](resource).
+
+### Resource <a id="resource"></a>
+
+**Used in:** All sub-category tables
+
+This table contains the HDX-specific metadata associated with all resources
+used to populate the HAPI sub-category tables. Every resource has one
+parent [dataset](dataset).
+
+## Geographical Metadata
+
+HAPI supports three hierarchical levels of geographical metadata:
+location (a country or country-like entity), admin 1, and admin 2.  An entry in
+the location table does not necessarily imply UN recognition of statehood.
+The subcategory data tables link to the lowest administrative level used by
+that data type; it will usually be admin2, but in some cases may be admin1 or
+location.
+
+The names and p-codes are read in from a [global p-code list](https://data.humdata.org/dataset/global-pcodes)
+taken from the common operational dataset (COD) gazetteers administrative
+boundaries.
+The p-code field is unique only in combination with reference_period_start,
+since p-codes may be reused in different versions of geographical metadata.
+
+When bringing in data from sub-categories, HDX HAPI uses p-code matching
+from [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/).
+Thie can involve .... TODO
 
 ## Location <a id="location"></a>
 
-## Admin1  <a id="admin1"></a>
+**Used in:** [`Admin 1`](admin1),
+[`Refugees & Persons of Concern`](affected_people.md#refugees),
+[`Funding`](coordination_and_context.md#funding),
+[`National Risk`](coordination_and_context.md#national-risk)
 
-## Admin2 <a id="admin2"></a>
+Country or country-like entities in HDX HAPI, from the CODs
+[global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
-## Org <a id="org></a>
+## Admin 1  <a id="admin1"></a>
 
-* The organisation table is populated from the 3W data
+**Used in:** [`Admin 2](admin2),
+[`Poverty Rate`](population_and_socio-economy.md#poverty-rate)
+
+Admin 1 level names and p-codes in HDX HAPI, from the CODs
+[global p-code list](https://data.humdata.org/dataset/global-pcodes).
+
+## Admin 2 <a id="admin2"></a>
+
+Admin 2 level names and p-codes in HDX HAPI, from the CODs
+[global p-code list](https://data.humdata.org/dataset/global-pcodes).
+
+**Used in:**
+[`Humanitarian Needs`](affected_people.md#humanitarian-needs),
+[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence),
+[`Conflict Events`](coordination_and_context.md#conflict-events),
+[`Food Security`](food_security_and_nutrition.md#food-security),
+[`Food Prices`](food_security_and_nutrition.md#food-prices),
+[`Baseline Population`](population_and_socio-economy.md#population)
+
+## Sub-category Metadata
+
+### Org <a id="org"></a>
+
+**Used in:**
+[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence)
+
+The organisation table is populated from the 3W data, using the following
+methodology:
+
 * Organisation name and acronym strings are normalised. If an acronym isn’t
   available, the first 32 characters of the name are used.
 * This [organisation mapping](https://docs.google.com/spreadsheets/d/e/2PACX-1vSfBWvSu3fKA743VvHtgf-pIGkYH7zhy-NP7DZgEV9_a6YU7vtCeWhbLM56aUL1iIfrfv5UBvvjVt7B/pub?gid=1040329566&single=true&output=csv)
   is used for common alternative names
-* Organisations without a sector are excluded
-* Organisations can have an associated organisation type. If available, the
+* Organisations must have an associated organisation type. If available, the
   organisation type code is taken directly from the 3W data, otherwise the name
   string is normalised and matched to the org type names. In the absence of a
   direct match, phonetic matching is used for strings > 5 characters. If no
   match is found, the organisation is skipped.
 
-## Org Type <a id="org-type"></a>
+### Org Type <a id="org-type"></a>
 
-* The table is populated using
-  [OCHA Digital Services organization types list](https://data.humdata.org/dataset/organization-types-beta),
-  with the addition of:
-  * Civil Society
-  * Observer
-  * Development Programme
-  * Local NGO
-* Organisation types all have an associated name and code
+**Used in:**
+[`Org`](org),
+[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence)
 
-## Sector  <a id=sector></a>
+The table is populated using
+[OCHA Digital Services organization types list](https://data.humdata.org/dataset/organization-types-beta),
+with the addition of:
 
-* This table is populated using the Global Coordination Groups, with the
-  following additional entries:
-  * cash
-  * humanitarian assistance
-  * multi-sector
-  * intersectoral
-* The sector name strings in the 3W data are normalised and then aligned to the
-  sector table, using the “sector_map” section of
-  [this configuration file](https://github.com/OCHA-DAP/hapi-pipelines/blob/main/src/hapi/pipelines/configs/core.yaml)
-  if needed.
-  In the absence of a direct match, phonetic matching is used for
-  strings > 5 characters.
+* Civil Society
+* Observer
+* Development Programme
+* Local NGO.
 
-## Currency <a id="currency"></a>
+Organisation types all have an associated name and code.
 
-## WFP Market <a id="wfp-market"></a>
+### Sector <a id=sector></a>
 
-The Markets data comes from the WFP Food Prices datasets. We p-code it by …
+**Used in:**
+[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence),
+[`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
-## WFP Commodity <a id="wfp-commodity"></a>
+This table is populated using the Global Coordination Groups, with the
+following additional entries:
+
+* cash
+* humanitarian assistance
+* multi-sector
+* intersectoral.
+
+The sector name strings in the 3W data are normalised and then aligned to the
+sector table, using the “sector_map” section of
+[this configuration file](https://github.com/OCHA-DAP/hapi-pipelines/blob/main/src/hapi/pipelines/configs/core.yaml)
+if needed.
+In the absence of a direct match, phonetic matching is used for
+strings > 5 characters.
+
+### Currency <a id="currency"></a>
+
+**Used in:**
+[`Food Prices`](food_security_and_nutrition.md#food-prices)
+
+The currency table is populated using the WFP VAM Data Bridges API.
+
+### WFP Market <a id="wfp-market"></a>
+
+**Used in:**
+[`Food Prices`](food_security_and_nutrition.md#food-prices)
+
+Markets are defined as the physical locations where buyers and sellers
+come together to trade goods and services. This table is populated from the
+food prices data, which contains location names down to admin 2 as well as
+a latitude and longitude, however is not p-coded.
+We therefore p-code .... TODO
+
+### WFP Commodity <a id="wfp-commodity"></a>
+
+**Used in:**
+[`Food Prices`](food_security_and_nutrition.md#food-prices)
+
+The commodity table tracks all food items, and their associated
+commodity category, present in the food prices data.

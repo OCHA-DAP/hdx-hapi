@@ -6,10 +6,8 @@
 [`Food Prices`](food_security_and_nutrition.md#food-prices),
 [`WFP Commodity`](metadata.md#wfp-commodity)
 
-The commodity categories are used in the WFP food prices data to
-group together similar types of food items.
-
-### Allowed values
+The commodity categories are used in the WFP food prices data to organize
+foods into food groups.
 
 {{ read_yaml('data_usage_guides/enum_parameters/commodity_category_parameters.yaml') }}
 
@@ -17,7 +15,9 @@ group together similar types of food items.
 
 **Used in:** [`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
-### Allowed values
+This marker is used to indicate any HNO PIN calculations that are disaggregated
+by disability. For more information on disability classification, see the
+[WHO International Classification of Functioning, Disability and Health (ICF)](https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health).
 
 {{ read_yaml('data_usage_guides/enum_parameters/disabled_marker_parameters.yaml') }}
 
@@ -32,8 +32,6 @@ outlined in the table below.
 Please see the [ACLED Codebook](https://acleddata.com/knowledge-base/codebook/#acled-events)
 for their methodology and more detailed descriptions of the sub-event types.
 
-### Allowed values
-
 {{ read_yaml('data_usage_guides/enum_parameters/event_type_parameters.yaml') }}
 
 ## Gender <a id="gender"></a>
@@ -43,7 +41,7 @@ for their methodology and more detailed descriptions of the sub-event types.
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
 [`Refugees & Persons of Concern`](refugees)
 
-### Allowed values
+Several sub-categories in HDX-HAPI are disaggregated by gender.
 
 {{ read_yaml('data_usage_guides/enum_parameters/gender_parameters.yaml') }}
 
@@ -58,8 +56,6 @@ and summarised in the table below.
 This enum also includes Phase 3+, to highlight the population in need of action,
 and total population, used to compute fractions.
 
-### Allowed values
-
 {{ read_yaml('data_usage_guides/enum_parameters/ipc_phase_parameters.yaml') }}
 
 ## IPC Type <a id="ipc_type"></a>
@@ -68,17 +64,16 @@ and total population, used to compute fractions.
 
 The IPC provides different projections to aid in planning and response efforts.
 
-### Allowed values
-
 {{ read_yaml('data_usage_guides/enum_parameters/ipc_type_parameters.yaml') }}
 
 ## Population Group <a id="population-group"></a>
 
 **Used in:**
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
-[`Refugees & Persons of Concern`](refugees)
+[`Refugees & Persons of Concern`](affected_people.md#refugees)
 
-### Allowed values
+Most population group terms come from [UNHCR's glossary](https://www.unhcr.org/refugee-statistics/methodology/data-content/),
+while RRI comes from the humanitarian needs data.
 
 {{ read_yaml('data_usage_guides/enum_parameters/population_group_parameters.yaml') }}
 
@@ -87,7 +82,8 @@ The IPC provides different projections to aid in planning and response efforts.
 **Used in:**
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
 
-### Allowed values
+The population status disaggregation provides a framework for the HNO to
+determine how effectively people in need are being reached.
 
 {{ read_yaml('data_usage_guides/enum_parameters/population_status_parameters.yaml') }}
 
@@ -95,15 +91,11 @@ The IPC provides different projections to aid in planning and response efforts.
 
 **Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
 
-### Allowed values
-
 {{ read_yaml('data_usage_guides/enum_parameters/price_flag_parameters.yaml') }}
 
 ## Price Type <a id="price-type"></a>
 
 **Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
-
-### Allowed values
 
 {{ read_yaml('data_usage_guides/enum_parameters/price_type_parameters.yaml') }}
 
@@ -111,6 +103,12 @@ The IPC provides different projections to aid in planning and response efforts.
 
 **Used in:** [`National Risk`](coordination_and_context.md#national-risk)
 
-### Allowed values
+In national risk, the final INFORM risk score is grouped into one of five
+risk classes, with the objective of systemically identifying risk in a
+consistent manner. Note that other categories and dimensions are also
+grouped into classes but with different thresholds, and these are not included
+in HDX HAPI. Please see the
+[methodology](https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk/Methodology)
+for more details.
 
 {{ read_yaml('data_usage_guides/enum_parameters/risk_class_parameters.yaml') }}

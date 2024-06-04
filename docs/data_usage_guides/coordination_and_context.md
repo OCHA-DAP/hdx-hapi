@@ -25,7 +25,7 @@ identify gaps, and plan for future humanitarian response.
   different ways from different OCHA offices, or sometimes even within the same
   3W. See the [`org`](org) section below for more information on how we handle
   these details.
-* Organisations without an associated sector are skipped
+* Rows without an associated sector are skipped
 * The reference period is obtained from the HDX dataset
 
 ### Usage notes
