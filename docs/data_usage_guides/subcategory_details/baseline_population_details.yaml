@@ -1,0 +1,10 @@
+- Attribute: Data provider
+  Details: UNFPA, OCHA country offices
+- Attribute: Dataset
+  Details: "[COD - subnational population statistics data series](https://data.humdata.org/dataset/?dataseries_name=COD+-+Subnational+Population+Statistics)"
+- Attribute: Time series
+  Details: No
+- Attribute: Update frequency
+  Details: Annually
+- Attribute: Related tables
+  Details: "[`Gender`](gender)"

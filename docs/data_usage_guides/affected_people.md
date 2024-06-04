@@ -17,8 +17,6 @@ organisations.
 
 * The table has been reshaped from wide to long: demographic-specific columns
   have been cast to gender, age, and population
-* Population group has been filtered for refugees (REF) and others of concern
-  (OOC)
 * It is not possible to p-code based on the location information in the
   original data, therefore population numbers are aggregated to the national
   level
@@ -27,6 +25,9 @@ organisations.
 
 ### Usage notes
 
+* UNHCR is the only source for returnees in some countries and is therefore
+  included in HDX HAPI, but if data is available from the IDP endpoint, that
+  data is preferable
 * An “all” value in the `gender` and `age_range` columns indicates no
   disaggregation
 
