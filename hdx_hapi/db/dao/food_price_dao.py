@@ -11,7 +11,7 @@ from hdx_hapi.db.dao.util.util import (
     apply_pagination,
     case_insensitive_filter,
 )
-from hdx_hapi.db.models.views.all_views import FoodPriceView, WfpMarketView
+from hdx_hapi.db.models.views.all_views import FoodPriceView
 from hdx_hapi.endpoints.util.util import PaginationParams
 
 
@@ -48,7 +48,7 @@ async def food_price_view_list(
     if market_code:
         query = case_insensitive_filter(query, FoodPriceView.market_code, market_code)
     if market_name:
-        query = query.where(WfpMarketView.name.icontains(market_name))
+        query = query.where(FoodPriceView.market_name.icontains(market_name))
     if commodity_code:
         query = case_insensitive_filter(query, FoodPriceView.commodity_code, commodity_code)
     if commodity_category:
