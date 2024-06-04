@@ -10,22 +10,22 @@ from hdx_hapi.endpoints.util.util import PaginationParams
 async def resources_view_list(
     pagination_parameters: PaginationParams,
     db: AsyncSession,
-    hdx_id: str = None,
+    resource_hdx_id: str = None,
     format: str = None,
     update_date_min: datetime = None,
     update_date_max: datetime = None,
     is_hxl: bool = None,
     hapi_updated_date_min: datetime = None,
     hapi_updated_date_max: datetime = None,
-    dataset_title: str = None,
+    dataset_hdx_title: str = None,
     dataset_hdx_id: str = None,
     dataset_hdx_stub: str = None,
     dataset_hdx_provider_stub: str = None,
     dataset_hdx_provider_name: str = None,
 ):
     query = select(ResourceView)
-    if hdx_id:
-        query = query.where(ResourceView.hdx_id == hdx_id)
+    if resource_hdx_id:
+        query = query.where(ResourceView.resource_hdx_id == resource_hdx_id)
     if format:
         query = query.where(ResourceView.format == format)
     if update_date_min:
@@ -38,8 +38,8 @@ async def resources_view_list(
         query = query.where(ResourceView.hapi_updated_date >= hapi_updated_date_min)
     if hapi_updated_date_max:
         query = query.where(ResourceView.hapi_updated_date < hapi_updated_date_max)
-    if dataset_title:
-        query = query.where(ResourceView.dataset_title == dataset_title)
+    if dataset_hdx_title:
+        query = query.where(ResourceView.dataset_hdx_title.icontains(dataset_hdx_title))
     if dataset_hdx_id:
         query = query.where(ResourceView.dataset_hdx_id == dataset_hdx_id)
     if dataset_hdx_stub:

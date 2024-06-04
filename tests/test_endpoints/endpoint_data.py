@@ -468,7 +468,7 @@ endpoint_data = {
     },
     '/api/v1/metadata/resource': {
         'query_parameters': {
-            'hdx_id': '17acb541-9431-409a-80a8-50eda7e8ebab',
+            'resource_hdx_id': '17acb541-9431-409a-80a8-50eda7e8ebab',
             'name': 'resource-01.csv',
             'format': 'csv',
             'update_date_min': date(2023, 6, 1),
@@ -476,12 +476,12 @@ endpoint_data = {
             'is_hxl': True,
             'hapi_updated_date': date(2023, 6, 2),
             'dataset_hdx_stub': 'dataset01',
-            'dataset_title': 'Dataset #1',
+            'dataset_hdx_title': 'Dataset #1',
             'dataset_hdx_provider_stub': 'pRoViDeR01',
             'dataset_hdx_provider_name': 'Provider #1',
         },
         'expected_fields': [
-            'hdx_id',
+            'resource_hdx_id',
             'dataset_hdx_id',
             'name',
             'format',
@@ -490,7 +490,7 @@ endpoint_data = {
             'download_url',
             'hapi_updated_date',
             'dataset_hdx_stub',
-            'dataset_title',
+            'dataset_hdx_title',
             'dataset_hdx_provider_stub',
             'dataset_hdx_provider_name',
             'hdx_link',  # computed field

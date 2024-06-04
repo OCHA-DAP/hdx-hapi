@@ -363,7 +363,7 @@ class RefugeesView(Base):
 
 class ResourceView(Base):
     __table__ = resource_view
-    hdx_id: Mapped[str] = column_property(resource_view.c.hdx_id)
+    resource_hdx_id: Mapped[str] = column_property(resource_view.c.hdx_id)
     dataset_hdx_id: Mapped[str] = column_property(resource_view.c.dataset_hdx_id)
     name: Mapped[str] = column_property(resource_view.c.name)
     format: Mapped[str] = column_property(resource_view.c.format)
@@ -372,7 +372,7 @@ class ResourceView(Base):
     download_url: Mapped[str] = column_property(resource_view.c.download_url)
     hapi_updated_date: Mapped[DateTime] = column_property(resource_view.c.hapi_updated_date)
     dataset_hdx_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_stub)
-    dataset_title: Mapped[str] = column_property(resource_view.c.dataset_title)
+    dataset_hdx_title: Mapped[str] = column_property(resource_view.c.dataset_title)
     dataset_hdx_provider_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_provider_stub)
     dataset_hdx_provider_name: Mapped[str] = column_property(resource_view.c.dataset_hdx_provider_name)
 
