@@ -23,7 +23,7 @@ def test_helper_get_dataset_url():
     dataset_view = DatasetResponse(
         dataset_hdx_id=dataset_id,
         dataset_hdx_stub=dataset_id,
-        title='Test Dataset #1',
+        dataset_hdx_title='Test Dataset #1',
         hdx_provider_stub='test-provider',
         hdx_provider_name='Test Provider',
     )
@@ -44,7 +44,7 @@ def test_helper_get_dataset_api_url():
     dataset_view = DatasetResponse(
         dataset_hdx_id=dataset_id,
         dataset_hdx_stub=dataset_id,
-        title='Test Dataset #2',
+        dataset_hdx_title='Test Dataset #2',
         hdx_provider_stub='test-provider2',
         hdx_provider_name='Test Provider 2',
     )
