@@ -1,3 +1,4 @@
+from typing import Optional, Tuple
 from urllib.parse import parse_qs, urlparse
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
@@ -34,43 +35,73 @@ async def app_identifier_middleware(request: Request, call_next):
     """
     Middleware to check for the app_identifier in the request and add it to the request state
     """
-    is_nginx_verify_request = request.url.path.startswith('/api/v1/util/verify-request') or request.url.path.startswith(
-        '/api/util/verify-request'
-    )
+    if CONFIG.HAPI_IDENTIFIER_FILTERING:
+        header_identifier = request.headers.get('X-HDX-HAPI-APP-IDENTIFIER')
 
-    parsed_url = None
-    if is_nginx_verify_request:
-        header_url = request.headers.get('X-Original-URI')
-        if header_url:
-            parsed_url = urlparse(header_url)
-            path = str(parsed_url.path)
+        is_nginx_verify_request = request.url.path.startswith(
+            '/api/v1/util/verify-request'
+        ) or request.url.path.startswith('/api/util/verify-request')
+        original_uri_from_nginx = request.headers.get('X-Original-URI')
+
+        if is_nginx_verify_request:
+            if not original_uri_from_nginx:
+                return JSONResponse(content={'error': 'Missing X-Original-URI'}, status_code=status.HTTP_403_FORBIDDEN)
+            path, app_identifier = _extract_path_and_identifier_from_original_url(original_uri_from_nginx)
         else:
-            return JSONResponse(content={'error': 'Missing X-Original-URI'}, status_code=status.HTTP_403_FORBIDDEN)
-    else:
-        path = request.url.path
-
-    if CONFIG.HAPI_IDENTIFIER_FILTERING and path and path.startswith('/api') and path not in ALLOWED_API_ENDPOINTS:
-        if is_nginx_verify_request and parsed_url:
-            query_params = parse_qs(str(parsed_url.query))
-            app_identifier = query_params.get('app_identifier', [None])[0]
-
-        else:
+            path = request.url.path
             app_identifier = request.query_params.get('app_identifier')
-        authorization = request.headers.get('X-HDX-HAPI-APP-IDENTIFIER')
-        encoded_value = app_identifier or authorization
 
-        if not encoded_value:
-            return JSONResponse(content={'error': 'Missing app identifier'}, status_code=status.HTTP_403_FORBIDDEN)
+        status_code, error_message, identifier_params = _check_allow_request(path, app_identifier or header_identifier)
 
-        try:
-            decoded_value = base64.b64decode(encoded_value).decode('utf-8')
-            application, email = decoded_value.split(':')
-            identifier_params = IdentifierParams(application=application, email=email)
-            logger.warning(f'Application: {application}, Email: {email}')
-            # Adding the app_name to the request state so it can be accessed in the endpoint
-            request.state.app_name = identifier_params.application
-        except Exception:
-            return JSONResponse(content={'error': 'Invalid app identifier'}, status_code=status.HTTP_403_FORBIDDEN)
+        if status_code == status.HTTP_200_OK:
+            request.state.app_name = identifier_params.application if identifier_params else None
+        else:
+            return JSONResponse(content={'error': error_message}, status_code=status_code)
 
     response = await call_next(request)
     return response
+
+
+def _extract_path_and_identifier_from_original_url(original_url: str) -> Tuple[str, Optional[str]]:
+    """
+    Extract the path and app_identifier from the Nginx header.
+    Args:
+        original_url: The original URL from the Nginx header
+    Returns:
+        Tuple of path and app_identifier
+    """
+
+    parsed_url = urlparse(original_url)
+    path = parsed_url.path
+    query_params = parse_qs(parsed_url.query)
+    app_identifier = query_params.get('app_identifier', [None])[0]
+    return path, app_identifier
+
+
+def _check_allow_request(
+    request_path: str, encoded_app_identifier: Optional[str]
+) -> Tuple[int, Optional[str], Optional[IdentifierParams]]:
+    """
+    Check if the request is allowed.
+    Args:
+        request_path: The path of the request
+        encoded_app_identifier: The app_identifier
+    Returns:
+        Tuple of status code, error message and IdentifierParams
+    """
+    if request_path and request_path.startswith('/api') and request_path not in ALLOWED_API_ENDPOINTS:
+        if not encoded_app_identifier:
+            return status.HTTP_403_FORBIDDEN, 'Missing app identifier', None
+
+        try:
+            decoded_value = base64.b64decode(encoded_app_identifier).decode('utf-8')
+            application, email = decoded_value.split(':')
+            identifier_params = IdentifierParams(application=application, email=email)
+            logger.warning(f'Application: {application}, Email: {email}')
+
+            return status.HTTP_200_OK, None, identifier_params
+
+        except Exception:
+            return status.HTTP_403_FORBIDDEN, 'Invalid app identifier', None
+
+    return status.HTTP_200_OK, None, None
