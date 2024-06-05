@@ -30,7 +30,8 @@ identify gaps, and plan for future humanitarian response.
   3W. See the [`org`](org) section below for more information on how we handle
   these details.
 * Rows without an associated sector are skipped
-* The reference period is obtained from the HDX dataset
+* The reference period is derived manually per resource based on the
+  resource metadata
 
 ### Usage notes
 

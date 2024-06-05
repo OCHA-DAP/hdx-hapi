@@ -1,54 +1,99 @@
 - parameter: '`hdx_id`'
-  description: ''
-  source: ''
+  description: >
+    Unique resource UUID on HDX, which does not change even when changes
+    are made to the resource. In combination with the dataset UUID from the
+    `dataset_hdx_id` field, it can be used to construct a link to the resource
+    on HDX:
+    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]`,
+    which can be found in the `hdx_link` field,
+    and through the HDX CKAN API:
+    `https://data.humdata.org/api/action/resource_show?id=[hdx_id]`,
+    which is shown in the `hdx_api_link` field.
+  source:
 - parameter: '`dataset_hdx_id`'
-  description: ''
-  source: ''
+  description: >
+    Unique dataset UUID on HDX, which does not change even when changes are
+    made to the dataset. It can be used to construct a link to the dataset
+    on HDX:
+    `https://data.humdata.org/dataset/[hdx_id]`,
+    which can be found in the `dataset_hdx_link` field.
+    It can also be used to access the dataset through the HDX CKAN API:
+    `https://data.humdata.org/api/action/package_show?id=[hdx_id]`,
+    which is shown in the `dataset_hdx_api_link` field.
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`name`'
-  description: ''
-  source: ''
+  description: >
+    The resource name on HDX. In combination with the dataset UUIDs from the
+    `dataset_hdx_id` and `hdx_id` fields respectively, it can be used to
+    construct a link to download the resource:
+    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]/download/[name]`,
+    which can be found in the `download_url` field.
+  source:
 - parameter: '`format`'
-  description: ''
-  source: ''
+  description: The format of the resource file, such as csv or Excel
+  source:
 - parameter: '`update_date`'
-  description: ''
-  source: ''
+  description: The date the resource was last updated
+  source:
 - parameter: '`is_hxl`'
-  description: ''
-  source: ''
+  description: A boolean to indicate whether the resource data is HXLated
+  source:
 - parameter: '`download_url`'
-  description: ''
+  description: >
+    A link to directly download the resource file from HDX, in the format
+    specified in the `format` field
   source: ''
 - parameter: '`hapi_updated_date`'
-  description: ''
+  description: The date that the resource was ingested into HDX HAPI
   source: ''
 - parameter: '`dataset_hdx_stub`'
-  description: ''
-  source: ''
+  description: >
+    The dataset URL stub can be used to construct a human-readable link to the
+    dataset on HDX as follows:
+    `https://data.humdata.org/dataset/[hdx_stub]`.
+    The stub may change at any time (unlike the UUID).
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`dataset_title`'
-  description: ''
-  source: ''
+  description: Dataset title on HDX
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`dataset_hdx_provider_stub`'
-  description: ''
-  source: ''
+  description: >
+    The dataset provider stub can be used to construct links to
+    the dataset provider's organisation page on HDX:
+    `https://data.humdata.org/organization/[hdx_provider_stub]`,
+    and to the dataset provider's information on the HDX CKAN API:
+    `https://data.humdata.org/api/action/organization_show?id=[hdx_provider_stub]`
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`dataset_hdx_provider_name`'
-  description: ''
-  source: ''
+  description: The name of the organisation that provided the dataset to HDX
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`hdx_link`'
-  description: ''
-  source: ''
+  description: A link to the resource on HDX, constructing using the UUIDs
+    from the `dataset_hdx_id` and `hdx_id` fields
+  source:
 - parameter: '`hdx_api_link`'
-  description: ''
-  source: ''
+  description: >
+    A link to the resource on the HDX CKAN API, constructed using the UUID
+    from the `hdx_id` field
+  source:
 - parameter: '`dataset_hdx_link`'
-  description: ''
-  source: ''
+  description: >
+    A link to the dataset on HDX, constructed using the UUID
+    from the `dataset_hdx_id` field
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`dataset_hdx_api_link`'
-  description: ''
-  source: ''
+  description: >
+    A link to the dataset on the HDX CKAN API, constructed using the UUID
+    from the `dataset_hdx_id` field
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`provider_hdx_link`'
-  description: ''
-  source: ''
+  description: >
+    A link to the dataset provider's organisation page, constructed using the
+    data provider stub from the `dataset_hdx_provider_stub` field
+  source: '[`Dataset`](metadata.md#dataset)'
 - parameter: '`provider_hdx_api_link`'
-  description: ''
-  source: ''
+  description: >
+    A link to the dataset provider's information via the HDX CKAN API,
+    constructed using the data provider stub from the
+    `dataset_hdx_provider_stub` field
+  source: '[`Dataset`](metadata.md#dataset)'
