@@ -1,24 +1,33 @@
 - Parameter: '`resource_hdx_id`'
-  Description: ''
-  Source: ''
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`admin2_ref`'
-  Description: ''
-  Source: ''
+  Description: >
+    An internal, stable identifier to reference an admin 2 division
+  Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`gender`'
-  Description: ''
-  Source: ''
+  Description: >
+    The gender of the population group in question, set to "all" if there
+    is no disaggregation
+  Source: '[`Gender`](enums.md#gender)'
 - Parameter: '`age_range`'
-  Description: ''
-  Source: ''
+  Description: >
+    The age range of the population group in question, set to "all" if there
+    is no disaggregation
+  Source:
 - Parameter: '`min_age`'
-  Description: ''
-  Source: ''
+  Description: >
+    The minimum age from `age_range`. NULL if `age_range` is "all" and
+    no age disaggregation.
+  Source:
 - Parameter: '`max_age`'
-  Description: ''
-  Source: ''
+  Description: >
+    The maximum age from `age_range`. NULL if `age_range` is "all" and
+    no age disaggregation, or if there is no upper limit to the age range.
+  Source:
 - Parameter: '`population`'
-  Description: ''
-  Source: ''
+  Description: The number of people
+  Source:
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
   Source:
@@ -45,10 +54,6 @@
 - Parameter: '`admin1_name`'
   Description: Admin 1 name
   Source: '[`Admin 1`](metadata.md#admin1)'
-- Parameter: '`admin2_ref`'
-  Description: >
-    An internal, stable identifier to reference an admin 2 division
-  Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`admin2_code`'
   Description: Admin 2 p-code
   Source: '[`Admin 2`](metadata.md#admin2)'

@@ -1,39 +1,42 @@
 - Parameter: '`code`'
-  Description: ''
-  Source: ''
+  Description: The unique code identifying the market
+  Source:
 - Parameter: '`name`'
-  Description: ''
-  Source: ''
+  Description: The name of the market
+  Source:
 - Parameter: '`lat`'
-  Description: ''
-  Source: ''
+  Description: The market's latitude
+  Source:
 - Parameter: '`lon`'
-  Description: ''
-  Source: ''
+  Description: The market's longitude
+  Source:
 - Parameter: '`location_ref`'
-  Description: ''
-  Source: ''
+  Description: >
+    An internal, stable identifier to reference a location
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`location_code`'
-  Description: ''
-  Source: ''
+  Description: Location p-code (ISO-3)
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`location_name`'
-  Description: ''
-  Source: ''
+  Description: Location name
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`admin1_ref`'
-  Description: ''
-  Source: ''
+  Description: >
+    An internal, stable identifier to reference an admin 1 division
+  Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin1_code`'
-  Description: ''
-  Source: ''
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin1_name`'
-  Description: ''
-  Source: ''
+  Description: Admin 1 name
+  Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin2_ref`'
-  Description: ''
-  Source: ''
+  Description: >
+    An internal, stable identifier to reference an admin 2 division
+  Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`admin2_code`'
-  Description: ''
-  Source: ''
+  Description: Admin 2 p-code
+  Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`admin2_name`'
-  Description: ''
-  Source: ''
+  Description: Admin 2 name
+  Source: '[`Admin 2`](metadata.md#admin2)'

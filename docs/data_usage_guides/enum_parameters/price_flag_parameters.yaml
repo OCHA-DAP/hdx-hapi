@@ -1,8 +1,8 @@
-- price flag: actual
-  description: Collected with monthly frequency
-- price flag: aggregate
-  description: >
+- Price Flag: actual
+  Description: Collected with monthly frequency
+- Price Flag: aggregate
+  Description: >
     Collected with greater than monthly frequency (daily or weekly),
     and averaged through a weighted mean to monthly
-- price flag: actual,aggregate
-  description:
+- Price Flag: actual,aggregate
+  Description:

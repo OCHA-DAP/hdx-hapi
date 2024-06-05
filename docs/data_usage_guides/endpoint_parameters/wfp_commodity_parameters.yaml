@@ -1,9 +1,7 @@
 - Parameter: '`code`'
-  Description: ''
-  Source: ''
+  Description: The unique code identifying the commodity
 - Parameter: '`name`'
-  Description: ''
-  Source: ''
+  Description: The name of the commodity
 - Parameter: '`category`'
-  Description: ''
-  Source: ''
+  Description: The food group that the commodity belongs to
+  Source: '[`Commodity Category`](enums.md#commodity-category)'

@@ -1,26 +1,45 @@
 - Parameter: '`risk_class`'
-  Description: ''
-  Source: ''
+  Description: >
+    The final INFORM risk score (`overall_risk`) is grouped into one of five
+    risk classes, with the objective of systemically identifying risk in a
+    consistent manner.
+  Source: '[`Risk Class`](enums.md#risk-class)'
 - Parameter: '`global_rank`'
-  Description: ''
-  Source: ''
+  Description: >
+    The rank of the country based on `overall_risk`. Higher rank
+    (smaller number) is associated with more risk.
+  Source:
 - Parameter: '`overall_risk`'
-  Description: ''
-  Source: ''
+  Description: >
+    The INFORM composite risk index, based on a combination of 54 indicators
+    into three dimensions of risk: hazard and
+    exposure, vulnerability, and lack of coping capacity. Risk score
+    is given out of 10.
+  Source:
 - Parameter: '`hazard_exposure_risk`'
-  Description: ''
-  Source: ''
+  Description: >
+    Risk due to events that may occur, and exposure to them. Risk score is
+    given out of 10.
+  Source:
 - Parameter: '`vulnerability_risk`'
-  Description: ''
+  Description: >
+    Risk due to hazard susceptibility.
+    Risk score is given out of 10.
   Source: ''
 - Parameter: '`coping_capacity_risk`'
-  Description: ''
+  Description: >
+    Risk due to lack of coping capacity to alleviate hazard impact
+    Risk score is given out of 10.
   Source: ''
 - Parameter: '`meta_missing_indicators_pct`'
-  Description: ''
+  Description: >
+    The percentage original indicators missing, including any that have been
+    estimated
   Source: ''
 - Parameter: '`meta_avg_recentness_years`'
-  Description: ''
+  Description: >
+    The average of the total number of years older than the reference year
+    per indicator, to account for any older data used as a proxy
   Source: ''
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
@@ -29,8 +48,8 @@
   Description: The end date for which the data are applicable
   Source:
 - Parameter: '`resource_hdx_id`'
-  Description: ''
-  Source: ''
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`location_code`'
   Description: Location p-code (ISO-3)
   Source: '[`Location`](metadata.md#location)'

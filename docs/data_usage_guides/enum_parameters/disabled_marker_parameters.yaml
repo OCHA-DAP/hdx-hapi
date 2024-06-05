@@ -1,6 +1,6 @@
-- disabled marker: y
-  description: 'yes'
-- disabled marker: n
-  description: 'no'
-- disabled marker: all
-  description: 'all'
+- Disabled Marker: y
+  Description: 'yes'
+- Disabled Marker: n
+  Description: 'no'
+- Disabled Marker: all
+  Description: 'all'

@@ -1,6 +1,4 @@
 - Parameter: '`code`'
-  Description: ''
-  Source: ''
+  Description: Sector code
 - Parameter: '`name`'
-  Description: ''
-  Source: ''
+  Description: Sector name

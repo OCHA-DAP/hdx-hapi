@@ -1,6 +1,4 @@
 - Parameter: '`code`'
-  Description: ''
-  Source: ''
+  Description: The code referring to the organisation type
 - Parameter: '`description`'
-  Description: ''
-  Source: ''
+  Description: A description of the organisation type

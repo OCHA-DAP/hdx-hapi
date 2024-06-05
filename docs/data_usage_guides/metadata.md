@@ -132,7 +132,7 @@ methodology:
 [`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence)
 
 The table is populated using
-[OCHA Digital Services organization types list](https://data.humdata.org/dataset/organization-types-beta),
+[OCHA Digital Services organisation types list](https://data.humdata.org/dataset/organization-types-beta),
 with the addition of:
 
 * Civil Society
@@ -150,8 +150,9 @@ Organisation types all have an associated name and code.
 [`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence),
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
-This table is populated using the Global Coordination Groups, with the
-following additional entries:
+This table is populated using the
+[Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
+dataset, with the following additional entries:
 
 * cash
 * humanitarian assistance

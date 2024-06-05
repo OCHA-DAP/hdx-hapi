@@ -1,30 +1,41 @@
 - Parameter: '`resource_hdx_id`'
-  Description: ''
-  Source: ''
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`origin_location_ref`'
-  Description: ''
-  Source: ''
+  Description: >
+    An internal, stable identifier that references the location of origin
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`asylum_location_ref`'
-  Description: ''
-  Source: ''
+  Description: >
+    An internal, stable identifier that references the location of asylum
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`population_group`'
-  Description: ''
-  Source: ''
+  Description: >
+    Population group as [defined by UNHCR](https://popstats.unhcr.org/refugee-statistics/methodology/data-content/
+  Source: '[`PopulationGroup`](enums.md#population-group)'
 - Parameter: '`gender`'
-  Description: ''
-  Source: ''
+  Description: >
+    The gender of the population group in question, set to "all" if there
+    is no disaggregation
+  Source: '[`Gender`](enums.md#gender)'
 - Parameter: '`age_range`'
-  Description: ''
-  Source: ''
+  Description: >
+    The age range of the population group in question, set to "all" if there
+    is no disaggregation
+  Source:
 - Parameter: '`min_age`'
-  Description: ''
-  Source: ''
+  Description: >
+    The minimum age from `age_range`. NULL if `age_range` is "all" and
+    no age disaggregation
+  Source:
 - Parameter: '`max_age`'
-  Description: ''
-  Source: ''
+  Description: >
+    The maximum age from `age_range`. NULL if `age_range` is "all" and
+    no age disaggregation, or if there is no upper limit to the age range.
+  Source:
 - Parameter: '`population`'
-  Description: ''
-  Source: ''
+  Description: The number of people
+  Source:
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
   Source:
@@ -32,14 +43,14 @@
   Description: The end date for which the data are applicable
   Source:
 - Parameter: '`origin_location_code`'
-  Description: ''
-  Source: ''
+  Description: Location of origin p-code (ISO-3)
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`origin_location_name`'
-  Description: ''
-  Source: ''
+  Description: Location of origin name
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`asylum_location_code`'
-  Description: ''
-  Source: ''
+  Description: Location of asylum p-code (ISO-3)
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`asylum_location_name`'
-  Description: ''
-  Source: ''
+  Description: Location of asylum name
+  Source: '[`Location`](metadata.md#location)'

@@ -1,15 +1,18 @@
 - Parameter: '`event_type`'
-  Description: ''
-  Source: ''
+  Description: >
+    ACLED's public dataset is compiled into non-mutually exclusive
+    event-type categories.
+    Please see the [ACLED Codebook](https://acleddata.com/knowledge-base/codebook/#acled-events)
+    for their methodology.
+  Source: '[`Event Type`](enums.md#event-type)'
 - Parameter: '`events`'
-  Description: ''
-  Source: ''
+  Description: The number of events with the given `event_type`
+  Source:
 - Parameter: '`fatalities`'
-  Description: ''
+  Description: The number of fatalities due to the given `event_type`
   Source: ''
 - Parameter: '`resource_hdx_id`'
-  Description: >
-    Unique resource UUID on HDX
+  Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`location_ref`'
   Description: >

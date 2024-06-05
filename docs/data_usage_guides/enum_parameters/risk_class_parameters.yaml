@@ -1,20 +1,20 @@
-- risk class: 1
-  description: very low
-  risk score min: 0.0
-  risk score max: 1.9
-- risk class: 2
-  description: low
-  risk score min: 2.0
-  risk score max: 3.4
-- risk class: 3
-  description: medium
-  risk score min: 3.5
-  risk score max: 4.9
-- risk class: 4
-  description: high
-  risk score min: 5.0
-  risk score max: 6.4
-- risk class: 5
-  description: very high
-  risk score min: 6.5
-  risk score max: 10
+- Risk Class: 1
+  Description: very low
+  Risk Score Min: 0.0
+  Risk Score Max: 1.9
+- Risk Class: 2
+  Description: low
+  Risk Score Min: 2.0
+  Risk Score Max: 3.4
+- Risk Class: 3
+  Description: medium
+  Risk Score Min: 3.5
+  Risk Score Max: 4.9
+- Risk Class: 4
+  Description: high
+  Risk Score Min: 5.0
+  Risk Score Max: 6.4
+- Risk Class: 5
+  Description: very high
+  Risk Score Min: 6.5
+  Risk Score Max: 10
