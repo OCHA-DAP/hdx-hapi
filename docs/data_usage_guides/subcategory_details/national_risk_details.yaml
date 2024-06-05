@@ -1,0 +1,12 @@
+- Attribute: Data provider
+  Details: INFORM
+- Attribute: Dataset
+  Details: >
+    [INFORM Risk Index](https://data.humdata.org/dataset/inform-risk-index-2021)
+- Attribute: Time series
+  Details: Not available for this subcategory
+- Attribute: Update frequency
+  Details: Annually
+- Attribute: Related tables
+  Details: >
+    [`RiskClass`](enums.md#risk-class)

@@ -1,0 +1,11 @@
+- Attribute: Data provider
+  Details: OCHA FTS
+- Attribute: Dataset
+  Details: >
+    [OCHA FTS - Requirements and Funding Data series](https://data.humdata.org/dataset/?dataseries_name=OCHA+FTS+-+Requirements+and+Funding+Data)
+- Attribute: Time series
+  Details: Data contains funding since 2006, but the timepoints are not regular
+- Attribute: Update frequency
+  Details: Annually
+- Attribute: Related tables
+  Details: None

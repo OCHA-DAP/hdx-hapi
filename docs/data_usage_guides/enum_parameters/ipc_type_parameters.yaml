@@ -1,0 +1,11 @@
+- IPC type: current
+  Definition: >
+    Food insecurity that is occurring in the current analysis period.
+- IPC type: first projection
+  Definition: >
+    Projected food insecurity occurring in the period immediately following the
+    current analysis period.
+- IPC type: second projection
+  Definition: >
+    Projected food insecurity occurring in the period immediately following the
+    first projection period.

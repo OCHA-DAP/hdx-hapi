@@ -2,16 +2,14 @@
 
 ---
 
-
-The [HDX Humanitarian API](https://dev.data-humdata-org.ahconu.org/hapi)(HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations 
-
+The [HDX Humanitarian API](https://dev.data-humdata-org.ahconu.org/hapi)(HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations
 
 HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts or join our slack channel, send an email to [hdx@un.org](hdx@un.org).
-
 
 The initial scope of HDX HAPI will be the data included in the [HDX Data Grids](https://data.humdata.org/dashboards/overview-of-data-grids). Work is ongoing to add more data.
 
 # App Identifier
+
 To access HDX HAPI you need to generate an API identifier. This can be done via the the [sandbox interface encode_identifier endpoint](https://stage.hapi-humdata-org.ahconu.org/docs#/Utility/get_encoded_identifier_api_v1_encode_identifier_get). Enter your application name and email address and it will return the app identifier. The key must be included as a query string parameter e.g.
 
 ```
@@ -20,7 +18,6 @@ https://stage.hapi-humdata-org.ahconu.org/api/v1/themes/3w?app_identifier={your 
 
 # The Structure of HDX HAPI
 
-
 ## Data Subcategory Endpoints
 HDX HAPI is organised around a set of key humanitarian data subcategories like **Baseline Population** and **Conflict Events**. Each of these subcategories can be queried via its endpoint.
 
@@ -28,25 +25,30 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Affected People
 
-- [Humanitarian Needs](https://stage.hapi-humdata-org.ahconu.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get) 
-- [Refugees](https://stage.hapi-humdata-org.ahconu.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get)
+- [Refugees & Persons of Concern](https://stage.hapi-humdata-org.ahconu.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get)
+- [Humanitarian Needs](https://stage.hapi-humdata-org.ahconu.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
 
-#### Coordination and Context
-- [Conflict Events](https://stage.hapi-humdata-org.ahconu.org/docs#/Conflict%20Events/get_conflict_events_api_v1_coordination_context_conflict_event_get)
+#### Coordination & Context
+
+- [3W - Who is Doing What Where](https://stage.hapi-humdata-org.ahconu.org/docs#/3W%20Operational%20Presence/get_operational_presences_api_v1_coordination_context_operational_presence_get)
 - [Funding](https://stage.hapi-humdata-org.ahconu.org/docs#/Funding/get_fundings_api_v1_coordination_context_funding_get)
-- [National risk](https://stage.hapi-humdata-org.ahconu.org/docs#/National%20Risk/get_national_risks_api_v1_coordination_context_national_risk_get)
-- [Operational Presence (3W)](https://stage.hapi-humdata-org.ahconu.org/docs#/3W%20Operational%20Presence/get_operational_presences_api_v1_coordination_context_operational_presence_get)
+- [Conflict Events](https://stage.hapi-humdata-org.ahconu.org/docs#/Conflict%20Events/get_conflict_events_api_v1_coordination_context_conflict_event_get)
+- [National Risk](https://stage.hapi-humdata-org.ahconu.org/docs#/National%20Risk/get_national_risks_api_v1_coordination_context_national_risk_get)
 
-#### Food
-- [Food Prices](https://stage.hapi-humdata-org.ahconu.org/docs#/Food%20Security%20%26%20Nutrition/get_food_prices_api_v1_food_food_price_get)
+#### Food Security & Nutrition
+
 - [Food Security](https://stage.hapi-humdata-org.ahconu.org/docs#/Food%20Security%20%26%20Nutrition/get_food_security_api_v1_food_food_security_get)
+- [Food Prices](https://stage.hapi-humdata-org.ahconu.org/docs#/Food%20Security%20%26%20Nutrition/get_food_prices_api_v1_food_food_price_get)
 
-#### Population Social
-- [Population](https://stage.hapi-humdata-org.ahconu.org/docs#/Baseline%20Population/get_populations_api_v1_population_social_population_get)
+#### Population & Socio-economy
+
+- [Baseline Population](https://stage.hapi-humdata-org.ahconu.org/docs#/Baseline%20Population/get_populations_api_v1_population_social_population_get)
 - [Poverty Rate](https://stage.hapi-humdata-org.ahconu.org/docs#/Baseline%20Population/get_poverty_rates_api_v1_population_social_poverty_rate_get)
 
 # Terms Of Use
+
 [The HDX Terms of Service](https://data.humdata.org/faqs/terms)
 
 ## FAQS
+
 Please [refer to the landing page](https://dev.data-humdata-org.ahconu.org/hapi) for non-technical FAQs

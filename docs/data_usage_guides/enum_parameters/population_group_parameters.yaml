@@ -1,0 +1,32 @@
+- population group: REF
+  description: 'refugees'
+- population group: ROC
+  description: 'people in a refugee-like situation'
+- population group: ASY
+  description: 'asylum seekers'
+- population group: OIP
+  description: 'other people in need of international protection'
+- population group: IDP
+  description: 'internally displaced persons '
+- population group: IOC
+  description: 'people in IDP-like situation'
+- population group: STA
+  description: 'stateless people'
+- population group: OOC
+  description: 'others of concern'
+- population group: HST
+  description: 'host community'
+- population group: RET
+  description: 'returned refugees'
+- population group: RST
+  description: 'resettled refugees'
+- population group: NAT
+  description: 'naturalized refugees'
+- population group: RDP
+  description: 'returned IDPs'
+- population group: POC
+  description: 'persons of concern'
+- population group: RRI
+  description: 'TODO: what is this'
+- population group: all
+  description: 'all'

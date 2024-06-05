@@ -4,8 +4,26 @@ nav:
   - Getting Started: getting-started.md
   - Data Coverage: data.md
   - Code Examples: examples.md
-  - Data Usage Guide: subcategory_details.md
+  - Data Usage Guide:
+      - Affected People: data_usage_guides/affected_people.md
+      - Coordination & Context : data_usage_guides/coordination_and_context.md
+      - Food Security & Nutrition : data_usage_guides/food_security_and_nutrition.md
+      - Population & Socio-economy : data_usage_guides/population_and_socio-economy.md
+      - Metadata: data_usage_guides/metadata.md
+      - Enums: data_usage_guides/enums.md
   - Geo Data: geo.md
   - Contact: contact.md
 theme:
   name: "material"
+markdown_extensions:
+  - pymdownx.highlight:
+        anchor_linenums: true
+        line_spans: __span
+        pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+plugins:
+  - search
+  - table-reader:
+      base_path: "docs_dir"
