@@ -1,37 +1,38 @@
 import logging
-
-from typing import Dict
+from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hdx_hapi.db.models.views.db_dataset_view import DatasetView
+from hdx_hapi.db.models.views.all_views import DatasetView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams
 
 logger = logging.getLogger(__name__)
 
-async def datasets_view_list(
-    pagination_parameters: Dict,
-    db: AsyncSession,
-    hdx_id: str = None,
-    hdx_stub: str = None,
-    title: str = None,
-    hdx_provider_stub: str = None,
-    hdx_provider_name: str = None,
-):
 
+async def datasets_view_list(
+    pagination_parameters: PaginationParams,
+    db: AsyncSession,
+    dataset_hdx_id: Optional[str] = None,
+    dataset_hdx_stub: Optional[str] = None,
+    dataset_hdx_title: Optional[str] = None,
+    hdx_provider_stub: Optional[str] = None,
+    hdx_provider_name: Optional[str] = None,
+):
     logger.info(
-        f'datasets_view_list called with params: hdx_id={hdx_id}, hdx_stub={hdx_stub}, title={title}, ' \
-        f'hdx_provider_stub={hdx_provider_stub}, hdx_provider_name={hdx_provider_name}'
+        f'datasets_view_list called with params: dataset_hdx_id={dataset_hdx_id}, dataset_hdx_stub={dataset_hdx_stub}, '
+        f'dataset_hdx_title={dataset_hdx_title}, hdx_provider_stub={hdx_provider_stub}, '
+        f'hdx_provider_name={hdx_provider_name}'
     )
 
     query = select(DatasetView)
-    if hdx_id:
-        query = query.where(DatasetView.hdx_id == hdx_id)
-    if hdx_stub:
-        query = query.where(DatasetView.hdx_stub == hdx_stub)
-    if title:
-        query = query.where(DatasetView.title.icontains(title))
+    if dataset_hdx_id:
+        query = query.where(DatasetView.dataset_hdx_id == dataset_hdx_id)
+    if dataset_hdx_stub:
+        query = query.where(DatasetView.dataset_hdx_stub == dataset_hdx_stub)
+    if dataset_hdx_title:
+        query = query.where(DatasetView.dataset_hdx_title.icontains(dataset_hdx_title))
     if hdx_provider_stub:
         query = case_insensitive_filter(query, DatasetView.hdx_provider_stub, hdx_provider_stub)
     if hdx_provider_name:
@@ -39,7 +40,7 @@ async def datasets_view_list(
 
     query = apply_pagination(query, pagination_parameters)
 
-    logger.debug(f'Executing SQL query: {query}')
+    logger.info(f'Executing SQL query: {query}')
 
     result = await db.execute(query)
     datasets = result.scalars().all()

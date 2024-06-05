@@ -17,4 +17,3 @@ venv/
 coverage.xml
 
 *.pg_restore
-

@@ -1,12 +1,13 @@
 # Code Examples
 
+---
+
+In each of these code examples you will need to insert your generated app identifier in place of { your app identifier } text. To generated an app identifier follow the getting started guide.
+
 ## 1. Query a theme end point and loop through pages
 
 Themes are the core data of the API.  The results are paginated and so multiple calls are needed to get the whole dataset.  Below we query the 3W theme for Afghanistan and return all results into a single object.  To query a different theme or country change the constant variable of ```THEME``` to another theme or ```LOCATION``` to a different ISO3 country code.
 
-The current themes supported ```population```, ```3w```.
-
-The current countries supported ```AFG```, ```MLI```, ```NGA```
 
 ### Python
 
@@ -37,21 +38,20 @@ def fetch_data(base_url, limit=1000):
             print(f"Getting results {offset} to {offset+limit-1}")
             json_response = json.loads(response.read())
             
-            results.extend(json_response)
+            results.extend(json_response['data'])
             
             # If the returned results are less than the limit, it's the last page
-            if len(json_response) < limit:
+            if len(json_response['data']) < limit:
                 break
         
         idx += 1
         
     return results
 
-THEME = "3w"
+THEME = "coordination-context/operational-presence"
 LOCATION = "AFG"
-BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}"
+BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/v1/{THEME}?output_format=json&location_code={LOCATION}&app_identifier={ your app identifier }"
 LIMIT = 1000
-
 
 results = fetch_data(BASE_URL, LIMIT)
 print(results)
@@ -73,10 +73,10 @@ async function fetchData(baseUrl, limit = 1000) {
         const response = await fetch(url);
         const jsonResponse = await response.json();
 
-        results = results.concat(jsonResponse);
+        results = results.concat(jsonResponse['data']);
 
         // If the returned results are less than the limit, it's the last page
-        if (jsonResponse.length < limit) {
+        if (jsonResponse['data'].length < limit) {
             break;
         }
 
@@ -86,9 +86,9 @@ async function fetchData(baseUrl, limit = 1000) {
     return results;
 }
 
-const THEME = "3W"
+const THEME = "coordination-context/operational-presence"
 const LOCATION = "AFG"
-const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
+const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/v1/${THEME}?output_format=json&location_code=${LOCATION}&app_identifier={ your app identifier }`;
 const LIMIT = 1000;
 
 window.onload = async function() {
@@ -115,10 +115,10 @@ async function fetchData(baseUrl, limit = 1000) {
         const response = await fetch(url);
         const jsonResponse = await response.json();
 
-        results = results.concat(jsonResponse);
+        results = results.concat(jsonResponse['data']);
 
         // If the returned results are less than the limit, it's the last page
-        if (jsonResponse.length < limit) {
+        if (jsonResponse['data'].length < limit) {
             break;
         }
 
@@ -128,9 +128,9 @@ async function fetchData(baseUrl, limit = 1000) {
     return results;
 }
 
-const THEME = "3W"
+const THEME = "coordination-context/operational-presence"
 const LOCATION = "AFG"
-const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}`;
+const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/v1/${THEME}?output_format=json&location_code=${LOCATION}&app_identifier={ your app identifier }`;
 const LIMIT = 1000;
 
 fetchData(BASE_URL, LIMIT).then(results => {
@@ -158,22 +158,22 @@ fetch_data <- function(base_url, limit = 1000) {
     
     json_response <- fromJSON(content(response, "text"))
     
-    results <- append(results, list(json_response))
+    results <- append(results, list(json_response$data))
     
     # If the returned results are less than the limit, it's the last page
-    if(nrow(json_response) < limit) {
+    if(length(json_response$data) < limit) {
       break
     }
     
     idx <- idx + 1
   }
   
-  return(do.call(rbind, results))
+  return(results)
 }
 
-THEME <- "3w"
+THEME <- "coordination-context/operational-presence"
 LOCATION <- "AFG"
-BASE_URL <- paste0("https://placeholder.url/api/v1/themes/", THEME, "?output_format=json&location_code=", LOCATION)
+BASE_URL <- paste0("https://stage.hapi-humdata-org.ahconu.org/api/v1/", THEME, "?output_format=json&location_code=", LOCATION, "&app_identifier={ your app identifier }")
 LIMIT <- 1000
 
 results <- fetch_data(BASE_URL, LIMIT)
@@ -184,7 +184,7 @@ print(results)
 
 It is possible to add extra filters to the call to get a subset of results. To see the full set of filters that can be used for each theme, please check this documentation:
 
-https://placeholder.url/docs#/humanitarian-response/
+https://stage.hapi-humdata-org.ahconu.org/docs#/humanitarian-response/
 
 ### Python
 
@@ -194,14 +194,14 @@ Change the code to include a new parameter in the URL.
 
 ```python
 SECTOR= urllib.parse.quote("Emergency Shelter and NFI")
-BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}&sector_name={SECTOR}"
+BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/v1/{THEME}?output_format=json&location_code={LOCATION}&sector_name={SECTOR}&app_identifier={ your app identifier }"
 ```
 
 #### Filter by Admin1
 
 ```python
 ADMIN1= "AF01"
-BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}&admin1_code={ADMIN1}"
+BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/v1/{THEME}?output_format=json&location_code={LOCATION}&admin1_code={ADMIN1}&app_identifier={ your app identifier }"
 ```
 
 ### Plain Javascript and Node
@@ -212,14 +212,14 @@ Change the code to include a new parameter in the URL.
 
 ```javascript
 const SECTOR = "Emergency Shelter and NFI"
-const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}&sector_name=${SECTOR}`;
+const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/v1/${THEME}?output_format=json&location_code=${LOCATION}&sector_name=${SECTOR}&app_identifier={ your app identifier }`;
 ```
 
 #### Filter by Admin1
 
 ```javascript
 const ADMIN1 = "AF01"
-const BASE_URL = `https://placeholder.url/api/v1/themes/${THEME}?output_format=json&location_code=${LOCATION}&admin1_code=${ADMIN1}`;
+const BASE_URL = `https://stage.hapi-humdata-org.ahconu.org/api/v1/${THEME}?output_format=json&location_code=${LOCATION}&admin1_code=${ADMIN1}&app_identifier={ your app identifier }`;
 ```
 
 ### R
@@ -230,14 +230,14 @@ Change the code to include a new parameter in the URL.
 
 ```R
 SECTOR <- "Emergency Shelter and NFI"
-BASE_URL <- paste0("https://placeholder.url/api/v1/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&sector_name=",SECTOR)
+BASE_URL <- paste0("https://stage.hapi-humdata-org.ahconu.org/api/v1/", THEME, "?output_format=json&location_code=", LOCATION, "&sector_name=",SECTOR,'&app_identifier={ your app identifier }')
 ```
 
 #### Filter by Admin1
 
 ```R
 ADMIN1 <- "AF01"
-BASE_URL <- paste0("https://placeholder.url/api/v1/themes/", THEME, "?output_format=json&location_code=", LOCATION, "&admin1_code=",ADMIN1)
+BASE_URL <- paste0("https://stage.hapi-humdata-org.ahconu.org/api/v1/", THEME, "?output_format=json&location_code=", LOCATION, "&admin1_code=",ADMIN1,'&app_identifier={ your app identifier }')
 ```
 
 ## 3. Filter for admin level
@@ -249,18 +249,18 @@ admin_level=1
 
 ## 4. Get data from supporting tables
 
-Each supporting table such as ```orgs```, ```orgs_type```, ```sector``` and more have a unique URL to call to get the range of possible values.  Below we show the URL for getting of the sector names and codes.  Change the code at the top to have a new ```BASEURL``` and remove the URL parameters above it. Full code examples can be seen in the example repo.
+Each supporting table such as ```orgs```, ```orgs_type```, ```sector``` and more have a unique URL to call to get the range of possible values.  Below we show the URL for getting of the sector names and codes.  Change the code at the top to have a new ```BASEURL``` and remove the URL parameters above it.
 
 ### Python
 
 ```python
-BASE_URL "https://placeholder.url/api/v1/sector?output_format=json&offset=0&limit=1000"
+BASE_URL "https://stage.hapi-humdata-org.ahconu.org/api/v1/metadata/sector?output_format=json&offset=0&limit=1000&app_identifier={ your app identifier }"
 ```
 
 ### Javascript
 
 ```javascript
-CONST BASE_URL "https://placeholder.url/api/v1/sector?output_format=json&offset=0&limit=1000"
+CONST BASE_URL "https://stage.hapi-humdata-org.ahconu.org/api/v1/metadata/sector?output_format=json&offset=0&limit=1000&app_identifier={ your app identifier }"
 ```
 
 ## 5. Get admin level data for a country
@@ -278,18 +278,19 @@ https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/locations/AFG/versions/c
 ```
 
 [Full documentation](https://apps.itos.uga.edu/CODV2API/Help)
+
 ## 6. Download as CSV
 
 The code examples so far have been using JSON output and then processing this data. To query this data as csv, change the ```output_format``` to ```csv``` as per the examples below. Visiting this URL through the browser will download the CSV to then be used on your computer.
 
 ```python
-BASE_URL = "https://placeholder.url/api/v1/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
+BASE_URL = "https://stage.hapi-humdata-org.ahconu.org/api/v1/metadata/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000&app_identifier={ your app identifier }"
 ```
 
 ### Javascript
 
 ```javascript
-CONST BASE_URL = "https://placeholder.url/api/v1/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000"
+CONST BASE_URL = "https://stage.hapi-humdata-org.ahconu.org/api/v1/metadata/admin1?location_code=MLI&output_format=csv&offset=0&limit=1000&app_identifier={ your app identifier }"
 ```
 
 ## 7. Query Population and join to GeoJson from ITOS service
@@ -318,15 +319,15 @@ def fetch_data(base_url, limit=1000):
     while True:
         offset = idx * limit
         url = f"{base_url}&offset={offset}&limit={limit}"
-        
+        print(url)
         with urllib.request.urlopen(url) as response:
             print(f"Getting results {offset} to {offset+limit-1}")
             json_response = json.loads(response.read())
             
-            results.extend(json_response)
+            results.extend(json_response['data'])
             
             # If the returned results are less than the limit, it's the last page
-            if len(json_response) < limit:
+            if len(json_response['data']) < limit:
                 break
         
         idx += 1
@@ -379,11 +380,11 @@ def save_geojson(geojson, filename):
         json.dump(geojson, file)
         print(f"GeoJSON saved to {filename}")
 
-THEME = "population"
+THEME = "population-social/population"
 LOCATION = "AFG"
-AGE_RANGE_CODE = "80%2B"
+AGE_RANGE_CODE = "0-4"
 GENDER = "f"
-BASE_URL = f"https://placeholder.url/api/v1/themes/{THEME}?output_format=json&location_code={LOCATION}&age_range_code={AGE_RANGE_CODE}&gender={GENDER}&admin1_is_unspecified=false&admin2_is_unspecified=true"
+BASE_URL = f"https://stage.hapi-humdata-org.ahconu.org/api/v1/{THEME}?output_format=json&location_code={LOCATION}&age_range_code={AGE_RANGE_CODE}&gender={GENDER}&admin_level=1&app_identifier={ your app identifier }"
 LIMIT = 1000
 results = fetch_data(BASE_URL, LIMIT)
 
@@ -412,9 +413,9 @@ fetch_data <- function(base_url, limit=1000) {
     stop_for_status(response)
     json_response <- content(response, "parsed", type = "application/json")
     
-    results <- c(results, json_response)
+    results <- c(results, json_response$data)
     
-    if (length(json_response) < limit) {
+    if (length(json_response$data) < limit) {
       break
     }
     idx <- idx + 1
@@ -449,11 +450,11 @@ save_geojson <- function(geojson, filename) {
 }
 
 # Use the functions
-THEME <- "population"
+THEME <- "population-social/population"
 LOCATION <- "AFG"
-AGE_RANGE_CODE <- "80%2B"
+AGE_RANGE_CODE <- "0-4"
 GENDER <- "f"
-BASE_URL <- sprintf("https://placeholder.url/api/v1/themes/%s?output_format=json&location_code=%s&age_range_code=%s&gender=%s&admin1_is_unspecified=false&admin2_is_unspecified=true",
+BASE_URL <- sprintf("https://stage.hapi-humdata-org.ahconu.org/api/v1/%s?output_format=json&location_code=%s&age_range_code=%s&gender=%s&admin_level=1&app_identifier={ your app identifier }",
                     THEME, LOCATION, AGE_RANGE_CODE, GENDER)
 LIMIT <- 1000
 results <- fetch_data(BASE_URL, LIMIT)
@@ -465,7 +466,7 @@ save_geojson(updated_geojson, 'updated_data.geojson')
 ```
 
 
-## 8. Load data intoa google spreadsheet using app script and periodically update
+## 8. Load data into a google spreadsheet using app script and periodically update
 
 ### App script
 
@@ -483,7 +484,7 @@ A simple script that will fetch the API data and place it in the spreadsheet
 
 ```javascript
 function loadApiData() {
-  var baseUrl = "https://placeholder.url/api/v1/themes/3w?output_format=json";
+  var baseUrl = "https://stage.hapi-humdata-org.ahconu.org/api/v1/coordination-context/operational-presence?output_format=json&location_code=AFG&app_identifier={ your app identifier }";
   var limit = 10000;
   var offset = 0;
   
@@ -496,8 +497,8 @@ function loadApiData() {
     var jsonData = JSON.parse(response.getContentText());
     
     // If there's no data or less data than the limit, break out of the loop
-    if (!jsonData.length || jsonData.length < limit) {
-      allData = allData.concat(jsonData);
+    if (!jsonData.data.length || jsonData.data.length < limit) {
+      allData = allData.concat(jsonData.data);
       break;
     }
 
@@ -546,3 +547,12 @@ function loadApiData() {
 When you run the script for the first time or set up a trigger, it will ask for permissions. Make sure to grant them so the script can access the external API and modify your Google Spreadsheet.
 
 Now, the script will run daily at the time you specified and load the API data into your Google Spreadsheet.
+
+## 9. Getting meta dataset for a resource
+
+In this code example take the resource ID of a dataset and then query the meta data end point to get the contributing organisation for the dataset.
+
+
+```
+https://stage.hapi-humdata-org.ahconu.org/api/v1/metadata/resource?hdx_id=562e7757-0683-4d61-87bd-a7c94af2ee38&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=json&offset=0&limit=1000
+```

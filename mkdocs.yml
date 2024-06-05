@@ -1,10 +1,11 @@
-site_name: HAPI - The Humanitarian API
+site_name: HDX HAPI - The Humanitarian API
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Data Coverage: data.md
-  - Examples: examples.md
+  - Code Examples: examples.md
+  - Data Usage Guide: subcategory_details.md
   - Geo Data: geo.md
   - Contact: contact.md
 theme:
-  name: "mkdocs"
+  name: "material"

@@ -1,22 +1,22 @@
 import logging
 
-from typing import Dict
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hdx_hapi.db.models.views.db_location_view import LocationView
-from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
+from hdx_hapi.db.models.views.all_views import LocationView
+from hdx_hapi.db.dao.util.util import apply_pagination, apply_reference_period_filter, case_insensitive_filter
+from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
 
 logger = logging.getLogger(__name__)
 
+
 async def locations_view_list(
-    pagination_parameters: Dict,
+    pagination_parameters: PaginationParams,
+    ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
     code: str = None,
     name: str = None,
 ):
-
     logger.info(f'orgs_view_list called with params: code={code}, name={name}')
 
     query = select(LocationView)
@@ -24,6 +24,8 @@ async def locations_view_list(
         query = case_insensitive_filter(query, LocationView.code, code)
     if name:
         query = query.where(LocationView.name.icontains(name))
+
+    query = apply_reference_period_filter(query, ref_period_parameters, LocationView)
 
     query = apply_pagination(query, pagination_parameters)
 

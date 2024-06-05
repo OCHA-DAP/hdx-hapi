@@ -11,23 +11,24 @@ log = logging.getLogger(__name__)
 # query_parameters = endpoint_data['query_parameters']
 # expected_fields = endpoint_data['expected_fields']
 ENDPOINT_ROUTER_LIST = [
-    '/api/v1/admin1',
-    '/api/v1/admin2',
-    '/api/v1/age_range',
-    '/api/v1/dataset',
-    '/api/v1/gender',
-    '/api/v1/location',
-    '/api/v1/themes/3W',
-    '/api/v1/org',
-    '/api/v1/org_type',
-    '/api/v1/themes/population',
-    '/api/v1/population_group',
-    '/api/v1/population_status',
-    '/api/v1/themes/food_security',
-    '/api/v1/themes/national_risk',
-    '/api/v1/themes/humanitarian_needs',
-    '/api/v1/resource',
-    '/api/v1/sector',
+    '/api/v1/metadata/admin1',
+    '/api/v1/metadata/admin2',
+    '/api/v1/metadata/dataset',
+    '/api/v1/affected-people/humanitarian-needs',
+    '/api/v1/metadata/location',
+    '/api/v1/metadata/org',
+    '/api/v1/metadata/org-type',
+    '/api/v1/metadata/resource',
+    '/api/v1/metadata/sector',
+    '/api/v1/population-social/population',
+    '/api/v1/population-social/poverty-rate',
+    '/api/v1/coordination-context/national-risk',
+    '/api/v1/coordination-context/operational-presence',
+    '/api/v1/affected-people/refugees',
+    '/api/v1/coordination-context/funding',
+    '/api/v1/coordination-context/conflict-event',
+    '/api/v1/food/food-security',
+    '/api/v1/metadata/currency',
 ]
 
 
@@ -40,7 +41,7 @@ async def test_output_format(event_loop, refresh_db, endpoint_router):
         response = await ac.get(endpoint_router)
     assert response.status_code == 200
     assert response.headers.get('content-type') == 'application/json', 'The output should be in json format'
-    no_rows_json = len(response.json())
+    no_rows_json = len(response.json()['data'])
     assert no_rows_json > 0
 
     # CSV

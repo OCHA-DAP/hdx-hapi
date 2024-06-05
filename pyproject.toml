@@ -12,6 +12,7 @@ select = [
     "E", 
     "F", 
     "Q", 
+    "INP001", # Checks for packages that are missing an __init__.py file.
 ]
 extend-ignore = [
     "Q003", # avoidable-escaped-quote
