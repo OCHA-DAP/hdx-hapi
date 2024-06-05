@@ -112,7 +112,7 @@ async def get_operational_presences(
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     # admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
-    admin2_ref: Annotated[int, Query(description={DOC_ADMIN2_REF})] = None,
+    admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
