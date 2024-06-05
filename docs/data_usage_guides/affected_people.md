@@ -43,8 +43,7 @@ While the HNO data is
 [directly available on HDX](https://data.humdata.org/dataset/?dataseries_name=Humanitarian+Needs+Overview),
 it comes from different OCHA offices and is currently not standardised. Thus,
 HDX HAPI obtains the PIN numbers from the
-[HPC Tools API](https://api.hpc.tools/docs/v1/).
-Datasets from the HPC API will soon be available on HDX.
+[HPC Tools API](https://api.hpc.tools/docs/v1/)-based datasets on HDX.
 
 ### Summary
 

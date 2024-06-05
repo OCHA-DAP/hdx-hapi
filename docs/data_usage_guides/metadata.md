@@ -11,7 +11,7 @@ contain a small subset of the metadata available through the CKAN API or
 HDX library.
 
 The HAPI data records contain enough information to access the full records
-from CKAN, see the parameters tables for more details.
+from CKAN (see the parameters tables for more details).
 All subcategory tables link back to a resource record, and all resources link
 back to a dataset record.
 
@@ -46,9 +46,21 @@ boundaries.
 The p-code field is unique only in combination with reference_period_start,
 since p-codes may be reused in different versions of geographical metadata.
 
-When bringing in data from sub-categories, HDX HAPI uses p-code matching
-from [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/).
-Thie can involve .... TODO
+HDX HAPI utilises p-code handling provided by the
+[`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
+library. When bringing in data from sub-categories, p-codes are used if
+present. Sometimes, these p-codes may not strictly follow the standard with
+variations such as shorter or longer country or admin unit codes.
+The `hdx-python-country` library has a p-code length matching algorithm to
+ensure correct admin units are determined.
+
+This algorithm works as follows: First, a p-code is verified against the
+expected p-code format. Then, a length-matching check is performed,
+ensuring that for each segment (country code or admin unit code),
+the length matches the predefined format for the country. For example,
+a 3-letter country code could be converted to a 2-letter one or vice-versa.
+Digits can be prefixed by 0's to increase the length, or have 0's dropped
+from the prefix.
 
 ## Location <a id="location"></a>
 
@@ -152,10 +164,14 @@ The currency table is populated using the WFP VAM Data Bridges API.
 [`Food Prices`](food_security_and_nutrition.md#food-prices)
 
 Markets are defined as the physical locations where buyers and sellers
-come together to trade goods and services. This table is populated from the
-food prices data, which contains location names down to admin 2 as well as
-a latitude and longitude, however is not p-coded.
-We therefore p-code .... TODO
+come together to trade goods and services.
+This table is populated from the food prices data, which contains location
+names down to admin 2 as well as
+a latitude and longitude, but is not p-coded. Consequently, admin 1 and 2
+names must be matched to p-codes using the algorithm provided by the
+[`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
+library which includes phonetic name matching and
+manual overrides.
 
 ### WFP Commodity <a id="wfp-commodity"></a>
 

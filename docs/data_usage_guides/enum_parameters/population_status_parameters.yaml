@@ -3,7 +3,7 @@
 - population status: AFF
   description: 'affected'
 - population status: INN
-  description: 'inneed'
+  description: 'in-need'
 - population status: TGT
   description: 'targeted'
 - population status: REA

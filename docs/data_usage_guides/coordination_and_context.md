@@ -22,7 +22,7 @@ identify gaps, and plan for future humanitarian response.
 * Countries that are not p-coded are aggregated to Admin 0
 * Organisation deduplication is a long-running challenge with this data, since
   there are no unique identifiers, and organisation names may be spelled
-  different ways from different OCHA offices, or sometimes even within the same
+  different ways by different OCHA offices, or sometimes even within the same
   3W. See the [`org`](org) section below for more information on how we handle
   these details.
 * Rows without an associated sector are skipped
@@ -38,10 +38,12 @@ identify gaps, and plan for future humanitarian response.
 
 ## Funding <a id=”funding”></a>
 
-FTS publishes data on humanitarian funding flows as reported by donors and
-recipient organisations. It presents all humanitarian funding to a country and
-funding that is reported or that can be specifically mapped against funding
-requirements stated in Humanitarian Response Plans.
+[OCHA Financial Tracking Service](https://fts.unocha.org/home/2024/donors/view)
+(FTS) publishes data on
+humanitarian funding flows as reported by donors and
+recipient organisations. It presents all humanitarian funding to a country
+as well as funding that is reported or that can be specifically
+mapped against funding requirements stated in Humanitarian Response Plans.
 
 ### Summary
 
@@ -53,7 +55,7 @@ requirements stated in Humanitarian Response Plans.
   with an appeal. Funding data without associated appeals will be added in a
   future version.
 * The reference period is taken from the start and end date provided in each
-  row front he original data
+  row from the original data
 
 ## Conflict Events <a id="conflict-events"></a>
 
@@ -99,11 +101,3 @@ information on the methodology, see
 ### Transformations applied
 
 * The reference period is obtained from the HDX dataset
-
-### Usage Notes
-
-* [To be moved to parameter table]
-* Missing data: The total number of original indicators missing, including
-  any that have been estimated (e.g. HDI derived from GDP per capita).
-* Recentness: The average of the total number of years older than the
-  reference year per indicator, to account for any older data used as a proxy

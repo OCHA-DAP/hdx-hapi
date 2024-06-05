@@ -39,7 +39,7 @@ for their methodology and more detailed descriptions of the sub-event types.
 **Used in:**
 [`Baseline Population`](population_and_socio-economy.md#population),
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
-[`Refugees & Persons of Concern`](refugees)
+[`Refugees & Persons of Concern`](affected_people.md#refugees)
 
 Several sub-categories in HDX-HAPI are disaggregated by gender.
 
@@ -72,8 +72,11 @@ The IPC provides different projections to aid in planning and response efforts.
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
 [`Refugees & Persons of Concern`](affected_people.md#refugees)
 
-Most population group terms come from [UNHCR's glossary](https://www.unhcr.org/refugee-statistics/methodology/data-content/),
-while RRI comes from the humanitarian needs data.
+Almost all population group terms come from [UNHCR's glossary](https://www.unhcr.org/refugee-statistics/methodology/data-content/),
+except for "POC", "RRI", and "all". "RRI" was added as umbrella term
+for returnees because unlike UNHCR, the humanitarian
+needs data does not distinguish between returned refugees and returned
+IDPs.
 
 {{ read_yaml('data_usage_guides/enum_parameters/population_group_parameters.yaml') }}
 
@@ -91,11 +94,18 @@ determine how effectively people in need are being reached.
 
 **Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
 
+Pre-processing characteristics of food prices.
+
 {{ read_yaml('data_usage_guides/enum_parameters/price_flag_parameters.yaml') }}
 
 ## Price Type <a id="price-type"></a>
 
 **Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
+
+The point in the supply chain at which the price is determined.
+See FAO's
+[concepts on price data](https://www.fao.org/economic/the-statistics-division-ess/methodology/methodology-systems/price-statistics-and-index-numbers-of-agricultural-production-and-prices/4-concepts-on-price-data/en/)
+for more information.
 
 {{ read_yaml('data_usage_guides/enum_parameters/price_type_parameters.yaml') }}
 

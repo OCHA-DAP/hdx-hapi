@@ -1,7 +1,8 @@
 - Attribute: Data provider
   Details: OCHA HPC
 - Attribute: Dataset
-  Details: Coming soon to HDX
+  Details: >
+    [Humanitarian Needs Overview tag](https://data.humdata.org/dataset/?vocab_Topics=humanitarian+needs+overview-hno)
 - Attribute: Time series
   Details: Past datasets are available in the HPC API, but are sparse prior to 2023
 - Attribute: Update frequency
