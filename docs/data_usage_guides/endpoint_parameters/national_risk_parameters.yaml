@@ -23,17 +23,17 @@
   description: ''
   source: ''
 - parameter: '`reference_period_start`'
-  description: ''
-  source: ''
+  description: The start date for which the data are applicable
+  source:
 - parameter: '`reference_period_end`'
-  description: ''
-  source: ''
+  description: The end date for which the data are applicable
+  source:
 - parameter: '`resource_hdx_id`'
   description: ''
   source: ''
 - parameter: '`location_code`'
-  description: ''
-  source: ''
+  description: Location p-code (ISO-3)
+  source: '[`Location`](metadata.md#location)'
 - parameter: '`location_name`'
-  description: ''
-  source: ''
+  description: Location name
+  source: '[`Location`](metadata.md#location)'

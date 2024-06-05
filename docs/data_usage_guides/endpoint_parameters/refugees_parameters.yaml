@@ -26,11 +26,11 @@
   description: ''
   source: ''
 - parameter: '`reference_period_start`'
-  description: ''
-  source: ''
+  description: The start date for which the data are applicable
+  source:
 - parameter: '`reference_period_end`'
-  description: ''
-  source: ''
+  description: The end date for which the data are applicable
+  source:
 - parameter: '`origin_location_code`'
   description: ''
   source: ''
