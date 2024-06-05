@@ -107,7 +107,8 @@ async def get_humanitarian_needs(
     """
     UNOCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF),
     provides information about the number of people in need during a crisis.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
+    affected_people/#humanitarian-needs'>HDX HAPI documentation</a>,
     and the <a href='https://www.jiaf.info/'>original JIAF source</a> website.”
     """
     ref_period_parameters = None
@@ -178,7 +179,8 @@ async def get_refugees(
 ):
     """
     UNHCR's Refugee data provides information about displaced people in a crisis.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
+    affected_people/#refugees-persons-of-concern'>HDX HAPI documentation</a>,
     and the <a href='https://data.humdata.org/dataset/unhcr-population-data-for-world'>original HDX source</a> website.
     """
     ref_period_parameters = None

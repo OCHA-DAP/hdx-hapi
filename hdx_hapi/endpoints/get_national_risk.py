@@ -65,7 +65,8 @@ async def get_national_risks(
 ):
     """
     European Commission national risk data from the INFORM-risk framework.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href=' https://hdx-hapi.readthedocs.io/data_usage_guides/
+    coordination_and_context/#national-risk'>HDX HAPI documentation</a>,
     and the <a href='https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk'>original INFORM-risk source</a> website.
     """
     ref_period_parameters = None

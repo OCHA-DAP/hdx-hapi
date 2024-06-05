@@ -85,7 +85,8 @@ async def get_conflict_events(
 ):
     """
     Armed Conflict Location & Events Data from ACLED.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href=' https://hdx-hapi.readthedocs.io/data_usage_guides/
+    coordination_and_context/#conflict-events'>HDX HAPI documentation</a>,
     and the <a href='https://acleddata.com/'>original ACLED source</a> website.
     """
     ref_period_parameters = None

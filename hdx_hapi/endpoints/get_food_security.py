@@ -71,7 +71,8 @@ async def get_food_security(
 ):
     """
     Integrated Food Security Phase Classification from the IPC.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
+    food_security_and_nutrition/#food-security'>HDX HAPI documentation</a>,
     and the <a href='https://www.ipcinfo.org/ipcinfo-website/ipc-overview-and-classification-system/ipc-acute-food-insecurity-classification/en/'>
     original IPC source</a> website.
     """

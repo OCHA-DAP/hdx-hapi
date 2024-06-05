@@ -180,7 +180,8 @@ async def get_operational_presences(
     UNOCHA's 3W (Who is doing What Where) Operational Presence data provides
     information about which organizations are working in different locations affected by a
     crisis.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href=' https://hdx-hapi.readthedocs.io/data_usage_guides/
+    coordination_and_context/#3w-who-is-doing-what-where'>HDX HAPI documentation</a>,
     and the <a href='https://3w.unocha.org/'>original UNOCHA 3W source</a> website.
     """
     ref_period_parameters = None

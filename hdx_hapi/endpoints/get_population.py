@@ -78,7 +78,8 @@ async def get_populations(
 ):
     """
     Baseline population data sourced and maintained by UNFPA (UN Population Fund).
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
+    population_and_socio-economy/#baseline-population'>HDX HAPI documentation</a>,
     and the <a href='https://data.humdata.org/organization/unfpa'>UNFPA on HDX</a>.
     """
     ref_period_parameters = None
@@ -128,7 +129,8 @@ async def get_poverty_rates(
 ):
     """
     Poverty rate data from the Oxford Department of International Development.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
+    population_and_socio-economy/#poverty-rate'>HDX HAPI documentation</a>,
     and the <a href='https://ophi.org.uk/global-mpi'>Oxford Department of International Development</a> website.
     """
     ref_period_parameters = None

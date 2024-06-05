@@ -88,7 +88,8 @@ async def get_food_prices(
     """
     The World Food Programme (WFP) food prices data provides information about food prices for a range of commodities
     at markets across the world. See the more detailed technical
-    <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    <a href=' https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
+    food_security_and_nutrition/#food-prices'>HDX HAPI documentation</a>,
     and the <a href='https://dataviz.vam.wfp.org/economic/prices'>original WFP source</a> website.
     """
     result = await get_food_prices_srv(
