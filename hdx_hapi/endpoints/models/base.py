@@ -2,6 +2,24 @@ from typing import Generic, List, Optional, TypeVar
 from typing_extensions import Self
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from hdx_hapi.config.doc_snippets import (
+    DOC_LOCATION_CODE,
+    DOC_LOCATION_REF,
+    DOC_LOCATION_NAME,
+    DOC_ADMIN1_REF,
+    DOC_ADMIN1_NAME,
+    DOC_ADMIN1_CODE,
+    DOC_ADMIN2_REF,
+    DOC_ADMIN2_NAME,
+    DOC_ADMIN2_CODE,
+)
+
+
+def truncate_query_description(query_description) -> str:
+    response_description = query_description.replace('Filter the response by ', '')
+    response_description = response_description.capitalize()
+    return response_description
+
 
 class HapiBaseModel(BaseModel):
     def list_of_fields(self) -> List[str]:
@@ -9,19 +27,19 @@ class HapiBaseModel(BaseModel):
 
 
 class HapiModelWithAdmins(BaseModel):
-    location_ref: int
-    location_code: str = Field(max_length=128)
-    location_name: str = Field(max_length=512)
+    location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
+    location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
+    location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
 
     admin1_is_unspecified: bool = Field(exclude=True)
     admin2_is_unspecified: bool = Field(exclude=True)
 
-    admin1_ref: int
-    admin1_code: Optional[str] = Field(max_length=128)
-    admin1_name: Optional[str] = Field(max_length=512)
-    admin2_ref: int
-    admin2_code: Optional[str] = Field(max_length=128)
-    admin2_name: Optional[str] = Field(max_length=512)
+    admin1_ref: int = Field(description=truncate_query_description(DOC_ADMIN1_REF))
+    admin1_code: Optional[str] = Field(max_length=128, description=truncate_query_description(DOC_ADMIN1_CODE))
+    admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
+    admin2_ref: int = Field(description=truncate_query_description(DOC_ADMIN2_REF))
+    admin2_code: Optional[str] = Field(max_length=128, description=truncate_query_description(DOC_ADMIN2_CODE))
+    admin2_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN2_NAME))
 
     @model_validator(mode='after')  # type: ignore
     def set_admin1_admin2_null(self) -> Self:
