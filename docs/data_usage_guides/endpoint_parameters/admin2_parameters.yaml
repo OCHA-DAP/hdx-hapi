@@ -1,24 +1,24 @@
-- parameter: '`code`'
-  description: Admin 2 p-code
-  source:
-- parameter: '`name`'
-  description: Admin 2 name
-  source:
-- parameter: '`admin1_code`'
-  description: Admin 1 p-code
-  source: '[`Admin 1`](metadata.md#admin1)'
-- parameter: '`admin1_name`'
-  description: Admin 1 name
-  source: '[`Admin 1`](metadata.md#admin1)'
-- parameter: '`location_code`'
-  description: Location p-code (ISO-3)
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`location_name`'
-  description: Location name
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`reference_period_start`'
-  description: The start date for which the data are applicable
-  source:
-- parameter: '`reference_period_end`'
-  description: The end date for which the data are applicable
-  source:
+- Parameter: '`code`'
+  Description: Admin 2 p-code
+  Source:
+- Parameter: '`name`'
+  Description: Admin 2 name
+  Source:
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_name`'
+  Description: Admin 1 name
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`location_code`'
+  Description: Location p-code (ISO-3)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: Location name
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:

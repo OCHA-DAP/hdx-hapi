@@ -1,57 +1,57 @@
-- parameter: '`resource_hdx_id`'
-  description: ''
-  source: ''
-- parameter: '`admin2_ref`'
-  description: ''
-  source: ''
-- parameter: '`gender`'
-  description: ''
-  source: ''
-- parameter: '`age_range`'
-  description: ''
-  source: ''
-- parameter: '`min_age`'
-  description: ''
-  source: ''
-- parameter: '`max_age`'
-  description: ''
-  source: ''
-- parameter: '`population`'
-  description: ''
-  source: ''
-- parameter: '`reference_period_start`'
-  description: The start date for which the data are applicable
-  source:
-- parameter: '`reference_period_end`'
-  description: The end date for which the data are applicable
-  source:
-- parameter: '`location_ref`'
-  description: >
+- Parameter: '`resource_hdx_id`'
+  Description: ''
+  Source: ''
+- Parameter: '`admin2_ref`'
+  Description: ''
+  Source: ''
+- Parameter: '`gender`'
+  Description: ''
+  Source: ''
+- Parameter: '`age_range`'
+  Description: ''
+  Source: ''
+- Parameter: '`min_age`'
+  Description: ''
+  Source: ''
+- Parameter: '`max_age`'
+  Description: ''
+  Source: ''
+- Parameter: '`population`'
+  Description: ''
+  Source: ''
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
+- Parameter: '`location_ref`'
+  Description: >
     An internal, stable identifier to reference a location
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`location_code`'
-  description: Location p-code (ISO-3)
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`location_name`'
-  description: Location name
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`admin1_ref`'
-  description: >
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_code`'
+  Description: Location p-code (ISO-3)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: Location name
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`admin1_ref`'
+  Description: >
     An internal, stable identifier to reference an admin 1 division
-  source: '[`Admin 1`](metadata.md#admin1)'
-- parameter: '`admin1_code`'
-  description: Admin 1 p-code
-  source: '[`Admin 1`](metadata.md#admin1)'
-- parameter: '`admin1_name`'
-  description: Admin 1 name
-  source: '[`Admin 1`](metadata.md#admin1)'
-- parameter: '`admin2_ref`'
-  description: >
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_name`'
+  Description: Admin 1 name
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin2_ref`'
+  Description: >
     An internal, stable identifier to reference an admin 2 division
-  source: '[`Admin 2`](metadata.md#admin2)'
-- parameter: '`admin2_code`'
-  description: Admin 2 p-code
-  source: '[`Admin 2`](metadata.md#admin2)'
-- parameter: '`admin2_name`'
-  description: Admin 2 name
-  source: '[`Admin 2`](metadata.md#admin2)'
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_code`'
+  Description: Admin 2 p-code
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_name`'
+  Description: Admin 2 name
+  Source: '[`Admin 2`](metadata.md#admin2)'

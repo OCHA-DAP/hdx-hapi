@@ -1,37 +1,37 @@
-- parameter: '`resource_hdx_id`'
-  description: Unique resource UUID on HDX
-  source: '[`Resource`](metadata.md#resource)'
-- parameter: '`appeal_code`'
-  description: ''
-  source: ''
-- parameter: '`appeal_name`'
-  description: ''
-  source: ''
-- parameter: '`appeal_type`'
-  description: ''
-  source: ''
-- parameter: '`requirements_usd`'
-  description: ''
-  source: ''
-- parameter: '`funding_usd`'
-  description: ''
-  source: ''
-- parameter: '`funding_pct`'
-  description: ''
-  source: ''
-- parameter: '`location_ref`'
-  description: >
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`appeal_code`'
+  Description: ''
+  Source: ''
+- Parameter: '`appeal_name`'
+  Description: ''
+  Source: ''
+- Parameter: '`appeal_type`'
+  Description: ''
+  Source: ''
+- Parameter: '`requirements_usd`'
+  Description: ''
+  Source: ''
+- Parameter: '`funding_usd`'
+  Description: ''
+  Source: ''
+- Parameter: '`funding_pct`'
+  Description: ''
+  Source: ''
+- Parameter: '`location_ref`'
+  Description: >
     An internal, stable identifier to reference a location
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`location_code`'
-  description: Location p-code (ISO-3)
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`location_name`'
-  description: Location name
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`reference_period_start`'
-  description: The start date for which the data are applicable
-  source:
-- parameter: '`reference_period_end`'
-  description: The end date for which the data are applicable
-  source:
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_code`'
+  Description: Location p-code (ISO-3)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: Location name
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:

@@ -1,12 +1,12 @@
-- parameter: '`code`'
-  description: Location p-code (ISO-3)
-  source:
-- parameter: '`name`'
-  description: Location name
-  source:
-- parameter: '`reference_period_start`'
-  description: The start date for which the data are applicable
-  source:
-- parameter: '`reference_period_end`'
-  description: The end date for which the data are applicable
-  source:
+- Parameter: '`code`'
+  Description: Location p-code (ISO-3)
+  Source:
+- Parameter: '`name`'
+  Description: Location name
+  Source:
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:

@@ -1,43 +1,43 @@
-- parameter: '`resource_hdx_id`'
-  description: >
+- Parameter: '`resource_hdx_id`'
+  Description: >
     Unique resource UUID on HDX
-  source: '[`Resource`](metadata.md#resource)'
-- parameter: '`admin1_name`'
-  description: >
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`admin1_name`'
+  Description: >
     Admin 1 name taken directly from the Oxford MPI data. Note that admin 1
     name would normally be aligned to the data in the
     [`Admin 1`](metadata.md#admin1) endpoint, however this is a
     special case due to the data not being p-coded.
-  source:
-- parameter: '`mpi`'
-  description: >
+  Source:
+- Parameter: '`mpi`'
+  Description: >
     The multidimensional poverty index, derived as a product of the
     `headcount_ratio` and `intensity_of_deprivation`. Note that this
     field is presented as a fraction, while the others are percentages.
-  source:
-- parameter: '`headcount_ratio`'
-  description: The percentage of people deprived in 33% or more indicators
-  source:
-- parameter: '`intensity_of_deprivation`'
-  description: >
+  Source:
+- Parameter: '`headcount_ratio`'
+  Description: The percentage of people deprived in 33% or more indicators
+  Source:
+- Parameter: '`intensity_of_deprivation`'
+  Description: >
     The average proportion of indicators in which people are deprived,
     given as a percentage
-  source:
-- parameter: '`vulnerable_to_poverty`'
-  description: The percentage of people deprived in 20-33% of indicators
-  source:
-- parameter: '`in_severe_poverty`'
-  description: The percentage of people deprived in 50% or more indicators
-  source:
-- parameter: '`reference_period_start`'
-  description: The start date for which the data are applicable
-  source:
-- parameter: '`reference_period_end`'
-  description: The end date for which the data are applicable
-  source:
-- parameter: '`location_code`'
-  description: Location p-code (ISO-3)
-  source: '[`Location`](metadata.md#location)'
-- parameter: '`location_name`'
-  description: Location name
-  source: '[`Location`](metadata.md#location)'
+  Source:
+- Parameter: '`vulnerable_to_poverty`'
+  Description: The percentage of people deprived in 20-33% of indicators
+  Source:
+- Parameter: '`in_severe_poverty`'
+  Description: The percentage of people deprived in 50% or more indicators
+  Source:
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
+- Parameter: '`location_code`'
+  Description: Location p-code (ISO-3)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: Location name
+  Source: '[`Location`](metadata.md#location)'
