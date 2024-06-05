@@ -1,27 +1,31 @@
 - Parameter: '`sector_code`'
-  Description: ''
-  Source: ''
-- Parameter: '`resource_hdx_id`'
-  Description: ''
-  Source: ''
-- Parameter: '`org_acronym`'
-  Description: ''
-  Source: ''
-- Parameter: '`org_name`'
-  Description: ''
-  Source: ''
-- Parameter: '`org_type_code`'
-  Description: ''
-  Source: ''
-- Parameter: '`org_type_description`'
-  Description: ''
-  Source: ''
-- Parameter: '`sector_name`'
-  Description: ''
-  Source: ''
-- Parameter: '`location_ref`'
   Description: >
-    An internal, stable identifier to reference a location
+    The sector code, derived either from the
+    [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
+    dataset, or created for HDX HAPI
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`org_acronym`'
+  Description: The organisation acronym
+  Source: '[`Org`](metadata.md#org)'
+- Parameter: '`org_name`'
+  Description: The organisation name
+  Source: '[`Org`](metadata.md#org)'
+- Parameter: '`org_type_code`'
+  Description: >
+    The code referring to the organisation type, derived either from the
+    [ OCHA Digital Services organisation types list ](https://data.humdata.org/dataset/organization-types-beta),
+    or created for HDX HAPI
+  Source: '[`Org Type`](metadata.md#org-type)'
+- Parameter: '`org_type_description`'
+  Description:  A description of the org type
+  Source: '[`Org Type`](metadata.md#org-type)'
+- Parameter: '`sector_name`'
+  Description: The name of the sector
+  Source: '[`Sector`](metadata.md#sector)'
+- Parameter: '`location_ref`'
+  Description: An internal, stable identifier to reference a location
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`location_code`'
   Description: Location p-code (ISO-3)

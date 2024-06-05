@@ -74,7 +74,7 @@ The IPC provides different projections to aid in planning and response efforts.
 
 Almost all population group terms come from
 [UNHCR's glossary](https://www.unhcr.org/refugee-statistics/methodology/data-content/),
-except for "POC", "RRI", and "all". "RRI" was added as umbrella term
+except for "POC", "RRI", and "all". "RRI" was added as an umbrella term
 for returnees because unlike UNHCR, the humanitarian
 needs data does not distinguish between returned refugees and returned
 IDPs.

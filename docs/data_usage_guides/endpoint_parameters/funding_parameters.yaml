@@ -2,23 +2,23 @@
   Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`appeal_code`'
-  Description: ''
-  Source: ''
+  Description: A unique code given by FTS to each appeal
+  Source:
 - Parameter: '`appeal_name`'
-  Description: ''
-  Source: ''
+  Description: Name of the appeal
+  Source:
 - Parameter: '`appeal_type`'
-  Description: ''
-  Source: ''
+  Description: The type of appeal, such as flash or HRP
+  Source:
 - Parameter: '`requirements_usd`'
-  Description: ''
-  Source: ''
+  Description: The funding requirements in US dollars
+  Source:
 - Parameter: '`funding_usd`'
-  Description: ''
-  Source: ''
+  Description: The actual funding in US dollars
+  Source:
 - Parameter: '`funding_pct`'
-  Description: ''
-  Source: ''
+  Description: The percentage of required funding received by the appeal
+  Source:
 - Parameter: '`location_ref`'
   Description: >
     An internal, stable identifier to reference a location

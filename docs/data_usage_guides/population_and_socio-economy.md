@@ -62,3 +62,5 @@ details.
 * The data is disaggregated to admin 1, but not p-coded. We have kept the
   admin 1 names in the data, but link only to national level p-codes.
   We plan to p-code this data in a future release.
+* An “all” value in the `gender` and `age_range` columns indicates no
+  disaggregation

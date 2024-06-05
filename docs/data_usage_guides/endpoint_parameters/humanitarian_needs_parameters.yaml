@@ -6,32 +6,43 @@
     An internal, stable identifier to reference an admin 2 division
   Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`gender`'
-  Description: ''
-  Source: ''
+  Description: >
+    The gender of the population group in question, set to "all" if there
+    is no disaggregation
+  Source: '[`Gender`](enums.md#gender)'
 - Parameter: '`age_range`'
-  Description: ''
-  Source: ''
+  Description: >
+    The age range of the population group in question, set to "all" if there
+    is no disaggregation
+  Source:
 - Parameter: '`min_age`'
-  Description: ''
-  Source: ''
+  Description: >
+    The minimum age from `age_range`. NULL if `age_range` is "all" and
+    no age disaggregation.
+  Source:
 - Parameter: '`max_age`'
-  Description: ''
-  Source: ''
+  Description: >
+    The maximum age from `age_range`. NULL if `age_range` is "all" and
+    no age disaggregation, or if there is no upper limit to the age range.
+  Source:
 - Parameter: '`disabled_marker`'
-  Description: ''
-  Source: ''
+  Description: Marker used to indicate disaggregation by disability
+  Source: '[`Disabled Marker`](enums.md#disabled-marker)'
 - Parameter: '`sector_code`'
-  Description: ''
-  Source: ''
+  Description: >
+    The sector code, derived either from the
+    [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
+    dataset, or created for HDX HAPI
+  Source: '[`Sector`](metadata.md#sector)'
 - Parameter: '`population_group`'
-  Description: ''
-  Source: ''
+  Description: The population group, such as IDP or refugee
+  Source: '[`Population Group`](enums.md#population-group)'
 - Parameter: '`population_status`'
-  Description: ''
-  Source: ''
+  Description: The population status, such as in-need or targeted
+  Source: '[`Population Status`](enums.md#population-status)'
 - Parameter: '`population`'
-  Description: ''
-  Source: ''
+  Description: The number of people
+  Source:
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
   Source:
@@ -39,8 +50,8 @@
   Description: The end date for which the data are applicable
   Source:
 - Parameter: '`sector_name`'
-  Description: ''
-  Source: ''
+  Description: The name of the sector
+  Source: '[`Sector`](metadata.md#sector)'
 - Parameter: '`location_code`'
   Description: Location p-code (ISO-3)
   Source: '[`Location`](metadata.md#location)'

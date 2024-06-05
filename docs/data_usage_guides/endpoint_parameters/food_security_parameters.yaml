@@ -6,17 +6,17 @@
     An internal, stable identifier to reference an admin 2 division
   Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`ipc_phase`'
-  Description: ''
-  Source: ''
+  Description: The IPC severity phase
+  Source: '[`IPC Phase`](enums.md#ipc-phase)'
 - Parameter: '`ipc_type`'
-  Description: ''
-  Source: ''
+  Description: The IPC phase projection type
+  Source: '[`IPC Type`](enums.md#ipc-type)'
 - Parameter: '`population_in_phase`'
-  Description: ''
-  Source: ''
+  Description: The number of people in the IPC phase
+  Source:
 - Parameter: '`population_fraction_in_phase`'
-  Description: ''
-  Source: ''
+  Description: The fraction of people in the IPC phase
+  Source:
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
   Source:

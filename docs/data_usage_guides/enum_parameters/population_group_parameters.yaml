@@ -27,6 +27,8 @@
 - Population Group: POC
   Description: 'persons of concern'
 - Population Group: RRI
-  Description: 'TODO: what is this'
+  Description: >
+   An umbrella term for returnees, used in the humanitarian
+   needs data which not distinguish between returned refugees and returned IDPs
 - Population Group: all
-  Description: 'all'
+  Description: no disaggregation

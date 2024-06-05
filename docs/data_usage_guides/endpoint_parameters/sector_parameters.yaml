@@ -1,4 +1,7 @@
 - Parameter: '`code`'
-  Description: Sector code
+  Description: >
+    The sector code, derived either from the
+    [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
+    dataset, or created for HDX HAPI
 - Parameter: '`name`'
-  Description: Sector name
+  Description: The name of the sector
