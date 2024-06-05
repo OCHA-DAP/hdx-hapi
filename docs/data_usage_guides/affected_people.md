@@ -13,6 +13,10 @@ organisations.
 
 {{ read_yaml('data_usage_guides/subcategory_details/refugees_details.yaml') }}
 
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/refugees_parameters.yaml') }}
+
 ### Transformations applied
 
 * The table has been reshaped from wide to long: demographic-specific columns
@@ -48,6 +52,10 @@ HDX HAPI obtains the PIN numbers from the
 ### Summary
 
 {{ read_yaml('data_usage_guides/subcategory_details/humanitarian_needs_details.yaml') }}
+
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/humanitarian_needs_parameters.yaml') }}
 
 ### Transformations applied
 

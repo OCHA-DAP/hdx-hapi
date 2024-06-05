@@ -23,6 +23,8 @@ This table contains the HDX-specific metadata associated with all datasets
 used to populate the HAPI sub-category tables. Every dataset has at least
 one child [resource](resource).
 
+{{ read_yaml('data_usage_guides/endpoint_parameters/dataset_parameters.yaml') }}
+
 ### Resource <a id="resource"></a>
 
 **Used in:** All sub-category tables
@@ -30,6 +32,8 @@ one child [resource](resource).
 This table contains the HDX-specific metadata associated with all resources
 used to populate the HAPI sub-category tables. Every resource has one
 parent [dataset](dataset).
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/resource_parameters.yaml') }}
 
 ## Geographical Metadata
 
@@ -62,7 +66,7 @@ a 3-letter country code could be converted to a 2-letter one or vice-versa.
 Digits can be prefixed by 0's to increase the length, or have 0's dropped
 from the prefix.
 
-## Location <a id="location"></a>
+### Location <a id="location"></a>
 
 **Used in:** [`Admin 1`](admin1),
 [`Refugees & Persons of Concern`](affected_people.md#refugees),
@@ -72,7 +76,9 @@ from the prefix.
 Country or country-like entities in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
-## Admin 1  <a id="admin1"></a>
+{{ read_yaml('data_usage_guides/endpoint_parameters/location_parameters.yaml') }}
+
+### Admin 1  <a id="admin1"></a>
 
 **Used in:** [`Admin 2](admin2),
 [`Poverty Rate`](population_and_socio-economy.md#poverty-rate)
@@ -80,7 +86,9 @@ Country or country-like entities in HDX HAPI, from the CODs
 Admin 1 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
-## Admin 2 <a id="admin2"></a>
+{{ read_yaml('data_usage_guides/endpoint_parameters/admin1_parameters.yaml') }}
+
+### Admin 2 <a id="admin2"></a>
 
 Admin 2 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
@@ -88,10 +96,12 @@ Admin 2 level names and p-codes in HDX HAPI, from the CODs
 **Used in:**
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
 [`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence),
-[`Conflict Events`](coordination_and_context.md#conflict-events),
+[`Conflict Events`](coordination_and_context.md#conflict-event),
 [`Food Security`](food_security_and_nutrition.md#food-security),
-[`Food Prices`](food_security_and_nutrition.md#food-prices),
+[`Food Prices`](food_security_and_nutrition.md#food-price),
 [`Baseline Population`](population_and_socio-economy.md#population)
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/admin2_parameters.yaml') }}
 
 ## Sub-category Metadata
 
@@ -113,6 +123,8 @@ methodology:
   direct match, phonetic matching is used for strings > 5 characters. If no
   match is found, the organisation is skipped.
 
+{{ read_yaml('data_usage_guides/endpoint_parameters/org_parameters.yaml') }}
+
 ### Org Type <a id="org-type"></a>
 
 **Used in:**
@@ -129,6 +141,8 @@ with the addition of:
 * Local NGO.
 
 Organisation types all have an associated name and code.
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/org_type_parameters.yaml') }}
 
 ### Sector <a id=sector></a>
 
@@ -151,17 +165,21 @@ if needed.
 In the absence of a direct match, phonetic matching is used for
 strings > 5 characters.
 
+{{ read_yaml('data_usage_guides/endpoint_parameters/sector_parameters.yaml') }}
+
 ### Currency <a id="currency"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-prices)
+[`Food Prices`](food_security_and_nutrition.md#food-price)
 
 The currency table is populated using the WFP VAM Data Bridges API.
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/currency_parameters.yaml') }}
 
 ### WFP Market <a id="wfp-market"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-prices)
+[`Food Prices`](food_security_and_nutrition.md#food-price)
 
 Markets are defined as the physical locations where buyers and sellers
 come together to trade goods and services.
@@ -173,10 +191,14 @@ names must be matched to p-codes using the algorithm provided by the
 library which includes phonetic name matching and
 manual overrides.
 
+{{ read_yaml('data_usage_guides/endpoint_parameters/wfp_market_parameters.yaml') }}
+
 ### WFP Commodity <a id="wfp-commodity"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-prices)
+[`Food Prices`](food_security_and_nutrition.md#food-price)
 
 The commodity table tracks all food items, and their associated
 commodity category, present in the food prices data.
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/wfp_commodity_parameters.yaml') }}

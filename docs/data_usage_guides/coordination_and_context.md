@@ -13,6 +13,10 @@ identify gaps, and plan for future humanitarian response.
 
 {{ read_yaml('data_usage_guides/subcategory_details/operational_presence_details.yaml') }}
 
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/operational_presence_parameters.yaml') }}
+
 ### Transformations applied
 
 * For consistency and interoperability, we aggregate to an
@@ -49,6 +53,10 @@ mapped against funding requirements stated in Humanitarian Response Plans.
 
 {{ read_yaml('data_usage_guides/subcategory_details/funding_details.yaml') }}
 
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/funding_parameters.yaml') }}
+
 ### Transformations applied
 
 * The present version of the API currently captures only funding associated
@@ -57,7 +65,7 @@ mapped against funding requirements stated in Humanitarian Response Plans.
 * The reference period is taken from the start and end date provided in each
   row from the original data
 
-## Conflict Events <a id="conflict-events"></a>
+## Conflict Events <a id="conflict-event"></a>
 
 [ACLED](https://acleddata.com/) collects real-time data on the locations,
 dates, actors, fatalities, and types of all reported political violence and
@@ -68,7 +76,11 @@ To learn more about their methodology, please consult the
 
 ### Summary
 
-{{ read_yaml('data_usage_guides/subcategory_details/conflict_events_details.yaml') }}
+{{ read_yaml('data_usage_guides/subcategory_details/conflict_event_details.yaml') }}
+
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/conflict_event_parameters.yaml') }}
 
 ### Transformations applied
 
@@ -97,6 +109,10 @@ information on the methodology, see
 ### Summary
 
 {{ read_yaml('data_usage_guides/subcategory_details/national_risk_details.yaml') }}
+
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/national_risk_parameters.yaml') }}
 
 ### Transformations applied
 

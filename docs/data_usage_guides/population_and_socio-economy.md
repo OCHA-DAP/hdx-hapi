@@ -14,6 +14,10 @@ sources.
 
 {{ read_yaml('data_usage_guides/subcategory_details/population_details.yaml') }}
 
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/population_parameters.yaml') }}
+
 ### Transformations applied
 
 * The table has been reshaped from wide to long: demographic-specific columns
@@ -40,6 +44,10 @@ details.
 ### Summary
 
 {{ read_yaml('data_usage_guides/subcategory_details/poverty_rate_details.yaml') }}
+
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/poverty_rate_parameters.yaml') }}
 
 ### Transformations applied
 

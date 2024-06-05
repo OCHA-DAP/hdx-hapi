@@ -14,6 +14,10 @@ a future release we will p-code and expand coverage to other IPC datasets.
 
 {{ read_yaml('data_usage_guides/subcategory_details/food_security_details.yaml') }}
 
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/food_security_parameters.yaml') }}
+
 ### Transformations applied
 
 * The table has been reshaped from wide to long: the population and individual
@@ -35,7 +39,7 @@ a future release we will p-code and expand coverage to other IPC datasets.
 * Due to the above, the sum of the IPC fractions from phase 1-5 may not sum to
   exactly 1
 
-## Food Prices <a id="food-prices"></a>
+## Food Prices <a id="food-price"></a>
 
 The World Food Programme Price Database covers foods such as maize, rice,
 beans, fish, and sugar for 98 countries and some 3000 markets. It is updated
@@ -45,7 +49,11 @@ detailed methodology, see WFP's
 
 ### Summary
 
-{{ read_yaml('data_usage_guides/subcategory_details/food_prices_details.yaml') }}
+{{ read_yaml('data_usage_guides/subcategory_details/food_price_details.yaml') }}
+
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/food_price_parameters.yaml') }}
 
 ### Transformations applied
 

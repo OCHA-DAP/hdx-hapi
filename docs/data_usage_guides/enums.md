@@ -3,7 +3,7 @@
 ## Commodity Category <a id="commodity-category"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-prices),
+[`Food Prices`](food_security_and_nutrition.md#food-price),
 [`WFP Commodity`](metadata.md#wfp-commodity)
 
 The commodity categories are used in the WFP food prices data to organize
@@ -23,7 +23,7 @@ by disability. For more information on disability classification, see the
 
 ## Event Type <a id="event-type"></a>
 
-**Used in:** [`Conflict Events`](coordination_and_context.md#conflict-events)
+**Used in:** [`Conflict Events`](coordination_and_context.md#conflict-event)
 
 ACLED compiles information on political violence, demonstrations, and other
 non-violent but politically important events. For their public dataset,
@@ -92,7 +92,7 @@ determine how effectively people in need are being reached.
 
 ## Price Flag <a id="price-flag"></a>
 
-**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
+**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-price)
 
 Pre-processing characteristics of food prices.
 
@@ -100,7 +100,7 @@ Pre-processing characteristics of food prices.
 
 ## Price Type <a id="price-type"></a>
 
-**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
+**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-price)
 
 The point in the supply chain at which the price is determined.
 See FAO's
