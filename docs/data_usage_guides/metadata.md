@@ -6,7 +6,7 @@ All of the data in HDX HAPI comes from publicly-available datasets on HDX, and
 the HDX metadata can be used refer back to the original data to see what HAPI
 has simplified or omitted.
 The two primary HDX metadata tables are
-[`dataset`](dataset) and [`resource`](resource), and they
+[`dataset`](metadata.md#dataset) and [`resource`](metadata.md#resource), and they
 contain a small subset of the metadata available through the CKAN API or
 HDX library.
 
@@ -17,11 +17,11 @@ back to a dataset record.
 
 ### Dataset <a id="dataset"></a>
 
-**Used in:** [`Resource`](resource), all sub-category tables
+**Used in:** [`Resource`](metadata.md#resource), all sub-category tables
 
 This table contains the HDX-specific metadata associated with all datasets
 used to populate the HAPI sub-category tables. Every dataset has at least
-one child [resource](resource).
+one child [resource](metadata.md#resource).
 
 ### Resource <a id="resource"></a>
 
@@ -29,7 +29,7 @@ one child [resource](resource).
 
 This table contains the HDX-specific metadata associated with all resources
 used to populate the HAPI sub-category tables. Every resource has one
-parent [dataset](dataset).
+parent [dataset](metadata.md#dataset).
 
 ## Geographical Metadata
 
@@ -64,7 +64,7 @@ from the prefix.
 
 ## Location <a id="location"></a>
 
-**Used in:** [`Admin 1`](admin1),
+**Used in:** [`Admin 1`](metadata.md#admin1),
 [`Refugees & Persons of Concern`](affected_people.md#refugees),
 [`Funding`](coordination_and_context.md#funding),
 [`National Risk`](coordination_and_context.md#national-risk)
@@ -74,7 +74,7 @@ Country or country-like entities in HDX HAPI, from the CODs
 
 ## Admin 1  <a id="admin1"></a>
 
-**Used in:** [`Admin 2](admin2),
+**Used in:** [`Admin 2](metadata.md#admin2),
 [`Poverty Rate`](population_and_socio-economy.md#poverty-rate)
 
 Admin 1 level names and p-codes in HDX HAPI, from the CODs
@@ -116,7 +116,7 @@ methodology:
 ### Org Type <a id="org-type"></a>
 
 **Used in:**
-[`Org`](org),
+[`Org`](metadata.md#org),
 [`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence)
 
 The table is populated using
