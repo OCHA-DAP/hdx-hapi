@@ -38,14 +38,19 @@ async def app_identifier_middleware(request: Request, call_next):
         '/api/util/verify-request'
     )
 
-    if (
-        CONFIG.HAPI_IDENTIFIER_FILTERING
-        and request.url.path.startswith('/api')
-        and request.url.path not in ALLOWED_API_ENDPOINTS
-    ):
-        if is_nginx_verify_request:
-            header_url = request.headers.get('X-Original-URI')
+    parsed_url = None
+    if is_nginx_verify_request:
+        header_url = request.headers.get('X-Original-URI')
+        if header_url:
             parsed_url = urlparse(header_url)
+            path = str(parsed_url.path)
+        else:
+            return JSONResponse(content={'error': 'Missing X-Original-URI'}, status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        path = request.url.path
+
+    if CONFIG.HAPI_IDENTIFIER_FILTERING and path and path.startswith('/api') and path not in ALLOWED_API_ENDPOINTS:
+        if is_nginx_verify_request and parsed_url:
             query_params = parse_qs(str(parsed_url.query))
             app_identifier = query_params.get('app_identifier', [None])[0]
 
