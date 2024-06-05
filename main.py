@@ -35,6 +35,8 @@ from hdx_hapi.endpoints.get_food_price import router as food_price_router  # noq
 
 from hdx_hapi.endpoints.get_version import router as version_router  # noqa
 
+from hdx_hapi.endpoints.util.version import api_version  # noqa
+
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 from hdx_hapi.config.config import get_config  # noqa
@@ -66,7 +68,7 @@ so that `location_name=Mali` will return data for Mali and Somalia.
 app = FastAPI(
     title='HDX HAPI',
     description=DESCRIPTION,
-    version='0.1.0',
+    version=api_version,
     docs_url=None,
     servers=[{'url': CONFIG.HAPI_SERVER_URL}] if CONFIG.HAPI_SERVER_URL else [],
 )
