@@ -50,8 +50,8 @@ SUMMARY_TEXT = 'Get the list of WFP markets.'
 async def get_wfp_markets(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[Optional[str], Query(max_length=32, description='Commodity code')] = None,
-    name: Annotated[Optional[str], Query(max_length=512, description='Commodity name')] = None,
+    code: Annotated[Optional[str], Query(max_length=32, description='Commodity code.')] = None,
+    name: Annotated[Optional[str], Query(max_length=512, description='Commodity name.')] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
@@ -73,7 +73,7 @@ async def get_wfp_markets(
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level')] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level.')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

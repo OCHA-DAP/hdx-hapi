@@ -65,7 +65,7 @@ async def get_operational_presences(
                 'Filter the response by sector codes, which describe the humanitarian sector '
                 'to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_sectors_api_v1_metadata_sector_get" '
-                'target="_blank">sector endpoint</a> for details'
+                'target="_blank">sector endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -77,7 +77,7 @@ async def get_operational_presences(
                 'Filter the response by sector names, '
                 'which describe the humanitarian sector to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_sectors_api_v1_metadata_sector_get" '
-                'target="_blank">sector endpoint</a> for details'
+                'target="_blank">sector endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -89,7 +89,7 @@ async def get_operational_presences(
                 'Filter the response by the acronym of the organization '
                 'to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_orgs_api_v1_metadata_org_get" '
-                'target="_blank">org endpoint</a> for details'
+                'target="_blank">org endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -101,7 +101,7 @@ async def get_operational_presences(
                 'Filter the response by the name of the organization '
                 'to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_orgs_api_v1_metadata_org_get" '
-                'target="_blank">org endpoint</a> for details'
+                'target="_blank">org endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -115,7 +115,7 @@ async def get_operational_presences(
     admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
+    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level.')] = None,
     # admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
     # resource_update_date_min: Annotated[
     #     NaiveDatetime | date,

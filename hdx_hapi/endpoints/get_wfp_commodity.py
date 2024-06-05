@@ -32,9 +32,9 @@ SUMMARY = 'Get the list of WFP commodities'
 async def get_wfp_commodities(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[Optional[str], Query(max_length=32, description='Commodity code')] = None,
-    category: Annotated[Optional[CommodityCategory], Query(description='Commodity category')] = None,
-    name: Annotated[Optional[str], Query(max_length=512, description='Commodity name')] = None,
+    code: Annotated[Optional[str], Query(max_length=32, description='Commodity code.')] = None,
+    category: Annotated[Optional[CommodityCategory], Query(description='Commodity category.')] = None,
+    name: Annotated[Optional[str], Query(max_length=512, description='Commodity name.')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

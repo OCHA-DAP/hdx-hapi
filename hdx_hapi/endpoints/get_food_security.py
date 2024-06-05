@@ -65,7 +65,7 @@ async def get_food_security(
     admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
+    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level.')] = None,
     # admin2_is_unspecified: Annotated[bool, Query(description='Is admin2 specified or not')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):

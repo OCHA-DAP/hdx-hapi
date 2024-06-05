@@ -52,15 +52,15 @@ SUMMARY_TEXT = 'Get food prices.'
 async def get_food_prices(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    market_code: Annotated[Optional[str], Query(max_length=32, description='Market code')] = None,
-    market_name: Annotated[Optional[str], Query(max_length=512, description='Market name')] = None,
-    commodity_code: Annotated[Optional[str], Query(max_length=32, description='Commodity code')] = None,
-    commodity_category: Annotated[Optional[CommodityCategory], Query(description='Commodity category')] = None,
-    commodity_name: Annotated[Optional[str], Query(max_length=512, description='Commodity name')] = None,
-    price_flag: Annotated[Optional[PriceFlag], Query(description='Price Flag')] = None,
-    price_type: Annotated[Optional[PriceType], Query(description='Price Type')] = None,
-    price_min: Annotated[Optional[Decimal], Query(description='Price, lower bound')] = None,
-    price_max: Annotated[Optional[Decimal], Query(description='Price, upper bound')] = None,
+    market_code: Annotated[Optional[str], Query(max_length=32, description='Market code.')] = None,
+    market_name: Annotated[Optional[str], Query(max_length=512, description='Market name.')] = None,
+    commodity_code: Annotated[Optional[str], Query(max_length=32, description='Commodity code.')] = None,
+    commodity_category: Annotated[Optional[CommodityCategory], Query(description='Commodity category.')] = None,
+    commodity_name: Annotated[Optional[str], Query(max_length=512, description='Commodity name.')] = None,
+    price_flag: Annotated[Optional[PriceFlag], Query(description='Price Flag.')] = None,
+    price_type: Annotated[Optional[PriceType], Query(description='Price Type.')] = None,
+    price_min: Annotated[Optional[Decimal], Query(description='Price, lower bound.')] = None,
+    price_max: Annotated[Optional[Decimal], Query(description='Price, upper bound.')] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
@@ -82,7 +82,7 @@ async def get_food_prices(
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level')] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level.')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
