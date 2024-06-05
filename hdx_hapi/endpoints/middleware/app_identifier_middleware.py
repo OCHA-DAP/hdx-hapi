@@ -1,3 +1,4 @@
+from urllib.parse import parse_qs, urlparse
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr
@@ -33,17 +34,28 @@ async def app_identifier_middleware(request: Request, call_next):
     """
     Middleware to check for the app_identifier in the request and add it to the request state
     """
+    is_nginx_verify_request = request.url.path.startswith('/api/v1/util/verify-request') or request.url.path.startswith(
+        '/api/util/verify-request'
+    )
+
     if (
         CONFIG.HAPI_IDENTIFIER_FILTERING
         and request.url.path.startswith('/api')
         and request.url.path not in ALLOWED_API_ENDPOINTS
     ):
-        app_identifier = request.query_params.get('app_identifier')
+        if is_nginx_verify_request:
+            header_url = request.headers.get('X-Original-URI')
+            parsed_url = urlparse(header_url)
+            query_params = parse_qs(str(parsed_url.query))
+            app_identifier = query_params.get('app_identifier', [None])[0]
+
+        else:
+            app_identifier = request.query_params.get('app_identifier')
         authorization = request.headers.get('X-HDX-HAPI-APP-IDENTIFIER')
         encoded_value = app_identifier or authorization
 
         if not encoded_value:
-            return JSONResponse(content={'error': 'Missing app identifier'}, status_code=status.HTTP_400_BAD_REQUEST)
+            return JSONResponse(content={'error': 'Missing app identifier'}, status_code=status.HTTP_403_FORBIDDEN)
 
         try:
             decoded_value = base64.b64decode(encoded_value).decode('utf-8')
@@ -53,7 +65,7 @@ async def app_identifier_middleware(request: Request, call_next):
             # Adding the app_name to the request state so it can be accessed in the endpoint
             request.state.app_name = identifier_params.application
         except Exception:
-            return JSONResponse(content={'error': 'Invalid app identifier'}, status_code=status.HTTP_400_BAD_REQUEST)
+            return JSONResponse(content={'error': 'Invalid app identifier'}, status_code=status.HTTP_403_FORBIDDEN)
 
     response = await call_next(request)
     return response
