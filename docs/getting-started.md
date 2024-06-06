@@ -122,7 +122,7 @@ https://hapi.humdata.org/api/v1/metadata/sector?output_format=json&offset=0&limi
 ```
 
 
-This functionality is not limited to age ranges. There are similar support tables for a variety of filters such as organisations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
+This functionality is not limited to age ranges. There are similar support tables for a variety of filters such as organizations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
 
 
 ## Getting Metadata through API Queries
@@ -151,7 +151,7 @@ When you inspect the JSON output from an initial API query, you'll encounter a v
 ```
 
 
-Among these fields, ```dataset_hdx_stub``` and ```resource_hdx_id``` are keys to unlocking metadata about the dataset. This metadata includes the last update date, the organisation responsible for the data, and links to download the original dataset.
+Among these fields, ```dataset_hdx_stub``` and ```resource_hdx_id``` are keys to unlocking metadata about the dataset. This metadata includes the last update date, the organization responsible for the data, and links to download the original dataset.
 
 
 To dive deeper into the data's origin, use the resource_hdx_id in the resource endpoint URL:
@@ -193,7 +193,7 @@ Executing this query provides a response like the following:
 ```
 
 
-This output gives you a comprehensive view of the dataset's metadata, including the update date, the contributing organisation, and direct links to more information via the CKAN API and the original data file download.
+This output gives you a comprehensive view of the dataset's metadata, including the update date, the contributing organization, and direct links to more information via the CKAN API and the original data file download.
 
 
 As a starting point to effectively use our API, we encourage you to experiment with different queries using the [sandbox's](https://hapi.humdata.org/docs) query interface and review the provided code examples for guidance.
