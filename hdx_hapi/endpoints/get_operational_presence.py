@@ -1,6 +1,7 @@
 from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 
+from hdx_hapi.config.config import get_config
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
@@ -35,6 +36,8 @@ from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
+CONFIG = get_config()
+
 router = APIRouter(
     tags=['Coordination & Context'],
 )
@@ -65,7 +68,7 @@ async def get_operational_presences(
                 'Filter the response by sector codes, which describe the humanitarian sector '
                 'to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_sectors_api_v1_metadata_sector_get" '
-                'target="_blank">sector endpoint</a> for details'
+                'target="_blank">sector endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -77,7 +80,7 @@ async def get_operational_presences(
                 'Filter the response by sector names, '
                 'which describe the humanitarian sector to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_sectors_api_v1_metadata_sector_get" '
-                'target="_blank">sector endpoint</a> for details'
+                'target="_blank">sector endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -89,7 +92,7 @@ async def get_operational_presences(
                 'Filter the response by the acronym of the organization '
                 'to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_orgs_api_v1_metadata_org_get" '
-                'target="_blank">org endpoint</a> for details'
+                'target="_blank">org endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -101,7 +104,7 @@ async def get_operational_presences(
                 'Filter the response by the name of the organization '
                 'to which the operational presence applies. '
                 'See the <a href="/docs#/Metadata/get_orgs_api_v1_metadata_org_get" '
-                'target="_blank">org endpoint</a> for details'
+                'target="_blank">org endpoint</a> for details.'
             ),
         ),
     ] = None,
@@ -112,10 +115,10 @@ async def get_operational_presences(
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     # admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
-    admin2_ref: Annotated[int, Query(description={DOC_ADMIN2_REF})] = None,
+    admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level')] = None,
+    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level.')] = None,
     # admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
     # resource_update_date_min: Annotated[
     #     NaiveDatetime | date,
@@ -176,13 +179,6 @@ async def get_operational_presences(
     # admin1_name: Annotated[str, Query(max_length=512, description='Location Adm1 Name')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    UNOCHA's 3W (Who is doing What Where) Operational Presence data provides
-    information about which organizations are working in different locations affected by a
-    crisis.
-    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
-    and the <a href='https://3w.unocha.org/'>original UNOCHA 3W source</a> website.
-    """
     ref_period_parameters = None
     result = await get_operational_presences_srv(
         pagination_parameters=common_parameters,
@@ -221,3 +217,12 @@ async def get_operational_presences(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceResponse)
+
+
+get_operational_presences.__doc__ = (
+    "UNOCHA's 3W (Who is doing What Where) Operational Presence data provides "
+    'information about which organizations are working in different locations affected by a crisis. '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'coordination_and_context/#who-is-doing-what-where-operational-presence">HDX HAPI documentation</a>, '
+    'and the <a href="https://3w.unocha.org/">original UNOCHA 3W source</a> website. '
+)

@@ -1,0 +1,15 @@
+- Parameter: '`code`'
+  Description: >
+     Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source:
+- Parameter: '`name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source:
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:

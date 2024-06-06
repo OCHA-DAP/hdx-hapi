@@ -16,8 +16,8 @@ _APP_IDENTIFIER_DESCRIPTION = (
     'See the *encoded_app_identifier* endpoint.'
 )
 
-app_name_identifier_query = Query(max_length=512, min_length=4, description='A name for the calling application')
-email_identifier_query = Query(max_length=512, description='An email address')
+app_name_identifier_query = Query(max_length=512, min_length=4, description='A name for the calling application.')
+email_identifier_query = Query(max_length=512, description='An email address.')
 
 pagination_limit_query = Query(ge=0, le=10000, example=100, description=_LIMIT_DESCRIPTION)
 pagination_offset_query = Query(ge=0, description=_OFFSET_DESCRIPTION)

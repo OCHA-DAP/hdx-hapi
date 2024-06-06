@@ -1,0 +1,4 @@
+- Parameter: '`code`'
+  Description: ISO-4217 currency code
+- Parameter: '`name`'
+  Description: Currency name

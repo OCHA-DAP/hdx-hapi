@@ -1,0 +1,17 @@
+- Attribute: Data provider
+  Details: The World Food Programme
+- Attribute: Dataset
+  Details: >
+    [WFP Food Prices data series](https://data.humdata.org/dataset/?dataseries_name=WFP+-+Food+Prices)
+- Attribute: Time series
+  Details: Yes, monthly
+- Attribute: Update frequency
+  Details: Weekly
+- Attribute: Related tables
+  Details: >
+    [`Commodity Category`](enums.md#commodity-category),
+    [`Currency`](metadata.md#currency),
+    [`Price Flag`](enums.md#price-flag),
+    [`Price Type`](enums.md#price-type),
+    [`WFP Commodity`](metadata.md#wfp-commodity),
+    [`WFP Market`](metadata.md#wfp-market)

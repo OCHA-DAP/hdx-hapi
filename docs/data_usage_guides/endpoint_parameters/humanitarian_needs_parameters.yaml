@@ -1,0 +1,84 @@
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`admin2_ref`'
+  Description: >
+    An internal, stable identifier to reference an admin 2 division
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`gender`'
+  Description: >
+    The gender of the population group in question, set to "all" if there
+    is no disaggregation
+  Source: '[`Gender`](enums.md#gender)'
+- Parameter: '`age_range`'
+  Description: >
+    The age range of the population group in question, set to "all" if there
+    is no disaggregation
+  Source:
+- Parameter: '`min_age`'
+  Description: >
+    The minimum age from `age_range`, set to `null` if `age_range` is "all" and
+    there is no age disaggregation
+  Source:
+- Parameter: '`max_age`'
+  Description: >
+    The maximum age from `age_range`, set to `null` if `age_range` is "all" and
+    there is no age disaggregation, or if there is no upper limit to the
+    age range
+  Source:
+- Parameter: '`disabled_marker`'
+  Description: Marker used to indicate disaggregation by disability
+  Source: '[`Disabled Marker`](enums.md#disabled-marker)'
+- Parameter: '`sector_code`'
+  Description: >
+    The sector code, derived either from the
+    [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
+    dataset, or created for HDX HAPI
+  Source: '[`Sector`](metadata.md#sector)'
+- Parameter: '`population_group`'
+  Description: The population group, such as IDP or refugee
+  Source: '[`Population Group`](enums.md#population-group)'
+- Parameter: '`population_status`'
+  Description: The population status, such as in-need or targeted
+  Source: '[`Population Status`](enums.md#population-status)'
+- Parameter: '`population`'
+  Description: The number of people
+  Source:
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
+- Parameter: '`sector_name`'
+  Description: The name of the sector
+  Source: '[`Sector`](metadata.md#sector)'
+- Parameter: '`location_code`'
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_ref`'
+  Description: >
+    An internal, stable identifier to reference a location
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_name`'
+  Description: Admin 1 name
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin2_code`'
+  Description: Admin 2 p-code
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_name`'
+  Description: Admin 2 name
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin1_ref`'
+  Description: >
+    An internal, stable identifier to reference an admin 1 division
+  Source: '[`Admin 1`](metadata.md#admin1)'

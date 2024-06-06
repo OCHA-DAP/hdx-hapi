@@ -1,0 +1,12 @@
+- Gender: f
+  Description: 'Female'
+- Gender: m
+  Description: 'Male'
+- Gender: x
+  Description: 'Non-binary'
+- Gender: u
+  Description: 'Unspecified'
+- Gender: o
+  Description: 'Other'
+- Gender: all
+  Description: No disaggregation

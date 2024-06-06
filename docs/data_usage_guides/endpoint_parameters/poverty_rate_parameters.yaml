@@ -1,0 +1,45 @@
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`admin1_name`'
+  Description: >
+    Admin 1 name taken directly from the Oxford MPI data. Note that admin 1
+    names would normally be aligned to those from the
+    [`Admin 1`](metadata.md#admin1) endpoint, however this is a
+    special case due to the data not being p-coded.
+  Source:
+- Parameter: '`mpi`'
+  Description: >
+    The multidimensional poverty index, derived as a product of the
+    `headcount_ratio` and `intensity_of_deprivation`. Note that this
+    metric is presented as a fraction, while the others are percentages.
+  Source:
+- Parameter: '`headcount_ratio`'
+  Description: The percentage of people deprived in 33% or more indicators
+  Source:
+- Parameter: '`intensity_of_deprivation`'
+  Description: >
+    The average proportion of indicators in which people are deprived,
+    given as a percentage
+  Source:
+- Parameter: '`vulnerable_to_poverty`'
+  Description: The percentage of people deprived in 20-33% of indicators
+  Source:
+- Parameter: '`in_severe_poverty`'
+  Description: The percentage of people deprived in 50% or more indicators
+  Source:
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
+- Parameter: '`location_code`'
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source: '[`Location`](metadata.md#location)'

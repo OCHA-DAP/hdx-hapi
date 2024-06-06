@@ -1,5 +1,6 @@
 mkdocs~=1.5.2
 mkdocs-material~=9.2.6
+mkdocs-table-reader-plugin~=2.2.2
 
 pytest~=7.4.2
 pytest-cov~=4.1.0

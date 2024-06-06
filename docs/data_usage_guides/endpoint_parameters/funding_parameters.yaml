@@ -1,0 +1,40 @@
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`appeal_code`'
+  Description: A unique code given by FTS to each appeal
+  Source:
+- Parameter: '`appeal_name`'
+  Description: Name of the appeal
+  Source:
+- Parameter: '`appeal_type`'
+  Description: The type of appeal, such as flash or HRP
+  Source:
+- Parameter: '`requirements_usd`'
+  Description: The funding requirements in US dollars
+  Source:
+- Parameter: '`funding_usd`'
+  Description: The actual funding in US dollars
+  Source:
+- Parameter: '`funding_pct`'
+  Description: The percentage of required funding received by the appeal
+  Source:
+- Parameter: '`location_ref`'
+  Description: >
+    An internal, stable identifier to reference a location
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_code`'
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:

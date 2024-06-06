@@ -1,0 +1,6 @@
+- Disabled Marker: y
+  Description: 'Yes'
+- Disabled Marker: n
+  Description: 'No'
+- Disabled Marker: all
+  Description: No disaggregation

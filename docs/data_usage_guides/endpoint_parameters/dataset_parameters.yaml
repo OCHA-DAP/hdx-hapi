@@ -1,0 +1,47 @@
+- Parameter: '`dataset_hdx_id`'
+  Description: >
+    Unique dataset UUID on HDX, which does not change even when changes are
+    made to the dataset. It can be used to construct a URL to access the dataset
+    on HDX:
+    `https://data.humdata.org/dataset/[dataset_hdx_id]`,
+    which can be found in the `hdx_link` field.
+    It can also be used to access the dataset through the HDX CKAN API:
+    `https://data.humdata.org/api/action/package_show?id=[dataset_hdx_id]`,
+    as shown in the `hdx_api_link` field.
+- Parameter: '`dataset_hdx_stub`'
+  Description: >
+    The unique, URL-safe name of the dataset on HDX, used to create a
+    human-readable URL to the dataset on HDX:
+    `https://data.humdata.org/dataset/[dataset_hdx_stub]`.
+    The stub may change at any time (unlike the UUID).
+- Parameter: '`dataset_hdx_title`'
+  Description: Dataset title on HDX
+- Parameter: '`hdx_provider_stub`'
+  Description: >
+    The unique, URL-safe dataset provider name, used to access
+    the the dataset provider's organization page on HDX through the
+    following URL pattern:
+    `https://data.humdata.org/organization/[hdx_provider_stub]`,
+    which can be found in the `provider_hdx_link` field.
+    It can also be used to access the provider's information through
+    the HDX CKAN API:
+    `https://data.humdata.org/api/action/organization_show?id=[hdx_provider_stub]`,
+    as shown in the `provider_hdx_api_link` field.
+- Parameter: '`hdx_provider_name`'
+  Description: The name of the organization that provided the dataset to HDX
+- Parameter: '`hdx_link`'
+  Description: >
+    A link to the dataset on HDX, constructed using the UUID
+    from the `dataset_hdx_id` field
+- Parameter: '`hdx_api_link`'
+  Description: >
+    A link to the dataset on the HDX CKAN API, constructed using the UUID
+    from the `dataset_hdx_id` field
+- Parameter: '`provider_hdx_link`'
+  Description: >
+    A link to the dataset provider's organization page, constructed using the
+    data provider stub from the `hdx_provider_stub` field
+- Parameter: '`provider_hdx_api_link`'
+  Description: >
+    A link to the dataset provider's information via the HDX CKAN API,
+    constructed using the data provider stub from the `hdx_provider_stub` field
