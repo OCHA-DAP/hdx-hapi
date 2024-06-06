@@ -1,7 +1,7 @@
 - Parameter: '`hdx_id`'
   Description: >
     Unique dataset UUID on HDX, which does not change even when changes are
-    made to the dataset. It can be used to construct a link to the dataset
+    made to the dataset. It can be used to construct a URL to access the dataset
     on HDX:
     `https://data.humdata.org/dataset/[hdx_id]`,
     which can be found in the `hdx_link` field.
@@ -10,16 +10,17 @@
     as shown in the `hdx_api_link` field.
 - Parameter: '`hdx_stub`'
   Description: >
-    The dataset URL stub can be used to construct a human-readable link to the
-    dataset on HDX as follows:
+    The unique, URL-safe name of the dataset on HDX, used to create a
+    human-readable URL to the dataset on HDX:
     `https://data.humdata.org/dataset/[hdx_stub]`.
     The stub may change at any time (unlike the UUID).
 - Parameter: '`title`'
   Description: Dataset title on HDX
 - Parameter: '`hdx_provider_stub`'
   Description: >
-    The dataset provider stub can be used to construct links to
-    the dataset provider's organisation page on HDX:
+    The unique, URL-safe dataset provider name, used to access
+    the the dataset provider's organisation page on HDX through the
+    following URL pattern:
     `https://data.humdata.org/organization/[hdx_provider_stub]`,
     which can be found in the `provider_hdx_link` field.
     It can also be used to access the provider's information through

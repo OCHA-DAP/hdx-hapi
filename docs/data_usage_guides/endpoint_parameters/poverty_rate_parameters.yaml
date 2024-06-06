@@ -35,8 +35,11 @@
   Description: The end date for which the data are applicable
   Source:
 - Parameter: '`location_code`'
-  Description: Location p-code (ISO-3)
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`location_name`'
-  Description: Location name
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
   Source: '[`Location`](metadata.md#location)'

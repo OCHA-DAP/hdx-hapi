@@ -2,7 +2,7 @@
   Description: >
     Unique resource UUID on HDX, which does not change even when changes
     are made to the resource. In combination with the dataset UUID from the
-    `dataset_hdx_id` field, it can be used to construct a link to the resource
+    `dataset_hdx_id` field, it can be used to construct a URL to the resource
     on HDX:
     `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]`,
     which can be found in the `hdx_link` field.
@@ -13,7 +13,7 @@
 - Parameter: '`dataset_hdx_id`'
   Description: >
     Unique dataset UUID on HDX, which does not change even when changes are
-    made to the dataset. It can be used to construct a link to the dataset
+    made to the dataset. It can be used to construct a URL to access the dataset
     on HDX:
     `https://data.humdata.org/dataset/[dataset_hdx_id]`,
     which can be found in the `dataset_hdx_link` field.
@@ -25,7 +25,7 @@
   Description: >
     The resource name on HDX. In combination with the dataset UUIDs from the
     `dataset_hdx_id` and `hdx_id` fields respectively, it can be used to
-    construct a link to download the resource:
+    construct a URL to download the resource:
     `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]/download/[name]`,
     which can be found in the `download_url` field.
   Source:
@@ -40,7 +40,7 @@
   Source:
 - Parameter: '`download_url`'
   Description: >
-    A link to directly download the resource file from HDX, in the format
+    A URL to directly download the resource file from HDX, in the format
     specified in the `format` field
   Source: ''
 - Parameter: '`hapi_updated_date`'
@@ -48,9 +48,9 @@
   Source: ''
 - Parameter: '`dataset_hdx_stub`'
   Description: >
-    The dataset URL stub can be used to construct a human-readable link to the
-    dataset on HDX as follows:
-    `https://data.humdata.org/dataset/[hdx_stub]`.
+    The unique, URL-safe name of the dataset on HDX, which is used to create a
+    human-readable URL to the dataset on HDX:
+    `https://data.humdata.org/dataset/[dataset_hdx_stub]`.
     The stub may change at any time (unlike the UUID).
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_title`'
@@ -58,8 +58,9 @@
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_provider_stub`'
   Description: >
-    The dataset provider stub can be used to construct links to
-    the dataset provider's organisation page on HDX:
+    The unique, URL-safe dataset provider name, used to access
+    the the dataset provider's organisation page on HDX through the
+    following URL pattern:
     `https://data.humdata.org/organization/[dataset_hdx_provider_stub]`,
     which can be found in the `provider_hdx_link` field.
     It can also be used to access the provider's information through
@@ -76,27 +77,27 @@
   Source:
 - Parameter: '`hdx_api_link`'
   Description: >
-    A link to the resource on the HDX CKAN API, constructed using the UUID
+    A URL to access the resource on the HDX CKAN API, constructed using the UUID
     from the `hdx_id` field
   Source:
 - Parameter: '`dataset_hdx_link`'
   Description: >
-    A link to the dataset on HDX, constructed using the UUID
+    A URL to access the dataset on HDX, constructed using the UUID
     from the `dataset_hdx_id` field
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_api_link`'
   Description: >
-    A link to the dataset on the HDX CKAN API, constructed using the UUID
+    A URL to access the dataset on the HDX CKAN API, constructed using the UUID
     from the `dataset_hdx_id` field
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`provider_hdx_link`'
   Description: >
-    A link to the dataset provider's organisation page, constructed using the
-    data provider stub from the `dataset_hdx_provider_stub` field
+    A URL to access the dataset provider's organisation page, constructed using
+    the data provider stub from the `dataset_hdx_provider_stub` field
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`provider_hdx_api_link`'
   Description: >
-    A link to the dataset provider's information via the HDX CKAN API,
+    A URL to access the dataset provider's information via the HDX CKAN API,
     constructed using the data provider stub from the
     `dataset_hdx_provider_stub` field
   Source: '[`Dataset`](metadata.md#dataset)'
