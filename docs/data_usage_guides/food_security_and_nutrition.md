@@ -21,10 +21,10 @@ a future release we will p-code and expand coverage to other IPC datasets.
 ### Transformations applied
 
 * The table has been reshaped from wide to long: the population and individual
-* IPC phase columns have been cast to a combination of `ipc_phase` and
+  IPC phase columns have been cast to a combination of `ipc_phase` and
   `population_in_phase`
 * The IPC fraction is computed in the HDX HAPI API pipeline, by dividing the
-  population in that phase by the total population (ipc_phase=all).
+  population in that phase by the total population (`ipc_phase`="all").
 * The reference period is computed from the “reference_label” and
   “reference_year” columns in the original data. In the case of a projection,
   it captures date range that the projection covers, not when the projection
@@ -33,11 +33,11 @@ a future release we will p-code and expand coverage to other IPC datasets.
 
 ### Usage Notes
 
-* The total population (ipc_phase=all) is not necessarily equal to the sum of
+* The total population (`ipc_phase`="all") is not necessarily equal to the sum of
   the populations in phases 1-5. The differences are usually small (due to
   rounding errors), or because there is no IPC phase data
-* Due to the above, the sum of the IPC fractions from phase 1-5 may not sum to
-  exactly 1
+* Due to the above, the sum of the IPC fractions from phases 1-5 may not be
+  exactly equal to 1
 
 ## Food Prices <a id="food-price"></a>
 
@@ -61,4 +61,5 @@ detailed methodology, see WFP's
   originally presented as 15th day of a particular month, into a range spanning
   the entire month
 * The source data is not p-coded, however we have used the admin 1 and 2 names
-  to p-code most markets. See [Markets](markets) for more details.
+  to p-code most markets. See [WFP Market](metadata.md#wfp-market)
+  for more details.

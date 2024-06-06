@@ -2,7 +2,7 @@
   Description: >
     The final INFORM risk score (`overall_risk`) is grouped into one of five
     risk classes, with the objective of systemically identifying risk in a
-    consistent manner.
+    consistent manner
   Source: '[`Risk Class`](enums.md#risk-class)'
 - Parameter: '`global_rank`'
   Description: >

@@ -1,5 +1,8 @@
 # Enums
 
+Enums, or enumerations, are a data type used to define a set of named values
+that represent fixed options for a field in the API.
+
 ## Commodity Category <a id="commodity-category"></a>
 
 **Used in:**
@@ -84,7 +87,7 @@ IDPs.
 ## Population Status <a id="population-status"></a>
 
 **Used in:**
-[`Humanitarian Needs`](affected_people.md#humanitarian-needs),
+[`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
 The population status disaggregation provides a framework for the HNO to
 determine how effectively people in need are being reached.

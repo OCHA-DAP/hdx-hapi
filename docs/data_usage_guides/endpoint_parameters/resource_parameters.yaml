@@ -5,8 +5,8 @@
     `dataset_hdx_id` field, it can be used to construct a link to the resource
     on HDX:
     `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]`,
-    which can be found in the `hdx_link` field,
-    and through the HDX CKAN API:
+    which can be found in the `hdx_link` field.
+    It can also be used to access the resource through the HDX CKAN API:
     `https://data.humdata.org/api/action/resource_show?id=[hdx_id]`,
     which is shown in the `hdx_api_link` field.
   Source:
@@ -15,11 +15,11 @@
     Unique dataset UUID on HDX, which does not change even when changes are
     made to the dataset. It can be used to construct a link to the dataset
     on HDX:
-    `https://data.humdata.org/dataset/[hdx_id]`,
+    `https://data.humdata.org/dataset/[dataset_hdx_id]`,
     which can be found in the `dataset_hdx_link` field.
     It can also be used to access the dataset through the HDX CKAN API:
-    `https://data.humdata.org/api/action/package_show?id=[hdx_id]`,
-    which is shown in the `dataset_hdx_api_link` field.
+    `https://data.humdata.org/api/action/package_show?id=[dataset_hdx_id]`,
+    as shown in the `dataset_hdx_api_link` field.
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`name`'
   Description: >
@@ -60,9 +60,12 @@
   Description: >
     The dataset provider stub can be used to construct links to
     the dataset provider's organisation page on HDX:
-    `https://data.humdata.org/organization/[hdx_provider_stub]`,
-    and to the dataset provider's information on the HDX CKAN API:
-    `https://data.humdata.org/api/action/organization_show?id=[hdx_provider_stub]`
+    `https://data.humdata.org/organization/[dataset_hdx_provider_stub]`,
+    which can be found in the `provider_hdx_link` field.
+    It can also be used to access the provider's information through
+    the HDX CKAN API:
+    `https://data.humdata.org/api/action/organization_show?id=[dataset_hdx_provider_stub]`,
+    as shown in the `provider_hdx_api_link` field.
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_provider_name`'
   Description: The name of the organisation that provided the dataset to HDX

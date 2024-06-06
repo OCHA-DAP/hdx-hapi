@@ -59,10 +59,12 @@ HDX HAPI obtains the PIN numbers from the
 
 ### Transformations applied
 
-* The table has been reshaped from wide to long: the columns of population, in
-  need, targeted, affected, and reached have been cast to a single
-  `population_status` column
-* Sector values of “ALL” have been converted to “intersectoral”
+* The table has been reshaped from wide to long: the columns in the original
+  data of "population", "in-need", "targeted", "affected", "reached",
+  and "population" have been cast to a single
+  `population_status` field
+* Sector values of “ALL” have been converted to “intersectoral”, as these
+  represent the intersectoral PIN and **not** the sum over sectors
 * Gender and disabled values of “a” have been converted to “all”
 * The methodology in Yemen leads to negative population values in some admin 2
   level areas. Where negative values appear they have been omitted from the API.
@@ -70,10 +72,10 @@ HDX HAPI obtains the PIN numbers from the
 
 ### Usage notes
 
-* The PIN should *not* be summed across sectors, as the same people can be
+* The PIN should **not** be summed across sectors, as the same people can be
   counted across multiple sectors. For the number of people affected across all
   sectors, please use the PIN value where sector=intersectoral.
 * An “all” value in the `gender`, `age_range`, `disable_marker`, and
  `population_group` columns indicates no disaggregation
-* A “population” value in the `population_status` column indicates no d
-  isaggregation
+* A “population” value in the `population_status` column indicates no
+  disaggregation

@@ -30,6 +30,8 @@ sources.
 * Any aggregation to a higher administrative level (e.g., admin 1 for a
   country where admin 2 is also available) has been taken directly from the
   data provided, and was not computed in the API pipeline
+* An “all” value in the `gender` and `age_range` columns indicates no
+  disaggregation
 
 ## Poverty Rate <a id="poverty-rate"></a>
 
@@ -62,5 +64,3 @@ details.
 * The data is disaggregated to admin 1, but not p-coded. We have kept the
   admin 1 names in the data, but link only to national level p-codes.
   We plan to p-code this data in a future release.
-* An “all” value in the `gender` and `age_range` columns indicates no
-  disaggregation

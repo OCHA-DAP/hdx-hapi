@@ -11,8 +11,9 @@
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`population_group`'
   Description: >
-    Population group as [defined by UNHCR](https://popstats.unhcr.org/refugee-statistics/methodology/data-content/
-  Source: '[`PopulationGroup`](enums.md#population-group)'
+    Population group as
+    [defined by UNHCR](https://popstats.unhcr.org/refugee-statistics/methodology/data-content/)
+  Source: '[`Population Group`](enums.md#population-group)'
 - Parameter: '`gender`'
   Description: >
     The gender of the population group in question, set to "all" if there
@@ -25,13 +26,14 @@
   Source:
 - Parameter: '`min_age`'
   Description: >
-    The minimum age from `age_range`. NULL if `age_range` is "all" and
-    no age disaggregation
+    The minimum age from `age_range`, set to `null` if `age_range` is "all" and
+    there is no age disaggregation
   Source:
 - Parameter: '`max_age`'
   Description: >
-    The maximum age from `age_range`. NULL if `age_range` is "all" and
-    no age disaggregation, or if there is no upper limit to the age range.
+    The maximum age from `age_range`, set to `null` if `age_range` is "all" and
+    there is no age disaggregation, or if there is no upper limit to the
+    age range
   Source:
 - Parameter: '`population`'
   Description: The number of people

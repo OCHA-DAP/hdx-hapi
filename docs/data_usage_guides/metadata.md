@@ -3,8 +3,8 @@
 ## HDX Metadata
 
 All of the data in HDX HAPI comes from publicly-available datasets on HDX, and
-the HDX metadata can be used refer back to the original data to see what HAPI
-has simplified or omitted.
+the HDX metadata can be used refer back to the original data to see what
+has been simplified or omitted in the API.
 The two primary HDX metadata tables are
 [`dataset`](metadata.md#dataset) and [`resource`](metadata.md#resource), and they
 contain a small subset of the metadata available through the CKAN API or
@@ -41,21 +41,22 @@ HAPI supports three hierarchical levels of geographical metadata:
 location (a country or country-like entity), admin 1, and admin 2.  An entry in
 the location table does not necessarily imply UN recognition of statehood.
 The subcategory data tables link to the lowest administrative level used by
-that data type; it will usually be admin2, but in some cases may be admin1 or
+that data type; it will usually be admin 2, but in some cases may be admin 1 or
 location.
 
 The names and p-codes are read in from a [global p-code list](https://data.humdata.org/dataset/global-pcodes)
-taken from the common operational dataset (COD) gazetteers administrative
+taken from the common operational dataset (COD) gazetteers and administrative
 boundaries.
-The p-code field is unique only in combination with reference_period_start,
+In the geographical tables, the `code` (p-code) field is unique only in
+combination with `reference_period_start`,
 since p-codes may be reused in different versions of geographical metadata.
 
-HDX HAPI utilises p-code handling provided by the
-[`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
-library. When bringing in data from sub-categories, p-codes are used if
+ When bringing in data from sub-categories, p-codes are used if
 present. Sometimes, these p-codes may not strictly follow the standard with
 variations such as shorter or longer country or admin unit codes.
-The `hdx-python-country` library has a p-code length matching algorithm to
+HDX HAPI utilises p-code handling provided by the
+[`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
+library, which has a p-code length matching algorithm to
 ensure correct admin units are determined.
 
 This algorithm works as follows: First, a p-code is verified against the
@@ -68,20 +69,12 @@ from the prefix.
 
 ### Location <a id="location"></a>
 
-**Used in:** [`Admin 1`](metadata.md#admin1),
-[`Refugees & Persons of Concern`](affected_people.md#refugees),
-[`Funding`](coordination_and_context.md#funding),
-[`National Risk`](coordination_and_context.md#national-risk)
-
 Country or country-like entities in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/location_parameters.yaml') }}
 
 ### Admin 1  <a id="admin1"></a>
-
-**Used in:** [`Admin 2](metadata.md#admin2),
-[`Poverty Rate`](population_and_socio-economy.md#poverty-rate)
 
 Admin 1 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
@@ -93,14 +86,6 @@ Admin 1 level names and p-codes in HDX HAPI, from the CODs
 Admin 2 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
-**Used in:**
-[`Humanitarian Needs`](affected_people.md#humanitarian-needs),
-[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence),
-[`Conflict Events`](coordination_and_context.md#conflict-event),
-[`Food Security`](food_security_and_nutrition.md#food-security),
-[`Food Prices`](food_security_and_nutrition.md#food-price),
-[`Baseline Population`](population_and_socio-economy.md#population)
-
 {{ read_yaml('data_usage_guides/endpoint_parameters/admin2_parameters.yaml') }}
 
 ## Sub-category Metadata
@@ -108,7 +93,7 @@ Admin 2 level names and p-codes in HDX HAPI, from the CODs
 ### Org <a id="org"></a>
 
 **Used in:**
-[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence)
+[`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence)
 
 The organisation table is populated from the 3W data, using the following
 methodology:
@@ -131,16 +116,18 @@ methodology:
 [`Org`](metadata.md#org),
 [`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence)
 
-The table is populated using
-[OCHA Digital Services organisation types list](https://data.humdata.org/dataset/organization-types-beta),
-with the addition of:
+The table is initially populated using the
+[OCHA Digital Services organisation types list](https://data.humdata.org/dataset/organization-types-beta).
+The following rows are then added:
 
-* Civil Society
-* Observer
-* Development Programme
-* Local NGO.
+| Code | Description            |
+|------|------------------------|
+| 501  | Civil Society          |
+| 502  | Observer               |
+| 503  | Development Programme  |
+| 504  | Local NGO              |
 
-Organisation types all have an associated name and code.
+Organisation types all have an associated description and code.
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_type_parameters.yaml') }}
 
@@ -150,14 +137,18 @@ Organisation types all have an associated name and code.
 [`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence),
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
-This table is populated using the
+This table is initially populated using the
 [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
-dataset, with the following additional entries:
+dataset. The following rows are then added:
 
-* cash
-* humanitarian assistance
-* multi-sector
-* intersectoral.
+| Code        | Name                                |
+|-------------|-------------------------------------|
+| Cash        | Cash programming                    |
+| Hum         | Humanitarian assistance (unspecified)|
+| Multi       | Multi-sector (unspecified)          |
+| Intersectoral| Intersectoral                      |
+
+Sectors all have an associated name and code.
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/sector_parameters.yaml') }}
 
@@ -182,7 +173,7 @@ names down to admin 2 as well as
 a latitude and longitude, but is not p-coded. Consequently, admin 1 and 2
 names must be matched to p-codes using the algorithm provided by the
 [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
-library which includes phonetic name matching and
+library which uses phonetic name matching and
 manual overrides.
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/wfp_market_parameters.yaml') }}

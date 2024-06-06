@@ -3,6 +3,7 @@
     The sector code, derived either from the
     [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
     dataset, or created for HDX HAPI
+  Source: '[`Sector`](metadata.md#sector)'
 - Parameter: '`resource_hdx_id`'
   Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'

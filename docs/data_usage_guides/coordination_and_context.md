@@ -69,7 +69,7 @@ mapped against funding requirements stated in Humanitarian Response Plans.
   with an appeal. Funding data without associated appeals will be added in a
   future version.
 * The reference period is taken from the start and end date provided in each
-  row from the original data
+  row of the original data
 
 ## Conflict Events <a id="conflict-event"></a>
 

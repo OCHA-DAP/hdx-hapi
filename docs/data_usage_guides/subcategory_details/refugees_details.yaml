@@ -2,7 +2,7 @@
   Details: UNHCR
 - Attribute: Dataset
   Details: >
-    [Data on forcibly displaced populations and stateless persons (Global)](https://data.humdata.org/dataset/unhcr-population-data-for-world)"
+    [Data on forcibly displaced populations and stateless persons (Global)](https://data.humdata.org/dataset/unhcr-population-data-for-world)
 - Attribute: Time series
   Details: Annual, dating back to 2001
 - Attribute: Update frequency
@@ -10,4 +10,4 @@
 - Attribute: Related tables
   Details: >
     [`Gender`](enums.md#gender),
-    [`PopulationGroup`](metadata.md#population-group)"
+    [`PopulationGroup`](metadata.md#population-group)
