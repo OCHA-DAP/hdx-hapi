@@ -3,18 +3,18 @@
   Risk Score Min: 0.0
   Risk Score Max: 1.9
 - Risk Class: 2
-  Description: low
+  Description: Low
   Risk Score Min: 2.0
   Risk Score Max: 3.4
 - Risk Class: 3
-  Description: medium
+  Description: Medium
   Risk Score Min: 3.5
   Risk Score Max: 4.9
 - Risk Class: 4
-  Description: high
+  Description: High
   Risk Score Min: 5.0
   Risk Score Max: 6.4
 - Risk Class: 5
-  Description: very high
+  Description: Very high
   Risk Score Min: 6.5
   Risk Score Max: 10

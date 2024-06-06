@@ -1,34 +1,34 @@
 - Population Group: REF
-  Description: 'refugees'
+  Description: 'Refugees'
 - Population Group: ROC
-  Description: 'people in a refugee-like situation'
+  Description: 'People in a refugee-like situation'
 - Population Group: ASY
-  Description: 'asylum seekers'
+  Description: 'Asylum seekers'
 - Population Group: OIP
-  Description: 'other people in need of international protection'
+  Description: 'Other people in need of international protection'
 - Population Group: IDP
-  Description: 'internally displaced persons '
+  Description: 'Internally displaced persons '
 - Population Group: IOC
-  Description: 'people in IDP-like situation'
+  Description: 'People in IDP-like situation'
 - Population Group: STA
-  Description: 'stateless people'
+  Description: 'Stateless people'
 - Population Group: OOC
-  Description: 'others of concern'
+  Description: 'Others of concern'
 - Population Group: HST
-  Description: 'host community'
+  Description: 'Host community'
 - Population Group: RET
-  Description: 'returned refugees'
+  Description: 'Returned refugees'
 - Population Group: RST
-  Description: 'resettled refugees'
+  Description: 'Resettled refugees'
 - Population Group: NAT
-  Description: 'naturalized refugees'
+  Description: 'Naturalized refugees'
 - Population Group: RDP
-  Description: 'returned IDPs'
+  Description: 'Returned IDPs'
 - Population Group: POC
-  Description: 'persons of concern'
+  Description: 'Persons of concern'
 - Population Group: RRI
   Description: >
-   An umbrella term for returnees, used in the humanitarian
-   needs data which not distinguish between returned refugees and returned IDPs
+   An umbrella term for returnees, used in the humanitarian needs data which
+   do not distinguish between returned refugees and returned IDPs
 - Population Group: all
-  Description: no disaggregation
+  Description: No disaggregation

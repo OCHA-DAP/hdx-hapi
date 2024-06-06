@@ -1,13 +1,13 @@
 # Coordination & Context
 
-## 3W - Who is Doing What Where <a id=”operational-presence”></a>
+## Who is Doing What Where - Operational Presence <a id=”operational-presence”></a>
 
-The [Who does What Where (3W)](https://3w.unocha.org/) is a core humanitarian
-coordination dataset that contains the geographic and sectoral spread of
-humanitarian activities and partners. It is critical to know where humanitarian
-organisations are working and what they are doing in order to ensure
-collaboration and efficient resource allocation, avoid duplication of efforts,
-identify gaps, and plan for future humanitarian response.
+The [Who is Doing What Where (3W)](https://3w.unocha.org/) is a core
+humanitarian coordination dataset that contains the geographic and sectoral
+spread of humanitarian activities and partners. It is critical to know where
+humanitarian organisations are working and what they are doing in order to
+ensure collaboration and efficient resource allocation, avoid duplication of
+efforts, identify gaps, and plan for future humanitarian response.
 
 ### Summary
 
@@ -21,14 +21,19 @@ identify gaps, and plan for future humanitarian response.
 
 * For consistency and interoperability, we aggregate to an
   [operational presence](https://humanitarian.atlassian.net/wiki/spaces/imtoolbox/pages/214499412/Who+does+What+Where+3W)
-  level (3W:OP, per org, sector, and admin2), even if the original 3W data is
+  level (3W:OP, per org, sector, and admin 2), even if the original 3W data is
   more detailed (e.g. the source lists individual activities)
-* Countries that are not p-coded are aggregated to Admin 0
+* Countries that are not p-coded are aggregated to the national level
 * Organisation deduplication is a long-running challenge with this data, since
   there are no unique identifiers, and organisation names may be spelled
   different ways by different OCHA offices, or sometimes even within the same
   3W. See the [`org`](org) section below for more information on how we handle
   these details.
+* The sector name strings in the 3W data are normalised and then aligned to the
+  [sector](metadata.md#sector) table, using the “sector_map” section of
+  [this configuration file](https://github.com/OCHA-DAP/hapi-pipelines/blob/main/src/hapi/pipelines/configs/core.yaml)
+  if needed. In the absence of a direct match, phonetic matching is used for
+  strings > 5 characters.
 * Rows without an associated sector are skipped
 * The reference period is derived manually per resource based on the
   resource metadata

@@ -129,7 +129,7 @@ methodology:
 
 **Used in:**
 [`Org`](org),
-[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence)
+[`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence)
 
 The table is populated using
 [OCHA Digital Services organisation types list](https://data.humdata.org/dataset/organization-types-beta),
@@ -147,7 +147,7 @@ Organisation types all have an associated name and code.
 ### Sector <a id=sector></a>
 
 **Used in:**
-[`3W - Who is Doing What Where`](coordination_and_context.md#operational-presence),
+[`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence),
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
 This table is populated using the
@@ -158,13 +158,6 @@ dataset, with the following additional entries:
 * humanitarian assistance
 * multi-sector
 * intersectoral.
-
-The sector name strings in the 3W data are normalised and then aligned to the
-sector table, using the “sector_map” section of
-[this configuration file](https://github.com/OCHA-DAP/hapi-pipelines/blob/main/src/hapi/pipelines/configs/core.yaml)
-if needed.
-In the absence of a direct match, phonetic matching is used for
-strings > 5 characters.
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/sector_parameters.yaml') }}
 

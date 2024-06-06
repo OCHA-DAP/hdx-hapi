@@ -1,12 +1,12 @@
 - Population Status: POP
-  Description: 'population'
+  Description: 'Population'
 - Population Status: AFF
-  Description: 'affected'
+  Description: 'Affected'
 - Population Status: INN
-  Description: 'in-need'
+  Description: 'In-need'
 - Population Status: TGT
-  Description: 'targeted'
+  Description: 'Targeted'
 - Population Status: REA
-  Description: 'reached'
+  Description: 'Reached'
 - Population Status: all
-  Description: no disaggregation
+  Description: No disaggregation
