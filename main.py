@@ -15,6 +15,7 @@ from hdx_hapi.endpoints.middleware.app_identifier_middleware import app_identifi
 from hdx_hapi.endpoints.middleware.mixpanel_tracking_middleware import mixpanel_tracking_middleware  # noqa
 
 from hdx_hapi.endpoints.get_encoded_identifier import router as encoded_identifier_router  # noqa
+from hdx_hapi.endpoints.get_request_verification import router as request_verification_router  # noqa
 
 from hdx_hapi.endpoints.favicon import router as favicon_router  # noqa
 
@@ -74,6 +75,7 @@ app = FastAPI(
 )
 
 app.include_router(encoded_identifier_router)
+app.include_router(request_verification_router)
 app.include_router(favicon_router)
 app.include_router(affected_people_router)
 

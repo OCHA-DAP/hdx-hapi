@@ -41,7 +41,7 @@ async def test_endpoints_vs_encode_identifier(event_loop, refresh_db, enable_hap
     for endpoint_router in ENDPOINT_ROUTER_LIST:
         async with AsyncClient(app=app, base_url='http://test') as ac:
             response = await ac.get(endpoint_router)
-        assert response.status_code == 400
+        assert response.status_code == 403
 
         async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
             response = await ac.get(endpoint_router)
