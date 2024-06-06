@@ -1,20 +1,20 @@
-- Parameter: '`hdx_id`'
+- Parameter: '`dataset_hdx_id`'
   Description: >
     Unique dataset UUID on HDX, which does not change even when changes are
     made to the dataset. It can be used to construct a URL to access the dataset
     on HDX:
-    `https://data.humdata.org/dataset/[hdx_id]`,
+    `https://data.humdata.org/dataset/[dataset_hdx_id]`,
     which can be found in the `hdx_link` field.
     It can also be used to access the dataset through the HDX CKAN API:
-    `https://data.humdata.org/api/action/package_show?id=[hdx_id]`,
+    `https://data.humdata.org/api/action/package_show?id=[dataset_hdx_id]`,
     as shown in the `hdx_api_link` field.
-- Parameter: '`hdx_stub`'
+- Parameter: '`dataset_hdx_stub`'
   Description: >
     The unique, URL-safe name of the dataset on HDX, used to create a
     human-readable URL to the dataset on HDX:
-    `https://data.humdata.org/dataset/[hdx_stub]`.
+    `https://data.humdata.org/dataset/[dataset_hdx_stub]`.
     The stub may change at any time (unlike the UUID).
-- Parameter: '`title`'
+- Parameter: '`dataset_hdx_title`'
   Description: Dataset title on HDX
 - Parameter: '`hdx_provider_stub`'
   Description: >
@@ -32,11 +32,11 @@
 - Parameter: '`hdx_link`'
   Description: >
     A link to the dataset on HDX, constructed using the UUID
-    from the `hdx_id` field
+    from the `dataset_hdx_id` field
 - Parameter: '`hdx_api_link`'
   Description: >
     A link to the dataset on the HDX CKAN API, constructed using the UUID
-    from the `hdx_id` field
+    from the `dataset_hdx_id` field
 - Parameter: '`provider_hdx_link`'
   Description: >
     A link to the dataset provider's organization page, constructed using the

@@ -1,13 +1,13 @@
-- Parameter: '`hdx_id`'
+- Parameter: '`resource_hdx_id`'
   Description: >
     Unique resource UUID on HDX, which does not change even when changes
     are made to the resource. In combination with the dataset UUID from the
     `dataset_hdx_id` field, it can be used to construct a URL to the resource
     on HDX:
-    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]`,
+    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]`,
     which can be found in the `hdx_link` field.
     It can also be used to access the resource through the HDX CKAN API:
-    `https://data.humdata.org/api/action/resource_show?id=[hdx_id]`,
+    `https://data.humdata.org/api/action/resource_show?id=[resource_hdx_id]`,
     which is shown in the `hdx_api_link` field.
   Source:
 - Parameter: '`dataset_hdx_id`'
@@ -24,9 +24,9 @@
 - Parameter: '`name`'
   Description: >
     The resource name on HDX. In combination with the dataset UUIDs from the
-    `dataset_hdx_id` and `hdx_id` fields respectively, it can be used to
+    `dataset_hdx_id` and `resource_hdx_id` fields respectively, it can be used to
     construct a URL to download the resource:
-    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[hdx_id]/download/[name]`,
+    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]/download/[name]`,
     which can be found in the `download_url` field.
   Source:
 - Parameter: '`format`'
@@ -53,7 +53,7 @@
     `https://data.humdata.org/dataset/[dataset_hdx_stub]`.
     The stub may change at any time (unlike the UUID).
   Source: '[`Dataset`](metadata.md#dataset)'
-- Parameter: '`dataset_title`'
+- Parameter: '`dataset_hdx_title`'
   Description: Dataset title on HDX
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_provider_stub`'
@@ -73,12 +73,12 @@
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`hdx_link`'
   Description: A link to the resource on HDX, constructing using the UUIDs
-    from the `dataset_hdx_id` and `hdx_id` fields
+    from the `dataset_hdx_id` and `resource_hdx_id` fields
   Source:
 - Parameter: '`hdx_api_link`'
   Description: >
     A URL to access the resource on the HDX CKAN API, constructed using the UUID
-    from the `hdx_id` field
+    from the `resource_hdx_id` field
   Source:
 - Parameter: '`dataset_hdx_link`'
   Description: >
