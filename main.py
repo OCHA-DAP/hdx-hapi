@@ -75,20 +75,25 @@ app = FastAPI(
 
 app.include_router(encoded_identifier_router)
 app.include_router(favicon_router)
+app.include_router(affected_people_router)
+
 app.include_router(operational_presence_router)
 app.include_router(funding_router)
 app.include_router(conflict_events_router)
-app.include_router(population_router)
-app.include_router(affected_people_router)
 app.include_router(national_risk_router)
+
 app.include_router(food_security_router)
 app.include_router(food_price_router)
-app.include_router(admin_level_router)
-app.include_router(humanitarian_response_router)
+
+app.include_router(population_router)
+
 app.include_router(dataset_router)
-app.include_router(wfp_market_router)
-app.include_router(wfp_commodity_router)
+app.include_router(admin_level_router)
 app.include_router(currency_router)
+app.include_router(humanitarian_response_router)
+app.include_router(wfp_commodity_router)
+app.include_router(wfp_market_router)
+
 app.include_router(version_router)
 
 
