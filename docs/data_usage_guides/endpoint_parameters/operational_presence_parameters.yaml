@@ -1,0 +1,65 @@
+- Parameter: '`sector_code`'
+  Description: >
+    The sector code, derived either from the
+    [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
+    dataset, or created for HDX HAPI
+  Source: '[`Sector`](metadata.md#sector)'
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`org_acronym`'
+  Description: The organization acronym
+  Source: '[`Org`](metadata.md#org)'
+- Parameter: '`org_name`'
+  Description: The organization name
+  Source: '[`Org`](metadata.md#org)'
+- Parameter: '`org_type_code`'
+  Description: >
+    The code referring to the organization type, derived either from the
+    [ OCHA Digital Services organization types list ](https://data.humdata.org/dataset/organization-types-beta),
+    or created for HDX HAPI
+  Source: '[`Org Type`](metadata.md#org-type)'
+- Parameter: '`org_type_description`'
+  Description:  A description of the org type
+  Source: '[`Org Type`](metadata.md#org-type)'
+- Parameter: '`sector_name`'
+  Description: The name of the sector
+  Source: '[`Sector`](metadata.md#sector)'
+- Parameter: '`location_ref`'
+  Description: An internal, stable identifier to reference a location
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_code`'
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
+- Parameter: '`admin1_ref`'
+  Description: >
+    An internal, stable identifier to reference an admin 1 division
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_name`'
+  Description: Admin 1 name
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin2_ref`'
+  Description: >
+    An internal, stable identifier to reference an admin 2 division
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_code`'
+  Description: Admin 2 p-code
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_name`'
+  Description: Admin 2 name
+  Source: '[`Admin 2`](metadata.md#admin2)'

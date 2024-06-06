@@ -1,32 +1,34 @@
-- population group: REF
-  description: 'refugees'
-- population group: ROC
-  description: 'people in a refugee-like situation'
-- population group: ASY
-  description: 'asylum seekers'
-- population group: OIP
-  description: 'other people in need of international protection'
-- population group: IDP
-  description: 'internally displaced persons '
-- population group: IOC
-  description: 'people in IDP-like situation'
-- population group: STA
-  description: 'stateless people'
-- population group: OOC
-  description: 'others of concern'
-- population group: HST
-  description: 'host community'
-- population group: RET
-  description: 'returned refugees'
-- population group: RST
-  description: 'resettled refugees'
-- population group: NAT
-  description: 'naturalized refugees'
-- population group: RDP
-  description: 'returned IDPs'
-- population group: POC
-  description: 'persons of concern'
-- population group: RRI
-  description: 'TODO: what is this'
-- population group: all
-  description: 'all'
+- Population Group: REF
+  Description: 'Refugees'
+- Population Group: ROC
+  Description: 'People in a refugee-like situation'
+- Population Group: ASY
+  Description: 'Asylum seekers'
+- Population Group: OIP
+  Description: 'Other people in need of international protection'
+- Population Group: IDP
+  Description: 'Internally displaced persons '
+- Population Group: IOC
+  Description: 'People in IDP-like situation'
+- Population Group: STA
+  Description: 'Stateless people'
+- Population Group: OOC
+  Description: 'Others of concern'
+- Population Group: HST
+  Description: 'Host community'
+- Population Group: RET
+  Description: 'Returned refugees'
+- Population Group: RST
+  Description: 'Resettled refugees'
+- Population Group: NAT
+  Description: 'Naturalized refugees'
+- Population Group: RDP
+  Description: 'Returned IDPs'
+- Population Group: POC
+  Description: 'Persons of concern'
+- Population Group: RRI
+  Description: >
+   An umbrella term for returnees, used in the humanitarian needs data which
+   do not distinguish between returned refugees and returned IDPs
+- Population Group: all
+  Description: No disaggregation

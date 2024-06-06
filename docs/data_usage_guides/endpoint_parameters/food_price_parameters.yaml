@@ -1,0 +1,79 @@
+- Parameter: '`resource_hdx_id`'
+  Description: >
+    Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`market_code`'
+  Description: The unique code identifying the market
+  Source: '[`WFP Market`](metadata.md#wfp-market)'
+- Parameter: '`market_name`'
+  Description: The name of the market
+  Source: '[`WFP Market`](metadata.md#wfp-market)'
+- Parameter: '`commodity_code`'
+  Description: The unique code identifying the commodity
+  Source: '[`WFP Market`](metadata.md#wfp-commodity)'
+- Parameter: '`commodity_name`'
+  Description: The name of the commodity
+  Source: '[`WFP Market`](metadata.md#wfp-commodity)'
+- Parameter: '`commodity_category`'
+  Description: The food group that the commodity belongs to
+  Source: '[`Commodity Category`](enums.md#commodity-category)'
+- Parameter: '`price_flag`'
+  Description: Pre-processing characteristics of food price
+  Source: '[`Price Flag`](enums.md#price-flag)'
+- Parameter: '`price_type`'
+  Description: The point in the supply chain at which the price is determined
+  Source: '[`Price Type`](enums.md#price-type)'
+- Parameter: '`price`'
+  Description: The price of the commodity
+  Source:
+- Parameter: '`unit`'
+  Description: The unit of the commodity, such as weight or number
+  Source:
+- Parameter: '`currency_code`'
+  Description: ISO-4217 currency code
+  Source: '[`Currency Code`](metadata.md#currency-code)'
+- Parameter: '`lat`'
+  Description: The market's latitude
+  Source: '[`WFP Market`](metadata.md#wfp-market)'
+- Parameter: '`lon`'
+  Description: The market's longitude
+  Source: '[`WFP Market`](metadata.md#wfp-market)'
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
+- Parameter: '`location_ref`'
+  Description: >
+    An internal, stable identifier to reference a location
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_code`'
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`admin1_ref`'
+  Description: >
+    An internal, stable identifier to reference an admin 1 division
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_name`'
+  Description: Admin 1 name
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin2_ref`'
+  Description: >
+    An internal, stable identifier to reference an admin 2 division
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_code`'
+  Description: Admin 2 p-code
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_name`'
+  Description: Admin 2 name
+  Source: '[`Admin 2`](metadata.md#admin2)'

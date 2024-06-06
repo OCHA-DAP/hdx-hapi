@@ -14,6 +14,10 @@ sources.
 
 {{ read_yaml('data_usage_guides/subcategory_details/population_details.yaml') }}
 
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/population_parameters.yaml') }}
+
 ### Transformations applied
 
 * The table has been reshaped from wide to long: demographic-specific columns
@@ -26,6 +30,8 @@ sources.
 * Any aggregation to a higher administrative level (e.g., admin 1 for a
   country where admin 2 is also available) has been taken directly from the
   data provided, and was not computed in the API pipeline
+* An “all” value in the `gender` and `age_range` columns indicates no
+  disaggregation
 
 ## Poverty Rate <a id="poverty-rate"></a>
 
@@ -40,6 +46,10 @@ details.
 ### Summary
 
 {{ read_yaml('data_usage_guides/subcategory_details/poverty_rate_details.yaml') }}
+
+### Parameters
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/poverty_rate_parameters.yaml') }}
 
 ### Transformations applied
 

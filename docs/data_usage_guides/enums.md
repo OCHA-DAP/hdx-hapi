@@ -1,9 +1,12 @@
 # Enums
 
+Enums, or enumerations, are a data type used to define a set of named values
+that represent fixed options for a field in the API.
+
 ## Commodity Category <a id="commodity-category"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-prices),
+[`Food Prices`](food_security_and_nutrition.md#food-price),
 [`WFP Commodity`](metadata.md#wfp-commodity)
 
 The commodity categories are used in the WFP food prices data to organize
@@ -23,7 +26,7 @@ by disability. For more information on disability classification, see the
 
 ## Event Type <a id="event-type"></a>
 
-**Used in:** [`Conflict Events`](coordination_and_context.md#conflict-events)
+**Used in:** [`Conflict Events`](coordination_and_context.md#conflict-event)
 
 ACLED compiles information on political violence, demonstrations, and other
 non-violent but politically important events. For their public dataset,
@@ -72,8 +75,9 @@ The IPC provides different projections to aid in planning and response efforts.
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
 [`Refugees & Persons of Concern`](affected_people.md#refugees)
 
-Almost all population group terms come from [UNHCR's glossary](https://www.unhcr.org/refugee-statistics/methodology/data-content/),
-except for "POC", "RRI", and "all". "RRI" was added as umbrella term
+Almost all population group terms come from
+[UNHCR's glossary](https://www.unhcr.org/refugee-statistics/methodology/data-content/),
+except for "POC", "RRI", and "all". "RRI" was added as an umbrella term
 for returnees because unlike UNHCR, the humanitarian
 needs data does not distinguish between returned refugees and returned
 IDPs.
@@ -83,7 +87,7 @@ IDPs.
 ## Population Status <a id="population-status"></a>
 
 **Used in:**
-[`Humanitarian Needs`](affected_people.md#humanitarian-needs),
+[`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
 The population status disaggregation provides a framework for the HNO to
 determine how effectively people in need are being reached.
@@ -92,7 +96,7 @@ determine how effectively people in need are being reached.
 
 ## Price Flag <a id="price-flag"></a>
 
-**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
+**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-price)
 
 Pre-processing characteristics of food prices.
 
@@ -100,7 +104,7 @@ Pre-processing characteristics of food prices.
 
 ## Price Type <a id="price-type"></a>
 
-**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-prices)
+**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-price)
 
 The point in the supply chain at which the price is determined.
 See FAO's
