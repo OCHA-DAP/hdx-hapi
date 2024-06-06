@@ -52,7 +52,7 @@ Several sub-categories in HDX-HAPI are disaggregated by gender.
 
 **Used in:** [`Food Security`](food_security_and_nutrition.md#food-security)
 
-The IPC classification includes 5 different phases of increasing severity,
+The IPC/CH classification includes 5 different phases of increasing severity,
 described in detail on page 53 of
 [the IPC technical manual version 3.1](https://www.ipcinfo.org/fileadmin/user_upload/ipcinfo/manual/IPC_Technical_Manual_3_Final.pdf),
 and summarised in the table below.
@@ -65,7 +65,8 @@ and total population, used to compute fractions.
 
 **Used in:** [`Food Security`](food_security_and_nutrition.md#food-security)
 
-The IPC provides different projections to aid in planning and response efforts.
+The IPC and Cadre Harmonisé provide different projections to aid in planning
+and response efforts.
 
 {{ read_yaml('data_usage_guides/enum_parameters/ipc_type_parameters.yaml') }}
 
