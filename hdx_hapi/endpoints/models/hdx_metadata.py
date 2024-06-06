@@ -13,9 +13,9 @@ from hdx_hapi.services.hdx_url_logic import (
 
 
 class DatasetResponse(HapiBaseModel):
-    hdx_id: str = Field(max_length=36)
-    hdx_stub: str = Field(max_length=128)
-    title: str = Field(max_length=1024)
+    dataset_hdx_id: str = Field(max_length=36)
+    dataset_hdx_stub: str = Field(max_length=128)
+    dataset_hdx_title: str = Field(max_length=1024)
     hdx_provider_stub: str = Field(max_length=128)
     hdx_provider_name: str = Field(max_length=512)
 
@@ -24,12 +24,12 @@ class DatasetResponse(HapiBaseModel):
     @computed_field
     @property
     def hdx_link(self) -> HttpUrl:
-        return get_dataset_url(dataset_id=self.hdx_id)
+        return get_dataset_url(dataset_id=self.dataset_hdx_id)
 
     @computed_field
     @property
     def hdx_api_link(self) -> HttpUrl:
-        return get_dataset_api_url(dataset_id=self.hdx_id)
+        return get_dataset_api_url(dataset_id=self.dataset_hdx_id)
 
     @computed_field
     @property
@@ -53,7 +53,7 @@ class DatasetResponse(HapiBaseModel):
 
 class ResourceResponse(HapiBaseModel):
     # id: int
-    hdx_id: str = Field(max_length=36)
+    resource_hdx_id: str = Field(max_length=36)
     dataset_hdx_id: str = Field(max_length=36)
     name: str = Field(max_length=256)
     format: str = Field(max_length=32)
@@ -64,7 +64,7 @@ class ResourceResponse(HapiBaseModel):
 
     dataset_hdx_stub: str = Field(max_length=128)
 
-    dataset_title: str = Field(max_length=1024)
+    dataset_hdx_title: str = Field(max_length=1024)
     dataset_hdx_provider_stub: str = Field(max_length=128)
     dataset_hdx_provider_name: str = Field(max_length=512)
 
@@ -73,12 +73,12 @@ class ResourceResponse(HapiBaseModel):
     @computed_field
     @property
     def hdx_link(self) -> HttpUrl:
-        return get_resource_url(dataset_id=self.dataset_hdx_id, resource_id=self.hdx_id)
+        return get_resource_url(dataset_id=self.dataset_hdx_id, resource_id=self.resource_hdx_id)
 
     @computed_field
     @property
     def hdx_api_link(self) -> HttpUrl:
-        return get_resource_api_url(resource_id=self.hdx_id)
+        return get_resource_api_url(resource_id=self.resource_hdx_id)
 
     @computed_field
     @property

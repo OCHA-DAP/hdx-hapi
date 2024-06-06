@@ -48,6 +48,11 @@ async def get_fundings(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
+    """
+    UNOCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions.
+    See the more detailed technical <a href='**http://RTD_SUBCATEGORY_LINK**'>HDX HAPI documentation</a>,
+    and the <a href='https://fts.unocha.org/home/2024/donors/view '>original FTS source</a> website.
+    """
     ref_period_parameters = None
     result = await get_funding_srv(
         pagination_parameters=common_parameters,

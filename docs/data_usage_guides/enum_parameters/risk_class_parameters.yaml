@@ -1,5 +1,5 @@
 - Risk Class: 1
-  Description: very low
+  Description: Very low
   Risk Score Min: 0.0
   Risk Score Max: 1.9
 - Risk Class: 2
@@ -17,4 +17,4 @@
 - Risk Class: 5
   Description: Very high
   Risk Score Min: 6.5
-  Risk Score Max: 10
+  Risk Score Max: 10.0

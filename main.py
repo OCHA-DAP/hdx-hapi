@@ -35,6 +35,8 @@ from hdx_hapi.endpoints.get_food_price import router as food_price_router  # noq
 
 from hdx_hapi.endpoints.get_version import router as version_router  # noqa
 
+from hdx_hapi.endpoints.util.version import api_version  # noqa
+
 
 # from hdx_hapi.endpoints.delete_example import delete_dataset
 from hdx_hapi.config.config import get_config  # noqa
@@ -54,7 +56,7 @@ All queries require an `app_identifier` which can be supplied as a query paramet
 application name and email address.
 
 The `limit` and `offset` parameters are available for all queries and have the usual database meanings 
-to provide pagination of results.
+to provide pagination of results. If no `limit` is specified, a maximum of 10,000 records will be returned.
 
 The `output_format` parameter is available for all queries and can be set to JSON or csv, 
 where JSON is selected rows of data are supplied under a data key.
@@ -66,7 +68,7 @@ so that `location_name=Mali` will return data for Mali and Somalia.
 app = FastAPI(
     title='HDX HAPI',
     description=DESCRIPTION,
-    version='0.1.0',
+    version=api_version,
     docs_url=None,
     servers=[{'url': CONFIG.HAPI_SERVER_URL}] if CONFIG.HAPI_SERVER_URL else [],
 )
