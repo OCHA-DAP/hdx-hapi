@@ -8,15 +8,15 @@
   Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`org_acronym`'
-  Description: The organisation acronym
+  Description: The organization acronym
   Source: '[`Org`](metadata.md#org)'
 - Parameter: '`org_name`'
-  Description: The organisation name
+  Description: The organization name
   Source: '[`Org`](metadata.md#org)'
 - Parameter: '`org_type_code`'
   Description: >
-    The code referring to the organisation type, derived either from the
-    [ OCHA Digital Services organisation types list ](https://data.humdata.org/dataset/organization-types-beta),
+    The code referring to the organization type, derived either from the
+    [ OCHA Digital Services organization types list ](https://data.humdata.org/dataset/organization-types-beta),
     or created for HDX HAPI
   Source: '[`Org Type`](metadata.md#org-type)'
 - Parameter: '`org_type_description`'

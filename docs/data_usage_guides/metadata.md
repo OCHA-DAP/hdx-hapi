@@ -95,18 +95,18 @@ Admin 2 level names and p-codes in HDX HAPI, from the CODs
 **Used in:**
 [`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence)
 
-The organisation table is populated from the 3W data, using the following
+The organization table is populated from the 3W data, using the following
 methodology:
 
-* Organisation name and acronym strings are normalised. If an acronym isn’t
+* Organization name and acronym strings are normalised. If an acronym isn’t
   available, the first 32 characters of the name are used.
-* This [organisation mapping](https://docs.google.com/spreadsheets/d/e/2PACX-1vSfBWvSu3fKA743VvHtgf-pIGkYH7zhy-NP7DZgEV9_a6YU7vtCeWhbLM56aUL1iIfrfv5UBvvjVt7B/pub?gid=1040329566&single=true&output=csv)
+* This [organization mapping](https://docs.google.com/spreadsheets/d/e/2PACX-1vSfBWvSu3fKA743VvHtgf-pIGkYH7zhy-NP7DZgEV9_a6YU7vtCeWhbLM56aUL1iIfrfv5UBvvjVt7B/pub?gid=1040329566&single=true&output=csv)
   is used for common alternative names
-* Organisations must have an associated organisation type. If available, the
-  organisation type code is taken directly from the 3W data, otherwise the name
+* Organizations must have an associated organization type. If available, the
+  organization type code is taken directly from the 3W data, otherwise the name
   string is normalised and matched to the org type names. In the absence of a
   direct match, phonetic matching is used for strings > 5 characters. If no
-  match is found, the organisation is skipped.
+  match is found, the organization is skipped.
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_parameters.yaml') }}
 
@@ -117,7 +117,7 @@ methodology:
 [`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence)
 
 The table is initially populated using the
-[OCHA Digital Services organisation types list](https://data.humdata.org/dataset/organization-types-beta).
+[OCHA Digital Services organization types list](https://data.humdata.org/dataset/organization-types-beta).
 The following rows are then added:
 
 | Code | Description            |
@@ -127,7 +127,7 @@ The following rows are then added:
 | 503  | Development Programme  |
 | 504  | Local NGO              |
 
-Organisation types all have an associated description and code.
+Organization types all have an associated description and code.
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_type_parameters.yaml') }}
 

@@ -7,7 +7,7 @@ age- and gender-disaggregated statistics on refugees and people of concern,
 categorised by their country of origin and country of asylum. The data are
 sourced primarily from governments hosting these populations, UNHCR's own
 registration data, and occasionally data published by non-governmental
-organisations.
+organizations.
 
 ### Summary
 

@@ -1,12 +1,12 @@
 - Parameter: '`acronym`'
-  Description: The organisation acronym
+  Description: The organization acronym
   Source:
 - Parameter: '`name`'
-  Description: The organisation name
+  Description: The organization name
   Source:
 - Parameter: '`org_type_code`'
-  Description: The code referring to the organisation type
+  Description: The code referring to the organization type
   Source: '[`Org Type`](metadata.md#org-type)'
 - Parameter: '`org_type_description`'
-  Description: A description of the organisation type
+  Description: A description of the organization type
   Source: '[`Org Type`](metadata.md#org-type)'

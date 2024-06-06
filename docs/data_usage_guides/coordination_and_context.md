@@ -5,7 +5,7 @@
 The [Who is Doing What Where (3W)](https://3w.unocha.org/) is a core
 humanitarian coordination dataset that contains the geographic and sectoral
 spread of humanitarian activities and partners. It is critical to know where
-humanitarian organisations are working and what they are doing in order to
+humanitarian organizations are working and what they are doing in order to
 ensure collaboration and efficient resource allocation, avoid duplication of
 efforts, identify gaps, and plan for future humanitarian response.
 
@@ -24,8 +24,8 @@ efforts, identify gaps, and plan for future humanitarian response.
   level (3W:OP, per org, sector, and admin 2), even if the original 3W data is
   more detailed (e.g. the source lists individual activities)
 * Countries that are not p-coded are aggregated to the national level
-* Organisation deduplication is a long-running challenge with this data, since
-  there are no unique identifiers, and organisation names may be spelled
+* Organization deduplication is a long-running challenge with this data, since
+  there are no unique identifiers, and organization names may be spelled
   different ways by different OCHA offices, or sometimes even within the same
   3W. See the [`org`](org) section below for more information on how we handle
   these details.
@@ -51,7 +51,7 @@ efforts, identify gaps, and plan for future humanitarian response.
 [OCHA Financial Tracking Service](https://fts.unocha.org/home/2024/donors/view)
 (FTS) publishes data on
 humanitarian funding flows as reported by donors and
-recipient organisations. It presents all humanitarian funding to a country
+recipient organizations. It presents all humanitarian funding to a country
 as well as funding that is reported or that can be specifically
 mapped against funding requirements stated in Humanitarian Response Plans.
 

@@ -1,7 +1,7 @@
 - Parameter: '`code`'
   Description: >
-    The code referring to the organisation type, derived either from the
-    [OCHA Digital Services organisation types list](https://data.humdata.org/dataset/organization-types-beta),
+    The code referring to the organization type, derived either from the
+    [OCHA Digital Services organization types list](https://data.humdata.org/dataset/organization-types-beta),
     or created for HDX HAPI
 - Parameter: '`description`'
-  Description: A description of the organisation type
+  Description: A description of the organization type

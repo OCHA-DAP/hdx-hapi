@@ -59,7 +59,7 @@
 - Parameter: '`dataset_hdx_provider_stub`'
   Description: >
     The unique, URL-safe dataset provider name, used to access
-    the the dataset provider's organisation page on HDX through the
+    the the dataset provider's organization page on HDX through the
     following URL pattern:
     `https://data.humdata.org/organization/[dataset_hdx_provider_stub]`,
     which can be found in the `provider_hdx_link` field.
@@ -69,7 +69,7 @@
     as shown in the `provider_hdx_api_link` field.
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_provider_name`'
-  Description: The name of the organisation that provided the dataset to HDX
+  Description: The name of the organization that provided the dataset to HDX
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`hdx_link`'
   Description: A link to the resource on HDX, constructing using the UUIDs
@@ -92,7 +92,7 @@
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`provider_hdx_link`'
   Description: >
-    A URL to access the dataset provider's organisation page, constructed using
+    A URL to access the dataset provider's organization page, constructed using
     the data provider stub from the `dataset_hdx_provider_stub` field
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`provider_hdx_api_link`'
