@@ -2,18 +2,18 @@
 
 ---
 
-Here you will find simple instructions to help you get started with using HAPI. In addition to this getting started section we suggest exploring the [query interface](https://stage.hapi-humdata-org.ahconu.org/docs) which details all available filtering options for each endpoint, providing a hands-on way to familiarise yourself with the API's structure.
+Here you will find simple instructions to help you get started with using HAPI. In addition to this getting started section we suggest exploring the [query interface](https://hapi.humdata.org/docs) which details all available filtering options for each endpoint, providing a hands-on way to familiarise yourself with the API's structure.
 
 
 Below, you will find example URLs to help you learn how to construct your API queries. These URLs can be entered directly into your web browser for immediate results.
 
 ## Generating a key
 
-To access HAPI you need to generate an app identifier. This can be done via the the [sandbox interface encode_identifier endpoint](https://stage.hapi-humdata-org.ahconu.org/docs#/Utility/get_encoded_identifier_api_v1_encode_identifier_get). Enter your application name and email address and it will return the app identifier. The key must be included as a query string parameter e.g.
+To access HAPI you need to generate an app identifier. This can be done via the the [sandbox interface encode_identifier endpoint](https://hapi.humdata.org/docs#/Utility/get_encoded_identifier_api_v1_encode_identifier_get). Enter your application name and email address and it will return the app identifier. The key must be included as a query string parameter e.g.
 
 
 ```
-https://stage.hapi-humdata-org.ahconu.org/api/v1/coordination-context/operational-presence?app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/coordination-context/operational-presence?app_identifier={your app identifier}
 ```
 
 
@@ -29,7 +29,7 @@ Copy this link into your browser to see the results
 
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/v1/coordination-context/operational-presence?location_code=mli&output_format=json&offset=0&limit=1000&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/coordination-context/operational-presence?location_code=mli&output_format=json&offset=0&limit=1000&app_identifier={your app identifier}
 
 
 ```
@@ -65,7 +65,7 @@ The maximum number of rows returned in a single response is 10,000. To access mo
 
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/v1/coordination-context/operational-presence?location_code=MLI&output_format=json&offset=1000&limit=1000&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/coordination-context/operational-presence?location_code=MLI&output_format=json&offset=1000&limit=1000&app_identifier={your app identifier}
 ```
 
 
@@ -79,7 +79,7 @@ This query gets all of the WASH activities happening in Yobe, Nigeria using the 
 
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/v1/coordination-context/operational-presence?sector_name=Water%20Sanitation%20Hygiene&location_name=Nigeria&admin1_name=Yobe&output_format=json&offset=0&limit=1000&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/coordination-context/operational-presence?sector_name=Water%20Sanitation%20Hygiene&location_name=Nigeria&admin1_name=Yobe&output_format=json&offset=0&limit=1000&app_identifier={your app identifier}
 ```
 
 
@@ -93,7 +93,7 @@ The Population endpoint delivers detailed demographic breakdowns by age range an
 
 
 ```
-https://stage.hapi-humdata-org.ahconu.org/api/v1/population-social/population?location_code=AFG&output_format=json&offset=0&limit=1000&admin_level=1&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/population-social/population?location_code=AFG&output_format=json&offset=0&limit=1000&admin_level=1&app_identifier={your app identifier}
 ```
 
 
@@ -101,7 +101,7 @@ To refine this query to retrieve population statistics specifically for males un
 
 
 ```
-https://stage.hapi-humdata-org.ahconu.org/api/v1/population-social/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1&age_range_code=0-4&gender_code=m&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/population-social/population?location_code=AFG&output_format=json&offset=0&limit=10000&admin_level=1&age_range_code=0-4&gender_code=m&app_identifier={your app identifier}
 ```
 
 
@@ -118,11 +118,11 @@ You can retrieve a list of possible age ranges by querying the `sector` support 
 
 
 ```plaintext
-https://stage.hapi-humdata-org.ahconu.org/api/v1/metadata/sector?output_format=json&offset=0&limit=1000&app_identifier=Z2V0dGluZ3Mtc3RhcnRlZDpzaW1vbi5qb2huc29uQHVuLm9yZw==
+https://hapi.humdata.org/api/v1/metadata/sector?output_format=json&offset=0&limit=1000&app_identifier=Z2V0dGluZ3Mtc3RhcnRlZDpzaW1vbi5qb2huc29uQHVuLm9yZw==
 ```
 
 
-This functionality is not limited to age ranges. There are similar support tables for a variety of filters such as organisations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
+This functionality is not limited to age ranges. There are similar support tables for a variety of filters such as organizations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
 
 
 ## Getting Metadata through API Queries
@@ -151,14 +151,14 @@ When you inspect the JSON output from an initial API query, you'll encounter a v
 ```
 
 
-Among these fields, ```dataset_hdx_stub``` and ```resource_hdx_id``` are keys to unlocking metadata about the dataset. This metadata includes the last update date, the organisation responsible for the data, and links to download the original dataset.
+Among these fields, ```dataset_hdx_stub``` and ```resource_hdx_id``` are keys to unlocking metadata about the dataset. This metadata includes the last update date, the organization responsible for the data, and links to download the original dataset.
 
 
 To dive deeper into the data's origin, use the resource_hdx_id in the resource endpoint URL:
 
 
 ```
-https://stage.hapi-humdata-org.ahconu.org/api/v1/metadata/resource?hdx_id=b28928be-1847-408f-b3cd-9b87b596c710&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=jsonlimit=100&offset=00&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/metadata/resource?hdx_id=b28928be-1847-408f-b3cd-9b87b596c710&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=jsonlimit=100&offset=00&app_identifier={your app identifier}
 ```
 
 
@@ -193,8 +193,7 @@ Executing this query provides a response like the following:
 ```
 
 
-This output gives you a comprehensive view of the dataset's metadata, including the update date, the contributing organisation, and direct links to more information via the CKAN API and the original data file download.
+This output gives you a comprehensive view of the dataset's metadata, including the update date, the contributing organization, and direct links to more information via the CKAN API and the original data file download.
 
 
-As a starting point to effectively use our API, we encourage you to experiment with different queries using the [sandbox's](https://stage.hapi-humdata-org.ahconu.org/docs) query interface and review the provided code examples for guidance.
-
+As a starting point to effectively use our API, we encourage you to experiment with different queries using the [sandbox's](https://hapi.humdata.org/docs) query interface and review the provided code examples for guidance.
