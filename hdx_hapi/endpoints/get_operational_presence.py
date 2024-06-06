@@ -223,6 +223,6 @@ get_operational_presences.__doc__ = (
     "UNOCHA's 3W (Who is doing What Where) Operational Presence data provides "
     'information about which organizations are working in different locations affected by a crisis. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
-    'coordination_and_context/#3w-who-is-doing-what-where-operational-presence">HDX HAPI documentation</a>, '
+    'coordination_and_context/#who-is-doing-what-where-operational-presence">HDX HAPI documentation</a>, '
     'and the <a href="https://3w.unocha.org/">original UNOCHA 3W source</a> website. '
 )
