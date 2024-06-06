@@ -5,6 +5,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_GENDER,
     DOC_AGE_RANGE,
@@ -41,6 +42,8 @@ from hdx_hapi.endpoints.util.util import (
     # reference_period_parameters,
     AdminLevel,
 )
+
+CONFIG = get_config()
 
 router = APIRouter(
     tags=['Affected people'],
@@ -104,13 +107,6 @@ async def get_humanitarian_needs(
     admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level.')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    UNOCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF),
-    provides information about the number of people in need during a crisis.
-    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
-    affected_people/#humanitarian-needs'>HDX HAPI documentation</a>,
-    and the <a href='https://www.jiaf.info/'>original JIAF source</a> website.”
-    """
     ref_period_parameters = None
     result = await get_humanitarian_needs_srv(
         pagination_parameters=common_parameters,
@@ -137,6 +133,14 @@ async def get_humanitarian_needs(
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, HumanitarianNeedsResponse)
 
+
+get_humanitarian_needs.__doc__ = (
+    "UNOCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF), "
+    'provides information about the number of people in need during a crisis.'
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'affected_people/#humanitarian-needs">HDX HAPI documentation</a>, '
+    'and the <a href="https://www.jiaf.info/">original JIAF source</a> website.'
+)
 
 ## refugees
 
@@ -177,12 +181,6 @@ async def get_refugees(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    UNHCR's Refugee data provides information about displaced people in a crisis.
-    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
-    affected_people/#refugees-persons-of-concern'>HDX HAPI documentation</a>,
-    and the <a href='https://data.humdata.org/dataset/unhcr-population-data-for-world'>original HDX source</a> website.
-    """
     ref_period_parameters = None
     result = await get_refugees_srv(
         pagination_parameters=common_parameters,
@@ -199,3 +197,12 @@ async def get_refugees(
         asylum_location_name=asylum_location_name,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, RefugeesResponse)
+
+
+get_refugees.__doc__ = (
+    "UNHCR's Refugee data provides information about displaced people in a crisis."
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'affected_people/#refugees-persons-of-concern">HDX HAPI documentation</a>, '
+    'and the <a href="https://data.humdata.org/dataset/unhcr-population-data-for-world">original HDX source</a> '
+    'website.'
+)
