@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, Query
 from hapi_schema.utils.enums import EventType
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
@@ -32,6 +33,7 @@ from hdx_hapi.services.conflict_view_logic import get_conflict_event_srv
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.sql_alchemy_session import get_db
 
+CONFIG = get_config()
 
 router = APIRouter(
     tags=['Coordination & Context'],
@@ -83,12 +85,6 @@ async def get_conflict_events(
     admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level.')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    Armed Conflict Location & Events Data from ACLED.
-    See the more detailed technical <a href=' https://hdx-hapi.readthedocs.io/data_usage_guides/
-    coordination_and_context/#conflict-events'>HDX HAPI documentation</a>,
-    and the <a href='https://acleddata.com/'>original ACLED source</a> website.
-    """
     ref_period_parameters = None
     result = await get_conflict_event_srv(
         pagination_parameters=common_parameters,
@@ -107,3 +103,11 @@ async def get_conflict_events(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, ConflictEventResponse)
+
+
+get_conflict_events.__doc__ = (
+    'Armed Conflict Location & Events Data from ACLED. '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'coordination_and_context/#conflict-events">HDX HAPI documentation</a>, '
+    'and the <a href="https://acleddata.com/">original ACLED source</a> website.'
+)

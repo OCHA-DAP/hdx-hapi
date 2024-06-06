@@ -5,6 +5,8 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hapi_schema.utils.enums import Gender
+
+from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
@@ -37,6 +39,8 @@ from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream
 from hdx_hapi.services.population_logic import get_populations_srv
 from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
+
+CONFIG = get_config()
 
 router = APIRouter(
     tags=['Population & Socio-Economy'],
@@ -76,12 +80,6 @@ async def get_populations(
     # admin2_is_unspecified: Annotated[bool, Query(description='Is admin2 specified or not')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    Baseline population data sourced and maintained by UNFPA (UN Population Fund).
-    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
-    population_and_socio-economy/#baseline-population'>HDX HAPI documentation</a>,
-    and the <a href='https://data.humdata.org/organization/unfpa'>UNFPA on HDX</a>.
-    """
     ref_period_parameters = None
     result = await get_populations_srv(
         pagination_parameters=common_parameters,
@@ -103,6 +101,14 @@ async def get_populations(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, PopulationResponse)
+
+
+get_populations.__doc__ = (
+    'Baseline population data sourced and maintained by UNFPA (UN Population Fund). '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'population_and_socio-economy/#baseline-population">HDX HAPI documentation</a>, '
+    'and the <a href="https://data.humdata.org/organization/unfpa">UNFPA on HDX</a>.'
+)
 
 
 @router.get(
@@ -127,12 +133,6 @@ async def get_poverty_rates(
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    Poverty rate data from the Oxford Department of International Development.
-    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
-    population_and_socio-economy/#poverty-rate'>HDX HAPI documentation</a>,
-    and the <a href='https://ophi.org.uk/global-mpi'>Oxford Department of International Development</a> website.
-    """
     ref_period_parameters = None
     result = await get_poverty_rates_srv(
         pagination_parameters=common_parameters,
@@ -145,3 +145,11 @@ async def get_poverty_rates(
         admin1_name=admin1_name,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, PovertyRateResponse)
+
+
+get_poverty_rates.__doc__ = (
+    'Poverty rate data from the Oxford Department of International Development. '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'population_and_socio-economy/#poverty-rate">HDX HAPI documentation</a>, '
+    'and the <a href="https://ophi.org.uk/global-mpi">Oxford Department of International Development</a> website.'
+)

@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 
-
+from hdx_hapi.config.config import get_config
 from sqlalchemy.ext.asyncio import AsyncSession
 from hapi_schema.utils.enums import IPCPhase, IPCType
 from hdx_hapi.config.doc_snippets import (
@@ -33,6 +33,7 @@ from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream
 from hdx_hapi.services.food_security_logic import get_food_security_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
+CONFIG = get_config()
 router = APIRouter(
     tags=['Food Security & Nutrition'],
 )
@@ -69,13 +70,6 @@ async def get_food_security(
     # admin2_is_unspecified: Annotated[bool, Query(description='Is admin2 specified or not')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    Integrated Food Security Phase Classification from the IPC.
-    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
-    food_security_and_nutrition/#food-security'>HDX HAPI documentation</a>,
-    and the <a href='https://www.ipcinfo.org/ipcinfo-website/ipc-overview-and-classification-system/ipc-acute-food-insecurity-classification/en/'>
-    original IPC source</a> website.
-    """
     ref_period_parameters = None
     result = await get_food_security_srv(
         pagination_parameters=common_parameters,
@@ -95,3 +89,13 @@ async def get_food_security(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, FoodSecurityResponse)
+
+
+get_food_security.__doc__ = (
+    'Integrated Food Security Phase Classification from the IPC. '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'food_security_and_nutrition/#food-security">HDX HAPI documentation</a>, '
+    'and the <a href="https://www.ipcinfo.org/ipcinfo-website/'
+    'ipc-overview-and-classification-system/ipc-acute-food-insecurity-classification/en/">'
+    'original IPC source</a> website.'
+)

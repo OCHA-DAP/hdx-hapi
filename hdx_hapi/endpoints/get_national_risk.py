@@ -5,6 +5,7 @@ from hapi_schema.utils.enums import RiskClass
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
@@ -23,6 +24,8 @@ from hdx_hapi.endpoints.util.util import (
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.national_risk_logic import get_national_risks_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
+
+CONFIG = get_config()
 
 router = APIRouter(
     tags=['Coordination & Context'],
@@ -71,12 +74,6 @@ async def get_national_risks(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    European Commission national risk data from the INFORM-risk framework.
-    See the more detailed technical <a href=' https://hdx-hapi.readthedocs.io/data_usage_guides/
-    coordination_and_context/#national-risk'>HDX HAPI documentation</a>,
-    and the <a href='https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk'>original INFORM-risk source</a> website.
-    """
     ref_period_parameters = None
     result = await get_national_risks_srv(
         pagination_parameters=common_parameters,
@@ -97,3 +94,12 @@ async def get_national_risks(
         location_name=location_name,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, NationalRiskResponse)
+
+
+get_national_risks.__doc__ = (
+    'European Commission national risk data from the INFORM-risk framework. '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'coordination_and_context/#national-risk">HDX HAPI documentation</a>, '
+    'and the <a href="https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk">'
+    'original INFORM-risk source</a> website.'
+)

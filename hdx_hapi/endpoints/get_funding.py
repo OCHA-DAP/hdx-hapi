@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends, Query
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import DOC_LOCATION_CODE, DOC_LOCATION_NAME, DOC_SEE_LOC
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.funding import FundingResponse
@@ -17,6 +18,7 @@ from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream
 from hdx_hapi.services.funding_logic import get_funding_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 
+CONFIG = get_config()
 
 router = APIRouter(
     tags=['Coordination & Context'],
@@ -48,12 +50,6 @@ async def get_fundings(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    UNOCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions.
-    See the more detailed technical <a href='https://hdx-hapi.readthedocs.io/data_usage_guides/
-    coordination_and_context/#funding'>HDX HAPI documentation</a>,
-    and the <a href='https://fts.unocha.org/home/2024/donors/view '>original FTS source</a> website.
-    """
     ref_period_parameters = None
     result = await get_funding_srv(
         pagination_parameters=common_parameters,
@@ -65,3 +61,11 @@ async def get_fundings(
         location_name=location_name,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, FundingResponse)
+
+
+get_fundings.__doc__ = (
+    "UNOCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions. "
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'coordination_and_context/#funding">HDX HAPI documentation</a>, '
+    'and the <a href="https://fts.unocha.org/home/2024/donors/view">original FTS source</a> website.'
+)

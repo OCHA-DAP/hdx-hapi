@@ -4,6 +4,8 @@ from fastapi import Depends, Query, APIRouter
 
 from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
@@ -30,6 +32,8 @@ from hdx_hapi.endpoints.util.util import (
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.food_price_logic import get_food_prices_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
+
+CONFIG = get_config()
 
 router = APIRouter(
     tags=['Food Security & Nutrition'],
@@ -85,13 +89,6 @@ async def get_food_prices(
     admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level.')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    The World Food Programme (WFP) food prices data provides information about food prices for a range of commodities
-    at markets across the world. See the more detailed technical
-    <a href=' https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/
-    food_security_and_nutrition/#food-prices'>HDX HAPI documentation</a>,
-    and the <a href='https://dataviz.vam.wfp.org/economic/prices'>original WFP source</a> website.
-    """
     result = await get_food_prices_srv(
         pagination_parameters=common_parameters,
         db=db,
@@ -116,3 +113,12 @@ async def get_food_prices(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, FoodPriceResponse)
+
+
+get_food_prices.__doc__ = (
+    'The World Food Programme (WFP) food prices data provides information about food prices for a range of commodities '
+    'at markets across the world. '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'food_security_and_nutrition/#food-prices">HDX HAPI documentation</a>, '
+    'and the <a href="https://dataviz.vam.wfp.org/economic/prices">original WFP source</a> website.'
+)

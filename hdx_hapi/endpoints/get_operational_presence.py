@@ -1,6 +1,7 @@
 from typing import Annotated
 from fastapi import Depends, Query, APIRouter
 
+from hdx_hapi.config.config import get_config
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
@@ -34,6 +35,8 @@ from hdx_hapi.endpoints.util.util import (
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.operational_presence_logic import get_operational_presences_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
+
+CONFIG = get_config()
 
 router = APIRouter(
     tags=['Coordination & Context'],
@@ -176,14 +179,6 @@ async def get_operational_presences(
     # admin1_name: Annotated[str, Query(max_length=512, description='Location Adm1 Name')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """
-    UNOCHA's 3W (Who is doing What Where) Operational Presence data provides
-    information about which organizations are working in different locations affected by a
-    crisis.
-    See the more detailed technical <a href=' https://hdx-hapi.readthedocs.io/data_usage_guides/
-    coordination_and_context/#3w-who-is-doing-what-where'>HDX HAPI documentation</a>,
-    and the <a href='https://3w.unocha.org/'>original UNOCHA 3W source</a> website.
-    """
     ref_period_parameters = None
     result = await get_operational_presences_srv(
         pagination_parameters=common_parameters,
@@ -222,3 +217,12 @@ async def get_operational_presences(
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceResponse)
+
+
+get_operational_presences.__doc__ = (
+    "UNOCHA's 3W (Who is doing What Where) Operational Presence data provides "
+    'information about which organizations are working in different locations affected by a crisis. '
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'coordination_and_context/#3w-who-is-doing-what-where">HDX HAPI documentation</a>, '
+    'and the <a href="https://3w.unocha.org/">original UNOCHA 3W source</a> website. '
+)
