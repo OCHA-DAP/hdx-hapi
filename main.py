@@ -50,7 +50,7 @@ The Humanitarian API (HDX HAPI) is a service of the
 <a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of OCHA\'s 
 <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.
 \nThis is the reference documentation of the API. 
-You may want to <a href="https://hdx-hapi.readthedocs.io/en/latest/">get started here</a>
+You may want to <a href="https://hdx-hapi.readthedocs.io/en/latest/">get started here.</a>
 
 All queries require an `app_identifier` which can be supplied as a query parameter or as a header 
 (`X-HDX-HAPI-APP-IDENTIFIER`). The `app_identifier` is simply a base64 encoded version of a user supplied

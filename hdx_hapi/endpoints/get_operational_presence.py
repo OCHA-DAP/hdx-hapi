@@ -42,7 +42,7 @@ router = APIRouter(
     tags=['Coordination & Context'],
 )
 
-SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working.'
+SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working'
 
 
 @router.get(

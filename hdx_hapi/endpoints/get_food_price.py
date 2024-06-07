@@ -39,7 +39,7 @@ router = APIRouter(
     tags=['Food Security & Nutrition'],
 )
 
-SUMMARY_TEXT = 'Get food prices.'
+SUMMARY_TEXT = 'Get food prices'
 
 
 @router.get(

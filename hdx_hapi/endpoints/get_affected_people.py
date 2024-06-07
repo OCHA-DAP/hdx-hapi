@@ -135,8 +135,8 @@ async def get_humanitarian_needs(
 
 
 get_humanitarian_needs.__doc__ = (
-    "UNOCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF), "
-    'provides information about the number of people in need during a crisis.'
+    "OCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF), "
+    'provides information about the number of people in need during a crisis. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'affected_people/#humanitarian-needs">HDX HAPI documentation</a>, '
     'and the <a href="https://www.jiaf.info/">original JIAF source</a> website.'
@@ -200,7 +200,7 @@ async def get_refugees(
 
 
 get_refugees.__doc__ = (
-    "UNHCR's Refugee data provides information about displaced people in a crisis."
+    "UNHCR's Refugee data provides information about displaced people in a crisis. "
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'affected_people/#refugees-persons-of-concern">HDX HAPI documentation</a>, '
     'and the <a href="https://data.humdata.org/dataset/unhcr-population-data-for-world">original HDX source</a> '
