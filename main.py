@@ -47,7 +47,7 @@ logger = logging.getLogger(__name__)
 CONFIG = get_config()
 DESCRIPTION = """
 The Humanitarian API (HDX HAPI) is a service of the 
-<a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of UNOCHA\'s 
+<a href="https://data.humdata.org">Humanitarian Data Exchange (HDX)</a>, part of OCHA\'s 
 <a href="https://centre.humdata.org">Centre for Humanitarian Data</a>.
 \nThis is the reference documentation of the API. 
 You may want to <a href="https://hdx-hapi.readthedocs.io/en/latest/">get started here</a>

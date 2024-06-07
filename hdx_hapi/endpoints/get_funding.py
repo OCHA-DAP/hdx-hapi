@@ -64,7 +64,7 @@ async def get_fundings(
 
 
 get_fundings.__doc__ = (
-    "UNOCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions. "
+    "OCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions. "
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'coordination_and_context/#funding">HDX HAPI documentation</a>, '
     'and the <a href="https://fts.unocha.org/home/2024/donors/view">original FTS source</a> website.'

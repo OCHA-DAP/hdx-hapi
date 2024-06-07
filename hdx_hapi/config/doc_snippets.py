@@ -2,18 +2,16 @@ from hdx_hapi.config.config import get_config
 
 CONFIG = get_config()
 
-DOC_ADMIN1_REF = 'Filter the response by the 1st subnational administrative reference number. The admin1 reference is intended as a stable identifier which will not change if, for example, admin1 name changes.'
+DOC_ADMIN1_REF = 'Filter the response by the 1st subnational administrative reference number.'
 DOC_ADMIN1_CODE = 'Filter the response by the 1st subnational administrative divisions. The admin1 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative divisions. The admin1 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
-DOC_ADMIN2_REF = 'Filter the response by the 2nd subnational administrative reference number. The admin2 reference is intended as a stable identifier which will not change if, for example, admin2 name changes'
+DOC_ADMIN2_REF = 'Filter the response by the 2nd subnational administrative reference number.'
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_NAME = 'Filter the response by the 2nd subnational administrative divisions. The admin2 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_AGE_RANGE_SUMMARY = 'Get the list of age ranges used for disaggregating population data.'
 DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start age]-[end age]. The end age is assumed to be inclusive, though that is not always explicit in the source data.'
-DOC_GENDER_SUMMARY = 'Get the list of gender codes used for disaggregating population data.'
-DOC_GENDER_CODE = 'Filter the response by the gender code.'
-DOC_GENDER = 'Filter the response by the gender. f (female), m (male), x (non-binary), u (unspecified), o (other) and all (a sum over all genders).'
-DOC_GENDER_DESCRIPTION = 'Filter the response by the gender description.'
+DOC_GENDER_SUMMARY = 'Get the list of genders used for disaggregating population data.'
+DOC_GENDER = f'Filter the response by the gender, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#gender">here</a>'
 DOC_POPULATION_GROUP = 'Filter the response by the population group. '
 DOC_POPULATION_STATUS = 'Filter the response by status. POP (population), AFF (affected), INN (in need), TGT (targeted), REA (reached) or all (all).'
 DOC_HDX_DATASET_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a Dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
@@ -29,7 +27,7 @@ DOC_HDX_RESOURCE_HXL = (
 DOC_HDX_DATASET_IN_RESOURCE_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_IN_RESOURCE_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
 DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the code of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[dataset_hdx_provider_stub]` will load the provider's page on HDX."
-DOC_LOCATION_REF = 'Filter the response by a location (typically a country) reference number. The location reference is intended as a stable identifier which will not change if, for example, location name changes.'
+DOC_LOCATION_REF = 'Filter the response by a location (typically a country) reference number.'
 DOC_LOCATION_CODE = 'Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes.'
 DOC_LOCATION_NAME = 'Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a>.'
 DOC_ORG_ACRONYM = 'Filter the response by the standard acronym used to represent the organization. When data is brought into the HDX HAPI database, an attempt is made to standardize the acronyms.'
