@@ -19,6 +19,8 @@ from hdx_hapi.endpoints.util.util import AdminLevel
 endpoint_data = {
     '/api/v1/metadata/admin1': {
         'query_parameters': {
+            'id': 2,
+            'location_ref': 1,
             'code': 'FoO-001',
             'name': 'Province 01',
             'location_code': 'FoO',
@@ -27,8 +29,11 @@ endpoint_data = {
             # 'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
+            'id',
+            'location_ref',
             'code',
             'name',
+            'from_cods',
             'location_code',
             'location_name',
             'reference_period_start',
