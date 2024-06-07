@@ -25,7 +25,7 @@ async def test_tracking_endpoint_success():
         async with AsyncClient(app=app, base_url=TEST_BASE_URL) as ac:
             headers = {
                 'User-Agent': TEST_USER_AGENT,
-                'HTTP_X_REAL_IP': '127.0.0.1',
+                'x-forwarded-for': '127.0.0.1',
             }
             params = {'admin_level': '1', 'output_format': 'json'}
             response = await ac.get(ENDPOINT, params=params, headers=headers)
@@ -38,6 +38,7 @@ async def test_tracking_endpoint_success():
             'query params': ['admin_level', 'output_format'],
             'time': pytest.approx(time.time()),
             'app name': None,
+            'identifier verification': False,
             'output format': 'json',
             'admin level': '1',
             'server side': True,
@@ -51,7 +52,7 @@ async def test_tracking_endpoint_success():
         }
 
         # Check parameters match the expected ones
-        send_mixpanel_event_patch.assert_called_once_with('api call', '123456', expected_mixpanel_dict)
+        send_mixpanel_event_patch.assert_called_once_with('hapi api call', '123456', expected_mixpanel_dict)
 
 
 @pytest.mark.asyncio
