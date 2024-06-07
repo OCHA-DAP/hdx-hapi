@@ -5,10 +5,10 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
 class LocationResponse(HapiBaseModel):
-    # id: int
+    id: int
     code: str = Field(max_length=128)
     name: str = Field(max_length=512)
-
+    from_cods: bool
     reference_period_start: datetime
     reference_period_end: Optional[datetime]
 
@@ -16,10 +16,11 @@ class LocationResponse(HapiBaseModel):
 
 
 class Admin1Response(HapiBaseModel):
-    # id: int
-    # location_ref: int
+    id: int
+    location_ref: int
     code: str = Field(max_length=128)
     name: str = Field(max_length=512)
+    from_cods: bool
     # hapi_updated_date: datetime
     # hapi_replaced_date: Optional[datetime]
     reference_period_start: datetime
@@ -31,10 +32,12 @@ class Admin1Response(HapiBaseModel):
 
 
 class Admin2Response(HapiBaseModel):
-    # id: int
-    # admin1_ref: int
+    id: int
+    admin1_ref: int
     code: str = Field(max_length=128)
     name: str = Field(max_length=512)
+    from_cods: bool
+    # location_ref: int
     # hapi_updated_date: datetime
     # hapi_replaced_date: Optional[datetime]
     reference_period_start: datetime

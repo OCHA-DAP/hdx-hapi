@@ -19,5 +19,6 @@ class PovertyRateResponse(HapiBaseModel):
     location_code: str = Field(max_length=128)
     location_name: str = Field(max_length=512)
     admin1_name: Optional[str] = Field(max_length=512)
+    location_ref: int
 
     model_config = ConfigDict(from_attributes=True)

@@ -9,9 +9,11 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN2_CODE,
     DOC_ADMIN2_NAME,
     DOC_LOCATION_CODE,
+    DOC_LOCATION_ID,
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
+    DOC_LOCATION_REF,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -51,6 +53,7 @@ async def get_locations(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
+    id: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -60,6 +63,7 @@ async def get_locations(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
+        id=id,
         code=code,
         name=name,
     )
@@ -87,6 +91,8 @@ async def get_admin1(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
+    id: Annotated[int, Query(description=f'{DOC_LOCATION_ID}')] = None,
+    location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
     # hapi_updated_date_min: Annotated[
@@ -114,6 +120,8 @@ async def get_admin1(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
+        id=id,
+        location_ref=location_ref,
         code=code,
         name=name,
         location_code=location_code,
@@ -143,6 +151,9 @@ async def get_admin2(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
+    id: Annotated[int, Query(description=f'{DOC_LOCATION_ID}')] = None,
+    admin1_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
+    # location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
     # hapi_updated_date_min: Annotated[
@@ -172,6 +183,9 @@ async def get_admin2(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
+        id=id,
+        admin1_ref=admin1_ref,
+        # location_ref=location_ref,
         code=code,
         name=name,
         admin1_code=admin1_code,

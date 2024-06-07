@@ -29,6 +29,7 @@ DOC_HDX_RESOURCE_HXL = (
 DOC_HDX_DATASET_IN_RESOURCE_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_IN_RESOURCE_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
 DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the code of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[dataset_hdx_provider_stub]` will load the provider's page on HDX."
+DOC_LOCATION_ID = 'Filter the response by a location ID.'
 DOC_LOCATION_REF = 'Filter the response by a location (typically a country) reference number. The location reference is intended as a stable identifier which will not change if, for example, location name changes.'
 DOC_LOCATION_CODE = 'Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes.'
 DOC_LOCATION_NAME = 'Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a>.'
