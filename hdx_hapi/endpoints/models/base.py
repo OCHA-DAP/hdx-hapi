@@ -12,13 +12,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
+    truncate_query_description,
 )
-
-
-def truncate_query_description(query_description) -> str:
-    response_description = query_description.replace('Filter the response by ', '')
-    response_description = response_description.capitalize()
-    return response_description
 
 
 class HapiBaseModel(BaseModel):

@@ -18,6 +18,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
     DOC_SEE_LOC,
+    DOC_ACLED_EVENT_TYPE,
 )
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.conflict_event import ConflictEventResponse
@@ -59,7 +60,7 @@ async def get_conflict_events(
     db: AsyncSession = Depends(get_db),
     event_type: Annotated[
         Optional[EventType],
-        Query(description='Event type, one of civilian_targeting, demonstration, political_violence'),
+        Query(description=DOC_ACLED_EVENT_TYPE),
     ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[

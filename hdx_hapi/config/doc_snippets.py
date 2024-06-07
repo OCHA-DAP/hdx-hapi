@@ -8,18 +8,16 @@ DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative div
 DOC_ADMIN2_REF = 'Filter the response by the 2nd subnational administrative reference number.'
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_NAME = 'Filter the response by the 2nd subnational administrative divisions. The admin2 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
-DOC_AGE_RANGE_SUMMARY = 'Get the list of age ranges used for disaggregating population data.'
 DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start age]-[end age]. The end age is assumed to be inclusive, though that is not always explicit in the source data.'
-DOC_GENDER_SUMMARY = 'Get the list of genders used for disaggregating population data.'
-DOC_GENDER = f'Filter the response by the gender, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#gender">here</a>'
-DOC_POPULATION_GROUP = 'Filter the response by the population group. '
+DOC_GENDER = f'Filter the response by the gender, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#gender">here.</a>'
+DOC_POPULATION_GROUP = 'Filter the response by the population group.'
 DOC_POPULATION_STATUS = 'Filter the response by status. POP (population), AFF (affected), INN (in need), TGT (targeted), REA (reached) or all (all).'
 DOC_HDX_DATASET_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a Dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_TITLE = 'Filter the response by the title of the dataset as it appears in the HDX interface. This name is not unique and can change.'
 DOC_HDX_PROVIDER_STUB = "Filter the response by the code of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[hdx_provider_stub]` will load the provider's page on HDX."
 DOC_HDX_PROVIDER_NAME = 'Filter the response by the display name of the provider (organization) of the dataset on HDX.'
-DOC_HDX_RESOURCE_ID = 'Filter the response by the resource ID (hdx_id), which is a unique and fixed identifier of a resource on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]` will load the resource page on HDX.'
+DOC_HDX_RESOURCE_ID = 'Filter the response by the resource ID (resource_hdx_id), which is a unique and fixed identifier of a resource on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]` will load the resource page on HDX.'
 DOC_HDX_RESOURCE_FORMAT = 'Filter the response by the format of the resource on HDX. These are typically file formats (i.e. CSV, XLSX), but can also include APIs and web apps.'
 DOC_HDX_RESOURCE_HXL = (
     'Filter the response by whether or not the resource contains <a href="https://hxlstandard.org/">HXL tags</a>.'
@@ -51,3 +49,25 @@ DOC_SEE_LOC = 'See the <a href="/docs#/Metadata/get_locations_api_v1_metadata_lo
 DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
 
 DOC_CURRENCY_CODE = 'Filter the response by the currency code.'
+
+# Endpoint
+DOC_ACLED_EVENT_TYPE = (
+    "ACLED's public dataset is compiled into non-mutually exclusive event-type categories. "
+    'Please see the [ACLED Codebook](https://acleddata.com/knowledge-base/codebook/#acled-events) '
+    'for their methodology.'
+)
+
+
+def truncate_query_description(query_description) -> str:
+    response_description = query_description.replace('Filter the response by ', '')
+    # response_description = response_description.capitalize()
+    if response_description.startswith('the'):
+        response_description = 'The' + response_description[3:]
+    if response_description.startswith('a'):
+        response_description = 'A' + response_description[1:]
+    response_description = response_description.replace('. the', '. The')
+    response_description = response_description.replace('un m49 standard', 'UN M49 standard')
+    return response_description
+
+
+thing = "'"
