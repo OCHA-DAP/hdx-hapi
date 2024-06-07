@@ -14,12 +14,15 @@ async def locations_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
+    id: int = None,
     code: str = None,
     name: str = None,
 ):
     logger.info(f'orgs_view_list called with params: code={code}, name={name}')
 
     query = select(LocationView)
+    if id:
+        query = query.where(LocationView.id == id)
     if code:
         query = case_insensitive_filter(query, LocationView.code, code)
     if name:

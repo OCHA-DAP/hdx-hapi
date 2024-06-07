@@ -5,10 +5,10 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 
 class LocationResponse(HapiBaseModel):
-    # id: int
+    id: int
     code: str = Field(max_length=128)
     name: str = Field(max_length=512)
-
+    from_cods: bool
     reference_period_start: datetime
     reference_period_end: Optional[datetime]
 

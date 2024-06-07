@@ -78,14 +78,17 @@ endpoint_data = {
     },
     '/api/v1/metadata/location': {
         'query_parameters': {
+            'id': 1,
             'code': 'foo',
             'name': 'Foolandia',
             # 'reference_period_start_min': '2020-01-01T00:00:00',
             # 'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
+            'id',
             'code',
             'name',
+            'from_cods',
             'reference_period_start',
             'reference_period_end',
         ],

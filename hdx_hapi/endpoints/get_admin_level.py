@@ -12,6 +12,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
+    DOC_LOCATION_REF,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -51,6 +52,7 @@ async def get_locations(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
+    id: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -60,6 +62,7 @@ async def get_locations(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
+        id=id,
         code=code,
         name=name,
     )
