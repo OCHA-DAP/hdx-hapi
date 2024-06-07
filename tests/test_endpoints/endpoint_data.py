@@ -282,6 +282,7 @@ endpoint_data = {
             'reference_period_end',
             'location_code',
             'location_name',
+            'location_ref',
         ],
     },
     '/api/v1/food/food-security': {
@@ -403,6 +404,7 @@ endpoint_data = {
             'resource_hdx_id',
             'location_code',
             'location_name',
+            'location_ref',
         ],
     },
     '/api/v1/affected-people/humanitarian-needs': {

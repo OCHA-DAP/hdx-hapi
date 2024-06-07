@@ -29,7 +29,7 @@ class NationalRiskResponse(HapiBaseModel):
     # hapi_replaced_date: Optional[datetime]
 
     # sector_name: str = Field(max_length=512)
-
+    location_ref: int
     location_code: str = Field(max_length=128)
     location_name: str = Field(max_length=512)
 
