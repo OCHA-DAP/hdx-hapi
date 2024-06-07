@@ -113,7 +113,8 @@ def _parse_fastapi_request(request: Request) -> Tuple[str, List[str], str, str, 
         request: The FastAPI request object
 
     Returns:
-        Tuple containing app_identifier, endpoint, query_params_keys, output_format, admin_level, email_address, and current_url
+        Tuple containing:
+        app_identifier, endpoint, query_params_keys, output_format, admin_level, email_address, and current_url
     """
     app_identifier = request.query_params.get('app_identifier', '')
     endpoint = request.url.path
@@ -153,7 +154,7 @@ def _parse_nginx_header(request: Request) -> Tuple[str, List[str], str, str, str
 
     protocol = request.headers.get('x-forwarded-proto', '')
     host = request.headers.get('x-forwarded-host', '')
-    current_url = unquote(f"{protocol}://{host}{original_uri_from_nginx}")
+    current_url = unquote(f'{protocol}://{host}{original_uri_from_nginx}')
 
     if app_identifier:
         current_url = current_url.replace(app_identifier, 'unavailable')
