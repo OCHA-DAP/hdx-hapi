@@ -32,10 +32,12 @@ class Admin1Response(HapiBaseModel):
 
 
 class Admin2Response(HapiBaseModel):
-    # id: int
-    # admin1_ref: int
+    id: int
+    admin1_ref: int
     code: str = Field(max_length=128)
     name: str = Field(max_length=512)
+    from_cods: bool
+    # location_ref: int
     # hapi_updated_date: datetime
     # hapi_replaced_date: Optional[datetime]
     reference_period_start: datetime

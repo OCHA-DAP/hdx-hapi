@@ -42,8 +42,11 @@ endpoint_data = {
     },
     '/api/v1/metadata/admin2': {
         'query_parameters': {
+            'id': 4,
+            'admin1_ref': 2,
             'code': 'FoO-001-A',
             'name': 'District A',
+            # 'location_ref': 1,
             'admin1_code': 'FOo-001',
             'admin1_name': 'Province 01',
             'location_code': 'FOo',
@@ -52,8 +55,12 @@ endpoint_data = {
             # 'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
+            'id',
+            'admin1_ref',
             'code',
             'name',
+            'from_cods',
+            # 'location_ref',
             'admin1_code',
             'admin1_name',
             'location_code',
