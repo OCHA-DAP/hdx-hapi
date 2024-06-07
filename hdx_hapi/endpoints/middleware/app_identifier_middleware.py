@@ -1,11 +1,11 @@
 from typing import Optional, Tuple
-from urllib.parse import parse_qs, urlparse
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.endpoints.util.util import app_name_identifier_query, email_identifier_query
+from hdx_hapi.endpoints.middleware.util.util import _extract_path_identifier_and_query_params
 
 import base64
 import logging
@@ -41,12 +41,13 @@ async def app_identifier_middleware(request: Request, call_next):
         is_nginx_verify_request = request.url.path.startswith(
             '/api/v1/util/verify-request'
         ) or request.url.path.startswith('/api/util/verify-request')
+        request.state.is_nginx_verify_request = is_nginx_verify_request
         original_uri_from_nginx = request.headers.get('X-Original-URI')
 
         if is_nginx_verify_request:
             if not original_uri_from_nginx:
                 return JSONResponse(content={'error': 'Missing X-Original-URI'}, status_code=status.HTTP_403_FORBIDDEN)
-            path, app_identifier = _extract_path_and_identifier_from_original_url(original_uri_from_nginx)
+            path, app_identifier, _ = _extract_path_identifier_and_query_params(original_uri_from_nginx)
         else:
             path = request.url.path
             app_identifier = request.query_params.get('app_identifier')
@@ -60,22 +61,6 @@ async def app_identifier_middleware(request: Request, call_next):
 
     response = await call_next(request)
     return response
-
-
-def _extract_path_and_identifier_from_original_url(original_url: str) -> Tuple[str, Optional[str]]:
-    """
-    Extract the path and app_identifier from the Nginx header.
-    Args:
-        original_url: The original URL from the Nginx header
-    Returns:
-        Tuple of path and app_identifier
-    """
-
-    parsed_url = urlparse(original_url)
-    path = parsed_url.path
-    query_params = parse_qs(parsed_url.query)
-    app_identifier = query_params.get('app_identifier', [None])[0]
-    return path, app_identifier
 
 
 def _check_allow_request(

@@ -23,7 +23,17 @@ async def mixpanel_tracking_middleware(request: Request, call_next):
     
     if CONFIG.MIXPANEL:
         if request.url.path.startswith('/api'):
-            background_tasks.add_task(track_api_call, request, response)
+            if getattr(request.state, 'is_nginx_verify_request', False):
+                original_uri_from_nginx = request.headers.get('X-Original-URI')
+                if not original_uri_from_nginx:
+                    logger.warning('The "hapi api call" event cannot be tracked due to missing X-Original-URI.')
+                else:
+                    if original_uri_from_nginx.startswith('/api'):
+                        background_tasks.add_task(track_api_call, request, response)
+                    elif original_uri_from_nginx.startswith('/docs'):
+                        background_tasks.add_task(track_page_view, request, response)
+            else:
+                background_tasks.add_task(track_api_call, request, response)
         elif request.url.path.startswith('/docs'):
             background_tasks.add_task(track_page_view, request, response)
     else:
