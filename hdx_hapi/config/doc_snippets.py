@@ -41,6 +41,8 @@ DOC_HAPI_UPDATED_DATE_MIN = 'Min date of HDX HAPI updated date, e.g. 2020-01-01 
 DOC_HAPI_UPDATED_DATE_MAX = 'Max date of HDX HAPI updated date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 DOC_HAPI_REPLACED_DATE_MIN = 'Min date of HDX HAPI replaced date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 DOC_HAPI_REPLACED_DATE_MAX = 'Max date of HDX HAPI replaced date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
+DOC_REFERENCE_PERIOD_START = 'The start date for which the data are applicable'
+DOC_REFERENCE_PERIOD_END = 'The end date for which the data are applicable'
 
 DOC_SEE_ADMIN1 = 'See the <a href="/docs#/Metadata/get_admin1_api_v1_metadata_admin1_get" target="_blank">admin1 endpoint</a> for details.'
 DOC_SEE_ADMIN2 = 'See the <a href="/docs#/Metadata/get_admin2_api_v1_metadata_admin2_get" target="_blank">admin2 endpoint</a> for details.'
@@ -68,6 +70,3 @@ def truncate_query_description(query_description) -> str:
     response_description = response_description.replace('. the', '. The')
     response_description = response_description.replace('un m49 standard', 'UN M49 standard')
     return response_description
-
-
-thing = "'"
