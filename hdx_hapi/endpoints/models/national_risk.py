@@ -2,6 +2,7 @@ from hapi_schema.utils.enums import RiskClass
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
+from hdx_hapi.config.doc_snippets import DOC_RISK_CLASS, truncate_query_description
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 from hdx_hapi.endpoints.models.util.constants import PERCENTAGE_TYPE
 
@@ -9,7 +10,7 @@ RISK_TYPE = Field(ge=0, le=10)
 
 
 class NationalRiskResponse(HapiBaseModel):
-    risk_class: RiskClass
+    risk_class: RiskClass = Field(description=truncate_query_description(DOC_RISK_CLASS))
     global_rank: int = Field(ge=1, le=250)
     overall_risk: float = RISK_TYPE
     hazard_exposure_risk: float = RISK_TYPE

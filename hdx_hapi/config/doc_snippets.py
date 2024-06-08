@@ -35,8 +35,8 @@ DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the code of the prov
 DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
 
 # Time periods
-# DOC_UPDATE_DATE_MIN = 'Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
-# DOC_UPDATE_DATE_MAX = 'Max date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
+DOC_UPDATE_DATE_MIN = 'Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
+DOC_UPDATE_DATE_MAX = 'Max date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 # DOC_HAPI_UPDATED_DATE_MIN = 'Min date of HDX HAPI updated date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 # DOC_HAPI_UPDATED_DATE_MAX = 'Max date of HDX HAPI updated date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 # DOC_HAPI_REPLACED_DATE_MIN = 'Min date of HDX HAPI replaced date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
@@ -45,17 +45,17 @@ DOC_REFERENCE_PERIOD_START = 'The start date for which the data are applicable'
 DOC_REFERENCE_PERIOD_END = 'The end date for which the data are applicable'
 
 # Enumerations
-DOC_COMMODITY_CATEGORY = f'Filter the response by the food group that the commodity belongs to, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#commodity-category">here.</a>'
-DOC_DISABLED_MARKER = f'Filter the response by the presence of disability disaggregation data, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#disabled-marker">here.</a>'
+DOC_COMMODITY_CATEGORY = f'Filter the response by the food group that the commodity belongs to, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#commodity-category">here.</a>'
+DOC_DISABLED_MARKER = f'Filter the response by the presence of disability disaggregation data, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#disabled-marker">here.</a>'
 # DOC_ACLED_EVENT_TYPE = 'This is documented below'
-DOC_GENDER = f'Filter the response by the gender, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#gender">here.</a>'
-DOC_IPC_PHASE = f'Filter the response by the IPC phase, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-code">here.</a>'
-DOC_IPC_TYPE = f'Filter the response by the IPC type, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-type">here.</a>'
-DOC_POPULATION_GROUP = 'Filter the response by the population group, '
-DOC_POPULATION_STATUS = 'Filter the response by the population status. POP (population), AFF (affected), INN (in need), TGT (targeted), REA (reached) or all (all).'
-DOC_PRICE_FLAG = ''
-DOC_PRICE_TYPE = ''
-
+DOC_GENDER = f'Filter the response by the gender, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#gender">here.</a>'
+DOC_IPC_PHASE = f'Filter the response by the IPC phase, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-code">here.</a>'
+DOC_IPC_TYPE = f'Filter the response by the IPC type, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-type">here.</a>'
+DOC_POPULATION_GROUP = f'Filter the response by the population group, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#population-group">here.</a>'
+DOC_POPULATION_STATUS = f'Filter the response by the population status, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#population-status">here.</a>'
+DOC_PRICE_FLAG = f'Filter the response by the pre-processing characteristics of food prices, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#price-flag">here.</a>'
+DOC_PRICE_TYPE = f'Filter the response by the point in the supply chain at which the price is determined, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#price-type">here.</a>'
+DOC_RISK_CLASS = f'Filter the response by the INFORM risk class, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#risk-class">here.</a>'
 
 # Humanitarian Response metadata
 DOC_ORG_ACRONYM = 'Filter the response by the standard acronym used to represent the organization. When data is brought into the HDX HAPI database, an attempt is made to standardize the acronyms.'

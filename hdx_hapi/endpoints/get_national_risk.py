@@ -9,6 +9,7 @@ from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
+    DOC_RISK_CLASS,
     DOC_SEE_LOC,
 )
 
@@ -47,7 +48,7 @@ async def get_national_risks(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    risk_class: Annotated[Optional[RiskClass], Query(description='Risk class.')] = None,
+    risk_class: Annotated[Optional[RiskClass], Query(description=DOC_RISK_CLASS)] = None,
     global_rank_min: Annotated[Optional[int], Query(description='Global rank, lower bound.')] = None,
     global_rank_max: Annotated[Optional[int], Query(description='Global rank, upper bound.')] = None,
     overall_risk_min: Annotated[Optional[float], Query(description='Overall risk, lower bound.')] = None,

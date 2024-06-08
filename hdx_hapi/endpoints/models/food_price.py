@@ -2,6 +2,8 @@ from typing import Optional
 from pydantic import ConfigDict, Field, NaiveDatetime
 from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType
 from hdx_hapi.config.doc_snippets import (
+    DOC_PRICE_FLAG,
+    DOC_PRICE_TYPE,
     DOC_REFERENCE_PERIOD_END,
     DOC_REFERENCE_PERIOD_START,
     DOC_COMMODITY_CATEGORY,
@@ -23,8 +25,8 @@ class FoodPriceResponse(HapiBaseModel, HapiModelWithAdmins):
     currency_code: str = Field(max_length=32, description='ISO-4217 currency code')
     unit: str = Field(max_length=32, description='The unit of the commodity, such as weight or number')
 
-    price_flag: PriceFlag = Field(description='Pre-processing characteristics of food price')
-    price_type: PriceType = Field(description='The point in the supply chain at which the price is determined')
+    price_flag: PriceFlag = Field(description=truncate_query_description(DOC_PRICE_FLAG))
+    price_type: PriceType = Field(description=truncate_query_description(DOC_PRICE_TYPE))
     price: NON_NEGATIVE_DECIMAL_TYPE
     lat: float = Field(ge=-90.0, le=90.0, description="The market's latitude")
     lon: float = Field(ge=-180.0, le=180.0, description="The market's longitude")
