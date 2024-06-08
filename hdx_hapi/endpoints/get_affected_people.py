@@ -13,6 +13,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_POPULATION_STATUS,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
+    DOC_ADMIN_LEVEL_FILTER,
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN2_REF,
@@ -104,7 +105,7 @@ async def get_humanitarian_needs(
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
     admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level.')] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
