@@ -2,7 +2,6 @@ from typing import List
 from datetime import datetime
 from pydantic import ConfigDict, Field, HttpUrl, computed_field
 from hdx_hapi.config.doc_snippets import (
-    DOC_HDX_DATASET_IN_RESOURCE_NAME,
     DOC_HDX_DATASET_STUB,
     DOC_HDX_DATASET_TITLE,
     DOC_HDX_PROVIDER_IN_RESOURCE_STUB,
