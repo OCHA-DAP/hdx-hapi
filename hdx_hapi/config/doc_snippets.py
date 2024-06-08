@@ -20,9 +20,9 @@ DOC_ADMIN_LEVEL_FILTER = 'Filter the response by admin level.'
 
 # HDX Metadata
 DOC_HDX_DATASET_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a Dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
-DOC_HDX_DATASET_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
+DOC_HDX_DATASET_STUB = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_TITLE = 'Filter the response by the title of the dataset as it appears in the HDX interface. This name is not unique and can change.'
-DOC_HDX_PROVIDER_STUB = "Filter the response by the code of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[hdx_provider_stub]` will load the provider's page on HDX."
+DOC_HDX_PROVIDER_STUB = "Filter the response by the URL-safe name of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[hdx_provider_stub]` will load the provider's page on HDX."
 DOC_HDX_PROVIDER_NAME = 'Filter the response by the display name of the provider (organization) of the dataset on HDX.'
 DOC_HDX_RESOURCE_ID = 'Filter the response by the resource ID (resource_hdx_id), which is a unique and fixed identifier of a resource on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]` will load the resource page on HDX.'
 DOC_HDX_RESOURCE_FORMAT = 'Filter the response by the format of the resource on HDX. These are typically file formats (i.e. CSV, XLSX), but can also include APIs and web apps.'
@@ -31,7 +31,7 @@ DOC_HDX_RESOURCE_HXL = (
 )
 DOC_HDX_DATASET_IN_RESOURCE_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_IN_RESOURCE_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
-DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the code of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[dataset_hdx_provider_stub]` will load the provider's page on HDX."
+DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the URL-safe name of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[dataset_hdx_provider_stub]` will load the provider's page on HDX."
 DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
 
 # Time periods

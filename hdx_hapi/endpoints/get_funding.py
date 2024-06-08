@@ -40,8 +40,14 @@ async def get_fundings(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    appeal_code: Annotated[Optional[str], Query(max_length=32, description='Appeal code')] = None,
-    appeal_type: Annotated[Optional[str], Query(max_length=32, description='Appeal type')] = None,
+    appeal_code: Annotated[
+        Optional[str],
+        Query(max_length=32, description='Filter the response by a unique code given by FTS to each appeal'),
+    ] = None,
+    appeal_type: Annotated[
+        Optional[str],
+        Query(max_length=32, description='Filter the respinse by the type of the appeal, such as flash or HRP'),
+    ] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
