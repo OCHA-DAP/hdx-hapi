@@ -89,7 +89,7 @@ async def send_mixpanel_event(event_name: str, distinct_id: str, event_data: dic
     _CONFIG.MIXPANEL.track(distinct_id, event_name, event_data)
 
 
-def _extract_path_identifier_and_query_params(original_url: str) -> Tuple[str, Optional[str]]:
+def extract_path_identifier_and_query_params(original_url: str) -> Tuple[str, Optional[str]]:
     """
     Extract the path, app_identifier and query parameters from the Nginx header.
     Args:
@@ -113,8 +113,7 @@ def _parse_fastapi_request(request: Request) -> Tuple[str, List[str], str, str, 
         request: The FastAPI request object
 
     Returns:
-        Tuple containing:
-        app_identifier, endpoint, query_params_keys, output_format, admin_level, email_address, and current_url
+        Tuple containing endpoint, query_params_keys, output_format, admin_level and current_url
     """
     app_identifier = request.query_params.get('app_identifier', '')
     endpoint = request.url.path
@@ -136,7 +135,7 @@ def _parse_fastapi_request(request: Request) -> Tuple[str, List[str], str, str, 
 
 def _parse_nginx_header(request: Request) -> Tuple[str, List[str], str, str, str]:
     """
-    Parse the nginx "X-Original-URI" header to extract data needed for analytics.
+    Parse nginx headers to extract data needed for analytics.
 
     Args:
         request: The FastAPI request object.
@@ -145,7 +144,7 @@ def _parse_nginx_header(request: Request) -> Tuple[str, List[str], str, str, str
         Tuple containing endpoint, query_params_keys, output_format, admin_level and current_url
     """
     original_uri_from_nginx = request.headers.get('X-Original-URI')
-    endpoint, app_identifier, query_params = _extract_path_identifier_and_query_params(original_uri_from_nginx)
+    endpoint, app_identifier, query_params = extract_path_identifier_and_query_params(original_uri_from_nginx)
 
     query_params_keys = list(query_params.keys())
     output_format = query_params.get('output_format', [''])[0]

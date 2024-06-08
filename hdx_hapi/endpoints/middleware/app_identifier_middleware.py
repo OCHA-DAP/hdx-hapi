@@ -5,7 +5,7 @@ from pydantic import BaseModel, EmailStr
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.endpoints.util.util import app_name_identifier_query, email_identifier_query
-from hdx_hapi.endpoints.middleware.util.util import _extract_path_identifier_and_query_params
+from hdx_hapi.endpoints.middleware.util.util import extract_path_identifier_and_query_params
 
 import base64
 import logging
@@ -47,7 +47,7 @@ async def app_identifier_middleware(request: Request, call_next):
         if is_nginx_verify_request:
             if not original_uri_from_nginx:
                 return JSONResponse(content={'error': 'Missing X-Original-URI'}, status_code=status.HTTP_403_FORBIDDEN)
-            path, app_identifier, _ = _extract_path_identifier_and_query_params(original_uri_from_nginx)
+            path, app_identifier, _ = extract_path_identifier_and_query_params(original_uri_from_nginx)
         else:
             path = request.url.path
             app_identifier = request.query_params.get('app_identifier')
