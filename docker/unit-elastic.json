@@ -6,7 +6,7 @@
     },
     "applications": {
         "hapi": {
-            "type": "python 3.10",
+            "type": "python 3.12",
             "threads": 1,
             "processes": {
                 "max": 10,
