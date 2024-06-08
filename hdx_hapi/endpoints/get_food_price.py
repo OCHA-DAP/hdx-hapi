@@ -20,6 +20,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
     DOC_SEE_LOC,
+    DOC_COMMODITY_CATEGORY,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -60,7 +61,7 @@ async def get_food_prices(
     market_code: Annotated[Optional[str], Query(max_length=32, description='Market code.')] = None,
     market_name: Annotated[Optional[str], Query(max_length=512, description='Market name.')] = None,
     commodity_code: Annotated[Optional[str], Query(max_length=32, description='Commodity code.')] = None,
-    commodity_category: Annotated[Optional[CommodityCategory], Query(description='Commodity category.')] = None,
+    commodity_category: Annotated[Optional[CommodityCategory], Query(description=DOC_COMMODITY_CATEGORY)] = None,
     commodity_name: Annotated[Optional[str], Query(max_length=512, description='Commodity name.')] = None,
     price_flag: Annotated[Optional[PriceFlag], Query(description='Price Flag.')] = None,
     price_type: Annotated[Optional[PriceType], Query(description='Price Type.')] = None,

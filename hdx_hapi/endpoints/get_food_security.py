@@ -18,6 +18,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN2_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
+    DOC_IPC_PHASE,
+    DOC_IPC_TYPE,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -55,8 +57,8 @@ async def get_food_security(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
-    ipc_phase: Annotated[IPCPhase, Query(description='IPC Phase')] = None,
-    ipc_type: Annotated[IPCType, Query(description='IPC Type')] = None,
+    ipc_phase: Annotated[IPCPhase, Query(description=f'{DOC_IPC_PHASE}')] = None,
+    ipc_type: Annotated[IPCType, Query(description=f'{DOC_IPC_TYPE}')] = None,
     location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,

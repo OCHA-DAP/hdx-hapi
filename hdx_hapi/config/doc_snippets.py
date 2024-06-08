@@ -45,9 +45,16 @@ DOC_REFERENCE_PERIOD_START = 'The start date for which the data are applicable'
 DOC_REFERENCE_PERIOD_END = 'The end date for which the data are applicable'
 
 # Enumerations
+DOC_COMMODITY_CATEGORY = f'Filter the response by the food group that the commodity belongs to, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#commodity-category">here.</a>'
+DOC_DISABLED_MARKER = f'Filter the response by the presence of disability disaggregation data, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#disabled-marker">here.</a>'
+# DOC_ACLED_EVENT_TYPE = 'This is documented below'
 DOC_GENDER = f'Filter the response by the gender, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#gender">here.</a>'
-DOC_POPULATION_GROUP = 'Filter the response by the population group.'
+DOC_IPC_PHASE = f'Filter the response by the IPC phase, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-code">here.</a>'
+DOC_IPC_TYPE = f'Filter the response by the IPC type, available values are listed <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-type">here.</a>'
+DOC_POPULATION_GROUP = 'Filter the response by the population group, '
 DOC_POPULATION_STATUS = 'Filter the response by the population status. POP (population), AFF (affected), INN (in need), TGT (targeted), REA (reached) or all (all).'
+DOC_PRICE_FLAG = ''
+DOC_PRICE_TYPE = ''
 
 
 # Humanitarian Response metadata

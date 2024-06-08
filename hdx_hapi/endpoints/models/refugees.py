@@ -1,6 +1,7 @@
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
+from hdx_hapi.config.doc_snippets import DOC_GENDER, truncate_query_description
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 from hapi_schema.utils.enums import Gender, PopulationGroup
 
@@ -10,7 +11,7 @@ class RefugeesResponse(HapiBaseModel):
     origin_location_ref: int
     asylum_location_ref: int
     population_group: PopulationGroup
-    gender: Gender
+    gender: Gender = Field(description=truncate_query_description(DOC_GENDER))
     age_range: str = Field(max_length=32)
     min_age: Optional[int] = Field(ge=0)
     max_age: Optional[int] = Field(ge=0)

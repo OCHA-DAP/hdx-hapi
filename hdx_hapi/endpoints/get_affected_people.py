@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
+    DOC_DISABLED_MARKER,
     DOC_GENDER,
     DOC_AGE_RANGE,
     DOC_POPULATION_GROUP,
@@ -68,7 +69,7 @@ async def get_humanitarian_needs(
     db: AsyncSession = Depends(get_db),
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker.')] = None,
+    disabled_marker: Annotated[Optional[DisabledMarker], Query(description=f'{DOC_DISABLED_MARKER}')] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
     population_group: Annotated[
         Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
