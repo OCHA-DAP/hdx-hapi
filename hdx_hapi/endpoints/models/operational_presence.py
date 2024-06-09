@@ -1,14 +1,20 @@
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
+from hdx_hapi.config.doc_snippets import (
+    DOC_HDX_RESOURCE_ID,
+    DOC_REFERENCE_PERIOD_END,
+    DOC_REFERENCE_PERIOD_START,
+    truncate_query_description,
+)
 from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
 
 
 class OperationalPresenceResponse(HapiBaseModel, HapiModelWithAdmins):
     # dataset_hdx_stub: str = Field(max_length=128)
-    resource_hdx_id: str = Field(max_length=36)
-    org_acronym: str = Field(max_length=32)
-    org_name: str = Field(max_length=512)
+    resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
+    org_acronym: str = Field(max_length=32, description='The organization acronym')
+    org_name: str = Field(max_length=512, description='The organization name')
     sector_code: str = Field(
         max_length=32,
         description=(
@@ -19,8 +25,8 @@ class OperationalPresenceResponse(HapiBaseModel, HapiModelWithAdmins):
     )
     sector_name: str = Field(max_length=512, description='The name of the sector')
 
-    reference_period_start: NaiveDatetime
-    reference_period_end: Optional[NaiveDatetime]
+    reference_period_start: NaiveDatetime = Field(description=DOC_REFERENCE_PERIOD_START)
+    reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
 
     # hapi_updated_date: datetime
     # hapi_replaced_date: Optional[datetime]
