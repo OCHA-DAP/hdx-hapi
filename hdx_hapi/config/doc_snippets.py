@@ -47,7 +47,7 @@ DOC_REFERENCE_PERIOD_END = 'The end date for which the data are applicable'
 # Enumerations
 DOC_COMMODITY_CATEGORY = f'Filter the response by the food group that the commodity belongs to, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#commodity-category">here.</a>'
 DOC_DISABLED_MARKER = f'Filter the response by the presence of disability disaggregation data, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#disabled-marker">here.</a>'
-# DOC_ACLED_EVENT_TYPE = 'This is documented below'
+DOC_ACLED_EVENT_TYPE = f'Filter the response by the ACLED event-type categories (non-mutually exclusive), available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#event-type">here.</a>'
 DOC_GENDER = f'Filter the response by the gender, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#gender">here.</a>'
 DOC_IPC_PHASE = f'Filter the response by the IPC phase, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-code">here.</a>'
 DOC_IPC_TYPE = f'Filter the response by the IPC type, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#ipc-type">here.</a>'
@@ -65,14 +65,6 @@ DOC_ORG_TYPE_DESCRIPTION = 'Filter the response by the organization type descrip
 DOC_SECTOR_CODE = 'Filter the response by the sector code.'
 DOC_SECTOR_NAME = 'Filter the response by the sector name.'
 DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
-
-
-# Endpoints - Conflict events
-DOC_ACLED_EVENT_TYPE = (
-    "ACLED's public dataset is compiled into non-mutually exclusive event-type categories. "
-    'Please see the [ACLED Codebook](https://acleddata.com/knowledge-base/codebook/#acled-events) '
-    'for their methodology.'
-)
 
 
 DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start age]-[end age]. The end age is assumed to be inclusive, though that is not always explicit in the source data.'

@@ -1,7 +1,7 @@
 from pydantic import ConfigDict, Field, NaiveDatetime
 from typing import Optional
 
-from hdx_hapi.config.doc_snippets import DOC_GENDER, DOC_POPULATION_GROUP, truncate_query_description
+from hdx_hapi.config.doc_snippets import DOC_GENDER, DOC_POPULATION_GROUP, DOC_AGE_RANGE, truncate_query_description
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 from hapi_schema.utils.enums import Gender, PopulationGroup
 
@@ -12,9 +12,22 @@ class RefugeesResponse(HapiBaseModel):
     asylum_location_ref: int
     population_group: PopulationGroup = Field(description=truncate_query_description(DOC_POPULATION_GROUP))
     gender: Gender = Field(description=truncate_query_description(DOC_GENDER))
-    age_range: str = Field(max_length=32)
-    min_age: Optional[int] = Field(ge=0)
-    max_age: Optional[int] = Field(ge=0)
+    age_range: str = Field(max_length=32, description=truncate_query_description(DOC_AGE_RANGE))
+    min_age: Optional[int] = Field(
+        ge=0,
+        description=(
+            'The minimum age from `age_range`, set to `null` if `age_range` is "all" and '
+            'there is no age disaggregation'
+        ),
+    )
+    max_age: Optional[int] = Field(
+        ge=0,
+        description=(
+            'The maximum age from `age_range`, set to `null` if `age_range` is "all" and '
+            'there is no age disaggregation, or if there is no upper limit to the '
+            'age range'
+        ),
+    )
     population: int = Field(ge=0)
     reference_period_start: NaiveDatetime
     reference_period_end: Optional[NaiveDatetime]
