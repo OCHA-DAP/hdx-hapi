@@ -1,4 +1,4 @@
-FROM public.ecr.aws/unocha/python:3
+FROM public.ecr.aws/unocha/python:3.12
 
 WORKDIR /srv/hapi
 
@@ -16,6 +16,7 @@ RUN apk add \
         /etc/services.d/hapi \
         /var/log/hapi && \
     mv docker/hapi_run /etc/services.d/hapi/run && \
+    mkdir -p ~/.config/pip/ && echo -e "[global]\nbreak-system-packages = true" > ~/.config/pip/pip.conf && \
     pip3 --no-cache-dir install --upgrade \
         pip \
         wheel && \

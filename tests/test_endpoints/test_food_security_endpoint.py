@@ -113,6 +113,7 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
         admin1_is_unspecified=True,
         admin1_code='FOO-XXX',
         admin1_name='Unpecified',
+        admin2_ref=1,
         admin2_is_unspecified=True,
         admin2_code='FOO-XXX',
         admin2_name='Unspecified',

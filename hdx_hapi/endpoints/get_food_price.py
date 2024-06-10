@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN_LEVEL_FILTER,
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
@@ -16,9 +17,12 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
+    DOC_PRICE_FLAG,
+    DOC_PRICE_TYPE,
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
     DOC_SEE_LOC,
+    DOC_COMMODITY_CATEGORY,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -39,7 +43,7 @@ router = APIRouter(
     tags=['Food Security & Nutrition'],
 )
 
-SUMMARY_TEXT = 'Get food prices.'
+SUMMARY_TEXT = 'Get food prices'
 
 
 @router.get(
@@ -56,15 +60,28 @@ SUMMARY_TEXT = 'Get food prices.'
 async def get_food_prices(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    market_code: Annotated[Optional[str], Query(max_length=32, description='Market code.')] = None,
-    market_name: Annotated[Optional[str], Query(max_length=512, description='Market name.')] = None,
-    commodity_code: Annotated[Optional[str], Query(max_length=32, description='Commodity code.')] = None,
-    commodity_category: Annotated[Optional[CommodityCategory], Query(description='Commodity category.')] = None,
-    commodity_name: Annotated[Optional[str], Query(max_length=512, description='Commodity name.')] = None,
-    price_flag: Annotated[Optional[PriceFlag], Query(description='Price Flag.')] = None,
-    price_type: Annotated[Optional[PriceType], Query(description='Price Type.')] = None,
-    price_min: Annotated[Optional[Decimal], Query(description='Price, lower bound.')] = None,
-    price_max: Annotated[Optional[Decimal], Query(description='Price, upper bound.')] = None,
+    market_code: Annotated[
+        Optional[str], Query(max_length=32, description='Filter the response by the unique code identifying the market')
+    ] = None,
+    market_name: Annotated[
+        Optional[str], Query(max_length=512, description='Filter the response by the name of the market')
+    ] = None,
+    commodity_code: Annotated[
+        Optional[str],
+        Query(max_length=32, description='Filter the response by the unique code identifying the commodity'),
+    ] = None,
+    commodity_category: Annotated[Optional[CommodityCategory], Query(description=DOC_COMMODITY_CATEGORY)] = None,
+    commodity_name: Annotated[
+        Optional[str], Query(max_length=512, description='Filter the response by the name of the commodity')
+    ] = None,
+    price_flag: Annotated[Optional[PriceFlag], Query(description=f'{DOC_PRICE_FLAG}')] = None,
+    price_type: Annotated[Optional[PriceType], Query(description=f'{DOC_PRICE_TYPE}')] = None,
+    price_min: Annotated[
+        Optional[Decimal], Query(description='Filter the response by a lower bound for the price.')
+    ] = None,
+    price_max: Annotated[
+        Optional[Decimal], Query(description='Filter the response by a upper bound for the price.')
+    ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
@@ -86,7 +103,7 @@ async def get_food_prices(
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level.')] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     result = await get_food_prices_srv(

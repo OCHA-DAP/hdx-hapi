@@ -29,6 +29,14 @@ jobs:
         run: |
           echo "Image tag is ${{ steps.tag_info.outputs.IMAGE_TAG }}"
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: arm64
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -50,3 +58,4 @@ jobs:
         with:
           push: true
           tags: public.ecr.aws/unocha/hdx-hapi:${{ steps.tag_info.outputs.IMAGE_TAG }}
+          platforms: linux/amd64,linux/arm64

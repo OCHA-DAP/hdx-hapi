@@ -8,6 +8,7 @@ from hapi_schema.utils.enums import Gender
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN_LEVEL_FILTER,
     DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
@@ -64,8 +65,12 @@ async def get_populations(
     db: AsyncSession = Depends(get_db),
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    population_min: Annotated[int, Query(description='Population, minimum value for filter.')] = None,
-    population_max: Annotated[int, Query(description='Population, maximum value for filter.')] = None,
+    population_min: Annotated[
+        int, Query(description='Filter the response by a lower bound for the population.')
+    ] = None,
+    population_max: Annotated[
+        int, Query(description='Filter the response by a upper bound for the population.')
+    ] = None,
     location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
@@ -76,7 +81,7 @@ async def get_populations(
     admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level.')] = None,
+    admin_level: Annotated[AdminLevel, Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     # admin2_is_unspecified: Annotated[bool, Query(description='Is admin2 specified or not')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):

@@ -40,8 +40,14 @@ async def get_fundings(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    appeal_code: Annotated[Optional[str], Query(max_length=32, description='Appeal code')] = None,
-    appeal_type: Annotated[Optional[str], Query(max_length=32, description='Appeal type')] = None,
+    appeal_code: Annotated[
+        Optional[str],
+        Query(max_length=32, description='Filter the response by a unique code given by FTS to each appeal'),
+    ] = None,
+    appeal_type: Annotated[
+        Optional[str],
+        Query(max_length=32, description='Filter the respinse by the type of the appeal, such as flash or HRP'),
+    ] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
@@ -64,7 +70,7 @@ async def get_fundings(
 
 
 get_fundings.__doc__ = (
-    "UNOCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions. "
+    "OCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions. "
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'coordination_and_context/#funding">HDX HAPI documentation</a>, '
     'and the <a href="https://fts.unocha.org/home/2024/donors/view">original FTS source</a> website.'

@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends, Query
 from hapi_schema.utils.enums import CommodityCategory
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from hdx_hapi.config.doc_snippets import DOC_COMMODITY_CATEGORY
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.wfp_commodity import WfpCommodityResponse
 from hdx_hapi.endpoints.util.util import CommonEndpointParams, OutputFormat, common_endpoint_parameters
@@ -32,9 +33,14 @@ SUMMARY = 'Get the list of WFP commodities'
 async def get_wfp_commodities(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[Optional[str], Query(max_length=32, description='Commodity code.')] = None,
-    category: Annotated[Optional[CommodityCategory], Query(description='Commodity category.')] = None,
-    name: Annotated[Optional[str], Query(max_length=512, description='Commodity name.')] = None,
+    code: Annotated[
+        Optional[str],
+        Query(max_length=32, description='Filter the response by the unique code identifying the commodity.'),
+    ] = None,
+    category: Annotated[Optional[CommodityCategory], Query(description=DOC_COMMODITY_CATEGORY)] = None,
+    name: Annotated[
+        Optional[str], Query(max_length=512, description='Filter the response by the name of the commodity.')
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

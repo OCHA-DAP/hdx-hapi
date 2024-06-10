@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN_LEVEL_FILTER,
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
@@ -18,6 +19,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
     DOC_SEE_LOC,
+    DOC_ACLED_EVENT_TYPE,
 )
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.conflict_event import ConflictEventResponse
@@ -59,7 +61,7 @@ async def get_conflict_events(
     db: AsyncSession = Depends(get_db),
     event_type: Annotated[
         Optional[EventType],
-        Query(description='Event type, one of civilian_targeting, demonstration, political_violence'),
+        Query(description=DOC_ACLED_EVENT_TYPE),
     ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
@@ -82,7 +84,7 @@ async def get_conflict_events(
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level.')] = None,
+    admin_level: Annotated[AdminLevel, Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None

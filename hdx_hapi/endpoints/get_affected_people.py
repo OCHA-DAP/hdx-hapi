@@ -7,12 +7,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
+    DOC_DISABLED_MARKER,
     DOC_GENDER,
     DOC_AGE_RANGE,
     DOC_POPULATION_GROUP,
     DOC_POPULATION_STATUS,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
+    DOC_ADMIN_LEVEL_FILTER,
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN2_REF,
@@ -67,7 +69,7 @@ async def get_humanitarian_needs(
     db: AsyncSession = Depends(get_db),
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    disabled_marker: Annotated[Optional[DisabledMarker], Query(description='Disabled marker.')] = None,
+    disabled_marker: Annotated[Optional[DisabledMarker], Query(description=f'{DOC_DISABLED_MARKER}')] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
     population_group: Annotated[
         Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
@@ -75,8 +77,13 @@ async def get_humanitarian_needs(
     population_status: Annotated[
         Optional[PopulationStatus], Query(max_length=32, description=f'{DOC_POPULATION_STATUS}')
     ] = None,
-    population_min: Annotated[int, Query(description='Population, minimum value for filter.')] = None,
-    population_max: Annotated[int, Query(description='Population, maximum value for filter.')] = None,
+    population_min: Annotated[
+        int,
+        Query(description='Filter the response by a lower bound for the population.'),
+    ] = None,
+    population_max: Annotated[
+        int, Query(description='Filter the response by a upper bound for the population.')
+    ] = None,
     # reference_period_start: Annotated[
     #     NaiveDatetime | date,
     #     Query(description='Reference period start', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
@@ -104,7 +111,7 @@ async def get_humanitarian_needs(
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
     admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description='Filter the response by admin level.')] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -135,8 +142,8 @@ async def get_humanitarian_needs(
 
 
 get_humanitarian_needs.__doc__ = (
-    "UNOCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF), "
-    'provides information about the number of people in need during a crisis.'
+    "OCHA's Humanitarian Needs data, based on the Joint and Intersectoral Analysis Framework (JIAF), "
+    'provides information about the number of people in need during a crisis. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'affected_people/#humanitarian-needs">HDX HAPI documentation</a>, '
     'and the <a href="https://www.jiaf.info/">original JIAF source</a> website.'
@@ -163,8 +170,12 @@ async def get_refugees(
     population_group: Annotated[
         Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
     ] = None,
-    population_min: Annotated[int, Query(description='Population, minimum value for filter.')] = None,
-    population_max: Annotated[int, Query(description='Population, maximum value for filter.')] = None,
+    population_min: Annotated[
+        int, Query(description='Filter the response by a lower bound for the population.')
+    ] = None,
+    population_max: Annotated[
+        int, Query(description='Filter the response by a upper bound for the population.')
+    ] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     origin_location_code: Annotated[
@@ -200,7 +211,7 @@ async def get_refugees(
 
 
 get_refugees.__doc__ = (
-    "UNHCR's Refugee data provides information about displaced people in a crisis."
+    "UNHCR's Refugee data provides information about displaced people in a crisis. "
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'affected_people/#refugees-persons-of-concern">HDX HAPI documentation</a>, '
     'and the <a href="https://data.humdata.org/dataset/unhcr-population-data-for-world">original HDX source</a> '

@@ -7,7 +7,8 @@ provides strategically relevant information to decision makers that focuses on
 short-term objectives to prevent, mitigate or decrease severe food insecurity.
 
 The Beta release of HDX HAPI only contains data from the
-[Cadre Harmonisé](https://www.cadreharmonise.org/en_GB), as it is p-coded. In
+[Cadre Harmonisé](https://www.cadreharmonise.org/en_GB) (CH), 
+as it is p-coded. In
 a future release we will p-code and expand coverage to other IPC datasets.
 
 ### Summary

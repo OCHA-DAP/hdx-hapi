@@ -1,6 +1,18 @@
 from typing import List
 from datetime import datetime
 from pydantic import ConfigDict, Field, HttpUrl, computed_field
+from hdx_hapi.config.doc_snippets import (
+    DOC_HDX_DATASET_STUB,
+    DOC_HDX_DATASET_TITLE,
+    DOC_HDX_PROVIDER_IN_RESOURCE_STUB,
+    DOC_HDX_PROVIDER_NAME,
+    DOC_HDX_PROVIDER_STUB,
+    DOC_HDX_RESOURCE_ID,
+    DOC_HDX_DATASET_ID,
+    DOC_HDX_RESOURCE_FORMAT,
+    DOC_HDX_RESOURCE_HXL,
+    truncate_query_description,
+)
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 from hdx_hapi.services.hdx_url_logic import (
     get_resource_url,
@@ -13,11 +25,11 @@ from hdx_hapi.services.hdx_url_logic import (
 
 
 class DatasetResponse(HapiBaseModel):
-    dataset_hdx_id: str = Field(max_length=36)
-    dataset_hdx_stub: str = Field(max_length=128)
-    dataset_hdx_title: str = Field(max_length=1024)
-    hdx_provider_stub: str = Field(max_length=128)
-    hdx_provider_name: str = Field(max_length=512)
+    dataset_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_DATASET_ID))
+    dataset_hdx_stub: str = Field(max_length=128, description=truncate_query_description(DOC_HDX_DATASET_STUB))
+    dataset_hdx_title: str = Field(max_length=1024, description=truncate_query_description(DOC_HDX_DATASET_TITLE))
+    hdx_provider_stub: str = Field(max_length=128, description=truncate_query_description(DOC_HDX_PROVIDER_STUB))
+    hdx_provider_name: str = Field(max_length=512, description=truncate_query_description(DOC_HDX_PROVIDER_NAME))
 
     # computed fields
 
@@ -53,20 +65,32 @@ class DatasetResponse(HapiBaseModel):
 
 class ResourceResponse(HapiBaseModel):
     # id: int
-    resource_hdx_id: str = Field(max_length=36)
-    dataset_hdx_id: str = Field(max_length=36)
-    name: str = Field(max_length=256)
-    format: str = Field(max_length=32)
-    update_date: datetime
-    is_hxl: bool
-    download_url: HttpUrl
-    hapi_updated_date: datetime
+    resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
+    dataset_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_DATASET_ID))
+    name: str = Field(
+        max_length=256,
+        description=(
+            'The resource name on HDX. In combination with the dataset UUIDs'
+            'from the `dataset_hdx_id` and `resource_hdx_id` fields respectively, it can be used to '
+            'construct a URL to download the resource: '
+            '`https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]/download/[name]`, '
+            'which can be found in the `download_url` field.'
+        ),
+    )
+    format: str = Field(max_length=32, description=truncate_query_description(DOC_HDX_RESOURCE_FORMAT))
+    update_date: datetime = Field(description='The date the resource was last updated')
+    is_hxl: bool = Field(description=truncate_query_description(DOC_HDX_RESOURCE_HXL))
+    download_url: HttpUrl = Field(
+        description='A URL to directly download the resource file from HDX, in the format '
+        'specified in the `format` field.'
+    )
+    hapi_updated_date: datetime = Field(description='The date that the resource was ingested into HDX HAPI')
 
-    dataset_hdx_stub: str = Field(max_length=128)
+    dataset_hdx_stub: str = Field(max_length=128, description=truncate_query_description(DOC_HDX_DATASET_STUB))
 
-    dataset_hdx_title: str = Field(max_length=1024)
-    dataset_hdx_provider_stub: str = Field(max_length=128)
-    dataset_hdx_provider_name: str = Field(max_length=512)
+    dataset_hdx_title: str = Field(max_length=1024, description=truncate_query_description(DOC_HDX_DATASET_TITLE))
+    dataset_hdx_provider_stub: str = Field(max_length=128, description=DOC_HDX_PROVIDER_IN_RESOURCE_STUB)
+    dataset_hdx_provider_name: str = Field(max_length=512, description=DOC_HDX_PROVIDER_NAME)
 
     # computed fields
 
