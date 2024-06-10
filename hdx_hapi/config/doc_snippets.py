@@ -4,6 +4,7 @@ CONFIG = get_config()
 
 # Location related
 DOC_SCOPE_DISCLAIMER = f'Not all data are available for all locations. Learn more about the scope of data coverage in HDX HAPI in the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
+DOC_LOCATION_ID = 'Filter the response by a location ID.'
 DOC_LOCATION_REF = 'Filter the response by a location (typically a country) reference number.'
 DOC_LOCATION_CODE = 'Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes.'
 DOC_LOCATION_NAME = 'Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a>.'
