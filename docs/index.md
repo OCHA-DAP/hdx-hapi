@@ -47,7 +47,7 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 # Terms Of Use
 
-[The HDX Terms of Service](https://data.humdata.org/faqs/terms)
+Use of HDX HAPI is governed by the [HDX HAPI Terms of Use](https://data.humdata.org/hapi/terms).
 
 ## FAQS
 

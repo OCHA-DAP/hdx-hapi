@@ -16,7 +16,7 @@ from hdx_hapi.config.doc_snippets import (
 
 
 class LocationResponse(HapiBaseModel):
-    # id: int
+    id: int
     code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_NAME))
     name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_CODE))
 
@@ -27,8 +27,8 @@ class LocationResponse(HapiBaseModel):
 
 
 class Admin1Response(HapiBaseModel):
-    # id: int
-    # location_ref: int
+    id: int
+    location_ref: int
     code: str = Field(max_length=128, description=truncate_query_description(DOC_ADMIN1_CODE))
     name: str = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
     # hapi_updated_date: datetime
@@ -42,10 +42,11 @@ class Admin1Response(HapiBaseModel):
 
 
 class Admin2Response(HapiBaseModel):
-    # id: int
-    # admin1_ref: int
+    id: int
+    admin1_ref: int
     code: str = Field(max_length=128, description=truncate_query_description(DOC_ADMIN2_CODE))
     name: str = Field(max_length=512, description=truncate_query_description(DOC_ADMIN2_NAME))
+    from_cods: bool
     # hapi_updated_date: datetime
     # hapi_replaced_date: Optional[datetime]
     reference_period_start: datetime = Field(description=DOC_REFERENCE_PERIOD_START)

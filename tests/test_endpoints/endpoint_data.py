@@ -19,6 +19,8 @@ from hdx_hapi.endpoints.util.util import AdminLevel
 endpoint_data = {
     '/api/v1/metadata/admin1': {
         'query_parameters': {
+            'id': 2,
+            'location_ref': 1,
             'code': 'FoO-001',
             'name': 'Province 01',
             'location_code': 'FoO',
@@ -27,8 +29,11 @@ endpoint_data = {
             # 'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
+            'id',
+            'location_ref',
             'code',
             'name',
+            'from_cods',
             'location_code',
             'location_name',
             'reference_period_start',
@@ -37,8 +42,11 @@ endpoint_data = {
     },
     '/api/v1/metadata/admin2': {
         'query_parameters': {
+            'id': 4,
+            'admin1_ref': 2,
             'code': 'FoO-001-A',
             'name': 'District A',
+            # 'location_ref': 1,
             'admin1_code': 'FOo-001',
             'admin1_name': 'Province 01',
             'location_code': 'FOo',
@@ -47,8 +55,12 @@ endpoint_data = {
             # 'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
+            'id',
+            'admin1_ref',
             'code',
             'name',
+            'from_cods',
+            # 'location_ref',
             'admin1_code',
             'admin1_name',
             'location_code',
@@ -78,14 +90,17 @@ endpoint_data = {
     },
     '/api/v1/metadata/location': {
         'query_parameters': {
+            'id': 1,
             'code': 'foo',
             'name': 'Foolandia',
             # 'reference_period_start_min': '2020-01-01T00:00:00',
             # 'reference_period_start_max': '2024-01-01T00:00:00',
         },
         'expected_fields': [
+            'id',
             'code',
             'name',
+            'from_cods',
             'reference_period_start',
             'reference_period_end',
         ],
@@ -267,6 +282,7 @@ endpoint_data = {
             'reference_period_end',
             'location_code',
             'location_name',
+            'location_ref',
         ],
     },
     '/api/v1/food/food-security': {
@@ -388,6 +404,7 @@ endpoint_data = {
             'resource_hdx_id',
             'location_code',
             'location_name',
+            'location_ref',
         ],
     },
     '/api/v1/affected-people/humanitarian-needs': {

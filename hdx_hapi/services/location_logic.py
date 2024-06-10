@@ -8,6 +8,7 @@ async def get_locations_srv(
     pagination_parameters: PaginationParams,
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
+    id: int = None,
     code: str = None,
     name: str = None,
 ):
@@ -15,6 +16,7 @@ async def get_locations_srv(
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
+        id=id,
         code=code,
         name=name,
     )
