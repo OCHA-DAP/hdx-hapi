@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import (
     DOC_HDX_DATASET_ID,
-    DOC_HDX_DATASET_NAME,
+    DOC_HDX_DATASET_STUB,
     DOC_HDX_DATASET_TITLE,
     DOC_HDX_PROVIDER_NAME,
     DOC_HDX_PROVIDER_STUB,
@@ -55,7 +55,7 @@ async def get_datasets(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     dataset_hdx_id: Annotated[Optional[str], Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,
-    dataset_hdx_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_DATASET_NAME}')] = None,
+    dataset_hdx_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_DATASET_STUB}')] = None,
     dataset_hdx_title: Annotated[Optional[str], Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
     hdx_provider_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
     hdx_provider_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,

@@ -4,6 +4,7 @@ from fastapi import Depends, Query, APIRouter
 from hdx_hapi.config.config import get_config
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN_LEVEL_FILTER,
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
@@ -42,7 +43,7 @@ router = APIRouter(
     tags=['Coordination & Context'],
 )
 
-SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working.'
+SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working'
 
 
 @router.get(
@@ -118,7 +119,7 @@ async def get_operational_presences(
     admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin_level: Annotated[AdminLevel, Query(description='Filter the response by admin level.')] = None,
+    admin_level: Annotated[AdminLevel, Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     # admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
     # resource_update_date_min: Annotated[
     #     NaiveDatetime | date,
@@ -220,9 +221,9 @@ async def get_operational_presences(
 
 
 get_operational_presences.__doc__ = (
-    "UNOCHA's 3W (Who is doing What Where) Operational Presence data provides "
+    "OCHA's 3W (Who is doing What Where) Operational Presence data provides "
     'information about which organizations are working in different locations affected by a crisis. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'coordination_and_context/#who-is-doing-what-where-operational-presence">HDX HAPI documentation</a>, '
-    'and the <a href="https://3w.unocha.org/">original UNOCHA 3W source</a> website. '
+    'and the <a href="https://3w.unocha.org/">original OCHA 3W source</a> website. '
 )

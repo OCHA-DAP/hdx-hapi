@@ -4,6 +4,7 @@ from fastapi import Depends, Query, APIRouter
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
+    DOC_SCOPE_DISCLAIMER,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
     DOC_ADMIN2_CODE,
@@ -70,10 +71,7 @@ async def get_locations(
     return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
 
 
-get_locations.__doc__ = (
-    'Not all data are available for all locations. Learn more about the scope of data coverage in HDX HAPI in '
-    f'the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
-)
+get_locations.__doc__ = DOC_SCOPE_DISCLAIMER
 
 
 @router.get(
@@ -130,10 +128,7 @@ async def get_admin1(
     return transform_result_to_csv_stream_if_requested(result, output_format, Admin1Response)
 
 
-get_admin1.__doc__ = (
-    'Not all data are available for all locations. Learn more about the scope of data coverage in HDX HAPI in '
-    f'the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
-)
+get_admin1.__doc__ = DOC_SCOPE_DISCLAIMER
 
 
 @router.get(
@@ -196,7 +191,4 @@ async def get_admin2(
     return transform_result_to_csv_stream_if_requested(result, output_format, Admin2Response)
 
 
-get_admin2.__doc__ = (
-    'Not all data are available for all locations. Learn more about the scope of data coverage in HDX HAPI in '
-    f'the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
-)
+get_admin2.__doc__ = DOC_SCOPE_DISCLAIMER
