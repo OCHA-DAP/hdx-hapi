@@ -4,17 +4,17 @@ CONFIG = get_config()
 
 # Location related
 DOC_SCOPE_DISCLAIMER = f'Not all data are available for all locations. Learn more about the scope of data coverage in HDX HAPI in the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
-DOC_LOCATION_ID = 'Filter the response by a location ID, a unique identifier for each entry in the Location table'
+DOC_LOCATION_ID = 'Filter the response by a location (typically a country), using the unique identifier (id) from the location table associated with each entry.'
 DOC_LOCATION_REF = 'Filter the response by a location (typically a country) reference number.'
 DOC_LOCATION_CODE = 'Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes.'
 DOC_LOCATION_NAME = 'Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a>.'
 DOC_SEE_LOC = 'See the <a href="/docs#/Metadata/get_locations_api_v1_metadata_location_get" target="_blank">location endpoint</a> for details.'
-DOC_ADMIN1_ID = 'Filter the response by an admin1 ID, a unique identifier for each entry in the admin1 table'
+DOC_ADMIN1_ID = 'Filter the response by 1st subnational administrative division, using the unique identifier (id) from the admin1 table associated with each entry.'
 DOC_ADMIN1_REF = 'Filter the response by the 1st subnational administrative reference number.'
 DOC_ADMIN1_CODE = 'Filter the response by the 1st subnational administrative divisions. The admin1 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative divisions. The admin1 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_SEE_ADMIN1 = 'See the <a href="/docs#/Metadata/get_admin1_api_v1_metadata_admin1_get" target="_blank">admin1 endpoint</a> for details.'
-DOC_ADMIN2_ID = 'Filter the response by an admin2 ID, a unique identifier for each entry in the admin2 table'
+DOC_ADMIN2_ID = 'Filter the response by 2nd subnational administrative division, using the unique identifier (id) from the admin2 table associated with each entry.'
 DOC_ADMIN2_REF = 'Filter the response by the 2nd subnational administrative reference number.'
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_NAME = 'Filter the response by the 2nd subnational administrative divisions. The admin2 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
@@ -38,8 +38,8 @@ DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the URL-safe name of
 DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
 
 # Time periods
-DOC_UPDATE_DATE_MIN = 'Min date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
-DOC_UPDATE_DATE_MAX = 'Max date of update date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
+DOC_UPDATE_DATE_MIN = 'Minimum date that datasets was last updated, e.g. 2020-01-01 or 2020-01-01T00:00:00'
+DOC_UPDATE_DATE_MAX = 'Maximum date that datasets was last updated, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 # DOC_HAPI_UPDATED_DATE_MIN = 'Min date of HDX HAPI updated date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 # DOC_HAPI_UPDATED_DATE_MAX = 'Max date of HDX HAPI updated date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
 # DOC_HAPI_REPLACED_DATE_MIN = 'Min date of HDX HAPI replaced date, e.g. 2020-01-01 or 2020-01-01T00:00:00'
@@ -71,7 +71,7 @@ DOC_SECTOR_NAME = 'Filter the response by the sector name.'
 DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
 
 
-DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start age]-[end age]. The end age is assumed to be inclusive, though that is not always explicit in the source data.'
+DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start age]-[end age], or [start age]+ for an age range starting at [start age] or above. The end age is assumed to be inclusive, though that is not always explicit in the source data.'
 # Endpoints - Food prices
 DOC_CURRENCY_CODE = 'Filter the response by the currency code.'
 
