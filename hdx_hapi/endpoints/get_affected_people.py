@@ -77,8 +77,13 @@ async def get_humanitarian_needs(
     population_status: Annotated[
         Optional[PopulationStatus], Query(max_length=32, description=f'{DOC_POPULATION_STATUS}')
     ] = None,
-    population_min: Annotated[int, Query(description='Population, minimum value for filter.')] = None,
-    population_max: Annotated[int, Query(description='Population, maximum value for filter.')] = None,
+    population_min: Annotated[
+        int,
+        Query(description='Filter the response by a lower bound for the population.'),
+    ] = None,
+    population_max: Annotated[
+        int, Query(description='Filter the response by a upper bound for the population.')
+    ] = None,
     # reference_period_start: Annotated[
     #     NaiveDatetime | date,
     #     Query(description='Reference period start', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
@@ -165,8 +170,12 @@ async def get_refugees(
     population_group: Annotated[
         Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
     ] = None,
-    population_min: Annotated[int, Query(description='Population, minimum value for filter.')] = None,
-    population_max: Annotated[int, Query(description='Population, maximum value for filter.')] = None,
+    population_min: Annotated[
+        int, Query(description='Filter the response by a lower bound for the population.')
+    ] = None,
+    population_max: Annotated[
+        int, Query(description='Filter the response by a upper bound for the population.')
+    ] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
     origin_location_code: Annotated[

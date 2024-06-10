@@ -65,8 +65,12 @@ async def get_populations(
     db: AsyncSession = Depends(get_db),
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    population_min: Annotated[int, Query(description='Population, minimum value for filter.')] = None,
-    population_max: Annotated[int, Query(description='Population, maximum value for filter.')] = None,
+    population_min: Annotated[
+        int, Query(description='Filter the response by a lower bound for the population.')
+    ] = None,
+    population_max: Annotated[
+        int, Query(description='Filter the response by a upper bound for the population.')
+    ] = None,
     location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,

@@ -60,15 +60,28 @@ SUMMARY_TEXT = 'Get food prices'
 async def get_food_prices(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    market_code: Annotated[Optional[str], Query(max_length=32, description='Market code.')] = None,
-    market_name: Annotated[Optional[str], Query(max_length=512, description='Market name.')] = None,
-    commodity_code: Annotated[Optional[str], Query(max_length=32, description='Commodity code.')] = None,
+    market_code: Annotated[
+        Optional[str], Query(max_length=32, description='Filter the response by the unique code identifying the market')
+    ] = None,
+    market_name: Annotated[
+        Optional[str], Query(max_length=512, description='Filter the response by the name of the market')
+    ] = None,
+    commodity_code: Annotated[
+        Optional[str],
+        Query(max_length=32, description='Filter the response by the unique code identifying the commodity'),
+    ] = None,
     commodity_category: Annotated[Optional[CommodityCategory], Query(description=DOC_COMMODITY_CATEGORY)] = None,
-    commodity_name: Annotated[Optional[str], Query(max_length=512, description='Commodity name.')] = None,
+    commodity_name: Annotated[
+        Optional[str], Query(max_length=512, description='Filter the response by the name of the commodity')
+    ] = None,
     price_flag: Annotated[Optional[PriceFlag], Query(description=f'{DOC_PRICE_FLAG}')] = None,
     price_type: Annotated[Optional[PriceType], Query(description=f'{DOC_PRICE_TYPE}')] = None,
-    price_min: Annotated[Optional[Decimal], Query(description='Price, lower bound.')] = None,
-    price_max: Annotated[Optional[Decimal], Query(description='Price, upper bound.')] = None,
+    price_min: Annotated[
+        Optional[Decimal], Query(description='Filter the response by a lower bound for the price.')
+    ] = None,
+    price_max: Annotated[
+        Optional[Decimal], Query(description='Filter the response by a upper bound for the price.')
+    ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')

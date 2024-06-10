@@ -49,23 +49,35 @@ async def get_national_risks(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     risk_class: Annotated[Optional[RiskClass], Query(description=DOC_RISK_CLASS)] = None,
-    global_rank_min: Annotated[Optional[int], Query(description='Global rank, lower bound.')] = None,
-    global_rank_max: Annotated[Optional[int], Query(description='Global rank, upper bound.')] = None,
-    overall_risk_min: Annotated[Optional[float], Query(description='Overall risk, lower bound.')] = None,
-    overall_risk_max: Annotated[Optional[float], Query(description='Overall risk, upper bound.')] = None,
+    global_rank_min: Annotated[
+        Optional[int], Query(description='Filter the response by a lower bound for the Global Rank.')
+    ] = None,
+    global_rank_max: Annotated[
+        Optional[int], Query(description='Filter the response by an upper bound for the Global Rank.')
+    ] = None,
+    overall_risk_min: Annotated[
+        Optional[float], Query(description='Filter the response by a lower bound for the Overall Risk.')
+    ] = None,
+    overall_risk_max: Annotated[
+        Optional[float], Query(description='Filter the response by an upper bound for the Overall Risk.')
+    ] = None,
     hazard_exposure_risk_min: Annotated[
-        Optional[float], Query(description='Hazard exposure risk, lower bound.')
+        Optional[float], Query(description='Filter the response by a lower bound for the Hazard Exposure Risk.')
     ] = None,
     hazard_exposure_risk_max: Annotated[
-        Optional[float], Query(description='Hazard exposure risk, upper bound.')
+        Optional[float], Query(description='Filter the response by an upper bound for the Hazard Exposure Risk.')
     ] = None,
-    vulnerability_risk_min: Annotated[Optional[float], Query(description='Vulnerability risk, lower bound.')] = None,
-    vulnerability_risk_max: Annotated[Optional[float], Query(description='Vulnerability risk, upper bound.')] = None,
+    vulnerability_risk_min: Annotated[
+        Optional[float], Query(description='Filter the response by a lower bound for the Vulnerability Risk.')
+    ] = None,
+    vulnerability_risk_max: Annotated[
+        Optional[float], Query(description='Filter the response by an upper bound for the Vulnerability Risk.')
+    ] = None,
     coping_capacity_risk_min: Annotated[
-        Optional[float], Query(description='Coping capacity risk, lower bound.')
+        Optional[float], Query(description='Filter the response by a lower bound for the Coping Capacity Risk.')
     ] = None,
     coping_capacity_risk_max: Annotated[
-        Optional[float], Query(description='Coping capacity risk, upper bound.')
+        Optional[float], Query(description='Filter the response by a lower bound for the Coping Capacity Risk.')
     ] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
