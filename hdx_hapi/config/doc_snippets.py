@@ -4,15 +4,17 @@ CONFIG = get_config()
 
 # Location related
 DOC_SCOPE_DISCLAIMER = f'Not all data are available for all locations. Learn more about the scope of data coverage in HDX HAPI in the <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}">Overview and Getting Started</a> documentation.'
-DOC_LOCATION_ID = 'Filter the response by a location ID.'
+DOC_LOCATION_ID = 'Filter the response by a location ID, a unique identifier for each entry in the Location table'
 DOC_LOCATION_REF = 'Filter the response by a location (typically a country) reference number.'
 DOC_LOCATION_CODE = 'Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes.'
 DOC_LOCATION_NAME = 'Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a>.'
 DOC_SEE_LOC = 'See the <a href="/docs#/Metadata/get_locations_api_v1_metadata_location_get" target="_blank">location endpoint</a> for details.'
+DOC_ADMIN1_ID = 'Filter the response by an admin1 ID, a unique identifier for each entry in the admin1 table'
 DOC_ADMIN1_REF = 'Filter the response by the 1st subnational administrative reference number.'
 DOC_ADMIN1_CODE = 'Filter the response by the 1st subnational administrative divisions. The admin1 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative divisions. The admin1 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_SEE_ADMIN1 = 'See the <a href="/docs#/Metadata/get_admin1_api_v1_metadata_admin1_get" target="_blank">admin1 endpoint</a> for details.'
+DOC_ADMIN2_ID = 'Filter the response by an admin2 ID, a unique identifier for each entry in the admin2 table'
 DOC_ADMIN2_REF = 'Filter the response by the 2nd subnational administrative reference number.'
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_NAME = 'Filter the response by the 2nd subnational administrative divisions. The admin2 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
@@ -25,7 +27,7 @@ DOC_HDX_DATASET_STUB = 'Filter the response by the URL-safe name (dataset_hdx_st
 DOC_HDX_DATASET_TITLE = 'Filter the response by the title of the dataset as it appears in the HDX interface. This name is not unique and can change.'
 DOC_HDX_PROVIDER_STUB = "Filter the response by the URL-safe name of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[hdx_provider_stub]` will load the provider's page on HDX."
 DOC_HDX_PROVIDER_NAME = 'Filter the response by the display name of the provider (organization) of the dataset on HDX.'
-DOC_HDX_RESOURCE_ID = 'Filter the response by the resource ID (resource_hdx_id), which is a unique and fixed identifier of a resource on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]` will load the resource page on HDX.'
+DOC_HDX_RESOURCE_ID = 'Filter the response by the resource ID, which is a unique and fixed identifier of a resource on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]` will load the resource page on HDX.'
 DOC_HDX_RESOURCE_FORMAT = 'Filter the response by the format of the resource on HDX. These are typically file formats (i.e. CSV, XLSX), but can also include APIs and web apps.'
 DOC_HDX_RESOURCE_HXL = (
     'Filter the response by whether or not the resource contains <a href="https://hxlstandard.org/">HXL tags</a>.'
