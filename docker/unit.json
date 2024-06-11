@@ -9,7 +9,7 @@
             "type": "python 3.12",
             "threads": 1,
             "processes": {
-                "max": 10,
+                "max": 5,
                 "spare": 3,
                 "idle_timeout": 20
             },
