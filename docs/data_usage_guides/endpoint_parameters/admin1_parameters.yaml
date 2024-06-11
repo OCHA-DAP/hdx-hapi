@@ -3,8 +3,7 @@
   Source:
 - Parameter: '`location_ref`'
   Description: >
-   A stable, unique identifier to reference the `id` of the associated entry
-    in the `location` table
+    A reference to the `id` of the associated entry in the `location` table
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`code`'
   Description: Admin 1 p-code
