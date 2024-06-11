@@ -17,7 +17,7 @@ async def admin2_view_list(
     db: AsyncSession,
     id: int = None,
     admin1_ref: int = None,
-    # location_ref: int = None,
+    location_ref: int = None,
     code: str = None,
     name: str = None,
     admin1_code: str = None,
@@ -38,8 +38,8 @@ async def admin2_view_list(
         query = query.where(Admin2View.id == id)
     if admin1_ref:
         query = query.where(Admin2View.admin1_ref == admin1_ref)
-    # if location_ref:
-    #     query = query.where(Admin2View.location_ref == location_ref)
+    if location_ref:
+        query = query.where(Admin2View.location_ref == location_ref)
     if code:
         query = case_insensitive_filter(query, Admin2View.code, code)
     if name:
