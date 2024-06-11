@@ -9,6 +9,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_REFERENCE_PERIOD_END,
     DOC_REFERENCE_PERIOD_START,
     DOC_RISK_CLASS,
+    DOC_LOCATION_REF,
     truncate_query_description,
 )
 from hdx_hapi.endpoints.models.base import HapiBaseModel
@@ -76,7 +77,7 @@ class NationalRiskResponse(HapiBaseModel):
     # hapi_replaced_date: Optional[datetime]
 
     # sector_name: str = Field(max_length=512)
-    location_ref: int
+    location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
     location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
 
