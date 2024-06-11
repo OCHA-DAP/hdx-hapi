@@ -53,10 +53,10 @@ async def get_wfp_markets(
     db: AsyncSession = Depends(get_db),
     code: Annotated[
         Optional[str],
-        Query(max_length=32, description='Filter the response by the unique code identifying the commodity.'),
+        Query(max_length=32, description='Filter the response by the unique code identifying the market.'),
     ] = None,
     name: Annotated[
-        Optional[str], Query(max_length=512, description='Filter the response by the name of the commodity.')
+        Optional[str], Query(max_length=512, description='Filter the response by the name of the market.')
     ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[

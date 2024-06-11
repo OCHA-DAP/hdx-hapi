@@ -48,18 +48,13 @@ async def get_orgs(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     acronym: Annotated[
-        str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}', openapi_examples={'unhcr': {'value': 'unhcr'}})
+        str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}')
     ] = None,
     name: Annotated[
         str,
         Query(
             max_length=512,
             description=f'{DOC_ORG_NAME}',
-            openapi_examples={
-                'United Nations High Commissioner for Refugees': {
-                    'value': 'United Nations High Commissioner for Refugees'
-                }
-            },
         ),
     ] = None,
     org_type_code: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')] = None,
@@ -95,12 +90,12 @@ async def get_org_types(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}', openapi_examples={'433': {'value': '433'}})
+        str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')
     ] = None,
     description: Annotated[
         str,
         Query(
-            max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}', openapi_examples={'Donor': {'value': 'Donor'}}
+            max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}'
         ),
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -127,15 +122,16 @@ async def get_sectors(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}', openapi_examples={'hea': {'value': 'hea'}})
+        str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}')
     ] = None,
     name: Annotated[
-        str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}', openapi_examples={'Health': {'value': 'Health'}})
+        str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """There is no consistent standard for the humanitarian sectors. The codes and descriptions used in HDX HAPI are
-    based on <a href="https://data.humdata.org/organization/54255d0b-c6b1-4517-9722-17321f6634ab">this dataset</a>.
+    """There are a variety of standards for the naming of humanitarian sectors. The codes and descriptions used
+    in HDX HAPI are based on
+    <a href="https://data.humdata.org/organization/54255d0b-c6b1-4517-9722-17321f6634ab">this dataset</a>.
     """
     result = await get_sectors_srv(
         pagination_parameters=common_parameters,

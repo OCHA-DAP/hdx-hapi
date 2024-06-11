@@ -34,7 +34,7 @@ async def test_tracking_endpoint_success():
         assert send_mixpanel_event_patch.call_count == 1, 'API calls should be tracked'
 
         expected_mixpanel_dict = {
-            'endpoint name': ENDPOINT,
+            'endpoint path': ENDPOINT,
             'query params': ['admin_level', 'output_format'],
             'time': pytest.approx(time.time()),
             'app name': None,

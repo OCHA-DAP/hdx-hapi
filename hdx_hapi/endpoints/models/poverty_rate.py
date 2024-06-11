@@ -8,6 +8,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_NAME,
     DOC_REFERENCE_PERIOD_END,
     DOC_REFERENCE_PERIOD_START,
+    DOC_LOCATION_REF,
     truncate_query_description,
 )
 from hdx_hapi.endpoints.models.base import HapiBaseModel
@@ -33,7 +34,7 @@ class PovertyRateResponse(HapiBaseModel):
     reference_period_start: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_START)
     reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
 
-    location_ref: int
+    location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
     location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
     admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
