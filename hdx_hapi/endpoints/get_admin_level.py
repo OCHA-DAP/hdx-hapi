@@ -148,7 +148,7 @@ async def get_admin2(
     db: AsyncSession = Depends(get_db),
     id: Annotated[int, Query(description=f'{DOC_LOCATION_ID}')] = None,
     admin1_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
-    # location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
+    location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
     # hapi_updated_date_min: Annotated[
@@ -180,7 +180,7 @@ async def get_admin2(
         db=db,
         id=id,
         admin1_ref=admin1_ref,
-        # location_ref=location_ref,
+        location_ref=location_ref,
         code=code,
         name=name,
         admin1_code=admin1_code,
