@@ -21,7 +21,7 @@
   Source:
 - Parameter: '`location_ref`'
   Description: >
-    An internal, stable identifier to reference a location
+    A reference to the `id` of the associated entry in the `location` table
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`location_code`'
   Description: >

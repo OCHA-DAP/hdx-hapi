@@ -111,7 +111,7 @@ By tailoring these filters, you can obtain a variety of demographic insights fro
 ## Understanding Supporting Tables
 
 
-Each theme within our API is bolstered by associated supporting tables. These tables are essential for understanding the range of possible values you can work with in the theme-specific tables. For example, if you're filtering by sector, such as, `sector=Nutrition`—you'll want to know what sectors are available.
+Each theme within our API is bolstered by associated supporting tables. These tables are essential for understanding the range of possible values you can work with in the theme-specific tables. For example, if you're filtering by sector, such as `sector=Nutrition`, you'll want to know what sectors are available.
 
 
 You can retrieve a list of possible age ranges by querying the `sector` support table like so:
