@@ -129,8 +129,9 @@ async def get_sectors(
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
-    """There is no consistent standard for the humanitarian sectors. The codes and descriptions used in HDX HAPI are
-    based on <a href="https://data.humdata.org/organization/54255d0b-c6b1-4517-9722-17321f6634ab">this dataset</a>.
+    """There are a variety of standards for the naming of humanitarian sectors. The codes and descriptions used
+    in HDX HAPI are based on
+    <a href="https://data.humdata.org/organization/54255d0b-c6b1-4517-9722-17321f6634ab">this dataset</a>.
     """
     result = await get_sectors_srv(
         pagination_parameters=common_parameters,
