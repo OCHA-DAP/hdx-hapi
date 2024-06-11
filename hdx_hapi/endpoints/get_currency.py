@@ -37,7 +37,7 @@ async def get_currencies(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_CURRENCY_CODE}', openapi_examples={'usd': {'value': 'usd'}})
+        str, Query(max_length=32, description=f'{DOC_CURRENCY_CODE}')
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
