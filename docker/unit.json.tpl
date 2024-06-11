@@ -9,7 +9,7 @@
             "type": "python 3.12",
             "threads": 1,
             "processes": {
-                "max": 5,
+                "max": ${UNITD_MAX_WORKERS},
                 "spare": 3,
                 "idle_timeout": 20
             },
@@ -17,7 +17,7 @@
                 "HOME": "/srv/hapi"
             },
             "path": "/srv/hapi",
-            "module": "main_elastic",
+            "module": "main",
             "callable": "app"
         }
     },

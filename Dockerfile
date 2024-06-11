@@ -5,8 +5,9 @@ WORKDIR /srv/hapi
 COPY . .
 
 RUN apk add \
+        envsubst \
         postgresql-dev \
-        unit \ 
+        unit \
         unit-python3 && \
     apk --virtual .build-deps add \
         git \
