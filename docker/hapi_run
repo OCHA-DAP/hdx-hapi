@@ -13,12 +13,10 @@ if [ "$ELASTIC_APM_ENABLED" == "true" ]; then
     [ -z "$ELASTIC_APM_ENVIRONMENT"  ] && export ELASTIC_APM_ENVIRONMENT=local
     # cp /srv/hapi/docker/unit-elastic.json /var/lib/unit/conf.json
     envsubst < /srv/hapi/docker/unit-elastic.json.tpl > /var/lib/unit/conf.json
-
 else
     echo "apm agents (newrelic and elastic) are disabled."
     # cp /srv/hapi/docker/unit.json /var/lib/unit/conf.json
     envsubst < /srv/hapi/docker/unit.json.tpl > /var/lib/unit/conf.json
-
 fi
 
 chmod 600 /var/lib/unit/conf.json
