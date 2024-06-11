@@ -1,9 +1,25 @@
+- Parameter: '`id`'
+  Description: A stable, unique identifier associated with each admin 2 entry
+  Source:
+- Parameter: '`admin1_ref`'
+  Description: >
+    A reference to the `id` of the associated entry in the `admin 1` table
+  Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`code`'
   Description: Admin 2 p-code
   Source:
 - Parameter: '`name`'
   Description: Admin 2 name
   Source:
+- Parameter: '`from_cods`'
+  Description: >
+    Whether the source of the entry is the
+    [common operational datasets](https://data.humdata.org/dashboards/cod?)
+    (CODs)
+- Parameter: '`location_ref`'
+  Description: >
+    A reference to the `id` of the associated entry in the `location` table
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`admin1_code`'
   Description: Admin 1 p-code
   Source: '[`Admin 1`](metadata.md#admin1)'

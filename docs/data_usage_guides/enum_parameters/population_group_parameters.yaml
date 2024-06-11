@@ -24,8 +24,6 @@
   Description: 'Naturalized refugees'
 - Population Group: RDP
   Description: 'Returned IDPs'
-- Population Group: POC
-  Description: 'Persons of concern'
 - Population Group: RRI
   Description: >
    An umbrella term for returnees, used in the humanitarian needs data which

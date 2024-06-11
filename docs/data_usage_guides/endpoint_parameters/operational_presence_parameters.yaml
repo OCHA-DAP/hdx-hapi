@@ -26,7 +26,8 @@
   Description: The name of the sector
   Source: '[`Sector`](metadata.md#sector)'
 - Parameter: '`location_ref`'
-  Description: An internal, stable identifier to reference a location
+  Description: >
+    A reference to the `id` of the associated entry in the `location` table
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`location_code`'
   Description: >
@@ -45,7 +46,7 @@
   Source:
 - Parameter: '`admin1_ref`'
   Description: >
-    An internal, stable identifier to reference an admin 1 division
+    A reference to the `id` of the associated entry in the `admin 1` table
   Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin1_code`'
   Description: Admin 1 p-code
@@ -55,7 +56,7 @@
   Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin2_ref`'
   Description: >
-    An internal, stable identifier to reference an admin 2 division
+    A reference to the `id` of the associated entry in the `admin 2` table
   Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`admin2_code`'
   Description: Admin 2 p-code
