@@ -3,16 +3,22 @@
 # guard against older stacks
 [ -z "$ELASTIC_APM_ENABLED" ] && export ELASTIC_APM_ENABLED=false
 
+[ -z "$UNITD_MAX_WORKERS" ] && export UNITD_MAX_WORKERS=5
+
 if [ "$ELASTIC_APM_ENABLED" == "true" ]; then
     echo "elastic is enabled."
     [ -z "$ELASTIC_APM_SERVICE_NAME" ] && export ELASTIC_APM_SERVICE_NAME=HAPI
     [ -z "$ELASTIC_APM_SERVER_URL"   ] && export ELASTIC_APM_SERVER_URL=http://localhost:8200
     [ -z "$ELASTIC_APM_SECRET_TOKEN" ] && export ELASTIC_APM_SECRET_TOKEN=
     [ -z "$ELASTIC_APM_ENVIRONMENT"  ] && export ELASTIC_APM_ENVIRONMENT=local
-    cp /srv/hapi/docker/unit-elastic.json /var/lib/unit/conf.json
+    # cp /srv/hapi/docker/unit-elastic.json /var/lib/unit/conf.json
+    envsubst < /srv/hapi/docker/unit-elastic.json.tpl > /var/lib/unit/conf.json
+
 else
     echo "apm agents (newrelic and elastic) are disabled."
-    cp /srv/hapi/docker/unit.json /var/lib/unit/conf.json
+    # cp /srv/hapi/docker/unit.json /var/lib/unit/conf.json
+    envsubst < /srv/hapi/docker/unit.json.tpl > /var/lib/unit/conf.json
+
 fi
 
 chmod 600 /var/lib/unit/conf.json
