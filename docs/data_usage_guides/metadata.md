@@ -23,6 +23,12 @@ This table contains the HDX-specific metadata associated with all datasets
 used to populate the HAPI sub-category tables. Every dataset has at least
 one child [resource](metadata.md#resource).
 
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get).
+
 {{ read_yaml('data_usage_guides/endpoint_parameters/dataset_parameters.yaml') }}
 
 ### Resource <a id="resource"></a>
@@ -32,6 +38,12 @@ one child [resource](metadata.md#resource).
 This table contains the HDX-specific metadata associated with all resources
 used to populate the HAPI sub-category tables. Every resource has one
 parent [dataset](metadata.md#dataset).
+
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_resources_api_v1_metadata_resource_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/resource_parameters.yaml') }}
 
@@ -44,9 +56,11 @@ The subcategory data tables link to the lowest administrative level used by
 that data type; it will usually be admin 2, but in some cases may be admin 1 or
 location.
 
-The names and p-codes are read in from a [global p-code list](https://data.humdata.org/dataset/global-pcodes)
-taken from the common operational dataset (COD) gazetteers and administrative
-boundaries.
+The names and p-codes are read in from a
+[global p-code list](https://data.humdata.org/dataset/global-pcodes)
+taken from the
+[common operational dataset](https://data.humdata.org/dashboards/cod?)
+(COD) gazetteers and administrative boundaries.
 In the geographical tables, the `code` (p-code) field is unique only in
 combination with `reference_period_start`,
 since p-codes may be reused in different versions of geographical metadata.
@@ -72,12 +86,24 @@ from the prefix.
 Country or country-like entities in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_locations_api_v1_metadata_location_get).
+
 {{ read_yaml('data_usage_guides/endpoint_parameters/location_parameters.yaml') }}
 
 ### Admin 1  <a id="admin1"></a>
 
 Admin 1 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
+
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_admin1_api_v1_metadata_admin1_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/admin1_parameters.yaml') }}
 
@@ -86,9 +112,30 @@ Admin 1 level names and p-codes in HDX HAPI, from the CODs
 Admin 2 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_admin2_api_v1_metadata_admin2_get).
+
 {{ read_yaml('data_usage_guides/endpoint_parameters/admin2_parameters.yaml') }}
 
 ## Sub-category Metadata
+
+### Currency <a id="currency"></a>
+
+**Used in:**
+[`Food Prices`](food_security_and_nutrition.md#food-price)
+
+The currency table is populated using the WFP VAM Data Bridges API.
+
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_currencies_api_v1_metadata_currency_get).
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/currency_parameters.yaml') }}
 
 ### Org <a id="org"></a>
 
@@ -107,6 +154,12 @@ methodology:
   string is normalised and matched to the org type names. In the absence of a
   direct match, phonetic matching is used for strings > 5 characters. If no
   match is found, the organization is skipped.
+
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_orgs_api_v1_metadata_org_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_parameters.yaml') }}
 
@@ -129,6 +182,12 @@ The following rows are then added:
 
 Organization types all have an associated description and code.
 
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get).
+
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_type_parameters.yaml') }}
 
 ### Sector <a id=sector></a>
@@ -150,16 +209,29 @@ dataset. The following rows are then added:
 
 Sectors all have an associated name and code.
 
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_sectors_api_v1_metadata_sector_get).
+
 {{ read_yaml('data_usage_guides/endpoint_parameters/sector_parameters.yaml') }}
 
-### Currency <a id="currency"></a>
+### WFP Commodity <a id="wfp-commodity"></a>
 
 **Used in:**
 [`Food Prices`](food_security_and_nutrition.md#food-price)
 
-The currency table is populated using the WFP VAM Data Bridges API.
+The commodity table tracks all food items, and their associated
+commodity category, present in the food prices data.
 
-{{ read_yaml('data_usage_guides/endpoint_parameters/currency_parameters.yaml') }}
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_wfp_commodities_api_v1_metadata_wfp_commodity_get).
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/wfp_commodity_parameters.yaml') }}
 
 ### WFP Market <a id="wfp-market"></a>
 
@@ -176,14 +248,10 @@ names must be matched to p-codes using the algorithm provided by the
 library which uses phonetic name matching and
 manual overrides.
 
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_wfp_markets_api_v1_metadata_wfp_market_get).
+
 {{ read_yaml('data_usage_guides/endpoint_parameters/wfp_market_parameters.yaml') }}
-
-### WFP Commodity <a id="wfp-commodity"></a>
-
-**Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-price)
-
-The commodity table tracks all food items, and their associated
-commodity category, present in the food prices data.
-
-{{ read_yaml('data_usage_guides/endpoint_parameters/wfp_commodity_parameters.yaml') }}

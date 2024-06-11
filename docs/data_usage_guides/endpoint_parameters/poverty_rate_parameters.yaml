@@ -43,3 +43,6 @@
     Location name, based on the "short name" from the
     [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
   Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_ref`'
+  Description: >
+    A reference to the `id` of the associated entry in the `location` table

@@ -1,5 +1,3 @@
-- Population Status: POP
-  Description: 'Population'
 - Population Status: AFF
   Description: 'Affected'
 - Population Status: INN
@@ -9,4 +7,4 @@
 - Population Status: REA
   Description: 'Reached'
 - Population Status: all
-  Description: No disaggregation
+  Description: No disaggregation, "population" in the source data

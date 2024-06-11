@@ -51,4 +51,4 @@ Use of HDX HAPI is governed by the [HDX HAPI Terms of Use](https://data.humdata.
 
 ## FAQS
 
-Please [refer to the landing page](https://dev.data-humdata-org.ahconu.org/hapi) for non-technical FAQs
+Please [refer to the landing page](https://data.humdata.org/hapi) for non-technical FAQs

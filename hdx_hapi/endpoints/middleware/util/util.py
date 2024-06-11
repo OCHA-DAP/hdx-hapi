@@ -33,7 +33,7 @@ async def track_api_call(request: Request, response: Response):
     ua_os, ua_browser, ua_browser_version = _parse_user_agent(user_agent_string)
 
     mixpanel_dict = {
-        'endpoint name': endpoint,
+        'endpoint path': endpoint,
         'query params': query_params_keys,
         'time': event_time,
         'app name': app_name,

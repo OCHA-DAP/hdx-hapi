@@ -1,3 +1,6 @@
+- Parameter: '`id`'
+  Description: Unique identifier associated with each location entry
+  Source:
 - Parameter: '`code`'
   Description: >
      Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
@@ -7,6 +10,11 @@
     Location name, based on the "short name" from the
     [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
   Source:
+- Parameter: '`from_cods`'
+  Description: >
+    Whether the source of the entry is the
+    [common operational datasets](https://data.humdata.org/dashboards/cod?)
+    (CODs)
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
   Source:

@@ -51,6 +51,75 @@ router = APIRouter(
     tags=['Affected people'],
 )
 
+## refugees
+
+
+@router.get(
+    '/api/affected-people/refugees',
+    response_model=HapiGenericResponse[RefugeesResponse],
+    summary='Get refugees data',
+    include_in_schema=False,
+)
+@router.get(
+    '/api/v1/affected-people/refugees',
+    response_model=HapiGenericResponse[RefugeesResponse],
+    summary='Get refugees data',
+)
+async def get_refugees(
+    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
+    db: AsyncSession = Depends(get_db),
+    population_group: Annotated[
+        Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
+    ] = None,
+    population_min: Annotated[
+        int, Query(description='Filter the response by a lower bound for the population.')
+    ] = None,
+    population_max: Annotated[
+        int, Query(description='Filter the response by a upper bound for the population.')
+    ] = None,
+    gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
+    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
+    origin_location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    origin_location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    asylum_location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    asylum_location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    output_format: OutputFormat = OutputFormat.JSON,
+):
+    ref_period_parameters = None
+    result = await get_refugees_srv(
+        pagination_parameters=common_parameters,
+        ref_period_parameters=ref_period_parameters,
+        db=db,
+        population_group=population_group,
+        population_min=population_min,
+        population_max=population_max,
+        gender=gender,
+        age_range=age_range,
+        origin_location_code=origin_location_code,
+        origin_location_name=origin_location_name,
+        asylum_location_code=asylum_location_code,
+        asylum_location_name=asylum_location_name,
+    )
+    return transform_result_to_csv_stream_if_requested(result, output_format, RefugeesResponse)
+
+
+get_refugees.__doc__ = (
+    "UNHCR's Refugee data provides information about displaced people in a crisis. "
+    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
+    'affected_people/#refugees-persons-of-concern">HDX HAPI documentation</a>, '
+    'and the <a href="https://data.humdata.org/dataset/unhcr-population-data-for-world">original HDX source</a> '
+    'website.'
+)
+
 
 @router.get(
     '/api/affected-people/humanitarian-needs',
@@ -147,73 +216,4 @@ get_humanitarian_needs.__doc__ = (
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'affected_people/#humanitarian-needs">HDX HAPI documentation</a>, '
     'and the <a href="https://www.jiaf.info/">original JIAF source</a> website.'
-)
-
-## refugees
-
-
-@router.get(
-    '/api/affected-people/refugees',
-    response_model=HapiGenericResponse[RefugeesResponse],
-    summary='Get refugees data',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/affected-people/refugees',
-    response_model=HapiGenericResponse[RefugeesResponse],
-    summary='Get refugees data',
-)
-async def get_refugees(
-    # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
-    common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
-    db: AsyncSession = Depends(get_db),
-    population_group: Annotated[
-        Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
-    ] = None,
-    population_min: Annotated[
-        int, Query(description='Filter the response by a lower bound for the population.')
-    ] = None,
-    population_max: Annotated[
-        int, Query(description='Filter the response by a upper bound for the population.')
-    ] = None,
-    gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
-    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    origin_location_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
-    ] = None,
-    origin_location_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
-    ] = None,
-    asylum_location_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
-    ] = None,
-    asylum_location_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
-    ] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
-):
-    ref_period_parameters = None
-    result = await get_refugees_srv(
-        pagination_parameters=common_parameters,
-        ref_period_parameters=ref_period_parameters,
-        db=db,
-        population_group=population_group,
-        population_min=population_min,
-        population_max=population_max,
-        gender=gender,
-        age_range=age_range,
-        origin_location_code=origin_location_code,
-        origin_location_name=origin_location_name,
-        asylum_location_code=asylum_location_code,
-        asylum_location_name=asylum_location_name,
-    )
-    return transform_result_to_csv_stream_if_requested(result, output_format, RefugeesResponse)
-
-
-get_refugees.__doc__ = (
-    "UNHCR's Refugee data provides information about displaced people in a crisis. "
-    f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
-    'affected_people/#refugees-persons-of-concern">HDX HAPI documentation</a>, '
-    'and the <a href="https://data.humdata.org/dataset/unhcr-population-data-for-world">original HDX source</a> '
-    'website.'
 )

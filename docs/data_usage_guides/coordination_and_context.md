@@ -13,7 +13,11 @@ efforts, identify gaps, and plan for future humanitarian response.
 
 {{ read_yaml('data_usage_guides/subcategory_details/operational_presence_details.yaml') }}
 
-### Parameters
+### Parameters Returned
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presences_api_v1_coordination_context_operational_presence_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/operational_presence_parameters.yaml') }}
 
@@ -59,7 +63,11 @@ mapped against funding requirements stated in Humanitarian Response Plans.
 
 {{ read_yaml('data_usage_guides/subcategory_details/funding_details.yaml') }}
 
-### Parameters
+### Parameters Returned
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_fundings_api_v1_coordination_context_funding_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/funding_parameters.yaml') }}
 
@@ -84,7 +92,11 @@ To learn more about their methodology, please consult the
 
 {{ read_yaml('data_usage_guides/subcategory_details/conflict_event_details.yaml') }}
 
-### Parameters
+### Parameters Returned
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_conflict_events_api_v1_coordination_context_conflict_event_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/conflict_event_parameters.yaml') }}
 
@@ -116,7 +128,11 @@ information on the methodology, see
 
 {{ read_yaml('data_usage_guides/subcategory_details/national_risk_details.yaml') }}
 
-### Parameters
+### Parameters Returned
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_national_risks_api_v1_coordination_context_national_risk_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/national_risk_parameters.yaml') }}
 
