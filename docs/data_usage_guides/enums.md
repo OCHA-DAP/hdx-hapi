@@ -78,8 +78,9 @@ and response efforts.
 
 Almost all population group terms come from
 [UNHCR's glossary](https://www.unhcr.org/refugee-statistics/methodology/data-content/),
-except for "POC", "RRI", and "all". "RRI" was added as an umbrella term
-for returnees because unlike UNHCR, the humanitarian
+except for "RRI", and "all". "all" represents no-disaggregation", while
+RRI" was added as an umbrella term
+for returnees because the humanitarian
 needs data does not distinguish between returned refugees and returned
 IDPs.
 
@@ -92,6 +93,9 @@ IDPs.
 
 The population status disaggregation provides a framework for the HNO to
 determine how effectively people in need are being reached.
+Note that "all" does **not** represent a sum over the different status types,
+but rather a disaggregation, as the same people may be present in
+multiple groups.
 
 {{ read_yaml('data_usage_guides/enum_parameters/population_status_parameters.yaml') }}
 

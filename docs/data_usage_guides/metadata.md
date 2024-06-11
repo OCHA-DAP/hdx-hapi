@@ -44,9 +44,11 @@ The subcategory data tables link to the lowest administrative level used by
 that data type; it will usually be admin 2, but in some cases may be admin 1 or
 location.
 
-The names and p-codes are read in from a [global p-code list](https://data.humdata.org/dataset/global-pcodes)
-taken from the common operational dataset (COD) gazetteers and administrative
-boundaries.
+The names and p-codes are read in from a
+[global p-code list](https://data.humdata.org/dataset/global-pcodes)
+taken from the
+[common operational dataset](https://data.humdata.org/dashboards/cod?)
+(COD) gazetteers and administrative boundaries.
 In the geographical tables, the `code` (p-code) field is unique only in
 combination with `reference_period_start`,
 since p-codes may be reused in different versions of geographical metadata.

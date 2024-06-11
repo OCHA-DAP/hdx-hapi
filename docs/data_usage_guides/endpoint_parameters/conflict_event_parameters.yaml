@@ -29,7 +29,7 @@
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`admin1_ref`'
   Description: >
-     internal, stable identifier to reference an admin 1 division
+     An internal, stable identifier to reference an admin 1 division
   Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin1_code`'
   Description: Admin 1 p-code

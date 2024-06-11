@@ -26,7 +26,8 @@
   Description: The name of the sector
   Source: '[`Sector`](metadata.md#sector)'
 - Parameter: '`location_ref`'
-  Description: An internal, stable identifier to reference a location
+  Description: >
+    An internal, stable identifier to reference a location
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`location_code`'
   Description: >
