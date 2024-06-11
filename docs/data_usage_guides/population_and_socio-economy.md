@@ -1,5 +1,7 @@
 # Population & Socio-economy
 
+---
+
 ## Baseline Population <a id="population"></a>
 
 The population statistics presented here are sourced from the
@@ -25,7 +27,7 @@ For available query parameters, please see the
 ### Transformations applied
 
 * The table has been reshaped from wide to long: demographic-specific columns
-  have been cast to gender, age, and population
+  have been cast to `gender`, `age_range`, and `population`
 * The reference period is obtained from the HDX dataset
 
 ### Usage Notes

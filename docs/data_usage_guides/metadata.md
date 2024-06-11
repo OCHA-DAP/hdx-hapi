@@ -1,5 +1,7 @@
 # Metadata
 
+---
+
 ## HDX Metadata
 
 All of the data in HDX HAPI comes from publicly-available datasets on HDX, and

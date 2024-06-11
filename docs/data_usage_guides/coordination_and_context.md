@@ -1,5 +1,7 @@
 # Coordination & Context
 
+---
+
 ## Who is Doing What Where - Operational Presence <a id=”operational-presence”></a>
 
 The [Who is Doing What Where (3W)](https://3w.unocha.org/) is a core

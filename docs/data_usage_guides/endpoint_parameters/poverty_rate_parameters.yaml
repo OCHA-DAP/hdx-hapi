@@ -46,3 +46,4 @@
 - Parameter: '`location_ref`'
   Description: >
     A reference to the `id` of the associated entry in the `location` table
+  Source: '[`Location`](metadata.md#location)'
