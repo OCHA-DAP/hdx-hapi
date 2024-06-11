@@ -1,5 +1,7 @@
 # Affected People
 
+---
+
 ## Refugees & Persons of Concern <a id=”refugees”></a>
 
 This dataset, compiled by [UNHCR](https://www.unhcr.org/), offers annual
@@ -24,7 +26,7 @@ For available query parameters, please see the
 ### Transformations applied
 
 * The table has been reshaped from wide to long: demographic-specific columns
-  have been cast to gender, age, and population
+  have been cast to `gender`, `age_range`, and `population`
 * It is not possible to p-code based on the location information in the
   original data, therefore population numbers are aggregated to the national
   level
