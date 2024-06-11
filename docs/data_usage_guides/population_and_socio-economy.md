@@ -14,7 +14,7 @@ sources.
 
 {{ read_yaml('data_usage_guides/subcategory_details/population_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -51,7 +51,7 @@ details.
 
 {{ read_yaml('data_usage_guides/subcategory_details/poverty_rate_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the

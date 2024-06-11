@@ -15,7 +15,7 @@ a future release we will p-code and expand coverage to other IPC datasets.
 
 {{ read_yaml('data_usage_guides/subcategory_details/food_security_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -56,7 +56,7 @@ detailed methodology, see WFP's
 
 {{ read_yaml('data_usage_guides/subcategory_details/food_price_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the

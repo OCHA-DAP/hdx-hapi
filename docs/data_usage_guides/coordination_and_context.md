@@ -13,7 +13,7 @@ efforts, identify gaps, and plan for future humanitarian response.
 
 {{ read_yaml('data_usage_guides/subcategory_details/operational_presence_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -63,7 +63,7 @@ mapped against funding requirements stated in Humanitarian Response Plans.
 
 {{ read_yaml('data_usage_guides/subcategory_details/funding_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -92,7 +92,7 @@ To learn more about their methodology, please consult the
 
 {{ read_yaml('data_usage_guides/subcategory_details/conflict_event_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -128,7 +128,7 @@ information on the methodology, see
 
 {{ read_yaml('data_usage_guides/subcategory_details/national_risk_details.yaml') }}
 
-### Returned Parameters
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the

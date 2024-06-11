@@ -23,7 +23,7 @@ This table contains the HDX-specific metadata associated with all datasets
 used to populate the HAPI sub-category tables. Every dataset has at least
 one child [resource](metadata.md#resource).
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -39,7 +39,7 @@ This table contains the HDX-specific metadata associated with all resources
 used to populate the HAPI sub-category tables. Every resource has one
 parent [dataset](metadata.md#dataset).
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -86,7 +86,7 @@ from the prefix.
 Country or country-like entities in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -99,7 +99,7 @@ For available query parameters, please see the
 Admin 1 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -112,7 +112,7 @@ For available query parameters, please see the
 Admin 2 level names and p-codes in HDX HAPI, from the CODs
 [global p-code list](https://data.humdata.org/dataset/global-pcodes).
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -129,7 +129,7 @@ For available query parameters, please see the
 
 The currency table is populated using the WFP VAM Data Bridges API.
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -155,7 +155,7 @@ methodology:
   direct match, phonetic matching is used for strings > 5 characters. If no
   match is found, the organization is skipped.
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -182,7 +182,7 @@ The following rows are then added:
 
 Organization types all have an associated description and code.
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -209,7 +209,7 @@ dataset. The following rows are then added:
 
 Sectors all have an associated name and code.
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -225,7 +225,7 @@ For available query parameters, please see the
 The commodity table tracks all food items, and their associated
 commodity category, present in the food prices data.
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
@@ -248,7 +248,7 @@ names must be matched to p-codes using the algorithm provided by the
 library which uses phonetic name matching and
 manual overrides.
 
-<h4> Returned Parameters </h4>
+<h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
