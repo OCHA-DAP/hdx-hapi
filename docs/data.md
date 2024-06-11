@@ -2,32 +2,59 @@
 
 ---
 
-The initial aim of HDX HAPI is to cover all countries that have a humanitarian response plan and cover the data categories from HDX data grids
+The initial aim of HDX HAPI is to cover all countries that have a
+humanitarian response plan, and all data sub-categories from
+[HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids).
+In the table below we detail the sub-category coverage that we have achieved
+at present, and to which administrative level: country, admin 1, or admin 2.
 
-|                                    | Affected People - Humanitarian Needs | Affected People - Refugees | Coordination Context - Conflict event | Coordination Context - Funding | Coordination Context - National Risk | Coordination Context - Operational Presence | Food - Food Price | Food - Food Security | Population Social - Population | Population Social - Poverty-rate |
-|:----------------------------------:|:----------------------------------:|:----------------------------------:|:-----------------------------------:|:----------------------------:|:----------------------------------:|:-----------------------------------------:|:---------------:|:------------------:|:----------------------------:|:------------------------------:|
-|            Afghanistan             |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |         No         |          Yes (adm1)          |           Yes (adm1)           |
-|            Burkina Faso            |             Yes (adm0)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |     Yes (adm2)     |          Yes (adm2)          |           Yes (adm1)           |
-|              Cameroon              |             Yes (adm1)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |     Yes (adm2)     |          Yes (adm1)          |           Yes (adm1)           |
-|      Central African Republic      |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |     Yes (adm2)     |              No              |           Yes (adm1)           |
-|                Chad                |             Yes (adm0)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm1)                |    Yes (adm2)   |     Yes (adm2)     |          Yes (adm2)          |           Yes (adm1)           |
-|              Colombia              |             Yes (adm1)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|  Democratic Republic of the Congo  |             Yes (adm0)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|            El Salvador             |             Yes (adm0)             |          Yes (adm0)          |              Yes (adm0)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|              Ethiopia              |             Yes (adm0)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm0)                |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|             Guatemala              |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm0)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|               Haiti                |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|              Honduras              |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm0)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|                Mali                |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |     Yes (adm2)     |          Yes (adm2)          |           Yes (adm1)           |
-|             Mozambique             |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|              Myanmar               |             Yes (adm1)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |         No         |          Yes (adm2)          |           Yes (adm1)           |
-|               Niger                |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |     Yes (adm2)     |          Yes (adm2)          |           Yes (adm1)           |
-|              Nigeria               |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |     Yes (adm2)     |          Yes (adm2)          |           Yes (adm1)           |
-|              Somalia               |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |         No         |          Yes (adm2)          |               No               |
-|            South Sudan             |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm0)                |    Yes (adm2)   |         No         |          Yes (adm2)          |               No               |
-|         State of Palestine         |                 No                 |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm0)                |    Yes (adm2)   |         No         |          Yes (adm1)          |           Yes (adm1)           |
-|               Sudan                |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm0)                |    Yes (adm2)   |         No         |          Yes (adm1)          |           Yes (adm1)           |
-|        Syrian Arab Republic        |             Yes (adm0)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |         No         |              No              |               No               |
-|              Ukraine               |             Yes (adm0)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                     No                    |    Yes (adm2)   |         No         |          Yes (adm1)          |           Yes (adm1)           |
-| Venezuela (Bolivarian Republic of) |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |        No       |         No         |          Yes (adm2)          |               No               |
-|               Yemen                |             Yes (adm2)             |          Yes (adm0)          |              Yes (adm2)             |          Yes (adm0)          |             Yes (adm0)             |                 Yes (adm2)                |    Yes (adm2)   |         No         |              No              |           Yes (adm1)           |
+<style>
+  .data-cell {
+    background-color: #66B0EC; /* HDX sapphire light */;
+  }
+
+  th.rotate {
+    white-space: nowrap;
+    vertical-align: bottom;
+    text-align: left;
+    height: 200px;
+  }
+  th.rotate > div {
+    transform: translate(20px, 150px) rotate(-45deg);
+    width: 1px;
+  }
+  th.rotate > div > span {
+    padding: 0px 0px;
+  }
+
+  th.horizontal {
+    vertical-align: center;
+    text-align: center;
+  }
+
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <th class="horizontal">Category</th>
+      <th class="horizontal">Sub-category</th>
+      <th class="rotate"><div><span>Demogcratic Republic of the Congo</span></div></th>
+      <th class="rotate"><div><span>Venezuela (Bolivarian Republic of)</span></div></th>
+      <th class="rotate"><div><span>Afghanistan</span></div></th>
+      <th class="horizontal">Sub-category</th>
+      <th class="horizontal">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Affected Population</th>
+      <th>Refugees</th>
+      <td class="data-cell">Admin 2</td>
+      <td class="data-cell">Country</td>
+      <td></td>
+      <th>Affected Population</th>
+      <th>Refugees</th>
+    </tr>
+  </tbody>
+</table>
