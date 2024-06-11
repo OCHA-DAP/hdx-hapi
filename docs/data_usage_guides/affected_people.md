@@ -13,7 +13,11 @@ organizations.
 
 {{ read_yaml('data_usage_guides/subcategory_details/refugees_details.yaml') }}
 
-### Parameters
+### Returned Parameters
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/refugees_parameters.yaml') }}
 
@@ -53,7 +57,11 @@ HDX HAPI obtains the PIN numbers from the
 
 {{ read_yaml('data_usage_guides/subcategory_details/humanitarian_needs_details.yaml') }}
 
-### Parameters
+### Returned Parameters
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/humanitarian_needs_parameters.yaml') }}
 

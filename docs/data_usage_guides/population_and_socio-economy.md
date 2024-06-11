@@ -14,7 +14,11 @@ sources.
 
 {{ read_yaml('data_usage_guides/subcategory_details/population_details.yaml') }}
 
-### Parameters
+### Returned Parameters
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_populations_api_v1_population_social_population_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/population_parameters.yaml') }}
 
@@ -47,7 +51,11 @@ details.
 
 {{ read_yaml('data_usage_guides/subcategory_details/poverty_rate_details.yaml') }}
 
-### Parameters
+### Returned Parameters
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_poverty_rates_api_v1_population_social_poverty_rate_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/poverty_rate_parameters.yaml') }}
 

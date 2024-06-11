@@ -15,7 +15,11 @@ a future release we will p-code and expand coverage to other IPC datasets.
 
 {{ read_yaml('data_usage_guides/subcategory_details/food_security_details.yaml') }}
 
-### Parameters
+### Returned Parameters
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_security_api_v1_food_food_security_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/food_security_parameters.yaml') }}
 
@@ -52,7 +56,11 @@ detailed methodology, see WFP's
 
 {{ read_yaml('data_usage_guides/subcategory_details/food_price_details.yaml') }}
 
-### Parameters
+### Returned Parameters
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_prices_api_v1_food_food_price_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/food_price_parameters.yaml') }}
 
