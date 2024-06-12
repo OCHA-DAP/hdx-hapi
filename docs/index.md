@@ -2,9 +2,9 @@
 
 ---
 
-The [HDX Humanitarian API](https://data.humdata.org/hapi)(HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations
+The [HDX Humanitarian API](https://data.humdata.org/hapi) (HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations.
 
-HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts or join our slack channel, send an email to [hdx@un.org](hdx@un.org).
+HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts or join our slack channel, send an email to [hdx@un.org](mailto:hdx@un.org).
 
 The initial scope of HDX HAPI will be the data included in the [HDX Data Grids](https://data.humdata.org/dashboards/overview-of-data-grids). Work is ongoing to add more data.
 
