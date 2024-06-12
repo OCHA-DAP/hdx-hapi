@@ -4,7 +4,7 @@ from hapi_schema.utils.enums import RiskClass
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hdx_hapi.db.models.views.all_views import NationalRiskView
+from hdx_hapi.db.models.views.vat_or_view import NationalRiskView
 from hdx_hapi.db.dao.util.util import apply_pagination, apply_reference_period_filter, case_insensitive_filter
 from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
 
