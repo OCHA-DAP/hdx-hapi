@@ -40,6 +40,8 @@ For available query parameters, please see the
   data is preferable
 * An “all” value in the `gender` and `age_range` columns indicates no
   disaggregation
+* `age_range` is expressed as "[`min_age`]-[`max_age`]", where `max_age` is
+  inclusive, or "[`min_age`]+" for an age range starting at `min_age` or above
 
 ## Humanitarian Needs <a id=”humanitarian-needs”></a>
 
