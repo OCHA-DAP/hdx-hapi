@@ -25,8 +25,8 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Affected People
 
-- [Humanitarian Needs](https://hapi.humdata.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
 - [Refugees & Persons of Concern](https://hapi.humdata.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get)
+- [Humanitarian Needs](https://hapi.humdata.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
 
 #### Coordination & Context
 
