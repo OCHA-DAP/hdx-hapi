@@ -57,7 +57,7 @@ ISO3 country code.
         return results
 
 
-    APP_IDENTIFER = { your app identifier }
+    APP_IDENTIFIER = { your app identifier }
     THEME = "coordination-context/operational-presence"
     LOCATION = "AFG"
     BASE_URL = (
@@ -193,7 +193,7 @@ ISO3 country code.
       return(results)
     }
 
-    APP_IDENTIFER <- { your app identifier }
+    APP_IDENTIFIER <- { your app identifier }
     THEME <- "coordination-context/operational-presence"
     LOCATION <- "AFG"
     BASE_URL <- paste0(
@@ -637,7 +637,7 @@ CSV to then be used on your computer.
             print(f"GeoJSON saved to {filename}")
 
 
-    APP_IDENTIFER = { your app identifier }
+    APP_IDENTIFIER = { your app identifier }
     THEME = "population-social/population"
     LOCATION = "AFG"
     AGE_RANGE = "0-4"
@@ -721,7 +721,7 @@ CSV to then be used on your computer.
     }
 
     # Use the functions
-    APP_IDENTIFER <- { your app identifier }
+    APP_IDENTIFIER <- { your app identifier }
     THEME <- "population-social/population"
     LOCATION <- "AFG"
     AGE_RANGE <- "0-4"

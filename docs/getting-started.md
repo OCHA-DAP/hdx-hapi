@@ -158,7 +158,7 @@ To dive deeper into the data's origin, use the `resource_hdx_id` in the resource
 
 
 ```
-https://hapi.humdata.org/api/v1/metadata/resource?resource_hdx_id=b28928be-1847-408f-b3cd-9b87b596c710&update_date_min=2020-01-01&update_date_max=2024-01-01&output_format=json&limit=100&offset=0&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/metadata/resource?resource_hdx_id=b28928be-1847-408f-b3cd-9b87b596c710&update_date_min=2020-01-01&update_date_max=2024-12-01&output_format=json&limit=100&offset=0&app_identifier={your app identifier}
 ```
 
 
