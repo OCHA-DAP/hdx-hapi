@@ -19,7 +19,7 @@ https://hapi.humdata.org/api/v1/coordination-context/operational-presence?app_id
 
 
 
-## Accessing Operational Presence Dta(3W) Data
+## Accessing Who is Doing What Where - Operational Presence Data
 
 
 Retrieve the latest Operational Presence (Who's doing What, Where) data for a specific country using the `location_code` filter and the country’s ISO3 code. The following example demonstrates how to get data for Mali:
@@ -114,7 +114,7 @@ By tailoring these filters, you can obtain a variety of demographic insights fro
 Each theme within our API is bolstered by associated supporting tables. These tables are essential for understanding the range of possible values you can work with in the theme-specific tables. For example, if you're filtering by sector, such as `sector=Nutrition`, you'll want to know what sectors are available.
 
 
-You can retrieve a list of possible age ranges by querying the `sector` support table like so:
+You can retrieve a list of possible sectors by querying the `sector` support table like so:
 
 
 ```plaintext
@@ -122,7 +122,7 @@ https://hapi.humdata.org/api/v1/metadata/sector?output_format=json&offset=0&limi
 ```
 
 
-This functionality is not limited to age ranges. There are similar support tables for a variety of filters such as organizations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
+This functionality is not limited to sectors. There are similar support tables for a variety of filters such as organizations, genders, currencies, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
 
 
 ## Getting Metadata through API Queries
@@ -154,11 +154,11 @@ When you inspect the JSON output from an initial API query, you'll encounter a v
 Among these fields, ```dataset_hdx_stub``` and ```resource_hdx_id``` are keys to unlocking metadata about the dataset. This metadata includes the last update date, the organization responsible for the data, and links to download the original dataset.
 
 
-To dive deeper into the data's origin, use the resource_hdx_id in the resource endpoint URL:
+To dive deeper into the data's origin, use the `resource_hdx_id` in the resource endpoint URL:
 
 
 ```
-https://hapi.humdata.org/api/v1/metadata/resource?hdx_id=b28928be-1847-408f-b3cd-9b87b596c710&update_date_min=2020-01-01&update_date_max=2024-12-31&output_format=jsonlimit=100&offset=00&app_identifier={your app identifier}
+https://hapi.humdata.org/api/v1/metadata/resource?resource_hdx_id=b28928be-1847-408f-b3cd-9b87b596c710&update_date_min=2020-01-01&update_date_max=2024-12-01&output_format=json&limit=100&offset=0&app_identifier={your app identifier}
 ```
 
 
