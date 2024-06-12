@@ -122,7 +122,7 @@ https://hapi.humdata.org/api/v1/metadata/sector?output_format=json&offset=0&limi
 ```
 
 
-This functionality is not limited to sectors. There are similar support tables for a variety of filters such as organizations, genders, sectors, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
+This functionality is not limited to sectors. There are similar support tables for a variety of filters such as organizations, genders, currencies, and more. Querying these support tables provides you with the necessary information to apply precise filters and extract the data that's most relevant to your needs.
 
 
 ## Getting Metadata through API Queries
