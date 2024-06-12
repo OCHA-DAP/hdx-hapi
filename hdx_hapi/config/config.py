@@ -14,6 +14,8 @@ class Config:
     # HAPI Database configuration
     SQL_ALCHEMY_ASYNCPG_DB_URI: str
     SQL_ALCHEMY_PSYCOPG2_DB_URI: str
+    SQL_ALCHEMY_POOL_SIZE: int
+    SQL_ALCHEMY_POOL_MAX_OVERFLOW: int
 
     HDX_DOMAIN: str
     HDX_DATASET_URL: str
@@ -47,6 +49,8 @@ def get_config() -> Config:
         CONFIG = Config(
             SQL_ALCHEMY_ASYNCPG_DB_URI=sql_alchemy_asyncypg_db_uri,
             SQL_ALCHEMY_PSYCOPG2_DB_URI=sql_alchemy_psycopg2_db_uri,
+            SQL_ALCHEMY_POOL_SIZE=int(os.getenv('SQL_ALCHEMY_POOL_SIZE', 5)),
+            SQL_ALCHEMY_POOL_MAX_OVERFLOW=int(os.getenv('SQL_ALCHEMY_POOL_MAX_OVERFLOW', 0)),
             HDX_DOMAIN=os.getenv('HDX_DOMAIN', 'https://data.humdata.org'),
             HDX_DATASET_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}'),
             HDX_RESOURCE_URL=os.getenv('HDX_DATASET_URL', '{domain}/dataset/{dataset_id}/resource/{resource_id}'),
