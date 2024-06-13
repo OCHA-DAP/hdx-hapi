@@ -34,23 +34,46 @@ at present, and to which administrative level: country, admin 1, or admin 2.
   }
 
   .container {
-	  overflow-x: scroll;
+	  overflow-x: hidden;
+	  overflow-y: scroll;
 	  position: relative;
 	  width: 688px;
 	}
 	.container table {
+		border-collapse: collapse;
 		margin-left: 150px !important;
 	}
 
+	thead tr th:first-child {
+		height: 100%;
+	}
+
+	thead tr:first-child th {
+		background-color: #EEE;
+		border: 1px solid #CCC;
+		border-left: 0;
+	}
+	thead tr:first-child th:first-child {
+		background-color: #FFF;
+    border: 0;
+    border-right: 1px solid #CCC;
+	}
+	thead tr,
+	tbody tr {
+		border-right: 1px solid #CCC;
+	}
+	tbody tr td:first-child {
+		border-left: 1px solid #CCC;
+	}
 
 	tr > th:first-child,
 	tr > td:first-child {
 		background-color: #FFF;
 		border-right: 1px solid #CCC;
-		height: 100%;
 	  left: 0;
 	  position: absolute;
 	  width: 150px !important;
+	  margin-top: -1px;
 	}
 
 	/** overrides **/
@@ -66,8 +89,12 @@ at present, and to which administrative level: country, admin 1, or admin 2.
 		line-height: 16px;
 		vertical-align: bottom;
 	}
+	.md-typeset__scrollwrap {
+		margin: 1em 0 1em -16px;
+	}
 
 </style>
+
 
 <div class='container'>
 	<table>
