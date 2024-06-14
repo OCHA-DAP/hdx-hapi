@@ -30,10 +30,10 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Coordination & Context
 
-- [Who is Doing What Where - Operational Presence](https://hapi.humdata.org/docs#/3W%20Operational%20Presence/get_operational_presences_api_v1_coordination_context_operational_presence_get)
-- [Funding](https://hapi.humdata.org/docs#/Funding/get_fundings_api_v1_coordination_context_funding_get)
-- [Conflict Events](https://hapi.humdata.org/docs#/Conflict%20Events/get_conflict_events_api_v1_coordination_context_conflict_event_get)
-- [National Risk](https://hapi.humdata.org/docs#/National%20Risk/get_national_risks_api_v1_coordination_context_national_risk_get)
+- [Who is Doing What Where - Operational Presence](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presences_api_v1_coordination_context_operational_presence_get)
+- [Funding](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_fundings_api_v1_coordination_context_funding_get)
+- [Conflict Events](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_conflict_events_api_v1_coordination_context_conflict_event_get)
+- [National Risk](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_national_risks_api_v1_coordination_context_national_risk_get)
 
 #### Food Security & Nutrition
 
@@ -42,8 +42,8 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Population & Socio-economy
 
-- [Baseline Population](https://hapi.humdata.org/docs#/Baseline%20Population/get_populations_api_v1_population_social_population_get)
-- [Poverty Rate](https://hapi.humdata.org/docs#/Baseline%20Population/get_poverty_rates_api_v1_population_social_poverty_rate_get)
+- [Baseline Population](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_populations_api_v1_population_social_population_get)
+- [Poverty Rate](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_poverty_rates_api_v1_population_social_poverty_rate_get)
 
 # Terms Of Use
 
