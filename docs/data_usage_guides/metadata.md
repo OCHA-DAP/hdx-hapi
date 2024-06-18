@@ -1,5 +1,7 @@
 # Metadata
 
+---
+
 ## HDX Metadata
 
 All of the data in HDX HAPI comes from publicly-available datasets on HDX, and
@@ -190,7 +192,7 @@ For available query parameters, please see the
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_type_parameters.yaml') }}
 
-### Sector <a id=sector></a>
+### Sector <a id="sector"></a>
 
 **Used in:**
 [`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence),

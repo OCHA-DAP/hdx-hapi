@@ -1,5 +1,7 @@
 # Enums
 
+---
+
 Enums, or enumerations, are a data type used to define a set of named values
 that represent fixed options for a field in the API.
 

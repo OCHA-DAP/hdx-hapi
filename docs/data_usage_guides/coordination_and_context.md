@@ -1,5 +1,7 @@
 # Coordination & Context
 
+---
+
 ## Who is Doing What Where - Operational Presence <a id=”operational-presence”></a>
 
 The [Who is Doing What Where (3W)](https://3w.unocha.org/) is a core
@@ -31,7 +33,7 @@ For available query parameters, please see the
 * Organization deduplication is a long-running challenge with this data, since
   there are no unique identifiers, and organization names may be spelled
   different ways by different OCHA offices, or sometimes even within the same
-  3W. See the [`org`](org) section below for more information on how we handle
+  3W. See the [`org`](metadata.md#org) section below for more information on how we handle
   these details.
 * The sector name strings in the 3W data are normalised and then aligned to the
   [sector](metadata.md#sector) table, using the “sector_map” section of

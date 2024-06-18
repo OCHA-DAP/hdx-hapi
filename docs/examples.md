@@ -57,7 +57,7 @@ ISO3 country code.
         return results
 
 
-    APP_IDENTIFER = { your app identifier }
+    APP_IDENTIFIER = { your app identifier }
     THEME = "coordination-context/operational-presence"
     LOCATION = "AFG"
     BASE_URL = (
@@ -101,17 +101,14 @@ ISO3 country code.
         return results;
     }
 
-    const APP_IDENTIFER = your app identifer here
+    const APP_IDENTIFIER = { your app identifer }
     const THEME = "coordination-context/operational-presence"
     const LOCATION = "AFG"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/${THEME}?
-        output_format=json
-        &location_code=${LOCATION}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/${THEME}?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     const LIMIT = 1000;
-
     window.onload = async function() {
         const results = await fetchData(BASE_URL, LIMIT);
         console.log(results);
@@ -149,15 +146,13 @@ ISO3 country code.
         return results;
     }
 
-    const APP_IDENTIFER = your app identifer here
+    const APP_IDENTIFIER = { your app identifer }
     const THEME = "coordination-context/operational-presence"
     const LOCATION = "AFG"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/${THEME}?
-        output_format=json
-        &location_code=${LOCATION}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/${THEME}?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     const LIMIT = 1000;
 
     fetchData(BASE_URL, LIMIT).then(results => {
@@ -198,7 +193,7 @@ ISO3 country code.
       return(results)
     }
 
-    APP_IDENTIFER <- your app identifier here
+    APP_IDENTIFIER <- { your app identifier }
     THEME <- "coordination-context/operational-presence"
     LOCATION <- "AFG"
     BASE_URL <- paste0(
@@ -243,26 +238,22 @@ Change the code to include a new parameter in the URL.
 
     ```javascript
     const SECTOR = "Emergency Shelter and NFI"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/${THEME}?
-        output_format=json
-        &location_code=${LOCATION}
-        &sector_name=${SECTOR}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/${THEME}?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&sector_name=${SECTOR}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "Node.js"
 
     ```javascript
     const SECTOR = "Emergency Shelter and NFI"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/${THEME}?
-        output_format=json
-        &location_code=${LOCATION}
-        &sector_name=${SECTOR}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/${THEME}?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&sector_name=${SECTOR}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "R"
@@ -297,25 +288,23 @@ Change the code to include a new parameter in the URL.
 
     ```javascript
     const ADMIN1 = "AF01"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/${THEME}?
-        output_format=json
-        &location_code=${LOCATION}
-        &admin1_code=${ADMIN1}
-        &app_identifier=${APP_IDENTIFIER}
-    ````
+    const BASE_URL = `https://hapi.humdata.org/api/v1/${THEME}?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&admin1_code=${ADMIN1}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
+    ```
 
 === "Node.js"
 
     ```javascript
     const ADMIN1 = "AF01"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/${THEME}?
-        output_format=json
-        &location_code=${LOCATION}
-        &admin1_code=${ADMIN1}
-        &app_identifier=${APP_IDENTIFIER}
-    ````
+    const BASE_URL = `https://hapi.humdata.org/api/v1/${THEME}?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&admin1_code=${ADMIN1}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
+    ```
 
 === "R"
 
@@ -333,8 +322,9 @@ Change the code to include a new parameter in the URL.
 ## 3. Filter for admin level
 
 Some sub-categories have data at multiple admin levels. If you don't filter
-for a particular levels you will receive data from both in one call. To filter
-for just admin 1 data, add this parameter to URL:
+for a particular level, you could receive data from multiple levels
+in one call. To filter
+for only admin 1 data, add this parameter to the URL:
 
 ```shell
 &admin_level=1
@@ -359,21 +349,17 @@ base URL for getting of the sector names and codes.
 === "JavaScript"
 
     ```javascript
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/sector?
-        output_format=json
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/sector?` +
+                     `output_format=json` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "Node.js"
 
     ```javascript
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/sector?
-        output_format=json
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/sector?` +
+                     `output_format=json` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "R"
@@ -409,24 +395,20 @@ from the `resource` endpoint
 
     ```javascript
     const RESOURCE_HDX_ID = "562e7757-0683-4d61-87bd-a7c94af2ee38"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/resource?
-        output_format=json
-        &resource_hdx_id=${RESOURCE_HDX_ID}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/resource?` +
+                     `output_format=json` +
+                     `&resource_hdx_id=${RESOURCE_HDX_ID}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "Node.js"
 
     ```javascript
     const RESOURCE_HDX_ID = "562e7757-0683-4d61-87bd-a7c94af2ee38"
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/resource?
-        output_format=json
-        &resource_hdx_id=${RESOURCE_HDX_ID}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/resource?` +
+                     `output_format=json` +
+                     `&resource_hdx_id=${RESOURCE_HDX_ID}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "R"
@@ -461,23 +443,19 @@ example that will retrieve the admin 1 level information for Afghanistan:
 === "JavaScript"
 
     ```javascript
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/admin1?
-        output_format=json
-        &location_code=${LOCATION}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/admin1?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "Node.js"
 
     ```javascript
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/admin1?
-        output_format=json
-        &location_code=${LOCATION}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/admin1?` +
+                     `output_format=json` +
+                     `&location_code=${LOCATION}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "R"
@@ -496,15 +474,13 @@ associated with each admin boundary is not yet available via the API,
 but it can be downloaded from HDX or obtained from the ITOS API service:
 
 ```shell
-https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/\
-locations/{p-code}/versions/current/{format}/{level}
+https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/locations/{p-code}/versions/current/{format}/{level}
 ```
 
 Here is an example of how to get the admin 1 geojson for Afghanistan:
 
 ```shell
-https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/\
-locations/AFG/versions/current/geoJSON/1
+https://apps.itos.uga.edu/codv2api/api/v1/themes/cod-ab/locations/AFG/versions/current/geoJSON/1
 ```
 
 Please see the [full documentation](https://apps.itos.uga.edu/CODV2API/Help)
@@ -531,23 +507,19 @@ CSV to then be used on your computer.
 === "JavaScript"
 
     ```javascript
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/admin1?
-        output_format=csv
-        &location_code=${LOCATION}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/admin1?` +
+                     `output_format=csv` +
+                     `&location_code=${LOCATION}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "Node.js"
 
     ```javascript
-    const BASE_URL = `
-        https://hapi.humdata.org/api/v1/metadata/admin1?
-        output_format=csv
-        &location_code=${LOCATION}
-        &app_identifier=${APP_IDENTIFIER}
-    `;
+    const BASE_URL = `https://hapi.humdata.org/api/v1/metadata/admin1?` +
+                     `output_format=csv` +
+                     `&location_code=${LOCATION}` +
+                     `&app_identifier=${APP_IDENTIFIER}`;
     ```
 
 === "R"
@@ -665,7 +637,7 @@ CSV to then be used on your computer.
             print(f"GeoJSON saved to {filename}")
 
 
-    APP_IDENTIFER = { your app identifier }
+    APP_IDENTIFIER = { your app identifier }
     THEME = "population-social/population"
     LOCATION = "AFG"
     AGE_RANGE = "0-4"
@@ -749,7 +721,7 @@ CSV to then be used on your computer.
     }
 
     # Use the functions
-    APP_IDENTIFER <- your app identifier here
+    APP_IDENTIFIER <- { your app identifier }
     THEME <- "population-social/population"
     LOCATION <- "AFG"
     AGE_RANGE <- "0-4"

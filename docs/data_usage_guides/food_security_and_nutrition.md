@@ -1,5 +1,7 @@
 # Food Security & Nutrition
 
+---
+
 ## Food Security <a id="food-security"></a>
 
 The [IPC Acute Food Insecurity (IPC AFI) classification](https://www.ipcinfo.org/ipcinfo-website/ipc-overview-and-classification-system/ipc-acute-food-insecurity-classification/en/)
