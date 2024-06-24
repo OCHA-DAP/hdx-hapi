@@ -6,16 +6,17 @@ The initial aim of HDX HAPI is to cover all countries that have a
 humanitarian response plan, and all data sub-categories from
 [HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids).
 In the table below we detail the sub-category coverage that we have achieved
-at present, and to which administrative level: country, admin 1, or admin 2.
+at present, and to which administrative level: national, admin 1, or admin 2.
 
 <style>
   .data-cell {
     background-color: #66B0EC; /* HDX sapphire light */;
   }
-.empty-cell {
+  .empty-cell {
     background-color: #EEE;
   }
 
+  /* rotating the national names */
   th.rotate {
     white-space: nowrap;
     vertical-align: bottom;
@@ -23,20 +24,59 @@ at present, and to which administrative level: country, admin 1, or admin 2.
     height: 200px;
   }
   th.rotate > div {
-    transform: translate(20px, 150px) rotate(-45deg);
+    transform: translate(20px, 5px) rotate(-45deg);
     width: 1px;
   }
-  th.rotate > div > span {
-    padding: 0px 0px;
-  }
 
-  th.horizontal {
-    vertical-align: center;
-    text-align: center;
-  }
+/* Only Erika understands this part */
+.container {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  width: 1200px;
+}
+thead tr th:first-child, thead tr th:nth-child(2) {
+  height: 100%;
+}
+thead tr:first-child th {
+  border-left: 0;
+  border-right: 0;
+}
+thead tr:first-child th:first-child, thead tr:first-child th:nth-child(2) {
+  border: 0;
+}
+tr > th:first-child,
+tr > td:first-child,
+tr > th:nth-child(2),
+tr > td:nth-child(2) {
+  background-color: #FFF;
+  left: 0;
+  position: sticky;
+  z-index: 2;
+}
+tr > th:nth-child(2),
+tr > td:nth-child(2) {
+  left: 115px;
+  z-index: 1;
+}
+
+/* overrides */
+.md-typeset table:not([class]) {
+  border: none;
+  display: table;
+}
+.md-typeset table:not([class]) td:not([align]),
+.md-typeset table:not([class]) th:not([align]) {
+  line-height: 16px;
+  vertical-align: bottom;
+}
+.md-typeset__scrollwrap {
+  margin: 1em 0 1em -16px;
+}
 
 </style>
 
+<div class="container">
 <table>
   <thead>
     <tr>
@@ -73,60 +113,60 @@ at present, and to which administrative level: country, admin 1, or admin 2.
     <tr>
       <th>Affected People</th>
       <th>Refugees & POC</th>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
     </tr>
     <tr>
       <th>Affected People</th>
       <th>Humanitarian Needs</th>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country, admin 1</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country, admin 1</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 1</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national, admin 1</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national, admin 1</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 1</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
       <td class="empty-cell"></td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country, admin 2</td>
-      <td class="data-cell">country, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national, admin 2</td>
+      <td class="data-cell">national, admin 2</td>
     </tr>
     <tr>
       <th>Coordination & Context</th>
@@ -139,7 +179,7 @@ at present, and to which administrative level: country, admin 1, or admin 2.
       <td class="data-cell">admin 2</td>
       <td class="empty-cell"></td>
       <td class="empty-cell"></td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
       <td class="data-cell">admin 2</td>
       <td class="data-cell">admin 2</td>
       <td class="data-cell">admin 2</td>
@@ -148,10 +188,10 @@ at present, and to which administrative level: country, admin 1, or admin 2.
       <td class="empty-cell"></td>
       <td class="empty-cell"></td>
       <td class="data-cell">admin 2</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
       <td class="empty-cell"></td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
       <td class="empty-cell"></td>
       <td class="empty-cell"></td>
       <td class="data-cell">admin 2</td>
@@ -160,31 +200,31 @@ at present, and to which administrative level: country, admin 1, or admin 2.
     <tr>
       <th>Coordination & Context</th>
       <th>Funding</th>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
     </tr>
     <tr>
       <th>Coordination & Context</th>
@@ -196,11 +236,11 @@ at present, and to which administrative level: country, admin 1, or admin 2.
       <td class="data-cell">admin 2</td>
       <td class="data-cell">admin 2</td>
       <td class="data-cell">admin 2</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
       <td class="data-cell">admin 2</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
       <td class="data-cell">admin 2</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
       <td class="data-cell">admin 2</td>
       <td class="data-cell">admin 2</td>
       <td class="data-cell">admin 2</td>
@@ -218,31 +258,31 @@ at present, and to which administrative level: country, admin 1, or admin 2.
     <tr>
       <th>Coordination & Context</th>
       <th>National Risk</th>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
     </tr>
     <tr>
       <th>Food Security & Nutrition</th>
@@ -305,60 +345,61 @@ at present, and to which administrative level: country, admin 1, or admin 2.
     <tr>
       <th>Population & Socio-economy</th>
       <th>Population</th>
-      <td class="data-cell">country, admin 1</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1</td>
+      <td class="data-cell">national, admin 1</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1</td>
       <td class="empty-cell"></td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
-      <td class="data-cell">country, admin 1</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1</td>
       <td class="empty-cell"></td>
-      <td class="data-cell">country, admin 1</td>
-      <td class="data-cell">country, admin 1, admin 2</td>
+      <td class="data-cell">national, admin 1</td>
+      <td class="data-cell">national, admin 1, admin 2</td>
       <td class="empty-cell"></td>
     </tr>
     <tr>
       <th>Poppulation & Socio-economy</th>
       <th>Poverty Rate</th>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
-      <td class="data-cell">country</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
+      <td class="data-cell">national</td>
     </tr>
   </tbody>
 </table>
+</div>
