@@ -1,8 +1,3 @@
----
-template: theme-for-coverage-table.html
----
-
-
 # Data Coverage
 
 ---
