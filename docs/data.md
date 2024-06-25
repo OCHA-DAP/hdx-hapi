@@ -11,6 +11,18 @@ at present, and to which administrative level: national (admin 0),
 admin 1, or admin 2.
 
 <style>
+  .admin2 {
+    background-color: #007CE0;
+  }
+  .admin1 {
+    background-color: #66B0EC;
+  }
+  .admin0 {
+    background-color: #CCE5F9;
+  }
+  .empty-cell {
+    background-color: #EEE;
+  }
   table {
     border-collapse: separate;
     width: 100%;
@@ -61,10 +73,14 @@ admin 1, or admin 2.
     border-bottom: 1px solid #CCC;
   }
 
+.container {
+  width: 1200px;
+}
+
   /** overrides **/
 	.md-typeset__table {
 		display: block;
-    height: 200px;
+    height: 800px;
 		margin: 0;
     overflow: auto;
 		padding: 0;
@@ -85,6 +101,7 @@ admin 1, or admin 2.
 	}
 </style>
 
+<div class="container">
   <table>
     <thead>
       <tr>
@@ -102,330 +119,332 @@ admin 1, or admin 2.
       </tr>
     </thead>
     <tbody>
-      <tr>
+           <tr>
         <td class="fixed-col">Afghanistan</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin1">admin 0, 1</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Burkina Faso</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Cameroon</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 1</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin1">admin 0, 1</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin1">admin 0, 1</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Central African Republic</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 1, 2</td>
-        <td class="data-cell">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 1, 2</td>
+        <td class="admin2">admin 2</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Chad</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 1</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 1, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin1">admin 1</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 1, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Colombia</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 1</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin1">admin 0, 1</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Democratic Republic of the Congo</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">El Salvador</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Ethiopia</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Guatemala</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Haiti</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Honduras</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Mali</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Mozambique</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Myanmar</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 1</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin1">admin 0, 1</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Niger</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 1, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 1, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Nigeria</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 1, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 1, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">State of Palestine</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin1">admin 0, 1</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Somalia</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">South Sudan</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Sudan</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin1">admin 0, 1</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Syrian Arab Republic</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
+        <td class="admin2">admin 2</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Ukraine</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0, 1</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin1">admin 0, 1</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Venezuela (Bolivarian Republic of)</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0, 1, 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin2">admin 0, 1, 2</td>
+        <td class="admin0">admin 0</td>
       </tr>
       <tr>
         <td class="fixed-col">Yemen</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 0, 2</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
-        <td class="data-cell">admin 2</td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 0, 2</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
+        <td class="admin2">admin 2</td>
+        <td class="admin0">admin 0</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 2</td>
+        <td class="admin2">admin 2</td>
         <td class="empty-cell"></td>
-        <td class="data-cell">admin 0</td>
+        <td class="admin0">admin 0</td>
       </tr>
+
     </tbody>
   </table>
+</div>
