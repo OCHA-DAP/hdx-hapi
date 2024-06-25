@@ -11,19 +11,21 @@ at present, and to which administrative level: country, admin 1, or admin 2.
 
 <style>
   table {
-    border-collapse: collapse;
+    border-collapse: separate;
     width: 100%;
   }
 
   th, td {
     padding: 8px 12px;
-    border: 1px solid #CCC;
+    border-right: 1px solid #CCC;
     white-space: nowrap;
     min-width: 200px;
   }
 
   thead th {
     background-color: #F2F2F2;
+    border-bottom: 1px solid #CCC;
+    border-top: 1px solid #CCC;
     position: sticky;
     top: 0;
     z-index: 2; 
@@ -31,6 +33,7 @@ at present, and to which administrative level: country, admin 1, or admin 2.
 
   .fixed-col {
     background-color: #F2F2F2;
+    border-left: 1px solid #CCC;
     position: -webkit-sticky; 
     position: sticky;
     left: 0;
@@ -40,6 +43,23 @@ at present, and to which administrative level: country, admin 1, or admin 2.
   tbody .fixed-col {
     z-index: 1;
   }
+
+  tr > td.fixed-col {
+    border-right: 1px solid #CCC;
+  }
+  thead > tr > th.fixed-col {
+  	background-color: #FFF;
+  	border-color: #FFF;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+  }
+  tbody tr:first-child td {
+    border-top: 0 !important;
+  }
+  tbody tr:last-child td {
+    border-bottom: 1px solid #CCC;
+  }
+
 
   /** overrides **/
 	.md-typeset__table {
@@ -56,8 +76,12 @@ at present, and to which administrative level: country, admin 1, or admin 2.
 		overflow: hidden;
 	}
 	.md-typeset table:not([class]) {
+		border: 0;
 		display: unset;
 		overflow: unset;
+	}
+	.md-typeset table:not([class]) td {
+		border-color: #CCC;
 	}
 </style>
 
