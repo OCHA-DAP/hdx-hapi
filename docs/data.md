@@ -21,7 +21,7 @@ admin 1, or admin 2.
     background-color: #CCE5F9;
   }
   .empty-cell {
-    background-color: #EEE;
+    background-color: #FFF;
   }
   table {
     border-collapse: separate;
@@ -29,10 +29,10 @@ admin 1, or admin 2.
   }
 
   th, td {
-    padding: 8px 12px;
     border-right: 1px solid #CCC;
-    white-space: nowrap;
-    min-width: 200px;
+    line-height: 16px;
+    padding: 8px 12px;
+    width: 200px;
   }
 
   thead th {
@@ -47,6 +47,7 @@ admin 1, or admin 2.
   .fixed-col {
     background-color: #F2F2F2;
     border-left: 1px solid #CCC;
+    font-weight: 700;
     position: -webkit-sticky;
     position: sticky;
     left: 0;
@@ -73,10 +74,6 @@ admin 1, or admin 2.
     border-bottom: 1px solid #CCC;
   }
 
-.container {
-  width: 1200px;
-}
-
   /** overrides **/
 	.md-typeset__table {
 		display: block;
@@ -98,353 +95,354 @@ admin 1, or admin 2.
 	}
 	.md-typeset table:not([class]) td {
 		border-color: #CCC;
+		vertical-align: middle;
+	}
+	.md-typeset table:not([class]) th {
+		vertical-align: bottom;
 	}
 </style>
 
-<div class="container">
-  <table>
-    <thead>
-      <tr>
-        <th class="fixed-col"></th>
-	      <th>Refugees & Persons Of Concern</th>
-	      <th>Humanitarian Needs</th>
-	      <th>Who is Doing What Where - Operational Presence</th>
-	      <th>Funding</th>
-	      <th>Conflict Events</th>
-	      <th>National Risk</th>
-	      <th>Food Security</th>
-	      <th>Food Price</th>
-	      <th>Population</th>
-	      <th>Poverty Rate</th>
-      </tr>
-    </thead>
-    <tbody>
-           <tr>
-        <td class="fixed-col">Afghanistan</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Burkina Faso</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Cameroon</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Central African Republic</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 1, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Chad</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin1">admin 1</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 1, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Colombia</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Democratic Republic of the Congo</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">El Salvador</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Ethiopia</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Guatemala</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Haiti</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Honduras</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Mali</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Mozambique</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Myanmar</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Niger</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 1, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Nigeria</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 1, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">State of Palestine</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Somalia</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">South Sudan</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Sudan</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Syrian Arab Republic</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Ukraine</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="admin1">admin 0, 1</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Venezuela (Bolivarian Republic of)</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
-      </tr>
-      <tr>
-        <td class="fixed-col">Yemen</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 0, 2</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="admin2">admin 2</td>
-        <td class="admin0">admin 0</td>
-        <td class="empty-cell"></td>
-        <td class="admin2">admin 2</td>
-        <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
-      </tr>
-
-    </tbody>
-  </table>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th class="fixed-col"></th>
+      <th>Refugees & Persons Of Concern</th>
+      <th>Humanitarian Needs</th>
+      <th>Who is Doing What Where - Operational Presence</th>
+      <th>Funding</th>
+      <th>Conflict Events</th>
+      <th>National Risk</th>
+      <th>Food Security</th>
+      <th>Food Price</th>
+      <th>Population</th>
+      <th>Poverty Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+         <tr>
+      <td class="fixed-col">Afghanistan</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Burkina Faso</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Cameroon</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Central African Republic</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 1, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Chad</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin1">admin 1</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 1, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Colombia</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Democratic Republic of the Congo</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">El Salvador</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Ethiopia</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Guatemala</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Haiti</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Honduras</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Mali</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Mozambique</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Myanmar</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Niger</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 1, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Nigeria</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 1, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">State of Palestine</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Somalia</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">South Sudan</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Sudan</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Syrian Arab Republic</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Ukraine</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="admin1">admin 0, 1</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Venezuela (Bolivarian Republic of)</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 0, 1, 2</td>
+      <td class="admin0">admin 0</td>
+    </tr>
+    <tr>
+      <td class="fixed-col">Yemen</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 0, 2</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="admin2">admin 2</td>
+      <td class="admin0">admin 0</td>
+      <td class="empty-cell"></td>
+      <td class="admin2">admin 2</td>
+      <td class="empty-cell"></td>
+      <td class="admin0">admin 0</td>
+    </tr>
+  </tbody>
+</table>
