@@ -4,7 +4,7 @@ from sqlalchemy import select
 
 from hapi_schema.utils.enums import IPCType, IPCPhase
 
-from hdx_hapi.db.models.views.all_views import FoodSecurityView
+from hdx_hapi.db.models.views.vat_or_view import FoodSecurityView
 from hdx_hapi.db.dao.util.util import (
     ReferencePeriodParameters,
     PaginationParams,

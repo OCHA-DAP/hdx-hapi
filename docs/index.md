@@ -2,9 +2,9 @@
 
 ---
 
-The [HDX Humanitarian API](https://data.humdata.org/hapi)(HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations
+The [HDX Humanitarian API](https://data.humdata.org/hapi) (HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations.
 
-HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts or join our slack channel, send an email to [hdx@un.org](hdx@un.org).
+HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts or join our slack channel, send an email to [hdx@un.org](mailto:hdx@un.org).
 
 The initial scope of HDX HAPI will be the data included in the [HDX Data Grids](https://data.humdata.org/dashboards/overview-of-data-grids). Work is ongoing to add more data.
 
@@ -25,15 +25,15 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Affected People
 
-- [Humanitarian Needs](https://hapi.humdata.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
 - [Refugees & Persons of Concern](https://hapi.humdata.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get)
+- [Humanitarian Needs](https://hapi.humdata.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
 
 #### Coordination & Context
 
-- [Who is Doing What Where - Operational Presence](https://hapi.humdata.org/docs#/3W%20Operational%20Presence/get_operational_presences_api_v1_coordination_context_operational_presence_get)
-- [Funding](https://hapi.humdata.org/docs#/Funding/get_fundings_api_v1_coordination_context_funding_get)
-- [Conflict Events](https://hapi.humdata.org/docs#/Conflict%20Events/get_conflict_events_api_v1_coordination_context_conflict_event_get)
-- [National Risk](https://hapi.humdata.org/docs#/National%20Risk/get_national_risks_api_v1_coordination_context_national_risk_get)
+- [Who is Doing What Where - Operational Presence](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presences_api_v1_coordination_context_operational_presence_get)
+- [Funding](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_fundings_api_v1_coordination_context_funding_get)
+- [Conflict Events](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_conflict_events_api_v1_coordination_context_conflict_event_get)
+- [National Risk](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_national_risks_api_v1_coordination_context_national_risk_get)
 
 #### Food Security & Nutrition
 
@@ -42,8 +42,8 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Population & Socio-economy
 
-- [Baseline Population](https://hapi.humdata.org/docs#/Baseline%20Population/get_populations_api_v1_population_social_population_get)
-- [Poverty Rate](https://hapi.humdata.org/docs#/Baseline%20Population/get_poverty_rates_api_v1_population_social_poverty_rate_get)
+- [Baseline Population](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_populations_api_v1_population_social_population_get)
+- [Poverty Rate](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_poverty_rates_api_v1_population_social_poverty_rate_get)
 
 # Terms Of Use
 

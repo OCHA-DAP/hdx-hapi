@@ -6,7 +6,7 @@ from sqlalchemy import select
 
 from hapi_schema.utils.enums import Gender
 
-from hdx_hapi.db.models.views.all_views import PopulationView
+from hdx_hapi.db.models.views.vat_or_view import PopulationView
 from hdx_hapi.db.dao.util.util import (
     apply_location_admin_filter,
     apply_pagination,
