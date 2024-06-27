@@ -113,8 +113,8 @@ admin 1, or admin 2.
       <th>Conflict Events</th>
       <th>National Risk</th>
       <th>Food Security</th>
-      <th>Food Price</th>
-      <th>Population</th>
+      <th>Food Prices</th>
+      <th>Baseline Population</th>
       <th>Poverty Rate</th>
     </tr>
   </thead>
