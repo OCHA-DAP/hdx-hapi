@@ -364,7 +364,7 @@ admin 1, or admin 2.
         <td class="empty-cell"></td>
         <td class="admin2">admin 2</td>
         <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
+        <td class="empty-cell"></td>
       </tr>
       <tr>
         <td class="fixed-col">South Sudan</td>
@@ -377,7 +377,7 @@ admin 1, or admin 2.
         <td class="empty-cell"></td>
         <td class="admin2">admin 2</td>
         <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
+        <td class="empty-cell"></td>
       </tr>
       <tr>
         <td class="fixed-col">Sudan</td>
@@ -403,7 +403,7 @@ admin 1, or admin 2.
         <td class="empty-cell"></td>
         <td class="admin2">admin 2</td>
         <td class="empty-cell"></td>
-        <td class="admin0">admin 0</td>
+        <td class="empty-cell"></td>
       </tr>
       <tr>
         <td class="fixed-col">Ukraine</td>
@@ -429,7 +429,7 @@ admin 1, or admin 2.
         <td class="empty-cell"></td>
         <td class="empty-cell"></td>
         <td class="admin2">admin 0, 1, 2</td>
-        <td class="admin0">admin 0</td>
+        <td class="empty-cell"></td>
       </tr>
       <tr>
         <td class="fixed-col">Yemen</td>
