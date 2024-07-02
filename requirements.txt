@@ -10,4 +10,4 @@ ua-parser==0.18.0
 alembic~=1.12.00
 psycopg2~=2.9.7
 
--e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@bugfix/field-names-in-vat-tables#egg=hapi-schema
+-e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.8.13#egg=hapi-schema
