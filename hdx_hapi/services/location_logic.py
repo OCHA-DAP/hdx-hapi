@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.location_view_dao import locations_view_list
@@ -8,9 +9,11 @@ async def get_locations_srv(
     pagination_parameters: PaginationParams,
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
-    id: int = None,
-    code: str = None,
-    name: str = None,
+    id: Optional[int] = None,
+    code: Optional[str] = None,
+    name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
 ):
     return await locations_view_list(
         pagination_parameters=pagination_parameters,
@@ -19,4 +22,6 @@ async def get_locations_srv(
         id=id,
         code=code,
         name=name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
     )

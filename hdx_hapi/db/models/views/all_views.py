@@ -241,6 +241,8 @@ class LocationView(Base):
     code: Mapped[str] = column_property(location_view.c.code)
     name: Mapped[str] = column_property(location_view.c.name)
     from_cods: Mapped[bool] = column_property(location_view.c.from_cods)
+    has_hrp: Mapped[bool] = column_property(location_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(location_view.c.in_gho)
     reference_period_start: Mapped[DateTime] = column_property(location_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(location_view.c.reference_period_end)
 
