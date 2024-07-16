@@ -60,7 +60,7 @@ async def get_locations(
     code: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
     name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
-    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
