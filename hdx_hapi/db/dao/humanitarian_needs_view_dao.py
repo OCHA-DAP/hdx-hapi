@@ -30,6 +30,8 @@ async def humanitarian_needs_view_list(
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
     location_ref: Optional[int] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
     admin1_code: Optional[str] = None,
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
@@ -59,6 +61,10 @@ async def humanitarian_needs_view_list(
         query = query.where(HumanitarianNeedsView.population < population_max)
     if sector_name:
         query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
+    if has_hrp:
+        query = query.where(HumanitarianNeedsView.has_hrp == has_hrp)
+    if in_gho:
+        query = query.where(HumanitarianNeedsView.in_gho == in_gho)
 
     query = apply_location_admin_filter(
         query,
@@ -66,6 +72,8 @@ async def humanitarian_needs_view_list(
         location_ref,
         location_code,
         location_name,
+        has_hrp,
+        in_gho,
         admin1_ref,
         admin1_code,
         admin1_name,
