@@ -61,10 +61,6 @@ async def humanitarian_needs_view_list(
         query = query.where(HumanitarianNeedsView.population < population_max)
     if sector_name:
         query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
-    if has_hrp:
-        query = query.where(HumanitarianNeedsView.has_hrp == has_hrp)
-    if in_gho:
-        query = query.where(HumanitarianNeedsView.in_gho == in_gho)
 
     query = apply_location_admin_filter(
         query,
