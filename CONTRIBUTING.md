@@ -75,7 +75,7 @@ To add a new query parameter to an endpoint, and to the response the general str
 has_hrp: Mapped[bool] = column_property(location_view.c.has_hrp)
 in_gho: Mapped[bool] = column_property(location_view.c.in_gho)
 ```
-1. Add lines like this to the router for the endpoint in one of the files in `hdx_hapi/endpoints`:
+2. Add lines like this to the router for the endpoint in one of the files in `hdx_hapi/endpoints`:
 ```python
 has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
 in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
@@ -85,7 +85,7 @@ The new parameters need to be added into the call to the subsequent `get_*_srv` 
 has_hrp=has_hrp,
 in_gho=in_gho,
 ```
-1. The `get_*_srv` function in `hdx_hapi/services/get_*_srv.py` needs to be updated with the new query parameters:
+3. The `get_*_srv` function in `hdx_hapi/services/get_*_srv.py` needs to be updated with the new query parameters:
 ```python
 has_hrp: Optional[bool] = None,
 in_gho: Optional[bool] = None,
@@ -95,7 +95,7 @@ Again the new parameters need to be included in the subsequent call to the next 
 has_hrp: Optional[bool] = None,
 in_gho: Optional[bool] = None,
 ```
-It is the `*_view_list` function in files like `hdx_hapi/db/dao/*_view_dao.py` where queries happen. The new query parameters need to be added to the function signature:
+4. It is the `*_view_list` function in files like `hdx_hapi/db/dao/*_view_dao.py` where queries happen. The new query parameters need to be added to the function signature:
 ```python
 has_hrp: Optional[bool] = None,
 in_gho: Optional[bool] = None,
@@ -108,10 +108,10 @@ if in_gho:
     query = query.where(LocationView.in_gho == in_gho)
 ```
 Actually in this case we do not need to make this explicit conditional statements because the parameters we introduce here are in the `EntityWithLocationAdmin` class and are handled by `apply_location_admin_filter`.
-1. If required, the response model class in files in `hdx_hapi/endpoints/models/` needs updating:
+5. If required, the response model class in files in `hdx_hapi/endpoints/models/` needs updating:
 ```python
 has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
 in_gho: bool =Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
 ```
 Again, because this is a special case where the parameters are in the `HapiModelWithAdmins` class it is not required for these particular parameters.
-1. Finally test fixtures need to be updated in `tests/test_endpoints/endpoint_data.py`, `tests/sample_data/*.sql` and sometimes in the declaration of `Response` classes in the tests themselves.
+6. Finally test fixtures need to be updated in `tests/test_endpoints/endpoint_data.py`, `tests/sample_data/*.sql` and sometimes in the declaration of `Response` classes in the tests themselves.
