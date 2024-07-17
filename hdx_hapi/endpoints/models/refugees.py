@@ -4,6 +4,8 @@ from typing import Optional
 from hdx_hapi.config.doc_snippets import (
     DOC_GENDER,
     DOC_HDX_RESOURCE_ID,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
     DOC_POPULATION_GROUP,
     DOC_AGE_RANGE,
     DOC_REFERENCE_PERIOD_END,
@@ -45,7 +47,12 @@ class RefugeesResponse(HapiBaseModel):
     reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
     origin_location_code: str = Field(max_length=128, description='Location of origin p-code (ISO-3)')
     origin_location_name: str = Field(max_length=512, description='Location of origin name')
+    origin_has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
+    origin_in_gho: bool = Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
+
     asylum_location_code: str = Field(max_length=128, description='Location of asylum p-code (ISO-3)')
     asylum_location_name: str = Field(max_length=512, description='Location of asylum name')
+    asylum_has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
+    asylum_in_gho: bool = Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
 
     model_config = ConfigDict(from_attributes=True)

@@ -18,8 +18,12 @@ async def get_refugees_srv(
     age_range: Optional[str] = None,
     origin_location_code: Optional[str] = None,
     origin_location_name: Optional[str] = None,
+    origin_has_hrp: Optional[bool] = None,
+    origin_in_gho: Optional[bool] = None,
     asylum_location_code: Optional[str] = None,
     asylum_location_name: Optional[str] = None,
+    asylum_has_hrp: Optional[bool] = None,
+    asylum_in_gho: Optional[bool] = None,
 ) -> Sequence[RefugeesView]:
     return await refugees_view_list(
         pagination_parameters=pagination_parameters,
@@ -32,6 +36,10 @@ async def get_refugees_srv(
         age_range=age_range,
         origin_location_code=origin_location_code,
         origin_location_name=origin_location_name,
+        origin_has_hrp=origin_has_hrp,
+        origin_in_gho=origin_in_gho,
         asylum_location_code=asylum_location_code,
         asylum_location_name=asylum_location_name,
+        asylum_has_hrp=asylum_has_hrp,
+        asylum_in_gho=asylum_in_gho,
     )

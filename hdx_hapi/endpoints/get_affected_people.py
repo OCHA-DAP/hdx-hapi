@@ -88,12 +88,16 @@ async def get_refugees(
     origin_location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
+    origin_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    origin_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     asylum_location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
     asylum_location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
+    asylum_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    asylum_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -108,8 +112,12 @@ async def get_refugees(
         age_range=age_range,
         origin_location_code=origin_location_code,
         origin_location_name=origin_location_name,
+        origin_has_hrp=origin_has_hrp,
+        origin_in_gho=origin_in_gho,
         asylum_location_code=asylum_location_code,
         asylum_location_name=asylum_location_name,
+        asylum_has_hrp=asylum_has_hrp,
+        asylum_in_gho=asylum_in_gho,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, RefugeesResponse)
 

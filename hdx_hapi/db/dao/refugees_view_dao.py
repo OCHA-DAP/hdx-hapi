@@ -24,8 +24,12 @@ async def refugees_view_list(
     age_range: Optional[str] = None,
     origin_location_code: Optional[str] = None,
     origin_location_name: Optional[str] = None,
+    origin_has_hrp: Optional[bool] = None,
+    origin_in_gho: Optional[bool] = None,
     asylum_location_code: Optional[str] = None,
     asylum_location_name: Optional[str] = None,
+    asylum_has_hrp: Optional[bool] = None,
+    asylum_in_gho: Optional[bool] = None,
 ):
     query = select(RefugeesView)
 
@@ -47,6 +51,14 @@ async def refugees_view_list(
         query = case_insensitive_filter(query, RefugeesView.asylum_location_code, asylum_location_code)
     if asylum_location_name:
         query = query.where(RefugeesView.asylum_location_name.icontains(asylum_location_name))
+    if origin_has_hrp:
+        query = query.where(RefugeesView.origin_has_hrp == origin_has_hrp)
+    if origin_in_gho:
+        query = query.where(RefugeesView.origin_in_gho == origin_in_gho)
+    if asylum_has_hrp:
+        query = query.where(RefugeesView.asylum_has_hrp == asylum_has_hrp)
+    if asylum_in_gho:
+        query = query.where(RefugeesView.asylum_in_gho == asylum_in_gho)
 
     query = apply_reference_period_filter(query, ref_period_parameters, RefugeesView)
 
