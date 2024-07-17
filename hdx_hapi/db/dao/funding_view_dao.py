@@ -44,6 +44,10 @@ async def funding_view_list(
         query = case_insensitive_filter(query, FundingView.appeal_code, appeal_code)
     if appeal_type:
         query = case_insensitive_filter(query, FundingView.appeal_type, appeal_type)
+    if has_hrp:
+        query = query.where(FundingView.has_hrp == has_hrp)
+    if in_gho:
+        query = query.where(FundingView.in_gho == in_gho)
 
     query = apply_reference_period_filter(query, ref_period_parameters, FundingView)
 

@@ -26,6 +26,8 @@ async def national_risks_view_list(
     coping_capacity_risk_max: Optional[float] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
 ):
     query = select(NationalRiskView)
     if risk_class:
@@ -50,6 +52,11 @@ async def national_risks_view_list(
         query = query.where(NationalRiskView.coping_capacity_risk >= coping_capacity_risk_min)
     if coping_capacity_risk_max:
         query = query.where(NationalRiskView.coping_capacity_risk < coping_capacity_risk_max)
+
+    if has_hrp:
+        query = query.where(NationalRiskView.has_hrp == has_hrp)
+    if in_gho:
+        query = query.where(NationalRiskView.in_gho == in_gho)
 
     # if sector_name:
     # query = query.where(NationalRiskView.sector_name.icontains(sector_name))

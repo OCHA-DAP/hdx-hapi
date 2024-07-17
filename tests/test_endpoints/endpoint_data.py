@@ -406,6 +406,8 @@ endpoint_data = {
             # 'reference_period_end_max': '2025-01-01T00:00:00',
             'location_code': 'fOO',
             'location_name': 'Foolandia',
+            'has_hrp': True,
+            'in_gho': True,
         },
         'expected_fields': [
             'risk_class',
@@ -422,6 +424,8 @@ endpoint_data = {
             'location_code',
             'location_name',
             'location_ref',
+            'has_hrp',
+            'in_gho',
         ],
     },
     '/api/v1/affected-people/humanitarian-needs': {
