@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.food_security_view_dao import food_security_view_list
@@ -13,6 +14,8 @@ async def get_food_security_srv(
     ipc_type: str = None,
     location_code: str = None,
     location_name: str = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
     admin1_name: str = None,
     admin1_code: str = None,
     location_ref: int = None,
@@ -32,6 +35,8 @@ async def get_food_security_srv(
         ipc_type=ipc_type,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_name=admin1_name,
         admin1_code=admin1_code,
         admin1_is_unspecified=admin1_is_unspecified,
