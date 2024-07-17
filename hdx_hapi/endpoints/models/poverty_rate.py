@@ -5,6 +5,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_NAME,
     DOC_HDX_RESOURCE_ID,
     DOC_LOCATION_CODE,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
     DOC_LOCATION_NAME,
     DOC_REFERENCE_PERIOD_END,
     DOC_REFERENCE_PERIOD_START,
@@ -37,6 +39,8 @@ class PovertyRateResponse(HapiBaseModel):
     location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
     location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
+    has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
+    in_gho: bool = Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
     admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
 
     model_config = ConfigDict(from_attributes=True)

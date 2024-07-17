@@ -14,6 +14,8 @@ async def get_poverty_rates_srv(
     mpi_max: Optional[float] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
     admin1_name: Optional[str] = None,
 ) -> Sequence[PovertyRateView]:
     return await poverty_rates_view_list(
@@ -24,5 +26,7 @@ async def get_poverty_rates_srv(
         mpi_max=mpi_max,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_name=admin1_name,
     )
