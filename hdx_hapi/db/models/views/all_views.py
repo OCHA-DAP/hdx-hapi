@@ -420,6 +420,8 @@ class WfpMarketView(Base):
     lon: Mapped[float] = column_property(wfp_market_view.c.lon)
     location_code: Mapped[str] = column_property(wfp_market_view.c.location_code)
     location_name: Mapped[str] = column_property(wfp_market_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(location_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(location_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(wfp_market_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(wfp_market_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(wfp_market_view.c.admin1_is_unspecified)
