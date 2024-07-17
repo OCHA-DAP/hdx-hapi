@@ -4,6 +4,8 @@ from typing import Optional
 from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_LOCATION_CODE,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
     DOC_LOCATION_NAME,
     DOC_LOCATION_REF,
     DOC_REFERENCE_PERIOD_END,
@@ -30,6 +32,8 @@ class FundingResponse(HapiBaseModel):
     location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
     location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
+    has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
+    in_gho: bool = Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
 
     reference_period_start: NaiveDatetime = Field(description=DOC_REFERENCE_PERIOD_START)
     reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)

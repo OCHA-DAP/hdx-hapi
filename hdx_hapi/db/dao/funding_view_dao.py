@@ -24,6 +24,8 @@ async def funding_view_list(
     # location_ref: Optional[int] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
 ) -> Sequence[FundingView]:
     query = select(FundingView)
     if org_acronym:

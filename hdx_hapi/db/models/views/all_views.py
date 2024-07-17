@@ -205,6 +205,8 @@ class FundingView(Base):
     reference_period_end: Mapped[DateTime] = column_property(funding_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(funding_view.c.location_code)
     location_name: Mapped[str] = column_property(funding_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(location_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(location_view.c.in_gho)
 
 
 class HumanitarianNeedsView(Base):
