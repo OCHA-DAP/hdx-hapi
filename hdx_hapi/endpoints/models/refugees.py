@@ -4,8 +4,6 @@ from typing import Optional
 from hdx_hapi.config.doc_snippets import (
     DOC_GENDER,
     DOC_HDX_RESOURCE_ID,
-    DOC_LOCATION_HAS_HRP,
-    DOC_LOCATION_IN_GHO,
     DOC_POPULATION_GROUP,
     DOC_AGE_RANGE,
     DOC_REFERENCE_PERIOD_END,
