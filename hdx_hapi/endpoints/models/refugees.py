@@ -52,7 +52,5 @@ class RefugeesResponse(HapiBaseModel):
 
     asylum_location_code: str = Field(max_length=128, description='Location of asylum p-code (ISO-3)')
     asylum_location_name: str = Field(max_length=512, description='Location of asylum name')
-    asylum_has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
-    asylum_in_gho: bool = Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
 
     model_config = ConfigDict(from_attributes=True)
