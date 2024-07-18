@@ -114,6 +114,8 @@ class ConflictEventView(Base):
     reference_period_end: Mapped[DateTime] = column_property(conflict_event_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(conflict_event_view.c.location_code)
     location_name: Mapped[str] = column_property(conflict_event_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(conflict_event_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(conflict_event_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(conflict_event_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(conflict_event_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(conflict_event_view.c.admin1_is_unspecified)
@@ -160,6 +162,8 @@ class FoodPriceView(Base):
     location_code: Mapped[str] = column_property(food_price_view.c.location_code)
     location_name: Mapped[str] = column_property(food_price_view.c.location_name)
     location_ref: Mapped[int] = column_property(food_price_view.c.location_ref)
+    has_hrp: Mapped[bool] = column_property(food_price_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(food_price_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(food_price_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(food_price_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(food_price_view.c.admin1_is_unspecified)
@@ -181,6 +185,8 @@ class FoodSecurityView(Base):
     reference_period_end: Mapped[DateTime] = column_property(food_security_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(food_security_view.c.location_code)
     location_name: Mapped[str] = column_property(food_security_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(food_security_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(food_security_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(food_security_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(food_security_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(food_security_view.c.admin1_is_unspecified)
@@ -205,6 +211,8 @@ class FundingView(Base):
     reference_period_end: Mapped[DateTime] = column_property(funding_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(funding_view.c.location_code)
     location_name: Mapped[str] = column_property(funding_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(funding_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(funding_view.c.in_gho)
 
 
 class HumanitarianNeedsView(Base):
@@ -226,6 +234,8 @@ class HumanitarianNeedsView(Base):
     location_code: Mapped[str] = column_property(humanitarian_needs_view.c.location_code)
     location_name: Mapped[str] = column_property(humanitarian_needs_view.c.location_name)
     location_ref: Mapped[int] = column_property(humanitarian_needs_view.c.location_ref)
+    has_hrp: Mapped[bool] = column_property(humanitarian_needs_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(humanitarian_needs_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(humanitarian_needs_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(humanitarian_needs_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(humanitarian_needs_view.c.admin1_is_unspecified)
@@ -241,6 +251,8 @@ class LocationView(Base):
     code: Mapped[str] = column_property(location_view.c.code)
     name: Mapped[str] = column_property(location_view.c.name)
     from_cods: Mapped[bool] = column_property(location_view.c.from_cods)
+    has_hrp: Mapped[bool] = column_property(location_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(location_view.c.in_gho)
     reference_period_start: Mapped[DateTime] = column_property(location_view.c.reference_period_start)
     reference_period_end: Mapped[DateTime] = column_property(location_view.c.reference_period_end)
 
@@ -261,6 +273,8 @@ class NationalRiskView(Base):
     reference_period_end: Mapped[DateTime] = column_property(national_risk_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(national_risk_view.c.location_code)
     location_name: Mapped[str] = column_property(national_risk_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(national_risk_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(national_risk_view.c.in_gho)
 
 
 class OperationalPresenceView(Base):
@@ -277,6 +291,8 @@ class OperationalPresenceView(Base):
     sector_name: Mapped[str] = column_property(operational_presence_view.c.sector_name)
     location_code: Mapped[str] = column_property(operational_presence_view.c.location_code)
     location_name: Mapped[str] = column_property(operational_presence_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(operational_presence_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(operational_presence_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(operational_presence_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(operational_presence_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(operational_presence_view.c.admin1_is_unspecified)
@@ -314,6 +330,8 @@ class PopulationView(Base):
     reference_period_end: Mapped[DateTime] = column_property(population_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(population_view.c.location_code)
     location_name: Mapped[str] = column_property(population_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(population_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(population_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(population_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(population_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(population_view.c.admin1_is_unspecified)
@@ -338,6 +356,8 @@ class PovertyRateView(Base):
     reference_period_end: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(poverty_rate_view.c.location_code)
     location_name: Mapped[str] = column_property(poverty_rate_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(poverty_rate_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(poverty_rate_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(poverty_rate_view.c.admin1_code)
     admin1_is_unspecified: Mapped[bool] = column_property(poverty_rate_view.c.admin1_is_unspecified)
     location_ref: Mapped[int] = column_property(poverty_rate_view.c.location_ref)
@@ -358,8 +378,12 @@ class RefugeesView(Base):
     reference_period_end: Mapped[DateTime] = column_property(refugees_view.c.reference_period_end)
     origin_location_code: Mapped[str] = column_property(refugees_view.c.origin_location_code)
     origin_location_name: Mapped[str] = column_property(refugees_view.c.origin_location_name)
+    origin_has_hrp: Mapped[bool] = column_property(refugees_view.c.origin_has_hrp)
+    origin_in_gho: Mapped[bool] = column_property(refugees_view.c.origin_in_gho)
     asylum_location_code: Mapped[str] = column_property(refugees_view.c.asylum_location_code)
     asylum_location_name: Mapped[str] = column_property(refugees_view.c.asylum_location_name)
+    asylum_has_hrp: Mapped[bool] = column_property(refugees_view.c.asylum_has_hrp)
+    asylum_in_gho: Mapped[bool] = column_property(refugees_view.c.asylum_in_gho)
 
 
 class ResourceView(Base):
@@ -400,6 +424,8 @@ class WfpMarketView(Base):
     lon: Mapped[float] = column_property(wfp_market_view.c.lon)
     location_code: Mapped[str] = column_property(wfp_market_view.c.location_code)
     location_name: Mapped[str] = column_property(wfp_market_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(wfp_market_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(wfp_market_view.c.in_gho)
     admin1_code: Mapped[str] = column_property(wfp_market_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(wfp_market_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(wfp_market_view.c.admin1_is_unspecified)

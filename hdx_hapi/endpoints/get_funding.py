@@ -4,7 +4,13 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.config import get_config
-from hdx_hapi.config.doc_snippets import DOC_LOCATION_CODE, DOC_LOCATION_NAME, DOC_SEE_LOC
+from hdx_hapi.config.doc_snippets import (
+    DOC_LOCATION_CODE,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
+    DOC_LOCATION_NAME,
+    DOC_SEE_LOC,
+)
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.funding import FundingResponse
 from hdx_hapi.endpoints.util.util import (
@@ -54,6 +60,8 @@ async def get_fundings(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
+    has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -65,6 +73,8 @@ async def get_fundings(
         appeal_type=appeal_type,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, FundingResponse)
 

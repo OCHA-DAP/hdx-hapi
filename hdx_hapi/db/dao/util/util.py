@@ -44,6 +44,8 @@ class EntityWithLocationAdmin(Protocol):
     location_ref: Mapped[int]
     location_code: Mapped[str]
     location_name: Mapped[str]
+    has_hrp: Mapped[bool]
+    in_gho: Mapped[bool]
     admin1_ref: Mapped[int]
     admin1_code: Mapped[str]
     admin1_name: Mapped[str]
@@ -60,6 +62,8 @@ def apply_location_admin_filter(
     location_ref: Optional[int] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
     admin1_ref: Optional[int] = None,
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
@@ -91,6 +95,10 @@ def apply_location_admin_filter(
         query = query.where(db_class.admin1_is_unspecified == admin1_is_unspecified)
     if admin2_is_unspecified is not None:
         query = query.where(db_class.admin2_is_unspecified == admin2_is_unspecified)
+    if has_hrp:
+        query = query.where(db_class.has_hrp == has_hrp)
+    if in_gho:
+        query = query.where(db_class.in_gho == in_gho)
 
     return query
 

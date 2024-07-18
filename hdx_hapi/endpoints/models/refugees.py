@@ -45,6 +45,7 @@ class RefugeesResponse(HapiBaseModel):
     reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
     origin_location_code: str = Field(max_length=128, description='Location of origin p-code (ISO-3)')
     origin_location_name: str = Field(max_length=512, description='Location of origin name')
+
     asylum_location_code: str = Field(max_length=128, description='Location of asylum p-code (ISO-3)')
     asylum_location_name: str = Field(max_length=512, description='Location of asylum name')
 

@@ -8,6 +8,8 @@ DOC_LOCATION_ID = 'Filter the response by a location (typically a country), usin
 DOC_LOCATION_REF = 'Filter the response by a location (typically a country) reference number.'
 DOC_LOCATION_CODE = 'Filter the response by a location (typically a country). The location codes use the ISO-3 (ISO 3166 alpha-3) codes.'
 DOC_LOCATION_NAME = 'Filter the response by a location (typically a country). The location names are based on the "short name" from the <a href="https://unstats.un.org/unsd/methodology/m49/#fn2">UN M49 Standard</a>.'
+DOC_LOCATION_HAS_HRP = 'Filter the response by the has_hrp flag. The has_hrp flag indicates whether a country has a Humanitarian Response Plan.'
+DOC_LOCATION_IN_GHO = 'Filter the response by the in_gho flag. The in_gho flag indicates whether a country is in the <a href="https://humanitarianaction.info/">Global Humanitarian Overview</a>.'
 DOC_SEE_LOC = 'See the <a href="/docs#/Metadata/get_locations_api_v1_metadata_location_get" target="_blank">location endpoint</a> for details.'
 DOC_ADMIN1_ID = 'Filter the response by 1st subnational administrative division, using the unique identifier (id) from the admin1 table associated with each entry.'
 DOC_ADMIN1_REF = 'Filter the response by the 1st subnational administrative division reference number.'

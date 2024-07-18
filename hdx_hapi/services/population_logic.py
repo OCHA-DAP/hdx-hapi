@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hapi_schema.utils.enums import Gender
@@ -18,6 +19,8 @@ async def get_populations_srv(
     location_ref: int = None,
     location_code: str = None,
     location_name: str = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
     admin1_ref: int = None,
     admin1_name: str = None,
     admin1_code: str = None,
@@ -42,6 +45,8 @@ async def get_populations_srv(
         location_ref=location_ref,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_name=admin1_name,
         admin1_code=admin1_code,
         admin2_ref=admin2_ref,

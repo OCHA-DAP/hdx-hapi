@@ -13,6 +13,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN2_REF,
     DOC_ADMIN2_CODE,
     DOC_ADMIN2_NAME,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
     DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
@@ -70,6 +72,8 @@ async def get_conflict_events(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
+    has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin1_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
@@ -96,6 +100,8 @@ async def get_conflict_events(
         location_ref=location_ref,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_ref=admin1_ref,
         admin1_code=admin1_code,
         admin1_name=admin1_name,

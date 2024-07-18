@@ -23,6 +23,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
     DOC_SEE_ADMIN2,
@@ -86,12 +88,16 @@ async def get_refugees(
     origin_location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
+    origin_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    origin_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     asylum_location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
     ] = None,
     asylum_location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
+    asylum_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    asylum_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -106,8 +112,12 @@ async def get_refugees(
         age_range=age_range,
         origin_location_code=origin_location_code,
         origin_location_name=origin_location_name,
+        origin_has_hrp=origin_has_hrp,
+        origin_in_gho=origin_in_gho,
         asylum_location_code=asylum_location_code,
         asylum_location_name=asylum_location_name,
+        asylum_has_hrp=asylum_has_hrp,
+        asylum_in_gho=asylum_in_gho,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, RefugeesResponse)
 
@@ -147,11 +157,11 @@ async def get_humanitarian_needs(
         Optional[PopulationStatus], Query(max_length=32, description=f'{DOC_POPULATION_STATUS}')
     ] = None,
     population_min: Annotated[
-        int,
+        Optional[int],
         Query(description='Filter the response by a lower bound for the population.'),
     ] = None,
     population_max: Annotated[
-        int, Query(description='Filter the response by a upper bound for the population.')
+        Optional[int], Query(description='Filter the response by a upper bound for the population.')
     ] = None,
     # reference_period_start: Annotated[
     #     NaiveDatetime | date,
@@ -169,6 +179,8 @@ async def get_humanitarian_needs(
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     admin1_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
     ] = None,
@@ -201,6 +213,8 @@ async def get_humanitarian_needs(
         location_code=location_code,
         location_name=location_name,
         location_ref=location_ref,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_code=admin1_code,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
