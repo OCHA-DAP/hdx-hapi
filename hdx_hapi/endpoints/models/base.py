@@ -6,8 +6,6 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_CODE,
     DOC_LOCATION_REF,
     DOC_LOCATION_NAME,
-    DOC_LOCATION_HAS_HRP,
-    DOC_LOCATION_IN_GHO,
     DOC_ADMIN1_REF,
     DOC_ADMIN1_NAME,
     DOC_ADMIN1_CODE,

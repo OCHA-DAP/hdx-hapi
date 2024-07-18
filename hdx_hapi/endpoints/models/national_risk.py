@@ -5,8 +5,6 @@ from typing import Optional
 from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_LOCATION_CODE,
-    DOC_LOCATION_HAS_HRP,
-    DOC_LOCATION_IN_GHO,
     DOC_LOCATION_NAME,
     DOC_REFERENCE_PERIOD_END,
     DOC_REFERENCE_PERIOD_START,
