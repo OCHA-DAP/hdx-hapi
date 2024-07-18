@@ -16,6 +16,7 @@
     Whether the source of the entry is the
     [common operational datasets](https://data.humdata.org/dashboards/cod?)
     (CODs)
+  Source:
 - Parameter: '`location_ref`'
   Description: >
     A reference to the `id` of the associated entry in the `location` table

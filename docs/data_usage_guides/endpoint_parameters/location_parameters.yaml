@@ -15,6 +15,7 @@
     Whether the source of the entry is the
     [common operational datasets](https://data.humdata.org/dashboards/cod?)
     (CODs)
+  Source:
 - Parameter: '`has_hrp`'
   Description: >
     Whether the location has a "Humanitarian Response Plan"
