@@ -504,10 +504,10 @@ endpoint_data = {
             'population',
             'reference_period_start',
             'reference_period_end',
-            'origin_location_code',
             'origin_location_name',
-            'asylum_location_code',
+            'origin_location_code',
             'asylum_location_name',
+            'asylum_location_code',
         ],
     },
     '/api/v1/metadata/resource': {
