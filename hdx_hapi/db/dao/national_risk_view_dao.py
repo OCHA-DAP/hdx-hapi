@@ -53,9 +53,9 @@ async def national_risks_view_list(
     if coping_capacity_risk_max:
         query = query.where(NationalRiskView.coping_capacity_risk < coping_capacity_risk_max)
 
-    if has_hrp:
+    if has_hrp is not None:
         query = query.where(NationalRiskView.has_hrp == has_hrp)
-    if in_gho:
+    if in_gho is not None:
         query = query.where(NationalRiskView.in_gho == in_gho)
 
     # if sector_name:
