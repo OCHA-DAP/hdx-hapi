@@ -21,7 +21,7 @@ async def locations_view_list(
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
 ):
-    logger.info(f'orgs_view_list called with params: code={code}, name={name}')
+    logger.info(f'location_view_list called with params: code={code}, name={name}, has_hrp={has_hrp}, in_gho={in_gho}')
 
     query = select(LocationView)
     if id:
@@ -30,9 +30,9 @@ async def locations_view_list(
         query = case_insensitive_filter(query, LocationView.code, code)
     if name:
         query = query.where(LocationView.name.icontains(name))
-    if has_hrp:
+    if has_hrp is not None:
         query = query.where(LocationView.has_hrp == has_hrp)
-    if in_gho:
+    if in_gho is not None:
         query = query.where(LocationView.in_gho == in_gho)
 
     query = apply_reference_period_filter(query, ref_period_parameters, LocationView)

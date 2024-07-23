@@ -95,9 +95,9 @@ def apply_location_admin_filter(
         query = query.where(db_class.admin1_is_unspecified == admin1_is_unspecified)
     if admin2_is_unspecified is not None:
         query = query.where(db_class.admin2_is_unspecified == admin2_is_unspecified)
-    if has_hrp:
+    if has_hrp is not None:
         query = query.where(db_class.has_hrp == has_hrp)
-    if in_gho:
+    if in_gho is not None:
         query = query.where(db_class.in_gho == in_gho)
 
     return query

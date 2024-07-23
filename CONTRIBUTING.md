@@ -102,9 +102,9 @@ in_gho: Optional[bool] = None,
 ```
 And the relevant query added, for these boolean parameters it is easy:
 ```python
-if has_hrp:
+if has_hrp is not None:
     query = query.where(LocationView.has_hrp == has_hrp)
-if in_gho:
+if in_gho is not None:
     query = query.where(LocationView.in_gho == in_gho)
 ```
 Actually in this case we do not need to make this explicit conditional statements because the parameters we introduce here are in the `EntityWithLocationAdmin` class and are handled by `apply_location_admin_filter`.
