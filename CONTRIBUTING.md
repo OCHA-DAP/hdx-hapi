@@ -102,7 +102,7 @@ in_gho: Optional[bool] = None,
 ```
 And the relevant query added, for these boolean parameters it is easy:
 ```python
-if has_hrp is not None:is not None:
+if has_hrp is not None:
     query = query.where(LocationView.has_hrp == has_hrp)
 if in_gho is not None:
     query = query.where(LocationView.in_gho == in_gho)
