@@ -6,7 +6,9 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_ID,
     DOC_ADMIN2_ID,
     DOC_ADMIN2_REF,
+    DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_ID,
+    DOC_LOCATION_IN_GHO,
     DOC_LOCATION_NAME,
     DOC_LOCATION_CODE,
     DOC_ADMIN1_CODE,
@@ -24,6 +26,8 @@ class LocationResponse(HapiBaseModel):
     id: int = Field(description=truncate_query_description(DOC_LOCATION_ID))
     code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_NAME))
     name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_CODE))
+    has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
+    in_gho: bool = Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
     from_cods: bool
 
     reference_period_start: datetime = Field(description=DOC_REFERENCE_PERIOD_START)

@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -12,6 +12,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_CODE,
     DOC_LOCATION_ID,
     DOC_LOCATION_NAME,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
     DOC_LOCATION_REF,
@@ -54,9 +56,11 @@ async def get_locations(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    id: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
-    code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
+    id: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    code: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE}')] = None,
+    name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
+    has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -67,6 +71,8 @@ async def get_locations(
         id=id,
         code=code,
         name=name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
 

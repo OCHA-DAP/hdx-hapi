@@ -70,9 +70,9 @@ VALUES
 ('PRO-HLP', 'Housing, Land and Property');
 
 -- dummy data
-INSERT INTO location (id, code, name, reference_period_start, reference_period_end, hapi_updated_date)
+INSERT INTO location (id, code, name, has_hrp, in_gho, reference_period_start, reference_period_end, hapi_updated_date)
 VALUES
-(1, 'FOO', 'Foolandia', '2023-01-01 00:00:00', NULL, '2023-01-01 00:00:00');
+(1, 'FOO', 'Foolandia', TRUE, TRUE, '2023-01-01 00:00:00', NULL, '2023-01-01 00:00:00');
 
 -- dummy data
 INSERT INTO admin1 (id, location_ref, code, name, is_unspecified, reference_period_start, reference_period_end, hapi_updated_date)

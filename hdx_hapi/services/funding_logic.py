@@ -18,8 +18,9 @@ async def get_funding_srv(
     # location_ref: Optional[int] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
 ) -> Sequence[FundingView]:
-    
     return await funding_view_list(
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
@@ -31,4 +32,6 @@ async def get_funding_srv(
         sector_name=sector_name,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
     )

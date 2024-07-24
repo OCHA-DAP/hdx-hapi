@@ -9,6 +9,8 @@ from hapi_schema.utils.enums import Gender
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN_LEVEL_FILTER,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
     DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
@@ -74,6 +76,8 @@ async def get_populations(
     location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     admin1_ref: Annotated[int, Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
@@ -98,6 +102,8 @@ async def get_populations(
         location_ref=location_ref,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_name=admin1_name,
         admin1_code=admin1_code,
         admin2_ref=admin2_ref,
@@ -135,6 +141,8 @@ async def get_poverty_rates(
     mpi_max: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), upper bound.')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -147,6 +155,8 @@ async def get_poverty_rates(
         mpi_max=mpi_max,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_name=admin1_name,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, PovertyRateResponse)

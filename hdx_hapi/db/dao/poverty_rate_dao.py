@@ -20,6 +20,8 @@ async def poverty_rates_view_list(
     mpi_max: Optional[float] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
     admin1_name: Optional[str] = None,
 ):
     query = select(PovertyRateView)
@@ -35,6 +37,8 @@ async def poverty_rates_view_list(
         None,
         location_code,
         location_name,
+        has_hrp,
+        in_gho,
         None,
         None,
         admin1_name,

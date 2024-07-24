@@ -12,11 +12,19 @@ docker-compose up -d
 docker-compose exec -T hapi sh -c "apk add git"
 docker-compose exec -T hapi sh -c "pip install --upgrade -r requirements.txt"
 docker-compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
+```
+This makes an editable installation of `hapi-sqlalchemy-schema` inside this repository.
+
+Then for each session the following needs to be run:
+```shell
+cd docker
+docker-compose up -d
 cd ..
 ./initialize_test_db.sh
+./restore_database.sh https://github.com/OCHA-DAP/hapi-pipelines/raw/db-export/database/hapi_db.pg_restore hapi
 ```
 
-This makes an editable installation of `hapi-sqlalchemy-schema` inside this repository.
+
 
 Tests can either be run from the Visual Code test runner or with:
 
@@ -58,3 +66,52 @@ The route is implemented in the `hdx_hapi/endpoints` directory based on a FastAP
 
 Tests are created by adding dictionary entries with `query_parameters` and `expected_fields` to the `tests/endpoint_data.py` file. Three tests are then done in a dedicated test file, one for any response, one for the query parameters and one for the response.
 
+# Add a new parameter to an existing endpoint
+
+To add a new query parameter to an endpoint, and to the response the general strategy is as follows. This description is based on [this](https://github.com/OCHA-DAP/hdx-hapi/pull/184) PR:
+
+1. Add lines like this to the relevant View class in`hdx_hapi/db/models/views/all_views.py`:
+```python
+has_hrp: Mapped[bool] = column_property(location_view.c.has_hrp)
+in_gho: Mapped[bool] = column_property(location_view.c.in_gho)
+```
+2. Add lines like this to the router for the endpoint in one of the files in `hdx_hapi/endpoints`:
+```python
+has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
+```
+The new parameters need to be added into the call to the subsequent `get_*_srv` call:
+```python
+has_hrp=has_hrp,
+in_gho=in_gho,
+```
+3. The `get_*_srv` function in `hdx_hapi/services/get_*_srv.py` needs to be updated with the new query parameters:
+```python
+has_hrp: Optional[bool] = None,
+in_gho: Optional[bool] = None,
+```
+Again the new parameters need to be included in the subsequent call to the next function `*_view_list`:
+```python
+has_hrp: Optional[bool] = None,
+in_gho: Optional[bool] = None,
+```
+4. It is the `*_view_list` function in files like `hdx_hapi/db/dao/*_view_dao.py` where queries happen. The new query parameters need to be added to the function signature:
+```python
+has_hrp: Optional[bool] = None,
+in_gho: Optional[bool] = None,
+```
+And the relevant query added, for these boolean parameters it is easy:
+```python
+if has_hrp is not None:
+    query = query.where(LocationView.has_hrp == has_hrp)
+if in_gho is not None:
+    query = query.where(LocationView.in_gho == in_gho)
+```
+Actually in this case we do not need to make this explicit conditional statements because the parameters we introduce here are in the `EntityWithLocationAdmin` class and are handled by `apply_location_admin_filter`.
+5. If required, the response model class in files in `hdx_hapi/endpoints/models/` needs updating:
+```python
+has_hrp: bool = Field(description=truncate_query_description(DOC_LOCATION_HAS_HRP))
+in_gho: bool =Field(description=truncate_query_description(DOC_LOCATION_IN_GHO))
+```
+Again, because this is a special case where the parameters are in the `HapiModelWithAdmins` class it is not required for these particular parameters.
+6. Finally test fixtures need to be updated in `tests/test_endpoints/endpoint_data.py`, `tests/sample_data/*.sql` and sometimes in the declaration of `Response` classes in the tests themselves.

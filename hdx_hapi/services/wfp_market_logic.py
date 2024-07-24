@@ -14,6 +14,8 @@ async def get_wfp_markets_srv(
     name: Optional[str] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
     admin1_ref: Optional[int] = None,
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
@@ -23,7 +25,6 @@ async def get_wfp_markets_srv(
     admin2_name: Optional[str] = None,
     admin_level: Optional[AdminLevel] = None,
 ) -> Sequence[WfpMarketView]:
-    
     admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
 
     return await wfp_market_view_list(
@@ -34,6 +35,8 @@ async def get_wfp_markets_srv(
         location_ref=location_ref,
         location_code=location_code,
         location_name=location_name,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
         admin1_ref=admin1_ref,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
