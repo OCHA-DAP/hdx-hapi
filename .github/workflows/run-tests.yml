@@ -10,26 +10,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build the docker-compose stack
+      - name: Build the docker compose stack
         run: |
           cd docker
-          docker-compose up -d
+          docker compose up -d
 
       - name: Install requirements
         run: |
           cd docker
-          docker-compose exec -T hapi sh -c "apk add git"
-          docker-compose exec -T hapi sh -c "pip install --upgrade -r requirements.txt"
-          docker-compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
+          docker compose exec -T hapi sh -c "apk add git"
+          docker compose exec -T hapi sh -c "pip install --upgrade -r requirements.txt"
+          docker compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
 
       - name: Setup database
         run: | 
           ./initialize_test_db.sh
+        env:
+          DCOMPOSE: "docker compose"
 
       - name: Test with pytest
         run: |
           cd docker
-          docker-compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report term --cov-report xml:coverage.xml"
+          docker compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report term --cov-report xml:coverage.xml"
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v3
