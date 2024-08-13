@@ -39,6 +39,7 @@ async def datasets_view_list(
         query = query.where(DatasetView.hdx_provider_name.icontains(hdx_provider_name))
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(DatasetView.dataset_hdx_stub.asc())
 
     logger.info(f'Executing SQL query: {query}')
 

@@ -80,6 +80,8 @@ async def populations_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, PopulationView)
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(PopulationView.location_code.asc())
+
     logger.info(f'Executing SQL query: {query}')
 
     result = await db.execute(query)

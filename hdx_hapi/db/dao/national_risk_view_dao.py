@@ -68,6 +68,7 @@ async def national_risks_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, NationalRiskView)
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(NationalRiskView.location_code.asc())
 
     result = await db.execute(query)
     national_risks = result.scalars().all()

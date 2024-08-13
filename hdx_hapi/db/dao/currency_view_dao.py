@@ -22,6 +22,7 @@ async def currencies_view_list(
         query = case_insensitive_filter(query, CurrencyView.code, code)
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(CurrencyView.code.asc())
 
     logger.debug(f'Executing SQL query: {query}')
 

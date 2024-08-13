@@ -32,6 +32,7 @@ async def wfp_commodity_view_list(
         query = query.where(WfpCommodityView.name.icontains(name))
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(WfpCommodityView.code.asc())
 
     result = await db.execute(query)
     wfp_commodities = result.scalars().all()
