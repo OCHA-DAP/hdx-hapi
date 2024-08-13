@@ -61,7 +61,7 @@ async def wfp_market_view_list(
     )
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(WfpMarketView.location_code.asc())
+    query = query.order_by(WfpMarketView.code.asc())
 
     result = await db.execute(query)
     wfp_markets = result.scalars().all()

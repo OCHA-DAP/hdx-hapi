@@ -61,7 +61,7 @@ async def food_security_view_list(
 
     query = apply_reference_period_filter(query, ref_period_parameters, FoodSecurityView)
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(FoodSecurityView.location_code.asc())
+    query = query.order_by(FoodSecurityView.admin2_ref.asc())
 
     result = await db.execute(query)
     food_security = result.scalars().all()

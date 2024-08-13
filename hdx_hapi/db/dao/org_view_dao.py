@@ -35,7 +35,7 @@ async def orgs_view_list(
         query = query.where(OrgView.org_type_description.icontains(org_type_description))
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(OrgView.acronym.asc())
+    query = query.order_by(OrgView.name.asc())
 
     logger.debug(f'Executing SQL query: {query}')
 
