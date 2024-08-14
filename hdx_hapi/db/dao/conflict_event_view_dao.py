@@ -3,7 +3,7 @@ from typing import Optional, Sequence
 
 from hapi_schema.utils.enums import EventType
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, column
+from sqlalchemy import select
 
 from hdx_hapi.db.models.views.vat_or_view import ConflictEventView
 from hdx_hapi.db.dao.util.util import (
