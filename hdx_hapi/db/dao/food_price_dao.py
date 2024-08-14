@@ -85,7 +85,6 @@ async def food_price_view_list(
     )
 
     query = apply_pagination(query, pagination_parameters)
-    # query = query.order_by(FoodPriceView.reference_period_start.asc(), FoodPriceView.admin2_ref.asc())
 
     result = await db.execute(query)
     food_prices = result.scalars().all()

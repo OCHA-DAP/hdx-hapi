@@ -3,7 +3,7 @@ from typing import Optional, Sequence
 
 from hapi_schema.utils.enums import EventType
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, column
 
 from hdx_hapi.db.models.views.vat_or_view import ConflictEventView
 from hdx_hapi.db.dao.util.util import (
@@ -61,7 +61,8 @@ async def conflict_event_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, ConflictEventView)
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(ConflictEventView.location_code.asc())
+
+    query = query.order_by(ConflictEventView.admin2_code.asc(), column('ctid').asc())
 
     logger.debug(f'Executing SQL query: {query}')
 

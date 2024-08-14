@@ -1,8 +1,11 @@
 from typing import Optional, Protocol, Type
-from sqlalchemy import DateTime, Select
+from sqlalchemy import DateTime, Select, column
 from sqlalchemy.orm import Mapped
 
+from hdx_hapi.config.config import get_config
 from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+
+CONFIG = get_config()
 
 
 def apply_pagination(query: Select, pagination_parameters: PaginationParams) -> Select:
@@ -13,6 +16,16 @@ def apply_pagination(query: Select, pagination_parameters: PaginationParams) -> 
     if not limit:
         limit = 1000
 
+    # limit and offset should be used with an order by clause. If we are running View as Table
+    # then we can always use the internal ctid column. However, if we are using views then ctid
+    # does not exist and the order of succesive offset/limit call returns is not guarenteed so
+    # duplicate rows can be introduced
+    # See HDX-10068
+    if CONFIG.HAPI_USE_VAT:
+        query = query.limit(limit).offset(offset).order_by(column('ctid').asc())
+    else:
+        # You're in danger
+        query = query.limit(limit).offset(offset)
     return query.limit(limit).offset(offset)
 
 

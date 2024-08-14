@@ -11,6 +11,7 @@
             "program": "main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
+            "env":{"HAPI_USE_VAT": "false"}
         }
     ],
     

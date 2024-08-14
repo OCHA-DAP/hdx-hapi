@@ -27,7 +27,6 @@ async def sectors_view_list(
         query = query.where(SectorView.name.icontains(name))
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(SectorView.code.asc())
 
     logger.debug(f'Executing SQL query: {query}')
 

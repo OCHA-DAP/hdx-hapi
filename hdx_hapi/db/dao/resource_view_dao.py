@@ -51,7 +51,6 @@ async def resources_view_list(
         query = query.where(ResourceView.dataset_hdx_provider_name == dataset_hdx_provider_name)
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(ResourceView.dataset_hdx_stub.asc())
 
     result = await db.execute(query)
     resources = result.scalars().all()

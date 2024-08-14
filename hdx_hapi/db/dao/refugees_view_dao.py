@@ -63,7 +63,6 @@ async def refugees_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, RefugeesView)
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(RefugeesView.origin_location_code.asc())
 
     result = await db.execute(query)
     refugees = result.scalars().all()

@@ -38,7 +38,6 @@ async def locations_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, LocationView)
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(LocationView.code.asc())
 
     logger.debug(f'Executing SQL query: {query}')
 

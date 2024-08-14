@@ -47,7 +47,6 @@ async def poverty_rates_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, PovertyRateView)
 
     query = apply_pagination(query, pagination_parameters)
-    query = query.order_by(PovertyRateView.location_code.asc())
 
     result = await db.execute(query)
     poverty_rates = result.scalars().all()
