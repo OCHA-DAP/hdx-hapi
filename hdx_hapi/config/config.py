@@ -71,7 +71,7 @@ def get_config() -> Config:
             ),
             HAPI_SERVER_URL=os.getenv('HAPI_SERVER_URL', None),
             HAPI_IDENTIFIER_FILTERING=os.getenv('HAPI_IDENTIFIER_FILTERING', 'True').lower() == 'true',
-            HAPI_USE_VAT=os.getenv('HAPI_USE_VAT', 'True').lower() == 'true',
+            HAPI_USE_VAT=os.getenv('HAPI_USE_VAT', 'False').lower() == 'true',
             MIXPANEL=Mixpanel(mixpanel_token) if mixpanel_token else None,
         )
 

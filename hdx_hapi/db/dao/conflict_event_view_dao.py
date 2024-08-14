@@ -62,8 +62,6 @@ async def conflict_event_view_list(
 
     query = apply_pagination(query, pagination_parameters)
 
-    query = query.order_by(ConflictEventView.admin2_code.asc(), column('ctid').asc())
-
     logger.debug(f'Executing SQL query: {query}')
 
     result = await db.execute(query)
