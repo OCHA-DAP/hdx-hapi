@@ -16,16 +16,6 @@ def apply_pagination(query: Select, pagination_parameters: PaginationParams) -> 
     if not limit:
         limit = 1000
 
-    # limit and offset should be used with an order by clause. If we are running View as Table
-    # then we can always use the internal ctid column. However, if we are using views then ctid
-    # does not exist and the order of succesive offset/limit call returns is not guarenteed so
-    # duplicate rows can be introduced
-    # See HDX-10068
-    if CONFIG.HAPI_USE_VAT:
-        query = query.limit(limit).offset(offset).order_by(column('ctid').asc())
-    else:
-        # You're in danger
-        query = query.limit(limit).offset(offset)
     return query.limit(limit).offset(offset)
 
 

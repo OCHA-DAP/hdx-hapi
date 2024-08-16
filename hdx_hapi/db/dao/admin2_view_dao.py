@@ -56,6 +56,7 @@ async def admin2_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, Admin2View)
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(Admin2View.id)
 
     logger.debug(f'Executing SQL query: {query}')
 
