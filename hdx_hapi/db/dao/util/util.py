@@ -1,5 +1,5 @@
 from typing import Optional, Protocol, Type
-from sqlalchemy import DateTime, Select, column
+from sqlalchemy import DateTime, Select
 from sqlalchemy.orm import Mapped
 
 from hdx_hapi.config.config import get_config
