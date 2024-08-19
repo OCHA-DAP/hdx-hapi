@@ -2,7 +2,10 @@ from typing import Optional, Protocol, Type
 from sqlalchemy import DateTime, Select
 from sqlalchemy.orm import Mapped
 
+from hdx_hapi.config.config import get_config
 from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+
+CONFIG = get_config()
 
 
 def apply_pagination(query: Select, pagination_parameters: PaginationParams) -> Select:
