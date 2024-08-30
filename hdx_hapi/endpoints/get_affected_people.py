@@ -1,6 +1,5 @@
 from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
-# from pydantic import NaiveDatetime
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -163,14 +162,6 @@ async def get_humanitarian_needs(
     population_max: Annotated[
         Optional[int], Query(description='Filter the response by a upper bound for the population.')
     ] = None,
-    # reference_period_start: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description='Reference period start', openapi_examples={'2020-01-01': {'value': '2020-01-01'}}),
-    # ] = None,
-    # reference_period_end: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description='Reference period end', openapi_examples={'2024-12-31': {'value': '2024-12-31'}}),
-    # ] = None,
     sector_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
