@@ -1,9 +1,9 @@
-from datetime import date
+import datetime
 from enum import Enum
 from typing import Annotated, Optional
 
 from fastapi import Depends, Query
-from pydantic import BaseModel, ConfigDict, NaiveDatetime
+from pydantic import BaseModel, ConfigDict
 
 
 _LIMIT_DESCRIPTION = 'Maximum number of records to return. The system will not return more than 10,000 records.'
@@ -50,29 +50,29 @@ async def common_endpoint_parameters(
 
 
 class ReferencePeriodParameters(BaseModel):
-    reference_period_start_min: Optional[NaiveDatetime | date] = None
-    reference_period_start_max: Optional[NaiveDatetime | date] = None
-    reference_period_end_min: Optional[NaiveDatetime | date] = None
-    reference_period_end_max: Optional[NaiveDatetime | date] = None
+    reference_period_start_min: Optional[datetime.datetime | datetime.date] = None
+    reference_period_start_max: Optional[datetime.datetime | datetime.date] = None
+    reference_period_end_min: Optional[datetime.datetime | datetime.date] = None
+    reference_period_end_max: Optional[datetime.datetime | datetime.date] = None
 
     model_config = ConfigDict(frozen=True)
 
 
 async def reference_period_parameters(
     reference_period_start_min: Annotated[
-        NaiveDatetime | date,
+        datetime.datetime | datetime.date,
         Query(description='Min date of reference start date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
     reference_period_start_max: Annotated[
-        NaiveDatetime | date,
+        datetime.datetime | datetime.date,
         Query(description='Max date of reference start date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
     reference_period_end_min: Annotated[
-        NaiveDatetime | date,
+        datetime.datetime | datetime.date,
         Query(description='Min date of reference end date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
     reference_period_end_max: Annotated[
-        NaiveDatetime | date,
+        datetime.datetime | datetime.date,
         Query(description='Max date of reference end date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
 ) -> ReferencePeriodParameters:
