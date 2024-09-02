@@ -1,12 +1,13 @@
 - Attribute: Data provider
-  Details: Food Security and Nutrition Working Group, West and Central Africa
+  Details: >
+    [Integrated Food Security Phase Classification (IPC)](https://www.ipcinfo.org/)
 - Attribute: Dataset
   Details: >
-    [West & Central Africa Food Security Data - Cadre Harmonise (CH) and Integrated Food Security Phase Classification (IPC) dataset](https://data.humdata.org/dataset/cadre-harmonise)
+    [Global: Acute Food Insecurity Country Data](https://data.humdata.org/dataset/global-acute-food-insecurity-country-data)
 - Attribute: Time series
   Details: Yes, with projections
 - Attribute: Update frequency
-  Details: Annually
+  Details: As needed
 - Attribute: Related tables
   Details: >
     [`IPCPhase`](enums.md#ipc-phase), [`IPCType`](enums.md#ipc-type)

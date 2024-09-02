@@ -27,16 +27,12 @@ For available query parameters, please see the
 
 ### Transformations applied
 
-* The table has been reshaped from wide to long: the population and individual
-  IPC phase columns have been cast to a combination of `ipc_phase` and
-  `population_in_phase`
-* The IPC fraction is computed in the HDX HAPI API pipeline, by dividing the
-  population in that phase by the total population (`ipc_phase`="all").
-* The reference period is computed from the “reference_label” and
-  “reference_year” columns in the original data. In the case of a projection,
-  it captures date range that the projection covers, not when the projection
-  was made
-* In the `ipc_type` column, “projected” is converted to “first projection”
+* We have p-coded the source data by taking the admin 1 and 2 names, and using
+  the algorithm provided by
+  [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
+  which uses phonetic name matching and manual overrides
+* Any unmatched p-codes are not included in HDX HAPI. In a future version we
+  plan on keeping rows and including the provider admin names.
 
 ### Usage Notes
 
