@@ -1,5 +1,7 @@
+import datetime
+
 from hapi_schema.utils.enums import RiskClass
-from pydantic import ConfigDict, Field, NaiveDatetime
+from pydantic import ConfigDict, Field
 from typing import Optional
 
 from hdx_hapi.config.doc_snippets import (
@@ -67,8 +69,8 @@ class NationalRiskResponse(HapiBaseModel):
         ),
     )
 
-    reference_period_start: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_START)
-    reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
+    reference_period_start: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_START)
+    reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
 
     # dataset_hdx_stub: str = Field(max_length=128)
     # dataset_hdx_provider_stub: str = Field(max_length=128)

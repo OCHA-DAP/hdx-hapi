@@ -1,5 +1,6 @@
+import datetime
 from typing import Optional
-from pydantic import ConfigDict, Field, NaiveDatetime
+from pydantic import ConfigDict, Field
 from hapi_schema.utils.enums import CommodityCategory, PriceFlag, PriceType
 from hdx_hapi.config.doc_snippets import (
     DOC_PRICE_FLAG,
@@ -31,7 +32,7 @@ class FoodPriceResponse(HapiBaseModel, HapiModelWithAdmins):
     lat: float = Field(ge=-90.0, le=90.0, description="The market's latitude")
     lon: float = Field(ge=-180.0, le=180.0, description="The market's longitude")
 
-    reference_period_start: NaiveDatetime = Field(description=DOC_REFERENCE_PERIOD_START)
-    reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
+    reference_period_start: datetime.datetime = Field(description=DOC_REFERENCE_PERIOD_START)
+    reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
 
     model_config = ConfigDict(from_attributes=True)

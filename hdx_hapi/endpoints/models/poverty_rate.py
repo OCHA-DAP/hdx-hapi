@@ -1,4 +1,5 @@
-from pydantic import ConfigDict, Field, NaiveDatetime
+import datetime
+from pydantic import ConfigDict, Field
 from typing import Optional
 
 from hdx_hapi.config.doc_snippets import (
@@ -31,8 +32,8 @@ class PovertyRateResponse(HapiBaseModel):
     vulnerable_to_poverty: float = Field(description='The percentage of people deprived in 20-33% of indicators')
     in_severe_poverty: float = Field(description='The percentage of people deprived in 50% or more indicators')
 
-    reference_period_start: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_START)
-    reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
+    reference_period_start: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_START)
+    reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
 
     location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))

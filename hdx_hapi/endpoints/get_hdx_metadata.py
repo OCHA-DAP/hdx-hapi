@@ -1,7 +1,8 @@
+import datetime
+
 from datetime import date
 from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
-from pydantic import NaiveDatetime
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -94,11 +95,11 @@ async def get_resources(
     resource_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
     format: Annotated[str, Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
     update_date_min: Annotated[
-        NaiveDatetime | date,
+        datetime.datetime | date,
         Query(description=f'{DOC_UPDATE_DATE_MIN}'),
     ] = None,
     update_date_max: Annotated[
-        NaiveDatetime | date,
+        datetime.datetime | date,
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
     is_hxl: Annotated[bool, Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,

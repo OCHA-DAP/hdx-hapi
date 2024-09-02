@@ -1,5 +1,6 @@
+import datetime
 from typing import Optional, Protocol, Type
-from sqlalchemy import DateTime, Select
+from sqlalchemy import Select
 from sqlalchemy.orm import Mapped
 
 from hdx_hapi.config.config import get_config
@@ -20,8 +21,8 @@ def apply_pagination(query: Select, pagination_parameters: PaginationParams) -> 
 
 
 class EntityWithReferencePeriod(Protocol):
-    reference_period_start: Mapped[DateTime]
-    reference_period_end: Mapped[DateTime]
+    reference_period_start: Mapped[datetime.datetime]
+    reference_period_end: Mapped[datetime.datetime]
 
 
 def apply_reference_period_filter(

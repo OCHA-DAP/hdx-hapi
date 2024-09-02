@@ -124,64 +124,6 @@ async def get_operational_presences(
     admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
     admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
     admin_level: Annotated[AdminLevel, Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
-    # admin2_is_unspecified: Annotated[bool, Query(description='Location Adm2 is not specified')] = None,
-    # resource_update_date_min: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(
-    #         description=(
-    #             'Filter the response to data updated on or after this date. '
-    #             'For example 2020-01-01 or 2020-01-01T00:00:00'
-    #         ),
-    #         openapi_examples={'2020-01-01': {'value': '2020-01-01'}},
-    #     ),
-    # ] = None,
-    # resource_update_date_max: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(
-    #         description=(
-    #             'Filter the response to data updated on or before this date. '
-    #             'For example 2024-12-31 or 2024-12-31T23:59:59'
-    #         ),
-    #         openapi_examples={'2024-12-31': {'value': '2024-12-31'}},
-    #     ),
-    # ] = None,
-    # hapi_updated_date_min: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
-    # ] = None,
-    # hapi_updated_date_max: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
-    # ] = None,
-    # hapi_replaced_date_min: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
-    # ] = None,
-    # hapi_replaced_date_max: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
-    # ] = None,
-    # dataset_hdx_provider_stub: Annotated[
-    #     str,
-    #     Query(
-    #         max_length=128,
-    #         description=(
-    #             'Filter the query by the organizations contributing the source data to HDX. '
-    #             'If you want to filter by the organization mentioned in the operational presence record, '
-    #             'see the org_name and org_acronym parameters below.'
-    #         ),
-    #     ),
-    # ] = None,
-    # org_ref: Annotated[int, Query(ge=1, description='Organization reference')] = None,
-    # dataset_hdx_id: Annotated[str, Query(max_length=36, description='HDX Dataset ID')] = None,
-    # dataset_hdx_stub: Annotated[str, Query(max_length=128, description='HDX Dataset Name')] = None,
-    # dataset_title: Annotated[str, Query(max_length=1024, description='Location name')] = None,
-    # dataset_hdx_provider_name: Annotated[str, Query(max_length=512, description='Location name')] = None,
-    # resource_hdx_id: Annotated[str, Query(max_length=36, description='Location name')] = None,
-    # resource_name: Annotated[str, Query(max_length=256, description='Location name')] = None,
-    # org_type_code: Annotated[str, Query(max_length=32, description='Location name')] = None,
-    # org_type_description: Annotated[str, Query(max_length=512, description='Location name')] = None,
-    # admin1_name: Annotated[str, Query(max_length=512, description='Location Adm1 Name')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None

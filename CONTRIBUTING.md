@@ -21,6 +21,7 @@ cd docker
 docker-compose up -d
 cd ..
 ./initialize_db.sh
+docker-compose exec -T hapi sh -c "alembic upgrade head"
 ./initialize_test_db.sh
 ```
 
@@ -28,7 +29,7 @@ Historically, when hapi used views in the database, a full copy of the hapi data
 ```shell
 ./restore_database.sh https://github.com/OCHA-DAP/hapi-pipelines/raw/db-export/database/hapi_db.pg_restore hapi
 ```
-Since August 2024 a View as Table (VAT) version of the database should be used. This is configured by setting the `HAPI_USE_VAT` environment variable to `"True"`, and then populating the database using the `hdx-hapi-write-app`.
+Since August 2024 a View as Table (VAT) version of the database should be used. This is configured by setting the `HAPI_USE_VAT` environment variable to `"True"`, and then populating the database using the `hdx-hapi-write-app`. 
 
 Tests can either be run from the Visual Code test runner or with:
 
