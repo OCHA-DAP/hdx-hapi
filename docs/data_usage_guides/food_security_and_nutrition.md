@@ -27,12 +27,12 @@ For available query parameters, please see the
 
 ### Transformations applied
 
-* We have p-coded the source data by taking the admin 1 and 2 names, and using
-  the algorithm provided by
-  [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
+* We have p-coded the source data by taking the admin 1 and 2 names,
+  and applying the algorithm from
+  [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/),
   which uses phonetic name matching and manual overrides
-* Any unmatched p-codes are not included in HDX HAPI. In a future version we
-  plan on keeping rows and including the provider admin names.
+* Any unmatched p-codes are not included in HDX HAPI; in a future version we
+  plan on retaining these rows and including the provider admin names
 
 ### Usage Notes
 
