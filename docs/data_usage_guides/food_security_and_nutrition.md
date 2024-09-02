@@ -8,11 +8,6 @@ The [IPC Acute Food Insecurity (IPC AFI) classification](https://www.ipcinfo.org
 provides strategically relevant information to decision makers that focuses on
 short-term objectives to prevent, mitigate or decrease severe food insecurity.
 
-The Beta release of HDX HAPI only contains data from the
-[Cadre Harmonisé](https://www.cadreharmonise.org/en_GB) (CH),
-as it is p-coded and uses the IPC classification system. In
-a future release we will p-code and expand coverage to other IPC datasets.
-
 ### Summary
 
 {{ read_yaml('data_usage_guides/subcategory_details/food_security_details.yaml') }}
@@ -31,7 +26,7 @@ For available query parameters, please see the
   and applying the algorithm from
   [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/),
   which uses phonetic name matching and manual overrides
-* Any unmatched p-codes are not included in HDX HAPI; in a future version we
+* Any unmatched p-codes are not included in HDX HAPI. In a future version we
   plan on retaining these rows and including the provider admin names
 
 ### Usage Notes
