@@ -30,6 +30,9 @@ from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
+
+from hapi_schema.views import view_params_availability
+
 from hapi_schema.utils.enums import (
     CommodityCategory,
     DisabledMarker,
@@ -70,6 +73,8 @@ sector_view = view(view_params_sector.name, Base.metadata, view_params_sector.se
 wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_params_wfp_commodity.selectable)
 wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
 patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
+
+availability_view = view(view_params_availability.name, Base.metadata, view_params_availability.selectable)
 
 
 class Admin1View(Base):
@@ -453,3 +458,16 @@ class PatchView(Base):
     patch_hash: Mapped[str] = column_property(patch_view.c.patch_hash)
     state: Mapped[str] = column_property(patch_view.c.state)
     execution_date: Mapped[datetime.datetime] = column_property(patch_view.c.execution_date)
+
+
+class AvailabilityView(Base):
+    __table__ = availability_view
+    category: Mapped[str] = column_property(availability_view.c.category)
+    subcategory: Mapped[str] = column_property(availability_view.c.subcategory)
+    location_name: Mapped[str] = column_property(availability_view.c.location_name)
+    location_code: Mapped[str] = column_property(availability_view.c.location_code)
+    admin1_name: Mapped[str] = column_property(availability_view.c.admin1_name)
+    admin1_code: Mapped[str] = column_property(availability_view.c.admin1_code)
+    admin2_name: Mapped[str] = column_property(availability_view.c.admin2_name)
+    admin2_code: Mapped[str] = column_property(availability_view.c.admin2_code)
+    hapi_updated_date: Mapped[datetime.datetime] = column_property(availability_view.c.hapi_updated_date)
