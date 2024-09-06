@@ -6,6 +6,7 @@ import datetime
 
 from decimal import Decimal
 from sqlalchemy.orm import column_property, Mapped
+from sqlalchemy.schema import PrimaryKeyConstraint
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
@@ -31,7 +32,7 @@ from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
 
-from hapi_schema.views import view_params_availability
+from hapi_schema.views import prepare_hapi_views
 
 from hapi_schema.utils.enums import (
     CommodityCategory,
@@ -74,7 +75,8 @@ wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_pa
 wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
 patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
 
-availability_view = view(view_params_availability.name, Base.metadata, view_params_availability.selectable)
+availability_view = prepare_hapi_views()
+# availability_view = view(view_params_availability.name, Base.metadata, view_params_availability.selectable)
 
 
 class Admin1View(Base):
