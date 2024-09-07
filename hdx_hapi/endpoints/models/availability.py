@@ -23,7 +23,7 @@ class AvailabilityResponse(HapiBaseModel):
     admin2_code: Optional[str] = Field(max_length=128, description=truncate_query_description(DOC_ADMIN2_CODE))
     admin2_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN2_NAME))
     hapi_updated_date: Optional[datetime.datetime] = Field(
-        description='Date that datasets was last updated, e.g. 2020-01-01 or 2020-01-01T00:00:00'
+        description='Date that dataset was last updated, e.g. 2020-01-01 or 2020-01-01T00:00:00'
     )
 
     model_config = ConfigDict(from_attributes=True)

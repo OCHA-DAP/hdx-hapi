@@ -462,7 +462,19 @@ class PatchView(Base):
 
 class AvailabilityView(Base):
     __table__ = availability_view
-    __mapper_args__ = {'primary_key': [availability_view.c.category]}
+    __mapper_args__ = {
+        'primary_key': [
+            availability_view.c.category,
+            availability_view.c.subcategory,
+            availability_view.c.location_name,
+            availability_view.c.location_code,
+            availability_view.c.admin1_name,
+            availability_view.c.admin1_code,
+            availability_view.c.admin2_name,
+            availability_view.c.admin2_code,
+            availability_view.c.hapi_updated_date,
+        ]
+    }
     category: Mapped[str] = column_property(availability_view.c.category)
     subcategory: Mapped[str] = column_property(availability_view.c.subcategory)
     location_name: Mapped[str] = column_property(availability_view.c.location_name)
