@@ -69,6 +69,31 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
+    '/api/v1/metadata/data-availability': {
+        'query_parameters': {
+            'category': 'coordination-context',
+            'subcategory': 'conflict-event',
+            'location_code': 'FOO',
+            'location_name': 'Foolandia',
+            'admin1_code': 'FOO-001',
+            'admin1_name': 'Province 01',
+            'admin2_code': 'FOO-001-A',
+            'admin2_name': 'District A',
+            'update_date_min': date(2022, 6, 1),
+            'update_date_max': date(2023, 6, 3),
+        },
+        'expected_fields': [
+            'category',
+            'subcategory',
+            'location_code',
+            'location_name',
+            'admin1_code',
+            'admin1_name',
+            'admin2_code',
+            'admin2_name',
+            'hapi_updated_date',
+        ],
+    },
     '/api/v1/metadata/dataset': {
         'query_parameters': {
             'dataset_hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',

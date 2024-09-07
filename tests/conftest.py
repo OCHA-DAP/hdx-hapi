@@ -5,6 +5,7 @@ import logging
 
 
 from logging import Logger
+import sqlalchemy
 from sqlalchemy import Engine, MetaData, create_engine, inspect, text
 from sqlalchemy.orm import sessionmaker, Session
 from typing import List
@@ -30,10 +31,12 @@ from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_currency import view_params_currency
 from hapi_schema.db_food_price import view_params_food_price
+from hapi_schema.views import prepare_hapi_views
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.db.models.base import Base
 from hdx_hapi.db.models.views.util.util import CreateView
+
 
 SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/location_admin.sql',
@@ -94,11 +97,16 @@ def pytest_sessionstart(session):
 
 
 def _create_tables_and_views(engine: Engine):
+    _ = prepare_hapi_views()
     Base.metadata.create_all(engine)
     with engine.connect() as conn:
         for v in VIEW_LIST:
-            conn.execute(CreateView(v.name, v.selectable))
-            conn.commit()
+            print(f'Creating view {v.name}', flush=True)
+            try:
+                conn.execute(CreateView(v.name, v.selectable))
+                conn.commit()
+            except (sqlalchemy.exc.ProgrammingError, sqlalchemy.exc.InternalError):
+                print('..already exists', flush=True)
 
 
 def _drop_tables_and_views(engine: Engine):
