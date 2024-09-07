@@ -6,7 +6,6 @@ import datetime
 
 from decimal import Decimal
 from sqlalchemy.orm import column_property, Mapped
-from sqlalchemy.schema import PrimaryKeyConstraint
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
@@ -76,7 +75,6 @@ wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_w
 patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
 
 availability_view = prepare_hapi_views()
-# availability_view = view(view_params_availability.name, Base.metadata, view_params_availability.selectable)
 
 
 class Admin1View(Base):
@@ -464,6 +462,7 @@ class PatchView(Base):
 
 class AvailabilityView(Base):
     __table__ = availability_view
+    __mapper_args__ = {'primary_key': [availability_view.c.category]}
     category: Mapped[str] = column_property(availability_view.c.category)
     subcategory: Mapped[str] = column_property(availability_view.c.subcategory)
     location_name: Mapped[str] = column_property(availability_view.c.location_name)
