@@ -73,11 +73,11 @@ async def get_data_availability(
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    hapi_update_date_min: Annotated[
+    hapi_updated_date_min: Annotated[
         datetime.datetime | datetime.date,
         Query(description=f'{DOC_UPDATE_DATE_MIN}'),
     ] = None,
-    hapi_update_date_max: Annotated[
+    hapi_updated_date_max: Annotated[
         datetime.datetime | datetime.date,
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
@@ -97,7 +97,7 @@ async def get_data_availability(
         admin1_code=admin1_code,
         admin2_name=admin2_name,
         admin2_code=admin2_code,
-        hapi_update_date_min=hapi_update_date_min,
-        hapi_update_date_max=hapi_update_date_max,
+        hapi_updated_date_min=hapi_updated_date_min,
+        hapi_updated_date_max=hapi_updated_date_max,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, AvailabilityResponse)

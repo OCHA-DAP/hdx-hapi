@@ -22,8 +22,8 @@ async def availability_view_list(
     admin1_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
     admin2_code: Optional[str] = None,
-    hapi_update_date_min: Optional[datetime.datetime] = None,
-    hapi_update_date_max: Optional[datetime.datetime] = None,
+    hapi_updated_date_min: Optional[datetime.datetime] = None,
+    hapi_updated_date_max: Optional[datetime.datetime] = None,
 ):
     logger.info(f'availability_view_list called with params: {locals()}')
 
@@ -45,10 +45,10 @@ async def availability_view_list(
         query = case_insensitive_filter(query, AvailabilityView.admin2_code, admin2_code)
     if admin2_name:
         query = query.where(AvailabilityView.admin2_name.icontains(admin2_name))
-    if hapi_update_date_min:
-        query = query.where(AvailabilityView.hapi_updated_date >= hapi_update_date_min)
-    if hapi_update_date_max:
-        query = query.where(AvailabilityView.hapi_updated_date < hapi_update_date_max)
+    if hapi_updated_date_min:
+        query = query.where(AvailabilityView.hapi_updated_date >= hapi_updated_date_min)
+    if hapi_updated_date_max:
+        query = query.where(AvailabilityView.hapi_updated_date < hapi_updated_date_max)
 
     query = apply_pagination(query, pagination_parameters)
     query = query.order_by(
