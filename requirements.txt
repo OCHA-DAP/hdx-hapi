@@ -8,6 +8,6 @@ mixpanel==4.10.1
 ua-parser==0.18.0
 
 alembic~=1.12.00
-psycopg2~=2.9.7
+psycopg2~=2.9.9
 
 -e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.8.16#egg=hapi-schema
