@@ -3,6 +3,7 @@ import pytest
 import os
 import logging
 
+from hdx.database import Database  # noqa
 
 from logging import Logger
 import sqlalchemy
@@ -107,10 +108,10 @@ def _create_tables_and_views(engine: Engine):
                 conn.commit()
             except (sqlalchemy.exc.ProgrammingError, sqlalchemy.exc.InternalError):
                 print('..already exists', flush=True)
-    try:
-        _ = prepare_hapi_views()
-    except:  # noqa
-        print('prepare_hapi_views failed', flush=True)
+    # try:
+    #     _ = prepare_hapi_views()
+    # except:  # noqa
+    #     print('prepare_hapi_views failed', flush=True)
 
 
 def _drop_tables_and_views(engine: Engine):
