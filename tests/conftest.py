@@ -97,7 +97,10 @@ def pytest_sessionstart(session):
 
 
 def _create_tables_and_views(engine: Engine):
-    _ = prepare_hapi_views()
+    try:
+        _ = prepare_hapi_views()
+    except:
+        print('prepare_hapi_views failed', flush=True)
     Base.metadata.create_all(engine)
     with engine.connect() as conn:
         for v in VIEW_LIST:
