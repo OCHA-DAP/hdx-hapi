@@ -32,8 +32,8 @@ async def test_get_data_availability_params(event_loop, refresh_db):
 
         assert response.status_code == 200
         assert len(response.json()['data']) > 0, (
-            f'There should be at least one data availability entry for parameter "{param_name}" with value "{param_value}" '
-            'in the database'
+            f'There should be at least one data availability entry for parameter "{param_name}" '
+            f'with value "{param_value}" in the database'
         )
 
     async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
