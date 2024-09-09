@@ -23,7 +23,8 @@ jobs:
           docker compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
 
       - name: Setup database
-        run: | 
+        run: |
+          ./initialize_db.sh 
           ./initialize_test_db.sh
         env:
           DCOMPOSE: "docker compose"
