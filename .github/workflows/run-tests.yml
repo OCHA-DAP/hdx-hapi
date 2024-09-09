@@ -24,7 +24,6 @@ jobs:
 
       - name: Setup database
         run: |
-          ./initialize_db.sh 
           ./initialize_test_db.sh
         env:
           DCOMPOSE: "docker compose"
