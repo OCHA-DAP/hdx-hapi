@@ -97,10 +97,6 @@ def pytest_sessionstart(session):
 
 
 def _create_tables_and_views(engine: Engine):
-    try:
-        _ = prepare_hapi_views()
-    except:  # noqa
-        print('prepare_hapi_views failed', flush=True)
     Base.metadata.create_all(engine)
     with engine.connect() as conn:
         for v in VIEW_LIST:
@@ -110,6 +106,10 @@ def _create_tables_and_views(engine: Engine):
                 conn.commit()
             except (sqlalchemy.exc.ProgrammingError, sqlalchemy.exc.InternalError):
                 print('..already exists', flush=True)
+    try:
+        _ = prepare_hapi_views()
+    except:  # noqa
+        print('prepare_hapi_views failed', flush=True)
 
 
 def _drop_tables_and_views(engine: Engine):
