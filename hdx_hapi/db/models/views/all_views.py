@@ -5,33 +5,35 @@ This code was generated automatically using src/hapi_schema/utils/hapi_views_cod
 import datetime
 
 from decimal import Decimal
+from hapi_schema.utils.view_params import ViewParams
+from sqlalchemy import union_all
 from sqlalchemy.orm import column_property, Mapped
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
 from hapi_schema.db_admin2 import view_params_admin2
-from hapi_schema.db_conflict_event import view_params_conflict_event
+from hapi_schema.db_conflict_event import view_params_conflict_event, availability_stmt_conflict_event
 from hapi_schema.db_currency import view_params_currency
 from hapi_schema.db_dataset import view_params_dataset
-from hapi_schema.db_food_price import view_params_food_price
-from hapi_schema.db_food_security import view_params_food_security
-from hapi_schema.db_funding import view_params_funding
-from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs
+from hapi_schema.db_food_price import view_params_food_price, availability_stmt_food_price
+from hapi_schema.db_food_security import view_params_food_security, availability_stmt_food_security
+from hapi_schema.db_funding import view_params_funding, availability_stmt_funding
+from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs, availability_stmt_humanitarian_needs
 from hapi_schema.db_location import view_params_location
-from hapi_schema.db_national_risk import view_params_national_risk
-from hapi_schema.db_operational_presence import view_params_operational_presence
+from hapi_schema.db_national_risk import view_params_national_risk, availability_stmt_national_risk
+from hapi_schema.db_operational_presence import view_params_operational_presence, availability_stmt_operational_presence
 from hapi_schema.db_org_type import view_params_org_type
 from hapi_schema.db_org import view_params_org
-from hapi_schema.db_population import view_params_population
-from hapi_schema.db_poverty_rate import view_params_poverty_rate
-from hapi_schema.db_refugees import view_params_refugees
+from hapi_schema.db_population import view_params_population, availability_stmt_population
+from hapi_schema.db_poverty_rate import view_params_poverty_rate, availability_stmt_poverty_rate
+from hapi_schema.db_refugees import view_params_refugees, availability_stmt_refugees
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
-
-from hapi_schema.views import prepare_hapi_views
+from hapi_schema.db_returnees import availability_stmt_returnees
+from hapi_schema.db_idps import availability_stmt_idps
 
 from hapi_schema.utils.enums import (
     CommodityCategory,
@@ -46,6 +48,54 @@ from hapi_schema.utils.enums import (
     RiskClass,
     Gender,
 )
+
+def create_view_params_availability() -> ViewParams:
+    availability_stmts = [
+        availability_stmt_conflict_event,
+        availability_stmt_food_price,
+        availability_stmt_food_security,
+        availability_stmt_funding,
+        availability_stmt_humanitarian_needs,
+        availability_stmt_national_risk,
+        availability_stmt_operational_presence,
+        availability_stmt_population,
+        availability_stmt_poverty_rate,
+        availability_stmt_refugees,
+        availability_stmt_returnees,
+        availability_stmt_idps,
+    ]
+    return ViewParams(
+        name='data_availability_view',
+        metadata=Base.metadata,
+        selectable=union_all(*availability_stmts),
+    )
+
+view_params_availability = create_view_params_availability()
+
+VIEW_LIST = [
+    view_params_admin1,
+    view_params_admin2,
+    view_params_location,
+    view_params_dataset,
+    view_params_food_security,
+    view_params_funding,
+    view_params_humanitarian_needs,
+    view_params_national_risk,
+    view_params_operational_presence,
+    view_params_org_type,
+    view_params_org,
+    view_params_population,
+    view_params_refugees,
+    view_params_resource,
+    view_params_sector,
+    view_params_conflict_event,
+    view_params_poverty_rate,
+    view_params_wfp_commodity,
+    view_params_wfp_market,
+    view_params_currency,
+    view_params_food_price,
+    view_params_availability,
+]
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
 admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
@@ -74,7 +124,7 @@ wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_pa
 wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
 patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
 
-availability_view = prepare_hapi_views()
+availability_view = view(view_params_availability.name, Base.metadata, view_params_availability.selectable)
 
 
 class Admin1View(Base):
