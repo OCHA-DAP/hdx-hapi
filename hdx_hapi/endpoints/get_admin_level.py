@@ -99,22 +99,6 @@ async def get_admin1(
     location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
-    # hapi_updated_date_min: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
-    # ] = None,
-    # hapi_updated_date_max: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
-    # ] = None,
-    # hapi_replaced_date_min: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
-    # ] = None,
-    # hapi_replaced_date_max: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
-    # ] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
     location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -157,22 +141,6 @@ async def get_admin2(
     location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
     code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
     name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
-    # hapi_updated_date_min: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MIN}'),
-    # ] = None,
-    # hapi_updated_date_max: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_UPDATED_DATE_MAX}'),
-    # ] = None,
-    # hapi_replaced_date_min: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MIN}'),
-    # ] = None,
-    # hapi_replaced_date_max: Annotated[
-    #     NaiveDatetime | date,
-    #     Query(description=f'{DOC_HAPI_REPLACED_DATE_MAX}'),
-    # ] = None,
     admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
     admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
     location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,

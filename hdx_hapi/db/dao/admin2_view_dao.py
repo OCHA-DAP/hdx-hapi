@@ -1,5 +1,5 @@
 import logging
-
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -15,15 +15,15 @@ async def admin2_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
-    id: int = None,
-    admin1_ref: int = None,
-    location_ref: int = None,
-    code: str = None,
-    name: str = None,
-    admin1_code: str = None,
-    admin1_name: str = None,
-    location_code: str = None,
-    location_name: str = None,
+    id: Optional[int] = None,
+    admin1_ref: Optional[int] = None,
+    location_ref: Optional[int] = None,
+    code: Optional[str] = None,
+    name: Optional[str] = None,
+    admin1_code: Optional[str] = None,
+    admin1_name: Optional[str] = None,
+    location_code: Optional[str] = None,
+    location_name: Optional[str] = None,
 ):
     logger.info(
         f'admin2_view_list called with params: code={code}, name={name}, admin1_code={admin1_code}, '
@@ -56,6 +56,7 @@ async def admin2_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, Admin2View)
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(Admin2View.id)
 
     logger.debug(f'Executing SQL query: {query}')
 

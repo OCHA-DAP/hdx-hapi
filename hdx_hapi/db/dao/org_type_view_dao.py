@@ -1,5 +1,6 @@
 import logging
 
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -13,8 +14,8 @@ logger = logging.getLogger(__name__)
 async def org_types_view_list(
     pagination_parameters: PaginationParams,
     db: AsyncSession,
-    code: str = None,
-    description: str = None,
+    code: Optional[str] = None,
+    description: Optional[str] = None,
 ):
     logger.info(f'org_types_view_list called with params: code={code}, description={description}')
 
@@ -25,6 +26,7 @@ async def org_types_view_list(
         query = query.where(OrgTypeView.description.icontains(description))
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(OrgTypeView.code)
 
     logger.debug(f'Executing SQL query: {query}')
 

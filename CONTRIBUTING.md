@@ -20,11 +20,16 @@ Then for each session the following needs to be run:
 cd docker
 docker-compose up -d
 cd ..
+./initialize_db.sh
+docker-compose exec -T hapi sh -c "alembic upgrade head"
 ./initialize_test_db.sh
-./restore_database.sh https://github.com/OCHA-DAP/hapi-pipelines/raw/db-export/database/hapi_db.pg_restore hapi
 ```
 
-
+Historically, when hapi used views in the database, a full copy of the hapi database could be populated using a commandline like:
+```shell
+./restore_database.sh https://github.com/OCHA-DAP/hapi-pipelines/raw/db-export/database/hapi_db.pg_restore hapi
+```
+Since August 2024 a View as Table (VAT) version of the database should be used. This is configured by setting the `HAPI_USE_VAT` environment variable to `"True"`, and then populating the database using the `hdx-hapi-write-app`. 
 
 Tests can either be run from the Visual Code test runner or with:
 
@@ -40,7 +45,7 @@ A local copy of HDX HAPI can be run by importing a snapshot of the database usin
  ./restore_database.sh https://github.com/OCHA-DAP/hapi-pipelines/raw/db-export/database/hapi_db.pg_restore hapi
 ```
 
-The HDX HAPI application can then be launched using the `start` launch configuration in Visual Code, this serves the documentation at `http://localhost:8844/docs` and the API at `http://localhost:8844/api` in the host machine.
+The HDX HAPI application can then be launched using the `start` launch configuration in Visual Code, this serves the documentation at `http://localhost:8844/docs` and the API at `http://localhost:8844/api` in the host machine. It is best to use `Run->Run without debugging` to launch for performance reasons.
 
 The HDX HAPI database can be accessed locally with the following connection details: 
 

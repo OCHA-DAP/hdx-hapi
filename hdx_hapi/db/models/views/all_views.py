@@ -2,33 +2,39 @@
 This code was generated automatically using src/hapi_schema/utils/hapi_views_code_generator.py
 """
 
+import datetime
+
 from decimal import Decimal
-from sqlalchemy import DateTime
+from hapi_schema.utils.view_params import ViewParams
+from sqlalchemy import union_all
 from sqlalchemy.orm import column_property, Mapped
 from hdx_hapi.db.models.views.util.util import view
 from hdx_hapi.db.models.base import Base
 from hapi_schema.db_admin1 import view_params_admin1
 from hapi_schema.db_admin2 import view_params_admin2
-from hapi_schema.db_conflict_event import view_params_conflict_event
+from hapi_schema.db_conflict_event import view_params_conflict_event, availability_stmt_conflict_event
 from hapi_schema.db_currency import view_params_currency
 from hapi_schema.db_dataset import view_params_dataset
-from hapi_schema.db_food_price import view_params_food_price
-from hapi_schema.db_food_security import view_params_food_security
-from hapi_schema.db_funding import view_params_funding
-from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs
+from hapi_schema.db_food_price import view_params_food_price, availability_stmt_food_price
+from hapi_schema.db_food_security import view_params_food_security, availability_stmt_food_security
+from hapi_schema.db_funding import view_params_funding, availability_stmt_funding
+from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs, availability_stmt_humanitarian_needs
 from hapi_schema.db_location import view_params_location
-from hapi_schema.db_national_risk import view_params_national_risk
-from hapi_schema.db_operational_presence import view_params_operational_presence
+from hapi_schema.db_national_risk import view_params_national_risk, availability_stmt_national_risk
+from hapi_schema.db_operational_presence import view_params_operational_presence, availability_stmt_operational_presence
 from hapi_schema.db_org_type import view_params_org_type
 from hapi_schema.db_org import view_params_org
-from hapi_schema.db_population import view_params_population
-from hapi_schema.db_poverty_rate import view_params_poverty_rate
-from hapi_schema.db_refugees import view_params_refugees
+from hapi_schema.db_population import view_params_population, availability_stmt_population
+from hapi_schema.db_poverty_rate import view_params_poverty_rate, availability_stmt_poverty_rate
+from hapi_schema.db_refugees import view_params_refugees, availability_stmt_refugees
 from hapi_schema.db_resource import view_params_resource
 from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
+from hapi_schema.db_returnees import availability_stmt_returnees
+from hapi_schema.db_idps import availability_stmt_idps
+
 from hapi_schema.utils.enums import (
     CommodityCategory,
     DisabledMarker,
@@ -42,6 +48,54 @@ from hapi_schema.utils.enums import (
     RiskClass,
     Gender,
 )
+
+def create_view_params_availability() -> ViewParams:
+    availability_stmts = [
+        availability_stmt_conflict_event,
+        availability_stmt_food_price,
+        availability_stmt_food_security,
+        availability_stmt_funding,
+        availability_stmt_humanitarian_needs,
+        availability_stmt_national_risk,
+        availability_stmt_operational_presence,
+        availability_stmt_population,
+        availability_stmt_poverty_rate,
+        availability_stmt_refugees,
+        availability_stmt_returnees,
+        availability_stmt_idps,
+    ]
+    return ViewParams(
+        name='data_availability_view',
+        metadata=Base.metadata,
+        selectable=union_all(*availability_stmts),
+    )
+
+view_params_availability = create_view_params_availability()
+
+VIEW_LIST = [
+    view_params_admin1,
+    view_params_admin2,
+    view_params_location,
+    view_params_dataset,
+    view_params_food_security,
+    view_params_funding,
+    view_params_humanitarian_needs,
+    view_params_national_risk,
+    view_params_operational_presence,
+    view_params_org_type,
+    view_params_org,
+    view_params_population,
+    view_params_refugees,
+    view_params_resource,
+    view_params_sector,
+    view_params_conflict_event,
+    view_params_poverty_rate,
+    view_params_wfp_commodity,
+    view_params_wfp_market,
+    view_params_currency,
+    view_params_food_price,
+    view_params_availability,
+]
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
 admin2_view = view(view_params_admin2.name, Base.metadata, view_params_admin2.selectable)
@@ -70,6 +124,8 @@ wfp_commodity_view = view(view_params_wfp_commodity.name, Base.metadata, view_pa
 wfp_market_view = view(view_params_wfp_market.name, Base.metadata, view_params_wfp_market.selectable)
 patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selectable)
 
+availability_view = view(view_params_availability.name, Base.metadata, view_params_availability.selectable)
+
 
 class Admin1View(Base):
     __table__ = admin1_view
@@ -79,8 +135,8 @@ class Admin1View(Base):
     name: Mapped[str] = column_property(admin1_view.c.name)
     is_unspecified: Mapped[bool] = column_property(admin1_view.c.is_unspecified)
     from_cods: Mapped[bool] = column_property(admin1_view.c.from_cods)
-    reference_period_start: Mapped[DateTime] = column_property(admin1_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(admin1_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(admin1_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(admin1_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(admin1_view.c.location_code)
     location_name: Mapped[str] = column_property(admin1_view.c.location_name)
 
@@ -93,8 +149,8 @@ class Admin2View(Base):
     name: Mapped[str] = column_property(admin2_view.c.name)
     is_unspecified: Mapped[bool] = column_property(admin2_view.c.is_unspecified)
     from_cods: Mapped[bool] = column_property(admin2_view.c.from_cods)
-    reference_period_start: Mapped[DateTime] = column_property(admin2_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(admin2_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(admin2_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(admin2_view.c.reference_period_end)
     admin1_code: Mapped[str] = column_property(admin2_view.c.admin1_code)
     admin1_name: Mapped[str] = column_property(admin2_view.c.admin1_name)
     admin1_is_unspecified: Mapped[bool] = column_property(admin2_view.c.admin1_is_unspecified)
@@ -110,8 +166,8 @@ class ConflictEventView(Base):
     event_type: Mapped[EventType] = column_property(conflict_event_view.c.event_type)
     events: Mapped[int] = column_property(conflict_event_view.c.events)
     fatalities: Mapped[int] = column_property(conflict_event_view.c.fatalities)
-    reference_period_start: Mapped[DateTime] = column_property(conflict_event_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(conflict_event_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(conflict_event_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(conflict_event_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(conflict_event_view.c.location_code)
     location_name: Mapped[str] = column_property(conflict_event_view.c.location_name)
     has_hrp: Mapped[bool] = column_property(conflict_event_view.c.has_hrp)
@@ -151,8 +207,8 @@ class FoodPriceView(Base):
     price_flag: Mapped[PriceFlag] = column_property(food_price_view.c.price_flag)
     price_type: Mapped[PriceType] = column_property(food_price_view.c.price_type)
     price: Mapped[Decimal] = column_property(food_price_view.c.price)
-    reference_period_start: Mapped[DateTime] = column_property(food_price_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(food_price_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(food_price_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(food_price_view.c.reference_period_end)
     admin2_ref: Mapped[int] = column_property(food_price_view.c.admin2_ref)
     market_name: Mapped[str] = column_property(food_price_view.c.market_name)
     lat: Mapped[float] = column_property(food_price_view.c.lat)
@@ -181,8 +237,8 @@ class FoodSecurityView(Base):
     ipc_type: Mapped[IPCType] = column_property(food_security_view.c.ipc_type)
     population_in_phase: Mapped[int] = column_property(food_security_view.c.population_in_phase)
     population_fraction_in_phase: Mapped[float] = column_property(food_security_view.c.population_fraction_in_phase)
-    reference_period_start: Mapped[DateTime] = column_property(food_security_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(food_security_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(food_security_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(food_security_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(food_security_view.c.location_code)
     location_name: Mapped[str] = column_property(food_security_view.c.location_name)
     has_hrp: Mapped[bool] = column_property(food_security_view.c.has_hrp)
@@ -207,8 +263,8 @@ class FundingView(Base):
     requirements_usd: Mapped[Decimal] = column_property(funding_view.c.requirements_usd)
     funding_usd: Mapped[Decimal] = column_property(funding_view.c.funding_usd)
     funding_pct: Mapped[Decimal] = column_property(funding_view.c.funding_pct)
-    reference_period_start: Mapped[DateTime] = column_property(funding_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(funding_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(funding_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(funding_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(funding_view.c.location_code)
     location_name: Mapped[str] = column_property(funding_view.c.location_name)
     has_hrp: Mapped[bool] = column_property(funding_view.c.has_hrp)
@@ -228,8 +284,10 @@ class HumanitarianNeedsView(Base):
     population_status: Mapped[PopulationStatus] = column_property(humanitarian_needs_view.c.population_status)
     disabled_marker: Mapped[DisabledMarker] = column_property(humanitarian_needs_view.c.disabled_marker)
     population: Mapped[int] = column_property(humanitarian_needs_view.c.population)
-    reference_period_start: Mapped[DateTime] = column_property(humanitarian_needs_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(humanitarian_needs_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(
+        humanitarian_needs_view.c.reference_period_start
+    )
+    reference_period_end: Mapped[datetime.datetime] = column_property(humanitarian_needs_view.c.reference_period_end)
     sector_name: Mapped[str] = column_property(humanitarian_needs_view.c.sector_name)
     location_code: Mapped[str] = column_property(humanitarian_needs_view.c.location_code)
     location_name: Mapped[str] = column_property(humanitarian_needs_view.c.location_name)
@@ -253,8 +311,8 @@ class LocationView(Base):
     from_cods: Mapped[bool] = column_property(location_view.c.from_cods)
     has_hrp: Mapped[bool] = column_property(location_view.c.has_hrp)
     in_gho: Mapped[bool] = column_property(location_view.c.in_gho)
-    reference_period_start: Mapped[DateTime] = column_property(location_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(location_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(location_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(location_view.c.reference_period_end)
 
 
 class NationalRiskView(Base):
@@ -269,8 +327,8 @@ class NationalRiskView(Base):
     coping_capacity_risk: Mapped[float] = column_property(national_risk_view.c.coping_capacity_risk)
     meta_missing_indicators_pct: Mapped[float] = column_property(national_risk_view.c.meta_missing_indicators_pct)
     meta_avg_recentness_years: Mapped[float] = column_property(national_risk_view.c.meta_avg_recentness_years)
-    reference_period_start: Mapped[DateTime] = column_property(national_risk_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(national_risk_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(national_risk_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(national_risk_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(national_risk_view.c.location_code)
     location_name: Mapped[str] = column_property(national_risk_view.c.location_name)
     has_hrp: Mapped[bool] = column_property(national_risk_view.c.has_hrp)
@@ -284,8 +342,10 @@ class OperationalPresenceView(Base):
     org_acronym: Mapped[str] = column_property(operational_presence_view.c.org_acronym)
     org_name: Mapped[str] = column_property(operational_presence_view.c.org_name)
     sector_code: Mapped[str] = column_property(operational_presence_view.c.sector_code)
-    reference_period_start: Mapped[DateTime] = column_property(operational_presence_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(operational_presence_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(
+        operational_presence_view.c.reference_period_start
+    )
+    reference_period_end: Mapped[datetime.datetime] = column_property(operational_presence_view.c.reference_period_end)
     org_type_code: Mapped[str] = column_property(operational_presence_view.c.org_type_code)
     org_type_description: Mapped[str] = column_property(operational_presence_view.c.org_type_description)
     sector_name: Mapped[str] = column_property(operational_presence_view.c.sector_name)
@@ -326,8 +386,8 @@ class PopulationView(Base):
     min_age: Mapped[int] = column_property(population_view.c.min_age)
     max_age: Mapped[int] = column_property(population_view.c.max_age)
     population: Mapped[int] = column_property(population_view.c.population)
-    reference_period_start: Mapped[DateTime] = column_property(population_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(population_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(population_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(population_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(population_view.c.location_code)
     location_name: Mapped[str] = column_property(population_view.c.location_name)
     has_hrp: Mapped[bool] = column_property(population_view.c.has_hrp)
@@ -352,8 +412,8 @@ class PovertyRateView(Base):
     intensity_of_deprivation: Mapped[float] = column_property(poverty_rate_view.c.intensity_of_deprivation)
     vulnerable_to_poverty: Mapped[float] = column_property(poverty_rate_view.c.vulnerable_to_poverty)
     in_severe_poverty: Mapped[float] = column_property(poverty_rate_view.c.in_severe_poverty)
-    reference_period_start: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(poverty_rate_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(poverty_rate_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(poverty_rate_view.c.reference_period_end)
     location_code: Mapped[str] = column_property(poverty_rate_view.c.location_code)
     location_name: Mapped[str] = column_property(poverty_rate_view.c.location_name)
     has_hrp: Mapped[bool] = column_property(poverty_rate_view.c.has_hrp)
@@ -374,8 +434,8 @@ class RefugeesView(Base):
     min_age: Mapped[int] = column_property(refugees_view.c.min_age)
     max_age: Mapped[int] = column_property(refugees_view.c.max_age)
     population: Mapped[int] = column_property(refugees_view.c.population)
-    reference_period_start: Mapped[DateTime] = column_property(refugees_view.c.reference_period_start)
-    reference_period_end: Mapped[DateTime] = column_property(refugees_view.c.reference_period_end)
+    reference_period_start: Mapped[datetime.datetime] = column_property(refugees_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(refugees_view.c.reference_period_end)
     origin_location_code: Mapped[str] = column_property(refugees_view.c.origin_location_code)
     origin_location_name: Mapped[str] = column_property(refugees_view.c.origin_location_name)
     origin_has_hrp: Mapped[bool] = column_property(refugees_view.c.origin_has_hrp)
@@ -392,10 +452,10 @@ class ResourceView(Base):
     dataset_hdx_id: Mapped[str] = column_property(resource_view.c.dataset_hdx_id)
     name: Mapped[str] = column_property(resource_view.c.name)
     format: Mapped[str] = column_property(resource_view.c.format)
-    update_date: Mapped[DateTime] = column_property(resource_view.c.update_date)
+    update_date: Mapped[datetime.datetime] = column_property(resource_view.c.update_date)
     is_hxl: Mapped[bool] = column_property(resource_view.c.is_hxl)
     download_url: Mapped[str] = column_property(resource_view.c.download_url)
-    hapi_updated_date: Mapped[DateTime] = column_property(resource_view.c.hapi_updated_date)
+    hapi_updated_date: Mapped[datetime.datetime] = column_property(resource_view.c.hapi_updated_date)
     dataset_hdx_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_stub)
     dataset_hdx_title: Mapped[str] = column_property(resource_view.c.dataset_title)
     dataset_hdx_provider_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_provider_stub)
@@ -441,10 +501,36 @@ class PatchView(Base):
     id: Mapped[int] = column_property(patch_view.c.id)
     patch_sequence_number: Mapped[int] = column_property(patch_view.c.patch_sequence_number)
     commit_hash: Mapped[str] = column_property(patch_view.c.commit_hash)
-    commit_date: Mapped[DateTime] = column_property(patch_view.c.commit_date)
+    commit_date: Mapped[datetime.datetime] = column_property(patch_view.c.commit_date)
     patch_path: Mapped[str] = column_property(patch_view.c.patch_path)
     patch_permalink_url: Mapped[str] = column_property(patch_view.c.patch_permalink_url)
     patch_target: Mapped[str] = column_property(patch_view.c.patch_target)
     patch_hash: Mapped[str] = column_property(patch_view.c.patch_hash)
     state: Mapped[str] = column_property(patch_view.c.state)
-    execution_date: Mapped[DateTime] = column_property(patch_view.c.execution_date)
+    execution_date: Mapped[datetime.datetime] = column_property(patch_view.c.execution_date)
+
+
+class AvailabilityView(Base):
+    __table__ = availability_view
+    __mapper_args__ = {
+        'primary_key': [
+            availability_view.c.category,
+            availability_view.c.subcategory,
+            availability_view.c.location_name,
+            availability_view.c.location_code,
+            availability_view.c.admin1_name,
+            availability_view.c.admin1_code,
+            availability_view.c.admin2_name,
+            availability_view.c.admin2_code,
+            availability_view.c.hapi_updated_date,
+        ]
+    }
+    category: Mapped[str] = column_property(availability_view.c.category)
+    subcategory: Mapped[str] = column_property(availability_view.c.subcategory)
+    location_name: Mapped[str] = column_property(availability_view.c.location_name)
+    location_code: Mapped[str] = column_property(availability_view.c.location_code)
+    admin1_name: Mapped[str] = column_property(availability_view.c.admin1_name)
+    admin1_code: Mapped[str] = column_property(availability_view.c.admin1_code)
+    admin2_name: Mapped[str] = column_property(availability_view.c.admin2_name)
+    admin2_code: Mapped[str] = column_property(availability_view.c.admin2_code)
+    hapi_updated_date: Mapped[datetime.datetime] = column_property(availability_view.c.hapi_updated_date)

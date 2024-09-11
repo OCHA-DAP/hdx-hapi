@@ -19,7 +19,7 @@ ISO3 country code.
 
     ```python
     import json
-    from urllib import requeest
+    from urllib import request
 
 
     def fetch_data(base_url, limit=1000):

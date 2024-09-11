@@ -3,37 +3,17 @@ import pytest
 import os
 import logging
 
-
 from logging import Logger
 from sqlalchemy import Engine, MetaData, create_engine, inspect, text
 from sqlalchemy.orm import sessionmaker, Session
 from typing import List
 
-from hapi_schema.db_admin1 import view_params_admin1
-from hapi_schema.db_admin2 import view_params_admin2
-from hapi_schema.db_dataset import view_params_dataset
-from hapi_schema.db_food_security import view_params_food_security
-from hapi_schema.db_funding import view_params_funding
-from hapi_schema.db_humanitarian_needs import view_params_humanitarian_needs
-from hapi_schema.db_location import view_params_location
-from hapi_schema.db_national_risk import view_params_national_risk
-from hapi_schema.db_operational_presence import view_params_operational_presence
-from hapi_schema.db_org_type import view_params_org_type
-from hapi_schema.db_org import view_params_org
-from hapi_schema.db_population import view_params_population
-from hapi_schema.db_refugees import view_params_refugees
-from hapi_schema.db_resource import view_params_resource
-from hapi_schema.db_sector import view_params_sector
-from hapi_schema.db_conflict_event import view_params_conflict_event
-from hapi_schema.db_poverty_rate import view_params_poverty_rate
-from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
-from hapi_schema.db_wfp_market import view_params_wfp_market
-from hapi_schema.db_currency import view_params_currency
-from hapi_schema.db_food_price import view_params_food_price
-
 from hdx_hapi.config.config import get_config
 from hdx_hapi.db.models.base import Base
-from hdx_hapi.db.models.views.util.util import CreateView
+
+# This is needed so that the views are recognized by sqlAlchemy
+from hdx_hapi.db.models.views.all_views import VIEW_LIST # noqa
+
 
 SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/location_admin.sql',
@@ -56,30 +36,6 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/food_price.sql',
 ]
 
-VIEW_LIST = [
-    view_params_admin1,
-    view_params_admin2,
-    view_params_location,
-    view_params_dataset,
-    view_params_food_security,
-    view_params_funding,
-    view_params_humanitarian_needs,
-    view_params_national_risk,
-    view_params_operational_presence,
-    view_params_org_type,
-    view_params_org,
-    view_params_population,
-    view_params_refugees,
-    view_params_resource,
-    view_params_sector,
-    view_params_conflict_event,
-    view_params_poverty_rate,
-    view_params_wfp_commodity,
-    view_params_wfp_market,
-    view_params_currency,
-    view_params_food_price,
-]
-
 
 def pytest_sessionstart(session):
     os.environ['HAPI_DB_NAME'] = 'hapi_test'
@@ -95,10 +51,14 @@ def pytest_sessionstart(session):
 
 def _create_tables_and_views(engine: Engine):
     Base.metadata.create_all(engine)
-    with engine.connect() as conn:
-        for v in VIEW_LIST:
-            conn.execute(CreateView(v.name, v.selectable))
-            conn.commit()
+    # with engine.connect() as conn:
+    #     for v in VIEW_LIST:
+    #         print(f'Creating view {v.name}', flush=True)
+    #         try:
+    #             conn.execute(CreateView(v.name, v.selectable))
+    #             conn.commit()
+    #         except (sqlalchemy.exc.ProgrammingError, sqlalchemy.exc.InternalError) as e:
+    #             print('..already exists', flush=True)
 
 
 def _drop_tables_and_views(engine: Engine):

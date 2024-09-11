@@ -83,6 +83,16 @@ async def humanitarian_needs_view_list(
     query = apply_reference_period_filter(query, ref_period_parameters, HumanitarianNeedsView)
 
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(
+        HumanitarianNeedsView.admin2_ref,
+        HumanitarianNeedsView.gender,
+        HumanitarianNeedsView.age_range,
+        HumanitarianNeedsView.sector_code,
+        HumanitarianNeedsView.population_group,
+        HumanitarianNeedsView.population_status,
+        HumanitarianNeedsView.disabled_marker,
+        HumanitarianNeedsView.reference_period_start,
+    )
 
     result = await db.execute(query)
     humanitarian_needs = result.scalars().all()

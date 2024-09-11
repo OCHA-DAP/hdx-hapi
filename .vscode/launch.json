@@ -6,11 +6,15 @@
     "configurations": [
         {
             "name": "start",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
+            "env":{
+                // "HAPI_DB_NAME": "hapi",
+                "HAPI_USE_VAT": "false"
+            }
         }
     ],
     

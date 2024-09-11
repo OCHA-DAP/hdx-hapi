@@ -1,4 +1,5 @@
-from pydantic import ConfigDict, Field, NaiveDatetime
+import datetime
+from pydantic import ConfigDict, Field
 from typing import Optional
 
 from hdx_hapi.config.doc_snippets import (
@@ -47,8 +48,8 @@ class HumanitarianNeedsResponse(HapiBaseModel, HapiModelWithAdmins):
     population_group: PopulationGroup = Field(description=truncate_query_description(DOC_POPULATION_GROUP))
     population_status: PopulationStatus = Field(description=truncate_query_description(DOC_POPULATION_STATUS))
     population: int = Field(ge=0, description='The number of people')
-    reference_period_start: NaiveDatetime = Field(description=DOC_REFERENCE_PERIOD_START)
-    reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
+    reference_period_start: datetime.datetime = Field(description=DOC_REFERENCE_PERIOD_START)
+    reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
     sector_name: Optional[str] = Field(max_length=512, description='The name of the sector')
 
     model_config = ConfigDict(from_attributes=True)

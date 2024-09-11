@@ -1,7 +1,9 @@
 import logging
 import os
 
+
 from dataclasses import dataclass
+from typing import Optional
 from mixpanel import Mixpanel
 
 from hdx_hapi.config.helper import create_pg_uri_from_env_without_protocol
@@ -28,11 +30,13 @@ class Config:
 
     HAPI_READTHEDOCS_OVERVIEW_URL: str
 
-    HAPI_SERVER_URL: str
+    HAPI_SERVER_URL: Optional[str]
 
     HAPI_IDENTIFIER_FILTERING: bool
 
-    MIXPANEL: Mixpanel
+    HAPI_USE_VAT: bool
+
+    MIXPANEL: Optional[Mixpanel]
 
 
 CONFIG = None
@@ -67,6 +71,7 @@ def get_config() -> Config:
             ),
             HAPI_SERVER_URL=os.getenv('HAPI_SERVER_URL', None),
             HAPI_IDENTIFIER_FILTERING=os.getenv('HAPI_IDENTIFIER_FILTERING', 'True').lower() == 'true',
+            HAPI_USE_VAT=os.getenv('HAPI_USE_VAT', 'False').lower() == 'true',
             MIXPANEL=Mixpanel(mixpanel_token) if mixpanel_token else None,
         )
 

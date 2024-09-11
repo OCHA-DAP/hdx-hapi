@@ -1,4 +1,6 @@
-from pydantic import ConfigDict, Field, NaiveDatetime
+import datetime
+
+from pydantic import ConfigDict, Field
 from typing import Optional
 
 from hdx_hapi.config.doc_snippets import (
@@ -20,7 +22,7 @@ class FoodSecurityResponse(HapiBaseModel, HapiModelWithAdmins):
     ipc_type: str = Field(max_length=32, description=truncate_query_description(DOC_IPC_TYPE))
     population_in_phase: int = Field(description='The number of people in the IPC phase')
     population_fraction_in_phase: float = Field(description='The fraction of people in the IPC phase')
-    reference_period_start: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_START)
-    reference_period_end: Optional[NaiveDatetime] = Field(description=DOC_REFERENCE_PERIOD_END)
+    reference_period_start: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_START)
+    reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
 
     model_config = ConfigDict(from_attributes=True)

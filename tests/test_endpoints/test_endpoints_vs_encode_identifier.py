@@ -9,26 +9,29 @@ from main import app
 log = logging.getLogger(__name__)
 
 ENDPOINT_ROUTER_LIST = [
-    '/api/v1/metadata/admin1',
-    '/api/v1/metadata/admin2',
-    '/api/v1/metadata/dataset',
-    '/api/v1/affected-people/humanitarian-needs',
-    '/api/v1/metadata/location',
-    '/api/v1/metadata/org',
-    '/api/v1/metadata/org-type',
-    '/api/v1/metadata/resource',
-    '/api/v1/metadata/sector',
-    '/api/v1/population-social/population',
-    '/api/v1/population-social/poverty-rate',
-    '/api/v1/coordination-context/national-risk',
-    '/api/v1/coordination-context/operational-presence',
     '/api/v1/affected-people/refugees',
+    '/api/v1/affected-people/humanitarian-needs',
+    '/api/v1/coordination-context/operational-presence',
     '/api/v1/coordination-context/funding',
     '/api/v1/coordination-context/conflict-event',
+    '/api/v1/coordination-context/national-risk',
     '/api/v1/food/food-security',
+    '/api/v1/food/food-price',
+    '/api/v1/population-social/population',
+    '/api/v1/population-social/poverty-rate',
+    '/api/v1/metadata/dataset',
+    '/api/v1/metadata/resource',
+    '/api/v1/metadata/location',
+    '/api/v1/metadata/admin1',
+    '/api/v1/metadata/admin2',
+    '/api/v1/metadata/org',
+    '/api/v1/metadata/org-type',
+    '/api/v1/metadata/sector',
     '/api/v1/metadata/currency',
+    '/api/v1/metadata/wfp-commodity',
+    '/api/v1/metadata/wfp-market',
+    '/api/v1/metadata/data-availability',
 ]
-
 
 APP_IDENTIFIER = 'aGFwaV90ZXN0OmhhcGlAaHVtZGF0YS5vcmc='
 query_parameters = {'app_identifier': APP_IDENTIFIER}
