@@ -10,12 +10,16 @@ Ian Hopkinson 2024-09-11
 endpoint_name = 'idps'
 
 type_lookup = {
+    'resource_hdx_id': 'str|36',
+    'reporting_round': 'int',
+    'population': 'int',
+    'assessment_type': 'DTMAssessmentType',
     'admin1_ref': 'int',
     'admin2_ref': 'int',
     'provider_admin1_name': 'str|512',
     'provider_admin2_name': 'str|512',
-    'reference_period_start': '',
-    'reference_period_end': '',
+    'reference_period_start': 'datetime',
+    'reference_period_end': 'Optional[datetime]',
     'location_code': 'str|128',
     'location_name': 'str|512',
     'has_hrp': 'bool',
@@ -24,14 +28,17 @@ type_lookup = {
     'admin1_name': 'str|512',
     'admin2_code': 'str|128',
     'admin2_name': 'str|512',
+    'category': 'str|32',
+    'subcategory': 'str|512',
 }
 doc_lookup = {
+    'resource_hdx_id': 'DOC_HDX_RESOURCE_ID',
     'admin1_ref': 'DOC_ADMIN1_REF',
     'admin2_ref': 'DOC_ADMIN2_REF',
     'provider_admin1_name': 'DOC_PROVIDER_ADMIN1_NAME',
     'provider_admin2_name': 'DOC_PROVIDER_ADMIN2_NAME',
-    'reference_period_start': '',
-    'reference_period_end': '',
+    'reference_period_start': 'DOC_REFERENCE_PERIOD_START',
+    'reference_period_end': 'DOC_REFERENCE_PERIOD_END',
     'location_ref': 'LOCATION_REF',
     'location_code': 'DOC_LOCATION_CODE|DOC_SEE_LOC',
     'location_name': 'DOC_LOCATION_NAME|DOC_SEE_LOC',
@@ -81,26 +88,53 @@ response_fields = [
 
 def main():
     # Generating the routes in main.py
-
     routes_in_main()
 
     # Generating the endpoint file
     print(f'\nNow create a file hdx_hapi/endpoints/get_{endpoint_name}.py', flush=True)
 
     # Generic imports
-
     imports_for_get_route()
 
     # Generate decorator call signature:
     get_route_decorate()
 
     # Generate call signature start:
-
     get_route_call_signature()
 
     # Generate body / return function
-
     get_route_body_and_return()
+
+    # Now make the response class
+    print(
+        '\nThe Response class goes in a file in hdx_hapi/endpoints/models/ with the endpoint name as the filename',
+        flush=True,
+    )
+
+    add_response_class()
+
+
+def add_response_class():
+    print(f'class {endpoint_name.title()}Response(HapiBaseModel):', flush=True)
+    for response_field in response_fields:
+        type_ = type_lookup.get(response_field, 'str|128').split('|')[0]
+        try:
+            max_length = type_lookup.get(response_field, 'str|128').split('|')[1]
+        except IndexError:
+            max_length = 1
+        doc_string = doc_lookup.get(response_field, '"Placeholder text"').split('|')[0]
+
+        if doc_string != '"Placeholder text"':
+            doc_string = f'truncate_query_description({doc_string})'
+
+        if type_ == 'str':
+            print(f'\t{response_field}: {type_} = Field(max_length={max_length}, description={doc_string})', flush=True)
+        elif 'datetime' in type_:
+            print(f'\t{response_field}: {type_} = Field(description={doc_string})', flush=True)
+        else:
+            print(f'\t{response_field}: {type_} = Field(description={doc_string})', flush=True)
+
+    print('\n\tmodel_config = ConfigDict(from_attributes=True)', flush=True)
 
 
 def get_route_body_and_return():
@@ -226,7 +260,7 @@ router = APIRouter(
 
     # These imports are per endpoint
     print(f'\nfrom hdx_hapi.endpoints.models.{endpoint_name} import {endpoint_name.title()}Response', flush=True)
-    print(f'from hdx_hapi.services.{endpoint_name}_logic import get_{endpoint_name.title()}_srv', flush=True)
+    print(f'from hdx_hapi.services.{endpoint_name}_logic import get_{endpoint_name}_srv', flush=True)
 
 
 def routes_in_main():
