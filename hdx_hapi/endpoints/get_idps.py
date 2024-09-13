@@ -25,7 +25,7 @@ from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hdx_hapi.endpoints.models.idps import IdpsResponse
-from hdx_hapi.services.idps_logic import get_Idps_srv
+from hdx_hapi.services.idps_logic import get_idps_srv
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,

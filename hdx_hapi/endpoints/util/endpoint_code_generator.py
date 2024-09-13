@@ -107,11 +107,44 @@ def main():
 
     # Now make the response class
     print(
-        '\nThe Response class goes in a file in hdx_hapi/endpoints/models/ with the endpoint name as the filename',
+        f'\nThe Response class goes in a file, hdx_hapi/endpoints/models/{endpoint_name}.py',
         flush=True,
     )
-
     add_response_class()
+
+    # Now make the get_[endpoint]_srv
+    print(f'\nThe service function goes in a file, hdx_hapi/services/{endpoint_name}_logic.py', flush=True)
+    add_service()
+
+
+def add_service():
+    print('\nfrom typing import Optional, Sequence', flush=True)
+    print('from sqlalchemy.ext.asyncio import AsyncSession', flush=True)
+
+    print(f'from hdx_hapi.db.dao.{endpoint_name}_view_dao import {endpoint_name}_view_list', flush=True)
+    print(f'from hdx_hapi.db.models.views.all_views import {endpoint_name.title()}View', flush=True)
+
+    print('from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters', flush=True)
+
+    print(f'async def get_{endpoint_name}_srv(', flush=True)
+    print('\tpagination_parameters: PaginationParams,', flush=True)
+    print('\tref_period_parameters: ReferencePeriodParameters,', flush=True)
+    print('\tdb: AsyncSession,', flush=True)
+    for query_field in query_fields:
+        if query_field.startswith('reference_period'):
+            continue
+        type_ = type_lookup.get(query_field, 'str|128').split('|')[0]
+        print(f'\t{query_field}: Optional[{type_}] = None,', flush=True)
+    print('\t) -> Sequence[FundingView]:', flush=True)
+    print('\treturn await funding_view_list(', flush=True)
+    print('\t\tpagination_parameters=pagination_parameters,', flush=True)
+    print('\t\tref_period_parameters=ref_period_parameters,', flush=True)
+    print('\t\tdb=db,', flush=True)
+    for query_field in query_fields:
+        if query_field.startswith('reference_period'):
+            continue
+        print(f'\t\t{query_field}={query_field},', flush=True)
+    print('\t)', flush=True)
 
 
 def add_response_class():
