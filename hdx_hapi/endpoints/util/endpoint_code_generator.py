@@ -116,6 +116,20 @@ def main():
     print(f'\nThe service function goes in a file, hdx_hapi/services/{endpoint_name}_logic.py', flush=True)
     add_service()
 
+    # Generate the [Endpoint]View - this is done with code in the hapi-sqlalchemy-schema repo.
+    print(f'\nThe {endpoint_name.title()}View goes in the file hdx_hapi/db/models/views/all_views.py file', flush=True)
+    print('\nThis is generated using the hapi_schema/utils/hapi_views_code_generator.py code', flush=True)
+    print('The following need to be added at the top of the all_views.py file', flush=True)
+    print(
+        f'from hapi_schema.db_{endpoint_name} import view_params_{endpoint_name}, availability_stmt_endpoint_name',
+        flush=True,
+    )
+    print(
+        f'{endpoint_name}_view = view(view_params_{endpoint_name}.name, Base.metadata, '
+        f'view_params_{endpoint_name}.selectable)',
+        flush=True,
+    )
+
 
 def add_service():
     print('\nfrom typing import Optional, Sequence', flush=True)
