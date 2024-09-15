@@ -12,7 +12,7 @@ from hdx_hapi.config.config import get_config
 from hdx_hapi.db.models.base import Base
 
 # This is needed so that the views are recognized by sqlAlchemy
-from hdx_hapi.db.models.views.all_views import VIEW_LIST # noqa
+from hdx_hapi.db.models.views.all_views import VIEW_LIST  # noqa
 
 
 SAMPLE_DATA_SQL_FILES = [
@@ -34,6 +34,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/wfp_market.sql',
     'tests/sample_data/currency.sql',
     'tests/sample_data/food_price.sql',
+    'tests/sample_data/idps.sql',
 ]
 
 
