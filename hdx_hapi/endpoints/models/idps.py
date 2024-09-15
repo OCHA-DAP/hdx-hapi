@@ -8,6 +8,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_ADMIN1_REF,
     DOC_ADMIN2_REF,
+    DOC_LOCATION_REF,
     DOC_PROVIDER_ADMIN1_NAME,
     DOC_PROVIDER_ADMIN2_NAME,
     DOC_REFERENCE_PERIOD_START,
@@ -31,6 +32,7 @@ class IdpsResponse(HapiBaseModel):
     population: int = Field(ge=0, description='The number of people')
     reference_period_start: datetime.datetime = Field(description=DOC_REFERENCE_PERIOD_START)
     reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
+    location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
     location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
     admin1_code: str = Field(max_length=128, description=truncate_query_description(DOC_ADMIN1_CODE))

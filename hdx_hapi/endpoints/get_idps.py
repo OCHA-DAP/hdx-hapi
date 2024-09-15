@@ -43,7 +43,6 @@ router = APIRouter(
     '/api/v1/affected-people/idps',
     response_model=HapiGenericResponse[IdpsResponse],
     summary='Get idps data',
-    include_in_schema=False,
 )
 async def get_idps(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],

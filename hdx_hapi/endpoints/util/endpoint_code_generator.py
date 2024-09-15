@@ -76,6 +76,7 @@ response_fields = [
     'population',
     'reference_period_start',
     'reference_period_end',
+    'location_ref',
     'location_code',
     'location_name',
     'admin1_code',
@@ -130,6 +131,109 @@ def main():
         flush=True,
     )
 
+    print('The following need to be added to hdx_hapi/db/models/views/vat_or_view.py:', flush=True)
+    print(f'{endpoint_name.title()}View', flush=True)
+    print(f'DB{endpoint_name.title()}VAT as {endpoint_name.title()}View', flush=True)
+
+    # Generate the query function
+    print(
+        f'\nThe query function is named {endpoint_name}_view_list and goes in the file '
+        f'hdx_hapi/db/dao/{endpoint_name}_view_dao.py',
+        flush=True,
+    )
+
+    generate_query_function()
+
+    # Generate tests
+
+    print(
+        f'Next generate tests which need to go in a file tests/test_endpoints/tests_{endpoint_name}_endpoint.py.'
+        'The easiest thing to do here is copy one of the existing files and do a search and replace on the endpoint '
+        ' name',
+        flush=True,
+    )
+
+    print(
+        'Also required are a couple of test fixtures/additions. tests/test_endpoints/endpoint_data.py needs an '
+        f'entry under the key /api/v1/affected-people/{endpoint_name} and a SQL file is also required with the name '
+        f'tests/sample_data/{endpoint_name}.sql which needs adding to /srv/hapi/tests/conftest.py too',
+        flush=True,
+    )
+
+
+def generate_query_function():
+    print('\nimport logging', flush=True)
+    print('from typing import Optional, Sequence', flush=True)
+
+    print('\nfrom sqlalchemy.ext.asyncio import AsyncSession', flush=True)
+    print('from sqlalchemy import select', flush=True)
+
+    print(f'\nfrom hdx_hapi.db.models.views.vat_or_view import {endpoint_name.title()}View', flush=True)
+    print(
+        'from hdx_hapi.db.dao.util.util import apply_pagination, '
+        'apply_reference_period_filter, case_insensitive_filter',
+        flush=True,
+    )
+    print('from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters', flush=True)
+
+    print('\nlogger = logging.getLogger(__name__)', flush=True)
+
+    print(f'\nasync def {endpoint_name}_view_list(', flush=True)
+    print('\tpagination_parameters: PaginationParams,', flush=True)
+    print('\tref_period_parameters: ReferencePeriodParameters,', flush=True)
+    print('\tdb: AsyncSession,', flush=True)
+    for query_field in query_fields:
+        if query_field.startswith('reference_period'):
+            continue
+        type_ = type_lookup.get(query_field, 'str|128').split('|')[0]
+        print(f'\t{query_field}: Optional[{type_}] = None,', flush=True)
+
+    print(f') -> Sequence[{endpoint_name.title()}View]:', flush=True)
+
+    print(f'\n\tquery = select({endpoint_name.title()}View)', flush=True)
+
+    print('\n\t#Query statements', flush=True)
+
+    for query_field in query_fields:
+        if query_field.startswith('reference_period'):
+            continue
+        type_ = type_lookup.get(query_field, 'str|128').split('|')[0]
+        if query_field in ['has_hrp', 'in_gho']:
+            print(f'\tif {query_field} is not None:', flush=True)
+        else:
+            print(f'\tif {query_field}:', flush=True)
+
+        if type_ in ['int', 'bool']:
+            print(f'\t\tquery = query.where({endpoint_name.title()}View.{query_field} == {query_field})', flush=True)
+        elif type_ == 'str' and '_name' not in query_field:
+            print(
+                f'\t\tquery = case_insensitive_filter(query, {endpoint_name.title()}View.{query_field}, {query_field})',
+                flush=True,
+            )
+        elif type_ == 'str' and '_name' in query_field:
+            print(
+                f'\t\tquery = query.where({endpoint_name.title()}View.{query_field}.icontains({query_field}))',
+                flush=True,
+            )
+        else:
+            print(f'\t\tquery = query.where({endpoint_name.title()}View.{query_field} == {query_field})', flush=True)
+
+    print(
+        f'\n\tquery = apply_reference_period_filter(query, ref_period_parameters, {endpoint_name.title()}View)',
+        flush=True,
+    )
+
+    print('\tquery = apply_pagination(query, pagination_parameters)', flush=True)
+
+    print("\n\tlogger.debug(f'Executing SQL query: {query}')", flush=True)
+
+    print('\n\tresult = await db.execute(query)', flush=True)
+    print(f'\t{endpoint_name} = result.scalars().all()', flush=True)
+
+    print(f"\n\tlogger.info(f'Retrieved {{len({endpoint_name})}} rows from the database')", flush=True)
+
+    print(f'\n\treturn {endpoint_name}', flush=True)
+
 
 def add_service():
     print('\nfrom typing import Optional, Sequence', flush=True)
@@ -149,8 +253,8 @@ def add_service():
             continue
         type_ = type_lookup.get(query_field, 'str|128').split('|')[0]
         print(f'\t{query_field}: Optional[{type_}] = None,', flush=True)
-    print('\t) -> Sequence[FundingView]:', flush=True)
-    print('\treturn await funding_view_list(', flush=True)
+    print(f'\t) -> Sequence[{endpoint_name.title()}View]:', flush=True)
+    print(f'\treturn await {endpoint_name}_view_list(', flush=True)
     print('\t\tpagination_parameters=pagination_parameters,', flush=True)
     print('\t\tref_period_parameters=ref_period_parameters,', flush=True)
     print('\t\tdb=db,', flush=True)
@@ -259,7 +363,8 @@ def get_route_decorate():
         print(f"'/api{version}/affected-people/{endpoint_name}',", flush=True)
         print(f'response_model=HapiGenericResponse[{endpoint_name.title()}Response],', flush=True)
         print(f"summary='Get {endpoint_name} data',", flush=True)
-        print('include_in_schema=False,', flush=True)
+        if version == '':
+            print('include_in_schema=False,', flush=True)
         print(')', flush=True)
 
 
