@@ -118,7 +118,7 @@ You can retrieve a list of possible sectors by querying the `sector` support tab
 
 
 ```plaintext
-https://hapi.humdata.org/api/v1/metadata/sector?output_format=json&offset=0&limit=1000&app_identifier=Z2V0dGluZ3Mtc3RhcnRlZDpzaW1vbi5qb2huc29uQHVuLm9yZw==
+https://hapi.humdata.org/api/v1/metadata/sector?output_format=json&offset=0&limit=1000&app_identifier={your app identifier}
 ```
 
 
