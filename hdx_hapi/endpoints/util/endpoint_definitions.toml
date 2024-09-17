@@ -1,0 +1,78 @@
+[[tables]]
+endpoint_name = "idps"
+has_HapiModelWithAdmins = true
+query_fields = [
+    'provider_admin1_name',
+    'provider_admin2_name',
+    'reference_period_start',
+    'reference_period_end',
+    'location_ref',
+    'location_code',
+    'location_name',
+    'has_hrp',
+    'in_gho',
+    'admin1_ref',
+    'admin1_code',
+    'admin1_name',
+    'admin2_ref',
+    'admin2_code',
+    'admin2_name',
+    'admin_level',
+]
+response_fields = [
+    'resource_hdx_id',
+    'admin2_ref',
+    'provider_admin1_name',
+    'provider_admin2_name',
+    'reporting_round',
+    'assessment_type',
+    'population',
+    'reference_period_start',
+    'reference_period_end',
+    'location_ref',
+    'location_code',
+    'location_name',
+    'admin1_code',
+    'admin1_name',
+    'admin2_code',
+    'admin2_name',
+    'admin1_ref',
+]
+
+[[tables]]
+endpoint_name = "returnees"
+has_HapiModelWithAdmins = false
+query_fields = [
+"population_group",
+"gender",
+"age_range",
+"min_age",
+"max_age",
+"reference_period_start",
+"reference_period_end",
+"origin_location_code",
+"origin_location_name",
+"origin_has_hrp",
+"origin_in_gho",
+"asylum_location_code",
+"asylum_location_name",
+"asylum_has_hrp",
+"asylum_in_gho",
+]
+response_fields = [
+"resource_hdx_id",
+"origin_location_ref",
+"asylum_location_ref",
+"population_group",
+"gender",
+"age_range",
+"min_age",
+"max_age",
+"population",
+"reference_period_start",
+"reference_period_end",
+"origin_location_code",
+"origin_location_name",
+"asylum_location_code",
+"asylum_location_name",
+]

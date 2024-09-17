@@ -7,10 +7,10 @@ This is a prototype script for generating various code fragments for adding a ne
 Ian Hopkinson 2024-09-11
 """
 
+from typing import Optional
+import os
+import tomllib
 import sys
-
-endpoint_name = 'idps'
-has_HapiModelWithAdmins = True
 
 type_lookup = {
     'resource_hdx_id': 'str|36',
@@ -71,75 +71,44 @@ doc_lookup = {
     'admin_level': 'DOC_ADMIN_LEVEL_FILTER',
 }
 # name, type, docstring
-query_fields = [
-    'provider_admin1_name',
-    'provider_admin2_name',
-    'reference_period_start',
-    'reference_period_end',
-    'location_ref',
-    'location_code',
-    'location_name',
-    'has_hrp',
-    'in_gho',
-    'admin1_ref',
-    'admin1_code',
-    'admin1_name',
-    'admin2_ref',
-    'admin2_code',
-    'admin2_name',
-    'admin_level',
-]
-
-response_fields = [
-    'resource_hdx_id',
-    'admin2_ref',
-    'provider_admin1_name',
-    'provider_admin2_name',
-    'reporting_round',
-    'assessment_type',
-    'population',
-    'reference_period_start',
-    'reference_period_end',
-    'location_ref',
-    'location_code',
-    'location_name',
-    'admin1_code',
-    'admin1_name',
-    'admin2_code',
-    'admin2_name',
-    'admin1_ref',
-]
 
 
 def main():
+    #
+    config = parse_toml(endpoint_name='idps')
     # Generating the routes in main.py
-    routes_in_main()
+    endpoint_name = config['endpoint_name']
+    query_fields = config['query_fields']
+    response_fields = config['response_fields']
+    has_HapiModelWithAdmins = config['has_HapiModelWithAdmins']
+
+    routes_in_main(endpoint_name)
 
     # Generating the endpoint file
     print(f'\nNow create a file hdx_hapi/endpoints/get_{endpoint_name}.py', flush=True)
 
     # Generic imports
-    imports_for_get_route()
+    imports_for_get_route(endpoint_name)
 
     # Generate decorator call signature:
-    get_route_decorate()
+    get_route_decorate(endpoint_name)
 
     # Generate call signature start:
-    get_route_call_signature()
+    get_route_call_signature(endpoint_name, query_fields)
 
     # Generate body / return function
-    get_route_body_and_return()
+    get_route_body_and_return(endpoint_name, query_fields)
 
     # Now make the response class
     print(
         f'\nThe Response class goes in a file, hdx_hapi/endpoints/models/{endpoint_name}.py',
         flush=True,
     )
-    add_response_class()
+    add_response_class(endpoint_name, response_fields, has_HapiModelWithAdmins)
 
     # Now make the get_[endpoint]_srv
     print(f'\nThe service function goes in a file, hdx_hapi/services/{endpoint_name}_logic.py', flush=True)
-    add_service()
+    add_service(endpoint_name, query_fields, has_HapiModelWithAdmins)
 
     # Generate the [Endpoint]View - this is done with code in the hapi-sqlalchemy-schema repo.
     print(f'\nThe {endpoint_name.title()}View goes in the file hdx_hapi/db/models/views/all_views.py file', flush=True)
@@ -166,7 +135,7 @@ def main():
         flush=True,
     )
 
-    generate_query_function()
+    generate_query_function(endpoint_name, query_fields, has_HapiModelWithAdmins)
 
     # Generate tests
 
@@ -185,7 +154,24 @@ def main():
     )
 
 
-def generate_query_function():
+def parse_toml(endpoint_name: Optional[str] = 'idps') -> dict:
+    # Setup the database:
+    if len(sys.argv) == 2:
+        endpoint_name = sys.argv[1]
+
+    config_file_path = os.path.join(os.path.dirname(__file__), 'endpoint_definitions.toml')
+    with open(config_file_path, 'rb') as file_handle:
+        all_config = tomllib.load(file_handle)
+
+    requested_config = None
+    for config in all_config['tables']:
+        if config['endpoint_name'] == endpoint_name:
+            requested_config = config
+            break
+    return requested_config
+
+
+def generate_query_function(endpoint_name, query_fields, has_HapiModelWithAdmins):
     print('\nimport logging', flush=True)
     print('from typing import Optional, Sequence', flush=True)
 
@@ -297,7 +283,7 @@ def generate_query_function():
     print(f'\n\treturn {endpoint_name}', flush=True)
 
 
-def add_service():
+def add_service(endpoint_name, query_fields, has_HapiModelWithAdmins):
     print('\nfrom typing import Optional, Sequence', flush=True)
     print('from sqlalchemy.ext.asyncio import AsyncSession', flush=True)
 
@@ -342,7 +328,7 @@ def add_service():
     print('\t)', flush=True)
 
 
-def add_response_class():
+def add_response_class(endpoint_name, response_fields, has_HapiModelWithAdmins):
     if has_HapiModelWithAdmins:
         print(f'class {endpoint_name.title()}Response(HapiBaseModel, HapiModelWithAdmins):', flush=True)
     else:
@@ -370,7 +356,7 @@ def add_response_class():
     print('\n\tmodel_config = ConfigDict(from_attributes=True)', flush=True)
 
 
-def get_route_body_and_return():
+def get_route_body_and_return(endpoint_name, query_fields):
     print('\tref_period_parameters = None', flush=True)
     print(
         f'\tresult = await get_{endpoint_name}_srv('
@@ -391,7 +377,7 @@ def get_route_body_and_return():
     )
 
 
-def get_route_call_signature():
+def get_route_call_signature(endpoint_name, query_fields):
     print(f'async def get_{endpoint_name}(', flush=True)
     print('\tcommon_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],', flush=True)
 
@@ -443,7 +429,7 @@ def get_route_call_signature():
     print('):', flush=True)
 
 
-def get_route_decorate():
+def get_route_decorate(endpoint_name):
     print('\n', flush=True)
     for version in ['', '/v1']:
         print('@router.get(', flush=True)
@@ -455,7 +441,7 @@ def get_route_decorate():
         print(')', flush=True)
 
 
-def imports_for_get_route():
+def imports_for_get_route(endpoint_name):
     print(
         """from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
@@ -499,7 +485,7 @@ from hdx_hapi.endpoints.util.util import (
     print("CONFIG = get_config()\nrouter = APIRouter(\n\ttags=['Affected people'],)", flush=True)
 
 
-def routes_in_main():
+def routes_in_main(endpoint_name):
     print('These statements go in main.py, in the root of repo', flush=True)
 
     print(f'\nfrom hdx_hapi.endpoints.get_{endpoint_name} import router as {endpoint_name}_router  # noqa', flush=True)
