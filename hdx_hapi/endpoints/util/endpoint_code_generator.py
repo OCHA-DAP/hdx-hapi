@@ -8,6 +8,7 @@ Ian Hopkinson 2024-09-11
 """
 
 endpoint_name = 'idps'
+has_HapiModelWithAdmins = True
 
 type_lookup = {
     'resource_hdx_id': 'str|36',
@@ -18,8 +19,9 @@ type_lookup = {
     'admin2_ref': 'int',
     'provider_admin1_name': 'str|512',
     'provider_admin2_name': 'str|512',
-    'reference_period_start': 'datetime',
-    'reference_period_end': 'Optional[datetime]',
+    'reference_period_start': 'datetime.datetime',
+    'reference_period_end': 'Optional[datetime.datetime]',
+    'location_ref': 'int',
     'location_code': 'str|128',
     'location_name': 'str|512',
     'has_hrp': 'bool',
@@ -28,9 +30,25 @@ type_lookup = {
     'admin1_name': 'str|512',
     'admin2_code': 'str|128',
     'admin2_name': 'str|512',
+    'admin_level': 'AdminLevel',
     'category': 'str|32',
     'subcategory': 'str|512',
 }
+
+HapiModelWithAdmins_fields = [
+    'location_ref',
+    'location_code',
+    'location_name',
+    'admin1_ref',
+    'admin1_code',
+    'admin1_name',
+    'admin2_ref',
+    'admin2_code',
+    'admin2_name',
+    'admin1_is_unspecified',
+    'admin2_is_unspecified',
+]
+
 doc_lookup = {
     'resource_hdx_id': 'DOC_HDX_RESOURCE_ID',
     'admin1_ref': 'DOC_ADMIN1_REF',
@@ -39,7 +57,7 @@ doc_lookup = {
     'provider_admin2_name': 'DOC_PROVIDER_ADMIN2_NAME',
     'reference_period_start': 'DOC_REFERENCE_PERIOD_START',
     'reference_period_end': 'DOC_REFERENCE_PERIOD_END',
-    'location_ref': 'LOCATION_REF',
+    'location_ref': 'DOC_LOCATION_REF',
     'location_code': 'DOC_LOCATION_CODE|DOC_SEE_LOC',
     'location_name': 'DOC_LOCATION_NAME|DOC_SEE_LOC',
     'has_hrp': 'DOC_LOCATION_HAS_HRP',
@@ -48,22 +66,26 @@ doc_lookup = {
     'admin1_name': 'DOC_ADMIN1_NAME|DOC_SEE_ADMIN1',
     'admin2_code': 'DOC_ADMIN2_CODE|DOC_SEE_ADMIN2',
     'admin2_name': 'DOC_ADMIN2_NAME|DOC_SEE_ADMIN2',
+    'admin_level': 'DOC_ADMIN_LEVEL_FILTER',
 }
 # name, type, docstring
 query_fields = [
-    'admin2_ref',
     'provider_admin1_name',
     'provider_admin2_name',
     'reference_period_start',
     'reference_period_end',
+    'location_ref',
     'location_code',
     'location_name',
     'has_hrp',
     'in_gho',
+    'admin1_ref',
     'admin1_code',
     'admin1_name',
+    'admin2_ref',
     'admin2_code',
     'admin2_name',
+    'admin_level',
 ]
 
 response_fields = [
@@ -169,11 +191,19 @@ def generate_query_function():
     print('from sqlalchemy import select', flush=True)
 
     print(f'\nfrom hdx_hapi.db.models.views.vat_or_view import {endpoint_name.title()}View', flush=True)
-    print(
-        'from hdx_hapi.db.dao.util.util import apply_pagination, '
-        'apply_reference_period_filter, case_insensitive_filter',
-        flush=True,
-    )
+
+    if has_HapiModelWithAdmins:
+        print(
+            'from hdx_hapi.db.dao.util.util import apply_pagination, '
+            'apply_reference_period_filter, case_insensitive_filter, apply_location_admin_filter',
+            flush=True,
+        )
+    else:
+        print(
+            'from hdx_hapi.db.dao.util.util import apply_pagination, '
+            'apply_reference_period_filter, case_insensitive_filter',
+            flush=True,
+        )
     print('from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters', flush=True)
 
     print('\nlogger = logging.getLogger(__name__)', flush=True)
@@ -182,8 +212,13 @@ def generate_query_function():
     print('\tpagination_parameters: PaginationParams,', flush=True)
     print('\tref_period_parameters: ReferencePeriodParameters,', flush=True)
     print('\tdb: AsyncSession,', flush=True)
+    if has_HapiModelWithAdmins:
+        print('\tadmin1_is_unspecified: Optional[bool] = None,')
+        print('\tadmin2_is_unspecified: Optional[bool] = None,')
     for query_field in query_fields:
         if query_field.startswith('reference_period'):
+            continue
+        if query_field == 'admin_level':
             continue
         type_ = type_lookup.get(query_field, 'str|128').split('|')[0]
         print(f'\t{query_field}: Optional[{type_}] = None,', flush=True)
@@ -196,6 +231,10 @@ def generate_query_function():
 
     for query_field in query_fields:
         if query_field.startswith('reference_period'):
+            continue
+        if has_HapiModelWithAdmins and query_field in HapiModelWithAdmins_fields:
+            continue
+        if query_field == 'admin_level':
             continue
         type_ = type_lookup.get(query_field, 'str|128').split('|')[0]
         if query_field in ['has_hrp', 'in_gho']:
@@ -224,6 +263,27 @@ def generate_query_function():
     )
 
     print('\tquery = apply_pagination(query, pagination_parameters)', flush=True)
+    if has_HapiModelWithAdmins:
+        print(
+            '\tquery = apply_location_admin_filter('
+            '\n\t\tquery,'
+            f'\n\t\t{endpoint_name.title()}View,'
+            '\n\t\tlocation_ref,'
+            '\n\t\tlocation_code,'
+            '\n\t\tlocation_name,'
+            '\n\t\thas_hrp,'
+            '\n\t\tin_gho,'
+            '\n\t\tadmin1_ref,'
+            '\n\t\tadmin1_code,'
+            '\n\t\tadmin1_name,'
+            '\n\t\tadmin1_is_unspecified,'
+            '\n\t\tadmin2_ref,'
+            '\n\t\tadmin2_code,'
+            '\n\t\tadmin2_name,'
+            '\n\t\tadmin2_is_unspecified,'
+            '\n\t\t)',
+            flush=True,
+        )
 
     print("\n\tlogger.debug(f'Executing SQL query: {query}')", flush=True)
 
@@ -242,7 +302,14 @@ def add_service():
     print(f'from hdx_hapi.db.dao.{endpoint_name}_view_dao import {endpoint_name}_view_list', flush=True)
     print(f'from hdx_hapi.db.models.views.all_views import {endpoint_name.title()}View', flush=True)
 
-    print('from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters', flush=True)
+    if has_HapiModelWithAdmins:
+        print(
+            'from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams, ReferencePeriodParameters',
+            flush=True,
+        )
+        print('from hdx_hapi.services.admin_level_logic import compute_unspecified_values', flush=True)
+    else:
+        print('from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters', flush=True)
 
     print(f'async def get_{endpoint_name}_srv(', flush=True)
     print('\tpagination_parameters: PaginationParams,', flush=True)
@@ -254,20 +321,33 @@ def add_service():
         type_ = type_lookup.get(query_field, 'str|128').split('|')[0]
         print(f'\t{query_field}: Optional[{type_}] = None,', flush=True)
     print(f'\t) -> Sequence[{endpoint_name.title()}View]:', flush=True)
+    if has_HapiModelWithAdmins:
+        print('\tadmin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)')
     print(f'\treturn await {endpoint_name}_view_list(', flush=True)
     print('\t\tpagination_parameters=pagination_parameters,', flush=True)
     print('\t\tref_period_parameters=ref_period_parameters,', flush=True)
+    if has_HapiModelWithAdmins:
+        print('\t\tadmin1_is_unspecified=admin1_is_unspecified,', flush=True)
+        print('\t\tadmin2_is_unspecified=admin2_is_unspecified,', flush=True)
     print('\t\tdb=db,', flush=True)
     for query_field in query_fields:
         if query_field.startswith('reference_period'):
             continue
+        if query_field == 'admin_level':
+            continue
         print(f'\t\t{query_field}={query_field},', flush=True)
+
     print('\t)', flush=True)
 
 
 def add_response_class():
-    print(f'class {endpoint_name.title()}Response(HapiBaseModel):', flush=True)
+    if has_HapiModelWithAdmins:
+        print(f'class {endpoint_name.title()}Response(HapiBaseModel, HapiModelWithAdmins):', flush=True)
+    else:
+        print(f'class {endpoint_name.title()}Response(HapiBaseModel):', flush=True)
     for response_field in response_fields:
+        if has_HapiModelWithAdmins and response_field in HapiModelWithAdmins_fields:
+            continue
         type_ = type_lookup.get(response_field, 'str|128').split('|')[0]
         try:
             max_length = type_lookup.get(response_field, 'str|128').split('|')[1]
@@ -347,6 +427,11 @@ def get_route_call_signature():
                 f'\t{query_field}: Annotated[' f"Optional[{type_}], Query(description=f'{doc_string}')" '] = None,',
                 flush=True,
             )
+        elif type_ == 'AdminLevel':
+            print(
+                f'\t{query_field}: Annotated[' f"Optional[{type_}], Query(description=f'{doc_string}')" '] = None,',
+                flush=True,
+            )
         else:
             print(f'No query annotation for {type_}', flush=True)
             sys.exit()
@@ -380,10 +465,10 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_NAME,
     DOC_ADMIN1_CODE,
     DOC_PROVIDER_ADMIN1_NAME,
+    DOC_PROVIDER_ADMIN2_NAME,
     DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
-    DOC_PROVIDER_ADMIN2_NAME,
     DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
@@ -402,17 +487,14 @@ from hdx_hapi.endpoints.util.util import (
     common_endpoint_parameters,
     AdminLevel,
 )
-CONFIG = get_config()
-router = APIRouter(
-    tags=['Affected people'],
-)
 """,
         flush=True,
     )
-
     # These imports are per endpoint
     print(f'\nfrom hdx_hapi.endpoints.models.{endpoint_name} import {endpoint_name.title()}Response', flush=True)
     print(f'from hdx_hapi.services.{endpoint_name}_logic import get_{endpoint_name}_srv', flush=True)
+
+    print("CONFIG = get_config()\nrouter = APIRouter(\n\ttags=['Affected people'],)", flush=True)
 
 
 def routes_in_main():
