@@ -7,6 +7,8 @@ This is a prototype script for generating various code fragments for adding a ne
 Ian Hopkinson 2024-09-11
 """
 
+import sys
+
 endpoint_name = 'idps'
 has_HapiModelWithAdmins = True
 
@@ -487,7 +489,7 @@ from hdx_hapi.endpoints.util.util import (
     common_endpoint_parameters,
     AdminLevel,
 )
-""",
+""",  # noqa
         flush=True,
     )
     # These imports are per endpoint

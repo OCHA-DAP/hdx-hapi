@@ -8,7 +8,6 @@ from hdx_hapi.db.models.views.vat_or_view import IdpsView
 from hdx_hapi.db.dao.util.util import (
     apply_pagination,
     apply_reference_period_filter,
-    case_insensitive_filter,
     apply_location_admin_filter,
 )
 from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
