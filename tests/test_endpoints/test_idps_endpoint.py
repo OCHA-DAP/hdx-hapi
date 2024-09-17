@@ -31,6 +31,7 @@ async def test_get_idps_params(event_loop, refresh_db):
     log.info('started test_get_idps_params')
 
     for param_name, param_value in query_parameters.items():
+        print(f'{param_name}:{param_value}', flush=True)
         async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
@@ -84,6 +85,8 @@ async def test_get_idps_adm_fields(event_loop, refresh_db):
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
         location_ref=2,
+        admin1_is_unspecified=False,
+        admin2_is_unspecified=False,
     )
 
     assert True
@@ -117,6 +120,8 @@ async def test_get_idps_adm_fields(event_loop, refresh_db):
         admin2_code='FOO-XXX-XXX',
         admin2_name='unspecified',
         location_ref=2,
+        admin1_is_unspecified=True,
+        admin2_is_unspecified=True,
     )
 
     assert (

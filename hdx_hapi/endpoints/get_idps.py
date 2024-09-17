@@ -61,7 +61,7 @@ async def get_idps(
     # provider_admin2_name: Annotated[
     #     Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
     # ] = None,
-    location_ref: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_REF}')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE}{DOC_SEE_LOC}')
     ] = None,
