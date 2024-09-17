@@ -7,7 +7,7 @@
   Description: >
     Demonstration events include ACLED’s protests and riots event types, with
     the exception of the mob violence sub-event type of the riots event type.
-- EventTtype: political_violence
+- Event Type: political_violence
   Description: >
     Political violence events include ACLED’s battles, violence against
     civilians, and explosions/remote violence event types, as well as the mob
