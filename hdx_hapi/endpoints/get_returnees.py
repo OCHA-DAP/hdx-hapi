@@ -7,6 +7,9 @@ from hdx_hapi.config.doc_snippets import (
     DOC_POPULATION_GROUP,
     DOC_GENDER,
 )
+from hdx_hapi.endpoints.models.returnees import ReturneesResponse
+from hdx_hapi.services.returnees_logic import get_returnees_srv
+
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.sql_alchemy_session import get_db
@@ -14,12 +17,8 @@ from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
     common_endpoint_parameters,
-    AdminLevel,
 )
 
-
-from hdx_hapi.endpoints.models.returnees import ReturneesResponse
-from hdx_hapi.services.returnees_logic import get_returnees_srv
 
 CONFIG = get_config()
 router = APIRouter(
