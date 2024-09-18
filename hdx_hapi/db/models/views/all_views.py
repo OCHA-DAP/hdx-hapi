@@ -32,8 +32,9 @@ from hapi_schema.db_sector import view_params_sector
 from hapi_schema.db_wfp_commodity import view_params_wfp_commodity
 from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
-from hapi_schema.db_returnees import availability_stmt_returnees
+from hapi_schema.db_returnees import view_params_returnees, availability_stmt_returnees
 from hapi_schema.db_idps import view_params_idps, availability_stmt_idps
+
 
 from hapi_schema.utils.enums import (
     CommodityCategory,
@@ -97,6 +98,8 @@ VIEW_LIST = [
     view_params_currency,
     view_params_food_price,
     view_params_availability,
+    view_params_idps,
+    view_params_returnees,
 ]
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
@@ -129,6 +132,7 @@ patch_view = view(view_params_patch.name, Base.metadata, view_params_patch.selec
 availability_view = view(view_params_availability.name, Base.metadata, view_params_availability.selectable)
 
 idps_view = view(view_params_idps.name, Base.metadata, view_params_idps.selectable)
+returnees_view = view(view_params_returnees.name, Base.metadata, view_params_returnees.selectable)
 
 
 class Admin1View(Base):
@@ -561,3 +565,26 @@ class IdpsView(Base):
     admin2_name: Mapped[str] = column_property(idps_view.c.admin2_name)
     admin2_is_unspecified: Mapped[bool] = column_property(idps_view.c.admin2_is_unspecified)
     admin1_ref: Mapped[int] = column_property(idps_view.c.admin1_ref)
+
+
+class ReturneesView(Base):
+    __table__ = returnees_view
+    resource_hdx_id: Mapped[str] = column_property(returnees_view.c.resource_hdx_id)
+    origin_location_ref: Mapped[int] = column_property(returnees_view.c.origin_location_ref)
+    asylum_location_ref: Mapped[int] = column_property(returnees_view.c.asylum_location_ref)
+    population_group: Mapped[str] = column_property(returnees_view.c.population_group)
+    gender: Mapped[str] = column_property(returnees_view.c.gender)
+    age_range: Mapped[str] = column_property(returnees_view.c.age_range)
+    min_age: Mapped[int] = column_property(returnees_view.c.min_age)
+    max_age: Mapped[int] = column_property(returnees_view.c.max_age)
+    population: Mapped[int] = column_property(returnees_view.c.population)
+    reference_period_start: Mapped[datetime.datetime] = column_property(returnees_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(returnees_view.c.reference_period_end)
+    origin_location_code: Mapped[str] = column_property(returnees_view.c.origin_location_code)
+    origin_location_name: Mapped[str] = column_property(returnees_view.c.origin_location_name)
+    origin_has_hrp: Mapped[bool] = column_property(returnees_view.c.origin_has_hrp)
+    origin_in_gho: Mapped[bool] = column_property(returnees_view.c.origin_in_gho)
+    asylum_location_code: Mapped[str] = column_property(returnees_view.c.asylum_location_code)
+    asylum_location_name: Mapped[str] = column_property(returnees_view.c.asylum_location_name)
+    asylum_has_hrp: Mapped[bool] = column_property(returnees_view.c.asylum_has_hrp)
+    asylum_in_gho: Mapped[bool] = column_property(returnees_view.c.asylum_in_gho)

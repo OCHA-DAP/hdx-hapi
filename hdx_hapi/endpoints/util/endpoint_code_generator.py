@@ -35,6 +35,22 @@ type_lookup = {
     'admin_level': 'AdminLevel',
     'category': 'str|32',
     'subcategory': 'str|512',
+    # Returnees entries
+    'origin_location_ref': 'int',
+    'asylum_location_ref': 'int',
+    'population_group': 'PopulationGroup',
+    'gender': 'Gender',
+    'age_range': 'str|32',
+    'min_age': 'int',
+    'max_age': 'int',
+    'origin_location_code': 'str|128',
+    'origin_location_name': 'str|512',
+    'origin_has_hrp': 'bool',
+    'origin_in_gho': 'bool',
+    'asylum_location_code': 'str|128',
+    'asylum_location_name': 'str|512',
+    'asylum_has_hrp': 'bool',
+    'asylum_in_gho': 'bool',
 }
 
 HapiModelWithAdmins_fields = [
@@ -69,6 +85,8 @@ doc_lookup = {
     'admin2_code': 'DOC_ADMIN2_CODE|DOC_SEE_ADMIN2',
     'admin2_name': 'DOC_ADMIN2_NAME|DOC_SEE_ADMIN2',
     'admin_level': 'DOC_ADMIN_LEVEL_FILTER',
+    'gender': 'DOC_GENDER',
+    'population_group': 'DOC_POPULATION_GROUP',
 }
 # name, type, docstring
 
@@ -86,6 +104,7 @@ def main():
 
     # Generating the endpoint file
     print(f'\nNow create a file hdx_hapi/endpoints/get_{endpoint_name}.py', flush=True)
+    print("It may be necessary to add enums  'from hapi_schema.utils.enums import '", flush=True)
 
     # Generic imports
     imports_for_get_route(endpoint_name)
@@ -390,39 +409,26 @@ def get_route_call_signature(endpoint_name, query_fields):
             max_length = type_lookup.get(query_field, 'str|128').split('|')[1]
         except IndexError:
             max_length = 1
-        doc_strings = doc_lookup.get(query_field, 'DOC__').split('|')
+        doc_strings = doc_lookup.get(query_field, "'Placeholder Text'").split('|')
 
-        doc_string = 'Placeholder Text'
-        if len(doc_strings[0]) != 0:
+        doc_string = "'Placeholder Text'"
+        if 'placeholder' not in doc_strings[0].lower():
             doc_string = ''
             for part in doc_strings:
-                doc_string = doc_string + f'{{{part}}}'
+                doc_string = doc_string + f"f'{{{part}}}'"
 
         if type_ == 'str':
             print(
                 f'\t{query_field}: Annotated['
-                f"Optional[{type_}], Query(max_length={max_length}, description=f'{doc_string}')"
+                f'Optional[{type_}], Query(max_length={max_length}, description={doc_string})'
                 '] = None,',
                 flush=True,
             )
-        elif type_ == 'int':
-            print(
-                f'\t{query_field}: Annotated[' f"Optional[{type_}], Query(description=f'{doc_string}')" '] = None,',
-                flush=True,
-            )
-        elif type_ == 'bool':
-            print(
-                f'\t{query_field}: Annotated[' f"Optional[{type_}], Query(description=f'{doc_string}')" '] = None,',
-                flush=True,
-            )
-        elif type_ == 'AdminLevel':
-            print(
-                f'\t{query_field}: Annotated[' f"Optional[{type_}], Query(description=f'{doc_string}')" '] = None,',
-                flush=True,
-            )
         else:
-            print(f'No query annotation for {type_}', flush=True)
-            sys.exit()
+            print(
+                f'\t{query_field}: Annotated[' f'Optional[{type_}], Query(description={doc_string})' '] = None,',
+                flush=True,
+            )
 
     # Add the end part
     print('\toutput_format: OutputFormat = OutputFormat.JSON', flush=True)
