@@ -6,6 +6,12 @@ from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_POPULATION_GROUP,
     DOC_GENDER,
+    DOC_AGE_RANGE,
+    DOC_LOCATION_CODE,
+    DOC_SEE_LOC,
+    DOC_LOCATION_NAME,
+    DOC_LOCATION_HAS_HRP,
+    DOC_LOCATION_IN_GHO,
 )
 from hdx_hapi.endpoints.models.returnees import ReturneesResponse
 from hdx_hapi.services.returnees_logic import get_returnees_srv
@@ -42,17 +48,42 @@ async def get_returnees(
     db: AsyncSession = Depends(get_db),
     population_group: Annotated[Optional[PopulationGroup], Query(description=f'{DOC_POPULATION_GROUP}')] = None,
     gender: Annotated[Optional[Gender], Query(description=f'{DOC_GENDER}')] = None,
-    age_range: Annotated[Optional[str], Query(max_length=32, description='Placeholder Text')] = None,
-    min_age: Annotated[Optional[int], Query(description='Placeholder Text')] = None,
-    max_age: Annotated[Optional[int], Query(description='Placeholder Text')] = None,
-    origin_location_code: Annotated[Optional[str], Query(max_length=128, description='Placeholder Text')] = None,
-    origin_location_name: Annotated[Optional[str], Query(max_length=512, description='Placeholder Text')] = None,
-    origin_has_hrp: Annotated[Optional[bool], Query(description='Placeholder Text')] = None,
-    origin_in_gho: Annotated[Optional[bool], Query(description='Placeholder Text')] = None,
-    asylum_location_code: Annotated[Optional[str], Query(max_length=128, description='Placeholder Text')] = None,
-    asylum_location_name: Annotated[Optional[str], Query(max_length=512, description='Placeholder Text')] = None,
-    asylum_has_hrp: Annotated[Optional[bool], Query(description='Placeholder Text')] = None,
-    asylum_in_gho: Annotated[Optional[bool], Query(description='Placeholder Text')] = None,
+    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
+    min_age: Annotated[
+        Optional[int],
+        Query(
+            ge=0,
+            description='The minimum age from `age_range`, set to `null` if `age_range` is "all" and '
+            'there is no age disaggregation',
+        ),
+    ] = None,
+    max_age: Annotated[
+        Optional[int],
+        Query(
+            ge=0,
+            description=(
+                'The maximum age from `age_range`, set to `null` if `age_range` is "all" and '
+                'there is no age disaggregation, or if there is no upper limit to the '
+                'age range'
+            ),
+        ),
+    ] = None,
+    origin_location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    origin_location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    origin_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    origin_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
+    asylum_location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    asylum_location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    asylum_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
+    asylum_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None

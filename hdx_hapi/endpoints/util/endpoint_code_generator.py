@@ -87,6 +87,7 @@ doc_lookup = {
     'admin_level': 'DOC_ADMIN_LEVEL_FILTER',
     'gender': 'DOC_GENDER',
     'population_group': 'DOC_POPULATION_GROUP',
+    'age_range': 'DOC_AGE_RANGE',
 }
 # name, type, docstring
 
@@ -360,7 +361,8 @@ def add_response_class(endpoint_name, response_fields, has_HapiModelWithAdmins):
             max_length = type_lookup.get(response_field, 'str|128').split('|')[1]
         except IndexError:
             max_length = 1
-        doc_string = doc_lookup.get(response_field, '"Placeholder text"').split('|')[0]
+        doc_lookup_field = response_field.replace('origin_', '').replace('asylum_', '')
+        doc_string = doc_lookup.get(doc_lookup_field, '"Placeholder text"').split('|')[0]
 
         if doc_string != '"Placeholder text"':
             doc_string = f'truncate_query_description({doc_string})'
@@ -409,14 +411,15 @@ def get_route_call_signature(endpoint_name, query_fields):
             max_length = type_lookup.get(query_field, 'str|128').split('|')[1]
         except IndexError:
             max_length = 1
-        doc_strings = doc_lookup.get(query_field, "'Placeholder Text'").split('|')
+        doc_field_name = query_field.replace('origin_', '').replace('asylum_', '')
+        doc_strings = doc_lookup.get(doc_field_name, "'Placeholder Text'").split('|')
 
         doc_string = "'Placeholder Text'"
         if 'placeholder' not in doc_strings[0].lower():
             doc_string = ''
             for part in doc_strings:
                 doc_string = doc_string + f"f'{{{part}}}'"
-
+            doc_string = doc_string.replace("'f'", ' ')
         if type_ == 'str':
             print(
                 f'\t{query_field}: Annotated['
