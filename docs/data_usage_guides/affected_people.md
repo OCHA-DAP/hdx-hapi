@@ -2,7 +2,7 @@
 
 ---
 
-## Internally-Displaced persons <a id=”idps”></a>
+## Internally-Displaced Persons <a id=”idps”></a>
 
 The data for this sub-category is taken from the
 [International Organization for Migration](https://www.iom.int/) (IOM)'s
@@ -51,7 +51,7 @@ data published by non-governmental organizations.
 
 {{ read_yaml('data_usage_guides/subcategory_details/refugees_and_returnees_details.yaml') }}
 
-### Parameters Returne
+### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
