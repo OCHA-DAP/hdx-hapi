@@ -2,28 +2,69 @@
 
 ---
 
-## Refugees & Persons of Concern <a id=”refugees”></a>
+## Internally-Displaced persons <a id=”idps”></a>
 
-This dataset, compiled by [UNHCR](https://www.unhcr.org/), offers annual
-age- and gender-disaggregated statistics on refugees and people of concern,
-categorised by their country of origin and country of asylum. The data are
-sourced primarily from governments hosting these populations, UNHCR's own
-registration data, and occasionally data published by non-governmental
-organizations.
+The data for this sub-category is taken from the
+[International Organization for Migration](https://www.iom.int/) (IOM)'s
+[displacement tracking matrix](https://dtm.iom.int/) (DTM),
+which collects and analyzes data on population movements,
+displacements, and mobility patterns to provide timely information
+for humanitarian response efforts.
+THe DTM data used in HAPI is taken from their
+[publicly accessible API](https://dtm.iom.int/data-and-analysis/dtm-api),
+however we note that there are many country-specific DTM datasets
+[available on HDX](https://data.humdata.org/dataset/?dataseries_name=IOM%20-%20DTM%20Baseline%20Assessment&dataseries_name=IOM%20-%20DTM%20Event%20and%20Flow%20Tracking&dataseries_name=IOM%20-%20DTM%20Site%20and%20Location%20Assessment&organization=international-organization-for-migration&q=&sort=last_modified%20desc&ext_page_size=25),
+which contain more detail and disaggregation.
 
 ### Summary
 
-{{ read_yaml('data_usage_guides/subcategory_details/refugees_details.yaml') }}
+{{ read_yaml('data_usage_guides/subcategory_details/idps_details.yaml') }}
 
 ### Parameters Returned
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get).
+[API sandbox](https://hapi.humdata.org/docs#/Affected%20people/get_idps_api_v1_affected_people_idps_get).
 
-{{ read_yaml('data_usage_guides/endpoint_parameters/refugees_parameters.yaml') }}
+{{ read_yaml('data_usage_guides/endpoint_parameters/idps_parameters.yaml') }}
 
 ### Transformations applied
+
+None
+
+### Usage notes
+
+* To obtain the number of IDPs per year in a given location,
+  only the most recent reporting round per operation should be aggregated
+
+## Refugees & Persons of Concern <a id=”refugees”></a>
+
+This sub-category is populated using data
+compiled by [UNHCR](https://www.unhcr.org/), which offers annual
+age- and gender-disaggregated global statistics on forcibly displaced and
+stateless persons, categorised by their country of origin and country
+of asylum. The data are sourced primarily from governments hosting
+these populations, UNHCR's own registration data, and occasionally
+data published by non-governmental organizations.
+
+### Summary
+
+{{ read_yaml('data_usage_guides/subcategory_details/refugees_and_returnees_details.yaml') }}
+
+### Parameters Returne
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get).
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/refugees_and_returnees_parameters.yaml') }}
+
+### Transformations applied
+
+* As this endpoint only concerns refugees and people of concern, and not
+  IDPs or refugees, we only include statistics from the
+  [population groups](enums.md#population-group)  "REF", "ROC",
+  "ASY", "OIP", "IOC", "STA", "OOC", "HST", "RST", and "NAT"
 
 * The table has been reshaped from wide to long: demographic-specific columns
   have been cast to `gender`, `age_range`, and `population`
@@ -35,8 +76,52 @@ For available query parameters, please see the
 
 ### Usage notes
 
+* Not all of the possible population groups are
+  necessarily found in the UNHCR data
+* An “all” value in the `gender` and `age_range` columns indicates no
+  disaggregation
+* `age_range` is expressed as "[`min_age`]-[`max_age`]", where `max_age` is
+  inclusive, or "[`min_age`]+" for an age range starting at `min_age` or above
+
+## Returnees <a id=”returnees”></a>
+
+This sub-category is populated using data
+compiled by [UNHCR](https://www.unhcr.org/), which offers annual
+age- and gender-disaggregated global statistics on forcibly displaced and
+stateless persons, categorised by their country of origin and country
+of asylum. The data are sourced primarily from governments hosting
+these populations, UNHCR's own registration data, and occasionally
+data published by non-governmental organizations.
+
+### Summary
+
+{{ read_yaml('data_usage_guides/subcategory_details/refugees_and_returnees_details.yaml') }}
+
+### Parameters Returned
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Affected%20people/get_returnees_api_v1_affected_people_returnees_get).
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/refugees_and_returnees_parameters.yaml') }}
+
+### Transformations applied
+
+* As this endpoint only concerns refugees and people of concern, and not
+  IDPs or refugees, we only include statistics from the
+  [population groups](enums.md#population-group)  "RET" and "RDP"
+* The table has been reshaped from wide to long: demographic-specific columns
+  have been cast to `gender`, `age_range`, and `population`
+* It is not possible to p-code based on the location information in the
+  original data, therefore population numbers are aggregated to the national
+  level
+* The reference period is constructed using the full range of the year
+  presented in the “Year” column of the original data
+
+### Usage notes
+
 * UNHCR is the only source for returnees in some countries and is therefore
-  included in HDX HAPI, but if data is available from the IDP endpoint, that
+  included in HDX HAPI, but if data is available from IOM, that
   data is preferable
 * An “all” value in the `gender` and `age_range` columns indicates no
   disaggregation
