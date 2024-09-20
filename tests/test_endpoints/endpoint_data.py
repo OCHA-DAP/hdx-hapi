@@ -539,9 +539,6 @@ endpoint_data = {
     '/api/v1/affected-people/idps': {
         'query_parameters': {
             'admin2_ref': 1,
-            'reporting_round': 1,
-            'assessment_type': 'BA',
-            'population': 0,
             'location_ref': 1,
             'location_code': 'fOO',
             'location_name': 'Foolandia',
@@ -558,6 +555,7 @@ endpoint_data = {
             'admin2_ref',
             'reporting_round',
             'assessment_type',
+            'operation',
             'population',
             'reference_period_start',
             'reference_period_end',

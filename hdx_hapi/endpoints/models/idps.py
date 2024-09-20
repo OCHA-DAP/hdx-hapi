@@ -17,8 +17,9 @@ class IdpsResponse(HapiBaseModel, HapiModelWithAdmins):
     # description=truncate_query_description(DOC_PROVIDER_ADMIN1_NAME))
     # provider_admin2_name: str = Field(max_length=512,
     # description=truncate_query_description(DOC_PROVIDER_ADMIN2_NAME))
-    reporting_round: int = Field(description='Placeholder text')
-    assessment_type: DTMAssessmentType = Field(description='Placeholder text')
+    reporting_round: int = Field(description='Data collection round number')
+    assessment_type: DTMAssessmentType = Field(description='Either baseline assessment (BA) or site assessment (SA)')
+    operation: str = Field(description='Name of DTM Operation for which the data was collected')
     population: int = Field(description='The number of people')
     reference_period_start: datetime.datetime = Field(
         description=truncate_query_description(DOC_REFERENCE_PERIOD_START)
