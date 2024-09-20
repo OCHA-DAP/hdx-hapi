@@ -1,0 +1,261 @@
+[[tables]]
+db_module = "db_admin1"
+target_view = "admin1_view"
+view_params_name="view_params_admin1"
+expected_primary_keys = ["id"]
+expected_indexes = ["code", "name", "reference_period_start", "reference_period_end", "location_code", "location_name"]
+expected_nullables = ["reference_period_start", "reference_period_end"]
+
+[[tables]]
+db_module = "db_admin2"
+target_view = "admin2_view"
+view_params_name="view_params_admin2"
+expected_primary_keys = ["id"]
+expected_indexes = ["code", "name",
+                    "reference_period_start", "reference_period_end",
+                    "location_code", "location_name"]
+expected_nullables = ["reference_period_start", "reference_period_end"]
+
+[[tables]]
+db_module = "db_conflict_event"
+target_view = "conflict_event_view"
+view_params_name="view_params_conflict_event"
+expected_primary_keys = [
+        "admin2_ref",
+        "event_type",
+        "reference_period_start"
+    ]
+expected_indexes = ["events", "fatalities", "reference_period_end", "location_code",
+"location_name", "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = ["events", "fatalities"]
+
+[[tables]]
+db_module = "db_currency"
+target_view = "currency_view"
+view_params_name = "view_params_currency"
+expected_primary_keys = [
+        "code"
+    ]
+expected_indexes = ["name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_dataset"
+target_view = "dataset_view"
+view_params_name="view_params_dataset"
+expected_primary_keys = ["hdx_id"]
+expected_indexes = ["hdx_stub", "hdx_provider_stub", "hdx_provider_name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_food_price"
+target_view = "food_price_view"
+view_params_name = "view_params_food_price"
+expected_primary_keys = ["market_code", "commodity_code", "commodity_category", "price_flag", "price_type",
+                        "reference_period_start"]
+expected_indexes = ["currency_code", "commodity_name", "market_name", "lat", "lon", "reference_period_end",
+                    "location_code", "location_name",
+                    "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_food_security"
+target_view = "food_security_view"
+view_params_name="view_params_food_security"
+expected_primary_keys = ["admin2_ref", "ipc_type", "ipc_phase", "reference_period_start"]
+expected_indexes = ["population_in_phase", "population_fraction_in_phase", "reference_period_end",
+"location_code", "location_name", "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_funding"
+target_view = "funding_view"
+view_params_name="view_params_funding"
+expected_primary_keys = ["appeal_code", "location_ref"]
+expected_indexes = ["requirements_usd", "funding_usd", "funding_pct", "reference_period_start",
+"location_code", "location_name"]
+expected_nullables = ["reference_period_end"]
+
+[[tables]]
+db_module = "db_humanitarian_needs"
+target_view = "humanitarian_needs_view"
+view_params_name="view_params_humanitarian_needs"
+expected_primary_keys = ["admin2_ref", "gender", "age_range", "population_group", "population_status", "disabled_marker", "population", "reference_period_start"]
+expected_indexes = ["min_age", "max_age", "reference_period_end",
+"location_code", "location_name", "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = ["min_age", "max_age"]
+
+[[tables]]
+db_module = "db_location"
+target_view = "location_view"
+view_params_name="view_params_location"
+expected_primary_keys = ["id"]
+expected_indexes = ["code", "name", "reference_period_start", "reference_period_end"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_national_risk"
+target_view = "national_risk_view"
+view_params_name="view_params_national_risk"
+expected_primary_keys = [
+        "location_ref",
+        "reference_period_start",
+    ]
+expected_indexes = ["reference_period_end", "location_code", "location_name"]
+expected_nullables = ["meta_missing_indicators_pct", "meta_avg_recentness_years"]
+
+[[tables]]
+db_module = "db_operational_presence"
+target_view = "operational_presence_view"
+view_params_name="view_params_operational_presence"
+expected_primary_keys = [
+        "admin2_ref",
+        "org_acronym",
+        "org_name",
+        "sector_code",
+        "reference_period_start"
+    ]
+expected_indexes = ["org_type_description","reference_period_end", "location_code",
+"location_name", "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_org_type"
+target_view = "org_type_view"
+view_params_name="view_params_org_type"
+expected_primary_keys = [
+        "code"
+    ]
+expected_indexes = ["description"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_org"
+target_view = "org_view"
+view_params_name="view_params_org"
+expected_primary_keys = ["acronym", "name"]
+expected_indexes = ["org_type_code", "org_type_description"]
+expected_nullables = ["org_type_code"]
+
+[[tables]]
+db_module = "db_population"
+target_view = "population_view"
+view_params_name="view_params_population"
+expected_primary_keys = [
+        "admin2_ref",
+        "gender",
+        "age_range",
+    ]
+expected_indexes = ["min_age", "max_age", "population", "reference_period_start", "reference_period_end",
+                    "location_code", "location_name",
+                    "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = ["min_age", "max_age"]
+
+[[tables]]
+db_module = "db_poverty_rate"
+target_view = "poverty_rate_view"
+view_params_name="view_params_poverty_rate"
+expected_primary_keys = [
+        "admin1_ref",
+        "admin1_name",
+        "reference_period_start"
+    ]
+expected_indexes = ["reference_period_end", "location_ref", "location_code",
+"location_name", "admin1_name"]
+expected_nullables = ["rate"]
+
+[[tables]]
+db_module = "db_refugees"
+target_view = "refugees_view"
+view_params_name="view_params_refugees"
+expected_primary_keys = [
+        "origin_location_ref",
+        "asylum_location_ref",
+        "gender",
+        "age_range",
+        "reference_period_start"
+    ]
+expected_indexes = ["min_age", "max_age", "population", "reference_period_end",
+                    "origin_location_code", "origin_location_name",
+                    "asylum_location_code", "asylum_location_name"]
+expected_nullables = ["min_age", "max_age"]
+
+[[tables]]
+db_module = "db_resource"
+target_view = "resource_view"
+view_params_name="view_params_resource"
+expected_primary_keys = ["hdx_id"]
+expected_indexes = ["dataset_hdx_stub", "dataset_hdx_provider_stub", "dataset_hdx_provider_name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_sector"
+target_view = "sector_view"
+view_params_name="view_params_sector"
+expected_primary_keys = [
+        "code"
+    ]
+expected_indexes = ["name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_wfp_commodity"
+target_view = "wfp_commodity_view"
+view_params_name = "view_params_wfp_commodity"
+expected_primary_keys = [
+        "code"
+    ]
+expected_indexes = ["category","name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_wfp_market"
+target_view = "wfp_market_view"
+view_params_name = "view_params_wfp_market"
+expected_primary_keys = [
+        "code"
+    ]
+expected_indexes = ["name","lat", "lon", "lat", "lon",
+                    "location_code", "location_name",
+                    "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_patch"
+target_view = "patch_view"
+view_params_name="view_params_patch"
+expected_primary_keys = ["id"]
+expected_indexes = ["patch_sequence_number", "patch_path", "state", "execution_date"]
+expected_nullables = []
+
+[[tables]]
+db_module = "db_idps"
+target_view = "idps_view"
+view_params_name="view_params_idps"
+expected_primary_keys = [
+        "admin2_ref",
+        "assessment_type",
+        "population",
+        "reference_period_start",
+        "reference_period_end",
+    ]
+expected_indexes = ["events", "fatalities", "reference_period_end", "location_code",
+"location_name", "admin1_code", "admin1_name", "admin2_code", "admin2_name"]
+expected_nullables = ["reporting_round", "reference_period_end"]
+
+[[tables]]
+db_module = "db_returnees"
+target_view = "returnees_view"
+view_params_name="view_params_returnees"
+expected_primary_keys = [
+        "origin_location_ref",
+        "asylum_location_ref",
+        "population_group",
+        "gender",
+        "age_range",
+        "reference_period_start"
+    ]
+expected_indexes = ["min_age", "max_age", "population", "reference_period_end",
+                    "origin_location_code", "origin_location_name",
+                    "asylum_location_code", "asylum_location_name"]
+expected_nullables = ["min_age", "max_age"]

@@ -7,10 +7,14 @@ This is a prototype script for generating various code fragments for adding a ne
 Ian Hopkinson 2024-09-11
 """
 
+import datetime
 from typing import Optional
 import os
+
 import tomllib
 import sys
+
+import yaml
 
 type_lookup = {
     'resource_hdx_id': 'str|36',
@@ -90,6 +94,14 @@ doc_lookup = {
     'age_range': 'DOC_AGE_RANGE',
 }
 # name, type, docstring
+readthedocs_lookup = {
+    'resource_hdx_id': '[`Resource`](metadata.md#resource)',
+    'location_ref': '[`Location`](metadata.md#location)',
+    'population_group': '[`Population Group`](enums.md#population-group)',
+    'gender': '[`Gender`](enums.md#gender)',
+    'location_code': '[`Location`](metadata.md#location)',
+    'location_name': '[`Location`](metadata.md#location)',
+}
 
 
 def main():
@@ -100,9 +112,11 @@ def main():
     query_fields = config['query_fields']
     response_fields = config['response_fields']
     has_HapiModelWithAdmins = config['has_HapiModelWithAdmins']
+    print_banner('main.py')
 
     routes_in_main(endpoint_name)
 
+    print_banner(f'hdx_hapi/endpoints/get_{endpoint_name}.py')
     # Generating the endpoint file
     print(f'\nNow create a file hdx_hapi/endpoints/get_{endpoint_name}.py', flush=True)
     print("It may be necessary to add enums  'from hapi_schema.utils.enums import '", flush=True)
@@ -119,6 +133,7 @@ def main():
     # Generate body / return function
     get_route_body_and_return(endpoint_name, query_fields)
 
+    print_banner(f'hdx_hapi/endpoints/models/{endpoint_name}.py')
     # Now make the response class
     print(
         f'\nThe Response class goes in a file, hdx_hapi/endpoints/models/{endpoint_name}.py',
@@ -127,10 +142,12 @@ def main():
     add_response_class(endpoint_name, response_fields, has_HapiModelWithAdmins)
 
     # Now make the get_[endpoint]_srv
+    print_banner(f'hdx_hapi/services/{endpoint_name}_logic.py')
     print(f'\nThe service function goes in a file, hdx_hapi/services/{endpoint_name}_logic.py', flush=True)
     add_service(endpoint_name, query_fields, has_HapiModelWithAdmins)
 
     # Generate the [Endpoint]View - this is done with code in the hapi-sqlalchemy-schema repo.
+    print_banner('hdx_hapi/db/models/views/all_views.py')
     print(f'\nThe {endpoint_name.title()}View goes in the file hdx_hapi/db/models/views/all_views.py file', flush=True)
     print('\nThis is generated using the hapi_schema/utils/hapi_views_code_generator.py code', flush=True)
     print('The following need to be added at the top of the all_views.py file', flush=True)
@@ -144,11 +161,13 @@ def main():
         flush=True,
     )
 
+    print_banner('hdx_hapi/db/models/views/vat_or_view.py')
     print('The following need to be added to hdx_hapi/db/models/views/vat_or_view.py:', flush=True)
     print(f'{endpoint_name.title()}View', flush=True)
     print(f'DB{endpoint_name.title()}VAT as {endpoint_name.title()}View', flush=True)
 
     # Generate the query function
+    print_banner(f'hdx_hapi/db/dao/{endpoint_name}_view_dao.py')
     print(
         f'\nThe query function is named {endpoint_name}_view_list and goes in the file '
         f'hdx_hapi/db/dao/{endpoint_name}_view_dao.py',
@@ -158,7 +177,40 @@ def main():
     generate_query_function(endpoint_name, query_fields, has_HapiModelWithAdmins)
 
     # Generate tests
+    print_banner(f'tests/test_endpoints/tests_{endpoint_name}_endpoint.py')
+    generate_tests(endpoint_name)
 
+    # Generate documentation
+    print_banner(f'docs/data_usage_guides/endpoint_parameters/{endpoint_name}_parameters.yaml')
+    print(
+        'Details of returned parameters should be add to a file '
+        f'docs/data_usage_guides/endpoint_parameters/{endpoint_name}_parameters.yaml',
+        flush=True,
+    )
+    generate_doc_yaml(endpoint_name, response_fields)
+    print(
+        '\nThis is rendered to pages like https://hdx-hapi.readthedocs.io/en/latest/data_usage_guides/affected_people/',
+        flush=True,
+    )
+    print(
+        'A link and related text should be added to a file like /srv/hapi/docs/data_usage_guides/affected_people.md',
+        flush=True,
+    )
+
+
+def generate_doc_yaml(endpoint_name, response_fields):
+    yaml_entries = []
+    for response_field in response_fields:
+        lookup_key = response_field.replace('origin_', '').replace('asylum_', '')
+        source_str = readthedocs_lookup.get(lookup_key, '')
+        yaml_entries.append({'Parameter': f"'`{response_field}`'", 'Description': '', 'Source': source_str})
+
+    yaml_str = yaml.dump(yaml_entries, sort_keys=False, default_flow_style=False).replace("'''", "'")
+
+    print(yaml_str, flush=True)
+
+
+def generate_tests(endpoint_name):
     print(
         f'Next generate tests which need to go in a file tests/test_endpoints/tests_{endpoint_name}_endpoint.py.'
         'The easiest thing to do here is copy one of the existing files and do a search and replace on the endpoint '
@@ -499,6 +551,22 @@ def routes_in_main(endpoint_name):
 
     print(f'\nfrom hdx_hapi.endpoints.get_{endpoint_name} import router as {endpoint_name}_router  # noqa', flush=True)
     print(f'app.include_router({endpoint_name}_router)', flush=True)
+
+
+def print_banner(action: str):
+    """Simple function to output a banner to console
+
+    Arguments:
+        action {str} -- _description_
+    """
+    title = f'{action}'
+    timestamp = f'Invoked at: {datetime.datetime.now().isoformat()}'
+    width = max(len(title), len(timestamp))
+    print('\n', flush=True)
+    print((width + 4) * '*', flush=True)
+    print(f'* {title:<{width}} *', flush=True)
+    print(f'* {timestamp:<{width}} *', flush=True)
+    print((width + 4) * '*', flush=True)
 
 
 if __name__ == '__main__':
