@@ -82,7 +82,8 @@ def parse_toml():
     if target_view == 'all':
         for table in config['tables']:
             complete_code.append(
-                f"{table['target_view']} = view({table['view_params_name']}.name, Base.metadata, {table['view_params_name']}.selectable)"
+                f"{table['target_view']} = view({table['view_params_name']}.name, "
+                f"Base.metadata, {table['view_params_name']}.selectable)"
             )
 
     complete_code.append('\n')
@@ -116,16 +117,8 @@ def create_table_code(
     target_table = target_view.replace('view', 'vat')
     # Make Preamble
     table_code = []
-    # if target_view != "all":
-    #     table_code.append(
-    #         f"\nfrom hapi_schema.{parameters['db_module']} import {parameters['view_params_name']}\n"
-    #     )
 
-    #     table_code.append(
-    #         f"{parameters['target_view']} = view({parameters['view_params_name']}.name, Base.metadata, {parameters['view_params_name']}.selectable)\n"
-    #     )
-
-    new_columns, table_body_code = make_table_template_from_view(
+    _, table_body_code = make_table_template_from_view(
         target_table,
         columns,
         expected_indexes=expected_indexes,
