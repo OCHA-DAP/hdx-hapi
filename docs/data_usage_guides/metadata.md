@@ -257,3 +257,20 @@ For available query parameters, please see the
 [API sandbox](https://hapi.humdata.org/docs#/Metadata/get_wfp_markets_api_v1_metadata_wfp_market_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/wfp_market_parameters.yaml') }}
+
+## HDX HAPI Metadata
+
+### Data Availability <a id="data-availability"></a>
+
+The data availability endpoint in HDX HAPI shows what data is accessible by
+sub-category and administrative level. If relevant data exists for a
+specific sub-category and region, it will be included in the query results,
+along with the date that it was last updated in HDX HAPI.
+
+<h4> Parameters Returned </h4>
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_data_availability_api_v1_metadata_data_availability_get)
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/data_availability_parameters.yaml') }}
