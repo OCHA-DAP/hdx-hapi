@@ -63,6 +63,14 @@ async def returnees_view_list(
 
     query = apply_reference_period_filter(query, ref_period_parameters, ReturneesView)
     query = apply_pagination(query, pagination_parameters)
+    query = query.order_by(
+        ReturneesView.origin_location_ref,
+        ReturneesView.asylum_location_ref,
+        ReturneesView.population_group,
+        ReturneesView.gender,
+        ReturneesView.age_range,
+        ReturneesView.reference_period_start,
+    )
 
     logger.debug(f'Executing SQL query: {query}')
 
