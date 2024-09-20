@@ -10,7 +10,7 @@ The data for this sub-category is taken from the
 which collects and analyzes data on population movements,
 displacements, and mobility patterns to provide timely information
 for humanitarian response efforts.
-THe DTM data used in HAPI is taken from their
+The DTM data used in HAPI is taken from their
 [publicly accessible API](https://dtm.iom.int/data-and-analysis/dtm-api),
 however we note that there are many country-specific DTM datasets
 [available on HDX](https://data.humdata.org/dataset/?dataseries_name=IOM%20-%20DTM%20Baseline%20Assessment&dataseries_name=IOM%20-%20DTM%20Event%20and%20Flow%20Tracking&dataseries_name=IOM%20-%20DTM%20Site%20and%20Location%20Assessment&organization=international-organization-for-migration&q=&sort=last_modified%20desc&ext_page_size=25),
@@ -62,10 +62,9 @@ For available query parameters, please see the
 ### Transformations applied
 
 * As this endpoint only concerns refugees and people of concern, and not
-  IDPs or refugees, we only include statistics from the
+  IDPs or returnees, we only include statistics from the
   [population groups](enums.md#population-group)  "REF", "ROC",
   "ASY", "OIP", "IOC", "STA", "OOC", "HST", "RST", and "NAT"
-
 * The table has been reshaped from wide to long: demographic-specific columns
   have been cast to `gender`, `age_range`, and `population`
 * It is not possible to p-code based on the location information in the
@@ -107,9 +106,9 @@ For available query parameters, please see the
 
 ### Transformations applied
 
-* As this endpoint only concerns refugees and people of concern, and not
-  IDPs or refugees, we only include statistics from the
-  [population groups](enums.md#population-group)  "RET" and "RDP"
+* As this endpoint only concerns returnees and not the other
+  [population groups](enums.md#population-group) available in the UNHCR data,
+  we only include statistics from the "RET" and "RDP" population groups
 * The table has been reshaped from wide to long: demographic-specific columns
   have been cast to `gender`, `age_range`, and `population`
 * It is not possible to p-code based on the location information in the
