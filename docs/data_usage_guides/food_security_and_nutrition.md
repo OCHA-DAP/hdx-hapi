@@ -7,6 +7,11 @@
 The [IPC Acute Food Insecurity (IPC AFI) classification](https://www.ipcinfo.org/ipcinfo-website/ipc-overview-and-classification-system/ipc-acute-food-insecurity-classification/en/)
 provides strategically relevant information to decision makers that focuses on
 short-term objectives to prevent, mitigate or decrease severe food insecurity.
+The IPC website and API also includes access to the
+[Cadre Harmonisé](https://www.ipcinfo.org/ch/) (CH) data,
+which targets countries in the Sahel and West Africa.
+Although the CH is a distinct food security classification system,
+it aligns with IPC standards in terms of assessment processes and outcomes.
 
 ### Summary
 
@@ -27,7 +32,7 @@ For available query parameters, please see the
   [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/),
   which uses phonetic name matching and manual overrides
 * Any unmatched p-codes are not included in HDX HAPI. In a future version we
-  plan on retaining these rows and including the provider admin names
+  plan on retaining these rows and including the provider admin names.
 
 ### Usage Notes
 
@@ -36,6 +41,23 @@ For available query parameters, please see the
   rounding errors), or because there is no IPC phase data
 * Due to the above, the sum of the IPC fractions from phases 1-5 may not be
   exactly equal to 1
+* Food security statistics from countries in West Africa and the Sahel
+  come from the [Cadre Harmonisé](https://www.ipcinfo.org/ch/)
+* Not all geographical sub-divisions in the IPC correspond to known
+  administrative levels. In particular, several countries contain point-like
+  regions that correspond to urban centres, or population groups such as IDPs
+  and refugees. There are also country-specific disclaimers that we
+  present in the table below:
+
+| ISO3 | Country Name | Notes                                                                                                                      |
+|------|--------------|----------------------------------------------------------------------------------------------------------------------------|
+| COD  | Democratic Republic of the Congo | Kinshasa is sub-divided and not p-codable at the admin 2 level                                         |
+| ETH  | Ethiopia | Some admin 2 regions are sub-divided into clusters and not p-codable                                                           |
+| HTI  | Haiti | Haiti is sub-divided using a combination of admin 2 and 3 levels, and thus we do not attempt to assign p-codes                 |
+| NER  | Niger | Some regions are divided into accessible and non-accessible areas, and the term "ville" is used to denote urban areas          |
+| NGA | Nigeria | There are several admin 2 regions which share a name, and some of them have a (1) appended to the name, which we do not p-code |
+| SDN | Sudan | Many admin 2 regions have been grouped together, and thus are not individually p-codable                                       |
+| SOM | Somalia | Admin 2 regions in Somalia are sub-divided, thus we to not attempt to assign p-codes                                           |
 
 ## Food Prices <a id="food-price"></a>
 
