@@ -267,6 +267,12 @@ sub-category and administrative level. If relevant data exists for a
 specific sub-category and region, it will be included in the query results,
 along with the date that it was last updated in HDX HAPI.
 
+Where data are available to the country (admin 0) level,
+then the admin 1 and 2 code and name fields will contain empty strings.
+Where the data are available to the admin 1 level,
+then the admin 2 code and name fields will contain empty strings.
+Note that some sub-categories can have data available add multiple levels.
+
 <h4> Parameters Returned </h4>
 
 The table below describes the parameters returned from this endpoint.
