@@ -53,7 +53,6 @@ For available query parameters, please see the
 |------|--------------|-------|
 | COD  | Democratic Republic of the Congo | Kinshasa is sub-divided and not p-codable at the admin 2 level |
 | ETH  | Ethiopia | Some admin 2 regions are sub-divided into clusters and not p-codable |
-| HTI  | Haiti | Haiti is sub-divided using a combination of admin 2 and 3 levels, and thus we do not attempt to assign p-codes |
 | NER  | Niger | Some regions are divided into accessible and non-accessible areas, and the term "ville" is used to denote urban areas |
 | NGA | Nigeria | There are several admin 2 regions which share a name, and some of them have a (1) appended to the name, which we do not p-code |
 | SDN | Sudan | Many admin 2 regions have been grouped together, and thus are not individually p-codable |
