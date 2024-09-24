@@ -67,6 +67,16 @@ async def idps_view_list(
         admin2_is_unspecified,
     )
 
+    query = query.order_by(
+        IdpsView.admin2_ref,
+        IdpsView.assessment_type,
+        IdpsView.reporting_round,
+        IdpsView.operation,
+        IdpsView.population,
+        IdpsView.reference_period_start,
+        IdpsView.reference_period_end,
+    )
+
     logger.debug(f'Executing SQL query: {query}')
 
     result = await db.execute(query)
