@@ -1,0 +1,11 @@
+- Attribute: Data provider
+  Details: IOM
+- Attribute: Dataset
+  Details: >
+    [Global IOM Displacement Tracking Matrix (DTM) from API](https://data.humdata.org/dataset/global-iom-dtm-from-api)
+- Attribute: Time series
+  Details: Approximately monthly, dating back to 2010
+- Attribute: Update frequency
+  Details: Weekly
+- Attribute: Related tables
+  Details: '[`Assessment Type`](enums.md#assessment-type)'
