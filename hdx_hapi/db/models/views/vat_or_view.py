@@ -27,6 +27,8 @@ if not USE_VAT:
         FundingView,
         RefugeesView,
         AvailabilityView,
+        IdpsView,
+        ReturneesView,
     )
 else:
     from hapi_schema.db_views_as_tables import (
@@ -52,4 +54,6 @@ else:
         DBFundingVAT as FundingView,
         DBRefugeesVAT as RefugeesView,
         DBAvailabilityVAT as AvailabilityView,
+        DBIDPsVAT as IdpsView,
+        DBReturneesVAT as ReturneesView,
     )
