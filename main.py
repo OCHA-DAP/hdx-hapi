@@ -34,6 +34,8 @@ from hdx_hapi.endpoints.get_currency import router as currency_router  # noqa
 from hdx_hapi.endpoints.get_food_security import router as food_security_router  # noqa
 from hdx_hapi.endpoints.get_food_price import router as food_price_router  # noqa
 from hdx_hapi.endpoints.get_data_availability import router as data_availability_router  # noqa
+from hdx_hapi.endpoints.get_idps import router as idps_router  # noqa
+from hdx_hapi.endpoints.get_returnees import router as returnees_router  # noqa
 
 from hdx_hapi.endpoints.get_version import router as version_router  # noqa
 
@@ -79,6 +81,8 @@ app.include_router(encoded_identifier_router)
 app.include_router(request_verification_router)
 app.include_router(favicon_router)
 app.include_router(affected_people_router)
+app.include_router(idps_router)
+app.include_router(returnees_router)
 
 app.include_router(operational_presence_router)
 app.include_router(funding_router)

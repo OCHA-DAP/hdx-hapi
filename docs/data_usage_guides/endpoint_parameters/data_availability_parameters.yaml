@@ -1,0 +1,37 @@
+- Parameter: '`category`'
+  Description: >
+    The category of data, based on the
+    [HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids?)
+  Source:
+- Parameter: '`subcategory`'
+  Description: >
+    The sub-category of data, based on the
+    [HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids?)
+  Source:
+- Parameter: '`location_code`'
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_name`'
+  Description: Admin 1 name
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin2_code`'
+  Description: Admin 2 p-code
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_name`'
+  Description: Admin 2 name
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`hapi_updated_date`'
+  Description: >
+    Date that the data was last updated in HAPI. Note that
+    this differs from the data's last update on HDX and does not
+    reflect how current the data is
+  Source:

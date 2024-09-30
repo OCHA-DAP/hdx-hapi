@@ -5,6 +5,16 @@
 Enums, or enumerations, are a data type used to define a set of named values
 that represent fixed options for a field in the API.
 
+## Assessment Type <a id="assessment-type"></a>
+
+**Used in:** [`IDPs`](affected_people.md#idps)
+
+The assessment types refer to two different methodologies for obtaining
+the IDP data coming from the IOM DTM. For more detail, see the
+[IOM DTM methodological framework](https://dtm.iom.int/about/methodological-framework).
+
+{{ read_yaml('data_usage_guides/enum_parameters/assessment_type_parameters.yaml') }}
+
 ## Commodity Category <a id="commodity-category"></a>
 
 **Used in:**
