@@ -573,6 +573,8 @@ endpoint_data = {
     '/api/v1/affected-people/idps': {
         'query_parameters': {
             'admin2_ref': 1,
+            'provider_admin1_name': 'Provider admin1 name 1',
+            'provider_admin2_name': 'Provider admin2 name 2',
             'location_ref': 1,
             'location_code': 'fOO',
             'location_name': 'Foolandia',
@@ -587,6 +589,8 @@ endpoint_data = {
         'expected_fields': [
             'resource_hdx_id',
             'admin2_ref',
+            'provider_admin1_name',
+            'provider_admin2_name',
             'reporting_round',
             'assessment_type',
             'operation',
