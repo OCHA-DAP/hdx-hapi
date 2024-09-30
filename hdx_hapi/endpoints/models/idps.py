@@ -8,15 +8,11 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_REFERENCE_PERIOD_START,
     DOC_REFERENCE_PERIOD_END,
-    DOC_PROVIDER_ADMIN1_NAME,
-    DOC_PROVIDER_ADMIN2_NAME,
 )
 
 
 class IdpsResponse(HapiBaseModel, HapiModelWithAdmins):
     resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
-    provider_admin1_name: str = Field(max_length=512, description=truncate_query_description(DOC_PROVIDER_ADMIN1_NAME))
-    provider_admin2_name: str = Field(max_length=512, description=truncate_query_description(DOC_PROVIDER_ADMIN2_NAME))
     reporting_round: int = Field(description='Data collection round number')
     assessment_type: DTMAssessmentType = Field(description='Either baseline assessment (BA) or site assessment (SA)')
     operation: str = Field(description='Name of DTM Operation for which the data was collected')
