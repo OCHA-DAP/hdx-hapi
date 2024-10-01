@@ -1,5 +1,7 @@
-from typing import Optional
+from typing import Optional, Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from hapi_schema.utils.base import Base
 
 from hdx_hapi.db.dao.operational_presence_view_dao import operational_presences_view_list
 from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams, ReferencePeriodParameters
@@ -28,7 +30,7 @@ async def get_operational_presences_srv(
     admin2_name: Optional[str] = None,
     provider_admin2_name: Optional[str] = None,
     admin_level: Optional[AdminLevel] = None,
-):
+) -> Sequence[Base]:
     admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
 
     return await operational_presences_view_list(

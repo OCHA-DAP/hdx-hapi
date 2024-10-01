@@ -4,6 +4,7 @@ from inspect import signature
 from hdx_hapi.endpoints.get_idps import get_idps
 from hdx_hapi.endpoints.get_affected_people import get_humanitarian_needs
 from hdx_hapi.endpoints.get_operational_presence import get_operational_presences
+from hdx_hapi.endpoints.get_conflict_events import get_conflict_events
 
 
 GEOGRAPHIC_PARAMETERS = {
@@ -22,7 +23,7 @@ GEOGRAPHIC_PARAMETERS = {
     'in_gho',
 }
 
-ENDPOINT_FUNCTION_LIST = [get_idps, get_humanitarian_needs, get_operational_presences]
+ENDPOINT_FUNCTION_LIST = [get_idps, get_humanitarian_needs, get_operational_presences, get_conflict_events]
 
 
 @pytest.mark.parametrize(

@@ -10,9 +10,11 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
+    DOC_PROVIDER_ADMIN1_NAME,
     DOC_ADMIN2_REF,
     DOC_ADMIN2_CODE,
     DOC_ADMIN2_NAME,
+    DOC_PROVIDER_ADMIN2_NAME,
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
     DOC_LOCATION_REF,
@@ -72,6 +74,12 @@ async def get_conflict_events(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
+    provider_admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    ] = None,
+    provider_admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
+    ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
@@ -88,7 +96,7 @@ async def get_conflict_events(
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin_level: Annotated[AdminLevel, Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -105,9 +113,11 @@ async def get_conflict_events(
         admin1_ref=admin1_ref,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
+        provider_admin1_name=provider_admin1_name,
         admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        provider_admin2_name=provider_admin2_name,
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, ConflictEventResponse)
