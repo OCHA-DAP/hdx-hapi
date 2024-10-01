@@ -8,7 +8,7 @@ from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
 async def get_operational_presences_srv(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     sector_code: Optional[str] = None,
     org_acronym: Optional[str] = None,
@@ -22,9 +22,11 @@ async def get_operational_presences_srv(
     admin1_ref: Optional[int] = None,
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
+    provider_admin1_name: Optional[str] = None,
     admin2_ref: Optional[int] = None,
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
+    provider_admin2_name: Optional[str] = None,
     admin_level: Optional[AdminLevel] = None,
 ):
     admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
@@ -45,9 +47,11 @@ async def get_operational_presences_srv(
         admin1_ref=admin1_ref,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
+        provider_admin1_name=provider_admin1_name,
         admin1_is_unspecified=admin1_is_unspecified,
         admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        provider_admin2_name=provider_admin2_name,
         admin2_is_unspecified=admin2_is_unspecified,
     )

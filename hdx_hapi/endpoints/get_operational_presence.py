@@ -19,6 +19,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN1,
     DOC_SEE_ADMIN2,
     DOC_SEE_LOC,
+    DOC_PROVIDER_ADMIN1_NAME,
+    DOC_PROVIDER_ADMIN2_NAME,
     # DOC_HAPI_UPDATED_DATE_MIN,
     # DOC_HAPI_UPDATED_DATE_MAX,
     # DOC_HAPI_REPLACED_DATE_MIN,
@@ -64,7 +66,7 @@ async def get_operational_presences(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     sector_code: Annotated[
-        str,
+        Optional[str],
         Query(
             max_length=512,
             description=(
@@ -76,7 +78,7 @@ async def get_operational_presences(
         ),
     ] = None,
     sector_name: Annotated[
-        str,
+        Optional[str],
         Query(
             max_length=512,
             description=(
@@ -88,7 +90,7 @@ async def get_operational_presences(
         ),
     ] = None,
     org_acronym: Annotated[
-        str,
+        Optional[str],
         Query(
             max_length=32,
             description=(
@@ -100,7 +102,7 @@ async def get_operational_presences(
         ),
     ] = None,
     org_name: Annotated[
-        str,
+        Optional[str],
         Query(
             max_length=512,
             description=(
@@ -111,19 +113,37 @@ async def get_operational_presences(
             ),
         ),
     ] = None,
-    location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
-    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
-    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    admin1_ref: Annotated[int, Query(description=f'{DOC_ADMIN1_REF}')] = None,
-    admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
-    admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
+    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
+    admin1_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
+    ] = None,
+    admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+    ] = None,
+    provider_admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    ] = None,
     # admin1_is_unspecified: Annotated[bool, Query(description='Location Adm1 is not specified')] = None,
-    admin2_ref: Annotated[int, Query(description=f'{DOC_ADMIN2_REF}')] = None,
-    admin2_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')] = None,
-    admin2_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')] = None,
-    admin_level: Annotated[AdminLevel, Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
+    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
+    admin2_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
+    ] = None,
+    admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
+    ] = None,
+    provider_admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
+    ] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -132,13 +152,6 @@ async def get_operational_presences(
         ref_period_parameters=ref_period_parameters,
         db=db,
         sector_code=sector_code,
-        # dataset_hdx_provider_stub=dataset_hdx_provider_stub,
-        # resource_update_date_min=resource_update_date_min,
-        # resource_update_date_max=resource_update_date_max,
-        # hapi_updated_date_min=hapi_updated_date_min,
-        # hapi_updated_date_max=hapi_updated_date_max,
-        # hapi_replaced_date_min=hapi_replaced_date_min,
-        # hapi_replaced_date_max=hapi_replaced_date_max,
         org_acronym=org_acronym,
         org_name=org_name,
         sector_name=sector_name,
@@ -146,23 +159,15 @@ async def get_operational_presences(
         location_name=location_name,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
+        provider_admin1_name=provider_admin1_name,
         location_ref=location_ref,
         has_hrp=has_hrp,
         in_gho=in_gho,
-        # admin1_is_unspecified=admin1_is_unspecified,
         admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        provider_admin2_name=provider_admin2_name,
         admin1_ref=admin1_ref,
-        # admin2_is_unspecified=admin2_is_unspecified
-        # dataset_hdx_id=dataset_hdx_id,
-        # dataset_hdx_stub=dataset_hdx_stub,
-        # dataset_title=dataset_title,
-        # dataset_hdx_provider_name=dataset_hdx_provider_name,
-        # resource_hdx_id=resource_hdx_id,
-        # resource_name=resource_name,
-        # org_type_code=org_type_code,
-        # org_type_description=org_type_description,
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceResponse)
