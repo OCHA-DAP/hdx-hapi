@@ -309,7 +309,7 @@ endpoint_data = {
     },
     '/api/v1/population-social/poverty-rate': {
         'query_parameters': {
-            'admin1_name': 'Province 01',
+            'provider_admin1_name': 'Province 01',
             'mpi_min': 0.01,
             'mpi_max': 0.9,
             # 'reference_period_start_min': '2020-01-01T00:00:00',
@@ -321,7 +321,7 @@ endpoint_data = {
         },
         'expected_fields': [
             'resource_hdx_id',
-            'admin1_name',
+            'provider_admin1_name',
             'mpi',
             'headcount_ratio',
             'intensity_of_deprivation',

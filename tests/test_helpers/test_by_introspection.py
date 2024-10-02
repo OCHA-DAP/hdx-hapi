@@ -8,6 +8,10 @@ from hdx_hapi.endpoints.get_conflict_events import get_conflict_events
 from hdx_hapi.endpoints.get_food_security import get_food_security
 from hdx_hapi.endpoints.get_population import get_populations
 from hdx_hapi.endpoints.get_wfp_market import get_wfp_markets
+from hdx_hapi.endpoints.get_population import get_poverty_rates
+
+from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
+from hdx_hapi.db.dao.poverty_rate_dao import poverty_rates_view_list
 
 
 GEOGRAPHIC_PARAMETERS = {
@@ -47,3 +51,20 @@ def test_call_signatures_parametrically(endpoint_function):
     query_parameters_set = {x for x, _ in function_signature.parameters.items()}
 
     assert GEOGRAPHIC_PARAMETERS.issubset(query_parameters_set)
+
+
+def test_poverty_rate_call_signature():
+    router_function_signature = signature(get_poverty_rates)
+    service_function_signature = signature(get_poverty_rates_srv)
+    list_function_signature = signature(poverty_rates_view_list)
+
+    router_parameters_set = {x for x, _ in router_function_signature.parameters.items()}
+    service_parameters_set = {x for x, _ in service_function_signature.parameters.items()}
+    list_parameters_set = {x for x, _ in list_function_signature.parameters.items()}
+
+    assert 'provider_admin1_name' in router_parameters_set
+
+    assert router_parameters_set - set(['common_parameters', 'output_format']) == service_parameters_set - set(
+        ['pagination_parameters', 'ref_period_parameters']
+    )
+    assert service_parameters_set == list_parameters_set

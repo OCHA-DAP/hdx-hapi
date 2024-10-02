@@ -157,11 +157,18 @@ async def get_poverty_rates(
     db: AsyncSession = Depends(get_db),
     mpi_min: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), lower bound.')] = None,
     mpi_max: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), upper bound.')] = None,
-    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
-    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
+    provider_admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -171,11 +178,12 @@ async def get_poverty_rates(
         db=db,
         mpi_min=mpi_min,
         mpi_max=mpi_max,
+        location_ref=location_ref,
         location_code=location_code,
         location_name=location_name,
         has_hrp=has_hrp,
         in_gho=in_gho,
-        admin1_name=admin1_name,
+        provider_admin1_name=provider_admin1_name,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, PovertyRateResponse)
 
