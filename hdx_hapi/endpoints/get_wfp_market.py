@@ -108,10 +108,12 @@ async def get_wfp_markets(
         in_gho=in_gho,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
+        provider_admin1_name=provider_admin1_name,
         location_ref=location_ref,
         admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        provider_admin2_name=provider_admin2_name,
         admin1_ref=admin1_ref,
         admin_level=admin_level,
     )

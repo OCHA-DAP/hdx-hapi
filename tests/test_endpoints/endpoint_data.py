@@ -684,7 +684,7 @@ endpoint_data = {
     '/api/v1/metadata/wfp-market': {
         'query_parameters': {
             'code': '001',
-            'name': 'market',
+            'name': 'Market #1',
             'location_ref': 1,
             'location_code': 'foo',
             'location_name': 'Foolandia',
@@ -693,11 +693,11 @@ endpoint_data = {
             'admin1_ref': 2,
             'admin1_code': 'foo-001',
             'admin1_name': 'province',
-            'provider_admin1_name': 'province',
+            'provider_admin1_name': 'Provider admin1 name 4',
             'admin2_ref': 4,
             'admin2_code': 'foo-001-a',
             'admin2_name': 'district',
-            'provider_admin2_name': 'distinct',
+            'provider_admin2_name': 'Provider admin2 name 4',
         },
         'expected_fields': [
             'code',
