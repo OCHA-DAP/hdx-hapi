@@ -1,9 +1,7 @@
-import datetime
 import pytest
 import logging
 
 from httpx import AsyncClient
-from regex import W
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 from hdx_hapi.endpoints.models.wfp_market import WfpMarketResponse
