@@ -693,9 +693,11 @@ endpoint_data = {
             'admin1_ref': 2,
             'admin1_code': 'foo-001',
             'admin1_name': 'province',
+            'provider_admin1_name': 'province',
             'admin2_ref': 4,
             'admin2_code': 'foo-001-a',
             'admin2_name': 'district',
+            'provider_admin2_name': 'distinct',
         },
         'expected_fields': [
             'code',
@@ -708,9 +710,11 @@ endpoint_data = {
             'admin1_ref',
             'admin1_code',
             'admin1_name',
+            'provider_admin1_name',
             'admin2_ref',
             'admin2_code',
             'admin2_name',
+            'provider_admin2_name',
         ],
     },
     '/api/encode_app_identifier': {
