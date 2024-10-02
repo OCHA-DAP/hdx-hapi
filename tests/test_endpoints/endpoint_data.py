@@ -277,9 +277,12 @@ endpoint_data = {
             'has_hrp': True,
             'in_gho': True,
             'admin1_code': 'FOO-xxx',
+            'admin1_name': 'Unspecified',
+            'provider_admin1_name': 'Provider admin1 name 1',
             'admin1_is_unspecified': False,
             'admin2_code': 'FOO-xxx-XXX',
             'admin2_name': 'Unspecified',
+            'provider_admin2_name': 'Provider admin2 name 1',
             'admin2_is_unspecified': True,
         },
         'expected_fields': [
@@ -298,8 +301,10 @@ endpoint_data = {
             'admin1_ref',
             'admin1_code',
             'admin1_name',
+            'provider_admin1_name',
             'admin2_code',
             'admin2_name',
+            'provider_admin2_name',
         ],
     },
     '/api/v1/population-social/poverty-rate': {

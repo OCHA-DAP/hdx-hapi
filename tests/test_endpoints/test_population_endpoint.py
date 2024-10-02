@@ -1,3 +1,4 @@
+import datetime
 import pytest
 import logging
 
@@ -67,19 +68,19 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
         min_age=10,
         max_age=14,
         population=100,
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         location_ref=1,
         location_code='FOO',
         location_name='Foolandia',
-        has_hrp=True,
-        in_gho=True,
         admin1_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
+        provider_admin1_name='Province 01',
         admin1_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
+        provider_admin2_name='District A',
         admin2_is_unspecified=False,
     )
     assert (
@@ -103,19 +104,19 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
         min_age=10,
         max_age=14,
         population=100,
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         location_ref=1,
         location_code='FOO',
         location_name='Foolandia',
-        has_hrp=True,
-        in_gho=True,
         admin1_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Unspecified',
+        provider_admin1_name='Unspecified',
         admin1_is_unspecified=True,
         admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
+        provider_admin2_name='Unspecified',
         admin2_is_unspecified=True,
     )
 

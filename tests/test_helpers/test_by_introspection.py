@@ -6,6 +6,7 @@ from hdx_hapi.endpoints.get_affected_people import get_humanitarian_needs
 from hdx_hapi.endpoints.get_operational_presence import get_operational_presences
 from hdx_hapi.endpoints.get_conflict_events import get_conflict_events
 from hdx_hapi.endpoints.get_food_security import get_food_security
+from hdx_hapi.endpoints.get_population import get_populations
 
 
 GEOGRAPHIC_PARAMETERS = {
@@ -30,6 +31,7 @@ ENDPOINT_FUNCTION_LIST = [
     get_operational_presences,
     get_conflict_events,
     get_food_security,
+    get_populations,
 ]
 
 

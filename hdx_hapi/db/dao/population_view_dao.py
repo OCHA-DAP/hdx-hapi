@@ -34,11 +34,13 @@ async def populations_view_list(
     admin1_ref: Optional[int] = None,
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
+    provider_admin1_name: Optional[str] = None,
     admin1_is_unspecified: Optional[bool] = None,
     location_ref: Optional[int] = None,
     admin2_ref: Optional[int] = None,
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
+    provider_admin2_name: Optional[str] = None,
     admin2_is_unspecified: Optional[bool] = None,
 ) -> Sequence[PopulationView]:
     logger.info(
@@ -70,10 +72,12 @@ async def populations_view_list(
         admin1_ref,
         admin1_code,
         admin1_name,
+        provider_admin1_name,
         admin1_is_unspecified,
         admin2_ref,
         admin2_code,
         admin2_name,
+        provider_admin2_name,
         admin2_is_unspecified,
     )
 
