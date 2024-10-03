@@ -9,6 +9,7 @@ from hdx_hapi.endpoints.get_food_security import get_food_security
 from hdx_hapi.endpoints.get_population import get_populations
 from hdx_hapi.endpoints.get_wfp_market import get_wfp_markets
 from hdx_hapi.endpoints.get_population import get_poverty_rates
+from hdx_hapi.endpoints.get_food_price import get_food_prices
 
 from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
 from hdx_hapi.db.dao.poverty_rate_dao import poverty_rates_view_list
@@ -38,6 +39,7 @@ ENDPOINT_FUNCTION_LIST = [
     get_food_security,
     get_populations,
     get_wfp_markets,
+    get_food_prices,
 ]
 
 
@@ -50,6 +52,7 @@ def test_call_signatures_parametrically(endpoint_function):
 
     query_parameters_set = {x for x, _ in function_signature.parameters.items()}
 
+    print(f'{GEOGRAPHIC_PARAMETERS.difference(query_parameters_set)}', flush=True)
     assert GEOGRAPHIC_PARAMETERS.issubset(query_parameters_set)
 
 
