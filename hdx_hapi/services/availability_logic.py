@@ -17,8 +17,8 @@ async def get_availability_srv(
     admin1_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
     admin2_code: Optional[str] = None,
-    hapi_updated_date_min: Optional[datetime.datetime] = None,
-    hapi_updated_date_max: Optional[datetime.datetime] = None,
+    hapi_updated_date_min: Optional[datetime.datetime | datetime.date] = None,
+    hapi_updated_date_max: Optional[datetime.datetime | datetime.date] = None,
 ):
     return await availability_view_list(
         pagination_parameters=pagination_parameters,

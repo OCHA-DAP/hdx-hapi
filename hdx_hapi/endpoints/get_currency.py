@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 
 
@@ -36,9 +36,7 @@ router = APIRouter(
 async def get_currencies(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_CURRENCY_CODE}')
-    ] = None,
+    code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_CURRENCY_CODE}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

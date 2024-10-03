@@ -7,7 +7,7 @@ from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParame
 
 async def get_locations_srv(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     id: Optional[int] = None,
     code: Optional[str] = None,

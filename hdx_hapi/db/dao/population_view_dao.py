@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 async def populations_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     gender: Optional[Gender] = None,
     age_range: Optional[str] = None,

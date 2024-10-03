@@ -22,8 +22,8 @@ async def availability_view_list(
     admin1_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
     admin2_code: Optional[str] = None,
-    hapi_updated_date_min: Optional[datetime.datetime] = None,
-    hapi_updated_date_max: Optional[datetime.datetime] = None,
+    hapi_updated_date_min: Optional[datetime.datetime | datetime.date] = None,
+    hapi_updated_date_max: Optional[datetime.datetime | datetime.date] = None,
 ):
     logger.info(f'availability_view_list called with params: {locals()}')
 

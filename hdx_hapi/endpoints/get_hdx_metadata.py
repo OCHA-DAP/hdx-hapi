@@ -92,30 +92,32 @@ async def get_datasets(
 async def get_resources(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    resource_hdx_id: Annotated[str, Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
-    format: Annotated[str, Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
+    resource_hdx_id: Annotated[Optional[str], Query(max_length=36, description=f'{DOC_HDX_RESOURCE_ID}')] = None,
+    format: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_HDX_RESOURCE_FORMAT}')] = None,
     update_date_min: Annotated[
-        datetime.datetime | date,
+        Optional[datetime.datetime | date],
         Query(description=f'{DOC_UPDATE_DATE_MIN}'),
     ] = None,
     update_date_max: Annotated[
-        datetime.datetime | date,
+        Optional[datetime.datetime | date],
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
-    is_hxl: Annotated[bool, Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
+    is_hxl: Annotated[Optional[bool], Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
     dataset_hdx_id: Annotated[
-        str, Query(max_length=36, description=f'{DOC_HDX_DATASET_IN_RESOURCE_ID} {DOC_SEE_DATASET} ')
+        Optional[str], Query(max_length=36, description=f'{DOC_HDX_DATASET_IN_RESOURCE_ID} {DOC_SEE_DATASET} ')
     ] = None,
     dataset_hdx_stub: Annotated[
-        str, Query(max_length=128, description=f'{DOC_HDX_DATASET_IN_RESOURCE_NAME} {DOC_SEE_DATASET}')
+        Optional[str], Query(max_length=128, description=f'{DOC_HDX_DATASET_IN_RESOURCE_NAME} {DOC_SEE_DATASET}')
     ] = None,
     dataset_hdx_title: Annotated[
-        str, Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE} {DOC_SEE_DATASET}')
+        Optional[str], Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE} {DOC_SEE_DATASET}')
     ] = None,
     dataset_hdx_provider_stub: Annotated[
-        str, Query(max_length=128, description=f'{DOC_HDX_PROVIDER_IN_RESOURCE_STUB}')
+        Optional[str], Query(max_length=128, description=f'{DOC_HDX_PROVIDER_IN_RESOURCE_STUB}')
     ] = None,
-    dataset_hdx_provider_name: Annotated[str, Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,
+    dataset_hdx_provider_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """

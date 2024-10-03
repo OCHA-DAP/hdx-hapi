@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 async def admin1_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     id: Optional[int] = None,
     location_ref: Optional[int] = None,

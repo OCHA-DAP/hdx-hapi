@@ -14,13 +14,10 @@ logger = logging.getLogger(__name__)
 
 async def funding_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     appeal_code: Optional[str] = None,
     appeal_type: Optional[str] = None,
-    org_acronym: Optional[str] = None,
-    org_name: Optional[str] = None,
-    sector_name: Optional[str] = None,
     # location_ref: Optional[int] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
@@ -28,12 +25,6 @@ async def funding_view_list(
     in_gho: Optional[bool] = None,
 ) -> Sequence[FundingView]:
     query = select(FundingView)
-    if org_acronym:
-        query = case_insensitive_filter(query, FundingView.org_acronym, org_acronym)
-    if org_name:
-        query = query.where(FundingView.org_name.icontains(org_name))
-    if sector_name:
-        query = query.where(FundingView.sector_name.icontains(sector_name))
     # if location_ref:
     #     query = query.where(FundingView.location_ref == location_ref)
     if location_code:
