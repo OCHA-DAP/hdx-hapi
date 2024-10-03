@@ -167,7 +167,7 @@ async def get_poverty_rates(
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
     provider_admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
