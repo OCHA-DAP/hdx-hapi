@@ -27,6 +27,7 @@ import sys
 
 sys.path.append('..')
 from importlib import import_module
+from typing import Optional
 
 import psycopg
 import sqlalchemy
@@ -43,8 +44,8 @@ from hdx_hapi.config.config import get_config
 def parse_toml():
     # Setup the database:
     session = make_session()
-    Base.metadata.create_all(session.get_bind())
-    Base.metadata.reflect(bind=session.get_bind(), views=True)
+    Base.metadata.create_all(session.get_bind())  # pyright: ignore[reportOptionalMemberAccess]
+    Base.metadata.reflect(bind=session.get_bind(), views=True)  # pyright: ignore[reportOptionalMemberAccess]
     target_view = None
     if len(sys.argv) == 2:
         target_view = sys.argv[1]
@@ -101,7 +102,7 @@ def parse_toml():
 
 def create_table_code(
     parameters: dict,
-    table_view: str = None,
+    table_view: Optional[str] = None,
 ) -> list[str]:
     # Change these the target_view, prepare_view, expected_primary_keys and expected_indexes
     target_view = parameters['target_view']

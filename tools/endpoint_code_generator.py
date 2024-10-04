@@ -11,7 +11,8 @@ import datetime
 from typing import Optional
 import os
 
-import tomllib
+# script used in Python 3.12 where tomllib is available, container is Python 3.10
+import tomllib  # pyright: ignore[reportMissingImports]
 import sys
 
 import yaml
@@ -235,7 +236,7 @@ def parse_toml(endpoint_name: Optional[str] = 'idps') -> dict:
     with open(config_file_path, 'rb') as file_handle:
         all_config = tomllib.load(file_handle)
 
-    requested_config = None
+    requested_config = {}
     for config in all_config['tables']:
         if config['endpoint_name'] == endpoint_name:
             requested_config = config

@@ -1,5 +1,5 @@
 import logging
-from pydantic import HttpUrl
+from pydantic import HttpUrl, TypeAdapter
 from hdx_hapi.config.config import get_config
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse
 from hdx_hapi.services.hdx_url_logic import get_dataset_url, get_dataset_api_url
@@ -14,7 +14,9 @@ def test_helper_get_dataset_url():
     log.info('started test_helper_get_dataset_url')
 
     dataset_id = 'test-dataset'
-    expected_link = HttpUrl(url='https://data.humdata.org/dataset/%s' % (dataset_id))
+
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    expected_link = AdaptedTypeURL.validate_strings(f'https://data.humdata.org/dataset/{dataset_id}')
 
     dataset_url = get_dataset_url(dataset_id=dataset_id)
 
@@ -35,7 +37,9 @@ def test_helper_get_dataset_api_url():
     log.info('started test_helper_get_dataset_api_url')
 
     dataset_id = 'test-api-dataset'
-    expected_link = HttpUrl(url='https://data.humdata.org/api/action/package_show?id=%s' % (dataset_id))
+
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    expected_link = AdaptedTypeURL.validate_strings(f'https://data.humdata.org/api/action/package_show?id={dataset_id}')
 
     dataset_api_url = get_dataset_api_url(dataset_id=dataset_id)
 
