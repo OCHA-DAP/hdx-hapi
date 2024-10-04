@@ -19,8 +19,8 @@ expected_fields = endpoint_data['expected_fields']
 
 
 @pytest.mark.asyncio
-async def test_get_food_prices(event_loop, refresh_db):
-    log.info('started test_get_food_prices')
+async def test_get_food_price(event_loop, refresh_db):
+    log.info('started test_get_food_price')
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200

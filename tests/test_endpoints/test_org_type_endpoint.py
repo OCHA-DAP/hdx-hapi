@@ -14,8 +14,8 @@ expected_fields = endpoint_data['expected_fields']
 
 
 @pytest.mark.asyncio
-async def test_get_org_types(event_loop, refresh_db):
-    log.info('started test_get_org_types')
+async def test_get_org_type(event_loop, refresh_db):
+    log.info('started test_get_org_type')
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200

@@ -42,7 +42,7 @@ router = APIRouter(
     response_model=HapiGenericResponse[FundingResponse],
     summary='Get funding data',
 )
-async def get_fundings(
+async def get_funding(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -79,7 +79,7 @@ async def get_fundings(
     return transform_result_to_csv_stream_if_requested(result, output_format, FundingResponse)
 
 
-get_fundings.__doc__ = (
+get_funding.__doc__ = (
     "OCHA's funding data from the Financial Tracking Service provides information on humanitarian aid contributions. "
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'coordination_and_context/#funding">HDX HAPI documentation</a>, '

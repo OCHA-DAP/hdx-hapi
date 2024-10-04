@@ -61,7 +61,7 @@ SUMMARY_TEXT = 'Get food prices'
     response_model=HapiGenericResponse[FoodPriceResponse],
     summary=SUMMARY_TEXT,
 )
-async def get_food_prices(
+async def get_food_price(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     market_code: Annotated[
@@ -148,7 +148,7 @@ async def get_food_prices(
     return transform_result_to_csv_stream_if_requested(result, output_format, FoodPriceResponse)
 
 
-get_food_prices.__doc__ = (
+get_food_price.__doc__ = (
     'The World Food Programme (WFP) food prices data provides information about food prices for a range of commodities '
     'at markets across the world. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'

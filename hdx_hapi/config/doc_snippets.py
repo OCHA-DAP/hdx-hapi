@@ -43,7 +43,7 @@ DOC_HDX_RESOURCE_HXL = (
 DOC_HDX_DATASET_IN_RESOURCE_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_IN_RESOURCE_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
 DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the URL-safe name of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[dataset_hdx_provider_stub]` will load the provider's page on HDX."
-DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
+DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_dataset_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
 
 # Time periods
 DOC_UPDATE_DATE_MIN = 'Minimum date that datasets was last updated, e.g. 2020-01-01 or 2020-01-01T00:00:00'
@@ -76,7 +76,7 @@ DOC_ORG_TYPE_CODE = 'Filter the response by the organization type code.'
 DOC_ORG_TYPE_DESCRIPTION = 'Filter the response by the organization type description.'
 DOC_SECTOR_CODE = 'Filter the response by the sector code.'
 DOC_SECTOR_NAME = 'Filter the response by the sector name.'
-DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
+DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_type_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
 
 
 DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start age]-[end age], or [start age]+ for an age range starting at [start age] or above. The end age is assumed to be inclusive, though that is not always explicit in the source data.'

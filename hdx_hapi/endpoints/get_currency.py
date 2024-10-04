@@ -33,7 +33,7 @@ router = APIRouter(
     response_model=HapiGenericResponse[CurrencyResponse],
     summary='Get information about how currencies are classified',
 )
-async def get_currencies(
+async def get_currency(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_CURRENCY_CODE}')] = None,

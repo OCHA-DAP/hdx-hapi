@@ -61,7 +61,7 @@ SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian 
     response_model=HapiGenericResponse[OperationalPresenceResponse],
     summary=SUMMARY_TEXT,
 )
-async def get_operational_presences(
+async def get_operational_presence(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -72,7 +72,7 @@ async def get_operational_presences(
             description=(
                 'Filter the response by sector codes, which describe the humanitarian sector '
                 'to which the operational presence applies. '
-                'See the <a href="/docs#/Metadata/get_sectors_api_v1_metadata_sector_get" '
+                'See the <a href="/docs#/Metadata/get_sector_api_v1_metadata_sector_get" '
                 'target="_blank">sector endpoint</a> for details.'
             ),
         ),
@@ -84,7 +84,7 @@ async def get_operational_presences(
             description=(
                 'Filter the response by sector names, '
                 'which describe the humanitarian sector to which the operational presence applies. '
-                'See the <a href="/docs#/Metadata/get_sectors_api_v1_metadata_sector_get" '
+                'See the <a href="/docs#/Metadata/get_sector_api_v1_metadata_sector_get" '
                 'target="_blank">sector endpoint</a> for details.'
             ),
         ),
@@ -96,7 +96,7 @@ async def get_operational_presences(
             description=(
                 'Filter the response by the acronym of the organization '
                 'to which the operational presence applies. '
-                'See the <a href="/docs#/Metadata/get_orgs_api_v1_metadata_org_get" '
+                'See the <a href="/docs#/Metadata/get_org_api_v1_metadata_org_get" '
                 'target="_blank">org endpoint</a> for details.'
             ),
         ),
@@ -108,7 +108,7 @@ async def get_operational_presences(
             description=(
                 'Filter the response by the name of the organization '
                 'to which the operational presence applies. '
-                'See the <a href="/docs#/Metadata/get_orgs_api_v1_metadata_org_get" '
+                'See the <a href="/docs#/Metadata/get_org_api_v1_metadata_org_get" '
                 'target="_blank">org endpoint</a> for details.'
             ),
         ),
@@ -173,7 +173,7 @@ async def get_operational_presences(
     return transform_result_to_csv_stream_if_requested(result, output_format, OperationalPresenceResponse)
 
 
-get_operational_presences.__doc__ = (
+get_operational_presence.__doc__ = (
     "OCHA's 3W (Who is doing What Where) Operational Presence data provides "
     'information about which organizations are working in different locations affected by a crisis. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'

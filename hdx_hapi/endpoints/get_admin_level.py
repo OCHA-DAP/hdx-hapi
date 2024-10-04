@@ -52,7 +52,7 @@ router = APIRouter(
     response_model=HapiGenericResponse[LocationResponse],
     summary='Get the list of locations (typically countries) included in HDX HAPI',
 )
-async def get_locations(
+async def get_location(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -77,7 +77,7 @@ async def get_locations(
     return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
 
 
-get_locations.__doc__ = DOC_SCOPE_DISCLAIMER
+get_location.__doc__ = DOC_SCOPE_DISCLAIMER
 
 
 @router.get(

@@ -52,7 +52,7 @@ router = APIRouter(
     response_model=HapiGenericResponse[DatasetResponse],
     summary='Get information about the sources of the data in HDX HAPI',
 )
-async def get_datasets(
+async def get_dataset(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     dataset_hdx_id: Annotated[Optional[str], Query(max_length=36, description=f'{DOC_HDX_DATASET_ID}')] = None,

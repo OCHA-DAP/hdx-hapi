@@ -16,8 +16,8 @@ expected_fields = endpoint_data['expected_fields']
 
 
 @pytest.mark.asyncio
-async def test_get_operational_presences(event_loop, refresh_db):
-    log.info('started test_get_operational_presences')
+async def test_get_operational_presence(event_loop, refresh_db):
+    log.info('started test_get_operational_presence')
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200

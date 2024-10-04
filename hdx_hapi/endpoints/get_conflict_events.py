@@ -59,7 +59,7 @@ SUMMARY_TEXT = 'Get the list of conflict events'
     response_model=HapiGenericResponse[ConflictEventResponse],
     summary=SUMMARY_TEXT,
 )
-async def get_conflict_events(
+async def get_conflict_event(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -123,7 +123,7 @@ async def get_conflict_events(
     return transform_result_to_csv_stream_if_requested(result, output_format, ConflictEventResponse)
 
 
-get_conflict_events.__doc__ = (
+get_conflict_event.__doc__ = (
     'Armed Conflict Location & Events Data from ACLED. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'coordination_and_context/#conflict-events">HDX HAPI documentation</a>, '

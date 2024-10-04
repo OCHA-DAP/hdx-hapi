@@ -61,7 +61,7 @@ router = APIRouter(
     response_model=HapiGenericResponse[PopulationResponse],
     summary='Get baseline population data',
 )
-async def get_populations(
+async def get_population(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -132,7 +132,7 @@ async def get_populations(
     return transform_result_to_csv_stream_if_requested(result, output_format, PopulationResponse)
 
 
-get_populations.__doc__ = (
+get_population.__doc__ = (
     'Baseline population data sourced and maintained by UNFPA (UN Population Fund). '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'population_and_socio-economy/#baseline-population">HDX HAPI documentation</a>, '
@@ -151,7 +151,7 @@ get_populations.__doc__ = (
     response_model=HapiGenericResponse[PovertyRateResponse],
     summary='Get poverty rate data',
 )
-async def get_poverty_rates(
+async def get_poverty_rate(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -188,7 +188,7 @@ async def get_poverty_rates(
     return transform_result_to_csv_stream_if_requested(result, output_format, PovertyRateResponse)
 
 
-get_poverty_rates.__doc__ = (
+get_poverty_rate.__doc__ = (
     'Poverty rate data from the Oxford Department of International Development. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'population_and_socio-economy/#poverty-rate">HDX HAPI documentation</a>, '

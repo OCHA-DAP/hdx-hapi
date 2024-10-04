@@ -3,13 +3,13 @@ import pytest
 from inspect import signature
 from hdx_hapi.endpoints.get_idps import get_idps
 from hdx_hapi.endpoints.get_affected_people import get_humanitarian_needs
-from hdx_hapi.endpoints.get_operational_presence import get_operational_presences
-from hdx_hapi.endpoints.get_conflict_events import get_conflict_events
+from hdx_hapi.endpoints.get_operational_presence import get_operational_presence
+from hdx_hapi.endpoints.get_conflict_events import get_conflict_event
 from hdx_hapi.endpoints.get_food_security import get_food_security
-from hdx_hapi.endpoints.get_population import get_populations
-from hdx_hapi.endpoints.get_wfp_market import get_wfp_markets
-from hdx_hapi.endpoints.get_population import get_poverty_rates
-from hdx_hapi.endpoints.get_food_price import get_food_prices
+from hdx_hapi.endpoints.get_population import get_population
+from hdx_hapi.endpoints.get_wfp_market import get_wfp_market
+from hdx_hapi.endpoints.get_population import get_poverty_rate
+from hdx_hapi.endpoints.get_food_price import get_food_price
 
 from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
 from hdx_hapi.db.dao.poverty_rate_dao import poverty_rates_view_list
@@ -34,12 +34,12 @@ GEOGRAPHIC_PARAMETERS = {
 ENDPOINT_FUNCTION_LIST = [
     get_idps,
     get_humanitarian_needs,
-    get_operational_presences,
-    get_conflict_events,
+    get_operational_presence,
+    get_conflict_event,
     get_food_security,
-    get_populations,
-    get_wfp_markets,
-    get_food_prices,
+    get_population,
+    get_wfp_market,
+    get_food_price,
 ]
 
 
@@ -57,7 +57,7 @@ def test_call_signatures_parametrically(endpoint_function):
 
 
 def test_poverty_rate_call_signature():
-    router_function_signature = signature(get_poverty_rates)
+    router_function_signature = signature(get_poverty_rate)
     service_function_signature = signature(get_poverty_rates_srv)
     list_function_signature = signature(poverty_rates_view_list)
 

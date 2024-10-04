@@ -37,7 +37,7 @@ from hdx_hapi.services.idps_logic import get_idps_srv
 
 CONFIG = get_config()
 router = APIRouter(
-    tags=['Affected people'],
+    tags=['Affected People'],
 )
 
 

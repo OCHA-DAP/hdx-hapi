@@ -543,7 +543,7 @@ from hdx_hapi.endpoints.util.util import (
     print(f'\nfrom hdx_hapi.endpoints.models.{endpoint_name} import {endpoint_name.title()}Response', flush=True)
     print(f'from hdx_hapi.services.{endpoint_name}_logic import get_{endpoint_name}_srv', flush=True)
 
-    print("CONFIG = get_config()\nrouter = APIRouter(\n\ttags=['Affected people'],)", flush=True)
+    print("CONFIG = get_config()\nrouter = APIRouter(\n\ttags=['Affected People'],)", flush=True)
 
 
 def routes_in_main(endpoint_name):

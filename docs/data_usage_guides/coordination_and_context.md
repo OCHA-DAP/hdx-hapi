@@ -19,7 +19,7 @@ efforts, identify gaps, and plan for future humanitarian response.
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presences_api_v1_coordination_context_operational_presence_get).
+[API sandbox](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presence_api_v1_coordination_context_operational_presence_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/operational_presence_parameters.yaml') }}
 
