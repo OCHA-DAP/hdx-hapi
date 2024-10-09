@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
-    DOC_DISABLED_MARKER,
     DOC_GENDER,
     DOC_AGE_RANGE,
     DOC_POPULATION_GROUP,
@@ -36,7 +35,7 @@ from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream
 from hdx_hapi.services.humanitarian_needs_logic import get_humanitarian_needs_srv
 from hdx_hapi.services.refugees_logic import get_refugees_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
-from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, PopulationStatus
+from hapi_schema.utils.enums import Gender, PopulationGroup, PopulationStatus
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
@@ -145,13 +144,8 @@ async def get_humanitarian_needs(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
-    age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
-    disabled_marker: Annotated[Optional[DisabledMarker], Query(description=f'{DOC_DISABLED_MARKER}')] = None,
+    category: Annotated[Optional[str], Query(max_length=128, description='')] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
-    population_group: Annotated[
-        Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
-    ] = None,
     population_status: Annotated[
         Optional[PopulationStatus], Query(max_length=32, description=f'{DOC_POPULATION_STATUS}')
     ] = None,
@@ -192,11 +186,8 @@ async def get_humanitarian_needs(
         ref_period_parameters=ref_period_parameters,
         db=db,
         admin2_ref=admin2_ref,
-        gender=gender,
-        age_range=age_range,
-        disabled_marker=disabled_marker,
+        category=category,
         sector_code=sector_code,
-        population_group=population_group,
         population_status=population_status,
         population_min=population_min,
         population_max=population_max,

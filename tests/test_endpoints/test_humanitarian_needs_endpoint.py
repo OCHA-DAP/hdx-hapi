@@ -3,6 +3,7 @@ import logging
 
 from httpx import AsyncClient
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
+from hapi_schema.utils.enums import PopulationStatus
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
@@ -67,14 +68,9 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
 
     humanitarian_needs_view_adm_specified = HumanitarianNeedsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
-        gender='f',
-        age_range='1-2',
-        min_age=1,
-        max_age=2,
-        disabled_marker='y',
+        category='',
         sector_code='EDU',
-        population_group='REF',
-        population_status='AFF',
+        population_status=PopulationStatus.AFFECTED,
         population=500000,
         reference_period_start='2023-01-01 00:00:00',
         reference_period_end='2023-03-31 23:59:59',
@@ -111,14 +107,9 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
 
     humanitarian_needs_view_adm_unspecified = HumanitarianNeedsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
-        gender='f',
-        age_range='1-2',
-        min_age=1,
-        max_age=2,
-        disabled_marker='y',
         sector_code='EDU',
-        population_group='REF',
-        population_status='AFF',
+        category='',
+        population_status=PopulationStatus.AFFECTED,
         population=500000,
         reference_period_start='2023-01-01 00:00:00',
         reference_period_end='2023-03-31 23:59:59',

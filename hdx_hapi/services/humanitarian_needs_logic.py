@@ -6,7 +6,7 @@ from hdx_hapi.db.models.views.all_views import HumanitarianNeedsView
 from hdx_hapi.db.dao.humanitarian_needs_view_dao import humanitarian_needs_view_list
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams, ReferencePeriodParameters
-from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, PopulationStatus
+from hapi_schema.utils.enums import PopulationStatus
 
 
 async def get_humanitarian_needs_srv(
@@ -14,11 +14,8 @@ async def get_humanitarian_needs_srv(
     ref_period_parameters: ReferencePeriodParameters,
     db: AsyncSession,
     admin2_ref: Optional[int] = None,
-    gender: Optional[Gender] = None,
-    age_range: Optional[str] = None,
-    disabled_marker: Optional[DisabledMarker] = None,
+    category: Optional[str] = None,
     sector_code: Optional[str] = None,
-    population_group: Optional[PopulationGroup] = None,
     population_status: Optional[PopulationStatus] = None,
     population_min: Optional[int] = None,
     population_max: Optional[int] = None,
@@ -44,11 +41,8 @@ async def get_humanitarian_needs_srv(
         ref_period_parameters=ref_period_parameters,
         db=db,
         admin2_ref=admin2_ref,
-        gender=gender,
-        age_range=age_range,
-        disabled_marker=disabled_marker,
+        category=category,
         sector_code=sector_code,
-        population_group=population_group,
         population_status=population_status,
         population_min=population_min,
         population_max=population_max,

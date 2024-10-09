@@ -2,7 +2,6 @@ from datetime import date
 
 from hapi_schema.utils.enums import (
     CommodityCategory,
-    DisabledMarker,
     EventType,
     Gender,
     PopulationGroup,
@@ -456,11 +455,8 @@ endpoint_data = {
     '/api/v1/affected-people/humanitarian-needs': {
         'query_parameters': {
             'admin2_ref': 2,
-            'gender': Gender.ALL.value,
-            'age_range': 'ALL',
-            'disabled_marker': DisabledMarker.YES.value,
             'sector_code': 'EDU',
-            'population_group': PopulationGroup.REFUGEES.value,
+            'category': 'All - Disabled - all - AFF',
             'population_status': PopulationStatus.AFFECTED.value,
             # 'reference_period_start_min': '2020-01-01T00:00:00',
             # 'reference_period_start_max': '2026-01-01T00:00:00',
@@ -479,13 +475,8 @@ endpoint_data = {
         'expected_fields': [
             'resource_hdx_id',
             'admin2_ref',
-            'gender',
-            'age_range',
-            'min_age',
-            'max_age',
-            'disabled_marker',
+            'category',
             'sector_code',
-            'population_group',
             'population_status',
             'population',
             'reference_period_start',
