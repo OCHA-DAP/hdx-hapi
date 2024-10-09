@@ -144,7 +144,13 @@ async def get_humanitarian_needs(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    category: Annotated[Optional[str], Query(max_length=128, description='')] = None,
+    category: Annotated[
+        Optional[str],
+        Query(
+            max_length=128,
+            description='A category combining gender, age range, disability marker and population group information',
+        ),
+    ] = None,
     sector_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
     population_status: Annotated[
         Optional[PopulationStatus], Query(max_length=32, description=f'{DOC_POPULATION_STATUS}')
