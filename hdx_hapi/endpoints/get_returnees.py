@@ -28,7 +28,7 @@ from hdx_hapi.endpoints.util.util import (
 
 CONFIG = get_config()
 router = APIRouter(
-    tags=['Affected people'],
+    tags=['Affected People'],
 )
 
 

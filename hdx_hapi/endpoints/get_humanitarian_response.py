@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 
 
@@ -44,22 +44,20 @@ router = APIRouter(
     response_model=HapiGenericResponse[OrgResponse],
     summary='Get the list of organizations represented in the data available in HDX HAPI',
 )
-async def get_orgs(
+async def get_org(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    acronym: Annotated[
-        str, Query(max_length=32, description=f'{DOC_ORG_ACRONYM}')
-    ] = None,
+    acronym: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_ORG_ACRONYM}')] = None,
     name: Annotated[
-        str,
+        Optional[str],
         Query(
             max_length=512,
             description=f'{DOC_ORG_NAME}',
         ),
     ] = None,
-    org_type_code: Annotated[str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')] = None,
+    org_type_code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')] = None,
     org_type_description: Annotated[
-        str, Query(max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION} {DOC_SEE_ORG_TYPE}')
+        Optional[str], Query(max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION} {DOC_SEE_ORG_TYPE}')
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -86,17 +84,13 @@ async def get_orgs(
     response_model=HapiGenericResponse[OrgTypeResponse],
     summary='Get information about how organizations are classified in HDX HAPI',
 )
-async def get_org_types(
+async def get_org_type(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')
-    ] = None,
+    code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_ORG_TYPE_CODE}')] = None,
     description: Annotated[
-        str,
-        Query(
-            max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}'
-        ),
+        Optional[str],
+        Query(max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}'),
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
@@ -118,15 +112,11 @@ async def get_org_types(
     response_model=HapiGenericResponse[SectorResponse],
     summary='Get information about how humanitarian response activities are classified',
 )
-async def get_sectors(
+async def get_sector(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    code: Annotated[
-        str, Query(max_length=32, description=f'{DOC_SECTOR_CODE}')
-    ] = None,
-    name: Annotated[
-        str, Query(max_length=512, description=f'{DOC_SECTOR_NAME}')
-    ] = None,
+    code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
+    name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """There are a variety of standards for the naming of humanitarian sectors. The codes and descriptions used

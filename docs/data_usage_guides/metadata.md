@@ -29,7 +29,7 @@ one child [resource](metadata.md#resource).
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get).
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_dataset_api_v1_metadata_dataset_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/dataset_parameters.yaml') }}
 
@@ -92,7 +92,7 @@ Country or country-like entities in HDX HAPI, from the CODs
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_locations_api_v1_metadata_location_get).
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_location_api_v1_metadata_location_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/location_parameters.yaml') }}
 
@@ -135,7 +135,7 @@ The currency table is populated using the WFP VAM Data Bridges API.
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_currencies_api_v1_metadata_currency_get).
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_currency_api_v1_metadata_currency_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/currency_parameters.yaml') }}
 
@@ -161,7 +161,7 @@ methodology:
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_orgs_api_v1_metadata_org_get).
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_org_api_v1_metadata_org_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_parameters.yaml') }}
 
@@ -188,7 +188,7 @@ Organization types all have an associated description and code.
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get).
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_org_type_api_v1_metadata_org_type_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/org_type_parameters.yaml') }}
 
@@ -215,7 +215,7 @@ Sectors all have an associated name and code.
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_sectors_api_v1_metadata_sector_get).
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_sector_api_v1_metadata_sector_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/sector_parameters.yaml') }}
 
@@ -254,7 +254,7 @@ manual overrides.
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_wfp_markets_api_v1_metadata_wfp_market_get).
+[API sandbox](https://hapi.humdata.org/docs#/Metadata/get_wfp_market_api_v1_metadata_wfp_market_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/wfp_market_parameters.yaml') }}
 

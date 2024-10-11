@@ -17,12 +17,12 @@ logger = logging.getLogger(__name__)
 
 async def idps_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     admin1_is_unspecified: Optional[bool] = None,
     admin2_is_unspecified: Optional[bool] = None,
-    # provider_admin1_name: Optional[str] = None,
-    # provider_admin2_name: Optional[str] = None,
+    provider_admin1_name: Optional[str] = None,
+    provider_admin2_name: Optional[str] = None,
     location_ref: Optional[int] = None,
     location_code: Optional[str] = None,
     location_name: Optional[str] = None,
@@ -37,11 +37,6 @@ async def idps_view_list(
 ) -> Sequence[IdpsView]:
     query = select(IdpsView)
 
-    # Query statements
-    # if provider_admin1_name:
-    #     query = query.where(IdpsView.provider_admin1_name.icontains(provider_admin1_name))
-    # if provider_admin2_name:
-    #     query = query.where(IdpsView.provider_admin2_name.icontains(provider_admin2_name))
     if has_hrp is not None:
         query = query.where(IdpsView.has_hrp == has_hrp)
     if in_gho is not None:
@@ -60,10 +55,12 @@ async def idps_view_list(
         admin1_ref,
         admin1_code,
         admin1_name,
+        provider_admin1_name,
         admin1_is_unspecified,
         admin2_ref,
         admin2_code,
         admin2_name,
+        provider_admin2_name,
         admin2_is_unspecified,
     )
 

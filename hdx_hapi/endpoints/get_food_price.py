@@ -11,9 +11,11 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
+    DOC_PROVIDER_ADMIN1_NAME,
     DOC_ADMIN2_REF,
     DOC_ADMIN2_CODE,
     DOC_ADMIN2_NAME,
+    DOC_PROVIDER_ADMIN2_NAME,
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
     DOC_LOCATION_REF,
@@ -59,7 +61,7 @@ SUMMARY_TEXT = 'Get food prices'
     response_model=HapiGenericResponse[FoodPriceResponse],
     summary=SUMMARY_TEXT,
 )
-async def get_food_prices(
+async def get_food_price(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     market_code: Annotated[
@@ -100,12 +102,18 @@ async def get_food_prices(
     admin1_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
     ] = None,
+    provider_admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    ] = None,
     admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
     ] = None,
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
+    ] = None,
+    provider_admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
     ] = None,
     admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -128,17 +136,19 @@ async def get_food_prices(
         in_gho=in_gho,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
+        provider_admin1_name=provider_admin1_name,
         location_ref=location_ref,
         admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        provider_admin2_name=provider_admin2_name,
         admin1_ref=admin1_ref,
         admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, FoodPriceResponse)
 
 
-get_food_prices.__doc__ = (
+get_food_price.__doc__ = (
     'The World Food Programme (WFP) food prices data provides information about food prices for a range of commodities '
     'at markets across the world. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'

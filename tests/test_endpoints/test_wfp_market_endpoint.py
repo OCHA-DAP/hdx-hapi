@@ -4,6 +4,8 @@ import logging
 from httpx import AsyncClient
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
+from hdx_hapi.endpoints.models.wfp_market import WfpMarketResponse
+
 
 log = logging.getLogger(__name__)
 
@@ -14,8 +16,8 @@ expected_fields = endpoint_data['expected_fields']
 
 
 @pytest.mark.asyncio
-async def test_get_wfp_markets(event_loop, refresh_db):
-    log.info('started test_get_wfp_marketss')
+async def test_get_wfp_market(event_loop, refresh_db):
+    log.info('started test_get_wfp_market')
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
@@ -61,3 +63,111 @@ async def test_get_wfp_market_result(event_loop, refresh_db):
     assert len(response.json()['data'][0]) == len(
         expected_fields
     ), 'Response has a different number of fields than expected'
+
+
+@pytest.mark.asyncio
+async def test_get_wpf_markets_adm_fields(event_loop, refresh_db):
+    log.info('started test_get_population_adm_fields')
+    wfp_market_view_adm_specified = WfpMarketResponse(
+        code='',
+        name='',
+        lat=1.1,
+        lon=1.1,
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_ref=1,
+        admin1_code='FOO-XXX',
+        admin1_name='Province 01',
+        provider_admin1_name='Province 01',
+        admin2_ref=1,
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='District A',
+        provider_admin2_name='District A',
+        location_ref=2,
+        admin1_is_unspecified=False,
+        admin2_is_unspecified=False,
+    )
+    assert (
+        wfp_market_view_adm_specified.admin1_code == 'FOO-XXX'
+    ), 'admin1_code should keep its value when admin1_is_unspecified is False'
+    assert (
+        wfp_market_view_adm_specified.admin1_name == 'Province 01'
+    ), 'admin1_name should keep its value when admin1_is_unspecified is False'
+    assert (
+        wfp_market_view_adm_specified.admin2_code == 'FOO-XXX-XXX'
+    ), 'admin2_code should keep its value when admin1_is_unspecified is False'
+    assert (
+        wfp_market_view_adm_specified.admin2_name == 'District A'
+    ), 'admin2_name should keep its value when admin1_is_unspecified is False'
+
+    wfp_market_view_adm_unspecified = WfpMarketResponse(
+        code='',
+        name='',
+        lat=1.1,
+        lon=1.1,
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_ref=1,
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        provider_admin1_name='Unspecified',
+        admin2_ref=1,
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin2_name='Unspecified',
+        location_ref=2,
+        admin1_is_unspecified=True,
+        admin2_is_unspecified=True,
+    )
+
+    assert (
+        wfp_market_view_adm_unspecified.admin1_code is None
+    ), 'admin1_code should be changed to None when admin1_is_unspecified is True'
+    assert (
+        wfp_market_view_adm_unspecified.admin1_name is None
+    ), 'admin1_name should be changed to None when admin1_is_unspecified is True'
+    assert (
+        wfp_market_view_adm_unspecified.admin2_code is None
+    ), 'admin2_code should be changed to None when admin1_is_unspecified is True'
+    assert (
+        wfp_market_view_adm_unspecified.admin2_name is None
+    ), 'admin2_name should be changed to None when admin1_is_unspecified is True'
+
+
+@pytest.mark.asyncio
+async def test_get_wpf_markets_admin_level(event_loop, refresh_db):
+    log.info('started test_get_population_admin_level')
+
+    async with AsyncClient(
+        app=app,
+        base_url='http://test',
+    ) as ac:
+        response = await ac.get(ENDPOINT_ROUTER)
+
+    assert len(response.json()['data'][0]) == len(
+        expected_fields
+    ), 'Response has a different number of fields than expected'
+
+    response_items = response.json()['data']
+    admin_0_count = len(
+        [item for item in response_items if item['admin1_name'] is None and item['admin2_name'] is None]
+    )
+    admin_1_count = len(
+        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is None]
+    )
+    admin_2_count = len(
+        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is not None]
+    )
+    counts_map = {
+        '0': admin_0_count,
+        '1': admin_1_count,
+        '2': admin_2_count,
+    }
+
+    for item in response_items:
+        log.info(f"{item['admin1_name']}, {item['admin2_name']}")
+    log.info(counts_map)
+    for admin_level, count in counts_map.items():
+        async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
+            response = await ac.get(ENDPOINT_ROUTER)
+            assert len(response.json()['data']) == count, f'Admin level {admin_level} should return {count} entries'

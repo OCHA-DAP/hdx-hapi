@@ -12,7 +12,9 @@ CONFIG = get_config()
 # Create an AsyncEngine
 engine = create_async_engine(
     CONFIG.SQL_ALCHEMY_ASYNCPG_DB_URI,
-    echo=True, pool_size=CONFIG.SQL_ALCHEMY_POOL_SIZE, max_overflow=CONFIG.SQL_ALCHEMY_POOL_MAX_OVERFLOW
+    echo=True,
+    pool_size=CONFIG.SQL_ALCHEMY_POOL_SIZE,
+    max_overflow=CONFIG.SQL_ALCHEMY_POOL_MAX_OVERFLOW,
 )
 
 # Create a custom Session class
@@ -20,7 +22,7 @@ AsyncSessionLocal = sessionmaker(
     bind=engine,
     expire_on_commit=False,
     class_=AsyncSession,
-    future=True
+    future=True,
 )
 
 

@@ -74,7 +74,7 @@ detailed methodology, see WFP's
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_prices_api_v1_food_food_price_get).
+[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_price_api_v1_food_food_price_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/food_price_parameters.yaml') }}
 

@@ -1,8 +1,10 @@
+import datetime
 import pytest
 import logging
 
 from httpx import AsyncClient
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
+from hapi_schema.utils.enums import Gender, DisabledMarker, PopulationGroup, PopulationStatus
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
@@ -67,30 +69,30 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
 
     humanitarian_needs_view_adm_specified = HumanitarianNeedsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
-        gender='f',
+        gender=Gender.FEMALE,
         age_range='1-2',
         min_age=1,
         max_age=2,
-        disabled_marker='y',
+        disabled_marker=DisabledMarker.YES,
         sector_code='EDU',
-        population_group='REF',
-        population_status='AFF',
+        population_group=PopulationGroup.REFUGEES,
+        population_status=PopulationStatus.AFFECTED,
         population=500000,
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         sector_name='Education',
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_is_unspecified=False,
         admin1_ref=1,
         admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
+        provider_admin1_name='Province 01',
         admin2_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
+        provider_admin2_name='District A',
         location_ref=2,
     )
 
@@ -111,30 +113,30 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
 
     humanitarian_needs_view_adm_unspecified = HumanitarianNeedsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
-        gender='f',
+        gender=Gender.FEMALE,
         age_range='1-2',
         min_age=1,
         max_age=2,
-        disabled_marker='y',
+        disabled_marker=DisabledMarker.YES,
         sector_code='EDU',
-        population_group='REF',
-        population_status='AFF',
+        population_group=PopulationGroup.REFUGEES,
+        population_status=PopulationStatus.AFFECTED,
         population=500000,
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         sector_name='Education',
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_is_unspecified=True,
         admin1_ref=1,
         admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Unspecified',
+        provider_admin1_name='Unspecified',
         admin2_is_unspecified=True,
         admin2_code='FOO-XXX',
         admin2_name='Unspecified',
+        provider_admin2_name='Unspecified',
         location_ref=2,
     )
 

@@ -86,10 +86,10 @@ async def track_page_view(request: Request, response: Response):
 
 
 async def send_mixpanel_event(event_name: str, distinct_id: str, event_data: dict):
-    _CONFIG.MIXPANEL.track(distinct_id, event_name, event_data)
+    _CONFIG.MIXPANEL.track(distinct_id, event_name, event_data)  # pyright: ignore[reportOptionalMemberAccess]
 
 
-def extract_path_identifier_and_query_params(original_url: str) -> Tuple[str, Optional[str]]:
+def extract_path_identifier_and_query_params(original_url: str) -> Tuple[str, Optional[str], dict]:
     """
     Extract the path, app_identifier and query parameters from the Nginx header.
     Args:
@@ -144,6 +144,7 @@ def _parse_nginx_header(request: Request) -> Tuple[str, List[str], str, str, str
         Tuple containing endpoint, query_params_keys, output_format, admin_level and current_url
     """
     original_uri_from_nginx = request.headers.get('X-Original-URI')
+    assert original_uri_from_nginx is not None
     endpoint, app_identifier, query_params = extract_path_identifier_and_query_params(original_uri_from_nginx)
 
     query_params_keys = list(query_params.keys())
@@ -190,6 +191,7 @@ class HashCodeGenerator(object):
         if not field_list and src_dict:
             field_list = list(src_dict.keys())
 
+        assert field_list is not None
         field_list.sort()
         try:
             self.__inner_string = ''

@@ -9,9 +9,11 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
     DOC_ADMIN1_NAME,
     DOC_ADMIN1_CODE,
+    DOC_PROVIDER_ADMIN1_NAME,
     DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
+    DOC_PROVIDER_ADMIN2_NAME,
     truncate_query_description,
 )
 
@@ -32,9 +34,11 @@ class HapiModelWithAdmins(BaseModel):
     admin1_ref: int = Field(description=truncate_query_description(DOC_ADMIN1_REF))
     admin1_code: Optional[str] = Field(max_length=128, description=truncate_query_description(DOC_ADMIN1_CODE))
     admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
+    provider_admin1_name: str = Field(max_length=512, description=truncate_query_description(DOC_PROVIDER_ADMIN1_NAME))
     admin2_ref: int = Field(description=truncate_query_description(DOC_ADMIN2_REF))
     admin2_code: Optional[str] = Field(max_length=128, description=truncate_query_description(DOC_ADMIN2_CODE))
     admin2_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN2_NAME))
+    provider_admin2_name: str = Field(max_length=512, description=truncate_query_description(DOC_PROVIDER_ADMIN2_NAME))
 
     @model_validator(mode='after')  # type: ignore
     def set_admin1_admin2_null(self) -> Self:

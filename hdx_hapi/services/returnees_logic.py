@@ -1,4 +1,5 @@
-from typing import Optional, Sequence
+from typing import Optional, Sequence, Union
+from hapi_schema.db_views_as_tables import DBReturneesVAT
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.db.dao.returnees_view_dao import returnees_view_list
 from hdx_hapi.db.models.views.all_views import ReturneesView
@@ -8,7 +9,7 @@ from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParame
 
 async def get_returnees_srv(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     population_group: Optional[PopulationGroup] = None,
     gender: Optional[Gender] = None,
@@ -23,7 +24,7 @@ async def get_returnees_srv(
     asylum_location_name: Optional[str] = None,
     asylum_has_hrp: Optional[bool] = None,
     asylum_in_gho: Optional[bool] = None,
-) -> Sequence[ReturneesView]:
+) -> Union[Sequence[ReturneesView], Sequence[DBReturneesVAT]]:
     return await returnees_view_list(
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,

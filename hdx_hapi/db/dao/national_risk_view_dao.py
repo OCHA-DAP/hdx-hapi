@@ -11,7 +11,7 @@ from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParame
 
 async def national_risks_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     risk_class: Optional[RiskClass] = None,
     global_rank_min: Optional[int] = None,

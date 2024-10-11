@@ -16,8 +16,8 @@ expected_fields = endpoint_data['expected_fields']
 
 
 @pytest.mark.asyncio
-async def test_get_operational_presences(event_loop, refresh_db):
-    log.info('started test_get_operational_presences')
+async def test_get_operational_presence(event_loop, refresh_db):
+    log.info('started test_get_operational_presence')
     async with AsyncClient(app=app, base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
@@ -77,16 +77,16 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
         location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_ref=1,
         admin1_is_unspecified=False,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
+        provider_admin1_name='Province 01',
         admin2_ref=1,
         admin2_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
+        provider_admin2_name='District A',
         reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
         reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
     )
@@ -115,16 +115,16 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
         location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_is_unspecified=True,
         admin1_ref=1,
         admin1_code='FOO-XXX',
-        admin1_name='Unpecified',
+        admin1_name='Unspecified',
+        provider_admin1_name='Unspecified',
         admin2_ref=1,
         admin2_is_unspecified=True,
         admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
+        provider_admin2_name='Unspecified',
         reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
         reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
     )

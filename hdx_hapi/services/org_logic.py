@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.org_view_dao import orgs_view_list
@@ -7,10 +8,10 @@ from hdx_hapi.endpoints.util.util import PaginationParams
 async def get_orgs_srv(
     pagination_parameters: PaginationParams,
     db: AsyncSession,
-    acronym: str = None,
-    name: str = None,
-    org_type_code: str = None,
-    org_type_description: str = None,
+    acronym: Optional[str] = None,
+    name: Optional[str] = None,
+    org_type_code: Optional[str] = None,
+    org_type_description: Optional[str] = None,
 ):
     return await orgs_view_list(
         pagination_parameters=pagination_parameters,
