@@ -15,6 +15,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN_LEVEL_FILTER,
     DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
+    DOC_ADMIN1_NAME,
     DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
@@ -26,6 +27,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
     DOC_SEE_ADMIN2,
+    DOC_PROVIDER_ADMIN1_NAME,
+    DOC_PROVIDER_ADMIN2_NAME,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -48,7 +51,7 @@ from hdx_hapi.endpoints.util.util import (
 CONFIG = get_config()
 
 router = APIRouter(
-    tags=['Affected people'],
+    tags=['Affected People'],
 )
 
 ## refugees
@@ -73,10 +76,10 @@ async def get_refugees(
         Optional[PopulationGroup], Query(max_length=32, description=f'{DOC_POPULATION_GROUP}')
     ] = None,
     population_min: Annotated[
-        int, Query(description='Filter the response by a lower bound for the population.')
+        Optional[int], Query(description='Filter the response by a lower bound for the population.')
     ] = None,
     population_max: Annotated[
-        int, Query(description='Filter the response by a upper bound for the population.')
+        Optional[int], Query(description='Filter the response by a upper bound for the population.')
     ] = None,
     gender: Annotated[Optional[Gender], Query(max_length=3, description=f'{DOC_GENDER}')] = None,
     age_range: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_AGE_RANGE}')] = None,
@@ -175,12 +178,21 @@ async def get_humanitarian_needs(
     admin1_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
     ] = None,
+    admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+    ] = None,
+    provider_admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    ] = None,
     admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
     ] = None,
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
+    ] = None,
+    provider_admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
     ] = None,
     admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
     admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
@@ -204,8 +216,11 @@ async def get_humanitarian_needs(
         has_hrp=has_hrp,
         in_gho=in_gho,
         admin1_code=admin1_code,
+        admin1_name=admin1_name,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
+        provider_admin1_name=provider_admin1_name,
+        provider_admin2_name=provider_admin2_name,
         admin1_ref=admin1_ref,
         admin_level=admin_level,
     )

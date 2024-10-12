@@ -30,20 +30,20 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Coordination & Context
 
-- [Who is Doing What Where - Operational Presence](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presences_api_v1_coordination_context_operational_presence_get)
-- [Funding](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_fundings_api_v1_coordination_context_funding_get)
-- [Conflict Events](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_conflict_events_api_v1_coordination_context_conflict_event_get)
-- [National Risk](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_national_risks_api_v1_coordination_context_national_risk_get)
+- [Who is Doing What Where - Operational Presence](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presence_api_v1_coordination_context_operational_presence_get)
+- [Funding](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_funding_api_v1_coordination_context_funding_get)
+- [Conflict Events](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_conflict_event_api_v1_coordination_context_conflict_event_get)
+- [National Risk](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_national_risk_api_v1_coordination_context_national_risk_get)
 
 #### Food Security & Nutrition
 
 - [Food Security](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_security_api_v1_food_food_security_get)
-- [Food Prices](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_prices_api_v1_food_food_price_get)
+- [Food Prices](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_price_api_v1_food_food_price_get)
 
 #### Population & Socio-economy
 
-- [Baseline Population](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_populations_api_v1_population_social_population_get)
-- [Poverty Rate](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_poverty_rates_api_v1_population_social_poverty_rate_get)
+- [Baseline Population](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_population_api_v1_population_social_population_get)
+- [Poverty Rate](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_poverty_rate_api_v1_population_social_poverty_rate_get)
 
 # Terms Of Use
 

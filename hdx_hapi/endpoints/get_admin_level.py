@@ -52,7 +52,7 @@ router = APIRouter(
     response_model=HapiGenericResponse[LocationResponse],
     summary='Get the list of locations (typically countries) included in HDX HAPI',
 )
-async def get_locations(
+async def get_location(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -77,7 +77,7 @@ async def get_locations(
     return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
 
 
-get_locations.__doc__ = DOC_SCOPE_DISCLAIMER
+get_location.__doc__ = DOC_SCOPE_DISCLAIMER
 
 
 @router.get(
@@ -95,12 +95,16 @@ async def get_admin1(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    id: Annotated[int, Query(description=f'{DOC_LOCATION_ID}')] = None,
-    location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
-    code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
-    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
-    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    id: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_ID}')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    code: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE}')] = None,
+    name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME}')] = None,
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
@@ -136,15 +140,23 @@ async def get_admin2(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    id: Annotated[int, Query(description=f'{DOC_LOCATION_ID}')] = None,
-    admin1_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
-    location_ref: Annotated[int, Query(description=f'{DOC_LOCATION_REF}')] = None,
-    code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
-    name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
-    admin1_code: Annotated[str, Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')] = None,
-    admin1_name: Annotated[str, Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')] = None,
-    location_code: Annotated[str, Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')] = None,
-    location_name: Annotated[str, Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')] = None,
+    id: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_ID}')] = None,
+    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    code: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE}')] = None,
+    name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME}')] = None,
+    admin1_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
+    ] = None,
+    admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+    ] = None,
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None

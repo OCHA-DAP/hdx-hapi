@@ -1,3 +1,4 @@
+import datetime
 import pytest
 import logging
 
@@ -72,21 +73,21 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
         sector_code='EDU',
         population_status=PopulationStatus.AFFECTED,
         population=500000,
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         sector_name='Education',
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_is_unspecified=False,
         admin1_ref=1,
         admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
+        provider_admin1_name='Province 01',
         admin2_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
+        provider_admin2_name='District A',
         location_ref=2,
     )
 
@@ -111,21 +112,21 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
         category='',
         population_status=PopulationStatus.AFFECTED,
         population=500000,
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         sector_name='Education',
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_is_unspecified=True,
         admin1_ref=1,
         admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Unspecified',
+        provider_admin1_name='Unspecified',
         admin2_is_unspecified=True,
         admin2_code='FOO-XXX',
         admin2_name='Unspecified',
+        provider_admin2_name='Unspecified',
         location_ref=2,
     )
 

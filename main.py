@@ -130,7 +130,7 @@ async def startup():
 @app.get('/docs', include_in_schema=False)
 async def swagger_ui_html(req: Request) -> HTMLResponse:
     root_path = req.scope.get('root_path', '').rstrip('/')
-    openapi_url = root_path + app.openapi_url
+    openapi_url = root_path + app.openapi_url  # pyright: ignore[reportOperatorIssue]
     oauth2_redirect_url = app.swagger_ui_oauth2_redirect_url
     if oauth2_redirect_url:
         oauth2_redirect_url = root_path + oauth2_redirect_url

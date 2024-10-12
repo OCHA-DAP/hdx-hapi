@@ -38,6 +38,6 @@ class PovertyRateResponse(HapiBaseModel):
     location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
     location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
-    admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
+    provider_admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
 
     model_config = ConfigDict(from_attributes=True)

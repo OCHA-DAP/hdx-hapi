@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 async def locations_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     id: Optional[int] = None,
     code: Optional[str] = None,

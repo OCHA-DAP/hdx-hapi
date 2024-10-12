@@ -7,8 +7,8 @@ from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN1_REF,
     DOC_ADMIN1_NAME,
     DOC_ADMIN1_CODE,
-    # DOC_PROVIDER_ADMIN1_NAME,
-    # DOC_PROVIDER_ADMIN2_NAME,
+    DOC_PROVIDER_ADMIN1_NAME,
+    DOC_PROVIDER_ADMIN2_NAME,
     DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
@@ -37,7 +37,7 @@ from hdx_hapi.services.idps_logic import get_idps_srv
 
 CONFIG = get_config()
 router = APIRouter(
-    tags=['Affected people'],
+    tags=['Affected People'],
 )
 
 
@@ -55,12 +55,6 @@ router = APIRouter(
 async def get_idps(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
-    # provider_admin1_name: Annotated[
-    #     Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
-    # ] = None,
-    # provider_admin2_name: Annotated[
-    #     Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
-    # ] = None,
     location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE}{DOC_SEE_LOC}')
@@ -77,12 +71,18 @@ async def get_idps(
     admin1_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME}{DOC_SEE_ADMIN1}')
     ] = None,
+    provider_admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    ] = None,
     admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
     admin2_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE}{DOC_SEE_ADMIN2}')
     ] = None,
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME}{DOC_SEE_ADMIN2}')
+    ] = None,
+    provider_admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
     ] = None,
     admin_level: Annotated[Optional[AdminLevel], Query(description=f'{DOC_ADMIN_LEVEL_FILTER}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
@@ -92,8 +92,8 @@ async def get_idps(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
-        # provider_admin1_name=provider_admin1_name,
-        # provider_admin2_name=provider_admin2_name,
+        provider_admin1_name=provider_admin1_name,
+        provider_admin2_name=provider_admin2_name,
         location_ref=location_ref,
         location_code=location_code,
         location_name=location_name,
