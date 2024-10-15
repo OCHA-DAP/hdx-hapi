@@ -19,6 +19,16 @@ else
     envsubst < /srv/hapi/docker/unit.json.tpl > /var/lib/unit/conf.json
 fi
 
+# LOGGING_CONF_FILE needs to be set before substituting app.conf.tpl
+export LOGGING_CONF_FILE=/srv/logging.conf
+
+# regenerate logging.conf
+export LOG_LEVEL="${LOG_LEVEL:-INFO}"
+[ ! -z "${LOG_LEVEL_CONSOLE}" ] || export LOG_LEVEL_CONSOLE=${LOG_LEVEL}
+[ ! -z "${LOG_LEVEL_JSON}" ] || export LOG_LEVEL_JSON=${LOG_LEVEL}
+[ ! -z "${LOG_LEVEL_TXT}" ] || export LOG_LEVEL_TXT=${LOG_LEVEL}
+envsubst < /srv/hapi/docker/logging.conf.tpl > /srv/logging.conf
+
 chmod 600 /var/lib/unit/conf.json
 chown -R unit /var/log/hapi
 
