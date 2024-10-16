@@ -1,7 +1,7 @@
 services:
 
   hapi:
-    image: public.ecr.aws/unocha/hdx-hapi:${HAPI_IMAGE_TAG:-main}
+    image: public.ecr.aws/unocha/hdx-hapi:${HAPI_IMAGE_TAG:-dev}
     # build:
     #   context: ./..
     #   dockerfile: Dockerfile
