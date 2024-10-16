@@ -58,6 +58,7 @@ async def test_get_idps_result(event_loop, refresh_db):
         response = await ac.get(ENDPOINT_ROUTER)
 
     for field in expected_fields:
+        print(field, flush=True)
         assert field in response.json()['data'][0], f'Field "{field}" not found in the response'
 
     assert len(response.json()['data'][0]) == len(
@@ -83,8 +84,10 @@ async def test_get_idps_adm_fields(event_loop, refresh_db):
         admin1_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
+        provider_admin1_name='Province 01',
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
+        provider_admin2_name='District A',
         location_ref=2,
         admin1_is_unspecified=False,
         admin2_is_unspecified=False,
@@ -119,8 +122,10 @@ async def test_get_idps_adm_fields(event_loop, refresh_db):
         admin1_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='unspecified',
+        provider_admin1_name='unspecified',
         admin2_code='FOO-XXX-XXX',
         admin2_name='unspecified',
+        provider_admin2_name='unspecified',
         location_ref=2,
         admin1_is_unspecified=True,
         admin2_is_unspecified=True,

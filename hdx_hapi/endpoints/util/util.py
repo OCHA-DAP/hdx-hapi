@@ -44,7 +44,7 @@ async def pagination_parameters(
 
 async def common_endpoint_parameters(
     pagination_parameters: Annotated[PaginationParams, Depends(pagination_parameters)],
-    app_identifier: Annotated[str, common_app_identifier_query] = None,
+    app_identifier: Annotated[Optional[str], common_app_identifier_query] = None,
 ) -> CommonEndpointParams:
     return CommonEndpointParams(**pagination_parameters.model_dump(), app_identifier=app_identifier)
 
@@ -60,19 +60,19 @@ class ReferencePeriodParameters(BaseModel):
 
 async def reference_period_parameters(
     reference_period_start_min: Annotated[
-        datetime.datetime | datetime.date,
+        Optional[datetime.datetime | datetime.date],
         Query(description='Min date of reference start date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
     reference_period_start_max: Annotated[
-        datetime.datetime | datetime.date,
+        Optional[datetime.datetime | datetime.date],
         Query(description='Max date of reference start date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
     reference_period_end_min: Annotated[
-        datetime.datetime | datetime.date,
+        Optional[datetime.datetime | datetime.date],
         Query(description='Min date of reference end date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
     reference_period_end_max: Annotated[
-        datetime.datetime | datetime.date,
+        Optional[datetime.datetime | datetime.date],
         Query(description='Max date of reference end date, e.g. 2020-01-01 or 2020-01-01T00:00:00'),
     ] = None,
 ) -> ReferencePeriodParameters:

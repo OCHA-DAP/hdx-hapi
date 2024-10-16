@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.admin2_view_dao import admin2_view_list
@@ -6,17 +7,17 @@ from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParame
 
 async def get_admin2_srv(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
-    id: int = None,
-    admin1_ref: int = None,
-    location_ref: int = None,
-    code: str = None,
-    name: str = None,
-    admin1_code: str = None,
-    admin1_name: str = None,
-    location_code: str = None,
-    location_name: str = None,
+    id: Optional[int] = None,
+    admin1_ref: Optional[int] = None,
+    location_ref: Optional[int] = None,
+    code: Optional[str] = None,
+    name: Optional[str] = None,
+    admin1_code: Optional[str] = None,
+    admin1_name: Optional[str] = None,
+    location_code: Optional[str] = None,
+    location_name: Optional[str] = None,
 ):
     return await admin2_view_list(
         pagination_parameters=pagination_parameters,

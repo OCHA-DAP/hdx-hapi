@@ -11,7 +11,8 @@ import datetime
 from typing import Optional
 import os
 
-import tomllib
+# script used in Python 3.12 where tomllib is available, container is Python 3.10
+import tomllib  # pyright: ignore[reportMissingImports]
 import sys
 
 import yaml
@@ -235,7 +236,7 @@ def parse_toml(endpoint_name: Optional[str] = 'idps') -> dict:
     with open(config_file_path, 'rb') as file_handle:
         all_config = tomllib.load(file_handle)
 
-    requested_config = None
+    requested_config = {}
     for config in all_config['tables']:
         if config['endpoint_name'] == endpoint_name:
             requested_config = config
@@ -543,7 +544,7 @@ from hdx_hapi.endpoints.util.util import (
     print(f'\nfrom hdx_hapi.endpoints.models.{endpoint_name} import {endpoint_name.title()}Response', flush=True)
     print(f'from hdx_hapi.services.{endpoint_name}_logic import get_{endpoint_name}_srv', flush=True)
 
-    print("CONFIG = get_config()\nrouter = APIRouter(\n\ttags=['Affected people'],)", flush=True)
+    print("CONFIG = get_config()\nrouter = APIRouter(\n\ttags=['Affected People'],)", flush=True)
 
 
 def routes_in_main(endpoint_name):

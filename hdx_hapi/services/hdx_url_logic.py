@@ -1,5 +1,5 @@
 import logging
-from pydantic import HttpUrl
+from pydantic import HttpUrl, TypeAdapter
 
 from hdx_hapi.config.config import get_config
 
@@ -22,8 +22,10 @@ def get_dataset_url(dataset_id: str) -> HttpUrl:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    url = dataset_url.format(domain=domain, dataset_id=dataset_id)
-    return HttpUrl(url=url)
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    url = AdaptedTypeURL.validate_strings(dataset_url.format(domain=domain, dataset_id=dataset_id))
+
+    return url
 
 
 def get_dataset_api_url(dataset_id: str) -> HttpUrl:
@@ -40,8 +42,10 @@ def get_dataset_api_url(dataset_id: str) -> HttpUrl:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    url = dataset_api_url.format(domain=domain, dataset_id=dataset_id)
-    return HttpUrl(url=url)
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    url = AdaptedTypeURL.validate_strings(dataset_api_url.format(domain=domain, dataset_id=dataset_id))
+
+    return url
 
 
 def get_resource_url(dataset_id: str, resource_id: str) -> HttpUrl:
@@ -58,8 +62,12 @@ def get_resource_url(dataset_id: str, resource_id: str) -> HttpUrl:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    url = resource_url.format(domain=domain, dataset_id=dataset_id, resource_id=resource_id)
-    return HttpUrl(url=url)
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    url = AdaptedTypeURL.validate_strings(
+        resource_url.format(domain=domain, dataset_id=dataset_id, resource_id=resource_id)
+    )
+
+    return url
 
 
 def get_resource_api_url(resource_id: str) -> HttpUrl:
@@ -76,8 +84,10 @@ def get_resource_api_url(resource_id: str) -> HttpUrl:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    url = resource_api_url.format(domain=domain, resource_id=resource_id)
-    return HttpUrl(url=url)
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    url = AdaptedTypeURL.validate_strings(resource_api_url.format(domain=domain, resource_id=resource_id))
+
+    return url
 
 
 def get_organization_url(org_id: str) -> HttpUrl:
@@ -95,8 +105,10 @@ def get_organization_url(org_id: str) -> HttpUrl:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    url = organization_url.format(domain=domain, org_id=org_id)
-    return HttpUrl(url=url)
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    url = AdaptedTypeURL.validate_strings(organization_url.format(domain=domain, org_id=org_id))
+
+    return url
 
 
 def get_organization_api_url(org_id: str) -> HttpUrl:
@@ -113,5 +125,7 @@ def get_organization_api_url(org_id: str) -> HttpUrl:
     if not domain:
         logger.warning('HDX_DOMAIN environment variable is not set.')
 
-    url = organization_api_url.format(domain=domain, org_id=org_id)
-    return HttpUrl(url=url)
+    AdaptedTypeURL = TypeAdapter(HttpUrl)
+    url = AdaptedTypeURL.validate_strings(organization_api_url.format(domain=domain, org_id=org_id))
+
+    return url

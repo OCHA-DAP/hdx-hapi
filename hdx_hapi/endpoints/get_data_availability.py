@@ -74,11 +74,11 @@ async def get_data_availability(
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
     hapi_updated_date_min: Annotated[
-        datetime.datetime | datetime.date,
+        Optional[datetime.datetime | datetime.date],
         Query(description=f'{DOC_UPDATE_DATE_MIN}'),
     ] = None,
     hapi_updated_date_max: Annotated[
-        datetime.datetime | datetime.date,
+        Optional[datetime.datetime | datetime.date],
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
     output_format: OutputFormat = OutputFormat.JSON,

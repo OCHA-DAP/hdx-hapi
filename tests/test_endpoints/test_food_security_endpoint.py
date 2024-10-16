@@ -1,3 +1,4 @@
+import datetime
 import pytest
 import logging
 
@@ -75,18 +76,18 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
         location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_ref=1,
         admin1_is_unspecified=False,
         admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Province 01',
+        provider_admin1_name='Province 01',
         admin2_is_unspecified=False,
         admin2_code='FOO-XXX-XXX',
         admin2_name='District A',
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        provider_admin2_name='District A',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
     )
 
     assert (
@@ -111,18 +112,18 @@ async def test_get_food_security_adm_fields(event_loop, refresh_db):
         location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
-        has_hrp=True,
-        in_gho=True,
         admin1_ref=1,
         admin1_is_unspecified=True,
         admin1_code='FOO-XXX',
-        admin1_name='Unpecified',
+        admin1_name='Unspecified',
+        provider_admin1_name='Unspecified',
         admin2_ref=1,
         admin2_is_unspecified=True,
         admin2_code='FOO-XXX',
         admin2_name='Unspecified',
-        reference_period_start='2023-01-01 00:00:00',
-        reference_period_end='2023-03-31 23:59:59',
+        provider_admin2_name='Unspecified',
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
     )
 
     assert (

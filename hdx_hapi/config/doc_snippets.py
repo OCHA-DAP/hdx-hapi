@@ -16,12 +16,16 @@ DOC_ADMIN1_REF = 'Filter the response by the 1st subnational administrative divi
 DOC_ADMIN1_CODE = 'Filter the response by the 1st subnational administrative divisions. The admin1 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative divisions. The admin1 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_SEE_ADMIN1 = 'See the <a href="/docs#/Metadata/get_admin1_api_v1_metadata_admin1_get" target="_blank">admin1 endpoint</a> for details.'
-DOC_PROVIDER_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative divisions provided by the supplier. The admin1 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
+DOC_PROVIDER_ADMIN1_NAME = (
+    'Filter the response by the 1st subnational administrative divisions provided by the supplier.'
+)
 DOC_ADMIN2_ID = 'Filter the response by 2nd subnational administrative division, using the unique identifier (id) from the admin2 table associated with each entry.'
 DOC_ADMIN2_REF = 'Filter the response by the 2nd subnational administrative division reference number.'
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_NAME = 'Filter the response by the 2nd subnational administrative divisions. The admin2 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
-DOC_PROVIDER_ADMIN2_NAME = 'Filter the response by the 1st subnational administrative divisions provided by the supplier. The admin2 names refer to the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
+DOC_PROVIDER_ADMIN2_NAME = (
+    'Filter the response by the 2nd subnational administrative divisions provided by the supplier.'
+)
 DOC_SEE_ADMIN2 = 'See the <a href="/docs#/Metadata/get_admin2_api_v1_metadata_admin2_get" target="_blank">admin2 endpoint</a> for details.'
 DOC_ADMIN_LEVEL_FILTER = 'Filter the response by admin level.'
 
@@ -39,7 +43,7 @@ DOC_HDX_RESOURCE_HXL = (
 DOC_HDX_DATASET_IN_RESOURCE_ID = 'Filter the response by the dataset ID (dataset_hdx_id), which is a unique and fixed identifier of a dataset on HDX. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_id]` will load the dataset page on HDX.'
 DOC_HDX_DATASET_IN_RESOURCE_NAME = 'Filter the response by the URL-safe name (dataset_hdx_stub) of the dataset as displayed on HDX. This name is unique but can change. A URL in the pattern of `https://data.humdata.org/dataset/[dataset_hdx_stub]` will load the dataset page on HDX.'
 DOC_HDX_PROVIDER_IN_RESOURCE_STUB = "Filter the response by the URL-safe name of the provider (organization) of the dataset on HDX. A URL in the pattern of `https://data.humdata.org/organization/[dataset_hdx_provider_stub]` will load the provider's page on HDX."
-DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_datasets_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
+DOC_SEE_DATASET = 'See the <a href="/docs#/Metadata/get_dataset_api_v1_metadata_dataset_get" target="_blank">dataset endpoint</a> for details.'
 
 # Time periods
 DOC_UPDATE_DATE_MIN = 'Minimum date that datasets was last updated, e.g. 2020-01-01 or 2020-01-01T00:00:00'
@@ -72,7 +76,7 @@ DOC_ORG_TYPE_CODE = 'Filter the response by the organization type code.'
 DOC_ORG_TYPE_DESCRIPTION = 'Filter the response by the organization type description.'
 DOC_SECTOR_CODE = 'Filter the response by the sector code.'
 DOC_SECTOR_NAME = 'Filter the response by the sector name.'
-DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_types_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
+DOC_SEE_ORG_TYPE = 'See the <a href="/docs#/Metadata/get_org_type_api_v1_metadata_org_type_get" target="_blank">org type endpoint</a> for details.'
 
 
 DOC_AGE_RANGE = 'Filter the response by the age range. These are expressed as [start age]-[end age], or [start age]+ for an age range starting at [start age] or above. The end age is assumed to be inclusive, though that is not always explicit in the source data.'

@@ -27,7 +27,7 @@ class EntityWithReferencePeriod(Protocol):
 
 def apply_reference_period_filter(
     query: Select,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db_class: Type[EntityWithReferencePeriod],
 ) -> Select:
     if ref_period_parameters is None:
@@ -53,10 +53,12 @@ class EntityWithLocationAdmin(Protocol):
     admin1_ref: Mapped[int]
     admin1_code: Mapped[str]
     admin1_name: Mapped[str]
+    provider_admin1_name: Mapped[str]
     admin1_is_unspecified: Mapped[bool]
     admin2_ref: Mapped[int]
     admin2_code: Mapped[str]
     admin2_name: Mapped[str]
+    provider_admin2_name: Mapped[str]
     admin2_is_unspecified: Mapped[bool]
 
 
@@ -71,10 +73,12 @@ def apply_location_admin_filter(
     admin1_ref: Optional[int] = None,
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
+    provider_admin1_name: Optional[str] = None,
     admin1_is_unspecified: Optional[bool] = None,
     admin2_ref: Optional[int] = None,
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
+    provider_admin2_name: Optional[str] = None,
     admin2_is_unspecified: Optional[bool] = None,
 ) -> Select:
     if location_ref:
@@ -89,12 +93,16 @@ def apply_location_admin_filter(
         query = case_insensitive_filter(query, db_class.admin1_code, admin1_code)
     if admin1_name:
         query = query.where(db_class.admin1_name.icontains(admin1_name))
+    if provider_admin1_name:
+        query = query.where(db_class.provider_admin1_name.icontains(provider_admin1_name))
     if admin2_ref:
         query = query.where(db_class.admin2_ref == admin2_ref)
     if admin2_code:
         query = case_insensitive_filter(query, db_class.admin2_code, admin2_code)
     if admin2_name:
         query = query.where(db_class.admin2_name.icontains(admin2_name))
+    if provider_admin2_name:
+        query = query.where(db_class.provider_admin2_name.icontains(provider_admin2_name))
     if admin1_is_unspecified is not None:
         query = query.where(db_class.admin1_is_unspecified == admin1_is_unspecified)
     if admin2_is_unspecified is not None:

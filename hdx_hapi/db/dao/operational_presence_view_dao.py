@@ -19,16 +19,9 @@ logger = logging.getLogger(__name__)
 
 async def operational_presences_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     sector_code: Optional[str] = None,
-    # dataset_hdx_provider_stub: str = None,
-    # resource_update_date_min: datetime = None,
-    # resource_update_date_max: datetime = None,
-    # hapi_updated_date_min: datetime = None,
-    # hapi_updated_date_max: datetime = None,
-    # hapi_replaced_date_min: datetime = None,
-    # hapi_replaced_date_max: datetime = None,
     org_acronym: Optional[str] = None,
     org_name: Optional[str] = None,
     sector_name: Optional[str] = None,
@@ -39,11 +32,13 @@ async def operational_presences_view_list(
     admin1_ref: Optional[int] = None,
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
+    provider_admin1_name: Optional[str] = None,
     admin1_is_unspecified: Optional[bool] = None,
     location_ref: Optional[int] = None,
     admin2_ref: Optional[int] = None,
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
+    provider_admin2_name: Optional[str] = None,
     admin2_is_unspecified: Optional[bool] = None,
 ) -> Sequence[OperationalPresenceView]:
     logger.info(
@@ -56,22 +51,6 @@ async def operational_presences_view_list(
     )
 
     query = select(OperationalPresenceView)
-    # if dataset_hdx_provider_stub:
-    #     query = case_insensitive_filter(
-    #         query, OperationalPresenceView.dataset_hdx_provider_stub, dataset_hdx_provider_stub
-    #     )
-    # if resource_update_date_min:
-    #     query = query.where(OperationalPresenceView.resource_update_date >= resource_update_date_min)
-    # if resource_update_date_max:
-    #     query = query.where(OperationalPresenceView.resource_update_date < resource_update_date_max)
-    # if hapi_updated_date_min:
-    #     query = query.where(OperationalPresenceView.hapi_updated_date >= hapi_updated_date_min)
-    # if hapi_updated_date_max:
-    #     query = query.where(OperationalPresenceView.hapi_updated_date < hapi_updated_date_max)
-    # if hapi_replaced_date_min:
-    #     query = query.where(OperationalPresenceView.hapi_replaced_date >= hapi_replaced_date_min)
-    # if hapi_replaced_date_max:
-    #     query = query.where(OperationalPresenceView.hapi_replaced_date < hapi_replaced_date_max)
     if org_acronym:
         query = case_insensitive_filter(query, OperationalPresenceView.org_acronym, org_acronym)
     if org_name:
@@ -92,10 +71,12 @@ async def operational_presences_view_list(
         admin1_ref,
         admin1_code,
         admin1_name,
+        provider_admin1_name,
         admin1_is_unspecified,
         admin2_ref,
         admin2_code,
         admin2_name,
+        provider_admin2_name,
         admin2_is_unspecified,
     )
 

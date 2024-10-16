@@ -15,7 +15,7 @@ from hapi_schema.utils.enums import Gender, PopulationGroup
 
 async def refugees_view_list(
     pagination_parameters: PaginationParams,
-    ref_period_parameters: ReferencePeriodParameters,
+    ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     population_group: Optional[PopulationGroup] = None,
     population_min: Optional[int] = None,

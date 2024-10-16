@@ -1,4 +1,5 @@
-from typing import Optional, Sequence
+from typing import Optional, Sequence, Union
+from hapi_schema.db_views_as_tables import DBWfpCommodityVAT
 from hapi_schema.utils.enums import CommodityCategory
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,12 +13,12 @@ async def get_wfp_commodities_srv(
     db: AsyncSession,
     code: Optional[str] = None,
     category: Optional[CommodityCategory] = None,
-    name: Optional[str] = None
-) -> Sequence[WfpCommodityView]:
+    name: Optional[str] = None,
+) -> Union[Sequence[WfpCommodityView], Sequence[DBWfpCommodityVAT]]:
     return await wfp_commodity_view_list(
         pagination_parameters=pagination_parameters,
         db=db,
         code=code,
         category=category,
         name=name,
-   )
+    )

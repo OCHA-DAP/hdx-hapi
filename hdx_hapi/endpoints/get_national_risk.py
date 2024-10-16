@@ -46,7 +46,7 @@ router = APIRouter(
     response_model=HapiGenericResponse[NationalRiskResponse],
     summary='Get national risk data',
 )
-async def get_national_risks(
+async def get_national_risk(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -115,7 +115,7 @@ async def get_national_risks(
     return transform_result_to_csv_stream_if_requested(result, output_format, NationalRiskResponse)
 
 
-get_national_risks.__doc__ = (
+get_national_risk.__doc__ = (
     'European Commission national risk data from the INFORM-risk framework. '
     f'See the more detailed technical <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/'
     'coordination_and_context/#national-risk">HDX HAPI documentation</a>, '
