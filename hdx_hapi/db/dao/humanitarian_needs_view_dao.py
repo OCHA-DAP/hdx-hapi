@@ -10,7 +10,7 @@ from hdx_hapi.db.dao.util.util import (
     apply_reference_period_filter,
 )
 from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
-from hapi_schema.utils.enums import DisabledMarker, Gender, PopulationGroup, PopulationStatus
+from hapi_schema.utils.enums import PopulationStatus
 
 
 async def humanitarian_needs_view_list(
@@ -18,11 +18,8 @@ async def humanitarian_needs_view_list(
     ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     admin2_ref: Optional[int] = None,
-    gender: Optional[Gender] = None,
-    age_range: Optional[str] = None,
-    disabled_marker: Optional[DisabledMarker] = None,
+    category: Optional[str] = None,
     sector_code: Optional[str] = None,
-    population_group: Optional[PopulationGroup] = None,
     population_status: Optional[PopulationStatus] = None,
     population_min: Optional[int] = None,
     population_max: Optional[int] = None,
@@ -44,16 +41,10 @@ async def humanitarian_needs_view_list(
 ) -> Sequence[HumanitarianNeedsView]:
     query = select(HumanitarianNeedsView)
 
-    if gender:
-        query = query.where(HumanitarianNeedsView.gender == gender)
-    if age_range:
-        query = query.where(HumanitarianNeedsView.age_range == age_range)
-    if disabled_marker:
-        query = query.where(HumanitarianNeedsView.disabled_marker == disabled_marker)
+    if category:
+        query = query.where(HumanitarianNeedsView.category.icontains(category))
     if sector_code:
         query = query.where(HumanitarianNeedsView.sector_code.icontains(sector_code))
-    if population_group:
-        query = query.where(HumanitarianNeedsView.population_group == population_group)
     if population_status:
         query = query.where(HumanitarianNeedsView.population_status == population_status)
 
@@ -89,12 +80,9 @@ async def humanitarian_needs_view_list(
     query = apply_pagination(query, pagination_parameters)
     query = query.order_by(
         HumanitarianNeedsView.admin2_ref,
-        HumanitarianNeedsView.gender,
-        HumanitarianNeedsView.age_range,
+        HumanitarianNeedsView.category,
         HumanitarianNeedsView.sector_code,
-        HumanitarianNeedsView.population_group,
         HumanitarianNeedsView.population_status,
-        HumanitarianNeedsView.disabled_marker,
         HumanitarianNeedsView.reference_period_start,
     )
 
