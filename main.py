@@ -2,7 +2,7 @@ import logging
 import logging.config
 import os
 
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig(os.getenv('LOGGING_CONF_FILE','logging.conf'))
 
 import uvicorn  # noqa
 from fastapi import FastAPI, Request  # noqa
