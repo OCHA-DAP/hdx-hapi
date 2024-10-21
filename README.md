@@ -7,6 +7,7 @@ This project is currently in development and the outputs are not yet public exce
 * HAPI documentation
 * HAPI endpoint root
 * [readthedocs](https://hdx-hapi.readthedocs.io/en/latest/)
+* HAPI [deployment process](/DEPLOYMENT-PROCESS.md)
 
 # Related repositories
 
