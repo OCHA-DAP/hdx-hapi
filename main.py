@@ -1,7 +1,8 @@
 import logging
 import logging.config
+import os
 
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig(os.getenv('LOGGING_CONF_FILE','logging.conf'))
 
 import uvicorn  # noqa
 from fastapi import FastAPI, Request  # noqa
@@ -153,6 +154,5 @@ def home():
 async def resp_validation_exception_handler(request: Request, exc: ResponseValidationError):
     return await response_validation_error_handler(request, exc)
 
-
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8844, log_config='logging.conf')
+    uvicorn.run(app, host='0.0.0.0', port=8844, log_config=os.getenv('LOGGING_CONF_FILE','logging.conf'))
