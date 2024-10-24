@@ -765,11 +765,6 @@ A simple script that will fetch the API data and place it in the spreadsheet
     ```javascript
     function loadApiData() {
       var baseUrl = "https://hapi.humdata.org/api/v1/coordination-context/" +
-                    "operational-presence?" +
-                    "output_format=json" +
-                    "&location_code=AFG" +
-                    "&app_identifier={ your app identifier }";
-      var baseUrl = "https://hapi.humdata.org/api/v1/coordination-context/" +
                   "operational-presence?output_format=json&" +
                   "location_code=AFG&app_identifier={ your app identifier }";
       var limit = 10000;
