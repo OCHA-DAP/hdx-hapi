@@ -1,13 +1,6 @@
 - Parameter: '`resource_hdx_id`'
   Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'
-- Parameter: '`admin1_name`'
-  Description: >
-    Admin 1 name taken directly from the Oxford MPI data. Note that admin 1
-    names would normally be aligned to those from the
-    [`Admin 1`](metadata.md#admin1) endpoint, however this is a
-    special case due to the data not being p-coded.
-  Source:
 - Parameter: '`mpi`'
   Description: >
     The multidimensional poverty index, derived as a product of the
@@ -47,3 +40,6 @@
   Description: >
     A reference to the `id` of the associated entry in the `location` table
   Source: '[`Location`](metadata.md#location)'
+- Parameter: '`provider_admin1_name`'
+  Description: Admin 1 names provided in the original source data
+  Source: 

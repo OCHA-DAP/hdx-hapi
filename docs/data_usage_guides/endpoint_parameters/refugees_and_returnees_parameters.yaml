@@ -1,14 +1,6 @@
 - Parameter: '`resource_hdx_id`'
   Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'
-- Parameter: '`origin_location_ref`'
-  Description: >
-    An internal, stable identifier that references the location of origin
-  Source: '[`Location`](metadata.md#location)'
-- Parameter: '`asylum_location_ref`'
-  Description: >
-    An internal, stable identifier that references the location of asylum
-  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`population_group`'
   Description: >
     Population group as
@@ -50,9 +42,17 @@
 - Parameter: '`origin_location_name`'
   Description: Location of origin name
   Source: '[`Location`](metadata.md#location)'
+- Parameter: '`origin_location_ref`'
+  Description: >
+    An internal, stable identifier that references the location of origin
+  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`asylum_location_code`'
   Description: Location of asylum p-code (ISO-3)
   Source: '[`Location`](metadata.md#location)'
 - Parameter: '`asylum_location_name`'
   Description: Location of asylum name
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`asylum_location_ref`'
+  Description: >
+    An internal, stable identifier that references the location of asylum
   Source: '[`Location`](metadata.md#location)'

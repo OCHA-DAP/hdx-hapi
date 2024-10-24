@@ -1,21 +1,23 @@
-- Parameter: '`id`'
-  Description: A stable, unique identifier associated with each admin 1 entry
-  Source:
-- Parameter: '`location_ref`'
-  Description: >
-    A reference to the `id` of the associated entry in the `location` table
-  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`code`'
   Description: Admin 1 p-code
   Source:
 - Parameter: '`name`'
   Description: Admin 1 name
   Source:
+- Parameter: '`id`'
+  Description: A stable, unique identifier associated with each admin 1 entry
+  Source:
 - Parameter: '`from_cods`'
   Description: >
     Whether the source of the entry is the
     [common operational datasets](https://data.humdata.org/dashboards/cod?)
     (CODs)
+  Source:
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
   Source:
 - Parameter: '`location_code`'
   Description: >
@@ -26,9 +28,7 @@
     Location name, based on the "short name" from the
     [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
   Source: '[`Location`](metadata.md#location)'
-- Parameter: '`reference_period_start`'
-  Description: The start date for which the data are applicable
-  Source:
-- Parameter: '`reference_period_end`'
-  Description: The end date for which the data are applicable
-  Source:
+- Parameter: '`location_ref`'
+  Description: >
+    A reference to the `id` of the associated entry in the `location` table
+  Source: '[`Location`](metadata.md#location)'
