@@ -10,6 +10,24 @@
     `https://data.humdata.org/api/action/resource_show?id=[resource_hdx_id]`,
     which is shown in the `hdx_api_link` field.
   Source:
+- Parameter: '`name`'
+  Description: >
+    The resource name on HDX. In combination with the dataset UUIDs from the
+    `dataset_hdx_id` and `resource_hdx_id` fields respectively, it can be used to
+    construct a URL to download the resource:
+    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]/download/[name]`,
+    which can be found in the `download_url` field.
+  Source:
+- Parameter: '`hdx_link`'
+  Description: A link to the resource on HDX, constructing using the UUIDs
+    from the `dataset_hdx_id` and `resource_hdx_id` fields
+  Source:
+- Parameter: '`hdx_api_link`'
+  Description: >
+    A URL to access the resource on the HDX CKAN API, constructed using the UUID
+    from the `resource_hdx_id` field
+  Source:
+- Parameter: '`download_url`'
 - Parameter: '`dataset_hdx_id`'
   Description: >
     Unique dataset UUID on HDX, which does not change even when changes are
@@ -21,14 +39,6 @@
     `https://data.humdata.org/api/action/package_show?id=[dataset_hdx_id]`,
     as shown in the `dataset_hdx_api_link` field.
   Source: '[`Dataset`](metadata.md#dataset)'
-- Parameter: '`name`'
-  Description: >
-    The resource name on HDX. In combination with the dataset UUIDs from the
-    `dataset_hdx_id` and `resource_hdx_id` fields respectively, it can be used to
-    construct a URL to download the resource:
-    `https://data.humdata.org/dataset/[dataset_hdx_id]/resource/[resource_hdx_id]/download/[name]`,
-    which can be found in the `download_url` field.
-  Source:
 - Parameter: '`format`'
   Description: The format of the resource file, such as csv or Excel
   Source:
@@ -38,11 +48,6 @@
 - Parameter: '`is_hxl`'
   Description: A boolean to indicate whether the resource data is HXLated
   Source:
-- Parameter: '`download_url`'
-  Description: >
-    A URL to directly download the resource file from HDX, in the format
-    specified in the `format` field
-  Source: ''
 - Parameter: '`hapi_updated_date`'
   Description: The date that the resource was ingested into HDX HAPI
   Source: ''
@@ -55,6 +60,20 @@
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_title`'
   Description: Dataset title on HDX
+  Description: >
+    A URL to directly download the resource file from HDX, in the format
+    specified in the `format` field
+  Source: ''
+  Source: '[`Dataset`](metadata.md#dataset)'
+- Parameter: '`dataset_hdx_link`'
+  Description: >
+    A URL to access the dataset on HDX, constructed using the UUID
+    from the `dataset_hdx_id` field
+  Source: '[`Dataset`](metadata.md#dataset)'
+- Parameter: '`dataset_hdx_api_link`'
+  Description: >
+    A URL to access the dataset on the HDX CKAN API, constructed using the UUID
+    from the `dataset_hdx_id` field
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_provider_stub`'
   Description: >
@@ -70,25 +89,6 @@
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`dataset_hdx_provider_name`'
   Description: The name of the organization that provided the dataset to HDX
-  Source: '[`Dataset`](metadata.md#dataset)'
-- Parameter: '`hdx_link`'
-  Description: A link to the resource on HDX, constructing using the UUIDs
-    from the `dataset_hdx_id` and `resource_hdx_id` fields
-  Source:
-- Parameter: '`hdx_api_link`'
-  Description: >
-    A URL to access the resource on the HDX CKAN API, constructed using the UUID
-    from the `resource_hdx_id` field
-  Source:
-- Parameter: '`dataset_hdx_link`'
-  Description: >
-    A URL to access the dataset on HDX, constructed using the UUID
-    from the `dataset_hdx_id` field
-  Source: '[`Dataset`](metadata.md#dataset)'
-- Parameter: '`dataset_hdx_api_link`'
-  Description: >
-    A URL to access the dataset on the HDX CKAN API, constructed using the UUID
-    from the `dataset_hdx_id` field
   Source: '[`Dataset`](metadata.md#dataset)'
 - Parameter: '`provider_hdx_link`'
   Description: >

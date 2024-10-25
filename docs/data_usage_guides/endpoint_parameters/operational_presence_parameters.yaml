@@ -1,9 +1,3 @@
-- Parameter: '`sector_code`'
-  Description: >
-    The sector code, derived either from the
-    [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
-    dataset, or created for HDX HAPI
-  Source: '[`Sector`](metadata.md#sector)'
 - Parameter: '`resource_hdx_id`'
   Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'
@@ -22,13 +16,21 @@
 - Parameter: '`org_type_description`'
   Description:  A description of the org type
   Source: '[`Org Type`](metadata.md#org-type)'
+- Parameter: '`sector_code`'
+  Description: >
+    The sector code, derived either from the
+    [Global Coordination Groups](https://data.humdata.org/dataset/global-coordination-groups-beta?)
+    dataset, or created for HDX HAPI
+  Source: '[`Sector`](metadata.md#sector)'
 - Parameter: '`sector_name`'
   Description: The name of the sector
   Source: '[`Sector`](metadata.md#sector)'
-- Parameter: '`location_ref`'
-  Description: >
-    A reference to the `id` of the associated entry in the `location` table
-  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
 - Parameter: '`location_code`'
   Description: >
     Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
@@ -38,34 +40,32 @@
     Location name, based on the "short name" from the
     [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
   Source: '[`Location`](metadata.md#location)'
-- Parameter: '`reference_period_start`'
-  Description: The start date for which the data are applicable
-  Source:
-- Parameter: '`reference_period_end`'
-  Description: The end date for which the data are applicable
-  Source:
+- Parameter: '`location_ref`'
+  Description: >
+    A reference to the `id` of the associated entry in the `location` table
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code
+  Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin1_name`'
   Description: Admin 1 name
   Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`provider_admin1_name`'
   Description: Admin 1 names provided in the original source data
   Source: 
-- Parameter: '`admin1_code`'
-  Description: Admin 1 p-code
-  Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin1_ref`'
   Description: >
     A reference to the `id` of the associated entry in the `admin 1` table
   Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin2_code`'
+  Description: Admin 2 p-code
+  Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`admin2_name`'
   Description: Admin 2 name
   Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`provider_admin2_name`'
   Description: Admin 2 names provided in the original source data
   Source:
-- Parameter: '`admin2_code`'
-  Description: Admin 2 p-code
-  Source: '[`Admin 2`](metadata.md#admin2)'
 - Parameter: '`admin2_ref`'
   Description: >
     A reference to the `id` of the associated entry in the `admin 2` table

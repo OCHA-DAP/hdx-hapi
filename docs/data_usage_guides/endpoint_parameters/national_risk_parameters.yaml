@@ -1,3 +1,6 @@
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`risk_class`'
   Description: >
     The final INFORM risk score (`overall_risk`) is grouped into one of five
@@ -47,9 +50,6 @@
 - Parameter: '`reference_period_end`'
   Description: The end date for which the data are applicable
   Source:
-- Parameter: '`resource_hdx_id`'
-  Description: Unique resource UUID on HDX
-  Source: '[`Resource`](metadata.md#resource)'
 - Parameter: '`location_code`'
   Description: >
     Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
