@@ -6,10 +6,10 @@ from sqlalchemy import select
 
 from hdx_hapi.db.models.views.vat_or_view import AvailabilityView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
-from hdx_hapi.endpoints.util.util import PaginationParams
+from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams
 
 logger = logging.getLogger(__name__)
-
+_UNSPECIFIED = 'UNSPECIFIED'
 
 async def availability_view_list(
     pagination_parameters: PaginationParams,
@@ -24,6 +24,7 @@ async def availability_view_list(
     admin2_code: Optional[str] = None,
     hapi_updated_date_min: Optional[datetime.datetime | datetime.date] = None,
     hapi_updated_date_max: Optional[datetime.datetime | datetime.date] = None,
+    admin_level: Optional[AdminLevel] = None,
 ):
     logger.info(f'availability_view_list called with params: {locals()}')
 
@@ -49,6 +50,18 @@ async def availability_view_list(
         query = query.where(AvailabilityView.hapi_updated_date >= hapi_updated_date_min)
     if hapi_updated_date_max:
         query = query.where(AvailabilityView.hapi_updated_date < hapi_updated_date_max)
+
+    # Admin level filtering. Filtering by admin level is handled differently for the data availability table
+    # beause we don't have the adminX_is_unspecified fields.
+    if admin_level == AdminLevel.ZERO:
+        query = case_insensitive_filter(query, AvailabilityView.admin1_name, _UNSPECIFIED)
+        query = case_insensitive_filter(query, AvailabilityView.admin2_name, _UNSPECIFIED)
+    elif admin_level == AdminLevel.ONE:
+        query = query.where(~AvailabilityView.admin1_name.ilike(_UNSPECIFIED))
+        query = case_insensitive_filter(query, AvailabilityView.admin2_name, _UNSPECIFIED)
+    elif admin_level == AdminLevel.TWO:
+        query = query.where(~AvailabilityView.admin1_name.ilike(_UNSPECIFIED))
+        query = query.where(~AvailabilityView.admin2_name.ilike(_UNSPECIFIED))
 
     query = apply_pagination(query, pagination_parameters)
     query = query.order_by(
