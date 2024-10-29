@@ -140,7 +140,7 @@ HDX](https://data.humdata.org/dataset/?dataseries_name=Humanitarian+Needs+Overvi
 it comes from different OCHA offices and is currently not
 standardised. Thus, HDX HAPI obtains the PIN numbers from the [HPC
 Tools API](https://api.hpc.tools/docs/v1/)-based datasets on HDX.
-This results in some loss of standardisation — unlike the original
+This results in some loss of detail — unlike the original
 data, HPC Tools does not have consistent Sex and Age Disaggregation
 (SADD), but instead includes a single, freeform `category` field — but
 using it allows HAPI to include data for more countries and update
@@ -168,7 +168,6 @@ For available query parameters, please see the
   "all", "INN", "TGT", "AFF", and "REA", respectively
 * Sector values of “ALL” have been converted to “intersectoral”, as these
   represent the intersectoral PIN and **not** the disaggregated population
-* Gender and disabled values of “a” have been converted to “all”
 * The methodology in Yemen leads to negative population values in some admin 2
   level areas. Where negative values appear they have been omitted from the API.
 * The reference period is obtained from the HDX dataset
@@ -178,6 +177,4 @@ For available query parameters, please see the
 * The PIN should **not** be summed across sectors or population statuses,
   as the same people can be present across multiple groups
 * For the number of people affected across all
-  sectors, please use the PIN value where sector=intersectoral.
-* An “all” value in the `gender`, `age_range`, `disable_marker`, and
- `population_group` columns indicates no disaggregation
+  sectors, please use the PIN value where sector=Intersectoral.
