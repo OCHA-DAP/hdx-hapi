@@ -2,7 +2,8 @@ import datetime
 import logging
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import Select, select, or_
+from sqlalchemy.orm import Mapped
 
 from hdx_hapi.db.models.views.vat_or_view import AvailabilityView
 from hdx_hapi.db.dao.util.util import apply_pagination, case_insensitive_filter
@@ -54,14 +55,14 @@ async def availability_view_list(
     # Admin level filtering. Filtering by admin level is handled differently for the data availability table
     # beause we don't have the adminX_is_unspecified fields.
     if admin_level == AdminLevel.ZERO:
-        query = case_insensitive_filter(query, AvailabilityView.admin1_name, _UNSPECIFIED)
-        query = case_insensitive_filter(query, AvailabilityView.admin2_name, _UNSPECIFIED)
+        query = filter_is_unspecified(query, AvailabilityView.admin1_name)
+        query = filter_is_unspecified(query, AvailabilityView.admin2_name)
     elif admin_level == AdminLevel.ONE:
-        query = query.where(~AvailabilityView.admin1_name.ilike(_UNSPECIFIED))
-        query = case_insensitive_filter(query, AvailabilityView.admin2_name, _UNSPECIFIED)
+        query = filter_is_unspecified(query, AvailabilityView.admin1_name, negate=True)
+        query = filter_is_unspecified(query, AvailabilityView.admin2_name)
     elif admin_level == AdminLevel.TWO:
-        query = query.where(~AvailabilityView.admin1_name.ilike(_UNSPECIFIED))
-        query = query.where(~AvailabilityView.admin2_name.ilike(_UNSPECIFIED))
+        query = filter_is_unspecified(query, AvailabilityView.admin1_name, negate=True)
+        query = filter_is_unspecified(query, AvailabilityView.admin2_name, negate=True)
 
     query = apply_pagination(query, pagination_parameters)
     query = query.order_by(
@@ -83,3 +84,11 @@ async def availability_view_list(
     logger.info(f'Retrieved {len(availabilities)} rows from the database')
 
     return availabilities
+
+def filter_is_unspecified(query: Select, column: Mapped[str], negate=False) -> Select:
+    or_clause = or_(column == '', column.is_(None), column.ilike(_UNSPECIFIED))
+    if negate:
+        return query.where(~or_clause)
+    else:
+        return query.where(or_clause)
+    

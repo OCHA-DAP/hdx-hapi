@@ -31,11 +31,11 @@ class AvailabilityResponse(HapiBaseModel):
     @model_validator(mode='after')  
     def set_admin1_admin2_null(self) -> Self:
 
-        if self.admin1_name and self.admin1_name.upper() == 'UNSPECIFIED':
+        if not self.admin1_name or self.admin1_name.upper() == 'UNSPECIFIED':
             self.admin1_code = None
             self.admin1_name = None
 
-        if self.admin2_name and self.admin2_name.upper() == 'UNSPECIFIED':
+        if not self.admin2_name or self.admin2_name.upper() == 'UNSPECIFIED':
             self.admin2_code = None
             self.admin2_name = None
 
