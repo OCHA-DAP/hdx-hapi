@@ -9,7 +9,4 @@
   Details: Annually
 - Attribute: Related tables
   Details: >
-    [ `DisabledMarker` ](enums.md#disabled-marker),
-    [`Gender`](enums.md#gender),
-    [`PopulationGroup`](enums.md#population-group),
     [`PopulationStatus`](enums.md#population-status)

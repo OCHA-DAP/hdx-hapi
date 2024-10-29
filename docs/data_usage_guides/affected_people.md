@@ -135,11 +135,17 @@ crises. It includes an estimate of the number of people by sector who require
 assistance, often referred to as People in Need (PIN), which is derived using
 the [Joint Intersectoral Analysis Framework (JIAF)](https://www.jiaf.info/).
 
-While the HNO data is
-[directly available on HDX](https://data.humdata.org/dataset/?dataseries_name=Humanitarian+Needs+Overview),
-it comes from different OCHA offices and is currently not standardised. Thus,
-HDX HAPI obtains the PIN numbers from the
-[HPC Tools API](https://api.hpc.tools/docs/v1/)-based datasets on HDX.
+While the HNO data is [directly available on
+HDX](https://data.humdata.org/dataset/?dataseries_name=Humanitarian+Needs+Overview),
+it comes from different OCHA offices and is currently not
+standardised. Thus, HDX HAPI obtains the PIN numbers from the [HPC
+Tools API](https://api.hpc.tools/docs/v1/)-based datasets on HDX.
+This results in some loss of standardisation — unlike the original
+data, HPC Tools does not have consistent Sex and Age Disaggregation
+(SADD), but instead includes a single, freeform `category` field — but
+using it allows HAPI to include data for more countries and update
+that data more quickly.  As HPC Tools improves its SADD support, we
+will update HAPI to take advantage of it.
 
 ### Summary
 
