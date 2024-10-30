@@ -5,6 +5,7 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN_LEVEL_FILTER,
     DOC_LOCATION_NAME,
     DOC_LOCATION_CODE,
     DOC_SEE_LOC,
@@ -21,6 +22,7 @@ from hdx_hapi.config.doc_snippets import (
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.availability import AvailabilityResponse
 from hdx_hapi.endpoints.util.util import (
+    AdminLevel,
     CommonEndpointParams,
     OutputFormat,
     common_endpoint_parameters,
@@ -81,6 +83,7 @@ async def get_data_availability(
         Optional[datetime.datetime | datetime.date],
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=f'{DOC_ADMIN_LEVEL_FILTER}')] = None,
     output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
@@ -99,5 +102,6 @@ async def get_data_availability(
         admin2_code=admin2_code,
         hapi_updated_date_min=hapi_updated_date_min,
         hapi_updated_date_max=hapi_updated_date_max,
+        admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, output_format, AvailabilityResponse)
