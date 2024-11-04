@@ -1,7 +1,8 @@
-from typing import Optional, Sequence
+from typing import Optional, Sequence, Union
 from sqlalchemy.ext.asyncio import AsyncSession
-from hapi_schema.utils.base import Base
+from hapi_schema.db_views_as_tables import DBIDPsVAT
 from hdx_hapi.db.dao.idps_view_dao import idps_view_list
+from hdx_hapi.db.models.views.all_views import IdpsView
 from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams, ReferencePeriodParameters
 from hdx_hapi.services.admin_level_logic import compute_unspecified_values
 
@@ -24,7 +25,7 @@ async def get_idps_srv(
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
     admin_level: Optional[AdminLevel] = None,
-) -> Sequence[Base]:
+) -> Union[Sequence[IdpsView], Sequence[DBIDPsVAT]]:
     admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
     return await idps_view_list(
         pagination_parameters=pagination_parameters,

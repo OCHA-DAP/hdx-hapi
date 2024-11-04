@@ -1,9 +1,13 @@
 import datetime
-from typing import Optional
+from typing import Optional, Sequence, Union
 from sqlalchemy.ext.asyncio import AsyncSession
 
+
+from hapi_schema.db_views_as_tables import DBAvailabilityVAT
+
 from hdx_hapi.db.dao.availability_view_dao import availability_view_list
-from hdx_hapi.endpoints.util.util import PaginationParams
+from hdx_hapi.db.models.views.all_views import AvailabilityView
+from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams
 
 
 async def get_availability_srv(
@@ -19,7 +23,9 @@ async def get_availability_srv(
     admin2_code: Optional[str] = None,
     hapi_updated_date_min: Optional[datetime.datetime | datetime.date] = None,
     hapi_updated_date_max: Optional[datetime.datetime | datetime.date] = None,
-):
+    admin_level: Optional[AdminLevel] = None,
+) -> Union[Sequence[AvailabilityView], Sequence[DBAvailabilityVAT]]:
+    
     return await availability_view_list(
         pagination_parameters=pagination_parameters,
         db=db,
@@ -33,4 +39,5 @@ async def get_availability_srv(
         admin2_code=admin2_code,
         hapi_updated_date_min=hapi_updated_date_min,
         hapi_updated_date_max=hapi_updated_date_max,
+        admin_level=admin_level,
     )

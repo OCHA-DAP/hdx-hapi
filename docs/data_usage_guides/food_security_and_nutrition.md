@@ -31,8 +31,7 @@ For available query parameters, please see the
   and applying the algorithm from
   [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/),
   which uses phonetic name matching and manual overrides
-* Any unmatched p-codes are not included in HDX HAPI. In a future version we
-  plan on retaining these rows and including the provider admin names.
+* Any rows whose p-codes are unmatched are p-coded at the national level.
 
 ### Usage Notes
 
@@ -51,12 +50,15 @@ For available query parameters, please see the
 
 | ISO3 | Country Name | Notes |
 |------|--------------|-------|
+| BDI | Burundi | Admin 2 regions do not correspond with the COD boundaries and were not p-coded |
 | COD  | Democratic Republic of the Congo | Kinshasa is sub-divided and not p-codable at the admin 2 level |
 | ETH  | Ethiopia | Some admin 2 regions are sub-divided into clusters and not p-codable |
+| MRT | Mauritania | Some admin 2 regions have been grouped together, and thus are not individually p-codable |
 | NER  | Niger | Some regions are divided into accessible and non-accessible areas, and the term "ville" is used to denote urban areas |
 | NGA | Nigeria | There are several admin 2 regions which share a name, and some of them have a (1) appended to the name, which we do not p-code |
 | SDN | Sudan | Many admin 2 regions have been grouped together, and thus are not individually p-codable |
 | SOM | Somalia | Admin 2 regions in Somalia are sub-divided, thus we to not attempt to assign p-codes |
+| ZAF | South Africa | Admin 2 regions are a mix of admin levels, thus we do not attempt to assign p-codes at admin 2 |
 
 ## Food Prices <a id="food-price"></a>
 

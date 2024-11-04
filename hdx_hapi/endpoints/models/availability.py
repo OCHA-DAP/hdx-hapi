@@ -1,6 +1,6 @@
 import datetime
-from typing import Optional
-from pydantic import ConfigDict, Field
+from typing import Optional, Self
+from pydantic import ConfigDict, Field, model_validator
 from hdx_hapi.endpoints.models.base import HapiBaseModel
 from hdx_hapi.config.doc_snippets import (
     truncate_query_description,
@@ -27,3 +27,16 @@ class AvailabilityResponse(HapiBaseModel):
     )
 
     model_config = ConfigDict(from_attributes=True)
+
+    @model_validator(mode='after')  
+    def set_admin1_admin2_null(self) -> Self:
+
+        if not self.admin1_name or self.admin1_name.upper() == 'UNSPECIFIED':
+            self.admin1_code = None
+            self.admin1_name = None
+
+        if not self.admin2_name or self.admin2_name.upper() == 'UNSPECIFIED':
+            self.admin2_code = None
+            self.admin2_name = None
+
+        return self

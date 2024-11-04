@@ -16,6 +16,8 @@ To access HDX HAPI you need to generate an API identifier. This can be done via 
 https://hapi.humdata.org/api/v1/themes/3w?app_identifier={your app identifier}
 ```
 
+We may use the email address to reach out to you directly about usage issues or to learn more about how you are using HAPI, but will not use it for any automated bulk mailings.  See the [Terms of Service](https://data.humdata.org/hapi/terms) for more information.
+
 # The Structure of HDX HAPI
 
 ## Data Subcategory Endpoints
