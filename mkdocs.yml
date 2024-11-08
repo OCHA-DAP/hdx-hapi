@@ -2,7 +2,6 @@ site_name: HDX HAPI - The Humanitarian API
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Data Coverage: data.md
   - Code Examples: examples.md
   - Data Usage Guide:
       - Affected People: data_usage_guides/affected_people.md
@@ -29,3 +28,6 @@ plugins:
   - search
   - table-reader:
       base_path: "docs_dir"
+extra_css:
+  - extra.css
+
