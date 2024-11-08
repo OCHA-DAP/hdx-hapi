@@ -135,11 +135,17 @@ crises. It includes an estimate of the number of people by sector who require
 assistance, often referred to as People in Need (PIN), which is derived using
 the [Joint Intersectoral Analysis Framework (JIAF)](https://www.jiaf.info/).
 
-While the HNO data is
-[directly available on HDX](https://data.humdata.org/dataset/?dataseries_name=Humanitarian+Needs+Overview),
-it comes from different OCHA offices and is currently not standardised. Thus,
-HDX HAPI obtains the PIN numbers from the
-[HPC Tools API](https://api.hpc.tools/docs/v1/)-based datasets on HDX.
+While the HNO data is [directly available on
+HDX](https://data.humdata.org/dataset/?dataseries_name=Humanitarian+Needs+Overview),
+it comes from different OCHA offices and is currently not
+standardised. Thus, HDX HAPI obtains the PIN numbers from the [HPC
+Tools API](https://api.hpc.tools/docs/v1/)-based datasets on HDX.
+This results in some loss of detail — unlike the original
+data, HPC Tools does not have consistent Sex and Age Disaggregation
+(SADD), but instead includes a single, freeform `category` field — but
+using it allows HAPI to include data for more countries and update
+that data more quickly.  As HPC Tools improves its SADD support, we
+will update HAPI to take advantage of it.
 
 ### Summary
 
@@ -162,7 +168,6 @@ For available query parameters, please see the
   "all", "INN", "TGT", "AFF", and "REA", respectively
 * Sector values of “ALL” have been converted to “intersectoral”, as these
   represent the intersectoral PIN and **not** the disaggregated population
-* Gender and disabled values of “a” have been converted to “all”
 * The methodology in Yemen leads to negative population values in some admin 2
   level areas. Where negative values appear they have been omitted from the API.
 * The reference period is obtained from the HDX dataset
@@ -172,6 +177,4 @@ For available query parameters, please see the
 * The PIN should **not** be summed across sectors or population statuses,
   as the same people can be present across multiple groups
 * For the number of people affected across all
-  sectors, please use the PIN value where sector=intersectoral.
-* An “all” value in the `gender`, `age_range`, `disable_marker`, and
- `population_group` columns indicates no disaggregation
+  sectors, please use the PIN value where sector=Intersectoral.
