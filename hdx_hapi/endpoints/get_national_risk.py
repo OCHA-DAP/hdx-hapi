@@ -16,6 +16,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
@@ -44,6 +45,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/coordination-context/national-risk',
     response_model=HapiGenericResponse[NationalRiskResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get national risk data',
 )
 async def get_national_risk(

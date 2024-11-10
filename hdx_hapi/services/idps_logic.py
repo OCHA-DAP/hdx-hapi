@@ -26,12 +26,16 @@ async def get_idps_srv(
     admin2_name: Optional[str] = None,
     admin_level: Optional[AdminLevel] = None,
 ) -> Union[Sequence[IdpsView], Sequence[DBIDPsVAT]]:
-    admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
+    admin1_is_unspecified, admin2_is_unspecified, provider_admin1_name_is_unspecified, \
+        provider_admin2_name_is_unspecified = \
+            compute_unspecified_values(admin_level, provider_admin1_name, provider_admin2_name)
     return await idps_view_list(
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
         admin1_is_unspecified=admin1_is_unspecified,
         admin2_is_unspecified=admin2_is_unspecified,
+        provider_admin1_name_is_unspecified=provider_admin1_name_is_unspecified,
+        provider_admin2_name_is_unspecified=provider_admin2_name_is_unspecified,
         db=db,
         provider_admin1_name=provider_admin1_name,
         provider_admin2_name=provider_admin2_name,

@@ -14,6 +14,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.humanitarian_response import OrgResponse, OrgTypeResponse, SectorResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
@@ -42,6 +43,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/org',
     response_model=HapiGenericResponse[OrgResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get the list of organizations represented in the data available in HDX HAPI',
 )
 async def get_org(
@@ -82,6 +84,7 @@ async def get_org(
 @router.get(
     '/api/v1/metadata/org-type',
     response_model=HapiGenericResponse[OrgTypeResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get information about how organizations are classified in HDX HAPI',
 )
 async def get_org_type(
@@ -110,6 +113,7 @@ async def get_org_type(
 @router.get(
     '/api/v1/metadata/sector',
     response_model=HapiGenericResponse[SectorResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get information about how humanitarian response activities are classified',
 )
 async def get_sector(

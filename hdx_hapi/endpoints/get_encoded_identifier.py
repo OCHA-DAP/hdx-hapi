@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from pydantic import EmailStr
 
 from hdx_hapi.endpoints.models.encoded_identifier import IdentifierResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import app_name_identifier_query, email_identifier_query
 
 router = APIRouter(
@@ -22,6 +23,7 @@ SUMMARY = 'Get an app identifier by encoding an application name and email'
 @router.get(
     '/api/v1/encode_app_identifier',
     response_model=IdentifierResponse,
+    responses=ERROR_RESPONSES, # type: ignore
     summary=SUMMARY,
 )
 async def get_encoded_identifier(

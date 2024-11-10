@@ -21,6 +21,7 @@ from hdx_hapi.config.doc_snippets import (
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
@@ -50,6 +51,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/location',
     response_model=HapiGenericResponse[LocationResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get the list of locations (typically countries) included in HDX HAPI',
 )
 async def get_location(
@@ -89,6 +91,7 @@ get_location.__doc__ = DOC_SCOPE_DISCLAIMER
 @router.get(
     '/api/v1/metadata/admin1',
     response_model=HapiGenericResponse[Admin1Response],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get the list of first-level subnational administrative divisions available in HDX HAPI',
 )
 async def get_admin1(
@@ -134,6 +137,7 @@ get_admin1.__doc__ = DOC_SCOPE_DISCLAIMER
 @router.get(
     '/api/v1/metadata/admin2',
     response_model=HapiGenericResponse[Admin2Response],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get the list of second-level administrative divisions available in HDX HAPI',
 )
 async def get_admin2(

@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.doc_snippets import DOC_COMMODITY_CATEGORY
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.wfp_commodity import WfpCommodityResponse
 from hdx_hapi.endpoints.util.util import CommonEndpointParams, OutputFormat, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -28,6 +29,7 @@ SUMMARY = 'Get the list of WFP commodities'
 @router.get(
     '/api/v1/metadata/wfp-commodity',
     response_model=HapiGenericResponse[WfpCommodityResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary=SUMMARY,
 )
 async def get_wfp_commodities(

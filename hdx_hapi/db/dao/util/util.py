@@ -1,6 +1,6 @@
 import datetime
 from typing import Optional, Protocol, Type
-from sqlalchemy import Select
+from sqlalchemy import Select, or_
 from sqlalchemy.orm import Mapped
 
 from hdx_hapi.config.config import get_config
@@ -74,11 +74,13 @@ def apply_location_admin_filter(
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
     provider_admin1_name: Optional[str] = None,
+    provider_admin1_name_is_unspecified: Optional[bool] = None,
     admin1_is_unspecified: Optional[bool] = None,
     admin2_ref: Optional[int] = None,
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
     provider_admin2_name: Optional[str] = None,
+    provider_admin2_name_is_unspecified: Optional[bool] = None,
     admin2_is_unspecified: Optional[bool] = None,
 ) -> Select:
     if location_ref:
@@ -93,6 +95,8 @@ def apply_location_admin_filter(
         query = case_insensitive_filter(query, db_class.admin1_code, admin1_code)
     if admin1_name:
         query = query.where(db_class.admin1_name.icontains(admin1_name))
+    if provider_admin1_name_is_unspecified:
+        query = query.where(or_(db_class.provider_admin1_name == '', db_class.provider_admin1_name.is_(None)))
     if provider_admin1_name:
         query = query.where(db_class.provider_admin1_name.icontains(provider_admin1_name))
     if admin2_ref:
@@ -101,6 +105,8 @@ def apply_location_admin_filter(
         query = case_insensitive_filter(query, db_class.admin2_code, admin2_code)
     if admin2_name:
         query = query.where(db_class.admin2_name.icontains(admin2_name))
+    if provider_admin2_name_is_unspecified:
+        query = query.where(or_(db_class.provider_admin2_name == '', db_class.provider_admin2_name.is_(None)))
     if provider_admin2_name:
         query = query.where(db_class.provider_admin2_name.icontains(provider_admin2_name))
     if admin1_is_unspecified is not None:

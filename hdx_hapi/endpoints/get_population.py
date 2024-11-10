@@ -30,6 +30,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.population import PopulationResponse
 from hdx_hapi.endpoints.models.poverty_rate import PovertyRateResponse
 from hdx_hapi.endpoints.util.util import (
@@ -59,6 +60,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/population-social/population',
     response_model=HapiGenericResponse[PopulationResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get baseline population data',
 )
 async def get_population(
@@ -149,6 +151,7 @@ get_population.__doc__ = (
 @router.get(
     '/api/v1/population-social/poverty-rate',
     response_model=HapiGenericResponse[PovertyRateResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get poverty rate data',
 )
 async def get_poverty_rate(

@@ -22,6 +22,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_ADMIN2,
 )
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hdx_hapi.endpoints.util.util import (
@@ -50,6 +51,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/affected-people/idps',
     response_model=HapiGenericResponse[IdpsResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get idps data',
 )
 async def get_idps(

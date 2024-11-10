@@ -28,7 +28,9 @@ async def get_food_security_srv(
     admin1_ref: Optional[int] = None,
     admin_level: Optional[AdminLevel] = None,
 ):
-    admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
+    admin1_is_unspecified, admin2_is_unspecified, provider_admin1_name_is_unspecified, \
+        provider_admin2_name_is_unspecified = \
+            compute_unspecified_values(admin_level, provider_admin1_name, provider_admin2_name)
 
     return await food_security_view_list(
         pagination_parameters=pagination_parameters,
@@ -43,12 +45,14 @@ async def get_food_security_srv(
         admin1_name=admin1_name,
         admin1_code=admin1_code,
         provider_admin1_name=provider_admin1_name,
+        provider_admin1_name_is_unspecified=provider_admin1_name_is_unspecified,
         admin1_is_unspecified=admin1_is_unspecified,
         location_ref=location_ref,
         admin2_ref=admin2_ref,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
         provider_admin2_name=provider_admin2_name,
+        provider_admin2_name_is_unspecified=provider_admin2_name_is_unspecified,
         admin2_is_unspecified=admin2_is_unspecified,
         admin1_ref=admin1_ref,
     )

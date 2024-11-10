@@ -25,6 +25,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
@@ -50,6 +51,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/dataset',
     response_model=HapiGenericResponse[DatasetResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get information about the sources of the data in HDX HAPI',
 )
 async def get_dataset(
@@ -87,6 +89,7 @@ async def get_dataset(
 @router.get(
     '/api/v1/metadata/resource',
     response_model=HapiGenericResponse[ResourceResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get information about the sources of the data in HDX HAPI',
 )
 async def get_resources(

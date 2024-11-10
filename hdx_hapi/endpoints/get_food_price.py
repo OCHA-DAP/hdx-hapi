@@ -30,6 +30,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.food_price import FoodPriceResponse
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
@@ -59,6 +60,7 @@ SUMMARY_TEXT = 'Get food prices'
 @router.get(
     '/api/v1/food/food-price',
     response_model=HapiGenericResponse[FoodPriceResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary=SUMMARY_TEXT,
 )
 async def get_food_price(

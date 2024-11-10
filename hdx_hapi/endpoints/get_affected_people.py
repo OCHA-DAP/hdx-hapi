@@ -34,6 +34,7 @@ from hdx_hapi.config.doc_snippets import (
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
 from hdx_hapi.endpoints.models.refugees import RefugeesResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.humanitarian_needs_logic import get_humanitarian_needs_srv
 from hdx_hapi.services.refugees_logic import get_refugees_srv
@@ -141,6 +142,7 @@ get_refugees.__doc__ = (
 @router.get(
     '/api/v1/affected-people/humanitarian-needs',
     response_model=HapiGenericResponse[HumanitarianNeedsResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get humanitarian needs data',
 )
 async def get_humanitarian_needs(

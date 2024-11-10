@@ -27,6 +27,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
@@ -55,6 +56,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/food/food-security',
     response_model=HapiGenericResponse[FoodSecurityResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get food security data',
 )
 async def get_food_security(

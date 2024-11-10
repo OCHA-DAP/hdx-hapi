@@ -21,6 +21,7 @@ from hdx_hapi.config.doc_snippets import (
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.availability import AvailabilityResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
     CommonEndpointParams,
@@ -46,6 +47,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/data-availability',
     response_model=HapiGenericResponse[AvailabilityResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get information about the availability of data for different geographic admin levels',
 )
 async def get_data_availability(

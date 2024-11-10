@@ -13,6 +13,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
 )
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.returnees import ReturneesResponse
 from hdx_hapi.services.returnees_logic import get_returnees_srv
 
@@ -41,6 +42,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/affected-people/returnees',
     response_model=HapiGenericResponse[ReturneesResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get returnees data',
 )
 async def get_returnees(

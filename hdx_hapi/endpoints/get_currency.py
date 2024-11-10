@@ -7,6 +7,7 @@ from hdx_hapi.config.doc_snippets import DOC_CURRENCY_CODE
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.currency import CurrencyResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
     OutputFormat,
@@ -31,6 +32,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/currency',
     response_model=HapiGenericResponse[CurrencyResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get information about how currencies are classified',
 )
 async def get_currency(

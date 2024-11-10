@@ -40,12 +40,14 @@ async def food_price_view_list(
     admin1_code: Optional[str] = None,
     admin1_name: Optional[str] = None,
     provider_admin1_name: Optional[str] = None,
+    provider_admin1_name_is_unspecified: Optional[bool] = None,
     admin1_is_unspecified: Optional[bool] = None,
     location_ref: Optional[int] = None,
     admin2_ref: Optional[int] = None,
     admin2_code: Optional[str] = None,
     admin2_name: Optional[str] = None,
     provider_admin2_name: Optional[str] = None,
+    provider_admin2_name_is_unspecified: Optional[bool] = None,
     admin2_is_unspecified: Optional[bool] = None,
 ) -> Sequence[FoodPriceView]:
     query = select(FoodPriceView)
@@ -80,11 +82,13 @@ async def food_price_view_list(
         admin1_code,
         admin1_name,
         provider_admin1_name,
+        provider_admin1_name_is_unspecified,
         admin1_is_unspecified,
         admin2_ref,
         admin2_code,
         admin2_name,
         provider_admin2_name,
+        provider_admin2_name_is_unspecified,
         admin2_is_unspecified,
     )
 

@@ -23,6 +23,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.wfp_market import WfpMarketResponse
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
@@ -50,6 +51,7 @@ SUMMARY_TEXT = 'Get the list of WFP markets.'
 @router.get(
     '/api/v1/metadata/wfp-market',
     response_model=HapiGenericResponse[WfpMarketResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary=SUMMARY_TEXT,
 )
 async def get_wfp_market(

@@ -28,6 +28,7 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
@@ -59,6 +60,7 @@ SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian 
 @router.get(
     '/api/v1/coordination-context/operational-presence',
     response_model=HapiGenericResponse[OperationalPresenceResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary=SUMMARY_TEXT,
 )
 async def get_operational_presence(
