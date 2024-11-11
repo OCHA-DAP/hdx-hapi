@@ -2,7 +2,7 @@ site_name: HDX HAPI - The Humanitarian API
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Data Coverage: data.md
+  - Data Availability: https://ocha-dap.github.io/viz-hapi-availability/
   - Code Examples: examples.md
   - Data Usage Guide:
       - Affected People: data_usage_guides/affected_people.md

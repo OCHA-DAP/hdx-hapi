@@ -38,7 +38,6 @@ from hapi_schema.db_idps import view_params_idps, availability_stmt_idps
 
 from hapi_schema.utils.enums import (
     CommodityCategory,
-    DisabledMarker,
     EventType,
     IPCPhase,
     IPCType,
@@ -283,14 +282,9 @@ class HumanitarianNeedsView(Base):
     __table__ = humanitarian_needs_view
     resource_hdx_id: Mapped[str] = column_property(humanitarian_needs_view.c.resource_hdx_id)
     admin2_ref: Mapped[int] = column_property(humanitarian_needs_view.c.admin2_ref)
-    gender: Mapped[Gender] = column_property(humanitarian_needs_view.c.gender)
-    age_range: Mapped[str] = column_property(humanitarian_needs_view.c.age_range)
-    min_age: Mapped[int] = column_property(humanitarian_needs_view.c.min_age)
-    max_age: Mapped[int] = column_property(humanitarian_needs_view.c.max_age)
     sector_code: Mapped[str] = column_property(humanitarian_needs_view.c.sector_code)
-    population_group: Mapped[PopulationGroup] = column_property(humanitarian_needs_view.c.population_group)
+    category: Mapped[str] = column_property(humanitarian_needs_view.c.category)
     population_status: Mapped[PopulationStatus] = column_property(humanitarian_needs_view.c.population_status)
-    disabled_marker: Mapped[DisabledMarker] = column_property(humanitarian_needs_view.c.disabled_marker)
     population: Mapped[int] = column_property(humanitarian_needs_view.c.population)
     reference_period_start: Mapped[datetime.datetime] = column_property(
         humanitarian_needs_view.c.reference_period_start
