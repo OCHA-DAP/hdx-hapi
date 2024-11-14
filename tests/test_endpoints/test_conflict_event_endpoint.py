@@ -157,13 +157,31 @@ async def test_get_conflict_event_admin_level(event_loop, refresh_db):
 
     response_items = response.json()['data']
     admin_0_count = len(
-        [item for item in response_items if item['admin1_name'] is None and item['admin2_name'] is None]
+        [
+            item
+            for item in response_items
+            if item['admin1_name'] is None
+            and item['provider_admin1_name'] is None
+            and item['admin2_name'] is None
+            and item['provider_admin2_name'] is None
+        ]
     )
     admin_1_count = len(
-        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is None]
+        [
+            item
+            for item in response_items
+            if (item['admin1_name'] is not None or item['provider_admin1_name'] is not None)
+            and item['admin2_name'] is None
+            and item['provider_admin2_name'] is None
+        ]
     )
     admin_2_count = len(
-        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is not None]
+        [
+            item
+            for item in response_items
+            if (item['admin1_name'] is not None or item['provider_admin1_name'] is not None)
+            and (item['admin2_name'] is not None or item['provider_admin2_name'] is not None)
+        ]
     )
     counts_map = {
         '0': admin_0_count,

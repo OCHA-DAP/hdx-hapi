@@ -1,0 +1,2 @@
+class RequestParamsValidationError(Exception):
+    pass

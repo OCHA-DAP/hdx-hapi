@@ -7,7 +7,7 @@ from hdx_hapi.config.doc_snippets import DOC_COMMODITY_CATEGORY
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.wfp_commodity import WfpCommodityResponse
-from hdx_hapi.endpoints.util.util import CommonEndpointParams, OutputFormat, common_endpoint_parameters
+from hdx_hapi.endpoints.util.util import CommonEndpointParams, common_endpoint_parameters
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hdx_hapi.services.wfp_commodity_logic import get_wfp_commodities_srv
@@ -43,7 +43,6 @@ async def get_wfp_commodities(
     name: Annotated[
         Optional[str], Query(max_length=512, description='Filter the response by the name of the commodity.')
     ] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Provide commodity information to use in conjunction with the food-prices endpoint
@@ -51,4 +50,4 @@ async def get_wfp_commodities(
     result = await get_wfp_commodities_srv(
         pagination_parameters=common_parameters, db=db, code=code, category=category, name=name
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, WfpCommodityResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, WfpCommodityResponse)

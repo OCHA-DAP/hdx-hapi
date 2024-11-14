@@ -18,7 +18,6 @@ from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.humanitarian_response import OrgResponse, OrgTypeResponse, SectorResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
     common_endpoint_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -43,7 +42,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/org',
     response_model=HapiGenericResponse[OrgResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get the list of organizations represented in the data available in HDX HAPI',
 )
 async def get_org(
@@ -61,7 +60,6 @@ async def get_org(
     org_type_description: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION} {DOC_SEE_ORG_TYPE}')
     ] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """ """
     result = await get_orgs_srv(
@@ -72,7 +70,7 @@ async def get_org(
         org_type_code=org_type_code,
         org_type_description=org_type_description,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, OrgResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, OrgResponse)
 
 
 @router.get(
@@ -84,7 +82,7 @@ async def get_org(
 @router.get(
     '/api/v1/metadata/org-type',
     response_model=HapiGenericResponse[OrgTypeResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get information about how organizations are classified in HDX HAPI',
 )
 async def get_org_type(
@@ -95,13 +93,12 @@ async def get_org_type(
         Optional[str],
         Query(max_length=512, description=f'{DOC_ORG_TYPE_DESCRIPTION}'),
     ] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """There is no agreed standard for the classification of organizations. The codes and descriptions used in HDX HAPI
     are based on <a href="https://data.humdata.org/dataset/organization-types-beta">this dataset</a>.
     """
     result = await get_org_types_srv(pagination_parameters=common_parameters, db=db, code=code, description=description)
-    return transform_result_to_csv_stream_if_requested(result, output_format, OrgTypeResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, OrgTypeResponse)
 
 
 @router.get(
@@ -113,7 +110,7 @@ async def get_org_type(
 @router.get(
     '/api/v1/metadata/sector',
     response_model=HapiGenericResponse[SectorResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get information about how humanitarian response activities are classified',
 )
 async def get_sector(
@@ -121,7 +118,6 @@ async def get_sector(
     db: AsyncSession = Depends(get_db),
     code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_SECTOR_CODE}')] = None,
     name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """There are a variety of standards for the naming of humanitarian sectors. The codes and descriptions used
     in HDX HAPI are based on
@@ -133,4 +129,4 @@ async def get_sector(
         code=code,
         name=name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, SectorResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, SectorResponse)

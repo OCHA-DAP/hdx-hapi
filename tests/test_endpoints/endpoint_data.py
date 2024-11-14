@@ -400,7 +400,7 @@ endpoint_data = {
             'admin2_code': 'FOO-xxx-XXX',
             'admin2_name': 'Unspecified',
             'provider_admin2_name': 'Provider admin2 name 1',
-            'admin_level': AdminLevel.ZERO.value,
+            'admin_level': AdminLevel.TWO.value,
         },
         'expected_fields': [
             'resource_hdx_id',

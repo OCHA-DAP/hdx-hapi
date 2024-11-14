@@ -10,7 +10,7 @@ from hdx_hapi.db.dao.util.util import (
     apply_reference_period_filter,
     apply_location_admin_filter,
 )
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams, ReferencePeriodParameters
 
 logger = logging.getLogger(__name__)
 
@@ -18,24 +18,10 @@ logger = logging.getLogger(__name__)
 async def idps_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
+    common_location_params: CommonLocationParameters,
     db: AsyncSession,
-    admin1_is_unspecified: Optional[bool] = None,
-    admin2_is_unspecified: Optional[bool] = None,
-    provider_admin1_name: Optional[str] = None,
-    provider_admin2_name: Optional[str] = None,
-    provider_admin1_name_is_unspecified: Optional[bool] = None,
-    provider_admin2_name_is_unspecified: Optional[bool] = None,
-    location_ref: Optional[int] = None,
-    location_code: Optional[str] = None,
-    location_name: Optional[str] = None,
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
-    admin1_ref: Optional[int] = None,
-    admin1_code: Optional[str] = None,
-    admin1_name: Optional[str] = None,
-    admin2_ref: Optional[int] = None,
-    admin2_code: Optional[str] = None,
-    admin2_name: Optional[str] = None,
 ) -> Sequence[IdpsView]:
     query = select(IdpsView)
 
@@ -49,23 +35,9 @@ async def idps_view_list(
     query = apply_location_admin_filter(
         query,
         IdpsView,
-        location_ref,
-        location_code,
-        location_name,
+        common_location_params,
         has_hrp,
         in_gho,
-        admin1_ref,
-        admin1_code,
-        admin1_name,
-        provider_admin1_name,
-        provider_admin1_name_is_unspecified,
-        admin1_is_unspecified,
-        admin2_ref,
-        admin2_code,
-        admin2_name,
-        provider_admin2_name,
-        provider_admin2_name_is_unspecified,
-        admin2_is_unspecified,
     )
 
     query = query.order_by(

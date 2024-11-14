@@ -10,7 +10,6 @@ from hdx_hapi.endpoints.models.currency import CurrencyResponse
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
     common_endpoint_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -39,7 +38,6 @@ async def get_currency(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     code: Annotated[Optional[str], Query(max_length=32, description=f'{DOC_CURRENCY_CODE}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Provide currency information to use in conjunction with the food-prices endpoint
@@ -49,4 +47,4 @@ async def get_currency(
         db=db,
         code=code,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, CurrencyResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, CurrencyResponse)

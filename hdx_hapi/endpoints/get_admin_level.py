@@ -24,7 +24,6 @@ from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
     # ReferencePeriodParameters,
     common_endpoint_parameters,
     # reference_period_parameters,
@@ -63,7 +62,6 @@ async def get_location(
     name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME}')] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_locations_srv(
@@ -76,7 +74,7 @@ async def get_location(
         has_hrp=has_hrp,
         in_gho=in_gho,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, LocationResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, LocationResponse)
 
 
 get_location.__doc__ = DOC_SCOPE_DISCLAIMER
@@ -108,7 +106,6 @@ async def get_admin1(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_admin1_srv(
@@ -122,7 +119,7 @@ async def get_admin1(
         location_code=location_code,
         location_name=location_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, Admin1Response)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, Admin1Response)
 
 
 get_admin1.__doc__ = DOC_SCOPE_DISCLAIMER
@@ -161,7 +158,6 @@ async def get_admin2(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_admin2_srv(
@@ -178,7 +174,7 @@ async def get_admin2(
         location_code=location_code,
         location_name=location_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, Admin2Response)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, Admin2Response)
 
 
 get_admin2.__doc__ = DOC_SCOPE_DISCLAIMER

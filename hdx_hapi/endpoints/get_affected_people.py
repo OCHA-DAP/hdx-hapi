@@ -12,23 +12,11 @@ from hdx_hapi.config.doc_snippets import (
     DOC_POPULATION_STATUS,
     DOC_SECTOR_CODE,
     DOC_SECTOR_NAME,
-    DOC_ADMIN_LEVEL_FILTER,
-    DOC_ADMIN1_REF,
-    DOC_ADMIN1_CODE,
-    DOC_ADMIN1_NAME,
-    DOC_ADMIN2_REF,
-    DOC_ADMIN2_NAME,
-    DOC_ADMIN2_CODE,
-    DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
-    DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
-    DOC_SEE_ADMIN2,
-    DOC_PROVIDER_ADMIN1_NAME,
-    DOC_PROVIDER_ADMIN2_NAME,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -42,11 +30,11 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 from hapi_schema.utils.enums import Gender, PopulationGroup, PopulationStatus
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
+    CommonLocationParameters,
     # ReferencePeriodParameters,
     common_endpoint_parameters,
     # reference_period_parameters,
-    AdminLevel,
+    common_location_parameters,
 )
 
 CONFIG = get_config()
@@ -100,7 +88,6 @@ async def get_refugees(
     ] = None,
     asylum_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     asylum_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_refugees_srv(
@@ -121,7 +108,7 @@ async def get_refugees(
         asylum_has_hrp=asylum_has_hrp,
         asylum_in_gho=asylum_in_gho,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, RefugeesResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, RefugeesResponse)
 
 
 get_refugees.__doc__ = (
@@ -142,11 +129,12 @@ get_refugees.__doc__ = (
 @router.get(
     '/api/v1/affected-people/humanitarian-needs',
     response_model=HapiGenericResponse[HumanitarianNeedsResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get humanitarian needs data',
 )
 async def get_humanitarian_needs(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     category: Annotated[
@@ -168,65 +156,27 @@ async def get_humanitarian_needs(
         Optional[int], Query(description='Filter the response by a upper bound for the population.')
     ] = None,
     sector_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_SECTOR_NAME}')] = None,
-    location_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
-    ] = None,
-    location_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
-    ] = None,
-    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    admin1_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
-    ] = None,
-    admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
-    ] = None,
-    provider_admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
-    ] = None,
-    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
-    admin2_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
-    ] = None,
-    admin2_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
-    ] = None,
-    provider_admin2_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
-    ] = None,
-    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_humanitarian_needs_srv(
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
+        common_location_params=common_location_params,
         db=db,
-        admin2_ref=admin2_ref,
         category=category,
         sector_code=sector_code,
         population_status=population_status,
         population_min=population_min,
         population_max=population_max,
         sector_name=sector_name,
-        location_code=location_code,
-        location_name=location_name,
-        location_ref=location_ref,
         has_hrp=has_hrp,
         in_gho=in_gho,
-        admin1_code=admin1_code,
-        admin1_name=admin1_name,
-        admin2_code=admin2_code,
-        admin2_name=admin2_name,
-        provider_admin1_name=provider_admin1_name,
-        provider_admin2_name=provider_admin2_name,
-        admin1_ref=admin1_ref,
-        admin_level=admin_level,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, HumanitarianNeedsResponse)
+    return transform_result_to_csv_stream_if_requested(
+        result, common_parameters.output_format, HumanitarianNeedsResponse
+    )
 
 
 get_humanitarian_needs.__doc__ = (

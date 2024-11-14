@@ -20,7 +20,6 @@ from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
     # ReferencePeriodParameters,
     common_endpoint_parameters,
     # reference_period_parameters,
@@ -45,7 +44,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/coordination-context/national-risk',
     response_model=HapiGenericResponse[NationalRiskResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get national risk data',
 )
 async def get_national_risk(
@@ -91,7 +90,6 @@ async def get_national_risk(
     ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_national_risks_srv(
@@ -114,7 +112,7 @@ async def get_national_risk(
         has_hrp=has_hrp,
         in_gho=in_gho,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, NationalRiskResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, NationalRiskResponse)
 
 
 get_national_risk.__doc__ = (
