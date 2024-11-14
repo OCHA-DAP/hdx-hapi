@@ -8,6 +8,7 @@ from hapi_schema.utils.enums import Gender
 from hdx_hapi.endpoints.models.population import PopulationResponse
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
+from tests.util.util import split_items_by_admin_level
 
 log = logging.getLogger(__name__)
 
@@ -149,20 +150,7 @@ async def test_get_population_admin_level(event_loop, refresh_db):
     ), 'Response has a different number of fields than expected'
 
     response_items = response.json()['data']
-    admin_0_count = len(
-        [item for item in response_items if item['admin1_name'] is None and item['admin2_name'] is None]
-    )
-    admin_1_count = len(
-        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is None]
-    )
-    admin_2_count = len(
-        [item for item in response_items if item['admin1_name'] is not None and item['admin2_name'] is not None]
-    )
-    counts_map = {
-        '0': admin_0_count,
-        '1': admin_1_count,
-        '2': admin_2_count,
-    }
+    counts_map = split_items_by_admin_level(response_items)
 
     for item in response_items:
         log.info(f"{item['admin1_name']}, {item['admin2_name']}")
