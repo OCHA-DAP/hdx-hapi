@@ -12,10 +12,10 @@ from hdx_hapi.config.doc_snippets import (
     DOC_SEE_LOC,
 )
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.funding import FundingResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
     # ReferencePeriodParameters,
     common_endpoint_parameters,
     # reference_period_parameters,
@@ -40,6 +40,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/coordination-context/funding',
     response_model=HapiGenericResponse[FundingResponse],
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get funding data',
 )
 async def get_funding(
@@ -62,7 +63,6 @@ async def get_funding(
     ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_funding_srv(
@@ -76,7 +76,7 @@ async def get_funding(
         has_hrp=has_hrp,
         in_gho=in_gho,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, FundingResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, FundingResponse)
 
 
 get_funding.__doc__ = (

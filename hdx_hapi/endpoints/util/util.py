@@ -3,7 +3,37 @@ from enum import Enum
 from typing import Annotated, Optional
 
 from fastapi import Depends, Query
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, model_validator
+
+from hdx_hapi.config.doc_snippets import (
+    DOC_ADMIN_LEVEL_FILTER,
+    DOC_ADMIN1_REF,
+    DOC_ADMIN1_CODE,
+    DOC_ADMIN1_NAME,
+    DOC_ADMIN2_REF,
+    DOC_ADMIN2_NAME,
+    DOC_ADMIN2_CODE,
+    DOC_LOCATION_REF,
+    DOC_LOCATION_CODE,
+    DOC_LOCATION_NAME,
+    DOC_SEE_ADMIN1,
+    DOC_SEE_LOC,
+    DOC_SEE_ADMIN2,
+    DOC_PROVIDER_ADMIN1_NAME,
+    DOC_PROVIDER_ADMIN2_NAME,
+)
+from hdx_hapi.endpoints.util.exceptions import RequestParamsValidationError
+
+
+class OutputFormat(str, Enum):
+    CSV = 'csv'
+    JSON = 'json'
+
+
+class AdminLevel(str, Enum):
+    ZERO = '0'
+    ONE = '1'
+    TWO = '2'
 
 
 _LIMIT_DESCRIPTION = 'Maximum number of records to return. The system will not return more than 10,000 records.'
@@ -15,6 +45,7 @@ _APP_IDENTIFIER_DESCRIPTION = (
     'This value can also be passed in the `X-HDX-HAPI-APP-IDENTIFIER` header. '
     'See the *encoded_app_identifier* endpoint.'
 )
+
 
 app_name_identifier_query = Query(max_length=512, min_length=4, description='A name for the calling application.')
 email_identifier_query = Query(max_length=512, description='An email address.')
@@ -32,6 +63,7 @@ class PaginationParams(BaseModel):
 
 
 class CommonEndpointParams(PaginationParams):
+    output_format: OutputFormat = OutputFormat.JSON
     app_identifier: Optional[str] = common_app_identifier_query
 
 
@@ -44,9 +76,11 @@ async def pagination_parameters(
 
 async def common_endpoint_parameters(
     pagination_parameters: Annotated[PaginationParams, Depends(pagination_parameters)],
+    output_format: OutputFormat = OutputFormat.JSON,
     app_identifier: Annotated[Optional[str], common_app_identifier_query] = None,
 ) -> CommonEndpointParams:
-    return CommonEndpointParams(**pagination_parameters.model_dump(), app_identifier=app_identifier)
+    return CommonEndpointParams(**pagination_parameters.model_dump(), 
+                                output_format=output_format, app_identifier=app_identifier)
 
 
 class ReferencePeriodParameters(BaseModel):
@@ -84,12 +118,74 @@ async def reference_period_parameters(
     )
 
 
-class OutputFormat(str, Enum):
-    CSV = 'csv'
-    JSON = 'json'
+class CommonLocationParameters(BaseModel):
+    location_code: Optional[str] = None
+    location_name: Optional[str] = None
+    location_ref: Optional[int] = None
+    admin1_code: Optional[str] = None
+    admin1_name: Optional[str] = None
+    admin1_ref: Optional[int] = None
+    provider_admin1_name: Optional[str] = None
+    admin2_code: Optional[str] = None
+    admin2_name: Optional[str] = None
+    admin2_ref: Optional[int] = None
+    provider_admin2_name: Optional[str] = None
+    admin_level: Optional[AdminLevel] = None
+
+    model_config = ConfigDict(frozen=True)
+
+    @model_validator(mode='after')
+    def validate_names(self) -> 'CommonLocationParameters':
+        if self.admin_level == AdminLevel.ONE and self.provider_admin2_name:
+            raise RequestParamsValidationError('Cannot specify provider_admin2_name and admin level 1 filter')
+        elif self.admin_level == AdminLevel.ZERO and self.provider_admin2_name:
+            raise RequestParamsValidationError('Cannot specify provider_admin2_name and admin level 0 filter')
+        elif self.admin_level == AdminLevel.ZERO and self.provider_admin1_name:
+            raise RequestParamsValidationError('Cannot specify provider_admin1_name and admin level 0 filter')
+        return self
 
 
-class AdminLevel(str, Enum):
-    ZERO = '0'
-    ONE = '1'
-    TWO = '2'
+async def common_location_parameters(
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    admin1_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
+    ] = None,
+    admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+    ] = None,
+    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
+    provider_admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    ] = None,
+    admin2_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
+    ] = None,
+    admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
+    ] = None,
+    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
+    provider_admin2_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
+    ] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
+) -> CommonLocationParameters:
+    return CommonLocationParameters(
+        location_code=location_code,
+        location_name=location_name,
+        location_ref=location_ref,
+        admin1_code=admin1_code,
+        admin1_name=admin1_name,
+        admin1_ref=admin1_ref,
+        provider_admin1_name=provider_admin1_name,
+        admin2_code=admin2_code,
+        admin2_name=admin2_name,
+        admin2_ref=admin2_ref,
+        provider_admin2_name=provider_admin2_name,
+        admin_level=admin_level,
+    )

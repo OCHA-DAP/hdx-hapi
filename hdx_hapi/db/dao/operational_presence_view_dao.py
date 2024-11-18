@@ -11,7 +11,7 @@ from hdx_hapi.db.dao.util.util import (
     apply_reference_period_filter,
     case_insensitive_filter,
 )
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams, ReferencePeriodParameters
 
 
 logger = logging.getLogger(__name__)
@@ -20,34 +20,23 @@ logger = logging.getLogger(__name__)
 async def operational_presences_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
+    common_location_params: CommonLocationParameters,
     db: AsyncSession,
     sector_code: Optional[str] = None,
     org_acronym: Optional[str] = None,
     org_name: Optional[str] = None,
     sector_name: Optional[str] = None,
-    location_code: Optional[str] = None,
-    location_name: Optional[str] = None,
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
-    admin1_ref: Optional[int] = None,
-    admin1_code: Optional[str] = None,
-    admin1_name: Optional[str] = None,
-    provider_admin1_name: Optional[str] = None,
-    admin1_is_unspecified: Optional[bool] = None,
-    location_ref: Optional[int] = None,
-    admin2_ref: Optional[int] = None,
-    admin2_code: Optional[str] = None,
-    admin2_name: Optional[str] = None,
-    provider_admin2_name: Optional[str] = None,
-    admin2_is_unspecified: Optional[bool] = None,
 ) -> Sequence[OperationalPresenceView]:
     logger.info(
         f'operational_presences_view_list called with params: sector_code={sector_code}, '
         f'org_acronym={org_acronym}, org_name={org_name}, '
-        f'sector_name={sector_name}, location_code={location_code}, location_name={location_name}, '
-        f'admin1_code={admin1_code}, admin1_name={admin1_name}, admin1_is_unspecified={admin1_is_unspecified}, '
-        f'admin2_code={admin2_code}, admin2_name={admin2_name}, admin2_is_unspecified={admin2_is_unspecified}, '
-        f'ref_period_parameters={ref_period_parameters}'
+        f'sector_name={sector_name}, location_code={common_location_params.location_code}, '
+        f'location_name={common_location_params.location_name}, '
+        f'admin1_code={common_location_params.admin1_code}, admin1_name={common_location_params.admin1_name}, '
+        f'admin2_code={common_location_params.admin2_code}, admin2_name={common_location_params.admin2_name}, '
+        f'ref_period_parameters={ref_period_parameters}, admin_level={common_location_params.admin_level}, '
     )
 
     query = select(OperationalPresenceView)
@@ -63,21 +52,9 @@ async def operational_presences_view_list(
     query = apply_location_admin_filter(
         query,
         OperationalPresenceView,
-        location_ref,
-        location_code,
-        location_name,
+        common_location_params,
         has_hrp,
         in_gho,
-        admin1_ref,
-        admin1_code,
-        admin1_name,
-        provider_admin1_name,
-        admin1_is_unspecified,
-        admin2_ref,
-        admin2_code,
-        admin2_name,
-        provider_admin2_name,
-        admin2_is_unspecified,
     )
 
     query = apply_reference_period_filter(query, ref_period_parameters, OperationalPresenceView)

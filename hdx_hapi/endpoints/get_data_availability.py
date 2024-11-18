@@ -21,10 +21,10 @@ from hdx_hapi.config.doc_snippets import (
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.availability import AvailabilityResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
     CommonEndpointParams,
-    OutputFormat,
     common_endpoint_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -46,6 +46,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/data-availability',
     response_model=HapiGenericResponse[AvailabilityResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary='Get information about the availability of data for different geographic admin levels',
 )
 async def get_data_availability(
@@ -84,7 +85,6 @@ async def get_data_availability(
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
     admin_level: Annotated[Optional[AdminLevel], Query(description=f'{DOC_ADMIN_LEVEL_FILTER}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Provide currency information to use in conjunction with the food-prices endpoint
@@ -104,4 +104,4 @@ async def get_data_availability(
         hapi_updated_date_max=hapi_updated_date_max,
         admin_level=admin_level,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, AvailabilityResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, AvailabilityResponse)

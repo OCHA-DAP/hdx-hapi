@@ -11,6 +11,7 @@ from hdx_hapi.endpoints.get_wfp_market import get_wfp_market
 from hdx_hapi.endpoints.get_population import get_poverty_rate
 from hdx_hapi.endpoints.get_food_price import get_food_price
 
+from hdx_hapi.endpoints.util.util import common_location_parameters
 from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
 from hdx_hapi.db.dao.poverty_rate_dao import poverty_rates_view_list
 
@@ -50,9 +51,11 @@ ENDPOINT_FUNCTION_LIST = [
 def test_call_signatures_parametrically(endpoint_function):
     function_signature = signature(endpoint_function)
 
-    query_parameters_set = {x for x, _ in function_signature.parameters.items()}
+    query_parameters_set = set(function_signature.parameters.keys()) 
+    if 'common_location_params' in query_parameters_set:
+        common_location_params_signature = signature(common_location_parameters)
+        query_parameters_set = query_parameters_set.union(set(common_location_params_signature.parameters.keys()))
 
-    print(f'{GEOGRAPHIC_PARAMETERS.difference(query_parameters_set)}', flush=True)
     assert GEOGRAPHIC_PARAMETERS.issubset(query_parameters_set)
 
 

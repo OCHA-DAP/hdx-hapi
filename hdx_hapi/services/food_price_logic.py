@@ -6,12 +6,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.food_price_dao import food_price_view_list
 from hdx_hapi.db.models.views.all_views import FoodPriceView
-from hdx_hapi.endpoints.util.util import AdminLevel, PaginationParams
-from hdx_hapi.services.admin_level_logic import compute_unspecified_values
+from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams
 
 
 async def get_food_prices_srv(
     pagination_parameters: PaginationParams,
+    common_location_params: CommonLocationParameters, 
     db: AsyncSession,
     market_code: Optional[str] = None,
     market_name: Optional[str] = None,
@@ -24,25 +24,13 @@ async def get_food_prices_srv(
     price_max: Optional[Decimal] = None,
     # lat: Optional[float] = None,
     # lon: Optional[float] = None,
-    location_code: Optional[str] = None,
-    location_name: Optional[str] = None,
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
-    admin1_ref: Optional[int] = None,
-    admin1_code: Optional[str] = None,
-    admin1_name: Optional[str] = None,
-    provider_admin1_name: Optional[str] = None,
-    location_ref: Optional[int] = None,
-    admin2_ref: Optional[int] = None,
-    admin2_code: Optional[str] = None,
-    admin2_name: Optional[str] = None,
-    provider_admin2_name: Optional[str] = None,
-    admin_level: Optional[AdminLevel] = None,
 ) -> Union[Sequence[FoodPriceView], Sequence[DBFoodPriceVAT]]:
-    admin1_is_unspecified, admin2_is_unspecified = compute_unspecified_values(admin_level)
 
     return await food_price_view_list(
         pagination_parameters=pagination_parameters,
+        common_location_params=common_location_params,
         db=db,
         market_code=market_code,
         market_name=market_name,
@@ -53,19 +41,6 @@ async def get_food_prices_srv(
         price_type=price_type,
         price_min=price_min,
         price_max=price_max,
-        location_ref=location_ref,
-        location_code=location_code,
-        location_name=location_name,
         has_hrp=has_hrp,
         in_gho=in_gho,
-        admin1_ref=admin1_ref,
-        admin1_code=admin1_code,
-        admin1_name=admin1_name,
-        provider_admin1_name=provider_admin1_name,
-        admin1_is_unspecified=admin1_is_unspecified,
-        admin2_ref=admin2_ref,
-        admin2_code=admin2_code,
-        admin2_name=admin2_name,
-        provider_admin2_name=provider_admin2_name,
-        admin2_is_unspecified=admin2_is_unspecified,
     )
