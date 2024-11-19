@@ -29,3 +29,6 @@ plugins:
   - search
   - table-reader:
       base_path: "docs_dir"
+extra_css:
+  - extra.css
+

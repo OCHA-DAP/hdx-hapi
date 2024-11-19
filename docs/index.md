@@ -1,12 +1,14 @@
 # Overview
 
----
-
 The [HDX Humanitarian API](https://data.humdata.org/hapi) (HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations.
 
 HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts or join our slack channel, send an email to [hdx@un.org](mailto:hdx@un.org).
 
-The initial scope of HDX HAPI will be the data included in the [HDX Data Grids](https://data.humdata.org/dashboards/overview-of-data-grids). Work is ongoing to add more data.
+# Data Coverage
+Thematically, HAPI aims to include all the data sub-categories from the [HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids). 
+Geographically, HAPI focuses on all countries that have a humanitarian response plan but also includes other countries for which the data is available. 
+The [Data Availability Table](https://data.humdata.org/hapi#data-availability) details the data coverage that we have achieved at present, and to which administrative level the data is available: national (admin 0),
+admin 1, or admin 2.
 
 # App Identifier
 
@@ -27,10 +29,10 @@ HDX HAPI is organised around a set of key humanitarian data subcategories like *
 
 #### Affected People
 
-- [IDPs](https://hapi.humdata.org/docs#/Affected%20People/get_idps_api_v1_affected_people_idps_get)
-- [Refugees & Persons of Concern](https://hapi.humdata.org/docs#/Affected%20People/get_refugees_api_v1_affected_people_refugees_get)
+- [Refugees & Persons of Concern](https://hapi.humdata.org/docs#/Affected%20people/get_refugees_api_v1_affected_people_refugees_get)
+- [Humanitarian Needs](https://hapi.humdata.org/docs#/Affected%20people/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
+- [Internally Displaced Persons](https://hapi.humdata.org/docs#/Affected%20People/get_idps_api_v1_affected_people_idps_get)
 - [Returnees](https://hapi.humdata.org/docs#/Affected%20People/get_returnees_api_v1_affected_people_returnees_get)
-- [Humanitarian Needs](https://hapi.humdata.org/docs#/Affected%20People/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
 
 #### Coordination & Context
 
