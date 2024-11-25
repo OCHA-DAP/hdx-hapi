@@ -47,9 +47,11 @@ The global [Oxford Multidimensional Poverty Index](https://ophi.org.uk/global-mp
 (MPI) measures multidimensional poverty in over 100 developing countries,
 using internationally comparable datasets. The MPI assesses poverty through
 three main dimensions: health, education, and living standards, each of which
-is represented by specific indicators. Please see the
-[OPHI methodological note](https://ophi.org.uk/publications/MN-54) for more
-details.
+is represented by specific indicators. For each country, MPI trends over time 
+are supplied if available. Relevant OPHI methodological notes are 
+[58](https://ophi.org.uk/publications/MN-58), 
+[59](https://ophi.org.uk/publications/MN-59) and 
+[60](https://ophi.org.uk/publications/MN-60).
 
 ### Summary
 
@@ -73,6 +75,13 @@ For available query parameters, please see the
 
 ### Usage Notes
 
-* The data is disaggregated to admin 1, but not p-coded. We have kept the
-  admin 1 names in the data, but link only to national level p-codes.
-  We plan to p-code this data in a future release.
+* The data is available at admin 0 and admin 1
+* We use p-codes from the source data which was p-coded by taking the admin 1 
+  names, and applying the algorithm from [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
+* Any rows whose p-codes are unmatched are p-coded at the national level with
+  admin names supplied in the returned data
+* Trends are estimated using indicators in the global MPI that are harmonised 
+  across the time periods and are used where data is available for a country
+* For any country where trends are unavailable in the source, the latest data
+  (which is not harmonised across time) is used instead
+

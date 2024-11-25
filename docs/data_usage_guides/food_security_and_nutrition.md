@@ -31,7 +31,8 @@ For available query parameters, please see the
   and applying the algorithm from
   [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/),
   which uses phonetic name matching and manual overrides
-* Any rows whose p-codes are unmatched are p-coded at the national level.
+* Any rows whose p-codes are unmatched are p-coded at the national level with
+  admin names supplied in the returned data
 
 ### Usage Notes
 
