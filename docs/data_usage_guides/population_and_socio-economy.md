@@ -75,11 +75,12 @@ For available query parameters, please see the
 
 ### Usage Notes
 
-* The data is available at admin 0 and admin 1
+* The data is available at admin 0 and admin 1 with admin names supplied in the 
+  returned data
 * We use p-codes from the source data which was p-coded by taking the admin 1 
   names, and applying the algorithm from [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
-* Any rows whose p-codes are unmatched are p-coded at the national level with
-  admin names supplied in the returned data
+* Where admin 1 names could not be p-coded, the provided p-codes from the 
+  source data are at national level
 * Trends are estimated using indicators in the global MPI that are harmonised 
   across the time periods and are used where data is available for a country
 * For any country where trends are unavailable in the source, the latest data
