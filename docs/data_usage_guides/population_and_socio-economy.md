@@ -82,7 +82,7 @@ For available query parameters, please see the
 * Where admin 1 names could not be p-coded, the provided p-codes from the 
   source data are at national level
 * Trends are estimated using indicators in the global MPI that are harmonised 
-  across the time periods and are used where data is available for a country
+  across the time periods and are used where data are available for a country
 * For any country where trends are unavailable in the source, the latest data
-  (which is not harmonised across time) is used instead
+  (which is not harmonised across time) are used instead
 
