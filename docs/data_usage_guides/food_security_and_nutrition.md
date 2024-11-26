@@ -38,8 +38,9 @@ For available query parameters, please see the
 
 ### Usage Notes
 
-* The data is available at national, admin 1 and admin 2 with admin names 
-  supplied in the returned data along with p-codes where available
+* The data are available at national, admin 1 and admin 2 levels
+* The admin name from the provider is supplied along with p-codes and 
+  corresponding standardised admin names where available
 * The total population (`ipc_phase`="all") is not necessarily equal to the sum of
   the populations in phases 1-5. The differences are usually small (due to
   rounding errors), or because there is no IPC phase data
