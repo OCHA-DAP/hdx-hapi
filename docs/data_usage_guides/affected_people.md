@@ -177,4 +177,4 @@ For available query parameters, please see the
 * The PIN should **not** be summed across sectors or population statuses,
   as the same people can be present across multiple groups
 * For the number of people affected across all
-  sectors, please use the PIN value where sector=Intersectoral.
+  sectors, please use the PIN value where sector=Intersectoral

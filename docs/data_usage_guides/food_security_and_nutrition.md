@@ -31,10 +31,15 @@ For available query parameters, please see the
   and applying the algorithm from
   [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/),
   which uses phonetic name matching and manual overrides
-* Any rows whose p-codes are unmatched are p-coded at the national level.
+* Where admin 1 names could not be p-coded, the provided p-codes from the 
+  source data are at national level
+* Where admin 2 names could not be p-coded, the provided p-codes from the 
+  source data are at admin 1 level if possible or national level if not
 
 ### Usage Notes
 
+* The data is available at national, admin 1 and admin 2 with admin names 
+  supplied in the returned data along with p-codes where available
 * The total population (`ipc_phase`="all") is not necessarily equal to the sum of
   the populations in phases 1-5. The differences are usually small (due to
   rounding errors), or because there is no IPC phase data
