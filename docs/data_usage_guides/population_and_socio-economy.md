@@ -75,8 +75,9 @@ For available query parameters, please see the
 
 ### Usage Notes
 
-* The data is available at admin 0 and admin 1 with admin names supplied in the 
-  returned data
+* The data are available at the national and admin 1 level
+* The admin name from the provider is supplied along with p-codes and 
+  corresponding standardised admin names where available
 * We use p-codes from the source data which was p-coded by taking the admin 1 
   names, and applying the algorithm from [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
 * Where admin 1 names could not be p-coded, the provided p-codes from the 
