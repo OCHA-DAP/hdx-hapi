@@ -25,10 +25,10 @@ from hdx_hapi.config.doc_snippets import (
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.hdx_metadata import DatasetResponse, ResourceResponse
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
     common_endpoint_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
@@ -50,6 +50,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/dataset',
     response_model=HapiGenericResponse[DatasetResponse],
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get information about the sources of the data in HDX HAPI',
 )
 async def get_dataset(
@@ -60,7 +61,6 @@ async def get_dataset(
     dataset_hdx_title: Annotated[Optional[str], Query(max_length=1024, description=f'{DOC_HDX_DATASET_TITLE}')] = None,
     hdx_provider_stub: Annotated[Optional[str], Query(max_length=128, description=f'{DOC_HDX_PROVIDER_STUB}')] = None,
     hdx_provider_name: Annotated[Optional[str], Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Get information about the <a href="https://data.humdata.org/dataset">HDX Datasets</a> that are used as data sources
@@ -75,7 +75,7 @@ async def get_dataset(
         hdx_provider_stub=hdx_provider_stub,
         hdx_provider_name=hdx_provider_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, DatasetResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, DatasetResponse)
 
 
 @router.get(
@@ -87,6 +87,7 @@ async def get_dataset(
 @router.get(
     '/api/v1/metadata/resource',
     response_model=HapiGenericResponse[ResourceResponse],
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get information about the sources of the data in HDX HAPI',
 )
 async def get_resources(
@@ -118,7 +119,6 @@ async def get_resources(
     dataset_hdx_provider_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_HDX_PROVIDER_NAME}')
     ] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     """
     Get information about the resources that are used as data sources for HDX HAPI. Datasets contain one or
@@ -138,4 +138,4 @@ async def get_resources(
         dataset_hdx_provider_stub=dataset_hdx_provider_stub,
         dataset_hdx_provider_name=dataset_hdx_provider_name,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, ResourceResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, ResourceResponse)

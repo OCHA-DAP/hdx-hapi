@@ -1,0 +1,13 @@
+.md-typeset h1, 
+.md-typeset h2 {
+    margin-bottom: 0.5em !important;
+    margin-top: 1em
+}
+
+.md-typeset h3, 
+.md-typeset h4, 
+.md-typeset h5, 
+.md-typeset h6 {
+    margin-bottom: 0.5em !important;
+    margin-top: 0.5em
+}

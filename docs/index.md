@@ -1,58 +1,36 @@
-# Overview
+# HDX HAPI
 
----
+The [HDX Humanitarian API](https://hapi.humdata.org) (HDX HAPI) is a way
+to access standardised indicators from multiple sources to automate workflows
+and visualisations.
 
-The [HDX Humanitarian API](https://data.humdata.org/hapi) (HDX HAPI) is a way to access standardised indicators from multiple sources to automate workflows and visualisations.
+HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts
+or join our Slack channel, send an email to [hdx@un.org](mailto:hdx@un.org).
 
-HDX HAPI is in beta phase, and we are seeking feedback. To share your thoughts or join our slack channel, send an email to [hdx@un.org](mailto:hdx@un.org).
+## Data Coverage
 
-The initial scope of HDX HAPI will be the data included in the [HDX Data Grids](https://data.humdata.org/dashboards/overview-of-data-grids). Work is ongoing to add more data.
+Thematically, HAPI aims to include all the data subcategories from the
+[HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids).
+Geographically, HAPI focuses on all countries that have a humanitarian response
+plan but also includes other countries for which the data is available.
+The [Data Availability Table](https://data.humdata.org/hapi#data-availability)
+details the data coverage that we have achieved at present, and to which
+administrative level the data is available: national (admin 0), admin 1,
+or admin 2.
 
-# App Identifier
+## Latest Changes
 
-To access HDX HAPI you need to generate an API identifier. This can be done via the the [sandbox interface encode_identifier endpoint](https://hapi.humdata.org/docs#/Utility/get_encoded_identifier_api_v1_encode_identifier_get). Enter your application name and email address and it will return the app identifier. The key must be included as a query string parameter e.g.
+_Note: this is only a 10-line snippet, for full details please refer
+ to the complete [changelog](changelog.md)._
 
-```
-https://hapi.humdata.org/api/v1/themes/3w?app_identifier={your app identifier}
-```
+--8<-- "docs/changelog.md:20:30"
 
-We may use the email address to reach out to you directly about usage issues or to learn more about how you are using HAPI, but will not use it for any automated bulk mailings.  See the [Terms of Service](https://data.humdata.org/hapi/terms) for more information.
+## Terms Of Use
 
-# The Structure of HDX HAPI
-
-## Data Subcategory Endpoints
-HDX HAPI is organised around a set of key humanitarian data subcategories like **Baseline Population** and **Conflict Events**. Each of these subcategories can be queried via its endpoint.
-
-### Current list of data subcategory endpoints in HAPI
-
-#### Affected People
-
-- [IDPs](https://hapi.humdata.org/docs#/Affected%20People/get_idps_api_v1_affected_people_idps_get)
-- [Refugees & Persons of Concern](https://hapi.humdata.org/docs#/Affected%20People/get_refugees_api_v1_affected_people_refugees_get)
-- [Returnees](https://hapi.humdata.org/docs#/Affected%20People/get_returnees_api_v1_affected_people_returnees_get)
-- [Humanitarian Needs](https://hapi.humdata.org/docs#/Affected%20People/get_humanitarian_needs_api_v1_affected_people_humanitarian_needs_get)
-
-#### Coordination & Context
-
-- [Who is Doing What Where - Operational Presence](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_operational_presence_api_v1_coordination_context_operational_presence_get)
-- [Funding](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_funding_api_v1_coordination_context_funding_get)
-- [Conflict Events](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_conflict_event_api_v1_coordination_context_conflict_event_get)
-- [National Risk](https://hapi.humdata.org/docs#/Coordination%20%26%20Context/get_national_risk_api_v1_coordination_context_national_risk_get)
-
-#### Food Security & Nutrition
-
-- [Food Security](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_security_api_v1_food_food_security_get)
-- [Food Prices](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_price_api_v1_food_food_price_get)
-
-#### Population & Socio-economy
-
-- [Baseline Population](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_population_api_v1_population_social_population_get)
-- [Poverty Rate](https://hapi.humdata.org/docs#/Population%20%26%20Socio-Economy/get_poverty_rate_api_v1_population_social_poverty_rate_get)
-
-# Terms Of Use
-
-Use of HDX HAPI is governed by the [HDX HAPI Terms of Use](https://data.humdata.org/hapi/terms).
+Use of HDX HAPI is governed by the
+[HDX HAPI Terms of Use](https://data.humdata.org/hapi/terms).
 
 ## FAQS
 
-Please [refer to the landing page](https://data.humdata.org/hapi) for non-technical FAQs
+Please [refer to the landing page](https://data.humdata.org/hapi)
+for non-technical FAQs

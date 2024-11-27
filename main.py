@@ -2,7 +2,10 @@ import logging
 import logging.config
 import os
 
-logging.config.fileConfig(os.getenv('LOGGING_CONF_FILE','logging.conf'))
+from hdx_hapi.endpoints.exception_handler.request_validation_error_handler import request_validation_error_handler
+from hdx_hapi.endpoints.util.exceptions import RequestParamsValidationError
+
+logging.config.fileConfig(os.getenv('LOGGING_CONF_FILE', 'logging.conf'))
 
 import uvicorn  # noqa
 from fastapi import FastAPI, Request  # noqa
@@ -154,5 +157,11 @@ def home():
 async def resp_validation_exception_handler(request: Request, exc: ResponseValidationError):
     return await response_validation_error_handler(request, exc)
 
+
+@app.exception_handler(RequestParamsValidationError)
+async def req_params_validation_exception_handler(request: Request, exc: RequestParamsValidationError):
+    return await request_validation_error_handler(request, exc)
+
+
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8844, log_config=os.getenv('LOGGING_CONF_FILE','logging.conf'))
+    uvicorn.run(app, host='0.0.0.0', port=8844, log_config=os.getenv('LOGGING_CONF_FILE', 'logging.conf'))

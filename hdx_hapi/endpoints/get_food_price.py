@@ -7,35 +7,21 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
-    DOC_ADMIN_LEVEL_FILTER,
-    DOC_ADMIN1_REF,
-    DOC_ADMIN1_CODE,
-    DOC_ADMIN1_NAME,
-    DOC_PROVIDER_ADMIN1_NAME,
-    DOC_ADMIN2_REF,
-    DOC_ADMIN2_CODE,
-    DOC_ADMIN2_NAME,
-    DOC_PROVIDER_ADMIN2_NAME,
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
-    DOC_LOCATION_REF,
-    DOC_LOCATION_CODE,
-    DOC_LOCATION_NAME,
     DOC_PRICE_FLAG,
     DOC_PRICE_TYPE,
-    DOC_SEE_ADMIN1,
-    DOC_SEE_ADMIN2,
-    DOC_SEE_LOC,
     DOC_COMMODITY_CATEGORY,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.food_price import FoodPriceResponse
 from hdx_hapi.endpoints.util.util import (
-    AdminLevel,
     CommonEndpointParams,
-    OutputFormat,
+    CommonLocationParameters,
     common_endpoint_parameters,
+    common_location_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.food_price_logic import get_food_prices_srv
@@ -59,9 +45,11 @@ SUMMARY_TEXT = 'Get food prices'
 @router.get(
     '/api/v1/food/food-price',
     response_model=HapiGenericResponse[FoodPriceResponse],
+    responses=ERROR_RESPONSES, # type: ignore
     summary=SUMMARY_TEXT,
 )
 async def get_food_price(
+    common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     market_code: Annotated[
@@ -86,40 +74,12 @@ async def get_food_price(
     price_max: Annotated[
         Optional[Decimal], Query(description='Filter the response by a upper bound for the price.')
     ] = None,
-    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
-    location_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
-    ] = None,
-    location_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
-    ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
-    admin1_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
-    ] = None,
-    admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
-    ] = None,
-    provider_admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
-    ] = None,
-    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
-    admin2_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
-    ] = None,
-    admin2_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
-    ] = None,
-    provider_admin2_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
-    ] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     result = await get_food_prices_srv(
         pagination_parameters=common_parameters,
+        common_location_params=common_location_params,
         db=db,
         market_code=market_code,
         market_name=market_name,
@@ -130,22 +90,10 @@ async def get_food_price(
         price_type=price_type,
         price_min=price_min,
         price_max=price_max,
-        location_code=location_code,
-        location_name=location_name,
         has_hrp=has_hrp,
         in_gho=in_gho,
-        admin1_code=admin1_code,
-        admin1_name=admin1_name,
-        provider_admin1_name=provider_admin1_name,
-        location_ref=location_ref,
-        admin2_ref=admin2_ref,
-        admin2_code=admin2_code,
-        admin2_name=admin2_name,
-        provider_admin2_name=provider_admin2_name,
-        admin1_ref=admin1_ref,
-        admin_level=admin_level,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, FoodPriceResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, FoodPriceResponse)
 
 
 get_food_price.__doc__ = (

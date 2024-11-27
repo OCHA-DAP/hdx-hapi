@@ -13,6 +13,7 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
 )
+from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.returnees import ReturneesResponse
 from hdx_hapi.services.returnees_logic import get_returnees_srv
 
@@ -21,7 +22,6 @@ from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hdx_hapi.endpoints.util.util import (
     CommonEndpointParams,
-    OutputFormat,
     common_endpoint_parameters,
 )
 
@@ -41,6 +41,7 @@ router = APIRouter(
 @router.get(
     '/api/v1/affected-people/returnees',
     response_model=HapiGenericResponse[ReturneesResponse],
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get returnees data',
 )
 async def get_returnees(
@@ -84,7 +85,6 @@ async def get_returnees(
     ] = None,
     asylum_has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     asylum_in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    output_format: OutputFormat = OutputFormat.JSON,
 ):
     ref_period_parameters = None
     result = await get_returnees_srv(
@@ -105,4 +105,4 @@ async def get_returnees(
         asylum_has_hrp=asylum_has_hrp,
         asylum_in_gho=asylum_in_gho,
     )
-    return transform_result_to_csv_stream_if_requested(result, output_format, ReturneesResponse)
+    return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, ReturneesResponse)
