@@ -23,7 +23,7 @@ or admin 2.
 _Note: this is only a 10-line snippet, for full details please refer
  to the complete [changelog](changelog.md)._
 
---8<-- "docs/changelog.md:18:30"
+--8<-- "docs/changelog.md:20:30"
 
 ## Terms Of Use
 
