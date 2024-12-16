@@ -6,12 +6,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.dao.food_price_dao import food_price_view_list
 from hdx_hapi.db.models.views.all_views import FoodPriceView
-from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, CommonLocationParameters, PaginationParams
 
 
 async def get_food_prices_srv(
+    common_date_range_params: CommonDateRangeParams,
     pagination_parameters: PaginationParams,
-    common_location_params: CommonLocationParameters, 
+    common_location_params: CommonLocationParameters,
     db: AsyncSession,
     market_code: Optional[str] = None,
     market_name: Optional[str] = None,
@@ -27,8 +28,8 @@ async def get_food_prices_srv(
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
 ) -> Union[Sequence[FoodPriceView], Sequence[DBFoodPriceVAT]]:
-
     return await food_price_view_list(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=pagination_parameters,
         common_location_params=common_location_params,
         db=db,

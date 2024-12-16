@@ -11,8 +11,10 @@ from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
     CommonLocationParameters,
+    common_date_range_params,
     common_endpoint_parameters,
     common_location_parameters,
 )
@@ -36,10 +38,11 @@ router = APIRouter(
 @router.get(
     '/api/v1/affected-people/idps',
     response_model=HapiGenericResponse[IdpsResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get idps data',
 )
 async def get_idps(
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -48,6 +51,7 @@ async def get_idps(
 ):
     ref_period_parameters = None
     result = await get_idps_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         common_location_params=common_location_params,

@@ -3,11 +3,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from hdx_hapi.db.models.views.all_views import RefugeesView
 from hdx_hapi.db.dao.refugees_view_dao import refugees_view_list
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, PaginationParams, ReferencePeriodParameters
 from hapi_schema.utils.enums import Gender, PopulationGroup
 
 
 async def get_refugees_srv(
+    common_date_range_params: CommonDateRangeParams,
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
@@ -26,6 +27,7 @@ async def get_refugees_srv(
     asylum_in_gho: Optional[bool] = None,
 ) -> Sequence[RefugeesView]:
     return await refugees_view_list(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,

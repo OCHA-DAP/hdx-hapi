@@ -4,10 +4,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.db.dao.returnees_view_dao import returnees_view_list
 from hdx_hapi.db.models.views.all_views import ReturneesView
 from hapi_schema.utils.enums import Gender, PopulationGroup
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, PaginationParams, ReferencePeriodParameters
 
 
 async def get_returnees_srv(
+    common_date_range_params: CommonDateRangeParams,
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
@@ -26,6 +27,7 @@ async def get_returnees_srv(
     asylum_in_gho: Optional[bool] = None,
 ) -> Union[Sequence[ReturneesView], Sequence[DBReturneesVAT]]:
     return await returnees_view_list(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,

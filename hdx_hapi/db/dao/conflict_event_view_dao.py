@@ -7,11 +7,17 @@ from sqlalchemy import select
 
 from hdx_hapi.db.models.views.vat_or_view import ConflictEventView
 from hdx_hapi.db.dao.util.util import (
+    apply_date_range_filter,
     apply_location_admin_filter,
     apply_pagination,
     apply_reference_period_filter,
 )
-from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
+    CommonLocationParameters,
+    PaginationParams,
+    ReferencePeriodParameters,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -20,7 +26,8 @@ logger = logging.getLogger(__name__)
 async def conflict_event_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
-    common_location_params: CommonLocationParameters, 
+    common_date_range_params: CommonDateRangeParams,
+    common_location_params: CommonLocationParameters,
     db: AsyncSession,
     event_type: Optional[EventType] = None,
     has_hrp: Optional[bool] = None,
@@ -29,6 +36,12 @@ async def conflict_event_view_list(
     query = select(ConflictEventView)
     if event_type:
         query = query.where(ConflictEventView.event_type == event_type)
+
+    query = apply_date_range_filter(
+        query,
+        ConflictEventView,
+        common_date_range_params,
+    )
 
     query = apply_location_admin_filter(
         query,
