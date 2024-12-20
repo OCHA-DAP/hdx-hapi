@@ -29,7 +29,8 @@ For available query parameters, please see the
   [operational presence](https://humanitarian.atlassian.net/wiki/spaces/imtoolbox/pages/214499412/Who+does+What+Where+3W)
   level (3W:OP, per org, sector, and admin 2), even if the original 3W data is
   more detailed (e.g. the source lists individual activities)
-* Countries that are not p-coded are aggregated to the national level
+* Countries that are not p-coded are p-coded to the national level and include
+  admin names from the providers.
 * Organization deduplication is a long-running challenge with this data, since
   there are no unique identifiers, and organization names may be spelled
   different ways by different OCHA offices, or sometimes even within the same

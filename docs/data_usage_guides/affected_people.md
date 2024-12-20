@@ -161,7 +161,7 @@ For available query parameters, please see the
 
 ### Transformations applied
 
-* The table has been reshaped from wide to long: the columns in the original
+* The tables have been reshaped from wide to long: the columns in the original
   data of "population", "in-need", "targeted", "affected", "reached",
   and "population" have been cast to a single
   `population_status` field, and renamed to
@@ -170,7 +170,7 @@ For available query parameters, please see the
   represent the intersectoral PIN and **not** the disaggregated population
 * The methodology in Yemen leads to negative population values in some admin 2
   level areas. Where negative values appear they have been omitted from the API.
-* The reference period is obtained from the HDX dataset
+* The reference period is obtained from the file name of each HDX resource
 
 ### Usage notes
 
