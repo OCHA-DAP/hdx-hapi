@@ -16,9 +16,11 @@ from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.operational_presence import OperationalPresenceResponse
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
     CommonLocationParameters,
     # ReferencePeriodParameters,
+    common_date_range_params,
     common_endpoint_parameters,
     common_location_parameters,
     # reference_period_parameters,
@@ -50,6 +52,7 @@ SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian 
 )
 async def get_operational_presence(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -106,6 +109,7 @@ async def get_operational_presence(
 ):
     ref_period_parameters = None
     result = await get_operational_presences_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         common_location_params=common_location_params,

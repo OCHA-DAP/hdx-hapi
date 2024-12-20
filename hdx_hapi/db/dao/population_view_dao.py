@@ -8,12 +8,18 @@ from hapi_schema.utils.enums import Gender
 
 from hdx_hapi.db.models.views.vat_or_view import PopulationView
 from hdx_hapi.db.dao.util.util import (
+    apply_date_range_filter,
     apply_location_admin_filter,
     apply_pagination,
     apply_reference_period_filter,
     case_insensitive_filter,
 )
-from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
+    CommonLocationParameters,
+    PaginationParams,
+    ReferencePeriodParameters,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -21,6 +27,7 @@ logger = logging.getLogger(__name__)
 
 async def populations_view_list(
     pagination_parameters: PaginationParams,
+    common_date_range_params: CommonDateRangeParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
     common_location_params: CommonLocationParameters,
     db: AsyncSession,
@@ -49,6 +56,13 @@ async def populations_view_list(
         query = query.where(PopulationView.population >= population_min)
     if population_max:
         query = query.where(PopulationView.population < population_max)
+
+    query = apply_date_range_filter(
+        query,
+        PopulationView,
+        common_date_range_params,
+    )
+
     query = apply_location_admin_filter(
         query,
         PopulationView,

@@ -21,7 +21,9 @@ from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
+    common_date_range_params,
     common_endpoint_parameters,
 )
 
@@ -45,6 +47,7 @@ router = APIRouter(
     summary='Get returnees data',
 )
 async def get_returnees(
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     population_group: Annotated[Optional[PopulationGroup], Query(description=f'{DOC_POPULATION_GROUP}')] = None,
@@ -88,6 +91,7 @@ async def get_returnees(
 ):
     ref_period_parameters = None
     result = await get_returnees_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,

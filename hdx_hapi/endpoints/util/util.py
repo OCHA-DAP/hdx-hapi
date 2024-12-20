@@ -3,7 +3,7 @@ from enum import Enum
 from typing import Annotated, Optional
 
 from fastapi import Depends, Query
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict, ValidationInfo, field_validator, model_validator
 
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN_LEVEL_FILTER,
@@ -79,8 +79,9 @@ async def common_endpoint_parameters(
     output_format: OutputFormat = OutputFormat.JSON,
     app_identifier: Annotated[Optional[str], common_app_identifier_query] = None,
 ) -> CommonEndpointParams:
-    return CommonEndpointParams(**pagination_parameters.model_dump(), 
-                                output_format=output_format, app_identifier=app_identifier)
+    return CommonEndpointParams(
+        **pagination_parameters.model_dump(), output_format=output_format, app_identifier=app_identifier
+    )
 
 
 class ReferencePeriodParameters(BaseModel):
@@ -189,3 +190,106 @@ async def common_location_parameters(
         provider_admin2_name=provider_admin2_name,
         admin_level=admin_level,
     )
+
+
+class CommonDateRangeParams(BaseModel):
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+
+    model_config = ConfigDict(frozen=True)
+
+    @field_validator('start_date')
+    def validate_start_date(cls, v: str, info: ValidationInfo) -> datetime.datetime | None:
+        if v:
+            try:
+                return normalize_date(v, info.field_name)
+            except ValueError:
+                raise RequestParamsValidationError(
+                    'Invalid start_date format. Use YYYY, YYYY-MM, YYYY-MM-DD, or YYYY-MM-DDTHH:MM:SS'
+                )
+        return None
+
+    @field_validator('end_date')
+    def validate_end_date(cls, v: str, info: ValidationInfo) -> datetime.datetime | None:
+        if v:
+            try:
+                return normalize_date(v, info.field_name)
+            except ValueError:
+                raise RequestParamsValidationError(
+                    'Invalid end_date format. Use YYYY, YYYY-MM, YYYY-MM-DD, or YYYY-MM-DDTHH:MM:SS'
+                )
+        return None
+
+
+async def common_date_range_params(
+    start_date: Annotated[
+        Optional[str],
+        Query(
+            description='Filter the response to keep rows where the reference period end is after this date or null, e.g. 2020, 2020-01, 2020-01-01 or 2020-01-01T00:00:00'  # noqa
+        ),
+    ] = None,
+    end_date: Annotated[
+        Optional[str],
+        Query(
+            description='Filter the response to keep rows where the reference period start is before this date, e.g. 2020, 2020-01, 2020-01-01, 2020-01-01 or 2020-01-01T23:59:59'  # noqa
+        ),
+    ] = None,
+) -> CommonDateRangeParams:
+    return CommonDateRangeParams(
+        start_date=start_date,
+        end_date=end_date,
+    )
+
+
+def normalize_date(date_str: str, field_name: Optional[str]) -> datetime.datetime:
+    """Normalize a date string into a datetime object, based on the field name.
+    Args:
+        date_str (str): The date string to normalize
+        field_name (Optional[str]): The field name indicating if it's a start or end date
+    Returns:
+        datetime: The normalized datetime object
+    Raises:
+        ValueError: If the date_str is not in a valid format
+    """
+
+    try:
+        # YYYY
+        # if re.match(r'^\d{4}$', date_str):
+        if len(date_str) == 4:
+            year = int(date_str)
+            start_date = datetime.datetime(year, 1, 1, 0, 0, 0)
+            end_date = datetime.datetime(year + 1, 1, 1, 0, 0, 0)
+            return start_date if field_name == 'start_date' else end_date
+
+        # YYYY-MM
+        # elif re.match(r'^\d{4}-\d{2}$', date_str):
+        elif len(date_str) == 7:
+            year = int(date_str[:4])
+            month = int(date_str[5:7])
+            start_date = datetime.datetime(year, month, 1, 0, 0, 0)
+            if month == 12:
+                end_date = datetime.datetime(year + 1, 1, 1, 0, 0, 0)
+            else:
+                end_date = datetime.datetime(year, month + 1, 1, 0, 0, 0)
+            return start_date if field_name == 'start_date' else end_date
+
+        # YYYY-MM-DD
+        # elif re.match(r'^\d{4}-\d{2}-\d{2}$', date_str):
+        elif len(date_str) == 10:
+            year = int(date_str[:4])
+            month = int(date_str[5:7])
+            day = int(date_str[8:10])
+            start_date = datetime.datetime(year, month, day, 0, 0, 0)
+            end_date = start_date + datetime.timedelta(days=1)
+            return start_date if field_name == 'start_date' else end_date
+
+        # YYYY-MM-DDTHH:MM:SS
+        # elif re.match(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$', date_str):
+        elif len(date_str) == 19 and 'T' in date_str:
+            return datetime.datetime.fromisoformat(date_str)
+
+        else:
+            raise ValueError(f'Invalid date format: {date_str}')
+
+    except ValueError as e:
+        raise ValueError(f'Error normalizing date: {e}')

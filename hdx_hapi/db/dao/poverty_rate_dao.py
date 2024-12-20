@@ -5,15 +5,17 @@ from sqlalchemy import select
 
 from hdx_hapi.db.models.views.vat_or_view import PovertyRateView
 from hdx_hapi.db.dao.util.util import (
+    apply_date_range_filter,
     apply_pagination,
     apply_reference_period_filter,
     case_insensitive_filter,
 )
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, PaginationParams, ReferencePeriodParameters
 
 
 async def poverty_rates_view_list(
     pagination_parameters: PaginationParams,
+    common_date_range_params: CommonDateRangeParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     mpi_min: Optional[float] = None,
@@ -45,6 +47,12 @@ async def poverty_rates_view_list(
         query = query.where(PovertyRateView.location_name.icontains(location_name))
     if provider_admin1_name:
         query = query.where(PovertyRateView.provider_admin1_name.icontains(provider_admin1_name))
+
+    query = apply_date_range_filter(
+        query,
+        PovertyRateView,
+        common_date_range_params,
+    )
 
     query = apply_reference_period_filter(query, ref_period_parameters, PovertyRateView)
 

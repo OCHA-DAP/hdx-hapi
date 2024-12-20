@@ -5,17 +5,24 @@ from sqlalchemy import select
 
 from hdx_hapi.db.models.views.vat_or_view import HumanitarianNeedsView
 from hdx_hapi.db.dao.util.util import (
+    apply_date_range_filter,
     apply_location_admin_filter,
     apply_pagination,
     apply_reference_period_filter,
 )
-from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
+    CommonLocationParameters,
+    PaginationParams,
+    ReferencePeriodParameters,
+)
 from hapi_schema.utils.enums import PopulationStatus
 
 
 async def humanitarian_needs_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
+    common_date_range_params: CommonDateRangeParams,
     common_location_params: CommonLocationParameters,
     db: AsyncSession,
     category: Optional[str] = None,
@@ -42,6 +49,12 @@ async def humanitarian_needs_view_list(
         query = query.where(HumanitarianNeedsView.population < population_max)
     if sector_name:
         query = query.where(HumanitarianNeedsView.sector_name.icontains(sector_name))
+
+    query = apply_date_range_filter(
+        query,
+        HumanitarianNeedsView,
+        common_date_range_params,
+    )
 
     query = apply_location_admin_filter(
         query,

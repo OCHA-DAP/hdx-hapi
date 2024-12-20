@@ -7,12 +7,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.dao.util.util import (
+    apply_date_range_filter,
     apply_location_admin_filter,
     apply_pagination,
     case_insensitive_filter,
 )
 from hdx_hapi.db.models.views.vat_or_view import FoodPriceView
-from hdx_hapi.endpoints.util.util import CommonLocationParameters, PaginationParams
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, CommonLocationParameters, PaginationParams
 
 
 logger = logging.getLogger(__name__)
@@ -20,7 +21,8 @@ logger = logging.getLogger(__name__)
 
 async def food_price_view_list(
     pagination_parameters: PaginationParams,
-    common_location_params: CommonLocationParameters, 
+    common_date_range_params: CommonDateRangeParams,
+    common_location_params: CommonLocationParameters,
     db: AsyncSession,
     market_code: Optional[str] = None,
     market_name: Optional[str] = None,
@@ -55,6 +57,12 @@ async def food_price_view_list(
         query = query.where(FoodPriceView.price >= price_min)
     if price_max:
         query = query.where(FoodPriceView.price < price_max)
+
+    query = apply_date_range_filter(
+        query,
+        FoodPriceView,
+        common_date_range_params,
+    )
 
     query = apply_location_admin_filter(
         query,

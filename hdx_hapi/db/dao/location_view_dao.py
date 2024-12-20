@@ -5,14 +5,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.vat_or_view import LocationView
-from hdx_hapi.db.dao.util.util import apply_pagination, apply_reference_period_filter, case_insensitive_filter
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.db.dao.util.util import (
+    apply_date_range_filter,
+    apply_pagination,
+    apply_reference_period_filter,
+    case_insensitive_filter,
+)
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, PaginationParams, ReferencePeriodParameters
 
 logger = logging.getLogger(__name__)
 
 
 async def locations_view_list(
     pagination_parameters: PaginationParams,
+    common_date_range_params: CommonDateRangeParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
     id: Optional[int] = None,
@@ -34,6 +40,12 @@ async def locations_view_list(
         query = query.where(LocationView.has_hrp == has_hrp)
     if in_gho is not None:
         query = query.where(LocationView.in_gho == in_gho)
+
+    query = apply_date_range_filter(
+        query,
+        LocationView,
+        common_date_range_params,
+    )
 
     query = apply_reference_period_filter(query, ref_period_parameters, LocationView)
 

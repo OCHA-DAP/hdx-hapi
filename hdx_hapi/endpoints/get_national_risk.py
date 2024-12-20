@@ -19,8 +19,10 @@ from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.national_risk import NationalRiskResponse
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
     # ReferencePeriodParameters,
+    common_date_range_params,
     common_endpoint_parameters,
     # reference_period_parameters,
 )
@@ -49,6 +51,7 @@ router = APIRouter(
 )
 async def get_national_risk(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     risk_class: Annotated[Optional[RiskClass], Query(description=DOC_RISK_CLASS)] = None,
@@ -93,6 +96,7 @@ async def get_national_risk(
 ):
     ref_period_parameters = None
     result = await get_national_risks_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
