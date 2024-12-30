@@ -225,13 +225,13 @@ async def common_date_range_params(
     start_date: Annotated[
         Optional[str],
         Query(
-            description='Filter the response to keep rows where the reference period end is after this date or null, e.g. 2020, 2020-01, 2020-01-01 or 2020-01-01T00:00:00'  # noqa
+            description='Filter entries to include rows where the reference period overlaps with or extends beyond this date, e.g. 2020, 2020-01, 2020-01-01 or 2020-01-01T00:00:00'  # noqa
         ),
     ] = None,
     end_date: Annotated[
         Optional[str],
         Query(
-            description='Filter the response to keep rows where the reference period start is before this date, e.g. 2020, 2020-01, 2020-01-01, 2020-01-01 or 2020-01-01T23:59:59'  # noqa
+            description='Filter entries to include rows where the reference period overlaps with or begins prior to this date, e.g. 2020, 2020-01, 2020-01-01, 2020-01-01 or 2020-01-01T23:59:59'  # noqa
         ),
     ] = None,
 ) -> CommonDateRangeParams:
