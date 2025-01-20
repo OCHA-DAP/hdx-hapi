@@ -9,11 +9,11 @@ identifier follow the getting started guide.
 ## 1. Query a sub-category end point and loop through pages
 
 Themes are the core data of the API.  The results are paginated and so
-multiple calls are needed to get the whole dataset.  Below we query the
-operational presence sub-category for Afghanistan and return all results
-into a single object. To query a different sub-category or country change
-the constant variable of `THEME` to another sub-category or `LOCATION` to
-a different ISO3 country code.
+multiple calls are needed to get the whole dataset.  Below we query the 3W
+sub-category for Afghanistan and return all results into a single object.
+To query a different sub-category or country change the constant variable
+of `THEME` to another sub-category or `LOCATION` to a different
+ISO3 country code.
 
 === "Python"
 
