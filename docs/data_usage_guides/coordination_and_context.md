@@ -2,7 +2,7 @@
 
 ---
 
-## Who is Doing What Where - Operational Presence <a id=”operational-presence”></a>
+## Operational Presence <a id=”operational-presence”></a>
 
 The [Who is Doing What Where (3W)](https://3w.unocha.org/) is a core
 humanitarian coordination dataset that contains the geographic and sectoral
