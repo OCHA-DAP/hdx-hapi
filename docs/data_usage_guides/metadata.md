@@ -144,18 +144,18 @@ For available query parameters, please see the
 **Used in:**
 [`Operational Presence`](coordination_and_context.md#operational-presence)
 
-The organization table is populated from the 3W data, using the following
-methodology:
+The organization table is populated from the operational presence data, using
+the following methodology:
 
 * Organization name and acronym strings are normalised. If an acronym isn’t
   available, the first 32 characters of the name are used.
 * This [organization mapping](https://docs.google.com/spreadsheets/d/e/2PACX-1vSfBWvSu3fKA743VvHtgf-pIGkYH7zhy-NP7DZgEV9_a6YU7vtCeWhbLM56aUL1iIfrfv5UBvvjVt7B/pub?gid=1040329566&single=true&output=csv)
   is used for common alternative names
 * Organizations must have an associated organization type. If available, the
-  organization type code is taken directly from the 3W data, otherwise the name
-  string is normalised and matched to the org type names. In the absence of a
-  direct match, phonetic matching is used for strings > 5 characters. If no
-  match is found, the organization is skipped.
+  organization type code is taken directly from the operational presence data,
+  otherwise the name string is normalised and matched to the org type names.
+  In the absence of a direct match, phonetic matching is used for strings > 5 
+  characters. If no match is found, the organization is skipped.
 
 <h4> Parameters Returned </h4>
 
