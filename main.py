@@ -136,6 +136,7 @@ def generate_custom_openapi_schema() -> dict:
                 parameters = method['parameters']
                 app_identifier_param = next((param for param in parameters if param['name'] == 'app_identifier'), None)
                 if app_identifier_param:
+                    app_identifier_param['required'] = True
                     parameters.remove(app_identifier_param)
                     parameters.insert(0, app_identifier_param)
 
