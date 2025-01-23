@@ -75,9 +75,9 @@ async def pagination_parameters(
 
 
 async def common_endpoint_parameters(
+    app_identifier: Annotated[str, common_app_identifier_query],
     pagination_parameters: Annotated[PaginationParams, Depends(pagination_parameters)],
     output_format: OutputFormat = OutputFormat.JSON,
-    app_identifier: Annotated[Optional[str], common_app_identifier_query] = None,
 ) -> CommonEndpointParams:
     return CommonEndpointParams(
         **pagination_parameters.model_dump(), output_format=output_format, app_identifier=app_identifier
