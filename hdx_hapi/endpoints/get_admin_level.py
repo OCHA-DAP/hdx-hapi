@@ -23,8 +23,10 @@ from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.admin_level import Admin1Response, Admin2Response, LocationResponse
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
     # ReferencePeriodParameters,
+    common_date_range_params,
     common_endpoint_parameters,
     # reference_period_parameters,
 )
@@ -50,11 +52,12 @@ router = APIRouter(
 @router.get(
     '/api/v1/metadata/location',
     response_model=HapiGenericResponse[LocationResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get the list of locations (typically countries) included in HDX HAPI',
 )
 async def get_location(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     id: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
@@ -65,6 +68,7 @@ async def get_location(
 ):
     ref_period_parameters = None
     result = await get_locations_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
@@ -89,11 +93,12 @@ get_location.__doc__ = DOC_SCOPE_DISCLAIMER
 @router.get(
     '/api/v1/metadata/admin1',
     response_model=HapiGenericResponse[Admin1Response],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get the list of first-level subnational administrative divisions available in HDX HAPI',
 )
 async def get_admin1(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     id: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_ID}')] = None,
@@ -109,6 +114,7 @@ async def get_admin1(
 ):
     ref_period_parameters = None
     result = await get_admin1_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
@@ -134,11 +140,12 @@ get_admin1.__doc__ = DOC_SCOPE_DISCLAIMER
 @router.get(
     '/api/v1/metadata/admin2',
     response_model=HapiGenericResponse[Admin2Response],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get the list of second-level administrative divisions available in HDX HAPI',
 )
 async def get_admin2(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     id: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_ID}')] = None,
@@ -161,6 +168,7 @@ async def get_admin2(
 ):
     ref_period_parameters = None
     result = await get_admin2_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,

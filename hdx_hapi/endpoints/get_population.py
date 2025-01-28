@@ -24,8 +24,10 @@ from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.population import PopulationResponse
 from hdx_hapi.endpoints.models.poverty_rate import PovertyRateResponse
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
     CommonLocationParameters,
+    common_date_range_params,
     common_endpoint_parameters,
     common_location_parameters,
 )
@@ -54,6 +56,7 @@ router = APIRouter(
     summary='Get baseline population data',
 )
 async def get_population(
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
@@ -71,6 +74,7 @@ async def get_population(
 ):
     ref_period_parameters = None
     result = await get_populations_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         common_location_params=common_location_params,
@@ -106,6 +110,7 @@ get_population.__doc__ = (
     summary='Get poverty rate data',
 )
 async def get_poverty_rate(
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -126,6 +131,7 @@ async def get_poverty_rate(
 ):
     ref_period_parameters = None
     result = await get_poverty_rates_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,

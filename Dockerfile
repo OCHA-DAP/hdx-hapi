@@ -21,6 +21,7 @@ RUN apk add \
     pip3 --no-cache-dir install --upgrade \
         pip \
         wheel && \
+    rm -r /srv/hapi/src/hapi-schema && \
     pip3 install --upgrade -r requirements.txt && \
     pip3 install elastic-apm && \
     apk del .build-deps && \

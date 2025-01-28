@@ -12,6 +12,7 @@ from fastapi import FastAPI, Request  # noqa
 from fastapi.exceptions import ResponseValidationError  # noqa
 from fastapi.responses import HTMLResponse, RedirectResponse  # noqa
 from fastapi.openapi.docs import get_swagger_ui_html  # noqa
+from fastapi.openapi.utils import get_openapi  # noqa
 
 # from hdx_hapi.services.sql_alchemy_session import init_db
 from hdx_hapi.endpoints.exception_handler.response_validation_error_handler import response_validation_error_handler  # noqa
@@ -107,6 +108,45 @@ app.include_router(wfp_market_router)
 
 app.include_router(data_availability_router)
 app.include_router(version_router)
+
+
+# custom OpenAPI schema generator
+def generate_custom_openapi_schema() -> dict:
+    """
+    Generate a custom OpenAPI schema with the 'app_identifier' parameter moved to the top.
+
+    Returns:
+        dict: The custom OpenAPI schema.
+    """
+    if app.openapi_schema:
+        return app.openapi_schema
+
+    # generate the OpenAPI schema
+    openapi_schema = get_openapi(
+        title=app.title,
+        version=app.version,
+        description=app.description,
+        routes=app.routes,
+    )
+
+    # move the 'app_identifier' parameter to the top
+    for path in openapi_schema['paths'].values():
+        for method in path.values():
+            if 'parameters' in method:
+                parameters = method['parameters']
+                app_identifier_param = next((param for param in parameters if param['name'] == 'app_identifier'), None)
+                if app_identifier_param:
+                    app_identifier_param['required'] = True
+                    parameters.remove(app_identifier_param)
+                    parameters.insert(0, app_identifier_param)
+
+    # update the application's OpenAPI schema
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+# override the application's OpenAPI schema generator
+app.openapi = generate_custom_openapi_schema
 
 
 # add middleware

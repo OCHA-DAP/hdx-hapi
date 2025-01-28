@@ -5,10 +5,11 @@ from hapi_schema.db_views_as_tables import DBFundingVAT
 
 from hdx_hapi.db.dao.funding_view_dao import funding_view_list
 from hdx_hapi.db.models.views.all_views import FundingView
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, PaginationParams, ReferencePeriodParameters
 
 
 async def get_funding_srv(
+    common_date_range_params: CommonDateRangeParams,
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
     db: AsyncSession,
@@ -21,6 +22,7 @@ async def get_funding_srv(
     in_gho: Optional[bool] = None,
 ) -> Union[Sequence[FundingView], Sequence[DBFundingVAT]]:
     return await funding_view_list(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=pagination_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,

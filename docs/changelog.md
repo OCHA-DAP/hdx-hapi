@@ -17,6 +17,13 @@ the API.
 
 ## Latest changes
 
+### 2024-12-19
+
+- Increased temporal coverage for humanitarian needs
+  subcategory
+- Increased geographical coverage to all available for
+  operational presence subcategory
+
 ### 2024-11-21
 
 - Increased geographical coverage to global for

@@ -6,6 +6,7 @@ from sqlalchemy.orm import Mapped
 from hdx_hapi.config.config import get_config
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
+    CommonDateRangeParams,
     CommonLocationParameters,
     PaginationParams,
     ReferencePeriodParameters,
@@ -23,6 +24,29 @@ def apply_pagination(query: Select, pagination_parameters: PaginationParams) -> 
         limit = 1000
 
     return query.limit(limit).offset(offset)
+
+
+class EntityWithDateRangeFilter(Protocol):
+    start_date: Mapped[str]
+    end_date: Mapped[str]
+    reference_period_start: Mapped[datetime.datetime]
+    reference_period_end: Mapped[datetime.datetime]
+
+
+def apply_date_range_filter(
+    query: Select,
+    db_class: Type[EntityWithDateRangeFilter],
+    common_date_range_params: CommonDateRangeParams,
+) -> Select:
+    start_date = common_date_range_params.start_date
+    end_date = common_date_range_params.end_date
+
+    if start_date:
+        query = query.filter(or_(db_class.reference_period_end >= start_date, db_class.reference_period_end.is_(None)))
+    if end_date:
+        query = query.filter(db_class.reference_period_start < end_date)
+
+    return query
 
 
 class EntityWithReferencePeriod(Protocol):

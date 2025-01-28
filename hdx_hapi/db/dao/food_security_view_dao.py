@@ -8,16 +8,18 @@ from hdx_hapi.db.models.views.vat_or_view import FoodSecurityView
 from hdx_hapi.db.dao.util.util import (
     ReferencePeriodParameters,
     PaginationParams,
+    apply_date_range_filter,
     apply_location_admin_filter,
     apply_reference_period_filter,
     apply_pagination,
 )
-from hdx_hapi.endpoints.util.util import CommonLocationParameters
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, CommonLocationParameters
 
 
 async def food_security_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
+    common_date_range_params: CommonDateRangeParams,
     common_location_params: CommonLocationParameters,
     db: AsyncSession,
     ipc_phase: Optional[IPCPhase] = None,
@@ -31,6 +33,12 @@ async def food_security_view_list(
         query = query.where(FoodSecurityView.ipc_phase == ipc_phase)
     if ipc_type:
         query = query.where(FoodSecurityView.ipc_type == ipc_type)
+
+    query = apply_date_range_filter(
+        query,
+        FoodSecurityView,
+        common_date_range_params,
+    )
 
     query = apply_location_admin_filter(
         query,

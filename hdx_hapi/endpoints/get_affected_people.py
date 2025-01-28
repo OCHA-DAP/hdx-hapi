@@ -29,9 +29,11 @@ from hdx_hapi.services.refugees_logic import get_refugees_srv
 from hdx_hapi.services.sql_alchemy_session import get_db
 from hapi_schema.utils.enums import Gender, PopulationGroup, PopulationStatus
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
     CommonLocationParameters,
     # ReferencePeriodParameters,
+    common_date_range_params,
     common_endpoint_parameters,
     # reference_period_parameters,
     common_location_parameters,
@@ -59,6 +61,7 @@ router = APIRouter(
 )
 async def get_refugees(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
     population_group: Annotated[
@@ -91,6 +94,7 @@ async def get_refugees(
 ):
     ref_period_parameters = None
     result = await get_refugees_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         db=db,
@@ -134,6 +138,7 @@ get_refugees.__doc__ = (
 )
 async def get_humanitarian_needs(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -161,6 +166,7 @@ async def get_humanitarian_needs(
 ):
     ref_period_parameters = None
     result = await get_humanitarian_needs_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         common_location_params=common_location_params,

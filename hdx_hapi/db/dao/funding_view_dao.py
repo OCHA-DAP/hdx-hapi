@@ -5,8 +5,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from hdx_hapi.db.models.views.vat_or_view import FundingView
-from hdx_hapi.db.dao.util.util import apply_pagination, apply_reference_period_filter, case_insensitive_filter
-from hdx_hapi.endpoints.util.util import PaginationParams, ReferencePeriodParameters
+from hdx_hapi.db.dao.util.util import (
+    apply_date_range_filter,
+    apply_pagination,
+    apply_reference_period_filter,
+    case_insensitive_filter,
+)
+from hdx_hapi.endpoints.util.util import CommonDateRangeParams, PaginationParams, ReferencePeriodParameters
 
 
 logger = logging.getLogger(__name__)
@@ -15,6 +20,7 @@ logger = logging.getLogger(__name__)
 async def funding_view_list(
     pagination_parameters: PaginationParams,
     ref_period_parameters: Optional[ReferencePeriodParameters],
+    common_date_range_params: CommonDateRangeParams,
     db: AsyncSession,
     appeal_code: Optional[str] = None,
     appeal_type: Optional[str] = None,
@@ -39,6 +45,12 @@ async def funding_view_list(
         query = query.where(FundingView.has_hrp == has_hrp)
     if in_gho is not None:
         query = query.where(FundingView.in_gho == in_gho)
+
+    query = apply_date_range_filter(
+        query,
+        FundingView,
+        common_date_range_params,
+    )
 
     query = apply_reference_period_filter(query, ref_period_parameters, FundingView)
 

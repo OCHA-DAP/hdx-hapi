@@ -15,9 +15,11 @@ from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.models.food_security import FoodSecurityResponse
 from hdx_hapi.endpoints.util.util import (
+    CommonDateRangeParams,
     CommonEndpointParams,
     CommonLocationParameters,
     # ReferencePeriodParameters,
+    common_date_range_params,
     common_endpoint_parameters,
     # reference_period_parameters,
     common_location_parameters,
@@ -41,10 +43,11 @@ router = APIRouter(
 @router.get(
     '/api/v1/food/food-security',
     response_model=HapiGenericResponse[FoodSecurityResponse],
-    responses=ERROR_RESPONSES, # type: ignore
+    responses=ERROR_RESPONSES,  # type: ignore
     summary='Get food security data',
 )
 async def get_food_security(
+    common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
@@ -56,6 +59,7 @@ async def get_food_security(
 ):
     ref_period_parameters = None
     result = await get_food_security_srv(
+        common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
         common_location_params=common_location_params,
