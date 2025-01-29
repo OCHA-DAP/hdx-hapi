@@ -63,12 +63,9 @@ async def test_email_validation(event_loop, refresh_db):
             {
                 'type': 'value_error',
                 'loc': ['query', 'email'],
-                'msg': (
-                    'value is not a valid email address: The email address is not valid. '
-                    'It must have exactly one @-sign.'
-                ),
+                'msg': ('value is not a valid email address: An email address must have an @-sign.'),
                 'input': 'not_an_email',
-                'ctx': {'reason': 'The email address is not valid. It must have exactly one @-sign.'},
+                'ctx': {'reason': 'An email address must have an @-sign.'},
             }
         ]
     }
