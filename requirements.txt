@@ -7,7 +7,7 @@ email_validator~=2.2.0
 mixpanel==4.10.1
 ua-parser==0.18.0
 
-alembic~=1.12.00
+alembic~=1.14.1
 psycopg2~=2.9.10
 
 -e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.9.3#egg=hapi-schema
