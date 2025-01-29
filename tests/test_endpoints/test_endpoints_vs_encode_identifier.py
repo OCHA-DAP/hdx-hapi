@@ -2,7 +2,7 @@
 import pytest
 import logging
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 # from tests.test_endpoints.endpoint_data import endpoint_data
 
@@ -42,11 +42,11 @@ async def test_endpoints_vs_encode_identifier(event_loop, refresh_db, enable_hap
     log.info('started test_endpoints_vs_encode_identifier')
 
     for endpoint_router in ENDPOINT_ROUTER_LIST:
-        async with AsyncClient(app=app, base_url='http://test') as ac:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
             response = await ac.get(endpoint_router)
         assert response.status_code == 403
 
-        async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
             response = await ac.get(endpoint_router)
         assert response.status_code == 200
         response_items = response.json()
@@ -59,10 +59,10 @@ async def test_encode_identifier(event_loop, refresh_db, enable_hapi_identifier_
     endpoint_router = '/api/v1/encode_app_identifier'
 
     # it should not be important if app_identifier is passed or not to the endpoint
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(endpoint_router)
     assert response.status_code == 422
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(endpoint_router)
     assert response.status_code == 422

@@ -1,7 +1,7 @@
 import pytest
 import logging
 import csv
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 
 log = logging.getLogger(__name__)
@@ -37,7 +37,7 @@ ENDPOINT_ROUTER_LIST = [
 async def test_output_format(event_loop, refresh_db, endpoint_router):
     log.info('started ' + endpoint_router)
     # JSON by default
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(endpoint_router)
     assert response.status_code == 200
     assert response.headers.get('content-type') == 'application/json', 'The output should be in json format'
@@ -45,7 +45,9 @@ async def test_output_format(event_loop, refresh_db, endpoint_router):
     assert no_rows_json > 0
 
     # CSV
-    async with AsyncClient(app=app, base_url='http://test', params={'output_format': 'csv'}) as ac:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url='http://test', params={'output_format': 'csv'}
+    ) as ac:
         response = await ac.get(endpoint_router)
     assert response.status_code == 200
     assert response.headers.get('content-type') == 'text/csv; charset=utf-8', 'The output should be in csv format'

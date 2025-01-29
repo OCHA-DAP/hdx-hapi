@@ -1,7 +1,7 @@
 import pytest
 import logging
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 from hdx_hapi.endpoints.util import version as hapi_version
 
@@ -14,7 +14,7 @@ ENDPOINT_ROUTER = '/api/v1/util/version'
 async def test_version():
     log.info('started test_version')
 
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 200

@@ -2,7 +2,7 @@ import datetime
 import pytest
 import logging
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from hapi_schema.utils.enums import Gender
 
 from hdx_hapi.endpoints.models.population import PopulationResponse
@@ -21,7 +21,7 @@ expected_fields = endpoint_data['expected_fields']
 @pytest.mark.asyncio
 async def test_get_population(event_loop, refresh_db):
     log.info('started test_get_population')
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
     assert len(response.json()['data']) > 0, 'There should be at least one population entry in the database'
@@ -32,10 +32,12 @@ async def test_get_population_params(event_loop, refresh_db):
     log.info('started test_get_population_params')
 
     for param_name, param_value in query_parameters.items():
-        async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url='http://test', params={param_name: param_value}
+        ) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
-        log.info(f'{param_name}:{param_value} - {len(response.json()["data"]) } rows')
+        log.info(f'{param_name}:{param_value} - {len(response.json()["data"])} rows')
         assert response.status_code == 200
         assert len(response.json()['data']) > 0, (
             f'There should be at least one population entry for parameter "{param_name}" with value "{param_value}" '
@@ -47,15 +49,15 @@ async def test_get_population_params(event_loop, refresh_db):
 async def test_get_population_result(event_loop, refresh_db):
     log.info('started test_get_population_result')
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     for field in expected_fields:
         assert field in response.json()['data'][0], f'Field "{field}" not found in the response'
 
-    assert len(response.json()['data'][0]) == len(
-        expected_fields
-    ), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(expected_fields), (
+        'Response has a different number of fields than expected'
+    )
 
 
 @pytest.mark.asyncio
@@ -84,18 +86,18 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
         provider_admin2_name='District A',
         admin2_is_unspecified=False,
     )
-    assert (
-        population_view_adm_specified.admin1_code == 'FOO-XXX'
-    ), 'admin1_code should keep its value when admin1_is_unspecified is False'
-    assert (
-        population_view_adm_specified.admin1_name == 'Province 01'
-    ), 'admin1_name should keep its value when admin1_is_unspecified is False'
-    assert (
-        population_view_adm_specified.admin2_code == 'FOO-XXX-XXX'
-    ), 'admin2_code should keep its value when admin1_is_unspecified is False'
-    assert (
-        population_view_adm_specified.admin2_name == 'District A'
-    ), 'admin2_name should keep its value when admin1_is_unspecified is False'
+    assert population_view_adm_specified.admin1_code == 'FOO-XXX', (
+        'admin1_code should keep its value when admin1_is_unspecified is False'
+    )
+    assert population_view_adm_specified.admin1_name == 'Province 01', (
+        'admin1_name should keep its value when admin1_is_unspecified is False'
+    )
+    assert population_view_adm_specified.admin2_code == 'FOO-XXX-XXX', (
+        'admin2_code should keep its value when admin1_is_unspecified is False'
+    )
+    assert population_view_adm_specified.admin2_name == 'District A', (
+        'admin2_name should keep its value when admin1_is_unspecified is False'
+    )
 
     population_view_adm_unspecified = PopulationResponse(
         resource_hdx_id='foo',
@@ -121,18 +123,18 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
         admin2_is_unspecified=True,
     )
 
-    assert (
-        population_view_adm_unspecified.admin1_code is None
-    ), 'admin1_code should be changed to None when admin1_is_unspecified is True'
-    assert (
-        population_view_adm_unspecified.admin1_name is None
-    ), 'admin1_name should be changed to None when admin1_is_unspecified is True'
-    assert (
-        population_view_adm_unspecified.admin2_code is None
-    ), 'admin2_code should be changed to None when admin1_is_unspecified is True'
-    assert (
-        population_view_adm_unspecified.admin2_name is None
-    ), 'admin2_name should be changed to None when admin1_is_unspecified is True'
+    assert population_view_adm_unspecified.admin1_code is None, (
+        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    )
+    assert population_view_adm_unspecified.admin1_name is None, (
+        'admin1_name should be changed to None when admin1_is_unspecified is True'
+    )
+    assert population_view_adm_unspecified.admin2_code is None, (
+        'admin2_code should be changed to None when admin1_is_unspecified is True'
+    )
+    assert population_view_adm_unspecified.admin2_name is None, (
+        'admin2_name should be changed to None when admin1_is_unspecified is True'
+    )
 
 
 @pytest.mark.asyncio
@@ -140,22 +142,24 @@ async def test_get_population_admin_level(event_loop, refresh_db):
     log.info('started test_get_population_admin_level')
 
     async with AsyncClient(
-        app=app,
+        transport=ASGITransport(app=app),
         base_url='http://test',
     ) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
-    assert len(response.json()['data'][0]) == len(
-        expected_fields
-    ), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(expected_fields), (
+        'Response has a different number of fields than expected'
+    )
 
     response_items = response.json()['data']
     counts_map = split_items_by_admin_level(response_items)
 
     for item in response_items:
-        log.info(f"{item['admin1_name']}, {item['admin2_name']}")
+        log.info(f'{item["admin1_name"]}, {item["admin2_name"]}')
     log.info(counts_map)
     for admin_level, count in counts_map.items():
-        async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url='http://test', params={'admin_level': admin_level}
+        ) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
             assert len(response.json()['data']) == count, f'Admin level {admin_level} should return {count} entries'

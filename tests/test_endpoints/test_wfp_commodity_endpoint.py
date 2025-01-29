@@ -1,7 +1,7 @@
 import pytest
 import logging
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
@@ -16,7 +16,7 @@ expected_fields = endpoint_data['expected_fields']
 @pytest.mark.asyncio
 async def test_get_wfp_commodities(event_loop, refresh_db):
     log.info('started test_get_wfp_commodities')
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
     assert len(response.json()['data']) > 0, 'There should be at least one wfp_commodity in the database'
@@ -27,7 +27,9 @@ async def test_get_wfp_commodity_params(event_loop, refresh_db):
     log.info('started test_get_wfp_commodity_params')
 
     for param_name, param_value in query_parameters.items():
-        async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url='http://test', params={param_name: param_value}
+        ) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
         assert response.status_code == 200
@@ -36,20 +38,20 @@ async def test_get_wfp_commodity_params(event_loop, refresh_db):
             'in the database'
         )
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 200
-    assert (
-        len(response.json()['data']) > 0
-    ), 'There should be at least one wfp_commodity entry for all parameters in the database'
+    assert len(response.json()['data']) > 0, (
+        'There should be at least one wfp_commodity entry for all parameters in the database'
+    )
 
 
 @pytest.mark.asyncio
 async def test_get_wfp_commodity_result(event_loop, refresh_db):
     log.info('started test_get_wfp_commodity_result')
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     for field in expected_fields:
@@ -58,6 +60,6 @@ async def test_get_wfp_commodity_result(event_loop, refresh_db):
     for field in response.json()['data'][0]:
         assert field in expected_fields, f'Field "{field}" unexpected'
 
-    assert len(response.json()['data'][0]) == len(
-        expected_fields
-    ), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(expected_fields), (
+        'Response has a different number of fields than expected'
+    )
