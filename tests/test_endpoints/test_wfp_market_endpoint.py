@@ -1,7 +1,7 @@
 import pytest
 import logging
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 from hdx_hapi.endpoints.models.wfp_market import WfpMarketResponse
@@ -18,7 +18,7 @@ expected_fields = endpoint_data['expected_fields']
 @pytest.mark.asyncio
 async def test_get_wfp_market(event_loop, refresh_db):
     log.info('started test_get_wfp_market')
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
     assert len(response.json()['data']) > 0, 'There should be at least one wfp_market in the database'
@@ -29,7 +29,9 @@ async def test_get_wfp_market_params(event_loop, refresh_db):
     log.info('started test_get_wfp_market_params')
 
     for param_name, param_value in query_parameters.items():
-        async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url='http://test', params={param_name: param_value}
+        ) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
         assert response.status_code == 200
@@ -38,20 +40,20 @@ async def test_get_wfp_market_params(event_loop, refresh_db):
             'in the database'
         )
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 200
-    assert (
-        len(response.json()['data']) > 0
-    ), 'There should be at least one wfp_market entry for all parameters in the database'
+    assert len(response.json()['data']) > 0, (
+        'There should be at least one wfp_market entry for all parameters in the database'
+    )
 
 
 @pytest.mark.asyncio
 async def test_get_wfp_market_result(event_loop, refresh_db):
     log.info('started test_get_wfp_market_result')
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     for field in expected_fields:
@@ -60,9 +62,9 @@ async def test_get_wfp_market_result(event_loop, refresh_db):
     for field in response.json()['data'][0]:
         assert field in expected_fields, f'Field "{field}" unexpected'
 
-    assert len(response.json()['data'][0]) == len(
-        expected_fields
-    ), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(expected_fields), (
+        'Response has a different number of fields than expected'
+    )
 
 
 @pytest.mark.asyncio
@@ -87,18 +89,18 @@ async def test_get_wpf_markets_adm_fields(event_loop, refresh_db):
         admin1_is_unspecified=False,
         admin2_is_unspecified=False,
     )
-    assert (
-        wfp_market_view_adm_specified.admin1_code == 'FOO-XXX'
-    ), 'admin1_code should keep its value when admin1_is_unspecified is False'
-    assert (
-        wfp_market_view_adm_specified.admin1_name == 'Province 01'
-    ), 'admin1_name should keep its value when admin1_is_unspecified is False'
-    assert (
-        wfp_market_view_adm_specified.admin2_code == 'FOO-XXX-XXX'
-    ), 'admin2_code should keep its value when admin1_is_unspecified is False'
-    assert (
-        wfp_market_view_adm_specified.admin2_name == 'District A'
-    ), 'admin2_name should keep its value when admin1_is_unspecified is False'
+    assert wfp_market_view_adm_specified.admin1_code == 'FOO-XXX', (
+        'admin1_code should keep its value when admin1_is_unspecified is False'
+    )
+    assert wfp_market_view_adm_specified.admin1_name == 'Province 01', (
+        'admin1_name should keep its value when admin1_is_unspecified is False'
+    )
+    assert wfp_market_view_adm_specified.admin2_code == 'FOO-XXX-XXX', (
+        'admin2_code should keep its value when admin1_is_unspecified is False'
+    )
+    assert wfp_market_view_adm_specified.admin2_name == 'District A', (
+        'admin2_name should keep its value when admin1_is_unspecified is False'
+    )
 
     wfp_market_view_adm_unspecified = WfpMarketResponse(
         code='',
@@ -120,18 +122,18 @@ async def test_get_wpf_markets_adm_fields(event_loop, refresh_db):
         admin2_is_unspecified=True,
     )
 
-    assert (
-        wfp_market_view_adm_unspecified.admin1_code is None
-    ), 'admin1_code should be changed to None when admin1_is_unspecified is True'
-    assert (
-        wfp_market_view_adm_unspecified.admin1_name is None
-    ), 'admin1_name should be changed to None when admin1_is_unspecified is True'
-    assert (
-        wfp_market_view_adm_unspecified.admin2_code is None
-    ), 'admin2_code should be changed to None when admin1_is_unspecified is True'
-    assert (
-        wfp_market_view_adm_unspecified.admin2_name is None
-    ), 'admin2_name should be changed to None when admin1_is_unspecified is True'
+    assert wfp_market_view_adm_unspecified.admin1_code is None, (
+        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    )
+    assert wfp_market_view_adm_unspecified.admin1_name is None, (
+        'admin1_name should be changed to None when admin1_is_unspecified is True'
+    )
+    assert wfp_market_view_adm_unspecified.admin2_code is None, (
+        'admin2_code should be changed to None when admin1_is_unspecified is True'
+    )
+    assert wfp_market_view_adm_unspecified.admin2_name is None, (
+        'admin2_name should be changed to None when admin1_is_unspecified is True'
+    )
 
 
 @pytest.mark.asyncio
@@ -139,14 +141,14 @@ async def test_get_wpf_markets_admin_level(event_loop, refresh_db):
     log.info('started test_get_population_admin_level')
 
     async with AsyncClient(
-        app=app,
+        transport=ASGITransport(app=app),
         base_url='http://test',
     ) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
-    assert len(response.json()['data'][0]) == len(
-        expected_fields
-    ), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(expected_fields), (
+        'Response has a different number of fields than expected'
+    )
 
     response_items = response.json()['data']
     admin_0_count = len(
@@ -165,9 +167,11 @@ async def test_get_wpf_markets_admin_level(event_loop, refresh_db):
     }
 
     for item in response_items:
-        log.info(f"{item['admin1_name']}, {item['admin2_name']}")
+        log.info(f'{item["admin1_name"]}, {item["admin2_name"]}')
     log.info(counts_map)
     for admin_level, count in counts_map.items():
-        async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url='http://test', params={'admin_level': admin_level}
+        ) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
             assert len(response.json()['data']) == count, f'Admin level {admin_level} should return {count} entries'

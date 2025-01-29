@@ -2,7 +2,7 @@ import logging
 import time
 
 import pytest
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 from unittest.mock import patch
 
@@ -18,11 +18,14 @@ ENDPOINT = '/api/v1/coordination-context/operational-presence'
 
 @pytest.mark.asyncio
 async def test_tracking_endpoint_success():
-    with patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch, patch(
-        'hdx_hapi.endpoints.middleware.util.util.HashCodeGenerator.compute_hash',
-        return_value='123456',
+    with (
+        patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch,
+        patch(
+            'hdx_hapi.endpoints.middleware.util.util.HashCodeGenerator.compute_hash',
+            return_value='123456',
+        ),
     ):
-        async with AsyncClient(app=app, base_url=TEST_BASE_URL) as ac:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url=TEST_BASE_URL) as ac:
             headers = {
                 'User-Agent': TEST_USER_AGENT,
                 'x-forwarded-for': '127.0.0.1',
@@ -58,7 +61,7 @@ async def test_tracking_endpoint_success():
 @pytest.mark.asyncio
 async def test_docs_page_tracked():
     with patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch:
-        async with AsyncClient(app=app, base_url=TEST_BASE_URL) as ac:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url=TEST_BASE_URL) as ac:
             response = await ac.get('/docs')
 
         assert response.status_code == 200
