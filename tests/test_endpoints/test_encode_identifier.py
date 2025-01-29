@@ -1,7 +1,6 @@
 import base64
 import pytest
 import logging
-from unittest.mock import ANY
 
 from httpx import ASGITransport, AsyncClient
 from main import app
