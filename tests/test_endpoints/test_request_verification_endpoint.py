@@ -1,6 +1,6 @@
 import pytest
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 
 
@@ -33,6 +33,6 @@ async def test_verify_request(event_loop, refresh_db, enable_hapi_identifier_fil
 
 
 async def _perform_request(headers) -> int:
-    async with AsyncClient(app=app, base_url='http://test', headers=headers) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', headers=headers) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     return response.status_code

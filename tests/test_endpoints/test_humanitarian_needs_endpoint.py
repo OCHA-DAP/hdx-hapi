@@ -2,7 +2,7 @@ import datetime
 import pytest
 import logging
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from hdx_hapi.endpoints.models.humanitarian_needs import HumanitarianNeedsResponse
 from hapi_schema.utils.enums import PopulationStatus
 from main import app
@@ -20,7 +20,7 @@ expected_fields = endpoint_data['expected_fields']
 @pytest.mark.asyncio
 async def test_get_humanitarian_needs(event_loop, refresh_db):
     log.info('started test_get_humanitarian_needs')
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
     assert response.status_code == 200
     assert len(response.json()['data']) > 0, 'There should be at least one food security entry in the database'
@@ -31,7 +31,9 @@ async def test_get_humanitarian_needs_params(event_loop, refresh_db):
     log.info('started test_get_humanitarian_needs_params')
 
     for param_name, param_value in query_parameters.items():
-        async with AsyncClient(app=app, base_url='http://test', params={param_name: param_value}) as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url='http://test', params={param_name: param_value}
+        ) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
 
         assert response.status_code == 200
@@ -40,28 +42,28 @@ async def test_get_humanitarian_needs_params(event_loop, refresh_db):
             f'"{param_name}" with value "{param_value}" in the database'
         )
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 200
-    assert (
-        len(response.json()['data']) > 0
-    ), 'There should be at least one humanitarian_needs entry for all parameters in the database'
+    assert len(response.json()['data']) > 0, (
+        'There should be at least one humanitarian_needs entry for all parameters in the database'
+    )
 
 
 @pytest.mark.asyncio
 async def test_get_humanitarian_needs_result(event_loop, refresh_db):
     log.info('started test_get_humanitarian_needs_result')
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     for field in expected_fields:
         assert field in response.json()['data'][0], f'Field "{field}" not found in the response'
 
-    assert len(response.json()['data'][0]) == len(
-        expected_fields
-    ), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(expected_fields), (
+        'Response has a different number of fields than expected'
+    )
 
 
 @pytest.mark.asyncio
@@ -94,18 +96,18 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
 
     assert True
 
-    assert (
-        humanitarian_needs_view_adm_specified.admin1_code == 'FOO-XXX'
-    ), 'admin1_code should keep its value when admin1_is_unspecified is False'
-    assert (
-        humanitarian_needs_view_adm_specified.admin1_name == 'Province 01'
-    ), 'admin1_name should keep its value when admin1_is_unspecified is False'
-    assert (
-        humanitarian_needs_view_adm_specified.admin2_code == 'FOO-XXX-XXX'
-    ), 'admin2_code should keep its value when admin1_is_unspecified is False'
-    assert (
-        humanitarian_needs_view_adm_specified.admin2_name == 'District A'
-    ), 'admin2_name should keep its value when admin1_is_unspecified is False'
+    assert humanitarian_needs_view_adm_specified.admin1_code == 'FOO-XXX', (
+        'admin1_code should keep its value when admin1_is_unspecified is False'
+    )
+    assert humanitarian_needs_view_adm_specified.admin1_name == 'Province 01', (
+        'admin1_name should keep its value when admin1_is_unspecified is False'
+    )
+    assert humanitarian_needs_view_adm_specified.admin2_code == 'FOO-XXX-XXX', (
+        'admin2_code should keep its value when admin1_is_unspecified is False'
+    )
+    assert humanitarian_needs_view_adm_specified.admin2_name == 'District A', (
+        'admin2_name should keep its value when admin1_is_unspecified is False'
+    )
 
     humanitarian_needs_view_adm_unspecified = HumanitarianNeedsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
@@ -131,18 +133,18 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
         location_ref=2,
     )
 
-    assert (
-        humanitarian_needs_view_adm_unspecified.admin1_code is None
-    ), 'admin1_code should be changed to None when admin1_is_unspecified is True'
-    assert (
-        humanitarian_needs_view_adm_unspecified.admin1_name is None
-    ), 'admin1_name should be changed to None when admin1_is_unspecified is True'
-    assert (
-        humanitarian_needs_view_adm_unspecified.admin2_code is None
-    ), 'admin2_code should be changed to None when admin1_is_unspecified is True'
-    assert (
-        humanitarian_needs_view_adm_unspecified.admin2_name is None
-    ), 'admin2_name should be changed to None when admin1_is_unspecified is True'
+    assert humanitarian_needs_view_adm_unspecified.admin1_code is None, (
+        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    )
+    assert humanitarian_needs_view_adm_unspecified.admin1_name is None, (
+        'admin1_name should be changed to None when admin1_is_unspecified is True'
+    )
+    assert humanitarian_needs_view_adm_unspecified.admin2_code is None, (
+        'admin2_code should be changed to None when admin1_is_unspecified is True'
+    )
+    assert humanitarian_needs_view_adm_unspecified.admin2_name is None, (
+        'admin2_name should be changed to None when admin1_is_unspecified is True'
+    )
 
 
 @pytest.mark.asyncio
@@ -150,19 +152,21 @@ async def test_get_humanitarian_needs_admin_level(event_loop, refresh_db):
     log.info('started test_get_humanitarian_needs_admin_level')
 
     async with AsyncClient(
-        app=app,
+        transport=ASGITransport(app=app),
         base_url='http://test',
     ) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
-    assert len(response.json()['data'][0]) == len(
-        expected_fields
-    ), 'Response has a different number of fields than expected'
+    assert len(response.json()['data'][0]) == len(expected_fields), (
+        'Response has a different number of fields than expected'
+    )
 
     response_items = response.json()['data']
     counts_map = split_items_by_admin_level(response_items)
 
     for admin_level, count in counts_map.items():
-        async with AsyncClient(app=app, base_url='http://test', params={'admin_level': admin_level}) as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url='http://test', params={'admin_level': admin_level}
+        ) as ac:
             response = await ac.get(ENDPOINT_ROUTER)
             assert len(response.json()['data']) == count, f'Admin level {admin_level} should return {count} entries'

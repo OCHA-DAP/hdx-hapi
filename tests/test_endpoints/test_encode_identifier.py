@@ -1,9 +1,8 @@
 import base64
 import pytest
 import logging
-from unittest.mock import ANY
 
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from main import app
 from tests.test_endpoints.endpoint_data import endpoint_data
 
@@ -19,15 +18,15 @@ expected_fields = endpoint_data['expected_fields']
 async def test_encoded_identifier_refuses_empty_parameters(event_loop, refresh_db):
     log.info('started test_encoded_identifier_refuses_empty_parameters')
 
-    async with AsyncClient(app=app, base_url='http://test') as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.status_code == 422
     # The url key depends on the Pydantic version which we do not pin
     assert response.json() == {
         'detail': [
-            {'type': 'missing', 'loc': ['query', 'application'], 'msg': 'Field required', 'input': None, 'url': ANY},
-            {'type': 'missing', 'loc': ['query', 'email'], 'msg': 'Field required', 'input': None, 'url': ANY},
+            {'type': 'missing', 'loc': ['query', 'application'], 'msg': 'Field required', 'input': None},
+            {'type': 'missing', 'loc': ['query', 'email'], 'msg': 'Field required', 'input': None},
         ]
     }
 
@@ -36,7 +35,7 @@ async def test_encoded_identifier_refuses_empty_parameters(event_loop, refresh_d
 async def test_get_encoded_identifier_results(event_loop, refresh_db):
     log.info('started test_get_encoded_identifier_result')
 
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     for field in expected_fields:
@@ -55,7 +54,7 @@ async def test_email_validation(event_loop, refresh_db):
     log.info('started test_get_encoded_identifier_result')
 
     query_parameters = {'application': 'web_application', 'email': 'not_an_email'}
-    async with AsyncClient(app=app, base_url='http://test', params=query_parameters) as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test', params=query_parameters) as ac:
         response = await ac.get(ENDPOINT_ROUTER)
 
     assert response.json() == {
