@@ -17,6 +17,13 @@ the API.
 
 ## Latest changes
 
+### Unreleased
+- Aligned category and sub-category endpoint names in the docs with
+  [HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids?)
+
+### 2025-01-06
+- Added functionality to filter by time period
+
 ### 2024-12-19
 
 - Increased temporal coverage for humanitarian needs
