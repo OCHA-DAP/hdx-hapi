@@ -50,7 +50,7 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v2/metadata/resource',
     '/api/v2/metadata/sector',
     '/api/v2/metadata/currency',
-    '/api/v1/coordination-context/conflict-events',
+    '/api/v2/coordination-context/conflict-events',
 ]
 
 
