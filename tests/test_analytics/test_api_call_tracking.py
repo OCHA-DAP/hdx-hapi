@@ -13,7 +13,7 @@ TEST_USER_AGENT = (
 
 log = logging.getLogger(__name__)
 
-ENDPOINT = '/api/v1/coordination-context/operational-presence'
+ENDPOINT = '/api/v2/coordination-context/operational-presence'
 
 
 @pytest.mark.asyncio

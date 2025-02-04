@@ -41,18 +41,18 @@ router = APIRouter(
 )
 
 
-@router.get(
-    '/api/metadata/dataset',
-    response_model=HapiGenericResponse[DatasetResponse],
-    summary='Get information about the sources of the data in HDX HAPI',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/dataset',
-    response_model=HapiGenericResponse[DatasetResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get information about the sources of the data in HDX HAPI',
-)
+SUMMARY_TEXT = 'Get information about the sources of the data in HDX HAPI'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[DatasetResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/dataset', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/dataset', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/dataset', **ROUTER_DICT)
 async def get_dataset(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -78,18 +78,18 @@ async def get_dataset(
     return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, DatasetResponse)
 
 
-@router.get(
-    '/api/metadata/resource',
-    response_model=HapiGenericResponse[ResourceResponse],
-    summary='Get information about the sources of the data in HDX HAPI',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/resource',
-    response_model=HapiGenericResponse[ResourceResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get information about the sources of the data in HDX HAPI',
-)
+SUMMARY_TEXT = 'Get information about the sources of the data in HDX HAPI'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[ResourceResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/resource', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/resource', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/resource', **ROUTER_DICT)
 async def get_resources(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),

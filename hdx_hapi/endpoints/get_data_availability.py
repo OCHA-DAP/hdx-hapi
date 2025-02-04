@@ -37,18 +37,18 @@ router = APIRouter(
 )
 
 
-@router.get(
-    '/api/metadata/data-availability',
-    response_model=HapiGenericResponse[AvailabilityResponse],
-    summary='Get information about the availability of data for different geographic admin levels',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/data-availability',
-    response_model=HapiGenericResponse[AvailabilityResponse],
-    responses=ERROR_RESPONSES, # type: ignore
-    summary='Get information about the availability of data for different geographic admin levels',
-)
+SUMMARY_TEXT = 'Get information about the availability of data for different geographic admin levels'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[AvailabilityResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/data-availability', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/data-availability', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/data-availability', **ROUTER_DICT)
 async def get_data_availability(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),

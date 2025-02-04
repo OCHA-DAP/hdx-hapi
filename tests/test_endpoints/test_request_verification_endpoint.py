@@ -4,12 +4,14 @@ from httpx import ASGITransport, AsyncClient
 from main import app
 
 
-ENDPOINT_ROUTER = '/api/v1/util/verify-request'
+ENDPOINT_ROUTER = '/api/v2/util/verify-request'
 
 APP_IDENTIFIER = 'cHl0ZXN0czpweXRlc3RzQGh1bWRhdGEub3Jn'
-URL_WITHOUT_APP_IDENTIFIER = 'http://localhost/api/v1/population-social/population?output_format=json&limit=10&offset=0'
+URL_WITHOUT_APP_IDENTIFIER = (
+    'http://localhost/api/v2/geography-infrastructure/baseline-population?output_format=json&limit=10&offset=0'
+)
 URL_WITH_APP_IDENTIFIER = (
-    'http://localhost/api/v1/population-social/population?output_format=json&'
+    'http://localhost/api/v2/geography-infrastructure/baseline-population?output_format=json&'
     f'app_identifier={APP_IDENTIFIER}&limit=10&offset=0'
 )
 

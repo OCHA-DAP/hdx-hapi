@@ -43,18 +43,18 @@ router = APIRouter(
 )
 
 
-@router.get(
-    '/api/metadata/location',
-    response_model=HapiGenericResponse[LocationResponse],
-    summary='Get the list of locations (typically countries) included in HDX HAPI',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/location',
-    response_model=HapiGenericResponse[LocationResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get the list of locations (typically countries) included in HDX HAPI',
-)
+SUMMARY_TEXT = 'Get the list of locations (typically countries) included in HDX HAPI'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[LocationResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/location', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/location', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/location', **ROUTER_DICT)
 async def get_location(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
@@ -84,18 +84,18 @@ async def get_location(
 get_location.__doc__ = DOC_SCOPE_DISCLAIMER
 
 
-@router.get(
-    '/api/metadata/admin1',
-    response_model=HapiGenericResponse[Admin1Response],
-    summary='Get the list of first-level subnational administrative divisions available in HDX HAPI',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/admin1',
-    response_model=HapiGenericResponse[Admin1Response],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get the list of first-level subnational administrative divisions available in HDX HAPI',
-)
+SUMMARY_TEXT = 'Get the list of first-level subnational administrative divisions available in HDX HAPI'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[Admin1Response],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/admin1', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/admin1', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/admin1', **ROUTER_DICT)
 async def get_admin1(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
@@ -131,18 +131,18 @@ async def get_admin1(
 get_admin1.__doc__ = DOC_SCOPE_DISCLAIMER
 
 
-@router.get(
-    '/api/metadata/admin2',
-    response_model=HapiGenericResponse[Admin2Response],
-    summary='Get the list of second-level administrative divisions available in HDX HAPI',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/admin2',
-    response_model=HapiGenericResponse[Admin2Response],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get the list of second-level administrative divisions available in HDX HAPI',
-)
+SUMMARY_TEXT = 'Get the list of second-level administrative divisions available in HDX HAPI'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[Admin2Response],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/admin2', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/admin2', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/admin2', **ROUTER_DICT)
 async def get_admin2(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],

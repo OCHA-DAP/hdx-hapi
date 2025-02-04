@@ -33,18 +33,18 @@ router = APIRouter(
 )
 
 
-@router.get(
-    '/api/metadata/org',
-    response_model=HapiGenericResponse[OrgResponse],
-    summary='Get the list of organizations represented in the data available in HDX HAPI',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/org',
-    response_model=HapiGenericResponse[OrgResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get the list of organizations represented in the data available in HDX HAPI',
-)
+SUMMARY_TEXT = 'Get the list of organizations represented in the data available in HDX HAPI'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[OrgResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/org', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/org', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/org', **ROUTER_DICT)
 async def get_org(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -73,18 +73,18 @@ async def get_org(
     return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, OrgResponse)
 
 
-@router.get(
-    '/api/metadata/org_type',
-    response_model=HapiGenericResponse[OrgTypeResponse],
-    summary='Get information about how organizations are classified in HDX HAPI',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/org-type',
-    response_model=HapiGenericResponse[OrgTypeResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get information about how organizations are classified in HDX HAPI',
-)
+SUMMARY_TEXT = 'Get information about how organizations are classified in HDX HAPI'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[OrgTypeResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/org-type', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/org-type', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/org-type', **ROUTER_DICT)
 async def get_org_type(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
@@ -101,18 +101,18 @@ async def get_org_type(
     return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, OrgTypeResponse)
 
 
-@router.get(
-    '/api/metadata/sector',
-    response_model=HapiGenericResponse[SectorResponse],
-    summary='Get information about how humanitarian response activities are classified',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/sector',
-    response_model=HapiGenericResponse[SectorResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get information about how humanitarian response activities are classified',
-)
+SUMMARY_TEXT = 'Get information about how humanitarian response activities are classified'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[SectorResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/sector', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/sector', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/sector', **ROUTER_DICT)
 async def get_sector(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),
