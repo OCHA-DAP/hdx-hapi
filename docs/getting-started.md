@@ -19,7 +19,7 @@ https://hapi.humdata.org/api/v1/coordination-context/operational-presence?app_id
 
 
 
-## Accessing Operational Presence Data
+## Accessing Who is Doing What Where - Operational Presence Data
 
 
 Retrieve the latest Operational Presence (Who's doing What, Where) data for a specific country using the `location_code` filter and the country’s ISO3 code. The following example demonstrates how to get data for Mali:
