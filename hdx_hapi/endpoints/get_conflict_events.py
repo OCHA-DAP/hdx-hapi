@@ -41,9 +41,9 @@ ROUTER_DICT = {
 }
 
 
-@router.get('/api/coordination-context/conflict-event', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/coordination-context/conflict-events', include_in_schema=False, **ROUTER_DICT)
 @router.get('/api/v1/coordination-context/conflict-event', include_in_schema=False, **ROUTER_DICT)
-@router.get('/api/v2/coordination-context/conflict-event', **ROUTER_DICT)
+@router.get('/api/v2/coordination-context/conflict-events', **ROUTER_DICT)
 async def get_conflict_event(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],

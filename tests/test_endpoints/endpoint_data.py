@@ -133,7 +133,7 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
-    '/api/v2/coordination-context/conflict-event': {
+    '/api/v2/coordination-context/conflict-events': {
         'query_parameters': {
             'event_type': EventType.POLITICAL_VIOLENCE.value,
             'location_ref': 1,

@@ -36,7 +36,7 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v2/food-security-nutrition-poverty/poverty-rate',
     '/api/v2/geography-infrastructure/baseline-population',
     '/api/v2/coordination-context/national-risk',
-    '/api/v2/coordination-context/conflict-event',
+    '/api/v2/coordination-context/conflict-events',
     '/api/v2/coordination-context/funding',
     '/api/v2/coordination-context/operational-presence',
     '/api/v2/affected-people/humanitarian-needs',
