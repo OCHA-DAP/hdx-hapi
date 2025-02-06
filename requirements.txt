@@ -1,6 +1,6 @@
 fastapi~=0.115.7
 uvicorn[standard]~=0.34.0
-sqlalchemy[asyncio]~=2.0.37
+sqlalchemy[asyncio]==2.0.37
 asyncpg~=0.30.0
 python-json-logger~=3.2.1
 email_validator~=2.2.0
@@ -10,4 +10,4 @@ ua-parser==1.0.0
 # alembic~=1.12.00
 psycopg2~=2.9.10
 
--e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.9.3#egg=hapi-schema
+-e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.9.7#egg=hapi-schema

@@ -26,17 +26,17 @@ DATE_RANGE_PARAMETERS = {
 }
 
 GEOGRAPHIC_PARAMETERS = {
-    'location_ref',
+    # 'location_ref',
     'location_code',
     'location_name',
-    'admin1_ref',
+    # 'admin1_ref',
     'admin1_code',
     'admin1_name',
-    'provider_admin1_name',
-    'admin2_ref',
+    # 'provider_admin1_name',
+    # 'admin2_ref',
     'admin2_code',
     'admin2_name',
-    'provider_admin2_name',
+    # 'provider_admin2_name',
     'has_hrp',
     'in_gho',
 }
@@ -113,7 +113,7 @@ def test_poverty_rate_call_signature():
     service_parameters_set = {x for x, _ in service_function_signature.parameters.items()}
     list_parameters_set = {x for x, _ in list_function_signature.parameters.items()}
 
-    assert 'provider_admin1_name' in router_parameters_set
+    assert 'common_location_params' in router_parameters_set
 
     assert router_parameters_set - set(['common_parameters', 'output_format']) == service_parameters_set - set(
         ['pagination_parameters', 'ref_period_parameters']

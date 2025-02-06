@@ -29,7 +29,7 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v1/metadata/sector',
     '/api/v1/metadata/currency',
     '/api/v1/metadata/wfp-commodity',
-    '/api/v1/metadata/wfp-market',
+    # '/api/v1/metadata/wfp-market',
     '/api/v1/metadata/data-availability',
     '/api/v2/food-security-nutrition-poverty/food-prices-market-monitor',
     '/api/v2/food-security-nutrition-poverty/food-security',
@@ -52,7 +52,7 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v2/metadata/sector',
     '/api/v2/metadata/currency',
     '/api/v2/metadata/wfp-commodity',
-    '/api/v2/metadata/wfp-market',
+    # '/api/v2/metadata/wfp-market',
     '/api/v2/metadata/data-availability',
 ]
 

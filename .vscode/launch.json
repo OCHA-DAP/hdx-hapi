@@ -12,6 +12,15 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "env":{"HAPI_USE_VAT": "false"}
+        },
+        {
+            "name": "generate-views",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/srv/hapi/src/hapi-schema/src/hapi_schema/utils/hapi_views_code_generator.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env":{"HAPI_USE_VAT": "false"}
         }
     ],
     

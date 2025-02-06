@@ -1,12 +1,13 @@
 import datetime
 from typing import Optional, Protocol, Type
-from sqlalchemy import Select, or_, and_
+from sqlalchemy import Select, or_
 from sqlalchemy.orm import Mapped
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.endpoints.util.util import (
     AdminLevel,
     CommonDateRangeParams,
+    CommonLocationAdm1Parameters,
     CommonLocationParameters,
     PaginationParams,
     ReferencePeriodParameters,
@@ -89,6 +90,43 @@ class EntityWithLocationAdmin(Protocol):
     admin2_name: Mapped[str]
     provider_admin2_name: Mapped[str]
     admin2_is_unspecified: Mapped[bool]
+    admin_level: Mapped[int]
+
+
+def _apply_location_admin_filter(
+    query: Select,
+    db_class: Type[EntityWithLocationAdmin],
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
+    location_code: Optional[str] = None,
+    location_name: Optional[str] = None,
+    admin1_code: Optional[str] = None,
+    admin1_name: Optional[str] = None,
+    admin2_code: Optional[str] = None,
+    admin2_name: Optional[str] = None,
+    admin_level: Optional[AdminLevel] = None,
+) -> Select:
+    if location_code:
+        query = case_insensitive_filter(query, db_class.location_code, location_code)
+    if location_name:
+        query = query.where(db_class.location_name.icontains(location_name))
+    if admin1_code:
+        query = case_insensitive_filter(query, db_class.admin1_code, admin1_code)
+    if admin1_name:
+        query = query.where(db_class.admin1_name.icontains(admin1_name))
+    if admin2_code:
+        query = case_insensitive_filter(query, db_class.admin2_code, admin2_code)
+    if admin2_name:
+        query = query.where(db_class.admin2_name.icontains(admin2_name))
+    if has_hrp is not None:
+        query = query.where(db_class.has_hrp == has_hrp)
+    if in_gho is not None:
+        query = query.where(db_class.in_gho == in_gho)
+
+    if admin_level is not None:
+        query = query.where(db_class.admin_level == int(admin_level.value))
+
+    return query
 
 
 def apply_location_admin_filter(
@@ -98,63 +136,55 @@ def apply_location_admin_filter(
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
 ) -> Select:
-    location_ref = common_location_parameters.location_ref
     location_code = common_location_parameters.location_code
     location_name = common_location_parameters.location_name
-    admin1_ref = common_location_parameters.admin1_ref
     admin1_code = common_location_parameters.admin1_code
     admin1_name = common_location_parameters.admin1_name
-    provider_admin1_name = common_location_parameters.provider_admin1_name
-    admin2_ref = common_location_parameters.admin2_ref
     admin2_code = common_location_parameters.admin2_code
     admin2_name = common_location_parameters.admin2_name
-    provider_admin2_name = common_location_parameters.provider_admin2_name
     admin_level = common_location_parameters.admin_level
 
-    if location_ref:
-        query = query.where(db_class.location_ref == location_ref)
-    if location_code:
-        query = case_insensitive_filter(query, db_class.location_code, location_code)
-    if location_name:
-        query = query.where(db_class.location_name.icontains(location_name))
-    if admin1_ref:
-        query = query.where(db_class.admin1_ref == admin1_ref)
-    if admin1_code:
-        query = case_insensitive_filter(query, db_class.admin1_code, admin1_code)
-    if admin1_name:
-        query = query.where(db_class.admin1_name.icontains(admin1_name))
-    # if provider_admin1_name_is_unspecified:
-    #     query = query.where(or_(db_class.provider_admin1_name == '', db_class.provider_admin1_name.is_(None)))
-    if provider_admin1_name:
-        query = query.where(db_class.provider_admin1_name.icontains(provider_admin1_name))
-    if admin2_ref:
-        query = query.where(db_class.admin2_ref == admin2_ref)
-    if admin2_code:
-        query = case_insensitive_filter(query, db_class.admin2_code, admin2_code)
-    if admin2_name:
-        query = query.where(db_class.admin2_name.icontains(admin2_name))
-    # if provider_admin2_name_is_unspecified:
-    #     query = query.where(or_(db_class.provider_admin2_name == '', db_class.provider_admin2_name.is_(None)))
-    if provider_admin2_name:
-        query = query.where(db_class.provider_admin2_name.icontains(provider_admin2_name))
-    # if admin1_is_unspecified is not None:
-    #     query = query.where(db_class.admin1_is_unspecified == admin1_is_unspecified)
-    # if admin2_is_unspecified is not None:
-    #     query = query.where(db_class.admin2_is_unspecified == admin2_is_unspecified)
-    if has_hrp is not None:
-        query = query.where(db_class.has_hrp == has_hrp)
-    if in_gho is not None:
-        query = query.where(db_class.in_gho == in_gho)
+    return _apply_location_admin_filter(
+        query=query,
+        db_class=db_class,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
+        location_code=location_code,
+        location_name=location_name,
+        admin1_code=admin1_code,
+        admin1_name=admin1_name,
+        admin2_code=admin2_code,
+        admin2_name=admin2_name,
+        admin_level=admin_level,
+    )
 
-    if AdminLevel.TWO == admin_level:
-        query = query.where(or_(db_class.admin2_is_unspecified == False, db_class.provider_admin2_name != ''))
-    elif AdminLevel.ONE == admin_level:
-        query = query.where(and_(db_class.admin2_is_unspecified == True, db_class.provider_admin2_name == ''))
-        query = query.where(or_(db_class.admin1_is_unspecified == False, db_class.provider_admin1_name != ''))
-    elif AdminLevel.ZERO == admin_level:
-        query = query.where(and_(db_class.admin1_is_unspecified == True, db_class.provider_admin1_name == ''))
 
-    return query
+def apply_location_admin_1_filter(
+    query: Select,
+    db_class: Type[EntityWithLocationAdmin],
+    common_location_parameters: CommonLocationAdm1Parameters,
+    has_hrp: Optional[bool] = None,
+    in_gho: Optional[bool] = None,
+) -> Select:
+    location_code = common_location_parameters.location_code
+    location_name = common_location_parameters.location_name
+    admin1_code = common_location_parameters.admin1_code
+    admin1_name = common_location_parameters.admin1_name
+    admin_level = common_location_parameters.admin_level
+
+    return _apply_location_admin_filter(
+        query=query,
+        db_class=db_class,
+        has_hrp=has_hrp,
+        in_gho=in_gho,
+        location_code=location_code,
+        location_name=location_name,
+        admin1_code=admin1_code,
+        admin1_name=admin1_name,
+        admin2_code=None,
+        admin2_name=None,
+        admin_level=admin_level,
+    )
 
 
 def case_insensitive_filter(query: Select, column: Mapped[str], value: str) -> Select:
