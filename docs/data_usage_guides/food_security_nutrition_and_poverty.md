@@ -66,7 +66,7 @@ For available query parameters, please see the
 | SOM | Somalia | Admin 2 regions in Somalia are sub-divided, thus we to not attempt to assign p-codes |
 | ZAF | South Africa | Admin 2 regions are a mix of admin levels, thus we do not attempt to assign p-codes at admin 2 |
 
-## Food Prices <a id="food-price"></a>
+## Food Prices & Market Monitor <a id="food-price"></a>
 
 The World Food Programme Price Database covers foods such as maize, rice,
 beans, fish, and sugar for 98 countries and some 3000 markets. It is updated

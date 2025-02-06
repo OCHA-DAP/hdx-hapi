@@ -127,7 +127,7 @@ For available query parameters, please see the
 ### Currency <a id="currency"></a>
 
 **Used in:**
-[`Food Prices`](food_security_nutrition_and_poverty.md#food-price)
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 The currency table is populated using the WFP VAM Data Bridges API.
 
@@ -222,7 +222,7 @@ For available query parameters, please see the
 ### WFP Commodity <a id="wfp-commodity"></a>
 
 **Used in:**
-[`Food Prices`](food_security_nutrition_and_poverty.md#food-price)
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 The commodity table tracks all food items, and their associated
 commodity category, present in the food prices data.
@@ -238,7 +238,7 @@ For available query parameters, please see the
 ### WFP Market <a id="wfp-market"></a>
 
 **Used in:**
-[`Food Prices`](food_security_nutrition_and_poverty.md#food-price)
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 Markets are defined as the physical locations where buyers and sellers
 come together to trade goods and services.
