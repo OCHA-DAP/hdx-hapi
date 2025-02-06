@@ -18,7 +18,7 @@ the IDP data coming from the IOM DTM. For more detail, see the
 ## Commodity Category <a id="commodity-category"></a>
 
 **Used in:**
-[`Food Prices`](food_security_nutrition_and_poverty.md#food-price),
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price),
 [`WFP Commodity`](metadata.md#wfp-commodity)
 
 The commodity categories are used in the WFP food prices data to organize
@@ -113,7 +113,7 @@ multiple groups.
 
 ## Price Flag <a id="price-flag"></a>
 
-**Used in:** [`Food Prices`](food_security_nutrition_and_poverty.md#food-price)
+**Used in:** [`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 Pre-processing characteristics of food prices.
 
@@ -121,7 +121,7 @@ Pre-processing characteristics of food prices.
 
 ## Price Type <a id="price-type"></a>
 
-**Used in:** [`Food Prices`](food_security_nutrition_and_poverty.md#food-price)
+**Used in:** [`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 The point in the supply chain at which the price is determined.
 See FAO's
