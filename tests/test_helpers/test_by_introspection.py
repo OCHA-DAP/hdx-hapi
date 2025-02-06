@@ -11,7 +11,7 @@ from hdx_hapi.endpoints.get_idps import get_idps
 from hdx_hapi.endpoints.get_national_risk import get_national_risk
 from hdx_hapi.endpoints.get_operational_presence import get_operational_presence
 from hdx_hapi.endpoints.get_population import get_population
-from hdx_hapi.endpoints.get_population import get_poverty_rate
+from hdx_hapi.endpoints.get_poverty_rate import get_poverty_rate
 from hdx_hapi.endpoints.get_returnees import get_returnees
 from hdx_hapi.endpoints.get_wfp_market import get_wfp_market
 

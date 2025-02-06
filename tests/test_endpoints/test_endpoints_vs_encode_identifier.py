@@ -31,6 +31,29 @@ ENDPOINT_ROUTER_LIST = [
     '/api/v1/metadata/wfp-commodity',
     '/api/v1/metadata/wfp-market',
     '/api/v1/metadata/data-availability',
+    '/api/v2/food-security-nutrition-poverty/food-prices-market-monitor',
+    '/api/v2/food-security-nutrition-poverty/food-security',
+    '/api/v2/food-security-nutrition-poverty/poverty-rate',
+    '/api/v2/geography-infrastructure/baseline-population',
+    '/api/v2/coordination-context/national-risk',
+    '/api/v2/coordination-context/conflict-events',
+    '/api/v2/coordination-context/funding',
+    '/api/v2/coordination-context/operational-presence',
+    '/api/v2/affected-people/humanitarian-needs',
+    '/api/v2/affected-people/refugees-persons-of-concern',
+    '/api/v2/affected-people/returnees',
+    '/api/v2/metadata/location',
+    '/api/v2/metadata/dataset',
+    '/api/v2/metadata/resource',
+    '/api/v2/metadata/admin1',
+    '/api/v2/metadata/admin2',
+    '/api/v2/metadata/org',
+    '/api/v2/metadata/org-type',
+    '/api/v2/metadata/sector',
+    '/api/v2/metadata/currency',
+    '/api/v2/metadata/wfp-commodity',
+    '/api/v2/metadata/wfp-market',
+    '/api/v2/metadata/data-availability',
 ]
 
 APP_IDENTIFIER = 'aGFwaV90ZXN0OmhhcGlAaHVtZGF0YS5vcmc='
@@ -56,7 +79,7 @@ async def test_endpoints_vs_encode_identifier(event_loop, refresh_db, enable_hap
 @pytest.mark.asyncio
 async def test_encode_identifier(event_loop, refresh_db, enable_hapi_identifier_filtering):
     # testing the encode identifier endpoint
-    endpoint_router = '/api/v1/encode_app_identifier'
+    endpoint_router = '/api/v2/encode_app_identifier'
 
     # it should not be important if app_identifier is passed or not to the endpoint
     async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:

@@ -48,17 +48,18 @@ router = APIRouter(
 ## refugees
 
 
-@router.get(
-    '/api/affected-people/refugees',
-    response_model=HapiGenericResponse[RefugeesResponse],
-    summary='Get refugees data',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/affected-people/refugees',
-    response_model=HapiGenericResponse[RefugeesResponse],
-    summary='Get refugees data',
-)
+SUMMARY_TEXT = 'Get refugees data'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[RefugeesResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/affected-people/refugees-persons-of-concern', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/affected-people/refugees', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/affected-people/refugees-persons-of-concern', **ROUTER_DICT)
 async def get_refugees(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
@@ -123,19 +124,18 @@ get_refugees.__doc__ = (
     'website.'
 )
 
+SUMMARY_TEXT = 'Get humanitarian needs data'
 
-@router.get(
-    '/api/affected-people/humanitarian-needs',
-    response_model=HapiGenericResponse[HumanitarianNeedsResponse],
-    summary='Get humanitarian needs data',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/affected-people/humanitarian-needs',
-    response_model=HapiGenericResponse[HumanitarianNeedsResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get humanitarian needs data',
-)
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[HumanitarianNeedsResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/affected-people/humanitarian-needs', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/affected-people/humanitarian-needs', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/affected-people/humanitarian-needs', **ROUTER_DICT)
 async def get_humanitarian_needs(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],

@@ -9,7 +9,7 @@ from hdx_hapi.endpoints.models.wfp_market import WfpMarketResponse
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/v1/metadata/wfp-market'
+ENDPOINT_ROUTER = '/api/v2/metadata/wfp-market'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']

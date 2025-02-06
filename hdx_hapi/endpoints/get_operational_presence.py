@@ -31,25 +31,23 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 
 CONFIG = get_config()
 
+
+SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[OperationalPresenceResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
 router = APIRouter(
     tags=['Coordination & Context'],
 )
 
-SUMMARY_TEXT = 'Get the list of organizations present and in which humanitarian sectors they are working'
 
-
-@router.get(
-    '/api/coordination-context/operational-presence',
-    response_model=HapiGenericResponse[OperationalPresenceResponse],
-    summary=SUMMARY_TEXT,
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/coordination-context/operational-presence',
-    response_model=HapiGenericResponse[OperationalPresenceResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary=SUMMARY_TEXT,
-)
+@router.get('/api/coordination-context/operational-presence', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/coordination-context/operational-presence', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/coordination-context/operational-presence', **ROUTER_DICT)
 async def get_operational_presence(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],

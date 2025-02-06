@@ -11,7 +11,7 @@ from tests.util.util import split_items_by_admin_level
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/v1/coordination-context/conflict-event'
+ENDPOINT_ROUTER = '/api/v2/coordination-context/conflict-events'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']

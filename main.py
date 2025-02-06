@@ -38,6 +38,7 @@ from hdx_hapi.endpoints.get_wfp_market import router as wfp_market_router  # noq
 from hdx_hapi.endpoints.get_currency import router as currency_router  # noqa
 from hdx_hapi.endpoints.get_food_security import router as food_security_router  # noqa
 from hdx_hapi.endpoints.get_food_price import router as food_price_router  # noqa
+from hdx_hapi.endpoints.get_poverty_rate import router as poverty_rate_router  # noqa
 from hdx_hapi.endpoints.get_data_availability import router as data_availability_router  # noqa
 from hdx_hapi.endpoints.get_idps import router as idps_router  # noqa
 from hdx_hapi.endpoints.get_returnees import router as returnees_router  # noqa
@@ -96,6 +97,7 @@ app.include_router(national_risk_router)
 
 app.include_router(food_security_router)
 app.include_router(food_price_router)
+app.include_router(poverty_rate_router)
 
 app.include_router(population_router)
 

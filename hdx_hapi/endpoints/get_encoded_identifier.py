@@ -11,21 +11,19 @@ router = APIRouter(
     tags=['Generate App Identifier'],
 )
 
-SUMMARY = 'Get an app identifier by encoding an application name and email'
+
+SUMMARY_TEXT = 'Get an app identifier by encoding an application name and email'
+
+ROUTER_DICT = {
+    'response_model': IdentifierResponse,
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
 
 
-@router.get(
-    '/api/encode_app_identifier',
-    response_model=IdentifierResponse,
-    summary=SUMMARY,
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/encode_app_identifier',
-    response_model=IdentifierResponse,
-    responses=ERROR_RESPONSES, # type: ignore
-    summary=SUMMARY,
-)
+@router.get('/api/encode_app_identifier', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/encode_app_identifier', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/encode_app_identifier', **ROUTER_DICT)
 async def get_encoded_identifier(
     application: Annotated[str, app_name_identifier_query],
     email: Annotated[EmailStr, email_identifier_query],
