@@ -10,4 +10,4 @@ ua-parser==1.0.1
 # alembic~=1.12.00
 psycopg2~=2.9.10
 
--e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@v0.9.7#egg=hapi-schema
+-e git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@1807945f6f9e77cabf06a2e0f6a0a5bf0a63323c#egg=hapi-schema
