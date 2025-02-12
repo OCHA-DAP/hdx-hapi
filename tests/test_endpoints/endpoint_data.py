@@ -71,7 +71,7 @@ endpoint_data = {
     '/api/v2/metadata/data-availability': {
         'query_parameters': {
             'category': 'coordination-context',
-            'subcategory': 'conflict-event',
+            'subcategory': 'conflict-events',
             'location_code': 'FOO',
             'location_name': 'Foolandia',
             'admin1_code': 'FOO-001',
