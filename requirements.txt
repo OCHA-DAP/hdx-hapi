@@ -1,6 +1,6 @@
 fastapi~=0.115.8
 uvicorn[standard]~=0.34.0
-sqlalchemy[asyncio]~=2.0.37
+sqlalchemy[asyncio]==2.0.37
 asyncpg~=0.30.0
 python-json-logger~=3.2.1
 email_validator~=2.2.0
