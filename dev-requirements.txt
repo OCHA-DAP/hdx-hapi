@@ -1,6 +1,6 @@
 mkdocs~=1.6.1
 mkdocs-include-markdown-plugin~=7.1.2
-mkdocs-material~=9.5.50
+mkdocs-material~=9.6.2
 mkdocs-table-reader-plugin~=3.1.0
 
 pytest~=8.3.4
@@ -8,6 +8,6 @@ pytest-cov~=6.0.0
 pytest-asyncio~=0.25.3
 httpx~=0.28.1
 
-ruff~=0.9.3
+ruff~=0.9.4
 
 toml
