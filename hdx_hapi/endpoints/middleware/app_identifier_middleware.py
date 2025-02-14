@@ -20,6 +20,7 @@ ALLOWED_API_ENDPOINTS = {
     '/api/v1/encode_app_identifier',
     '/api/v2/encode_app_identifier',
     '/api/encode_app_identifier',
+    '/api/v2/util/version',
     '/api/v1/util/version',
     '/api/util/version',
 }
