@@ -24,21 +24,19 @@ router = APIRouter(
     tags=['Metadata'],
 )
 
+
 SUMMARY_TEXT = 'Get the list of WFP markets.'
 
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[WfpMarketResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
 
-@router.get(
-    '/api/metadata/wfp-market',
-    response_model=HapiGenericResponse[WfpMarketResponse],
-    summary=SUMMARY_TEXT,
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/wfp-market',
-    response_model=HapiGenericResponse[WfpMarketResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary=SUMMARY_TEXT,
-)
+
+@router.get('/api/metadata/wfp-market', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/wfp-market', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/wfp-market', **ROUTER_DICT)
 async def get_wfp_market(
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],

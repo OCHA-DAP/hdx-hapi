@@ -22,18 +22,18 @@ router = APIRouter(
 )
 
 
-@router.get(
-    '/api/metadata/currency',
-    response_model=HapiGenericResponse[CurrencyResponse],
-    summary='Get information about how currencies are classified',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/currency',
-    response_model=HapiGenericResponse[CurrencyResponse],
-    responses=ERROR_RESPONSES, # type: ignore
-    summary='Get information about how currencies are classified',
-)
+SUMMARY_TEXT = 'Get information about how currencies are classified'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[CurrencyResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/metadata/currency', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/currency', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/currency', **ROUTER_DICT)
 async def get_currency(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),

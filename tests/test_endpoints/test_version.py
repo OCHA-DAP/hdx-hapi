@@ -7,11 +7,11 @@ from hdx_hapi.endpoints.util import version as hapi_version
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/v1/util/version'
+ENDPOINT_ROUTER = '/api/v2/util/version'
 
 
 @pytest.mark.asyncio
-async def test_version():
+async def test_version(enable_hapi_identifier_filtering):
     log.info('started test_version')
 
     async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as ac:

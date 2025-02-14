@@ -17,21 +17,19 @@ router = APIRouter(
     tags=['Metadata'],
 )
 
-SUMMARY = 'Get the list of WFP commodities'
+
+SUMMARY_TEXT = 'Get the list of WFP commodities'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[WfpCommodityResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
 
 
-@router.get(
-    '/api/metadata/wfp-commodity',
-    response_model=HapiGenericResponse[WfpCommodityResponse],
-    summary=SUMMARY,
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/metadata/wfp-commodity',
-    response_model=HapiGenericResponse[WfpCommodityResponse],
-    responses=ERROR_RESPONSES, # type: ignore
-    summary=SUMMARY,
-)
+@router.get('/api/metadata/wfp-commodity', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/metadata/wfp-commodity', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/metadata/wfp-commodity', **ROUTER_DICT)
 async def get_wfp_commodities(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     db: AsyncSession = Depends(get_db),

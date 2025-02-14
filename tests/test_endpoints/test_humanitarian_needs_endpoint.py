@@ -11,7 +11,7 @@ from tests.util.util import split_items_by_admin_level
 
 log = logging.getLogger(__name__)
 
-ENDPOINT_ROUTER = '/api/v1/affected-people/humanitarian-needs'
+ENDPOINT_ROUTER = '/api/v2/affected-people/humanitarian-needs'
 endpoint_data = endpoint_data[ENDPOINT_ROUTER]
 query_parameters = endpoint_data['query_parameters']
 expected_fields = endpoint_data['expected_fields']

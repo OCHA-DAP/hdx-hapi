@@ -18,7 +18,7 @@ the IDP data coming from the IOM DTM. For more detail, see the
 ## Commodity Category <a id="commodity-category"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-price),
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price),
 [`WFP Commodity`](metadata.md#wfp-commodity)
 
 The commodity categories are used in the WFP food prices data to organize
@@ -52,7 +52,7 @@ for their methodology and more detailed descriptions of the sub-event types.
 ## Gender <a id="gender"></a>
 
 **Used in:**
-[`Baseline Population`](population_and_socio-economy.md#population),
+[`Baseline Population`](geography_and_infrastructure.md#population),
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs),
 [`Refugees & Persons of Concern`](affected_people.md#refugees)
 
@@ -62,7 +62,7 @@ Several sub-categories in HDX-HAPI are disaggregated by gender.
 
 ## IPC Code <a id="ipc-code"></a>
 
-**Used in:** [`Food Security`](food_security_and_nutrition.md#food-security)
+**Used in:** [`Food Security`](food_security_nutrition_and_poverty.md#food-security)
 
 The IPC/CH classification includes 5 different phases of increasing severity,
 described in detail on page 53 of
@@ -75,7 +75,7 @@ and total population, used to compute fractions.
 
 ## IPC Type <a id="ipc_type"></a>
 
-**Used in:** [`Food Security`](food_security_and_nutrition.md#food-security)
+**Used in:** [`Food Security`](food_security_nutrition_and_poverty.md#food-security)
 
 The IPC and Cadre Harmonisé provide different projections to aid in planning
 and response efforts.
@@ -113,7 +113,7 @@ multiple groups.
 
 ## Price Flag <a id="price-flag"></a>
 
-**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-price)
+**Used in:** [`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 Pre-processing characteristics of food prices.
 
@@ -121,7 +121,7 @@ Pre-processing characteristics of food prices.
 
 ## Price Type <a id="price-type"></a>
 
-**Used in:** [`Food Prices`](food_security_and_nutrition.md#food-price)
+**Used in:** [`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 The point in the supply chain at which the price is determined.
 See FAO's

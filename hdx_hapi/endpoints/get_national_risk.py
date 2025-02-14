@@ -36,19 +36,18 @@ router = APIRouter(
     tags=['Coordination & Context'],
 )
 
+SUMMARY_TEXT = 'Get national risk data'
 
-@router.get(
-    '/api/coordination-context/national-risk',
-    response_model=HapiGenericResponse[NationalRiskResponse],
-    summary='Get national risk data',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/coordination-context/national-risk',
-    response_model=HapiGenericResponse[NationalRiskResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get national risk data',
-)
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[NationalRiskResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/coordination-context/national-risk', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/coordination-context/national-risk', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/coordination-context/national-risk', **ROUTER_DICT)
 async def get_national_risk(
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],

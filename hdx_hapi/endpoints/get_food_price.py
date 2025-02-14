@@ -32,24 +32,21 @@ from hdx_hapi.services.sql_alchemy_session import get_db
 CONFIG = get_config()
 
 router = APIRouter(
-    tags=['Food Security & Nutrition'],
+    tags=['Food Security, Nutrition & Poverty'],
 )
 
 SUMMARY_TEXT = 'Get food prices'
 
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[FoodPriceResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
 
-@router.get(
-    '/api/food/food-price',
-    response_model=HapiGenericResponse[FoodPriceResponse],
-    summary=SUMMARY_TEXT,
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/food/food-price',
-    response_model=HapiGenericResponse[FoodPriceResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary=SUMMARY_TEXT,
-)
+
+@router.get('/api/food-security-nutrition-poverty/food-prices-market-monitor', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/food/food-price', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/food-security-nutrition-poverty/food-prices-market-monitor', **ROUTER_DICT)
 async def get_food_price(
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],

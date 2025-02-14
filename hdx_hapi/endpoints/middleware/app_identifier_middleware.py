@@ -18,7 +18,9 @@ CONFIG = get_config()
 
 ALLOWED_API_ENDPOINTS = {
     '/api/v1/encode_app_identifier',
+    '/api/v2/encode_app_identifier',
     '/api/encode_app_identifier',
+    '/api/v2/util/version',
     '/api/v1/util/version',
     '/api/util/version',
 }
@@ -38,9 +40,11 @@ async def app_identifier_middleware(request: Request, call_next):
     if CONFIG.HAPI_IDENTIFIER_FILTERING:
         header_identifier = request.headers.get('X-HDX-HAPI-APP-IDENTIFIER')
 
-        is_nginx_verify_request = request.url.path.startswith(
-            '/api/v1/util/verify-request'
-        ) or request.url.path.startswith('/api/util/verify-request')
+        is_nginx_verify_request = (
+            request.url.path.startswith('/api/v2/util/verify-request')
+            or request.url.path.startswith('/api/util/verify-request')
+            or request.url.path.startswith('/api/v1/util/verify-request')
+        )
         request.state.is_nginx_verify_request = is_nginx_verify_request
         original_uri_from_nginx = request.headers.get('X-Original-URI')
 

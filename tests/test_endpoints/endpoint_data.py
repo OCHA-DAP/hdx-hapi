@@ -16,7 +16,7 @@ from hapi_schema.utils.enums import (
 from hdx_hapi.endpoints.util.util import AdminLevel
 
 endpoint_data = {
-    '/api/v1/metadata/admin1': {
+    '/api/v2/metadata/admin1': {
         'query_parameters': {
             'id': 2,
             'location_ref': 1,
@@ -39,7 +39,7 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
-    '/api/v1/metadata/admin2': {
+    '/api/v2/metadata/admin2': {
         'query_parameters': {
             'id': 4,
             'admin1_ref': 2,
@@ -68,10 +68,10 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
-    '/api/v1/metadata/data-availability': {
+    '/api/v2/metadata/data-availability': {
         'query_parameters': {
             'category': 'coordination-context',
-            'subcategory': 'conflict-event',
+            'subcategory': 'conflict-events',
             'location_code': 'FOO',
             'location_name': 'Foolandia',
             'admin1_code': 'FOO-001',
@@ -93,7 +93,7 @@ endpoint_data = {
             'hapi_updated_date',
         ],
     },
-    '/api/v1/metadata/dataset': {
+    '/api/v2/metadata/dataset': {
         'query_parameters': {
             'dataset_hdx_id': '90deb235-1bf5-4bae-b231-3393222c2d01',
             'dataset_hdx_title': 'Dataset #1',
@@ -112,7 +112,7 @@ endpoint_data = {
             'provider_hdx_api_link',  # computed field
         ],
     },
-    '/api/v1/metadata/location': {
+    '/api/v2/metadata/location': {
         'query_parameters': {
             'id': 1,
             'code': 'foo',
@@ -133,7 +133,7 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
-    '/api/v1/coordination-context/conflict-event': {
+    '/api/v2/coordination-context/conflict-events': {
         'query_parameters': {
             'event_type': EventType.POLITICAL_VIOLENCE.value,
             'location_ref': 1,
@@ -170,7 +170,7 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
-    '/api/v1/coordination-context/funding': {
+    '/api/v2/coordination-context/funding': {
         'query_parameters': {
             'appeal_code': 'hfoo24',
             'appeal_type': 'hRp',
@@ -196,7 +196,7 @@ endpoint_data = {
             'reference_period_end',
         ],
     },
-    '/api/v1/coordination-context/operational-presence': {
+    '/api/v2/coordination-context/operational-presence': {
         'query_parameters': {
             'org_acronym': 'oRG01',
             'org_name': 'Organisation 1',
@@ -243,7 +243,7 @@ endpoint_data = {
             'provider_admin2_name',
         ],
     },
-    '/api/v1/metadata/org': {
+    '/api/v2/metadata/org': {
         'query_parameters': {
             'acronym': 'Org01',
             'name': 'Organisation 1',
@@ -252,14 +252,14 @@ endpoint_data = {
         },
         'expected_fields': ['acronym', 'name', 'org_type_code', 'org_type_description'],
     },
-    '/api/v1/metadata/org-type': {
+    '/api/v2/metadata/org-type': {
         'query_parameters': {
             'code': '431',
             'name': 'Academic / Research',
         },
         'expected_fields': ['code', 'description'],
     },
-    '/api/v1/population-social/population': {
+    '/api/v2/geography-infrastructure/baseline-population': {
         'query_parameters': {
             'admin2_ref': 1,
             'gender': Gender.NONBINARY.value,
@@ -306,7 +306,7 @@ endpoint_data = {
             'provider_admin2_name',
         ],
     },
-    '/api/v1/population-social/poverty-rate': {
+    '/api/v2/food-security-nutrition-poverty/poverty-rate': {
         'query_parameters': {
             'provider_admin1_name': 'Province 01',
             'mpi_min': 0.01,
@@ -333,7 +333,7 @@ endpoint_data = {
             'location_ref',
         ],
     },
-    '/api/v1/food/food-security': {
+    '/api/v2/food-security-nutrition-poverty/food-security': {
         'query_parameters': {
             'admin2_ref': 1,
             'ipc_phase': IPCPhase.PHASE_1.value,
@@ -376,7 +376,7 @@ endpoint_data = {
             'admin1_ref',
         ],
     },
-    '/api/v1/food/food-price': {
+    '/api/v2/food-security-nutrition-poverty/food-prices-market-monitor': {
         'query_parameters': {
             'market_code': '001',
             'market_name': 'market',
@@ -431,7 +431,7 @@ endpoint_data = {
             'provider_admin2_name',
         ],
     },
-    '/api/v1/coordination-context/national-risk': {
+    '/api/v2/coordination-context/national-risk': {
         'query_parameters': {
             'risk_class': RiskClass.HIGH.value,
             'global_rank_min': 5,
@@ -470,7 +470,7 @@ endpoint_data = {
             'location_ref',
         ],
     },
-    '/api/v1/affected-people/humanitarian-needs': {
+    '/api/v2/affected-people/humanitarian-needs': {
         'query_parameters': {
             'admin2_ref': 2,
             'sector_code': 'EDU',
@@ -514,7 +514,7 @@ endpoint_data = {
             'admin1_ref',
         ],
     },
-    '/api/v1/affected-people/refugees': {
+    '/api/v2/affected-people/refugees-persons-of-concern': {
         'query_parameters': {
             'population_group': PopulationGroup.REFUGEES.value,
             'gender': Gender.ALL.value,
@@ -548,7 +548,7 @@ endpoint_data = {
             'asylum_location_code',
         ],
     },
-    '/api/v1/affected-people/returnees': {
+    '/api/v2/affected-people/returnees': {
         'query_parameters': {
             'population_group': PopulationGroup.REFUGEES.value,
             'gender': Gender.ALL.value,
@@ -583,7 +583,7 @@ endpoint_data = {
         ],
     },
     # ('17acb541-9431-409a-80a8-50eda7e8ebab', 1, 'BA', 1, 50, '2023-01-01 00:00:00', NULL)
-    '/api/v1/affected-people/idps': {
+    '/api/v2/affected-people/idps': {
         'query_parameters': {
             'admin2_ref': 1,
             'provider_admin1_name': 'Provider admin1 name 1',
@@ -621,7 +621,7 @@ endpoint_data = {
             'admin1_ref',
         ],
     },
-    '/api/v1/metadata/resource': {
+    '/api/v2/metadata/resource': {
         'query_parameters': {
             'resource_hdx_id': '17acb541-9431-409a-80a8-50eda7e8ebab',
             'name': 'resource-01.csv',
@@ -656,20 +656,20 @@ endpoint_data = {
             'provider_hdx_api_link',  # computed field
         ],
     },
-    '/api/v1/metadata/sector': {
+    '/api/v2/metadata/sector': {
         'query_parameters': {
             'code': 'Pro',
             'name': 'Protection',  # Protection
         },
         'expected_fields': ['code', 'name'],
     },
-    '/api/v1/metadata/currency': {
+    '/api/v2/metadata/currency': {
         'query_parameters': {
             'code': 'usD',
         },
         'expected_fields': ['code', 'name'],
     },
-    '/api/v1/metadata/wfp-commodity': {
+    '/api/v2/metadata/wfp-commodity': {
         'query_parameters': {
             'code': '001',
             'name': 'commodity',
@@ -677,7 +677,7 @@ endpoint_data = {
         },
         'expected_fields': ['code', 'name', 'category'],
     },
-    '/api/v1/metadata/wfp-market': {
+    '/api/v2/metadata/wfp-market': {
         'query_parameters': {
             'code': '001',
             'name': 'Market #1',
@@ -713,7 +713,7 @@ endpoint_data = {
             'provider_admin2_name',
         ],
     },
-    '/api/encode_app_identifier': {
+    '/api/v2/encode_app_identifier': {
         'query_parameters': {
             'application': 'web_application_1',
             'email': 'info@example.com',

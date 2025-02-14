@@ -2,9 +2,9 @@
 
 ---
 
-## Who is Doing What Where - Operational Presence <a id=”operational-presence”></a>
+## Operational Presence <a id=”operational-presence”></a>
 
-The [Who is Doing What Where (3W)](https://3w.unocha.org/) is a core
+[Operational presence](https://3w.unocha.org/) is a core
 humanitarian coordination dataset that contains the geographic and sectoral
 spread of humanitarian activities and partners. It is critical to know where
 humanitarian organizations are working and what they are doing in order to
@@ -27,16 +27,16 @@ For available query parameters, please see the
 
 * For consistency and interoperability, we aggregate to an
   [operational presence](https://humanitarian.atlassian.net/wiki/spaces/imtoolbox/pages/214499412/Who+does+What+Where+3W)
-  level (3W:OP, per org, sector, and admin 2), even if the original 3W data is
+  level (3W:OP, per org, sector, and admin 2), even if the original data is
   more detailed (e.g. the source lists individual activities)
 * Countries that are not p-coded are p-coded to the national level and include
   admin names from the providers.
 * Organization deduplication is a long-running challenge with this data, since
   there are no unique identifiers, and organization names may be spelled
   different ways by different OCHA offices, or sometimes even within the same
-  3W. See the [`org`](metadata.md#org) section below for more information on how we handle
-  these details.
-* The sector name strings in the 3W data are normalised and then aligned to the
+  dataset. See the [`org`](metadata.md#org) section below for more information
+  on how we handle these details.
+* The sector name strings in the data are normalised and then aligned to the
   [sector](metadata.md#sector) table, using the “sector_map” section of
   [this configuration file](https://github.com/OCHA-DAP/hapi-pipelines/blob/main/src/hapi/pipelines/configs/core.yaml)
   if needed. In the absence of a direct match, phonetic matching is used for
@@ -50,7 +50,7 @@ For available query parameters, please see the
 * Available at either Admin 0, 1, or 2 depending on the country. Please check
   data coverage for further information
 * We cannot guarantee org consistency over time; for example, if an IMO
-  changes, the 3W might change the spelling or the whole name of an org between
+  changes, the spelling or the whole name of an org might change between
   releases
 
 ## Funding <a id=”funding”></a>

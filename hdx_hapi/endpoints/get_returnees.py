@@ -29,23 +29,24 @@ from hdx_hapi.endpoints.util.util import (
 
 
 CONFIG = get_config()
+
 router = APIRouter(
     tags=['Affected People'],
 )
 
 
-@router.get(
-    '/api/affected-people/returnees',
-    response_model=HapiGenericResponse[ReturneesResponse],
-    summary='Get returnees data',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/affected-people/returnees',
-    response_model=HapiGenericResponse[ReturneesResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get returnees data',
-)
+SUMMARY_TEXT = 'Get returnees data'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[ReturneesResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/affected-people/returnees', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/affected-people/returnees', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/affected-people/returnees', **ROUTER_DICT)
 async def get_returnees(
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],

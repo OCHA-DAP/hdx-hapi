@@ -15,5 +15,10 @@ router = APIRouter(
     response_model=None,
     include_in_schema=False,
 )
+@router.get(
+    '/api/v2/util/verify-request',
+    response_model=None,
+    include_in_schema=False,
+)
 async def get_request_verification():
     return None

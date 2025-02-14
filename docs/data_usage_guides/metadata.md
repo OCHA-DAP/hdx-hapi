@@ -127,7 +127,7 @@ For available query parameters, please see the
 ### Currency <a id="currency"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-price)
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 The currency table is populated using the WFP VAM Data Bridges API.
 
@@ -142,20 +142,20 @@ For available query parameters, please see the
 ### Org <a id="org"></a>
 
 **Used in:**
-[`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence)
+[`Operational Presence`](coordination_and_context.md#operational-presence)
 
-The organization table is populated from the 3W data, using the following
-methodology:
+The organization table is populated from the operational presence data, using
+the following methodology:
 
 * Organization name and acronym strings are normalised. If an acronym isn’t
   available, the first 32 characters of the name are used.
 * This [organization mapping](https://docs.google.com/spreadsheets/d/e/2PACX-1vSfBWvSu3fKA743VvHtgf-pIGkYH7zhy-NP7DZgEV9_a6YU7vtCeWhbLM56aUL1iIfrfv5UBvvjVt7B/pub?gid=1040329566&single=true&output=csv)
   is used for common alternative names
 * Organizations must have an associated organization type. If available, the
-  organization type code is taken directly from the 3W data, otherwise the name
-  string is normalised and matched to the org type names. In the absence of a
-  direct match, phonetic matching is used for strings > 5 characters. If no
-  match is found, the organization is skipped.
+  organization type code is taken directly from the operational presence data,
+  otherwise the name string is normalised and matched to the org type names.
+  In the absence of a direct match, phonetic matching is used for strings > 5 
+  characters. If no match is found, the organization is skipped.
 
 <h4> Parameters Returned </h4>
 
@@ -169,7 +169,7 @@ For available query parameters, please see the
 
 **Used in:**
 [`Org`](metadata.md#org),
-[`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence)
+[`Operational Presence`](coordination_and_context.md#operational-presence)
 
 The table is initially populated using the
 [OCHA Digital Services organization types list](https://data.humdata.org/dataset/organization-types-beta).
@@ -195,7 +195,7 @@ For available query parameters, please see the
 ### Sector <a id="sector"></a>
 
 **Used in:**
-[`Who is Doing What Where - Operational Presence`](coordination_and_context.md#operational-presence),
+[`Operational Presence`](coordination_and_context.md#operational-presence),
 [`Humanitarian Needs`](affected_people.md#humanitarian-needs)
 
 This table is initially populated using the
@@ -222,7 +222,7 @@ For available query parameters, please see the
 ### WFP Commodity <a id="wfp-commodity"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-price)
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 The commodity table tracks all food items, and their associated
 commodity category, present in the food prices data.
@@ -238,7 +238,7 @@ For available query parameters, please see the
 ### WFP Market <a id="wfp-market"></a>
 
 **Used in:**
-[`Food Prices`](food_security_and_nutrition.md#food-price)
+[`Food Prices & Market Monitor`](food_security_nutrition_and_poverty.md#food-price)
 
 Markets are defined as the physical locations where buyers and sellers
 come together to trade goods and services.

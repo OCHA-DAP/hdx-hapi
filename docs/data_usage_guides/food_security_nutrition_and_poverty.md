@@ -1,4 +1,4 @@
-# Food Security & Nutrition
+# Food Security, Nutrition & Poverty
 
 ---
 
@@ -21,7 +21,7 @@ it aligns with IPC standards in terms of assessment processes and outcomes.
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_security_api_v1_food_food_security_get).
+[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20Nutrition%20%26%20Poverty/get_food_security_api_v1_food_food_security_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/food_security_parameters.yaml') }}
 
@@ -66,7 +66,7 @@ For available query parameters, please see the
 | SOM | Somalia | Admin 2 regions in Somalia are sub-divided, thus we to not attempt to assign p-codes |
 | ZAF | South Africa | Admin 2 regions are a mix of admin levels, thus we do not attempt to assign p-codes at admin 2 |
 
-## Food Prices <a id="food-price"></a>
+## Food Prices & Market Monitor <a id="food-price"></a>
 
 The World Food Programme Price Database covers foods such as maize, rice,
 beans, fish, and sugar for 98 countries and some 3000 markets. It is updated
@@ -82,7 +82,7 @@ detailed methodology, see WFP's
 
 The table below describes the parameters returned from this endpoint.
 For available query parameters, please see the
-[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20%26%20Nutrition/get_food_price_api_v1_food_food_price_get).
+[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20Nutrition%20%26%20Poverty/get_food_price_api_v1_food_food_price_get).
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/food_price_parameters.yaml') }}
 
@@ -94,3 +94,50 @@ For available query parameters, please see the
 * The source data is not p-coded, however we have used the admin 1 and 2 names
   to p-code most markets. See [WFP Market](metadata.md#wfp-market)
   for more details.
+
+## Poverty Rate <a id="poverty-rate"></a>
+
+The global [Oxford Multidimensional Poverty Index](https://ophi.org.uk/global-mpi)
+(MPI) measures multidimensional poverty in over 100 developing countries,
+using internationally comparable datasets. The MPI assesses poverty through
+three main dimensions: health, education, and living standards, each of which
+is represented by specific indicators. For each country, MPI trends over time 
+are supplied if available. Relevant OPHI methodological notes are 
+[58](https://ophi.org.uk/publications/MN-58), 
+[59](https://ophi.org.uk/publications/MN-59) and 
+[60](https://ophi.org.uk/publications/MN-60).
+
+### Summary
+
+{{ read_yaml('data_usage_guides/subcategory_details/poverty_rate_details.yaml') }}
+
+### Parameters Returned
+
+The table below describes the parameters returned from this endpoint.
+For available query parameters, please see the
+[API sandbox](https://hapi.humdata.org/docs#/Food%20Security%20Nutrition%20%26%20Poverty/get_poverty_rate_api_v1_population_social_poverty_rate_get).
+
+{{ read_yaml('data_usage_guides/endpoint_parameters/poverty_rate_parameters.yaml') }}
+
+### Transformations applied
+
+* For rows in the original data with two timepoints, we take each timepoint as
+  single entry into HDX HAPI
+* The reference period is constructed using the full range of the year or year
+  range presented in the “year” column, pertaining to the timepoint in
+  question, of the original data
+
+### Usage Notes
+
+* The data are available at the national and admin 1 level
+* The admin name from the provider is supplied along with p-codes and 
+  corresponding standardised admin names where available
+* We use p-codes from the source data which was p-coded by taking the admin 1 
+  names, and applying the algorithm from [`hdx-python-country`](https://hdx-python-country.readthedocs.io/en/latest/)
+* Where admin 1 names could not be p-coded, the provided p-codes from the 
+  source data are at national level
+* Trends are estimated using indicators in the global MPI that are harmonised 
+  across the time periods and are used where data are available for a country
+* For any country where trends are unavailable in the source, the latest data
+  (which is not harmonised across time) are used instead
+

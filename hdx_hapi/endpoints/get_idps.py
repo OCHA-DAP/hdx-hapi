@@ -29,18 +29,18 @@ router = APIRouter(
 )
 
 
-@router.get(
-    '/api/affected-people/idps',
-    response_model=HapiGenericResponse[IdpsResponse],
-    summary='Get idps data',
-    include_in_schema=False,
-)
-@router.get(
-    '/api/v1/affected-people/idps',
-    response_model=HapiGenericResponse[IdpsResponse],
-    responses=ERROR_RESPONSES,  # type: ignore
-    summary='Get idps data',
-)
+SUMMARY_TEXT = 'Get idps data'
+
+ROUTER_DICT = {
+    'response_model': HapiGenericResponse[IdpsResponse],
+    'summary': SUMMARY_TEXT,
+    'responses': ERROR_RESPONSES,
+}
+
+
+@router.get('/api/affected-people/idps', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v1/affected-people/idps', include_in_schema=False, **ROUTER_DICT)
+@router.get('/api/v2/affected-people/idps', **ROUTER_DICT)
 async def get_idps(
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
     common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
