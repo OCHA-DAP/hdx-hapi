@@ -25,7 +25,7 @@ You can find out more about HDX HAPI in the
 [API documentation](https://hapi.humdata.org) pages. 
 
 There are also
-[HAPI datasets on HDX](https://data.humdata.org/organization/hdx-hapi)
+[HDX HAPI datasets on HDX](https://data.humdata.org/organization/hdx-hapi)
 containing the data available from the API. Some datasets have warning and 
 error columns. Warnings typically indicate corrections have been made to 
 the data or show things to look out for. Rows with only warnings are considered 
