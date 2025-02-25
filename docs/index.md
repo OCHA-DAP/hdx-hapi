@@ -18,6 +18,21 @@ details the data coverage that we have achieved at present, and to which
 administrative level the data is available: national (admin 0), admin 1,
 or admin 2.
 
+## Accessing the Data
+
+You can find out more about HDX HAPI in the 
+[Getting Started](getting-started.md) and 
+[API documentation](https://hapi.humdata.org) pages. 
+
+There are also
+[HAPI datasets on HDX](https://data.humdata.org/organization/hdx-hapi)
+containing the data available from the API. Some datasets have warning and 
+error columns. Warnings typically indicate corrections have been made to 
+the data or show things to look out for. Rows with only warnings are considered 
+complete, and are available from the API. Errors usually mean that the data 
+is incomplete or unusable. Rows with any errors are not present in the API but 
+have been included for transparency.
+
 ## Latest Changes
 
 _Note: this is only a 10-line snippet, for full details please refer
