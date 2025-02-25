@@ -1,42 +1,14 @@
 import datetime
-from typing import Optional, Self
-from pydantic import ConfigDict, Field, model_validator
-from hdx_hapi.endpoints.models.base import HapiBaseModel
-from hdx_hapi.config.doc_snippets import (
-    truncate_query_description,
-    DOC_LOCATION_CODE,
-    DOC_LOCATION_NAME,
-    DOC_ADMIN1_CODE,
-    DOC_ADMIN1_NAME,
-    DOC_ADMIN2_CODE,
-    DOC_ADMIN2_NAME,
-)
+from typing import Optional
+from pydantic import ConfigDict, Field
+from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
 
 
-class AvailabilityResponse(HapiBaseModel):
+class AvailabilityResponse(HapiBaseModel, HapiModelWithAdmins):
     category: str = Field(max_length=32, description='HAPI category')
     subcategory: str = Field(max_length=512, description='HAPI subcategory')
-    location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
-    location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
-    admin1_code: Optional[str] = Field(max_length=128, description=truncate_query_description(DOC_ADMIN1_CODE))
-    admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
-    admin2_code: Optional[str] = Field(max_length=128, description=truncate_query_description(DOC_ADMIN2_CODE))
-    admin2_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN2_NAME))
     hapi_updated_date: Optional[datetime.datetime] = Field(
         description='Date that dataset was last updated, e.g. 2020-01-01 or 2020-01-01T00:00:00'
     )
 
     model_config = ConfigDict(from_attributes=True)
-
-    @model_validator(mode='after')  
-    def set_admin1_admin2_null(self) -> Self:
-
-        if not self.admin1_name or self.admin1_name.upper() == 'UNSPECIFIED':
-            self.admin1_code = None
-            self.admin1_name = None
-
-        if not self.admin2_name or self.admin2_name.upper() == 'UNSPECIFIED':
-            self.admin2_code = None
-            self.admin2_name = None
-
-        return self

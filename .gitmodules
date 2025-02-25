@@ -1,3 +1,0 @@
-[submodule "src/hapi-schema"]
-path = src/hapi-schema
-url = https://github.com/OCHA-DAP/hapi-sqlalchemy-schema.git

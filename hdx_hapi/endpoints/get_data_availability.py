@@ -5,16 +5,6 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from hdx_hapi.config.doc_snippets import (
-    DOC_ADMIN_LEVEL_FILTER,
-    DOC_LOCATION_NAME,
-    DOC_LOCATION_CODE,
-    DOC_SEE_LOC,
-    DOC_ADMIN1_NAME,
-    DOC_ADMIN1_CODE,
-    DOC_SEE_ADMIN1,
-    DOC_ADMIN2_NAME,
-    DOC_ADMIN2_CODE,
-    DOC_SEE_ADMIN2,
     DOC_UPDATE_DATE_MIN,
     DOC_UPDATE_DATE_MAX,
 )
@@ -23,9 +13,10 @@ from hdx_hapi.endpoints.models.base import HapiGenericResponse
 from hdx_hapi.endpoints.models.availability import AvailabilityResponse
 from hdx_hapi.endpoints.models.error import ERROR_RESPONSES
 from hdx_hapi.endpoints.util.util import (
-    AdminLevel,
     CommonEndpointParams,
+    CommonLocationParameters,
     common_endpoint_parameters,
+    common_location_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 
@@ -51,6 +42,7 @@ ROUTER_DICT = {
 @router.get('/api/v2/metadata/data-availability', **ROUTER_DICT)
 async def get_data_availability(
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
+    common_location_params: Annotated[CommonLocationParameters, Depends(common_location_parameters)],
     db: AsyncSession = Depends(get_db),
     category: Annotated[
         Optional[str], Query(max_length=128, description='Filter the response by a data category')
@@ -58,24 +50,24 @@ async def get_data_availability(
     subcategory: Annotated[
         Optional[str], Query(max_length=128, description='Filter the response by a data subcategory')
     ] = None,
-    location_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
-    ] = None,
-    location_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
-    ] = None,
-    admin1_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
-    ] = None,
-    admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
-    ] = None,
-    admin2_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
-    ] = None,
-    admin2_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
-    ] = None,
+    # location_code: Annotated[
+    #     Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    # ] = None,
+    # location_name: Annotated[
+    #     Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    # ] = None,
+    # admin1_code: Annotated[
+    #     Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
+    # ] = None,
+    # admin1_name: Annotated[
+    #     Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+    # ] = None,
+    # admin2_code: Annotated[
+    #     Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
+    # ] = None,
+    # admin2_name: Annotated[
+    #     Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
+    # ] = None,
     hapi_updated_date_min: Annotated[
         Optional[datetime.datetime | datetime.date],
         Query(description=f'{DOC_UPDATE_DATE_MIN}'),
@@ -84,24 +76,18 @@ async def get_data_availability(
         Optional[datetime.datetime | datetime.date],
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
-    admin_level: Annotated[Optional[AdminLevel], Query(description=f'{DOC_ADMIN_LEVEL_FILTER}')] = None,
+    # admin_level: Annotated[Optional[AdminLevel], Query(description=f'{DOC_ADMIN_LEVEL_FILTER}')] = None,
 ):
     """
     Provide currency information to use in conjunction with the food-prices endpoint
     """
     result = await get_availability_srv(
         pagination_parameters=common_parameters,
+        common_location_params=common_location_params,
         db=db,
         category=category,
         subcategory=subcategory,
-        location_name=location_name,
-        location_code=location_code,
-        admin1_name=admin1_name,
-        admin1_code=admin1_code,
-        admin2_name=admin2_name,
-        admin2_code=admin2_code,
         hapi_updated_date_min=hapi_updated_date_min,
         hapi_updated_date_max=hapi_updated_date_max,
-        admin_level=admin_level,
     )
     return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, AvailabilityResponse)

@@ -13,7 +13,6 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
 
 
 class OperationalPresenceResponse(HapiBaseModel, HapiModelWithAdmins):
-    # dataset_hdx_stub: str = Field(max_length=128)
     resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
     org_acronym: str = Field(max_length=32, description='The organization acronym')
     org_name: str = Field(max_length=512, description='The organization name')

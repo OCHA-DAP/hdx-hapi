@@ -3,7 +3,6 @@ from pydantic import ConfigDict, Field
 from typing import Optional
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_ADMIN2_REF,
     DOC_GENDER,
     DOC_AGE_RANGE,
     DOC_HDX_RESOURCE_ID,
@@ -17,16 +16,13 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
 
 class PopulationResponse(HapiBaseModel, HapiModelWithAdmins):
     resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
-    admin2_ref: int = Field(description=truncate_query_description(DOC_ADMIN2_REF))
-
     gender: Gender = Field(description=truncate_query_description(DOC_GENDER))
     age_range: str = Field(max_length=32, description=truncate_query_description(DOC_AGE_RANGE))
 
     min_age: Optional[int] = Field(
         ge=0,
         description=(
-            'The minimum age from `age_range`, set to `null` if `age_range` is "all" and '
-            'there is no age disaggregation'
+            'The minimum age from `age_range`, set to `null` if `age_range` is "all" and there is no age disaggregation'
         ),
     )
     max_age: Optional[int] = Field(
