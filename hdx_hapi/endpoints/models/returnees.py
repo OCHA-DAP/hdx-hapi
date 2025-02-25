@@ -9,7 +9,6 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_REFERENCE_PERIOD_START,
     DOC_REFERENCE_PERIOD_END,
-    DOC_LOCATION_REF,
     DOC_AGE_RANGE,
     DOC_LOCATION_NAME,
     DOC_LOCATION_CODE,
@@ -20,16 +19,15 @@ from hdx_hapi.endpoints.models.base import HapiBaseModel
 
 class ReturneesResponse(HapiBaseModel):
     resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
-    origin_location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
-    asylum_location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
+    # origin_location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
+    # asylum_location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     population_group: PopulationGroup = Field(description=truncate_query_description(DOC_POPULATION_GROUP))
     gender: Gender = Field(description=truncate_query_description(DOC_GENDER))
     age_range: str = Field(max_length=32, description=truncate_query_description(DOC_AGE_RANGE))
     min_age: Optional[int] = Field(
         ge=0,
         description=(
-            'The minimum age from `age_range`, set to `null` if `age_range` is "all" and '
-            'there is no age disaggregation'
+            'The minimum age from `age_range`, set to `null` if `age_range` is "all" and there is no age disaggregation'
         ),
     )
     max_age: Optional[int] = Field(

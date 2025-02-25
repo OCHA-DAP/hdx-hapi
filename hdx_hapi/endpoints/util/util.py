@@ -7,20 +7,15 @@ from pydantic import BaseModel, ConfigDict, ValidationInfo, field_validator, mod
 
 from hdx_hapi.config.doc_snippets import (
     DOC_ADMIN_LEVEL_FILTER,
-    DOC_ADMIN1_REF,
     DOC_ADMIN1_CODE,
     DOC_ADMIN1_NAME,
-    DOC_ADMIN2_REF,
     DOC_ADMIN2_NAME,
     DOC_ADMIN2_CODE,
-    DOC_LOCATION_REF,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
     DOC_SEE_ADMIN1,
     DOC_SEE_LOC,
     DOC_SEE_ADMIN2,
-    DOC_PROVIDER_ADMIN1_NAME,
-    DOC_PROVIDER_ADMIN2_NAME,
 )
 from hdx_hapi.endpoints.util.exceptions import RequestParamsValidationError
 
@@ -119,6 +114,16 @@ async def reference_period_parameters(
     )
 
 
+class CommonLocationAdm1Parameters(BaseModel):
+    location_code: Optional[str] = None
+    location_name: Optional[str] = None
+    admin1_code: Optional[str] = None
+    admin1_name: Optional[str] = None
+    admin_level: Optional[AdminLevel] = None
+
+    model_config = ConfigDict(frozen=True)
+
+
 class CommonLocationParameters(BaseModel):
     location_code: Optional[str] = None
     location_name: Optional[str] = None
@@ -153,41 +158,65 @@ async def common_location_parameters(
     location_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
     ] = None,
-    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    # location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
     admin1_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
     ] = None,
     admin1_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
     ] = None,
-    admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
-    provider_admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
-    ] = None,
+    # admin1_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN1_REF}')] = None,
+    # provider_admin1_name: Annotated[
+    #     Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    # ] = None,
     admin2_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_ADMIN2_CODE} {DOC_SEE_ADMIN2}')
     ] = None,
     admin2_name: Annotated[
         Optional[str], Query(max_length=512, description=f'{DOC_ADMIN2_NAME} {DOC_SEE_ADMIN2}')
     ] = None,
-    admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
-    provider_admin2_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
-    ] = None,
+    # admin2_ref: Annotated[Optional[int], Query(description=f'{DOC_ADMIN2_REF}')] = None,
+    # provider_admin2_name: Annotated[
+    #     Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN2_NAME}')
+    # ] = None,
     admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
 ) -> CommonLocationParameters:
     return CommonLocationParameters(
         location_code=location_code,
         location_name=location_name,
-        location_ref=location_ref,
+        # location_ref=location_ref,
         admin1_code=admin1_code,
         admin1_name=admin1_name,
-        admin1_ref=admin1_ref,
-        provider_admin1_name=provider_admin1_name,
+        # admin1_ref=admin1_ref,
+        # provider_admin1_name=provider_admin1_name,
         admin2_code=admin2_code,
         admin2_name=admin2_name,
-        admin2_ref=admin2_ref,
-        provider_admin2_name=provider_admin2_name,
+        # admin2_ref=admin2_ref,
+        # provider_admin2_name=provider_admin2_name,
+        admin_level=admin_level,
+    )
+
+
+async def common_location_adm1_parameters(
+    location_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    ] = None,
+    location_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    ] = None,
+    admin1_code: Annotated[
+        Optional[str], Query(max_length=128, description=f'{DOC_ADMIN1_CODE} {DOC_SEE_ADMIN1}')
+    ] = None,
+    admin1_name: Annotated[
+        Optional[str], Query(max_length=512, description=f'{DOC_ADMIN1_NAME} {DOC_SEE_ADMIN1}')
+    ] = None,
+    admin_level: Annotated[Optional[AdminLevel], Query(description=DOC_ADMIN_LEVEL_FILTER)] = None,
+) -> CommonLocationAdm1Parameters:
+    return CommonLocationAdm1Parameters(
+        location_code=location_code,
+        location_name=location_name,
+        admin1_code=admin1_code,
+        admin1_name=admin1_name,
         admin_level=admin_level,
     )
 

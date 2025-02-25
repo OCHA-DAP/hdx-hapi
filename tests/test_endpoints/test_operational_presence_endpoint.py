@@ -69,7 +69,7 @@ async def test_get_operational_presence_result(event_loop, refresh_db):
 async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
     log.info('started test_get_operational_presence_adm_fields')
 
-    operational_presence_view_adm_specified = OperationalPresenceResponse(
+    adm_0 = OperationalPresenceResponse(
         sector_code='ABC',
         resource_hdx_id='test-resource1',
         org_acronym='ORG01',
@@ -77,73 +77,78 @@ async def test_get_operational_presence_adm_fields(event_loop, refresh_db):
         org_type_code='unimportant',
         org_type_description='Unimportant',
         sector_name='Sector Name',
-        location_ref=1,
-        location_code='Foolandia',
-        location_name='FOO-XXX',
-        admin1_ref=1,
-        admin1_is_unspecified=False,
-        admin1_code='FOO-XXX',
-        admin1_name='Province 01',
-        provider_admin1_name='Province 01',
-        admin2_ref=1,
-        admin2_is_unspecified=False,
-        admin2_code='FOO-XXX-XXX',
-        admin2_name='District A',
-        provider_admin2_name='District A',
         reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
         reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
-    )
-
-    assert operational_presence_view_adm_specified.admin1_code == 'FOO-XXX', (
-        'admin1_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert operational_presence_view_adm_specified.admin1_name == 'Province 01', (
-        'admin1_name should keep its value when admin1_is_unspecified is False'
-    )
-    assert operational_presence_view_adm_specified.admin2_code == 'FOO-XXX-XXX', (
-        'admin2_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert operational_presence_view_adm_specified.admin2_name == 'District A', (
-        'admin2_name should keep its value when admin1_is_unspecified is False'
-    )
-
-    operational_presence_view_adm_unspecified = OperationalPresenceResponse(
-        sector_code='ABC',
-        resource_hdx_id='test-resource1',
-        org_acronym='ORG01',
-        org_name='Organisation 1',
-        org_type_code='unimportant',
-        org_type_description='Unimportant',
-        sector_name='Sector Name',
-        location_ref=1,
         location_code='Foolandia',
         location_name='FOO-XXX',
-        admin1_is_unspecified=True,
-        admin1_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Unspecified',
-        provider_admin1_name='Unspecified',
-        admin2_ref=1,
-        admin2_is_unspecified=True,
         admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
-        provider_admin2_name='Unspecified',
-        reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
-        reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=0,
     )
 
-    assert operational_presence_view_adm_unspecified.admin1_code is None, (
-        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    assert adm_0.admin1_code is None
+    assert adm_0.admin1_name is None
+    assert adm_0.admin2_code is None
+    assert adm_0.admin2_name is None
+    assert adm_0.admin_level == 0
+
+    adm_1 = OperationalPresenceResponse(
+        sector_code='ABC',
+        resource_hdx_id='test-resource1',
+        org_acronym='ORG01',
+        org_name='Organisation 1',
+        org_type_code='unimportant',
+        org_type_description='Unimportant',
+        sector_name='Sector Name',
+        reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=1,
     )
-    assert operational_presence_view_adm_unspecified.admin1_name is None, (
-        'admin1_name should be changed to None when admin1_is_unspecified is True'
+
+    assert adm_1.admin1_code == 'FOO-XXX'
+    assert adm_1.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_1.admin2_code is None
+    assert adm_1.admin2_name is None
+    assert adm_1.admin_level == 1
+
+    adm_2 = OperationalPresenceResponse(
+        sector_code='ABC',
+        resource_hdx_id='test-resource1',
+        org_acronym='ORG01',
+        org_name='Organisation 1',
+        org_type_code='unimportant',
+        org_type_description='Unimportant',
+        sector_name='Sector Name',
+        reference_period_start=datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=2,
     )
-    assert operational_presence_view_adm_unspecified.admin2_code is None, (
-        'admin2_code should be changed to None when admin1_is_unspecified is True'
-    )
-    assert operational_presence_view_adm_unspecified.admin2_name is None, (
-        'admin2_name should be changed to None when admin1_is_unspecified is True'
-    )
+
+    assert adm_2.admin1_code == 'FOO-XXX'
+    assert adm_2.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_2.admin2_code == 'FOO-XXX-XXX'
+    assert adm_2.admin2_name == 'District A Provider adm2 name'
+    assert adm_2.admin_level == 2
 
 
 @pytest.mark.asyncio

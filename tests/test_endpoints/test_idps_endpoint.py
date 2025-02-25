@@ -74,9 +74,8 @@ async def test_get_idps_result(event_loop, refresh_db):
 async def test_get_idps_adm_fields(event_loop, refresh_db):
     log.info('started test_get_idps_adm_fields')
 
-    idps_view_adm_specified = IdpsResponse(
+    idps_view_adm_0 = IdpsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
-        admin2_ref=1,
         reporting_round=1,
         assessment_type=DTMAssessmentType.BASELINE,
         operation='operation',
@@ -85,36 +84,22 @@ async def test_get_idps_adm_fields(event_loop, refresh_db):
         reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         location_code='Foolandia',
         location_name='FOO-XXX',
-        admin1_ref=1,
         admin1_code='FOO-XXX',
-        admin1_name='Province 01',
-        provider_admin1_name='Province 01',
+        admin1_name='Unspecified',
         admin2_code='FOO-XXX-XXX',
-        admin2_name='District A',
-        provider_admin2_name='District A',
-        location_ref=2,
-        admin1_is_unspecified=False,
-        admin2_is_unspecified=False,
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=0,
     )
+    assert idps_view_adm_0.admin1_code is None
+    assert idps_view_adm_0.admin1_name is None
+    assert idps_view_adm_0.admin2_code is None
+    assert idps_view_adm_0.admin2_name is None
+    assert idps_view_adm_0.admin_level == 0
 
-    assert True
-
-    assert idps_view_adm_specified.admin1_code == 'FOO-XXX', (
-        'admin1_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert idps_view_adm_specified.admin1_name == 'Province 01', (
-        'admin1_name should keep its value when admin1_is_unspecified is False'
-    )
-    assert idps_view_adm_specified.admin2_code == 'FOO-XXX-XXX', (
-        'admin2_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert idps_view_adm_specified.admin2_name == 'District A', (
-        'admin2_name should keep its value when admin1_is_unspecified is False'
-    )
-
-    idps_view_adm_unspecified = IdpsResponse(
+    idps_view_adm_1 = IdpsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
-        admin2_ref=1,
         reporting_round=1,
         assessment_type=DTMAssessmentType.BASELINE,
         operation='operation',
@@ -123,30 +108,43 @@ async def test_get_idps_adm_fields(event_loop, refresh_db):
         reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         location_code='Foolandia',
         location_name='FOO-XXX',
-        admin1_ref=1,
         admin1_code='FOO-XXX',
-        admin1_name='unspecified',
-        provider_admin1_name='unspecified',
+        admin1_name='Unspecified',
         admin2_code='FOO-XXX-XXX',
-        admin2_name='unspecified',
-        provider_admin2_name='unspecified',
-        location_ref=2,
-        admin1_is_unspecified=True,
-        admin2_is_unspecified=True,
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=1,
     )
+    assert idps_view_adm_1.admin1_code == 'FOO-XXX'
+    assert idps_view_adm_1.admin1_name == 'Province 0 Provider adm1 name'
+    assert idps_view_adm_1.admin2_code is None
+    assert idps_view_adm_1.admin2_name is None
+    assert idps_view_adm_1.admin_level == 1
 
-    assert idps_view_adm_unspecified.admin1_code is None, (
-        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    idps_view_adm_2 = IdpsResponse(
+        resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
+        reporting_round=1,
+        assessment_type=DTMAssessmentType.BASELINE,
+        operation='operation',
+        population=500000,
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=2,
     )
-    assert idps_view_adm_unspecified.admin1_name is None, (
-        'admin1_name should be changed to None when admin1_is_unspecified is True'
-    )
-    assert idps_view_adm_unspecified.admin2_code is None, (
-        'admin2_code should be changed to None when admin1_is_unspecified is True'
-    )
-    assert idps_view_adm_unspecified.admin2_name is None, (
-        'admin2_name should be changed to None when admin1_is_unspecified is True'
-    )
+    assert idps_view_adm_2.admin1_code == 'FOO-XXX'
+    assert idps_view_adm_2.admin1_name == 'Province 0 Provider adm1 name'
+    assert idps_view_adm_2.admin2_code == 'FOO-XXX-XXX'
+    assert idps_view_adm_2.admin2_name == 'District A Provider adm2 name'
+    assert idps_view_adm_2.admin_level == 2
 
 
 @pytest.mark.asyncio
@@ -170,5 +168,5 @@ async def test_get_idps_admin_level(event_loop, refresh_db):
         async with AsyncClient(
             transport=ASGITransport(app=app), base_url='http://test', params={'admin_level': admin_level}
         ) as ac:
-            response = await ac.get(ENDPOINT_ROUTER)
-            assert len(response.json()['data']) == count, f'Admin level {admin_level} should return {count} entries'
+            _response = await ac.get(ENDPOINT_ROUTER)
+            assert len(_response.json()['data']) == count, f'Admin level {admin_level} should return {count} entries'

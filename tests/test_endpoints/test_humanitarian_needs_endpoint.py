@@ -70,7 +70,7 @@ async def test_get_humanitarian_needs_result(event_loop, refresh_db):
 async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
     log.info('started test_get_humanitarian_needs_adm_fields')
 
-    humanitarian_needs_view_adm_specified = HumanitarianNeedsResponse(
+    adm_0 = HumanitarianNeedsResponse(
         resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
         category='',
         sector_code='EDU',
@@ -81,70 +81,72 @@ async def test_get_humanitarian_needs_adm_fields(event_loop, refresh_db):
         sector_name='Education',
         location_code='Foolandia',
         location_name='FOO-XXX',
-        admin1_is_unspecified=False,
-        admin1_ref=1,
-        admin2_ref=1,
-        admin1_code='FOO-XXX',
-        admin1_name='Province 01',
-        provider_admin1_name='Province 01',
-        admin2_is_unspecified=False,
-        admin2_code='FOO-XXX-XXX',
-        admin2_name='District A',
-        provider_admin2_name='District A',
-        location_ref=2,
-    )
-
-    assert True
-
-    assert humanitarian_needs_view_adm_specified.admin1_code == 'FOO-XXX', (
-        'admin1_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert humanitarian_needs_view_adm_specified.admin1_name == 'Province 01', (
-        'admin1_name should keep its value when admin1_is_unspecified is False'
-    )
-    assert humanitarian_needs_view_adm_specified.admin2_code == 'FOO-XXX-XXX', (
-        'admin2_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert humanitarian_needs_view_adm_specified.admin2_name == 'District A', (
-        'admin2_name should keep its value when admin1_is_unspecified is False'
-    )
-
-    humanitarian_needs_view_adm_unspecified = HumanitarianNeedsResponse(
-        resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
-        sector_code='EDU',
-        category='',
-        population_status=PopulationStatus.AFFECTED,
-        population=500000,
-        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
-        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
-        sector_name='Education',
-        location_code='Foolandia',
-        location_name='FOO-XXX',
-        admin1_is_unspecified=True,
-        admin1_ref=1,
-        admin2_ref=1,
         admin1_code='FOO-XXX',
         admin1_name='Unspecified',
-        provider_admin1_name='Unspecified',
-        admin2_is_unspecified=True,
-        admin2_code='FOO-XXX',
+        admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
-        provider_admin2_name='Unspecified',
-        location_ref=2,
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=0,
     )
 
-    assert humanitarian_needs_view_adm_unspecified.admin1_code is None, (
-        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    assert adm_0.admin1_code is None
+    assert adm_0.admin1_name is None
+    assert adm_0.admin2_code is None
+    assert adm_0.admin2_name is None
+    assert adm_0.admin_level == 0
+
+    adm_1 = HumanitarianNeedsResponse(
+        resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
+        category='',
+        sector_code='EDU',
+        population_status=PopulationStatus.AFFECTED,
+        population=500000,
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        sector_name='Education',
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=1,
     )
-    assert humanitarian_needs_view_adm_unspecified.admin1_name is None, (
-        'admin1_name should be changed to None when admin1_is_unspecified is True'
+
+    assert adm_1.admin1_code == 'FOO-XXX'
+    assert adm_1.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_1.admin2_code is None
+    assert adm_1.admin2_name is None
+    assert adm_1.admin_level == 1
+
+    adm_2 = HumanitarianNeedsResponse(
+        resource_hdx_id='17acb541-9431-409a-80a8-50eda7e8ebab',
+        category='',
+        sector_code='EDU',
+        population_status=PopulationStatus.AFFECTED,
+        population=500000,
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        sector_name='Education',
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=2,
     )
-    assert humanitarian_needs_view_adm_unspecified.admin2_code is None, (
-        'admin2_code should be changed to None when admin1_is_unspecified is True'
-    )
-    assert humanitarian_needs_view_adm_unspecified.admin2_name is None, (
-        'admin2_name should be changed to None when admin1_is_unspecified is True'
-    )
+
+    assert adm_2.admin1_code == 'FOO-XXX'
+    assert adm_2.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_2.admin2_code == 'FOO-XXX-XXX'
+    assert adm_2.admin2_name == 'District A Provider adm2 name'
+    assert adm_2.admin_level == 2
 
 
 @pytest.mark.asyncio

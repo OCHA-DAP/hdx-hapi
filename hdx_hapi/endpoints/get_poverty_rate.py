@@ -9,11 +9,6 @@ from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
-    DOC_LOCATION_REF,
-    DOC_LOCATION_CODE,
-    DOC_LOCATION_NAME,
-    DOC_SEE_LOC,
-    DOC_PROVIDER_ADMIN1_NAME,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -22,8 +17,10 @@ from hdx_hapi.endpoints.models.poverty_rate import PovertyRateResponse
 from hdx_hapi.endpoints.util.util import (
     CommonDateRangeParams,
     CommonEndpointParams,
+    CommonLocationAdm1Parameters,
     common_date_range_params,
     common_endpoint_parameters,
+    common_location_adm1_parameters,
 )
 from hdx_hapi.services.csv_transform_logic import transform_result_to_csv_stream_if_requested
 from hdx_hapi.services.poverty_rate_logic import get_poverty_rates_srv
@@ -49,38 +46,36 @@ ROUTER_DICT = {
 @router.get('/api/v2/food-security-nutrition-poverty/poverty-rate', **ROUTER_DICT)
 async def get_poverty_rate(
     common_date_range_params: Annotated[CommonDateRangeParams, Depends(common_date_range_params)],
+    common_location_params: Annotated[CommonLocationAdm1Parameters, Depends(common_location_adm1_parameters)],
     common_parameters: Annotated[CommonEndpointParams, Depends(common_endpoint_parameters)],
     # ref_period_parameters: Annotated[ReferencePeriodParameters, Depends(reference_period_parameters)],
     db: AsyncSession = Depends(get_db),
     mpi_min: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), lower bound.')] = None,
     mpi_max: Annotated[Optional[float], Query(description='Multidimensional Poverty Index (MPI), upper bound.')] = None,
-    location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
-    location_code: Annotated[
-        Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
-    ] = None,
-    location_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
-    ] = None,
+    # location_ref: Annotated[Optional[int], Query(description=f'{DOC_LOCATION_REF}')] = None,
+    # location_code: Annotated[
+    #     Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
+    # ] = None,
+    # location_name: Annotated[
+    #     Optional[str], Query(max_length=512, description=f'{DOC_LOCATION_NAME} {DOC_SEE_LOC}')
+    # ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
-    provider_admin1_name: Annotated[
-        Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
-    ] = None,
+    # provider_admin1_name: Annotated[
+    #     Optional[str], Query(max_length=512, description=f'{DOC_PROVIDER_ADMIN1_NAME}')
+    # ] = None,
 ):
     ref_period_parameters = None
     result = await get_poverty_rates_srv(
         common_date_range_params=common_date_range_params,
         pagination_parameters=common_parameters,
         ref_period_parameters=ref_period_parameters,
+        common_location_params=common_location_params,
         db=db,
         mpi_min=mpi_min,
         mpi_max=mpi_max,
-        location_ref=location_ref,
-        location_code=location_code,
-        location_name=location_name,
         has_hrp=has_hrp,
         in_gho=in_gho,
-        provider_admin1_name=provider_admin1_name,
     )
     return transform_result_to_csv_stream_if_requested(result, common_parameters.output_format, PovertyRateResponse)
 

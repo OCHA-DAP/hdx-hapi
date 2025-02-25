@@ -7,7 +7,6 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_LOCATION_CODE,
     DOC_LOCATION_NAME,
-    DOC_LOCATION_REF,
     DOC_REFERENCE_PERIOD_END,
     DOC_REFERENCE_PERIOD_START,
     truncate_query_description,
@@ -29,7 +28,6 @@ class FundingResponse(HapiBaseModel):
         description='The percentage of required funding received by the appeal'
     )
 
-    location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
     location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
     location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
 
