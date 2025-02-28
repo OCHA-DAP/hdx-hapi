@@ -113,15 +113,21 @@ def _apply_location_admin_filter(
     if admin1_code:
         query = case_insensitive_filter(query, db_class.admin1_code, admin1_code)
     if admin1_name:
-        query = query.where(
-            or_(db_class.admin1_name.icontains(admin1_name), db_class.provider_admin1_name.icontains(admin1_name))
-        )
+        if hasattr(db_class, 'provider_admin1_name'):
+            query = query.where(
+                or_(db_class.admin1_name.icontains(admin1_name), db_class.provider_admin1_name.icontains(admin1_name))
+            )
+        else:
+            query = query.where(db_class.admin1_name.icontains(admin1_name))
     if admin2_code:
         query = case_insensitive_filter(query, db_class.admin2_code, admin2_code)
     if admin2_name:
-        query = query.where(
-            or_(db_class.admin2_name.icontains(admin2_name), db_class.provider_admin2_name.icontains(admin2_name))
-        )
+        if hasattr(db_class, 'provider_admin2_name'):
+            query = query.where(
+                or_(db_class.admin2_name.icontains(admin2_name), db_class.provider_admin2_name.icontains(admin2_name))
+            )
+        else:
+            query = query.where(db_class.admin2_name.icontains(admin2_name))
     if has_hrp is not None:
         query = query.where(db_class.has_hrp == has_hrp)
     if in_gho is not None:
