@@ -1,5 +1,5 @@
 import datetime
-from typing import Optional, Protocol, Type, cast, runtime_checkable
+from typing import Optional, Protocol, Type, cast
 from sqlalchemy import Select, or_
 from sqlalchemy.orm import Mapped
 
