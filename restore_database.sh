@@ -28,26 +28,28 @@ else
   HOST_DUMP_FILE_NAME="$DUMP_SOURCE"
 fi
 
+DCOMPOSE="${DCOMPOSE:-docker compose}"
+
 # Get the Docker container ID for the db service
-CONTAINER_ID=$(docker-compose ps -q db)
+CONTAINER_ID=$(docker compose ps -q db)
 
 # Copy the dump file to the container
 docker cp $HOST_DUMP_FILE_NAME "${CONTAINER_ID}:${CONTAINER_DB_PATH}/$DUMP_FILE_NAME"
 
 # Drop the existing database if it exists, then create it
-docker-compose exec db psql -U postgres -c "DROP DATABASE IF EXISTS $DATABASE_NAME;"
-docker-compose exec db psql -U postgres -c "CREATE DATABASE $DATABASE_NAME with encoding 'UTF8';"
+$DCOMPOSE exec db psql -U postgres -c "DROP DATABASE IF EXISTS $DATABASE_NAME;"
+$DCOMPOSE exec db psql -U postgres -c "CREATE DATABASE $DATABASE_NAME with encoding 'UTF8';"
 
 # Restore the database
-docker-compose exec db pg_restore --username postgres --no-owner --no-privileges --dbname $DATABASE_NAME "${CONTAINER_DB_PATH}/$DUMP_FILE_NAME"
+$DCOMPOSE exec db pg_restore --username postgres --no-owner --no-privileges --dbname $DATABASE_NAME "${CONTAINER_DB_PATH}/$DUMP_FILE_NAME"
 
 # Grant privileges
-docker-compose exec db psql -U postgres -c "grant all privileges on database $DATABASE_NAME to hapi"
-docker-compose exec db psql -U postgres $DATABASE_NAME -c "GRANT USAGE, CREATE ON SCHEMA public TO hapi"
-docker-compose exec db psql -U postgres $DATABASE_NAME -c "GRANT ALL ON ALL TABLES IN SCHEMA public TO hapi"
+$DCOMPOSE exec db psql -U postgres -c "grant all privileges on database $DATABASE_NAME to hapi"
+$DCOMPOSE exec db psql -U postgres $DATABASE_NAME -c "GRANT USAGE, CREATE ON SCHEMA public TO hapi"
+$DCOMPOSE exec db psql -U postgres $DATABASE_NAME -c "GRANT ALL ON ALL TABLES IN SCHEMA public TO hapi"
 
 # Delete the dump file from the container
-docker-compose exec db rm "${CONTAINER_DB_PATH}/$DUMP_FILE_NAME"
+$DCOMPOSE exec db rm "${CONTAINER_DB_PATH}/$DUMP_FILE_NAME"
 
 # Return to the original directory
 popd

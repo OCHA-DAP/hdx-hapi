@@ -63,9 +63,8 @@ async def test_get_population_result(event_loop, refresh_db):
 @pytest.mark.asyncio
 async def test_get_population_adm_fields(event_loop, refresh_db):
     log.info('started test_get_population_adm_fields')
-    population_view_adm_specified = PopulationResponse(
+    adm_x = PopulationResponse(
         resource_hdx_id='foo',
-        admin2_ref=1,
         gender=Gender.MALE,
         age_range='10-14',
         min_age=10,
@@ -73,68 +72,74 @@ async def test_get_population_adm_fields(event_loop, refresh_db):
         population=100,
         reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
         reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
-        location_ref=1,
-        location_code='FOO',
-        location_name='Foolandia',
-        admin1_ref=1,
-        admin1_code='FOO-XXX',
-        admin1_name='Province 01',
-        provider_admin1_name='Province 01',
-        admin1_is_unspecified=False,
-        admin2_code='FOO-XXX-XXX',
-        admin2_name='District A',
-        provider_admin2_name='District A',
-        admin2_is_unspecified=False,
-    )
-    assert population_view_adm_specified.admin1_code == 'FOO-XXX', (
-        'admin1_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert population_view_adm_specified.admin1_name == 'Province 01', (
-        'admin1_name should keep its value when admin1_is_unspecified is False'
-    )
-    assert population_view_adm_specified.admin2_code == 'FOO-XXX-XXX', (
-        'admin2_code should keep its value when admin1_is_unspecified is False'
-    )
-    assert population_view_adm_specified.admin2_name == 'District A', (
-        'admin2_name should keep its value when admin1_is_unspecified is False'
-    )
-
-    population_view_adm_unspecified = PopulationResponse(
-        resource_hdx_id='foo',
-        admin2_ref=1,
-        gender=Gender.MALE,
-        age_range='10-14',
-        min_age=10,
-        max_age=14,
-        population=100,
-        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
-        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
-        location_ref=1,
-        location_code='FOO',
-        location_name='Foolandia',
-        admin1_ref=1,
+        location_code='Foolandia',
+        location_name='FOO-XXX',
         admin1_code='FOO-XXX',
         admin1_name='Unspecified',
-        provider_admin1_name='Unspecified',
-        admin1_is_unspecified=True,
         admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
-        provider_admin2_name='Unspecified',
-        admin2_is_unspecified=True,
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=0,
     )
 
-    assert population_view_adm_unspecified.admin1_code is None, (
-        'admin1_code should be changed to None when admin1_is_unspecified is True'
+    assert adm_x.admin1_code is None
+    assert adm_x.admin1_name is None
+    assert adm_x.admin2_code is None
+    assert adm_x.admin2_name is None
+    assert adm_x.admin_level == 0
+
+    adm_x = PopulationResponse(
+        resource_hdx_id='foo',
+        gender=Gender.MALE,
+        age_range='10-14',
+        min_age=10,
+        max_age=14,
+        population=100,
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=1,
     )
-    assert population_view_adm_unspecified.admin1_name is None, (
-        'admin1_name should be changed to None when admin1_is_unspecified is True'
+
+    assert adm_x.admin1_code == 'FOO-XXX'
+    assert adm_x.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_x.admin2_code is None
+    assert adm_x.admin2_name is None
+    assert adm_x.admin_level == 1
+
+    adm_x = PopulationResponse(
+        resource_hdx_id='foo',
+        gender=Gender.MALE,
+        age_range='10-14',
+        min_age=10,
+        max_age=14,
+        population=100,
+        reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=2,
     )
-    assert population_view_adm_unspecified.admin2_code is None, (
-        'admin2_code should be changed to None when admin1_is_unspecified is True'
-    )
-    assert population_view_adm_unspecified.admin2_name is None, (
-        'admin2_name should be changed to None when admin1_is_unspecified is True'
-    )
+
+    assert adm_x.admin1_code == 'FOO-XXX'
+    assert adm_x.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_x.admin2_code == 'FOO-XXX-XXX'
+    assert adm_x.admin2_name == 'District A Provider adm2 name'
+    assert adm_x.admin_level == 2
 
 
 @pytest.mark.asyncio

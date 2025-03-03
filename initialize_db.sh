@@ -6,7 +6,7 @@ DB_HOST="${HAPI_DB_HOST:-db}"
 DB_PORT="${HAPI_DB_PORT:-5432}"
 ALEMBIC_COMMIT="${ALEMBIC_COMMIT:-head}"
 
-DCOMPOSE="${DCOMPOSE:-docker-compose}"
+DCOMPOSE="${DCOMPOSE:-docker compose}"
 
 cd docker
 $DCOMPOSE exec -T db psql -U postgres -c "create database $DB_NAME with encoding 'UTF8';"

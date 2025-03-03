@@ -3,19 +3,15 @@ from pydantic import ConfigDict, Field
 from typing import Optional
 
 from hdx_hapi.config.doc_snippets import (
-    DOC_ADMIN1_NAME,
     DOC_HDX_RESOURCE_ID,
-    DOC_LOCATION_CODE,
-    DOC_LOCATION_NAME,
     DOC_REFERENCE_PERIOD_END,
     DOC_REFERENCE_PERIOD_START,
-    DOC_LOCATION_REF,
     truncate_query_description,
 )
-from hdx_hapi.endpoints.models.base import HapiBaseModel
+from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmin1
 
 
-class PovertyRateResponse(HapiBaseModel):
+class PovertyRateResponse(HapiBaseModel, HapiModelWithAdmin1):
     resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
 
     mpi: float = Field(
@@ -34,10 +30,5 @@ class PovertyRateResponse(HapiBaseModel):
 
     reference_period_start: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_START)
     reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
-
-    location_ref: int = Field(description=truncate_query_description(DOC_LOCATION_REF))
-    location_code: str = Field(max_length=128, description=truncate_query_description(DOC_LOCATION_CODE))
-    location_name: str = Field(max_length=512, description=truncate_query_description(DOC_LOCATION_NAME))
-    provider_admin1_name: Optional[str] = Field(max_length=512, description=truncate_query_description(DOC_ADMIN1_NAME))
 
     model_config = ConfigDict(from_attributes=True)

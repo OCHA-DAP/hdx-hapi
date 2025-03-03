@@ -5,6 +5,7 @@ from sqlalchemy.sql import table
 
 # This is based on https://github.com/sqlalchemy/sqlalchemy/wiki/Views
 
+
 class CreateView(DDLElement):
     def __init__(self, name, selectable):
         self.name = name
@@ -41,7 +42,7 @@ def view(name, metadata, selectable):
     t = table(name)
 
     t._columns._populate_separate_keys(
-        col._make_proxy(t) for col in selectable.selected_columns
+        col._make_proxy(t, primary_key=set(), foreign_keys=set()) for col in selectable.selected_columns
     )
 
     sa.event.listen(
@@ -49,7 +50,5 @@ def view(name, metadata, selectable):
         'after_create',
         CreateView(name, selectable).execute_if(callable_=view_doesnt_exist),
     )
-    sa.event.listen(
-        metadata, 'before_drop', DropView(name).execute_if(callable_=view_exists)
-    )
+    sa.event.listen(metadata, 'before_drop', DropView(name).execute_if(callable_=view_exists))
     return t

@@ -1,7 +1,9 @@
+import datetime
 import pytest
 import logging
 
 from httpx import ASGITransport, AsyncClient
+from hdx_hapi.endpoints.models.availability import AvailabilityResponse
 from main import app
 from hdx_hapi.endpoints.util.util import AdminLevel
 from tests.test_endpoints.endpoint_data import endpoint_data
@@ -115,3 +117,71 @@ async def test_get_data_availability_for_admin_level_filter(event_loop, refresh_
             assert item['admin2_name'] is not None
             assert item['admin1_code'] is not None
             assert item['admin1_name'] is not None
+
+
+@pytest.mark.asyncio
+async def test_get_data_availability_adm_fields(event_loop, refresh_db):
+    log.info('started test_get_data_availability_adm_fields')
+
+    adm_x = AvailabilityResponse(
+        category='coordination-context',
+        subcategory='conflict-events',
+        hapi_updated_date=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=0,
+    )
+
+    assert adm_x.admin1_code is None
+    assert adm_x.admin1_name is None
+    assert adm_x.admin2_code is None
+    assert adm_x.admin2_name is None
+    assert adm_x.admin_level == 0
+
+    adm_x = AvailabilityResponse(
+        category='coordination-context',
+        subcategory='conflict-events',
+        hapi_updated_date=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=1,
+    )
+
+    assert adm_x.admin1_code == 'FOO-XXX'
+    assert adm_x.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_x.admin2_code is None
+    assert adm_x.admin2_name is None
+    assert adm_x.admin_level == 1
+
+    adm_x = AvailabilityResponse(
+        category='coordination-context',
+        subcategory='conflict-events',
+        hapi_updated_date=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
+        location_code='Foolandia',
+        location_name='FOO-XXX',
+        admin1_code='FOO-XXX',
+        admin1_name='Unspecified',
+        admin2_code='FOO-XXX-XXX',
+        admin2_name='Unspecified',
+        provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin2_name='District A Provider adm2 name',
+        admin_level=2,
+    )
+
+    assert adm_x.admin1_code == 'FOO-XXX'
+    assert adm_x.admin1_name == 'Province 0 Provider adm1 name'
+    assert adm_x.admin2_code == 'FOO-XXX-XXX'
+    assert adm_x.admin2_name == 'District A Provider adm2 name'
+    assert adm_x.admin_level == 2
