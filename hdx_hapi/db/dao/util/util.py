@@ -1,5 +1,5 @@
 import datetime
-from typing import Optional, Protocol, Type
+from typing import Optional, Protocol, Type, cast
 from sqlalchemy import Select, or_
 from sqlalchemy.orm import Mapped
 
@@ -83,14 +83,17 @@ class EntityWithLocationAdmin(Protocol):
     admin1_ref: Mapped[int]
     admin1_code: Mapped[str]
     admin1_name: Mapped[str]
-    provider_admin1_name: Mapped[str]
     admin1_is_unspecified: Mapped[bool]
     admin2_ref: Mapped[int]
     admin2_code: Mapped[str]
     admin2_name: Mapped[str]
-    provider_admin2_name: Mapped[str]
     admin2_is_unspecified: Mapped[bool]
     admin_level: Mapped[int]
+
+
+class EntityWithLocationAdminWithProviders(EntityWithLocationAdmin, Protocol):
+    provider_admin1_name: Mapped[str]
+    provider_admin2_name: Mapped[str]
 
 
 def _apply_location_admin_filter(
@@ -112,12 +115,31 @@ def _apply_location_admin_filter(
         query = query.where(db_class.location_name.icontains(location_name))
     if admin1_code:
         query = case_insensitive_filter(query, db_class.admin1_code, admin1_code)
-    if admin1_name:
-        query = query.where(db_class.admin1_name.icontains(admin1_name))
     if admin2_code:
         query = case_insensitive_filter(query, db_class.admin2_code, admin2_code)
-    if admin2_name:
-        query = query.where(db_class.admin2_name.icontains(admin2_name))
+
+    if hasattr(db_class, 'provider_admin1_name'):
+        db_class_with_providers = cast(Type[EntityWithLocationAdminWithProviders], db_class)
+        if admin1_name:
+            query = query.where(
+                or_(
+                    db_class_with_providers.admin1_name.icontains(admin1_name),
+                    db_class_with_providers.provider_admin1_name.icontains(admin1_name),
+                )
+            )
+        if admin2_name:
+            query = query.where(
+                or_(
+                    db_class_with_providers.admin2_name.icontains(admin2_name),
+                    db_class_with_providers.provider_admin2_name.icontains(admin2_name),
+                )
+            )
+    else:
+        if admin1_name:
+            query = query.where(db_class.admin1_name.icontains(admin1_name))
+        if admin2_name:
+            query = query.where(db_class.admin2_name.icontains(admin2_name))
+
     if has_hrp is not None:
         query = query.where(db_class.has_hrp == has_hrp)
     if in_gho is not None:
