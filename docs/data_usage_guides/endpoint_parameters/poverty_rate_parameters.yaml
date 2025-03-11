@@ -36,16 +36,13 @@
     Location name, based on the "short name" from the
     [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
   Source: '[`Location`](metadata.md#location)'
-- Parameter: '`location_ref`'
-  Description: >
-    A reference to the `id` of the associated entry in the `location` table
-  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`admin1_code`'
-  Description: Admin 1 p-code
+  Description: Admin 1 p-code from [Common Operational Datasets](https://data.humdata.org/dashboards/cod?)
   Source: '[`Admin 1`](metadata.md#admin1)'
 - Parameter: '`admin1_name`'
-  Description: Admin 1 name
+  Description: Admin 1 name from [Common Operational Datasets](https://data.humdata.org/dashboards/cod?) or original data source
   Source: '[`Admin 1`](metadata.md#admin1)'
-- Parameter: '`provider_admin1_name`'
-  Description: Admin 1 names provided in the original source data
-  Source: 
+- Parameter: '`admin_level`'
+  Description: >
+    Admin level
+  Source: '[`Admin Level`](metadata.md#geometadata)'
