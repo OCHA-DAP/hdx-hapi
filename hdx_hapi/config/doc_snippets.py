@@ -16,16 +16,16 @@ DOC_ADMIN1_REF = 'Filter the response by the 1st subnational administrative divi
 DOC_ADMIN1_CODE = 'Filter the response by the 1st subnational administrative divisions. The admin1 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN1_NAME = 'Filter the response by the 1st subnational administrative divisions. The admin1 names refer to either the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a> or those provided in the original data source.'
 DOC_SEE_ADMIN1 = 'See the <a href="/docs#/Metadata/get_admin1_api_v1_metadata_admin1_get" target="_blank">admin1 endpoint</a> for details.'
-#DOC_PROVIDER_ADMIN1_NAME = (
+# DOC_PROVIDER_ADMIN1_NAME = (
 #    'Filter the response by the 1st subnational administrative divisions provided in the original data source.'
-#)
+# )
 DOC_ADMIN2_ID = 'Filter the response by 2nd subnational administrative division, using the unique identifier (id) from the admin2 table associated with each entry.'
 DOC_ADMIN2_REF = 'Filter the response by the 2nd subnational administrative division reference number.'
 DOC_ADMIN2_CODE = 'Filter the response by the 2nd subnational administrative divisions. The admin2 codes refer to the p-codes in the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a>.'
 DOC_ADMIN2_NAME = 'Filter the response by the 2nd subnational administrative divisions. The admin2 names refer to either the <a href="https://data.humdata.org/dashboards/cod?">Common Operational Datasets</a> or those provided in the original data source.'
-#DOC_PROVIDER_ADMIN2_NAME = (
+# DOC_PROVIDER_ADMIN2_NAME = (
 #    'Filter the response by the 2nd subnational administrative divisions provided in the original data source.'
-#)
+# )
 DOC_SEE_ADMIN2 = 'See the <a href="/docs#/Metadata/get_admin2_api_v1_metadata_admin2_get" target="_blank">admin2 endpoint</a> for details.'
 DOC_ADMIN_LEVEL_FILTER = 'Filter the response by admin level.'
 
@@ -67,6 +67,7 @@ DOC_POPULATION_STATUS = f'Filter the response by the population status, availabl
 DOC_PRICE_FLAG = f'Filter the response by the pre-processing characteristics of food prices, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#price-flag">here.</a>'
 DOC_PRICE_TYPE = f'Filter the response by the point in the supply chain at which the price is determined, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#price-type">here.</a>'
 DOC_RISK_CLASS = f'Filter the response by the INFORM risk class, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#risk-class">here.</a>'
+DOC_AGGREGATION_PERIOD = f'Filter the response by the aggregation period, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#aggregation-period">here.</a>'
 
 # Humanitarian Response metadata
 

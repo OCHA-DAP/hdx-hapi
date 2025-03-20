@@ -1,0 +1,27 @@
+import datetime
+from pydantic import ConfigDict, Field
+from typing import Optional
+
+from hdx_hapi.config.doc_snippets import (
+    DOC_AGGREGATION_PERIOD,
+    DOC_HDX_RESOURCE_ID,
+    DOC_REFERENCE_PERIOD_END,
+    DOC_REFERENCE_PERIOD_START,
+    truncate_query_description,
+)
+from hapi_schema.utils.enums import AggregationPeriod
+from hdx_hapi.endpoints.models.base import HapiBaseModel, HapiModelWithAdmins
+from hdx_hapi.endpoints.models.util.constants import NON_NEGATIVE_DECIMAL_TYPE
+
+
+class RainfallResponse(HapiBaseModel, HapiModelWithAdmins):
+    resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
+    aggregation_period: AggregationPeriod = Field(description=truncate_query_description(DOC_AGGREGATION_PERIOD))
+    rainfall: NON_NEGATIVE_DECIMAL_TYPE
+    rainfall_long_term_average: NON_NEGATIVE_DECIMAL_TYPE
+    rainfall_anomaly_pct: NON_NEGATIVE_DECIMAL_TYPE
+
+    reference_period_start: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_START)
+    reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)
+
+    model_config = ConfigDict(from_attributes=True)
