@@ -12,7 +12,6 @@ from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
     DOC_AGGREGATION_PERIOD,
-    DOC_AGE_RANGE,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
