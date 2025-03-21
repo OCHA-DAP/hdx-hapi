@@ -55,13 +55,13 @@ async def get_rainfall(
     aggregation_period: Annotated[
         Optional[AggregationPeriod], Query(max_length=12, description=f'{DOC_AGGREGATION_PERIOD}')
     ] = None,
-    rainfall: Annotated[Optional[Decimal], Query(description='Filter the response by rainfall.')] = None,
-    rainfall_long_term_average: Annotated[
-        Optional[Decimal], Query(description='Filter the response by rainfall long term average.')
-    ] = None,
-    rainfall_anomaly_pct: Annotated[
-        Optional[Decimal], Query(description='Filter the response by rainfall anomaly pct.')
-    ] = None,
+    # rainfall: Annotated[Optional[Decimal], Query(description='Filter the response by rainfall.')] = None,
+    # rainfall_long_term_average: Annotated[
+    #     Optional[Decimal], Query(description='Filter the response by rainfall long term average.')
+    # ] = None,
+    # rainfall_anomaly_pct: Annotated[
+    #     Optional[Decimal], Query(description='Filter the response by rainfall anomaly pct.')
+    # ] = None,
     has_hrp: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_HAS_HRP}')] = None,
     in_gho: Annotated[Optional[bool], Query(description=f'{DOC_LOCATION_IN_GHO}')] = None,
 ):

@@ -19,9 +19,6 @@ async def get_rainfall_srv(
     common_location_params: CommonLocationParameters,
     db: AsyncSession,
     aggregation_period: Optional[AggregationPeriod] = None,
-    # age_range: Optional[str] = None,
-    # population_min: Optional[int] = None,
-    # population_max: Optional[int] = None,
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
 ):
@@ -32,9 +29,6 @@ async def get_rainfall_srv(
         common_location_params=common_location_params,
         db=db,
         aggregation_period=aggregation_period,
-        # age_range=age_range,
-        # population_min=population_min,
-        # population_max=population_max,
         has_hrp=has_hrp,
         in_gho=in_gho,
     )

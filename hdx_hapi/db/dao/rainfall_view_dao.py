@@ -37,7 +37,6 @@ async def rainfall_view_list(
 ) -> Sequence[RainfallView]:
     logger.info(
         f'rainfall_view_list called with params: aggregation_period={aggregation_period} '
-        # f'population_min={population_min}, population_max={population_max},'
         f'location_name={common_location_params.location_name}, '
         f'admin1_code={common_location_params.admin1_code}, admin1_name={common_location_params.admin1_name}, '
         f'admin2_code={common_location_params.admin2_code}, admin2_name={common_location_params.admin2_name}, '
@@ -47,12 +46,6 @@ async def rainfall_view_list(
     query = select(RainfallView)
     if aggregation_period:
         query = query.where(RainfallView.aggregation_period == aggregation_period)
-    # if age_range:
-    #     query = case_insensitive_filter(query, PopulationView.age_range, age_range)
-    # if population_min:
-    #     query = query.where(PopulationView.population >= population_min)
-    # if population_max:
-    #     query = query.where(PopulationView.population < population_max)
 
     query = apply_date_range_filter(
         query,
