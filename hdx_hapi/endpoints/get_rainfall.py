@@ -1,4 +1,3 @@
-from decimal import Decimal
 from typing import Annotated, Optional
 from fastapi import Depends, Query, APIRouter
 
