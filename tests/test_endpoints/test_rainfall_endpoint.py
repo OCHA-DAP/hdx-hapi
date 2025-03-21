@@ -79,7 +79,9 @@ async def test_get_rainfall_adm_fields(event_loop, refresh_db):
         admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
         provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin1_code='393',
         provider_admin2_name='District A Provider adm2 name',
+        provider_admin2_code='39339',
         admin_level=0,
     )
 
@@ -104,7 +106,9 @@ async def test_get_rainfall_adm_fields(event_loop, refresh_db):
         admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
         provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin1_code='393',
         provider_admin2_name='District A Provider adm2 name',
+        provider_admin2_code='39339',
         admin_level=1,
     )
 
@@ -129,7 +133,9 @@ async def test_get_rainfall_adm_fields(event_loop, refresh_db):
         admin2_code='FOO-XXX-XXX',
         admin2_name='Unspecified',
         provider_admin1_name='Province 0 Provider adm1 name',
+        provider_admin1_code='393',
         provider_admin2_name='District A Provider adm2 name',
+        provider_admin2_code='39339',
         admin_level=2,
     )
 
