@@ -315,8 +315,8 @@ endpoint_data = {
         },
         'expected_fields': [
             'resource_hdx_id',
-            # 'provider_admin1_code',
-            # 'provider_admin2_code',
+            'provider_admin1_code',
+            'provider_admin2_code',
             'aggregation_period',
             'rainfall',
             'rainfall_long_term_average',
