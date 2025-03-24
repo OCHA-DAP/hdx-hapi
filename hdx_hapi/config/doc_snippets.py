@@ -69,6 +69,10 @@ DOC_PRICE_TYPE = f'Filter the response by the point in the supply chain at which
 DOC_RISK_CLASS = f'Filter the response by the INFORM risk class, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#risk-class">here.</a>'
 DOC_AGGREGATION_PERIOD = f'Filter the response by the aggregation period, available values are described <a href="{CONFIG.HAPI_READTHEDOCS_OVERVIEW_URL}data_usage_guides/enums/#aggregation-period">here.</a>'
 
+# rainfall
+DOC_VERSION = 'Version rainfall'
+DOC_NUMBER_PIXELS = 'Rainfall number pixels'
+
 # Humanitarian Response metadata
 
 DOC_ORG_ACRONYM = 'Filter the response by the standard acronym used to represent the organization. When data is brought into the HDX HAPI database, an attempt is made to standardize the acronyms.'

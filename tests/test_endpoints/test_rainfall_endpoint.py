@@ -4,7 +4,7 @@ import pytest
 import logging
 
 from httpx import ASGITransport, AsyncClient
-from hapi_schema.utils.enums import AggregationPeriod
+from hapi_schema.utils.enums import AggregationPeriod, Version
 
 from hdx_hapi.endpoints.models.rainfall import RainfallResponse
 from main import app
@@ -70,6 +70,8 @@ async def test_get_rainfall_adm_fields(event_loop, refresh_db):
         rainfall=Decimal(10.1),
         rainfall_long_term_average=Decimal(10.2),
         rainfall_anomaly_pct=Decimal(14.2),
+        number_pixels=1000,
+        version=Version.FORECAST,
         reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
         reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         location_code='Foolandia',
@@ -97,6 +99,8 @@ async def test_get_rainfall_adm_fields(event_loop, refresh_db):
         rainfall=Decimal(10.1),
         rainfall_long_term_average=Decimal(10.2),
         rainfall_anomaly_pct=Decimal(14.2),
+        number_pixels=1000,
+        version=Version.FORECAST,
         reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
         reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         location_code='Foolandia',
@@ -124,6 +128,8 @@ async def test_get_rainfall_adm_fields(event_loop, refresh_db):
         rainfall=Decimal(10.1),
         rainfall_long_term_average=Decimal(10.2),
         rainfall_anomaly_pct=Decimal(14.2),
+        number_pixels=1000,
+        version=Version.FORECAST,
         reference_period_start=datetime.datetime.strptime('2023-01-01 00:00:00', '%Y-%m-%d %H:%M:%S'),
         reference_period_end=datetime.datetime.strptime('2023-03-31 23:59:59', '%Y-%m-%d %H:%M:%S'),
         location_code='Foolandia',

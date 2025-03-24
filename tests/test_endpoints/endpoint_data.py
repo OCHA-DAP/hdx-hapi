@@ -321,6 +321,8 @@ endpoint_data = {
             'rainfall',
             'rainfall_long_term_average',
             'rainfall_anomaly_pct',
+            'number_pixels',
+            'version',
             'reference_period_start',
             'reference_period_end',
             'location_code',
