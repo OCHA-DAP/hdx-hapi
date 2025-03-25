@@ -20,11 +20,11 @@ class FundingResponse(HapiBaseModel):
 
     appeal_code: str = Field(max_length=32, description='A unique code given by FTS to each appeal')
     appeal_name: str = Field(max_length=256, description='Name of the appeal')
-    appeal_type: str = Field(max_length=32, description='The type of the appeal, such as flash or HRP')
+    appeal_type: Optional[str] = Field(max_length=32, description='The type of the appeal, such as flash or HRP')
 
-    requirements_usd: NON_NEGATIVE_DECIMAL_TYPE = Field(description='The funding requirements in US dollars')
+    requirements_usd: Optional[NON_NEGATIVE_DECIMAL_TYPE] = Field(description='The funding requirements in US dollars')
     funding_usd: NON_NEGATIVE_DECIMAL_TYPE = Field(description='The actual funding in US dollars')
-    funding_pct: NON_NEGATIVE_DECIMAL_TYPE = Field(
+    funding_pct: Optional[NON_NEGATIVE_DECIMAL_TYPE] = Field(
         description='The percentage of required funding received by the appeal'
     )
 
