@@ -36,6 +36,7 @@ SAMPLE_DATA_SQL_FILES = [
     'tests/sample_data/food_price.sql',
     'tests/sample_data/idps.sql',
     'tests/sample_data/returnees.sql',
+    'tests/sample_data/rainfall.sql',
 ]
 
 
