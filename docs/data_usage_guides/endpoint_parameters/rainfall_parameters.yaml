@@ -1,0 +1,71 @@
+- Parameter: '`resource_hdx_id`'
+  Description: Unique resource UUID on HDX
+  Source: '[`Resource`](metadata.md#resource)'
+- Parameter: '`provider_admin1_code`'
+  Description: >
+    The admin 1 ID used by the data provider
+  Source:
+- Parameter: '`provider_admin2_code`'
+  Description: >
+    The admin 2 ID used by the data provider
+  Source:
+- Parameter: '`aggregation_period`'
+  Description: >
+    The aggregation period of the data
+  Source: '[`Aggregation Period`](enums.md#aggregation_period)'
+- Parameter: '`rainfall`'
+  Description: >
+    The amount of rainfall in millimeters
+  Source:
+- Parameter: '`rainfall_long_term_average`'
+  Description: >
+    The amount of rainfall in millimeters over the long term average of
+    the timeseries, which is calculated over the period 1989-01-01 to
+    2018-12-31
+  Source:
+- Parameter: '`rainfall_anomaly_pct`'
+  Description: >
+    The anomaly in rainfall as a percent in reference to the long
+    term average of the timeseries, which is calculated over the
+    period 1989-01-01 to 2018-12-31
+  Source:
+- Parameter: '`number_pixels`'
+  Description: >
+    The number of pixels in the raster rainfall data used to calculate
+    the rainfall in a particular admin unit
+  Source:
+- Parameter: '`version`'
+  Description: >
+    The version of the data
+  Source: '[`Version`](enums.md#version)'
+- Parameter: '`reference_period_start`'
+  Description: The start date for which the data are applicable
+  Source:
+- Parameter: '`reference_period_end`'
+  Description: The end date for which the data are applicable
+  Source:
+- Parameter: '`location_code`'
+  Description: >
+    Location p-code, based on the ISO-3 (ISO 3166 alpha-3) standard
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`location_name`'
+  Description: >
+    Location name, based on the "short name" from the
+    [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/#fn2)
+  Source: '[`Location`](metadata.md#location)'
+- Parameter: '`admin1_code`'
+  Description: Admin 1 p-code from [Common Operational Datasets](https://data.humdata.org/dashboards/cod?)
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin1_name`'
+  Description: Admin 1 name from [Common Operational Datasets](https://data.humdata.org/dashboards/cod?) or original data source
+  Source: '[`Admin 1`](metadata.md#admin1)'
+- Parameter: '`admin2_code`'
+  Description: Admin 2 p-code from [Common Operational Datasets](https://data.humdata.org/dashboards/cod?)
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin2_name`'
+  Description: Admin 2 name from [Common Operational Datasets](https://data.humdata.org/dashboards/cod?) or original data source
+  Source: '[`Admin 2`](metadata.md#admin2)'
+- Parameter: '`admin_level`'
+  Description: >
+    Admin level
+  Source: '[`Admin Level`](metadata.md#geometadata)'

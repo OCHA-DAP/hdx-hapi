@@ -1,0 +1,15 @@
+- Aggregation Period: DEKAD
+  Name: Dekad
+  Description: >
+    Rainfall indicators are aggregated to the dekad (a period of 10 days 
+    within a month)
+- Assessment Type: ONE_MONTH
+  Name: One month
+  Description: >
+    Rainfall indicators are aggregated to a one-month rolling aggregation 
+    period
+- Assessment Type: THREE_MONTH
+  Name: Three month
+  Description: >
+    Rainfall indicators are aggregated to a three-month rolling aggregation 
+    period
