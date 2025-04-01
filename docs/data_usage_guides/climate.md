@@ -5,8 +5,8 @@
 ## Rainfall <a id=”rainfall”></a>
 
 This sub-category contains dekadal rainfall indicators computed by the
-World Food Programme from Climate Hazards Group InfraRed Precipitation 
-satellite imagery with insitu Station data
+World Food Programme (WFP) from Climate Hazards Group InfraRed
+Precipitation satellite imagery with insitu Station data
 ([CHIRPS](https://chc.ucsb.edu/data/chirps)) version 2, aggregated by
 subnational administrative units.
 

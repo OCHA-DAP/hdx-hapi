@@ -157,6 +157,6 @@ for more details.
 
 **Used in:** [`Rainfall`](climate.md#rainfall)
 
-What version the data refers to.
+What version the rainfall data refers to.
 
 {{ read_yaml('data_usage_guides/enum_parameters/version_parameters.yaml') }}
