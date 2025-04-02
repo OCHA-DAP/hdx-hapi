@@ -17,12 +17,17 @@ the API.
 
 ## Latest changes
 
+### 2025-03-27
+
+- Increased temporal coverage for food security
+  subcategory
+- Added rainfall data endpoint under climate/hazards-rainfall
+
 ### 2025-02-18
 
 - Aligned category and sub-category endpoint names in the docs with
   [HDX data grids](https://data.humdata.org/dashboards/overview-of-data-grids?)
   - affected-people/refugees -> affected-people/refugees-persons-of-concern
-  - population-social/population -> geography-infrastructure/baseline-population
   - coordination-context/conflict-event -> coordination-context/conflict-events
   - food/food-security -> food-security-nutrition-poverty/food-security
   - food/food-price -> food-security-nutrition-poverty/food-prices-market-monitor

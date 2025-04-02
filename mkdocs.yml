@@ -10,7 +10,6 @@ nav:
       - Geography & Infrastructure : data_usage_guides/geography_and_infrastructure.md
       - Metadata: data_usage_guides/metadata.md
       - Enums: data_usage_guides/enums.md
-  - Geo Data: geo.md
   - Changelog: changelog.md
   - Contact: contact.md
 theme:

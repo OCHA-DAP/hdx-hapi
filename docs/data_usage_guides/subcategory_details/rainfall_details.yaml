@@ -1,0 +1,12 @@
+- Attribute: Data provider
+  Details: The World Food Programme
+- Attribute: Dataset
+  Details:  >
+    [WFP Rainfall Indicators data series](https://data.humdata.org/dataset/?dataseries_name=WFP+-+Rainfall+Indicators+at+Subnational+Level)
+- Attribute: Time series
+  Details: Yes, approximately every ten days
+- Attribute: Update frequency
+  Details: Every two weeks
+- Attribute: Related tables
+  Details: >
+    [`AggregationPeriod`](enums.md#aggregation-period), [`Version`](enums.md#version)
