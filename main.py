@@ -42,6 +42,7 @@ from hdx_hapi.endpoints.get_poverty_rate import router as poverty_rate_router  #
 from hdx_hapi.endpoints.get_data_availability import router as data_availability_router  # noqa
 from hdx_hapi.endpoints.get_idps import router as idps_router  # noqa
 from hdx_hapi.endpoints.get_returnees import router as returnees_router  # noqa
+from hdx_hapi.endpoints.get_rainfall import router as rainfall_router  # noqa
 
 from hdx_hapi.endpoints.get_version import router as version_router  # noqa
 
@@ -100,6 +101,7 @@ app.include_router(food_price_router)
 app.include_router(poverty_rate_router)
 
 app.include_router(population_router)
+app.include_router(rainfall_router)
 
 app.include_router(dataset_router)
 app.include_router(admin_level_router)

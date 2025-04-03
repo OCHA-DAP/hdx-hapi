@@ -29,8 +29,8 @@ class FoodPriceResponse(HapiBaseModel, HapiModelWithAdmins):
     price_flag: PriceFlag = Field(description=truncate_query_description(DOC_PRICE_FLAG))
     price_type: PriceType = Field(description=truncate_query_description(DOC_PRICE_TYPE))
     price: NON_NEGATIVE_DECIMAL_TYPE
-    lat: float = Field(ge=-90.0, le=90.0, description="The market's latitude")
-    lon: float = Field(ge=-180.0, le=180.0, description="The market's longitude")
+    lat: Optional[float] = Field(ge=-90.0, le=90.0, description="The market's latitude")
+    lon: Optional[float] = Field(ge=-180.0, le=180.0, description="The market's longitude")
 
     reference_period_start: datetime.datetime = Field(description=DOC_REFERENCE_PERIOD_START)
     reference_period_end: Optional[datetime.datetime] = Field(description=DOC_REFERENCE_PERIOD_END)

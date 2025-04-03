@@ -1,30 +1,43 @@
 - Parameter: '`resource_hdx_id`'
   Description: Unique resource UUID on HDX
   Source: '[`Resource`](metadata.md#resource)'
-- Parameter: '`gender`'
+- Parameter: '`provider_admin1_code`'
   Description: >
-    The gender of the population group in question, set to "all" if there
-    is no disaggregation
-  Source: '[`Gender`](enums.md#gender)'
-- Parameter: '`age_range`'
+    The admin 1 ID used by the data provider
+  Source:
+- Parameter: '`provider_admin2_code`'
   Description: >
-    The age range of the population group in question, set to "all" if there
-    is no disaggregation
+    The admin 2 ID used by the data provider
   Source:
-- Parameter: '`min_age`'
+- Parameter: '`aggregation_period`'
   Description: >
-    The minimum age from `age_range`, set to `null` if `age_range` is "all" and
-    there is no age disaggregation
-  Source:
-- Parameter: '`max_age`'
+    The aggregation period of the data
+  Source: '[`Aggregation Period`](enums.md#aggregation_period)'
+- Parameter: '`rainfall`'
   Description: >
-    The maximum age from `age_range`, set to `null` if `age_range` is "all" and
-    there is no age disaggregation, or if there is no upper limit to the
-    age range
+    The amount of rainfall in millimeters
   Source:
-- Parameter: '`population`'
-  Description: The number of people
+- Parameter: '`rainfall_long_term_average`'
+  Description: >
+    The amount of rainfall in millimeters over the long term average of
+    the timeseries, which is calculated over the period 1989-01-01 to
+    2018-12-31
   Source:
+- Parameter: '`rainfall_anomaly_pct`'
+  Description: >
+    The anomaly in rainfall as a percent in reference to the long
+    term average of the timeseries, which is calculated over the
+    period 1989-01-01 to 2018-12-31
+  Source:
+- Parameter: '`number_pixels`'
+  Description: >
+    The number of pixels in the raster rainfall data used to calculate
+    the rainfall in a particular admin unit
+  Source:
+- Parameter: '`version`'
+  Description: >
+    The version of the data
+  Source: '[`Version`](enums.md#version)'
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
   Source:

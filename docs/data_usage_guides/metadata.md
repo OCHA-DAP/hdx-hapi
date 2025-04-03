@@ -49,7 +49,7 @@ For available query parameters, please see the
 
 {{ read_yaml('data_usage_guides/endpoint_parameters/resource_parameters.yaml') }}
 
-## Geographical Metadata
+## Geographical Metadata  <a id="geometadata"></a>
 
 HAPI supports three hierarchical levels of geographical metadata:
 location (a country or country-like entity), admin 1, and admin 2.  An entry in

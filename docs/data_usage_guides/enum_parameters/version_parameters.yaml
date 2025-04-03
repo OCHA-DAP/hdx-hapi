@@ -1,0 +1,13 @@
+- Version: FINAL
+  Name: Final
+  Description: >
+    Rainfall indicators are final
+- Version: FORECAST
+  Name: Forecast
+  Description: >
+    Rainfall indicators are forecasted into the future
+- Version: PRELIMINARY
+  Name: Preliminary
+  Description: >
+    Rainfall indicators are preliminary and will be replaced by final 
+    figures when they are available

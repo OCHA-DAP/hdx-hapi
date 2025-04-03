@@ -5,6 +5,15 @@
 Enums, or enumerations, are a data type used to define a set of named values
 that represent fixed options for a field in the API.
 
+## Aggregation Period <a id="aggregation-period"></a>
+
+**Used in:** [`Rainfall`](climate.md#rainfall)
+
+The aggregation period refers to the different time periods used to
+aggregate the rainfall data.
+
+{{ read_yaml('data_usage_guides/enum_parameters/aggregation_period_parameters.yaml') }}
+
 ## Assessment Type <a id="assessment-type"></a>
 
 **Used in:** [`IDPs`](affected_people.md#idps)
@@ -143,3 +152,11 @@ in HDX HAPI. Please see the
 for more details.
 
 {{ read_yaml('data_usage_guides/enum_parameters/risk_class_parameters.yaml') }}
+
+## Version <a id="version"></a>
+
+**Used in:** [`Rainfall`](climate.md#rainfall)
+
+What version the rainfall data refers to.
+
+{{ read_yaml('data_usage_guides/enum_parameters/version_parameters.yaml') }}

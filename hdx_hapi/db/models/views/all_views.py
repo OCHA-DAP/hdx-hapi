@@ -34,7 +34,7 @@ from hapi_schema.db_wfp_market import view_params_wfp_market
 from hapi_schema.db_patch import view_params_patch
 from hapi_schema.db_returnees import view_params_returnees, availability_stmt_returnees
 from hapi_schema.db_idps import view_params_idps, availability_stmt_idps
-
+from hapi_schema.db_rainfall import view_params_rainfall
 
 from hapi_schema.utils.enums import (
     CommodityCategory,
@@ -99,6 +99,7 @@ VIEW_LIST = [
     view_params_availability,
     view_params_idps,
     view_params_returnees,
+    view_params_rainfall,
 ]
 
 admin1_view = view(view_params_admin1.name, Base.metadata, view_params_admin1.selectable)
@@ -132,6 +133,7 @@ availability_view = view(view_params_availability.name, Base.metadata, view_para
 
 idps_view = view(view_params_idps.name, Base.metadata, view_params_idps.selectable)
 returnees_view = view(view_params_returnees.name, Base.metadata, view_params_returnees.selectable)
+rainfall_view = view(view_params_rainfall.name, Base.metadata, view_params_rainfall.selectable)
 
 
 class Admin1View(Base):
@@ -582,3 +584,32 @@ class ReturneesView(Base):
     asylum_location_name: Mapped[str] = column_property(returnees_view.c.asylum_location_name)
     asylum_has_hrp: Mapped[bool] = column_property(returnees_view.c.asylum_has_hrp)
     asylum_in_gho: Mapped[bool] = column_property(returnees_view.c.asylum_in_gho)
+
+
+class RainfallView(Base):
+    __table__ = rainfall_view
+    resource_hdx_id: Mapped[str] = column_property(rainfall_view.c.resource_hdx_id)
+    admin2_ref: Mapped[int] = column_property(rainfall_view.c.admin2_ref)
+    provider_admin1_code: Mapped[str] = column_property(rainfall_view.c.provider_admin1_code)
+    provider_admin2_code: Mapped[str] = column_property(rainfall_view.c.provider_admin2_code)
+    aggregation_period: Mapped[str] = column_property(rainfall_view.c.aggregation_period)
+    rainfall: Mapped[Decimal] = column_property(rainfall_view.c.rainfall)
+    rainfall_long_term_average: Mapped[Decimal] = column_property(rainfall_view.c.rainfall_long_term_average)
+    rainfall_anomaly_pct: Mapped[Decimal] = column_property(rainfall_view.c.rainfall_anomaly_pct)
+    number_pixels: Mapped[int] = column_property(rainfall_view.c.number_pixels)
+    version: Mapped[str] = column_property(rainfall_view.c.version)
+    reference_period_start: Mapped[datetime.datetime] = column_property(rainfall_view.c.reference_period_start)
+    reference_period_end: Mapped[datetime.datetime] = column_property(rainfall_view.c.reference_period_end)
+    location_code: Mapped[str] = column_property(rainfall_view.c.location_code)
+    location_name: Mapped[str] = column_property(rainfall_view.c.location_name)
+    has_hrp: Mapped[bool] = column_property(rainfall_view.c.has_hrp)
+    in_gho: Mapped[bool] = column_property(rainfall_view.c.in_gho)
+    admin1_code: Mapped[str] = column_property(rainfall_view.c.admin1_code)
+    admin1_name: Mapped[str] = column_property(rainfall_view.c.admin1_name)
+    admin1_is_unspecified: Mapped[bool] = column_property(rainfall_view.c.admin1_is_unspecified)
+    location_ref: Mapped[int] = column_property(rainfall_view.c.location_ref)
+    admin2_code: Mapped[str] = column_property(rainfall_view.c.admin2_code)
+    admin2_name: Mapped[str] = column_property(rainfall_view.c.admin2_name)
+    admin2_is_unspecified: Mapped[bool] = column_property(rainfall_view.c.admin2_is_unspecified)
+    admin1_ref: Mapped[int] = column_property(rainfall_view.c.admin1_ref)
+    admin_level: Mapped[int] = column_property(rainfall_view.c.admin_level)

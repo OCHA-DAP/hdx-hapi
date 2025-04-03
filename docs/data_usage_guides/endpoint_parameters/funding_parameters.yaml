@@ -19,9 +19,6 @@
 - Parameter: '`funding_pct`'
   Description: The percentage of required funding received by the appeal
   Source:
-  Description: >
-    A reference to the `id` of the associated entry in the `location` table
-  Source: '[`Location`](metadata.md#location)'
 - Parameter: '`reference_period_start`'
   Description: The start date for which the data are applicable
   Source:

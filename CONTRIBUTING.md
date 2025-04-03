@@ -8,20 +8,20 @@ The following needs to be run once to setup the Docker containers for testing:
 
 ```shell
 cd docker
-docker-compose up -d
-docker-compose exec -T hapi sh -c "apk add git"
-docker-compose exec -T hapi sh -c "pip install --upgrade -r requirements.txt"
-docker-compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
+docker compose up -d
+docker compose exec -T hapi sh -c "apk add git"
+docker compose exec -T hapi sh -c "pip install --upgrade -r requirements.txt"
+docker compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
 ```
 This makes an editable installation of `hapi-sqlalchemy-schema` inside this repository.
 
 Then for each session the following needs to be run:
 ```shell
 cd docker
-docker-compose up -d
+docker compose up -d
 cd ..
 ./initialize_db.sh
-docker-compose exec -T hapi sh -c "alembic upgrade head"
+docker compose exec -T hapi sh -c "alembic upgrade head"
 ./initialize_test_db.sh
 ```
 
@@ -34,7 +34,7 @@ Since August 2024 a View as Table (VAT) version of the database should be used. 
 Tests can either be run from the Visual Code test runner or with:
 
 ```shell
-docker-compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report term --cov-report xml:coverage.xml"
+docker compose exec -T hapi sh -c "pytest --log-level=INFO --cov=. --cov-report term --cov-report xml:coverage.xml"
 ```
 
 As an integration test the `docs` endpoint is inspected "manually".
