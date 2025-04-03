@@ -1,7 +1,7 @@
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hapi_schema.utils.enums import AggregationPeriod
+from hapi_schema.utils.enums import AggregationPeriod, Version
 
 from hdx_hapi.db.dao.rainfall_view_dao import rainfall_view_list
 from hdx_hapi.endpoints.util.util import (
@@ -19,6 +19,7 @@ async def get_rainfall_srv(
     common_location_params: CommonLocationParameters,
     db: AsyncSession,
     aggregation_period: Optional[AggregationPeriod] = None,
+    version: Optional[Version] = None,
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
 ):
@@ -29,6 +30,7 @@ async def get_rainfall_srv(
         common_location_params=common_location_params,
         db=db,
         aggregation_period=aggregation_period,
+        version=version,
         has_hrp=has_hrp,
         in_gho=in_gho,
     )

@@ -22,7 +22,7 @@ class PovertyRateResponse(HapiBaseModel, HapiModelWithAdmin1):
         )
     )
     headcount_ratio: float = Field(description='The percentage of people deprived in 33% or more indicators')
-    intensity_of_deprivation: float = Field(
+    intensity_of_deprivation: Optional[float] = Field(
         description='The average proportion of indicators in which people are deprived, given as a percentage.'
     )
     vulnerable_to_poverty: float = Field(description='The percentage of people deprived in 20-33% of indicators')
