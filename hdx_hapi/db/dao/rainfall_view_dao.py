@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from hapi_schema.utils.enums import AggregationPeriod
+from hapi_schema.utils.enums import AggregationPeriod, Version
 
 from hdx_hapi.db.models.views.vat_or_view import RainfallView
 from hdx_hapi.db.dao.util.util import (
@@ -32,6 +32,7 @@ async def rainfall_view_list(
     common_location_params: CommonLocationParameters,
     db: AsyncSession,
     aggregation_period: Optional[AggregationPeriod] = None,
+    version: Optional[Version] = None,
     has_hrp: Optional[bool] = None,
     in_gho: Optional[bool] = None,
 ) -> Sequence[RainfallView]:
@@ -46,6 +47,9 @@ async def rainfall_view_list(
     query = select(RainfallView)
     if aggregation_period:
         query = query.where(RainfallView.aggregation_period == aggregation_period)
+
+    if version:
+        query = query.where(RainfallView.version == version)
 
     query = apply_date_range_filter(
         query,

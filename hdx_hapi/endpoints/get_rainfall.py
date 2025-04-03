@@ -4,13 +4,14 @@ from fastapi import Depends, Query, APIRouter
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from hapi_schema.utils.enums import AggregationPeriod
+from hapi_schema.utils.enums import AggregationPeriod, Version
 
 from hdx_hapi.config.config import get_config
 from hdx_hapi.config.doc_snippets import (
     DOC_LOCATION_HAS_HRP,
     DOC_LOCATION_IN_GHO,
     DOC_AGGREGATION_PERIOD,
+    DOC_VERSION,
 )
 
 from hdx_hapi.endpoints.models.base import HapiGenericResponse
@@ -54,6 +55,7 @@ async def get_rainfall(
     aggregation_period: Annotated[
         Optional[AggregationPeriod], Query(max_length=12, description=f'{DOC_AGGREGATION_PERIOD}')
     ] = None,
+    version: Annotated[Optional[Version], Query(max_length=16, description=f'{DOC_VERSION}')] = None,
     # rainfall: Annotated[Optional[Decimal], Query(description='Filter the response by rainfall.')] = None,
     # rainfall_long_term_average: Annotated[
     #     Optional[Decimal], Query(description='Filter the response by rainfall long term average.')
@@ -72,6 +74,7 @@ async def get_rainfall(
         common_location_params=common_location_params,
         db=db,
         aggregation_period=aggregation_period,
+        version=version,
         has_hrp=has_hrp,
         in_gho=in_gho,
     )

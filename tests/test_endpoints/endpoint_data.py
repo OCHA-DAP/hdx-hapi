@@ -12,6 +12,7 @@ from hapi_schema.utils.enums import (
     IPCPhase,
     IPCType,
     AggregationPeriod,
+    Version,
 )
 
 from hdx_hapi.endpoints.util.util import AdminLevel
@@ -298,9 +299,10 @@ endpoint_data = {
     '/api/v2/climate/rainfall': {
         'query_parameters': {
             'aggregation_period': AggregationPeriod.DEKAD.value,
-            'rainfall': 10,
-            'rainfall_long_term_average': 11,
-            'rainfall_anomaly_pct': 12,
+            # 'rainfall': 10,
+            # 'rainfall_long_term_average': 11,
+            # 'rainfall_anomaly_pct': 12,
+            'version': Version.FINAL.value,
             'start_date': '2020-01-01T00:00:00',
             'end_date': '2024-01-01T00:00:00',
             'location_code': 'fOO',
