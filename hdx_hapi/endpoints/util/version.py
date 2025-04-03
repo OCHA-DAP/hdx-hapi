@@ -1,2 +1,2 @@
-api_version = '0.9.6'
-hapi_sqlalchemy_schema_version = '0.9.11'
+api_version = '0.9.7'
+hapi_sqlalchemy_schema_version = '0.9.13'
