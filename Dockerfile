@@ -12,15 +12,14 @@ RUN apk add \
     apk --virtual .build-deps add \
         git \
         build-base \
+        py3-wheel \
         python3-dev && \
     mkdir -p \
         /etc/services.d/hapi \
         /var/log/hapi && \
     mv docker/hapi_run /etc/services.d/hapi/run && \
     mkdir -p ~/.config/pip/ && echo -e "[global]\nbreak-system-packages = true" > ~/.config/pip/pip.conf && \
-    pip3 --no-cache-dir install --upgrade \
-        pip \
-        wheel && \
+    pip3 --no-cache-dir install --upgrade pip && \
     rm -r /srv/hapi/src/hapi-schema && \
     pip3 install --upgrade -r requirements.txt && \
     pip3 install elastic-apm && \
