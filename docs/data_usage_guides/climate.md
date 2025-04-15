@@ -8,7 +8,11 @@ This sub-category contains dekadal rainfall indicators computed by the
 World Food Programme (WFP) from Climate Hazards Group InfraRed
 Precipitation satellite imagery with insitu Station data
 ([CHIRPS](https://chc.ucsb.edu/data/chirps)) version 2, aggregated by
-subnational administrative units.
+subnational administrative units. Countries with a Humanitarian Response
+Plan (HRP) and counries in the Global Humanitarian Overview (GHO) are
+disaggregated to admin 2 while other countries are disaggregated to
+admin 1. For the time being only the current
+year of rainfall data is included due to the size of the data.
 
 ### Summary
 
