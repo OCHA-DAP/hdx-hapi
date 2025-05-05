@@ -24,7 +24,12 @@ For available query parameters, please see the
 
 ### Transformations applied
 
-None
+* At the admin 2 level, the data is only made available in HAPI for countries
+  with a Humanitarian Response Plan (HRP) and countries in the
+  [Global Humanitarian Overview (GHO)](https://humanitarianaction.info/), 
+  and only for the past year.
+* In the future, admin 1 level data will be added to HDX, which we will make
+  available in HAPI for all countries and across the full timespan.
 
 ### Usage notes
 
