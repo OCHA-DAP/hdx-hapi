@@ -108,7 +108,6 @@ For available query parameters, please see the
 * The data for political violence events, civilian targeting events, and
   demonstrations are in separate resource on HDX, but are combined into a
   single endpoint in the API
-* Any duplicate rows in the original data are removed
 * The reference period is constructed using the full range of the month
   presented in the “Month” and “Year” columns of the original data
 
@@ -116,6 +115,10 @@ For available query parameters, please see the
 
 * The three event categories are not mutually exclusive, see
   [`Event Type`](enums.md#event-type) for more details
+* To access more granular event data (i.e. daily rather than monthly data
+  with six different event types), please [register](https://acleddata.com/register/)
+  to use the [Data Export Tool](https://acleddata.com/data-export-tool/) and
+  [API](https://acleddata.com/download/2833/) on the ACLED website
 * Data is either national or disaggregated to admin 2, see individual resources
   for more details
 
