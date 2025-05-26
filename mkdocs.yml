@@ -8,6 +8,7 @@ nav:
       - Coordination & Context : data_usage_guides/coordination_and_context.md
       - Food Security, Nutrition & Poverty : data_usage_guides/food_security_nutrition_and_poverty.md
       - Geography & Infrastructure : data_usage_guides/geography_and_infrastructure.md
+      - Climate: data_usage_guides/climate.md
       - Metadata: data_usage_guides/metadata.md
       - Enums: data_usage_guides/enums.md
   - Changelog: changelog.md
