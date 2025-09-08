@@ -27,3 +27,5 @@ RUN apk add \
     rm -rf /var/lib/apk/* && rm -r /root/.cache
 
 EXPOSE 5000
+
+ENTRYPOINT ["/init"]
