@@ -1,4 +1,4 @@
-FROM public.ecr.aws/unocha/python:3.12
+FROM public.ecr.aws/unocha/python:3.12-stable
 
 WORKDIR /srv/hapi
 
