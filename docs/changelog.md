@@ -17,6 +17,10 @@ the API.
 
 ## Latest changes
 
+### 2025-09-15
+
+- Add ETT to idps and assessment type parameters 
+
 ### 2025-03-27
 
 - Increased temporal coverage for food security
