@@ -14,7 +14,9 @@ from hdx_hapi.config.doc_snippets import (
 class IdpsResponse(HapiBaseModel, HapiModelWithAdmins):
     resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
     reporting_round: int = Field(description='Data collection round number')
-    assessment_type: DTMAssessmentType = Field(description='Either baseline assessment (BA) or site assessment (SA)')
+    assessment_type: DTMAssessmentType = Field(
+        description='Either baseline assessment (BA),site assessment (SA) or event track (ETT)'
+    )
     operation: str = Field(description='Name of DTM Operation for which the data was collected')
     population: int = Field(description='The number of people')
     reference_period_start: datetime.datetime = Field(
