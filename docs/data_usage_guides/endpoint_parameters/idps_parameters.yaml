@@ -5,7 +5,7 @@
   Description: Data collection round number
   Source:
 - Parameter: '`assessment_type`'
-  Description: Either baseline assessment (BA) or site assessment (SA)
+  Description: Baseline assessment (BA), emergency tracking tool (ETT) or site assessment (SA)
   Source: '[`Assessment Type`](enums.md#assessment-type)'
 - Parameter: '`operation`'
   Description: Name of DTM Operation for which the data was collected

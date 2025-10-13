@@ -3,6 +3,12 @@
   Description: >
     A high-level survey to identify population presence and displacement
     figures in large administrative areas, guiding further detailed assessments
+- Assessment Type: ETT
+  Name: Emergency tracking tool
+  Description: >
+    Initial information on mobility-displacement and migration that is quickly 
+    collected to keep pace with rapidly evolving situations during emergency
+    events
 - Assessment Type: SA
   Name: Site assessment
   Description: >
