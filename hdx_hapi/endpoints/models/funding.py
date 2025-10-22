@@ -18,7 +18,7 @@ from hdx_hapi.endpoints.models.util.constants import NON_NEGATIVE_DECIMAL_TYPE
 class FundingResponse(HapiBaseModel):
     resource_hdx_id: str = Field(max_length=36, description=DOC_HDX_RESOURCE_ID)
 
-    appeal_code: str = Field(max_length=32, description='A unique code given by FTS to each appeal')
+    appeal_code: str = Field(max_length=64, description='A unique code given by FTS to each appeal')
     appeal_name: str = Field(max_length=256, description='Name of the appeal')
     appeal_type: Optional[str] = Field(max_length=64, description='The type of the appeal, such as flash or HRP')
 
