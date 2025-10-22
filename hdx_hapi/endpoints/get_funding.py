@@ -51,11 +51,11 @@ async def get_funding(
     db: AsyncSession = Depends(get_db),
     appeal_code: Annotated[
         Optional[str],
-        Query(max_length=32, description='Filter the response by a unique code given by FTS to each appeal'),
+        Query(max_length=64, description='Filter the response by a unique code given by FTS to each appeal'),
     ] = None,
     appeal_type: Annotated[
         Optional[str],
-        Query(max_length=64, description='Filter the respinse by the type of the appeal, such as flash or HRP'),
+        Query(max_length=64, description='Filter the response by the type of the appeal, such as flash or HRP'),
     ] = None,
     location_code: Annotated[
         Optional[str], Query(max_length=128, description=f'{DOC_LOCATION_CODE} {DOC_SEE_LOC}')
