@@ -6,7 +6,7 @@
     },
     "applications": {
         "hapi": {
-            "type": "python 3.12",
+            "type": "python 3.14",
             "threads": 1,
             "processes": {
                 "max": ${UNITD_MAX_WORKERS},
