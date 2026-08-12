@@ -3,7 +3,7 @@ uvicorn[standard]~=0.34.3
 sqlalchemy[asyncio]==2.0.37
 asyncpg~=0.30.0
 python-json-logger~=3.3.0
-email_validator~=2.2.0
+email_validator~=2.3.0
 mixpanel==4.10.1
 ua-parser==1.0.1
 
