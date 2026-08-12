@@ -17,10 +17,10 @@ _CONFIG = get_config()
 async def track_api_call(request: Request, response: Response):
     is_nginx_verify_request = getattr(request.state, 'is_nginx_verify_request', False)
 
-    if is_nginx_verify_request:
-        endpoint, query_params_keys, output_format, admin_level, current_url = _parse_nginx_header(request)
-    else:
-        endpoint, query_params_keys, output_format, admin_level, current_url = _parse_fastapi_request(request)
+    if not is_nginx_verify_request:
+        return
+
+    endpoint, query_params_keys, output_format, admin_level, current_url = _parse_nginx_header(request)
 
     app_name = getattr(request.state, 'app_name', None)
     user_agent_string = request.headers.get('user-agent', '')
@@ -55,10 +55,10 @@ async def track_api_call(request: Request, response: Response):
 async def track_page_view(request: Request, response: Response):
     is_nginx_verify_request = getattr(request.state, 'is_nginx_verify_request', False)
 
-    if is_nginx_verify_request:
-        _, _, _, _, current_url = _parse_nginx_header(request)
-    else:
-        _, _, _, _, current_url = _parse_fastapi_request(request)
+    if not is_nginx_verify_request:
+        return
+
+    _, _, _, _, current_url = _parse_nginx_header(request)
 
     user_agent_string = request.headers.get('user-agent', '')
     ip_address = request.headers.get('x-forwarded-for', '')
@@ -105,32 +105,34 @@ def extract_path_identifier_and_query_params(original_url: str) -> Tuple[str, Op
     return path, app_identifier, query_params
 
 
-def _parse_fastapi_request(request: Request) -> Tuple[str, List[str], str, str, str]:
-    """
-    Parse the FastAPI request to extract data needed for analytics.
-
-    Args:
-        request: The FastAPI request object
-
-    Returns:
-        Tuple containing endpoint, query_params_keys, output_format, admin_level and current_url
-    """
-    app_identifier = request.query_params.get('app_identifier', '')
-    endpoint = request.url.path
-
-    query_params_keys = list(request.query_params.keys())
-    output_format = request.query_params.get('output_format', '')
-    admin_level = request.query_params.get('admin_level', '')
-    email_address = request.query_params.get('email', '')
-
-    current_url = unquote(str(request.url))
-
-    if app_identifier:
-        current_url = current_url.replace(app_identifier, 'unavailable')
-    if email_address:
-        current_url = current_url.replace(email_address, 'unavailable')
-
-    return endpoint, query_params_keys, output_format, admin_level, current_url
+# Unused now that track_api_call/track_page_view return early for non-nginx-verified requests.
+# Kept as reference for how to parse analytics data directly from a FastAPI request.
+# def _parse_fastapi_request(request: Request) -> Tuple[str, List[str], str, str, str]:
+#     """
+#     Parse the FastAPI request to extract data needed for analytics.
+#
+#     Args:
+#         request: The FastAPI request object
+#
+#     Returns:
+#         Tuple containing endpoint, query_params_keys, output_format, admin_level and current_url
+#     """
+#     app_identifier = request.query_params.get('app_identifier', '')
+#     endpoint = request.url.path
+#
+#     query_params_keys = list(request.query_params.keys())
+#     output_format = request.query_params.get('output_format', '')
+#     admin_level = request.query_params.get('admin_level', '')
+#     email_address = request.query_params.get('email', '')
+#
+#     current_url = unquote(str(request.url))
+#
+#     if app_identifier:
+#         current_url = current_url.replace(app_identifier, 'unavailable')
+#     if email_address:
+#         current_url = current_url.replace(email_address, 'unavailable')
+#
+#     return endpoint, query_params_keys, output_format, admin_level, current_url
 
 
 def _parse_nginx_header(request: Request) -> Tuple[str, List[str], str, str, str]:

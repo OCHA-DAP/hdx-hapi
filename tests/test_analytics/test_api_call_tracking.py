@@ -1,5 +1,4 @@
 import logging
-import time
 
 import pytest
 from httpx import ASGITransport, AsyncClient
@@ -14,10 +13,27 @@ TEST_USER_AGENT = (
 log = logging.getLogger(__name__)
 
 ENDPOINT = '/api/v2/coordination-context/operational-presence'
+VERIFY_REQUEST_ENDPOINT = '/api/v2/util/verify-request'
+ALLOWED_API_ENDPOINT = '/api/v2/util/version'
 
 
 @pytest.mark.asyncio
-async def test_tracking_endpoint_success():
+async def test_direct_api_call_not_tracked():
+    with patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url=TEST_BASE_URL) as ac:
+            headers = {
+                'User-Agent': TEST_USER_AGENT,
+                'x-forwarded-for': '127.0.0.1',
+            }
+            params = {'admin_level': '1', 'output_format': 'json'}
+            response = await ac.get(ENDPOINT, params=params, headers=headers)
+
+        assert response.status_code == 200
+        assert send_mixpanel_event_patch.call_count == 0, 'Direct (non-nginx-verified) API calls should not be tracked'
+
+
+@pytest.mark.asyncio
+async def test_nginx_verified_api_call_tracked(enable_hapi_identifier_filtering):
     with (
         patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch,
         patch(
@@ -29,40 +45,41 @@ async def test_tracking_endpoint_success():
             headers = {
                 'User-Agent': TEST_USER_AGENT,
                 'x-forwarded-for': '127.0.0.1',
+                'X-Original-URI': ALLOWED_API_ENDPOINT,
             }
-            params = {'admin_level': '1', 'output_format': 'json'}
-            response = await ac.get(ENDPOINT, params=params, headers=headers)
+            response = await ac.get(VERIFY_REQUEST_ENDPOINT, headers=headers)
 
         assert response.status_code == 200
-        assert send_mixpanel_event_patch.call_count == 1, 'API calls should be tracked'
+        assert send_mixpanel_event_patch.call_count == 1, 'Nginx-verified API calls should be tracked'
 
-        expected_mixpanel_dict = {
-            'endpoint path': ENDPOINT,
-            'query params': ['admin_level', 'output_format'],
-            'time': pytest.approx(time.time()),
-            'app name': None,
-            'identifier verification': False,
-            'output format': 'json',
-            'admin level': '1',
-            'server side': True,
-            'response code': 200,
-            'user agent': TEST_USER_AGENT,
-            'ip': '127.0.0.1',
-            '$os': 'Windows',
-            '$browser': 'Chrome',
-            '$browser_version': '124',
-            '$current_url': f'{TEST_BASE_URL}{ENDPOINT}?admin_level=1&output_format=json',
-        }
-
-        # Check parameters match the expected ones
-        send_mixpanel_event_patch.assert_called_once_with('hapi api call', '123456', expected_mixpanel_dict)
+        event_name, distinct_id, event_data = send_mixpanel_event_patch.call_args.args
+        assert event_name == 'hapi api call'
+        assert distinct_id == '123456'
+        assert event_data['identifier verification'] is True
+        assert event_data['endpoint path'] == ALLOWED_API_ENDPOINT
+        assert event_data['response code'] == 200
 
 
 @pytest.mark.asyncio
-async def test_docs_page_tracked():
+async def test_direct_docs_page_not_tracked():
     with patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch:
         async with AsyncClient(transport=ASGITransport(app=app), base_url=TEST_BASE_URL) as ac:
             response = await ac.get('/docs')
 
         assert response.status_code == 200
-        assert send_mixpanel_event_patch.call_count == 1, 'Docs page should be tracked as a page view'
+        assert send_mixpanel_event_patch.call_count == 0, 'Direct (non-nginx-verified) docs view should not be tracked'
+
+
+@pytest.mark.asyncio
+async def test_nginx_verified_docs_page_tracked(enable_hapi_identifier_filtering):
+    with patch('hdx_hapi.endpoints.middleware.util.util.send_mixpanel_event') as send_mixpanel_event_patch:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url=TEST_BASE_URL) as ac:
+            headers = {'X-Original-URI': '/docs'}
+            response = await ac.get(VERIFY_REQUEST_ENDPOINT, headers=headers)
+
+        assert response.status_code == 200
+        assert send_mixpanel_event_patch.call_count == 1, 'Nginx-verified docs page view should be tracked'
+
+        event_name, _, event_data = send_mixpanel_event_patch.call_args.args
+        assert event_name == 'hapi openapi docs view'
+        assert event_data['identifier verification'] is True
