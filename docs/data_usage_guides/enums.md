@@ -18,7 +18,7 @@ aggregate the rainfall data.
 
 **Used in:** [`IDPs`](affected_people.md#idps)
 
-The assessment types refer to two different methodologies for obtaining
+The assessment types refer to the different methodologies for obtaining
 the IDP data coming from the IOM DTM. For more detail, see the
 [IOM DTM methodological framework](https://dtm.iom.int/about/methodological-framework).
 

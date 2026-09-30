@@ -10,7 +10,6 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_RESOURCE_ID,
     DOC_HDX_DATASET_ID,
     DOC_HDX_RESOURCE_FORMAT,
-    DOC_HDX_RESOURCE_HXL,
     truncate_query_description,
 )
 from hdx_hapi.endpoints.models.base import HapiBaseModel
@@ -79,7 +78,6 @@ class ResourceResponse(HapiBaseModel):
     )
     format: str = Field(max_length=32, description=truncate_query_description(DOC_HDX_RESOURCE_FORMAT))
     update_date: datetime = Field(description='The date the resource was last updated')
-    is_hxl: bool = Field(description=truncate_query_description(DOC_HDX_RESOURCE_HXL))
     download_url: HttpUrl = Field(
         description='A URL to directly download the resource file from HDX, in the format '
         'specified in the `format` field.'

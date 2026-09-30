@@ -15,7 +15,11 @@ class IdpsResponse(HapiBaseModel, HapiModelWithAdmins):
     resource_hdx_id: str = Field(max_length=36, description=truncate_query_description(DOC_HDX_RESOURCE_ID))
     reporting_round: int = Field(description='Data collection round number')
     assessment_type: DTMAssessmentType = Field(
-        description='Either baseline assessment (BA),site assessment (SA) or event track (ETT)'
+        description=(
+            'Baseline assessment (BA), emergency tracking tool (ETT), flow monitoring counter (FMC), '
+            'flow monitoring survey (FMS), flow monitoring screener (FMSc), registration (REG), '
+            'site assessment (SA) or survey (SRV)'
+        )
     )
     operation: str = Field(description='Name of DTM Operation for which the data was collected')
     population: int = Field(description='The number of people')
