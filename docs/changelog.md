@@ -21,6 +21,7 @@ the API.
 
 - Removed the `is_hxl` field and query parameter from the
   metadata/resource endpoint
+- Add SRV, FMS, FMC, FMSc and REG to idps and assessment type parameters
 
 ### 2025-09-15
 
