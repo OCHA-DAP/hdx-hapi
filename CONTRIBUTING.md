@@ -9,7 +9,7 @@ The following needs to be run once to setup the Docker containers for testing:
 ```shell
 cd docker
 docker compose up -d
-docker compose exec -T hapi sh -c "apk add git"
+docker compose exec -T hapi sh -c "apk add git build-base python3-dev"
 docker compose exec -T hapi sh -c "pip install --upgrade -r requirements.txt"
 docker compose exec -T hapi sh -c "pip install --upgrade -r dev-requirements.txt"
 ```
