@@ -15,7 +15,6 @@ async def resources_view_list(
     format: Optional[str] = None,
     update_date_min: Optional[datetime | date] = None,
     update_date_max: Optional[datetime | date] = None,
-    is_hxl: Optional[bool] = None,
     dataset_hdx_title: Optional[str] = None,
     dataset_hdx_id: Optional[str] = None,
     dataset_hdx_stub: Optional[str] = None,
@@ -31,8 +30,6 @@ async def resources_view_list(
         query = query.where(ResourceView.update_date >= update_date_min)
     if update_date_max:
         query = query.where(ResourceView.update_date < update_date_max)
-    if is_hxl is not None:
-        query = query.where(ResourceView.is_hxl == is_hxl)
     if dataset_hdx_title:
         query = query.where(ResourceView.dataset_hdx_title.icontains(dataset_hdx_title))
     if dataset_hdx_id:

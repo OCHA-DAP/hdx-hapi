@@ -174,7 +174,6 @@ Executing this query provides a response like the following:
       "name": "MALI_3W_December_2023",
       "format": "XLSX",
       "update_date": "2024-03-01T12:33:46",
-      "is_hxl": true,
       "download_url": "https://data.humdata.org/dataset/d7ab89e4-bcb2-4127-be3c-5e8cf804ffd3/resource/b28928be-1847-408f-b3cd-9b87b596c710/download/mali-3w-presence-operationnelle-december-2023.xlsx",
       "hapi_updated_date": "2024-05-30T19:30:19.932113",
       "dataset_hdx_stub": "mali-operational-presence",

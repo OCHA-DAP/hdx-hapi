@@ -45,9 +45,6 @@
 - Parameter: '`update_date`'
   Description: The date the resource was last updated
   Source:
-- Parameter: '`is_hxl`'
-  Description: A boolean to indicate whether the resource data is HXLated
-  Source:
 - Parameter: '`hapi_updated_date`'
   Description: The date that the resource was ingested into HDX HAPI
   Source: ''

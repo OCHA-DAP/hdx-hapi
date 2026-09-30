@@ -457,7 +457,6 @@ class ResourceView(Base):
     name: Mapped[str] = column_property(resource_view.c.name)
     format: Mapped[str] = column_property(resource_view.c.format)
     update_date: Mapped[datetime.datetime] = column_property(resource_view.c.update_date)
-    is_hxl: Mapped[bool] = column_property(resource_view.c.is_hxl)
     download_url: Mapped[str] = column_property(resource_view.c.download_url)
     hapi_updated_date: Mapped[datetime.datetime] = column_property(resource_view.c.hapi_updated_date)
     dataset_hdx_stub: Mapped[str] = column_property(resource_view.c.dataset_hdx_stub)
