@@ -18,7 +18,7 @@ jobs:
       - name: Install requirements
         run: |
           cd docker
-          docker compose exec -T hapi sh -c "apk add git python3-dev"
+          docker compose exec -T hapi sh -c "apk add git build-base python3-dev"
           docker compose exec -T hapi sh -c "pip install --upgrade --exists-action=w -r requirements.txt"
           docker compose exec -T hapi sh -c "pip install --upgrade --exists-action=w -r dev-requirements.txt"
 
