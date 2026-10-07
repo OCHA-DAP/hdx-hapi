@@ -9,9 +9,34 @@
     Initial information on mobility-displacement and migration that is quickly 
     collected to keep pace with rapidly evolving situations during emergency
     events
+- Assessment Type: FMC
+  Name: Flow monitoring counter
+  Description: >
+    A count of the people passing through flow monitoring points, used to
+    quantify mobility flows at points of origin, transit and destination
+- Assessment Type: FMS
+  Name: Flow monitoring survey
+  Description: >
+    Interviews with a sample of people passing through flow monitoring points,
+    capturing their profiles, experiences, intentions and needs
+- Assessment Type: FMSc
+  Name: Flow monitoring screener
+  Description: >
+    A short screening questionnaire administered to people at flow monitoring
+    points
+- Assessment Type: REG
+  Name: Registration
+  Description: >
+    Records information on individuals and households, typically for
+    beneficiary selection, vulnerability targeting and programming
 - Assessment Type: SA
   Name: Site assessment
   Description: >
     Also known as a multi-sectoral location assessment (MSLA), it entails
     a detailed data collection on living conditions and needs of displaced
     populations at specific locations identified by Baseline Assessments
+- Assessment Type: SRV
+  Name: Survey
+  Description: >
+    Collects specific information from a sample of the population of
+    interest, such as their intentions, perceptions or needs

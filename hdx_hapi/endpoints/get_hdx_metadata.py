@@ -14,7 +14,6 @@ from hdx_hapi.config.doc_snippets import (
     DOC_HDX_PROVIDER_NAME,
     DOC_HDX_PROVIDER_STUB,
     DOC_HDX_RESOURCE_FORMAT,
-    DOC_HDX_RESOURCE_HXL,
     DOC_HDX_RESOURCE_ID,
     DOC_HDX_DATASET_IN_RESOURCE_ID,
     DOC_HDX_DATASET_IN_RESOURCE_NAME,
@@ -103,7 +102,6 @@ async def get_resources(
         Optional[datetime.datetime | date],
         Query(description=f'{DOC_UPDATE_DATE_MAX}'),
     ] = None,
-    is_hxl: Annotated[Optional[bool], Query(description=f'{DOC_HDX_RESOURCE_HXL}')] = None,
     dataset_hdx_id: Annotated[
         Optional[str], Query(max_length=36, description=f'{DOC_HDX_DATASET_IN_RESOURCE_ID} {DOC_SEE_DATASET} ')
     ] = None,
@@ -131,7 +129,6 @@ async def get_resources(
         format=format,
         update_date_min=update_date_min,
         update_date_max=update_date_max,
-        is_hxl=is_hxl,
         dataset_hdx_id=dataset_hdx_id,
         dataset_hdx_stub=dataset_hdx_stub,
         dataset_hdx_title=dataset_hdx_title,

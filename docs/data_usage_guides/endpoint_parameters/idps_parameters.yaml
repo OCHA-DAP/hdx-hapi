@@ -5,7 +5,10 @@
   Description: Data collection round number
   Source:
 - Parameter: '`assessment_type`'
-  Description: Baseline assessment (BA), emergency tracking tool (ETT) or site assessment (SA)
+  Description: >
+    Baseline assessment (BA), emergency tracking tool (ETT), flow monitoring
+    counter (FMC), flow monitoring survey (FMS), flow monitoring screener (FMSc),
+    registration (REG), site assessment (SA) or survey (SRV)
   Source: '[`Assessment Type`](enums.md#assessment-type)'
 - Parameter: '`operation`'
   Description: Name of DTM Operation for which the data was collected

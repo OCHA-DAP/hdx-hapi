@@ -28,8 +28,6 @@ def apply_pagination(query: Select, pagination_parameters: PaginationParams) -> 
 
 
 class EntityWithDateRangeFilter(Protocol):
-    start_date: Mapped[str]
-    end_date: Mapped[str]
     reference_period_start: Mapped[datetime.datetime]
     reference_period_end: Mapped[datetime.datetime]
 
